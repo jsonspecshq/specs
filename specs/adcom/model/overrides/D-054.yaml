@@ -1,0 +1,148 @@
+format: 2
+id: D-054
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Five of AdCOM's objects refer to each other in a closed chain, so no order of the five puts each after the objects it refers to. What do those five references become?"
+covers:
+  - ir: key:object_displayplacement:DisplayPlacement.nativefmt
+    digest: 9e32b24a1f7124b199f7eac4ffd21e96a9ea1ef424eab5e512d143cf42a34f10
+    quote: "`nativefmt` | This object specified the required and permitted assets and attributes of a native display placement. Refer to Object: NativeFormat."
+  - ir: key:object_nativeformat:NativeFormat.asset
+    digest: 0626cbf7cfba508315003144f436318a28f231e55c3935d13f52a361be4b26fd
+    quote: "`asset` | Array of objects that specify the set of native assets and their permitted formats. Refer to Object: AssetFormat."
+  - ir: key:object_assetformat:AssetFormat.video
+    digest: 172e5b8efe461899adc627d4c736156c1378397424f4071cc2f79255ccfd2213
+    quote: "`video` | Asset Format Subtype Object, which leverages the `VideoPlacement` object, that indicates this is specifying a video asset and provides additional detail as such. Refer to Object: VideoPlacement. * Required if no other asset format subtype object is specified."
+  - ir: key:object_videoplacement:VideoPlacement.comp
+    digest: 4f7d2b02da0c391eaefe8dea26fa1364133d580ae1276e26b8a68ff8124fb3af
+    quote: "`comp` | Array of objects indicating that companion ads are available and providing the specifications thereof. Refer to Object: Companion."
+  - ir: key:object_companion:Companion.display
+    digest: 529c1cad0dbac58e0428d44b9977cf81d5c0cf422c024da5e9192c4e7bf898e5
+    quote: "`display` | Display specification object representing the companion ad. Refer to Object: DisplayPlacement."
+options:
+  - id: references-as-written
+    summary: >-
+      Each of the five attributes refers to the object its row names, so the
+      five objects refer to each other as the text writes them, and a reader
+      who follows the chain comes back to where it started.
+  - id: document-boundary
+    summary: >-
+      One of the five is the root of a payload of its own, and the chain is
+      read as leaving that payload and re-entering it, so the five are not
+      one group of objects but two.
+  - id: copy-at-one-edge
+    summary: >-
+      One of the five attributes holds a copy of its object rather than the
+      object, written out where it is used.
+  - id: drop-one-edge
+    summary: >-
+      One of the five attributes holds an object of any members instead of
+      the object its row names, so the chain is cut at that attribute.
+chosen: references-as-written
+rationale: >-
+  The chain is in the specification, and it is one chain and no more.
+  Measured on both locks by reading every object's attribute rows for the
+  object each names, in a link in the definition cell or in the Type cell:
+  46 objects, 39 references between them, no object referring to itself, and
+  exactly one closed chain -- AssetFormat, Companion, DisplayPlacement,
+  NativeFormat, VideoPlacement. Its five steps are the five rows quoted
+  above: `DisplayPlacement.nativefmt` names NativeFormat at line 1057,
+  `NativeFormat.asset` names AssetFormat at line 1132, `AssetFormat.video`
+  "leverages the `VideoPlacement` object" at line 1177, `VideoPlacement.comp`
+  names Companion at line 1523, and `Companion.display` names
+  DisplayPlacement at line 1723. Each of the five is a link the text writes,
+  not an inference from a name (D-052 covers the rows where the text writes
+  no link), so the chain is as firm as any other reference in the document.
+
+  What it means and why it is not an error. A companion ad of a video
+  placement is specified as a display placement, and a display placement may
+  carry a native format whose assets may be specified as video placements, so
+  the chain is the specification saying that a placement can be nested in a
+  placement. The text says that in prose too: `AssetFormat.video` is the row
+  that says it "leverages the `VideoPlacement` object". A payload that
+  follows the chain all the way round would be a video asset inside a native
+  format inside a display placement inside a companion of a video placement,
+  which is deep but not absurd, and nothing in the text bounds the depth.
+
+  Why the reference stays the object. JSON Schema 2020-12 resolves a
+  reference graph with a closed chain in it: the five are five entries of one
+  file referring to each other by name, and every validator follows them,
+  stopping where the payload stops rather than where the schema does. Every
+  language a target emits expresses five classes that refer to each other,
+  by a forward declaration or by a pointer. So the artifact the choice
+  produces is ordinary; what the chain breaks is the assumption that the
+  objects can be put in an order, and the layer order is still total --
+  primitives, then constructors, then vocabularies, then objects, then
+  documents -- because all five are objects and the chain never leaves that
+  layer. A reference from an object to a vocabulary or a primitive still goes
+  downward, and this reading touches none of that.
+
+  `document-boundary` has nothing in the text to cut the chain at. AdCOM
+  heads 45 sections Object: and no section a document, a payload, or a root;
+  the three payloads in the external corpus are each rooted at a wrapper --
+  a request context, an item specification, a bid media -- that the
+  specification defines no object for, which is why every claim in that
+  corpus starts at a pointer one or more levels down. Choosing one of the
+  five as a root would also put a reference upward: if DisplayPlacement were
+  a document and Companion an object, then `Companion.display` refers to a
+  type of a higher layer, which is a second problem where there was one.
+
+  `copy-at-one-edge` does not cut the chain and cannot be written down. A
+  copy of DisplayPlacement under `Companion.display` still holds `nativefmt`,
+  which still holds `asset`, which still holds `video`, which still holds
+  `comp`, which still holds `display`, so the copy expands for ever unless it
+  stops somewhere -- and wherever it stops, the members below that point are
+  members the text states and the schema does not. An expansion that does
+  not stop is no file at all; one that does drops stated attributes, and the
+  object with the most to lose is DisplayPlacement, whose table has 19 rows.
+  A copy that kept every member would also be a second definition of a named
+  type at a second place, which is the one thing the one-definition rule
+  refuses outright.
+
+  `drop-one-edge` is a departure, not a gap, which is why it is listed and
+  not taken. Making `Companion.display` an object of any members contradicts
+  a link the row writes, so the record would have to say it departs from the
+  text on that row rather than filling a point the text leaves open, and a
+  consumer would lose every check DisplayPlacement's 19 rows carry at exactly
+  the place a companion ad is described. The chain is awkward for a generator
+  and correct for a reader, and the text is normative.
+
+  What the choice costs, stated plainly because it is the reason this record
+  exists. The layer check reads a model's references and refuses any chain
+  that returns to its start (`layerProblems` in `src/conventions.ts`); it is
+  registered, it is green today because no model carries the objects, and it
+  goes red on the first model that does. This record settles the reading --
+  that the five references are what the text writes and the schema publishes
+  them -- and it settles nothing about that check: a record is not a
+  configuration switch, and narrowing the check to chains that cross layers
+  while it still refuses a reference upward is a gate decision, append-only
+  under `gates/decisions/`, which cites this record and is not this record's
+  to make. Until that decision exists, the objects cannot be emitted, and
+  that is the honest state of it rather than a waiver written into a reading.
+
+  Two consequences a reader should expect. The type map must carry a visited
+  set: a reader who opens DisplayPlacement, follows `nativefmt` to
+  NativeFormat and keeps going arrives back at DisplayPlacement, so a tree
+  that expands every reference does not terminate and the renderer has to
+  mark the step that returns rather than take it. And the five objects'
+  rows are 19, 2, 7, 35, and 4 -- 67 of the 411 -- so the chain is not a
+  corner of the specification but its placement core.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1057"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1132"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1177"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1523"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1723"
+feedback: >-
+  Say whether a placement may be nested in a placement without bound.
+  `Companion.display` refers to DisplayPlacement, `DisplayPlacement.nativefmt`
+  to NativeFormat, `NativeFormat.asset` to AssetFormat, `AssetFormat.video` to
+  VideoPlacement, and `VideoPlacement.comp` back to Companion, so a reader who
+  follows the links returns to where they started and nothing in the document
+  says how deep a sender may go or how deep a receiver must read. Either state
+  a maximum depth, or say that the nesting is unbounded and that a receiver
+  must handle a payload of any depth. It is the only closed chain among the 39
+  references between the 46 objects, so a reader meets it once and has nothing
+  to compare it with.

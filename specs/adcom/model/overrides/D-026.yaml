@@ -1,0 +1,17 @@
+format: 2
+id: D-026
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_agenttypes:3
+value: Person-based ID
+reading: D-019
+covers:
+  - ir: def:list_agenttypes:3
+    digest: 4759f82f507937eeabd3bed4393a2159cb7ca22d2a7d63d256c847481a1b2a94
+    quote: "`3` | A person-based ID, i.e., that is the same across devices."
+reason: >-
+  The row gives code 3 a sentence, not a name, and a name cut from it
+  would end mid-phrase, so D-019 names the code from the row's own
+  words and the row stays its description.

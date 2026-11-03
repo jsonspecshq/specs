@@ -1,0 +1,200 @@
+# The external payload corpus: payloads this repository did not write, held
+# to formats/external-sources.schema.json and read by the `external-corpus`
+# gate (gates/external.ts). Architecture § 3.13a.
+#
+# Why the copies live here and not in the enum drift snapshot that already
+# holds the same bytes. The enum drift report's snapshot under
+# outputs/enum-drift/snapshots/prebid-openrtb/ pins all of adcom1/, and
+# adcom1/testdata/ is inside it, so the three payloads below are in this
+# repository twice. They are copied rather than resolved through that
+# snapshot because the two sit on opposite sides of the pipeline: src/stages.ts
+# orders `input` first and `reports` -- which owns outputs/enum-drift/ --
+# second, so reading an input out of a later stage's committed tree would make
+# the corpus a function of that stage. The report's `folder` pin is the
+# report's to narrow: it could move to a subfolder of adcom1/, or to another
+# commit, and the corpus would silently empty with every gate green. A corpus
+# that is the oracle of record for a slice with no byte-parity baseline is
+# pinned on its own terms. The copy costs 1,931 bytes of payload and the
+# upstream's 10,760-byte license.
+#
+# Every pin below is derived, not typed: `tree` is the git tree SHA of
+# adcom1/testdata at the commit, computed with src/enum-drift.ts's `treeSha`
+# over the enum drift snapshot, whose own adcom1/ pin (1591f176..., which that
+# computation reproduces) `enum-drift-sources` checks on every run.
+format: 1
+sources:
+  - id: prebid-openrtb
+    title: Prebid openrtb adcom1 golden files
+    upstream: https://github.com/prebid/openrtb
+    commit: 0d01af1cd27503d7edd0584fadb7e740ab83cc9c
+    clone: vendor/prebid-openrtb
+    folder: adcom1/testdata
+    tree: 329e3d07dfcd1b7d7708d77c0a9fd5949b23ad36
+    license:
+      path: LICENSE
+      blob: b7fa401fa4b79b208b1dbc4679b09b8f4691adbf
+      spdx: Apache-2.0
+      clause: >-
+        Section 4, Redistribution: "You may reproduce and distribute copies of
+        the Work or Derivative Works thereof in any medium, with or without
+        modifications", provided the recipients get a copy of the License and
+        the retained notices. The folder is reproduced whole and unmodified and
+        LICENSE is kept beside it at its pinned blob.
+    submitted_by: >-
+      The repository owner, taking the upstream's committed test data at a
+      pinned commit; nobody outside this repository was asked for it.
+    taken_on: "2026-10-31"
+    # Read this before reading a green run of the gate as independent evidence.
+    independence: >-
+      These are not independent payloads. Each is the specification's own
+      Appendix C example with the transport envelope removed, round-tripped
+      through Prebid's Go types: `request-context.json` is the `context` of
+      code:requestcontext:1 with the zero-valued members Go's `omitempty`
+      drops (regs.gdpr, regs.coppa, site.amp) gone and `user.yob` and
+      `user.gender` added; `item-specifications.json` is the `spec` of
+      code:itemspecs:1 without `ampren` and `instl`; `media-response.json` is
+      the `media` of code:mediaresponse:1 unchanged. So the corpus attests one
+      thing the text alone cannot: the member set and value shapes a real Go
+      implementation of this specification serialises, which is what catches a
+      model that omits an inherited member. It attests nothing about values the
+      specification did not already state, because every value in it is the
+      specification's own.
+payloads:
+  # The type each payload decodes as is named by the upstream's own test:
+  # adcom1/adcom1_test.go lines 27-29 enter them as RequestContext, ItemSpec
+  # and BidMedia. All three of those are wrappers the specification defines no
+  # object for -- its 45 `Object:` headings hold no Context, ItemSpec or
+  # BidMedia -- so every claim starts at a pointer one or more levels down,
+  # where the specification's own types begin.
+  #
+  # Both builds are named on every payload. The upstream's types are of AdCOM
+  # 1.0 and both locks are editions of AdCOM 1.0 whose code lists are
+  # byte-identical apart from the $id (specs/adcom/input/tag-202607.lock.yaml
+  # says where the two texts differ: inside the Content object's table, which
+  # no payload here touches).
+  #
+  # The claims are by meaning, read off each row's own "Refer to List: ..."
+  # sentence, the way outputs/enum-drift/sources.yaml pairs a list with an
+  # enum. The IR records no list reference on a key row, so no check can
+  # derive this pairing; what the gate checks is that the type named exists.
+  - source: prebid-openrtb
+    here: adcom1/testdata/request-context.json
+    locks: [main, tag-202607]
+    profile: open-base
+    claims:
+      # The objects this payload carries at a top-level pointer, claimed where
+      # each begins. Until slice 2 every claim here named a vocabulary, so the
+      # gate decided 11 scalars against 11 code lists -- what slice 1 already
+      # had -- and no object schema was graded by anything outside this
+      # repository. `/site` is the one that matters most: the payload's `site`
+      # carries `id`, `name` and `pub`, none of which is a row of the Site
+      # section, so a model that read the 45 object sections alone would
+      # reject it. That is the measurement `D-053` rests on, and it is now
+      # made from the committed corpus rather than from the gate's own
+      # fixture.
+      #
+      # ~~`/device`, `/restrictions`, `/placement` and `/ad` are **not**
+      # claimed, and the reason is the gate's own rule rather than a gap in the
+      # reading: a finding is keyed by the payload and the location, so a claim
+      # may not contain another ... Grading an object and a code inside it in
+      # one run needs the finding key to carry the claim, which is a change to
+      # `gates/external.ts` and not a line here.~~
+      #
+      # **Superseded 2026-11-02: the four are claimed, and the change was to
+      # `gates/external.ts` after all -- but not to the finding key.** The key
+      # is the payload and the location, and `/device` and `/device/type` are
+      # two locations, so a nested claim never shared a key with the claim
+      # around it; only two claims at the *same* pointer would. `corpusClaims`
+      # refused every nesting because it compared with `within` while every
+      # claim sat at a leaf, and it now refuses an equal pointer alone, with a
+      # fixture that states the duplicate. Measured on this corpus: 7 object
+      # claims, 11 vocabulary claims, all 11 of them inside one of the 7, and
+      # 18 claims decided per build.
+      #
+      # **Extended 2026-11-03.** A claim nested inside another is now *derived*
+      # rather than authored: `gates/external.ts`'s `checkPairings` walks from
+      # the claim around it to the model's property, reads the key row the
+      # property rests on, and requires the claimed type to be the list or the
+      # object that row's own citation names (`Key.cites`). So every location
+      # these payloads carry whose row cites a list or an object can be
+      # claimed with the text behind it, and the ten that were reached only
+      # through an enclosing object's schema are claimed in their own right.
+      # Measured over the three payloads: 21 such locations, of which 11 were
+      # claimed. The seven outermost claims stay authored, and the reason is
+      # the envelope: AdCOM defines no object for `openrtb`, `request`,
+      # `context`, `item` or `seatbid`, so no row of the text states the
+      # pointer those claims begin at.
+      - { object: Site, at: /site }
+      - { object: Device, at: /device }
+      - { object: User, at: /user }
+      - { object: Regs, at: /regs }
+      - { object: Restrictions, at: /restrictions }
+      # Restrictions.cattax: "The taxonomy in use for the `bcat` attribute.
+      # Refer to List: Category Taxonomies."
+      - { object: CategoryTaxonomy, at: /restrictions/cattax }
+      # Device.type: "The general type of device. Refer to List: Device Types."
+      - { object: DeviceType, at: /device/type }
+      # Device.os: "Device operating system. Refer to List: Operating Systems."
+      - { object: OperatingSystem, at: /device/os }
+      # Device.geo: "Location of the device ... Refer to Object: Geo."
+      - { object: Geo, at: /device/geo }
+      # Geo.type: "Source of location data ... Refer to List: Location Types."
+      - { object: LocationType, at: /device/geo/type }
+      # DistributionChannel.pub: "Details about the publisher of the site ...
+      # Refer to Object: Publisher." The row is the abstract class's, which
+      # D-053 copies into Site, so the claim is what grades a payload member
+      # that no row of the Site section names.
+      - { object: Publisher, at: /site/pub }
+  - source: prebid-openrtb
+    here: adcom1/testdata/item-specifications.json
+    locks: [main, tag-202607]
+    profile: open-base
+    claims:
+      - { object: Placement, at: /placement }
+      # Placement.display: "Placement details ... Refer to Object:
+      # DisplayPlacement."
+      - { object: DisplayPlacement, at: /placement/display }
+      # DisplayPlacement.ctype: "Creative subtypes permitted. Refer to List:
+      # Creative Subtypes - Display." An array row, so each item is a claim of
+      # its own: the type is the item's, not the array's.
+      - { object: CreativeSubtypeDisplay, at: /placement/display/ctype/0 }
+      - { object: CreativeSubtypeDisplay, at: /placement/display/ctype/1 }
+      # DisplayPlacement.displayfmt: "Array of objects that govern the
+      # attributes ... Refer to Object: DisplayFormat." One claim per item.
+      - { object: DisplayFormat, at: /placement/display/displayfmt/0 }
+      - { object: DisplayFormat, at: /placement/display/displayfmt/1 }
+      # DisplayPlacement.event: "Array of supported ad tracking events ...
+      # Refer to Object: EventSpec."
+      - { object: EventSpec, at: /placement/display/event/0 }
+      # EventSpec.type: "Type of supported ad tracking event. Refer to List:
+      # Event Types."
+      - { object: EventType, at: /placement/display/event/0/type }
+      # EventSpec.method: "Array of supported event tracking methods for this
+      # event type. Refer to List: Event Tracking Methods."
+      - { object: EventTrackingMethod, at: /placement/display/event/0/method/0 }
+  - source: prebid-openrtb
+    here: adcom1/testdata/media-response.json
+    locks: [main, tag-202607]
+    profile: open-base
+    claims:
+      - { object: Ad, at: /ad }
+      # Ad.display: "Media subtype of the ad ... Refer to Object: Display."
+      - { object: Display, at: /ad/display }
+      # Display.ctype: "Subtype of display creative. Refer to List: Creative
+      # Subtypes - Display." Scalar on the response side where
+      # DisplayPlacement's is an array.
+      - { object: CreativeSubtypeDisplay, at: /ad/display/ctype }
+      # Display.banner: "Structured banner image object ... Refer to Object:
+      # Banner."
+      - { object: Banner, at: /ad/display/banner }
+      # Banner.link: "Default destination link for the banner ... Refer to
+      # Object: LinkAsset."
+      - { object: LinkAsset, at: /ad/display/banner/link }
+      # Display.event: "Array of supported tracking events ... Refer to
+      # Object: Event."
+      - { object: Event, at: /ad/display/event/0 }
+      # Event.type: "Type of event to track. Refer to List: Event Types."
+      - { object: EventType, at: /ad/display/event/0/type }
+      # Event.method: "Method of tracking requested. Refer to List: Event
+      # Tracking Methods." Scalar here, an array in EventSpec.
+      - { object: EventTrackingMethod, at: /ad/display/event/0/method }

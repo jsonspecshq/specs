@@ -1,0 +1,18 @@
+format: 2
+id: D-034
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_feedtypes:3
+value: Podcast
+reading: D-022
+covers:
+  - ir: def:list_feedtypes:3
+    digest: 74bd793443583a3d3782623ed2154f946d8266c0fb4d7265132019073d2698cd
+    quote: "`3` | AOD | Podcast (original, pre-recorded content distributed as episodes in a series)"
+reason: >-
+  The row starts with the code's name and runs into parentheses that
+  explain what a podcast is, as the list's other rows explain their
+  codes, so D-022 ends the name where the other codes' names end and
+  leaves the explanation to the description.

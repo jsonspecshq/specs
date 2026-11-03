@@ -1,0 +1,244 @@
+format: 2
+id: D-056
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Four attribute rows cite a code list and the citation yields no vocabulary: three link a heading slug the published document never anchors, and one links a section whose table AdCOM removed. What do their codes become?"
+covers:
+  
+  - ir: key:object_content:Content.prodq
+    digest: b83d47b95ae30a902e290d0dcb8d31134e2ae0c3efcdb973d56fc0c23197efba
+    quote: "`prodq` | Production quality. Refer to List: Production Qualities in AdCOM 1.0."
+  - ir: key:object_content:Content.context
+    digest: 0bec9f02955eda6d37ccab3dac3a3dd21e83339ef7c1451ce33204df1b0d4de8
+    quote: "`context` | Type of content (game, video, text, etc.). Refer to List: Content Contexts in AdCOM 1.0."
+  - ir: key:object_content:Content.mrating
+    digest: 03fc4072ac34fbb55da21d08919e5b525b83949ebd0851b7014ec7a959497080
+    quote: "`mrating` | Media rating per IQG guidelines. Refer to List: Media Ratings in AdCOM 1.0."
+    locks:
+      - main
+  - ir: key:object_content:Content.qagmediarating
+    digest: 1c194a2ba26d651ab813686fa781b675afd95e601699fa7154d98e96104bbe07
+    quote: "`qagmediarating` | Media rating per IQG guidelines. Refer to List: Media Ratings in AdCOM 1.0."
+    locks:
+      - tag-202607
+  - ir: key:object_dooh:Dooh.venue
+    digest: 299c1c33f2a9a4eb78fc87e4fb99c9f4300fe8b3236141cdc98f89b0da10d363
+    quote: "`venue` | The type of out-of-home venue. Refer to List: DOOH Venue TypesList: DOOH Venue Types."
+options:
+  - id: by-list-name
+    summary: >-
+      Where the row's own words name a List: section the document does head,
+      the codes are that list's vocabulary, so a broken link costs nothing;
+      where no such section exists, the attribute keeps the non-negative
+      integer its Type cell states and no vocabulary is invented for it.
+  - id: unmapped
+    summary: >-
+      All four rows are left out, since the link each depends on reaches
+      nothing, so a payload that writes `prodq`, `context`, `mrating`, or
+      `venue` is rejected.
+  - id: integer-for-all-four
+    summary: >-
+      All four keep the non-negative integer their Type cells state, so none
+      is checked against any list and the three lists the document does head
+      are reachable from nothing.
+  - id: new-vocabulary-for-venue
+    summary: >-
+      The three read by name as above, and `venue` gets a vocabulary of its
+      own whose codes come from OpenRTB's own DOOH Venue Types list.
+chosen: by-list-name
+rationale: >-
+  Measured on both locks. 77 attribute rows cite a code list. 73 resolve to a
+  List: section that defines a vocabulary and the rule `enum-row` types them.
+  These four are the rest, and they fail for two different reasons, which is
+  why one record settles them together and gives them two answers.
+
+  The three Content rows. `Content.prodq`, `Content.context` and
+  `Content.mrating` each write their link to
+  `.../AdCOM%20v1.0%20FINAL.md#list--production-qualities-`, `#list--content-contexts-`
+  and `#list--media-ratings-`, slugs with a doubled hyphen that the pinned
+  document anchors nowhere -- it anchors `list_productionqualities`,
+  `list_contentcontexts` and `list_mediaratings`. So the citation reaches no
+  section and the rule declines. The row's own words, however, name the list
+  exactly as the document heads it: "Refer to List: Production Qualities in
+  AdCOM 1.0", "List: Content Contexts", "List: Media Ratings". Each of the
+  three sections holds a table of codes and each already yields a vocabulary
+  of the registry -- `ProductionQuality`, `ContentContext` and `MediaRating`
+  -- published since slice 1. So the vocabulary these codes belong to is
+  decided by the text; only the hyperlink is wrong. The third row carries two
+  names: `main` writes `mrating` and the tag writes `qagmediarating`, the name
+  `main` reverted (D-016), so the record quotes the row under each name and
+  scopes each entry to the lock that writes it.
+
+  `Dooh.venue` is the other kind. Its link resolves: it reaches
+  `list_doohvenuetypes`, which the pinned document still heads, as "List:
+  DOOH Venue Types (deprecated)", and which holds no table at all -- the
+  subject of D-014, whose reading of the registry is `as-written`, so the
+  registry publishes no vocabulary for it and there is none to point at. The
+  row's Type cell states `integer` and its definition states "The type of
+  out-of-home venue", so what the text gives is a non-negative whole number
+  and a sentence saying what it means. `new-vocabulary-for-venue` is refused
+  because the codes would come from another document that this repository has
+  not locked, which is an invention by the standard this project holds: a
+  value is narrowed only where the text states the narrowing, and the text
+  states the narrowing in a table it deleted. `Dooh` also carries `venuetax`,
+  which names a taxonomy, and `venuetype`, whose own list is current, so a
+  consumer that needs the venue has a path the text does support.
+
+  `unmapped` is refused for the reason D-052 refuses it: `Content.context`
+  and `Content.mrating` are rows a real payload writes, and leaving them out
+  rejects it. `integer-for-all-four` is refused because it costs three
+  vocabularies' reachability -- `ProductionQuality`, `ContentContext` and
+  `MediaRating` would be published and reachable from nothing -- on the
+  strength of a doubled hyphen in a URL.
+
+  What this reading rests on, stated so a reviewer can attack it. For the
+  three Content rows it is the row's own words rather than its link, and
+  D-049's extraction is deliberately keyed on the link's target and not on
+  the words in front of it, because `Publisher.cattax` proves the words can
+  be absent while the link is right. This record is the opposite case and it
+  is why these three are a reviewed reading and not a rule: a rule that read
+  the words would have to match "List: Production Qualities" against a
+  heading, and matching prose against headings is the kind of inference the
+  pipeline keeps out of its rules and inside its records.
+challenge:
+  - type: Content
+    value:
+      id: "c-1"
+      context: 99
+    verdict: reject
+    context: >-
+      A connected-TV publisher whose content system numbers "short-form clip"
+      99 in its own content-type table and sends that number as the type of
+      content.
+    reason: >-
+      Reading the row's own words as List: Content Contexts types `context` as
+      the registry's `ContentContext`, whose `oneOf` at
+      `specs/adcom/schemas/modules/lists/1/lists.json#/$defs/ContentContext`
+      holds the seven codes 1 to 7, so 99 matches no branch. Under
+      `integer-for-all-four` the same value is accepted as a non-negative
+      integer and no consumer can tell it from a code AdCOM numbers, which is
+      what a doubled hyphen in a URL would have cost.
+  - type: Content
+    value:
+      id: "c-1"
+      context: 1
+      prodq: 1
+    verdict: accept
+    context: >-
+      The same publisher's live sports stream: video content, professionally
+      produced.
+    reason: >-
+      1 is Video in List: Content Contexts and 1 is Professionally Produced in
+      List: Production Qualities, so one branch of each `oneOf` matches.
+      `unmapped` publishes neither attribute, so `additionalProperties: false`
+      at `#/$defs/Content` refuses this payload, which is what that option
+      costs a publisher writing rows the text does define.
+  - type: Content
+    value:
+      id: "c-1"
+      prodq: 4
+    verdict: reject
+    context: >-
+      A syndication partner that has added a fourth production quality,
+      studio-assisted, to its own list and numbers it 4.
+    reason: >-
+      `prodq` takes `ProductionQuality`, whose `oneOf` holds the four codes 0
+      to 3, so 4 matches no branch. A second of the three Content rows,
+      because each resolves its own list by name and one row's verdict says
+      nothing about the next.
+  - type: Dooh
+    value:
+      id: "dooh-1"
+      name: Mall Atrium Screens
+      venue: 99
+    verdict: accept
+    context: >-
+      An out-of-home seller whose own venue taxonomy numbers "mall atrium"
+      99, sent as the type of out-of-home venue.
+    reason: >-
+      List: DOOH Venue Types keeps its heading and holds no table, so `venue`
+      keeps the kernel's `Count` -- an integer with `minimum: 0` and
+      `maximum: 9007199254740991` -- and 99 is accepted.
+      `new-vocabulary-for-venue` would take codes from a document this
+      repository has not locked and refuse 99, which is the narrowing this
+      record declined to invent.
+  - type: Content
+    value:
+      id: "c-1"
+      mrating: 4
+    verdict: reject
+    locks:
+      - main
+    context: >-
+      A publisher that has added a fourth media rating of its own above
+      mature audiences and numbers it 4.
+    reason: >-
+      `mrating` takes `MediaRating`, whose `oneOf` holds the three codes 1 to
+      3, so 4 matches no branch. Scoped to `main` because the tag writes this
+      row `qagmediarating` (D-016): on that lock the same value is refused by
+      `additionalProperties: false` at `#/$defs/Content` instead, a different
+      keyword at a different pointer, which would make this reason false.
+  - type: Content
+    value:
+      id: "c-1"
+      mrating: 3
+    verdict: accept
+    locks:
+      - main
+    context: >-
+      The same publisher labelling a late-night programme for mature
+      audiences, which is the rating IQG guidelines give it.
+    reason: >-
+      3 is Mature Audiences in List: Media Ratings, so the third branch
+      matches. Under `unmapped` the attribute is not published and this
+      payload is refused, which is the pair the reject above is owed. Scoped
+      to `main`, which is the lock that writes the row under this name.
+  - type: Content
+    value:
+      id: "c-1"
+      qagmediarating: 4
+    verdict: reject
+    locks:
+      - tag-202607
+    context: >-
+      The same publisher's payload against the tagged revision, which writes
+      the row under its earlier name.
+    reason: >-
+      `qagmediarating` takes the same `MediaRating`, whose `oneOf` holds the
+      three codes 1 to 3, so 4 matches no branch. Scoped to `tag-202607`: on
+      `main` the attribute does not exist and the rejection comes from
+      `additionalProperties: false`, not from the vocabulary. The pair of
+      entries under the two names is what shows that reading the list by name
+      survives the rename D-016 records.
+  - type: Content
+    value:
+      id: "c-1"
+      qagmediarating: 3
+    verdict: accept
+    locks:
+      - tag-202607
+    context: >-
+      The same late-night programme, labelled for mature audiences, against
+      the tagged revision.
+    reason: >-
+      3 is Mature Audiences in List: Media Ratings under either name, so the
+      vocabulary the row's words resolve to is the same on both locks and
+      only the attribute's name differs.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_productionqualities"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_contentcontexts"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_mediaratings"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_doohvenuetypes"
+feedback: >-
+  Correct three links in the Content attribute table: `prodq`, `context` and
+  `mrating` point at `#list--production-qualities-`,
+  `#list--content-contexts-` and `#list--media-ratings-`, and the document
+  anchors `#list_productionqualities`, `#list_contentcontexts` and
+  `#list_mediaratings`. Then decide `Dooh.venue`: the row refers to List:
+  DOOH Venue Types, the section is kept and its table is gone, so the row
+  refers to nothing. Either restore the codes, or deprecate the attribute
+  with the list and say that `venuetax` and `venuetype` replace it. The row's
+  definition cell also prints the link's words twice, "List: DOOH Venue
+  TypesList: DOOH Venue Types".

@@ -1,0 +1,2485 @@
+{
+  "format": 1,
+  "lock": "main",
+  "commit": "26c59ba1b235cd8d938c9877409e506f1b8d3f0c",
+  "types": {
+    "Ad": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
+      "minimal": {
+        "display": {},
+        "id": "EP-104233"
+      },
+      "full": {
+        "adomain": [
+          "examplepub.example"
+        ],
+        "attr": [
+          1
+        ],
+        "audio": {
+          "adm": "Weekday reach among business news readers in the US.",
+          "api": [
+            1
+          ],
+          "ctype": 1,
+          "curl": "Weekday reach among business news readers in the US.",
+          "dur": 250000,
+          "ext": {},
+          "mime": [
+            "EP-104233"
+          ]
+        },
+        "audit": {
+          "corr": {},
+          "ext": {},
+          "feedback": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "init": 1793664000000,
+          "lastmod": 1793664000000,
+          "status": 1
+        },
+        "bundle": [
+          "EP-104233"
+        ],
+        "cat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "display": {},
+        "ext": {},
+        "id": "ad-1",
+        "init": 1793664000000,
+        "iurl": "Weekday reach among business news readers in the US.",
+        "lang": "EP-104233",
+        "lastmod": 1793664000000,
+        "mrating": 1,
+        "secure": 1,
+        "video": {
+          "adm": "Weekday reach among business news readers in the US.",
+          "api": [
+            1
+          ],
+          "ctype": 1,
+          "curl": "Weekday reach among business news readers in the US.",
+          "dur": 250000,
+          "ext": {},
+          "mime": [
+            "EP-104233"
+          ]
+        }
+      }
+    },
+    "AgentType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/AgentType",
+      "minimal": 1,
+      "full": 1
+    },
+    "ApiFramework": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ApiFramework",
+      "minimal": 1,
+      "full": 1
+    },
+    "App": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/App",
+      "minimal": {},
+      "full": {
+        "bundle": "EP-104233",
+        "cat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "content": {
+          "album": "Weekday reach among business news readers in the US.",
+          "artist": "Weekday reach among business news readers in the US.",
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "channel": {
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "context": 1,
+          "data": [
+            {
+              "cids": [
+                "EP-104233"
+              ],
+              "ext": {},
+              "id": "EP-104233",
+              "name": "Weekday reach among business news readers in the US.",
+              "segment": [
+                {
+                  "ext": {},
+                  "id": "EP-104233",
+                  "name": "Weekday reach among business news readers in the US.",
+                  "value": "Weekday reach among business news readers in the US."
+                }
+              ]
+            }
+          ],
+          "embed": 1,
+          "episode": 250000,
+          "ext": {},
+          "firstbroadcast": 1,
+          "genre": "Weekday reach among business news readers in the US.",
+          "genres": [
+            "EP-104233"
+          ],
+          "gtax": 1,
+          "id": "EP-104233",
+          "isrc": "EP-104233",
+          "keywords": "Weekday reach among business news readers in the US.",
+          "kwarray": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "lang": "EP-104233",
+          "langb": "EP-104233",
+          "len": 250000,
+          "live": 1,
+          "mrating": 1,
+          "network": {
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "prodq": 0,
+          "producer": {
+            "cat": [
+              "EP-104233"
+            ],
+            "cattax": 1,
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "rating": "Weekday reach among business news readers in the US.",
+          "realtime": 1,
+          "season": "Weekday reach among business news readers in the US.",
+          "series": "Weekday reach among business news readers in the US.",
+          "srcrel": 1,
+          "title": "Weekday reach among business news readers in the US.",
+          "urating": "Weekday reach among business news readers in the US.",
+          "url": "Weekday reach among business news readers in the US."
+        },
+        "domain": "examplepub.example",
+        "ext": {},
+        "id": "EP-104233",
+        "keywords": "Weekday reach among business news readers in the US.",
+        "kwarray": [
+          "Weekday reach among business news readers in the US."
+        ],
+        "name": "Weekday reach among business news readers in the US.",
+        "pagecat": [
+          "EP-104233"
+        ],
+        "paid": 1,
+        "privpolicy": 1,
+        "pub": {
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "domain": "examplepub.example",
+          "ext": {},
+          "id": "EP-104233",
+          "name": "Weekday reach among business news readers in the US."
+        },
+        "sectcat": [
+          "EP-104233"
+        ],
+        "storeid": "EP-104233",
+        "storeurl": "Weekday reach among business news readers in the US.",
+        "ver": "EP-104233"
+      }
+    },
+    "Asset": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "minimal": {
+        "title": {
+          "text": "Weekday reach among business news readers in the US."
+        }
+      },
+      "full": {
+        "data": {
+          "ext": {},
+          "len": 1,
+          "type": 1,
+          "value": "Weekday reach among business news readers in the US."
+        },
+        "ext": {},
+        "id": 250000,
+        "image": {
+          "ext": {},
+          "h": 250000,
+          "type": 1,
+          "url": "Weekday reach among business news readers in the US.",
+          "w": 250000
+        },
+        "link": {
+          "ext": {},
+          "trkr": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "url": "Weekday reach among business news readers in the US.",
+          "urlfb": "Weekday reach among business news readers in the US."
+        },
+        "req": 1,
+        "title": {
+          "text": "Buy a widget"
+        },
+        "video": {
+          "adm": "<VAST/>",
+          "ext": {}
+        }
+      }
+    },
+    "AssetFormat": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
+      "minimal": {
+        "id": 250000,
+        "title": {
+          "len": 250000
+        }
+      },
+      "full": {
+        "data": {
+          "ext": {},
+          "len": 250000,
+          "type": 1
+        },
+        "ext": {},
+        "id": 1,
+        "img": {
+          "ext": {},
+          "h": 250000,
+          "hmin": 250000,
+          "hratio": 250000,
+          "mime": [
+            "EP-104233"
+          ],
+          "type": 1,
+          "w": 250000,
+          "wmin": 250000,
+          "wratio": 250000
+        },
+        "req": 1,
+        "title": {
+          "len": 90
+        },
+        "video": {
+          "api": [
+            1
+          ],
+          "boxing": 1,
+          "clktype": 0,
+          "comp": [
+            {
+              "display": {
+                "ampren": 250000,
+                "api": [
+                  1
+                ],
+                "clktype": 0,
+                "context": 10,
+                "ctype": [
+                  1
+                ],
+                "displayfmt": [
+                  {
+                    "expdir": [
+                      1
+                    ],
+                    "ext": {},
+                    "h": 250000,
+                    "hratio": 250000,
+                    "w": 250000,
+                    "wratio": 250000
+                  }
+                ],
+                "event": [
+                  {
+                    "api": [
+                      1
+                    ],
+                    "ext": {},
+                    "jstrk": [
+                      "examplepub.example"
+                    ],
+                    "method": [
+                      1
+                    ],
+                    "pxtrk": [
+                      "examplepub.example"
+                    ],
+                    "type": 1,
+                    "wjs": 1,
+                    "wpx": 1
+                  }
+                ],
+                "ext": {},
+                "h": 250000,
+                "ifrbust": [
+                  "EP-104233"
+                ],
+                "instl": 1,
+                "mime": [
+                  "EP-104233"
+                ],
+                "nativefmt": {
+                  "asset": [
+                    {
+                      "id": 250000,
+                      "title": {
+                        "len": 250000
+                      }
+                    }
+                  ],
+                  "ext": {}
+                },
+                "pos": 0,
+                "priv": 1,
+                "ptype": 1,
+                "topframe": 1,
+                "unit": 1,
+                "w": 250000
+              },
+              "ext": {},
+              "id": "EP-104233",
+              "vcm": 1
+            }
+          ],
+          "comptype": [
+            1
+          ],
+          "ctype": [
+            1
+          ],
+          "delay": 0,
+          "delivery": [
+            1
+          ],
+          "expdir": [
+            1
+          ],
+          "ext": {},
+          "h": 250000,
+          "linear": 1,
+          "maxbitr": 250000,
+          "maxdur": 250000,
+          "maxext": 0,
+          "maxseq": 250000,
+          "mime": [
+            "EP-104233"
+          ],
+          "minbitr": 250000,
+          "mincpmpersec": 1200000,
+          "mindur": 250000,
+          "overlayexpdir": [
+            1
+          ],
+          "playend": 1,
+          "playmethod": [
+            1
+          ],
+          "poddur": 250000,
+          "podid": 250000,
+          "podseq": -1,
+          "pos": 0,
+          "ptype": 1,
+          "rqddurs": [
+            250000
+          ],
+          "skip": 1,
+          "skipafter": 250000,
+          "skipmin": 250000,
+          "slotinpod": -1,
+          "unit": 1,
+          "w": 250000
+        }
+      }
+    },
+    "Audio": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Audio",
+      "minimal": {},
+      "full": {
+        "adm": "Weekday reach among business news readers in the US.",
+        "api": [
+          1
+        ],
+        "ctype": 1,
+        "curl": "Weekday reach among business news readers in the US.",
+        "dur": 250000,
+        "ext": {},
+        "mime": [
+          "EP-104233"
+        ]
+      }
+    },
+    "AudioPlacement": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
+      "minimal": {
+        "mime": []
+      },
+      "full": {
+        "api": [
+          1
+        ],
+        "comp": [
+          {
+            "display": {
+              "ampren": 250000,
+              "api": [
+                1
+              ],
+              "clktype": 0,
+              "context": 10,
+              "ctype": [
+                1
+              ],
+              "displayfmt": [
+                {
+                  "expdir": [
+                    1
+                  ],
+                  "ext": {},
+                  "h": 250000,
+                  "hratio": 250000,
+                  "w": 250000,
+                  "wratio": 250000
+                }
+              ],
+              "event": [
+                {
+                  "api": [
+                    1
+                  ],
+                  "ext": {},
+                  "jstrk": [
+                    "examplepub.example"
+                  ],
+                  "method": [
+                    1
+                  ],
+                  "pxtrk": [
+                    "examplepub.example"
+                  ],
+                  "type": 1,
+                  "wjs": 1,
+                  "wpx": 1
+                }
+              ],
+              "ext": {},
+              "h": 250000,
+              "ifrbust": [
+                "EP-104233"
+              ],
+              "instl": 1,
+              "mime": [
+                "EP-104233"
+              ],
+              "nativefmt": {
+                "asset": [
+                  {
+                    "id": 250000,
+                    "title": {
+                      "len": 250000
+                    }
+                  }
+                ],
+                "ext": {}
+              },
+              "pos": 0,
+              "priv": 1,
+              "ptype": 1,
+              "topframe": 1,
+              "unit": 1,
+              "w": 250000
+            },
+            "ext": {},
+            "id": "EP-104233",
+            "vcm": 1
+          }
+        ],
+        "comptype": [
+          1
+        ],
+        "ctype": [
+          1
+        ],
+        "delay": 0,
+        "delivery": [
+          1
+        ],
+        "ext": {},
+        "feed": 1,
+        "maxbitr": 250000,
+        "maxdur": 250000,
+        "maxext": 0,
+        "maxseq": 250000,
+        "mime": [
+          "EP-104233"
+        ],
+        "minbitr": 250000,
+        "mincpmpersec": 1200000,
+        "mindur": 250000,
+        "nvol": 0,
+        "overlayexpdir": [
+          1
+        ],
+        "playend": 1,
+        "playmethod": [
+          1
+        ],
+        "poddur": 250000,
+        "podid": 250000,
+        "podseq": -1,
+        "rqddurs": [
+          250000
+        ],
+        "skip": 1,
+        "skipafter": 250000,
+        "skipmin": 250000,
+        "slotinpod": -1
+      }
+    },
+    "Audit": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Audit",
+      "minimal": {},
+      "full": {
+        "corr": {},
+        "ext": {},
+        "feedback": [
+          "Weekday reach among business news readers in the US."
+        ],
+        "init": 1793664000000,
+        "lastmod": 1793664000000,
+        "status": 1
+      }
+    },
+    "AuditStatusCode": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/AuditStatusCode",
+      "minimal": 1,
+      "full": 1
+    },
+    "AutoRefreshTrigger": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/AutoRefreshTrigger",
+      "minimal": 0,
+      "full": 0
+    },
+    "Banner": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Banner",
+      "minimal": {
+        "img": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "ext": {},
+        "img": "Weekday reach among business news readers in the US.",
+        "link": {
+          "ext": {},
+          "trkr": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "url": "Weekday reach among business news readers in the US.",
+          "urlfb": "Weekday reach among business news readers in the US."
+        }
+      }
+    },
+    "BrandVersion": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/BrandVersion",
+      "minimal": {},
+      "full": {
+        "brand": "Weekday reach among business news readers in the US.",
+        "ext": {},
+        "version": [
+          "EP-104233"
+        ]
+      }
+    },
+    "CategoryTaxonomy": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/CategoryTaxonomy",
+      "minimal": 1,
+      "full": 1
+    },
+    "Channel": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Channel",
+      "minimal": {},
+      "full": {
+        "domain": "examplepub.example",
+        "ext": {},
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US."
+      }
+    },
+    "ClickType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ClickType",
+      "minimal": 0,
+      "full": 0
+    },
+    "Companion": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Companion",
+      "minimal": {},
+      "full": {
+        "display": {
+          "ampren": 250000,
+          "api": [
+            1
+          ],
+          "clktype": 0,
+          "context": 10,
+          "ctype": [
+            1
+          ],
+          "displayfmt": [
+            {
+              "expdir": [
+                1
+              ],
+              "ext": {},
+              "h": 250000,
+              "hratio": 250000,
+              "w": 250000,
+              "wratio": 250000
+            }
+          ],
+          "event": [
+            {
+              "api": [
+                1
+              ],
+              "ext": {},
+              "jstrk": [
+                "examplepub.example"
+              ],
+              "method": [
+                1
+              ],
+              "pxtrk": [
+                "examplepub.example"
+              ],
+              "type": 1,
+              "wjs": 1,
+              "wpx": 1
+            }
+          ],
+          "ext": {},
+          "h": 250000,
+          "ifrbust": [
+            "EP-104233"
+          ],
+          "instl": 1,
+          "mime": [
+            "EP-104233"
+          ],
+          "nativefmt": {
+            "asset": [
+              {
+                "id": 250000,
+                "title": {
+                  "len": 250000
+                }
+              }
+            ],
+            "ext": {}
+          },
+          "pos": 0,
+          "priv": 1,
+          "ptype": 1,
+          "topframe": 1,
+          "unit": 1,
+          "w": 250000
+        },
+        "ext": {},
+        "id": "EP-104233",
+        "vcm": 1
+      }
+    },
+    "CompanionType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/CompanionType",
+      "minimal": 1,
+      "full": 1
+    },
+    "ConnectionType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ConnectionType",
+      "minimal": 1,
+      "full": 1
+    },
+    "Content": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Content",
+      "minimal": {},
+      "full": {
+        "album": "Weekday reach among business news readers in the US.",
+        "artist": "Weekday reach among business news readers in the US.",
+        "cat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "channel": {
+          "domain": "examplepub.example",
+          "ext": {},
+          "id": "EP-104233",
+          "name": "Weekday reach among business news readers in the US."
+        },
+        "context": 1,
+        "data": [
+          {
+            "cids": [
+              "EP-104233"
+            ],
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US.",
+            "segment": [
+              {
+                "ext": {},
+                "id": "EP-104233",
+                "name": "Weekday reach among business news readers in the US.",
+                "value": "Weekday reach among business news readers in the US."
+              }
+            ]
+          }
+        ],
+        "embed": 1,
+        "episode": 250000,
+        "ext": {},
+        "firstbroadcast": 1,
+        "genre": "Weekday reach among business news readers in the US.",
+        "genres": [
+          "EP-104233"
+        ],
+        "gtax": 1,
+        "id": "EP-104233",
+        "isrc": "EP-104233",
+        "keywords": "Weekday reach among business news readers in the US.",
+        "kwarray": [
+          "Weekday reach among business news readers in the US."
+        ],
+        "lang": "EP-104233",
+        "langb": "EP-104233",
+        "len": 250000,
+        "live": 1,
+        "mrating": 1,
+        "network": {
+          "domain": "examplepub.example",
+          "ext": {},
+          "id": "EP-104233",
+          "name": "Weekday reach among business news readers in the US."
+        },
+        "prodq": 0,
+        "producer": {
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "domain": "examplepub.example",
+          "ext": {},
+          "id": "EP-104233",
+          "name": "Weekday reach among business news readers in the US."
+        },
+        "rating": "Weekday reach among business news readers in the US.",
+        "realtime": 1,
+        "season": "Weekday reach among business news readers in the US.",
+        "series": "Weekday reach among business news readers in the US.",
+        "srcrel": 1,
+        "title": "Weekday reach among business news readers in the US.",
+        "urating": "Weekday reach among business news readers in the US.",
+        "url": "Weekday reach among business news readers in the US."
+      }
+    },
+    "ContentContext": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ContentContext",
+      "minimal": 1,
+      "full": 1
+    },
+    "Corr": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Corr",
+      "minimal": {},
+      "full": {}
+    },
+    "Count": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/Count",
+      "minimal": 250000,
+      "full": 250000
+    },
+    "CreativeAttribute": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/CreativeAttribute",
+      "minimal": 1,
+      "full": 1
+    },
+    "CreativeSubtypeAudioVideo": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/CreativeSubtypeAudioVideo",
+      "minimal": 1,
+      "full": 1
+    },
+    "CreativeSubtypeDisplay": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/CreativeSubtypeDisplay",
+      "minimal": 1,
+      "full": 1
+    },
+    "Data": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Data",
+      "minimal": {},
+      "full": {
+        "cids": [
+          "EP-104233"
+        ],
+        "ext": {},
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US.",
+        "segment": [
+          {
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US.",
+            "value": "Weekday reach among business news readers in the US."
+          }
+        ]
+      }
+    },
+    "DataAsset": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/DataAsset",
+      "minimal": {
+        "value": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "ext": {},
+        "len": 1,
+        "type": 1,
+        "value": "Weekday reach among business news readers in the US."
+      }
+    },
+    "DataAssetFormat": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/DataAssetFormat",
+      "minimal": {
+        "type": 1
+      },
+      "full": {
+        "ext": {},
+        "len": 250000,
+        "type": 1
+      }
+    },
+    "Degrees": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/Degrees",
+      "minimal": 37.7749,
+      "full": 37.7749
+    },
+    "DeliveryMethod": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DeliveryMethod",
+      "minimal": 1,
+      "full": 1
+    },
+    "Device": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Device",
+      "minimal": {},
+      "full": {
+        "carrier": "Weekday reach among business news readers in the US.",
+        "contype": 1,
+        "dnt": 1,
+        "ext": {},
+        "geo": {
+          "accur": 250000,
+          "city": "EP-104233",
+          "country": "EP-104233",
+          "ext": {},
+          "ipserv": 1,
+          "lastfix": 250000,
+          "lat": 37.7749,
+          "lon": 37.7749,
+          "metro": "EP-104233",
+          "region": "EP-104233",
+          "type": 1,
+          "utcoffset": -300,
+          "zip": "EP-104233"
+        },
+        "geofetch": 1,
+        "h": 250000,
+        "hwv": "EP-104233",
+        "ifa": "EP-104233",
+        "ip": "EP-104233",
+        "iptr": 1,
+        "ipv6": "EP-104233",
+        "js": 1,
+        "lang": "EP-104233",
+        "langb": "EP-104233",
+        "lmt": 1,
+        "make": "Weekday reach among business news readers in the US.",
+        "mccmnc": "EP-104233",
+        "mccmncsim": "EP-104233",
+        "model": "Weekday reach among business news readers in the US.",
+        "os": 0,
+        "osv": "EP-104233",
+        "ppi": 250000,
+        "pxratio": 1200000,
+        "sua": {
+          "architecture": "EP-104233",
+          "bitness": "EP-104233",
+          "browsers": [
+            {
+              "brand": "Weekday reach among business news readers in the US.",
+              "ext": {},
+              "version": [
+                "EP-104233"
+              ]
+            }
+          ],
+          "ext": {},
+          "mobile": 1,
+          "model": "Weekday reach among business news readers in the US.",
+          "platform": {
+            "brand": "Weekday reach among business news readers in the US.",
+            "ext": {},
+            "version": [
+              "EP-104233"
+            ]
+          },
+          "source": 0
+        },
+        "type": 1,
+        "ua": "Weekday reach among business news readers in the US.",
+        "w": 250000,
+        "xff": "EP-104233"
+      }
+    },
+    "DeviceType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DeviceType",
+      "minimal": 1,
+      "full": 1
+    },
+    "Display": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Display",
+      "minimal": {},
+      "full": {
+        "adm": "Weekday reach among business news readers in the US.",
+        "api": [
+          1
+        ],
+        "banner": {
+          "ext": {},
+          "img": "Weekday reach among business news readers in the US.",
+          "link": {
+            "ext": {},
+            "trkr": [
+              "Weekday reach among business news readers in the US."
+            ],
+            "url": "Weekday reach among business news readers in the US.",
+            "urlfb": "Weekday reach among business news readers in the US."
+          }
+        },
+        "ctype": 1,
+        "curl": "Weekday reach among business news readers in the US.",
+        "event": [
+          {
+            "api": [
+              1
+            ],
+            "cdata": {},
+            "ext": {},
+            "method": 1,
+            "type": 2,
+            "url": "https://example.invalid/px.gif"
+          }
+        ],
+        "ext": {},
+        "h": 250000,
+        "hratio": 250000,
+        "mime": "EP-104233",
+        "native": {
+          "asset": [
+            {
+              "data": {
+                "ext": {},
+                "len": 1,
+                "type": 1,
+                "value": "Weekday reach among business news readers in the US."
+              },
+              "ext": {},
+              "id": 250000,
+              "image": {
+                "ext": {},
+                "h": 250000,
+                "type": 1,
+                "url": "Weekday reach among business news readers in the US.",
+                "w": 250000
+              },
+              "link": {
+                "ext": {},
+                "trkr": [
+                  "Weekday reach among business news readers in the US."
+                ],
+                "url": "Weekday reach among business news readers in the US.",
+                "urlfb": "Weekday reach among business news readers in the US."
+              },
+              "req": 1,
+              "title": {
+                "text": "Buy a widget"
+              },
+              "video": {
+                "adm": "<VAST/>",
+                "ext": {}
+              }
+            }
+          ],
+          "ext": {},
+          "link": {
+            "ext": {},
+            "trkr": [
+              "Weekday reach among business news readers in the US."
+            ],
+            "url": "Weekday reach among business news readers in the US.",
+            "urlfb": "Weekday reach among business news readers in the US."
+          }
+        },
+        "priv": "Weekday reach among business news readers in the US.",
+        "w": 250000,
+        "wratio": 250000
+      }
+    },
+    "DisplayContextType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DisplayContextType",
+      "minimal": 10,
+      "full": 10
+    },
+    "DisplayFormat": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/DisplayFormat",
+      "minimal": {},
+      "full": {
+        "expdir": [
+          1
+        ],
+        "ext": {},
+        "h": 250000,
+        "hratio": 250000,
+        "w": 250000,
+        "wratio": 250000
+      }
+    },
+    "DisplayPlacement": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/DisplayPlacement",
+      "minimal": {},
+      "full": {
+        "ampren": 250000,
+        "api": [
+          1
+        ],
+        "clktype": 0,
+        "context": 10,
+        "ctype": [
+          1
+        ],
+        "displayfmt": [
+          {
+            "expdir": [
+              1
+            ],
+            "ext": {},
+            "h": 250000,
+            "hratio": 250000,
+            "w": 250000,
+            "wratio": 250000
+          }
+        ],
+        "event": [
+          {
+            "api": [
+              1
+            ],
+            "ext": {},
+            "jstrk": [
+              "examplepub.example"
+            ],
+            "method": [
+              1
+            ],
+            "pxtrk": [
+              "examplepub.example"
+            ],
+            "type": 1,
+            "wjs": 1,
+            "wpx": 1
+          }
+        ],
+        "ext": {},
+        "h": 250000,
+        "ifrbust": [
+          "EP-104233"
+        ],
+        "instl": 1,
+        "mime": [
+          "EP-104233"
+        ],
+        "nativefmt": {
+          "asset": [
+            {
+              "id": 250000,
+              "title": {
+                "len": 250000
+              }
+            }
+          ],
+          "ext": {}
+        },
+        "pos": 0,
+        "priv": 1,
+        "ptype": 1,
+        "topframe": 1,
+        "unit": 1,
+        "w": 250000
+      }
+    },
+    "DisplayPlacementType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DisplayPlacementType",
+      "minimal": 1,
+      "full": 1
+    },
+    "Domain": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/Domain",
+      "minimal": "examplepub.example",
+      "full": "examplepub.example"
+    },
+    "Dooh": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Dooh",
+      "minimal": {},
+      "full": {
+        "content": {
+          "album": "Weekday reach among business news readers in the US.",
+          "artist": "Weekday reach among business news readers in the US.",
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "channel": {
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "context": 1,
+          "data": [
+            {
+              "cids": [
+                "EP-104233"
+              ],
+              "ext": {},
+              "id": "EP-104233",
+              "name": "Weekday reach among business news readers in the US.",
+              "segment": [
+                {
+                  "ext": {},
+                  "id": "EP-104233",
+                  "name": "Weekday reach among business news readers in the US.",
+                  "value": "Weekday reach among business news readers in the US."
+                }
+              ]
+            }
+          ],
+          "embed": 1,
+          "episode": 250000,
+          "ext": {},
+          "firstbroadcast": 1,
+          "genre": "Weekday reach among business news readers in the US.",
+          "genres": [
+            "EP-104233"
+          ],
+          "gtax": 1,
+          "id": "EP-104233",
+          "isrc": "EP-104233",
+          "keywords": "Weekday reach among business news readers in the US.",
+          "kwarray": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "lang": "EP-104233",
+          "langb": "EP-104233",
+          "len": 250000,
+          "live": 1,
+          "mrating": 1,
+          "network": {
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "prodq": 0,
+          "producer": {
+            "cat": [
+              "EP-104233"
+            ],
+            "cattax": 1,
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "rating": "Weekday reach among business news readers in the US.",
+          "realtime": 1,
+          "season": "Weekday reach among business news readers in the US.",
+          "series": "Weekday reach among business news readers in the US.",
+          "srcrel": 1,
+          "title": "Weekday reach among business news readers in the US.",
+          "urating": "Weekday reach among business news readers in the US.",
+          "url": "Weekday reach among business news readers in the US."
+        },
+        "dpi": 250000,
+        "etime": 250000,
+        "ext": {},
+        "fixed": 250000,
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US.",
+        "pub": {
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "domain": "examplepub.example",
+          "ext": {},
+          "id": "EP-104233",
+          "name": "Weekday reach among business news readers in the US."
+        },
+        "venue": 250000
+      }
+    },
+    "DoohMultiplierMeasurementSourceType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DoohMultiplierMeasurementSourceType",
+      "minimal": 0,
+      "full": 0
+    },
+    "DoohVenueTaxonomy": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DoohVenueTaxonomy",
+      "minimal": 0,
+      "full": 0
+    },
+    "EpochMilliseconds": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/EpochMilliseconds",
+      "minimal": 1793664000000,
+      "full": 1793664000000
+    },
+    "Event": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
+      "minimal": {
+        "method": 1,
+        "type": 1,
+        "url": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "api": [
+          1
+        ],
+        "cdata": {},
+        "ext": {},
+        "method": 1,
+        "type": 2,
+        "url": "https://example.invalid/px.gif"
+      }
+    },
+    "EventSpec": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/EventSpec",
+      "minimal": {
+        "type": 1
+      },
+      "full": {
+        "api": [
+          1
+        ],
+        "ext": {},
+        "jstrk": [
+          "examplepub.example"
+        ],
+        "method": [
+          1
+        ],
+        "pxtrk": [
+          "examplepub.example"
+        ],
+        "type": 1,
+        "wjs": 1,
+        "wpx": 1
+      }
+    },
+    "EventTrackingMethod": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/EventTrackingMethod",
+      "minimal": 1,
+      "full": 1
+    },
+    "EventType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/EventType",
+      "minimal": 1,
+      "full": 1
+    },
+    "ExpandableDirection": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ExpandableDirection",
+      "minimal": 1,
+      "full": 1
+    },
+    "Ext": {
+      "kind": "part",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/Ext",
+      "minimal": {},
+      "full": {}
+    },
+    "ExtendedDuration": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/ExtendedDuration",
+      "minimal": 0,
+      "full": 0
+    },
+    "ExtendedIdentifierUids": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/ExtendedIdentifierUids",
+      "minimal": {},
+      "full": {
+        "atype": 1,
+        "ext": {},
+        "id": "EP-104233"
+      }
+    },
+    "ExtendedIdentifiers": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/ExtendedIdentifiers",
+      "minimal": {},
+      "full": {
+        "ext": {},
+        "inserter": "examplepub.example",
+        "matcher": "Weekday reach among business news readers in the US.",
+        "mm": 0,
+        "source": "examplepub.example",
+        "uids": [
+          {
+            "atype": 1,
+            "ext": {},
+            "id": "EP-104233"
+          }
+        ]
+      }
+    },
+    "ExternalId": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/ExternalId",
+      "minimal": "EP-104233",
+      "full": "EP-104233"
+    },
+    "FeedType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/FeedType",
+      "minimal": 1,
+      "full": 1
+    },
+    "Geo": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Geo",
+      "minimal": {},
+      "full": {
+        "accur": 250000,
+        "city": "EP-104233",
+        "country": "EP-104233",
+        "ext": {},
+        "ipserv": 1,
+        "lastfix": 250000,
+        "lat": 37.7749,
+        "lon": 37.7749,
+        "metro": "EP-104233",
+        "region": "EP-104233",
+        "type": 1,
+        "utcoffset": -300,
+        "zip": "EP-104233"
+      }
+    },
+    "IdMatchMethod": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/IdMatchMethod",
+      "minimal": 0,
+      "full": 0
+    },
+    "ImageAsset": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/ImageAsset",
+      "minimal": {
+        "url": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "ext": {},
+        "h": 250000,
+        "type": 1,
+        "url": "Weekday reach among business news readers in the US.",
+        "w": 250000
+      }
+    },
+    "ImageAssetFormat": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/ImageAssetFormat",
+      "minimal": {},
+      "full": {
+        "ext": {},
+        "h": 250000,
+        "hmin": 250000,
+        "hratio": 250000,
+        "mime": [
+          "EP-104233"
+        ],
+        "type": 1,
+        "w": 250000,
+        "wmin": 250000,
+        "wratio": 250000
+      }
+    },
+    "IntegerFlag": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/IntegerFlag",
+      "minimal": 1,
+      "full": 1
+    },
+    "IpLocationService": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/IpLocationService",
+      "minimal": 1,
+      "full": 1
+    },
+    "LinearityMode": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/LinearityMode",
+      "minimal": 1,
+      "full": 1
+    },
+    "LinkAsset": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/LinkAsset",
+      "minimal": {
+        "url": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "ext": {},
+        "trkr": [
+          "Weekday reach among business news readers in the US."
+        ],
+        "url": "Weekday reach among business news readers in the US.",
+        "urlfb": "Weekday reach among business news readers in the US."
+      }
+    },
+    "LocationType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/LocationType",
+      "minimal": 1,
+      "full": 1
+    },
+    "Measure": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/Measure",
+      "minimal": 1200000,
+      "full": 1200000
+    },
+    "MediaOffset": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/MediaOffset",
+      "minimal": 15,
+      "full": 15
+    },
+    "MediaRating": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/MediaRating",
+      "minimal": 1,
+      "full": 1
+    },
+    "MinuteOffset": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/MinuteOffset",
+      "minimal": -300,
+      "full": -300
+    },
+    "Native": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Native",
+      "minimal": {},
+      "full": {
+        "asset": [
+          {
+            "data": {
+              "ext": {},
+              "len": 1,
+              "type": 1,
+              "value": "Weekday reach among business news readers in the US."
+            },
+            "ext": {},
+            "id": 250000,
+            "image": {
+              "ext": {},
+              "h": 250000,
+              "type": 1,
+              "url": "Weekday reach among business news readers in the US.",
+              "w": 250000
+            },
+            "link": {
+              "ext": {},
+              "trkr": [
+                "Weekday reach among business news readers in the US."
+              ],
+              "url": "Weekday reach among business news readers in the US.",
+              "urlfb": "Weekday reach among business news readers in the US."
+            },
+            "req": 1,
+            "title": {
+              "text": "Buy a widget"
+            },
+            "video": {
+              "adm": "<VAST/>",
+              "ext": {}
+            }
+          }
+        ],
+        "ext": {},
+        "link": {
+          "ext": {},
+          "trkr": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "url": "Weekday reach among business news readers in the US.",
+          "urlfb": "Weekday reach among business news readers in the US."
+        }
+      }
+    },
+    "NativeDataAssetType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/NativeDataAssetType",
+      "minimal": 1,
+      "full": 1
+    },
+    "NativeFormat": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/NativeFormat",
+      "minimal": {
+        "asset": []
+      },
+      "full": {
+        "asset": [
+          {
+            "id": 250000,
+            "title": {
+              "len": 250000
+            }
+          }
+        ],
+        "ext": {}
+      }
+    },
+    "NativeImageAssetType": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/NativeImageAssetType",
+      "minimal": 1,
+      "full": 1
+    },
+    "Network": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Network",
+      "minimal": {},
+      "full": {
+        "domain": "examplepub.example",
+        "ext": {},
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US."
+      }
+    },
+    "OperatingSystem": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/OperatingSystem",
+      "minimal": 0,
+      "full": 0
+    },
+    "Placement": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
+      "minimal": {
+        "display": {}
+      },
+      "full": {
+        "admx": 1,
+        "audio": {
+          "api": [
+            1
+          ],
+          "comp": [
+            {
+              "display": {
+                "ampren": 250000,
+                "api": [
+                  1
+                ],
+                "clktype": 0,
+                "context": 10,
+                "ctype": [
+                  1
+                ],
+                "displayfmt": [
+                  {
+                    "expdir": [
+                      1
+                    ],
+                    "ext": {},
+                    "h": 250000,
+                    "hratio": 250000,
+                    "w": 250000,
+                    "wratio": 250000
+                  }
+                ],
+                "event": [
+                  {
+                    "api": [
+                      1
+                    ],
+                    "ext": {},
+                    "jstrk": [
+                      "examplepub.example"
+                    ],
+                    "method": [
+                      1
+                    ],
+                    "pxtrk": [
+                      "examplepub.example"
+                    ],
+                    "type": 1,
+                    "wjs": 1,
+                    "wpx": 1
+                  }
+                ],
+                "ext": {},
+                "h": 250000,
+                "ifrbust": [
+                  "EP-104233"
+                ],
+                "instl": 1,
+                "mime": [
+                  "EP-104233"
+                ],
+                "nativefmt": {
+                  "asset": [
+                    {
+                      "id": 250000,
+                      "title": {
+                        "len": 250000
+                      }
+                    }
+                  ],
+                  "ext": {}
+                },
+                "pos": 0,
+                "priv": 1,
+                "ptype": 1,
+                "topframe": 1,
+                "unit": 1,
+                "w": 250000
+              },
+              "ext": {},
+              "id": "EP-104233",
+              "vcm": 1
+            }
+          ],
+          "comptype": [
+            1
+          ],
+          "ctype": [
+            1
+          ],
+          "delay": 0,
+          "delivery": [
+            1
+          ],
+          "ext": {},
+          "feed": 1,
+          "maxbitr": 250000,
+          "maxdur": 250000,
+          "maxext": 0,
+          "maxseq": 250000,
+          "mime": [
+            "EP-104233"
+          ],
+          "minbitr": 250000,
+          "mincpmpersec": 1200000,
+          "mindur": 250000,
+          "nvol": 0,
+          "overlayexpdir": [
+            1
+          ],
+          "playend": 1,
+          "playmethod": [
+            1
+          ],
+          "poddur": 250000,
+          "podid": 250000,
+          "podseq": -1,
+          "rqddurs": [
+            250000
+          ],
+          "skip": 1,
+          "skipafter": 250000,
+          "skipmin": 250000,
+          "slotinpod": -1
+        },
+        "curlx": 1,
+        "display": {},
+        "ext": {},
+        "reward": 1,
+        "sdk": "Weekday reach among business news readers in the US.",
+        "sdkver": "EP-104233",
+        "secure": 1,
+        "ssai": 250000,
+        "tagid": "EP-104233",
+        "video": {
+          "api": [
+            1
+          ],
+          "boxing": 1,
+          "clktype": 0,
+          "comp": [
+            {
+              "display": {
+                "ampren": 250000,
+                "api": [
+                  1
+                ],
+                "clktype": 0,
+                "context": 10,
+                "ctype": [
+                  1
+                ],
+                "displayfmt": [
+                  {
+                    "expdir": [
+                      1
+                    ],
+                    "ext": {},
+                    "h": 250000,
+                    "hratio": 250000,
+                    "w": 250000,
+                    "wratio": 250000
+                  }
+                ],
+                "event": [
+                  {
+                    "api": [
+                      1
+                    ],
+                    "ext": {},
+                    "jstrk": [
+                      "examplepub.example"
+                    ],
+                    "method": [
+                      1
+                    ],
+                    "pxtrk": [
+                      "examplepub.example"
+                    ],
+                    "type": 1,
+                    "wjs": 1,
+                    "wpx": 1
+                  }
+                ],
+                "ext": {},
+                "h": 250000,
+                "ifrbust": [
+                  "EP-104233"
+                ],
+                "instl": 1,
+                "mime": [
+                  "EP-104233"
+                ],
+                "nativefmt": {
+                  "asset": [
+                    {
+                      "id": 250000,
+                      "title": {
+                        "len": 250000
+                      }
+                    }
+                  ],
+                  "ext": {}
+                },
+                "pos": 0,
+                "priv": 1,
+                "ptype": 1,
+                "topframe": 1,
+                "unit": 1,
+                "w": 250000
+              },
+              "ext": {},
+              "id": "EP-104233",
+              "vcm": 1
+            }
+          ],
+          "comptype": [
+            1
+          ],
+          "ctype": [
+            1
+          ],
+          "delay": 0,
+          "delivery": [
+            1
+          ],
+          "expdir": [
+            1
+          ],
+          "ext": {},
+          "h": 250000,
+          "linear": 1,
+          "maxbitr": 250000,
+          "maxdur": 250000,
+          "maxext": 0,
+          "maxseq": 250000,
+          "mime": [
+            "EP-104233"
+          ],
+          "minbitr": 250000,
+          "mincpmpersec": 1200000,
+          "mindur": 250000,
+          "overlayexpdir": [
+            1
+          ],
+          "playend": 1,
+          "playmethod": [
+            1
+          ],
+          "poddur": 250000,
+          "podid": 250000,
+          "podseq": -1,
+          "pos": 0,
+          "ptype": 1,
+          "rqddurs": [
+            250000
+          ],
+          "skip": 1,
+          "skipafter": 250000,
+          "skipmin": 250000,
+          "slotinpod": -1,
+          "unit": 1,
+          "w": 250000
+        },
+        "wlang": [
+          "EP-104233"
+        ]
+      }
+    },
+    "PlacementPosition": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PlacementPosition",
+      "minimal": 0,
+      "full": 0
+    },
+    "PlaybackCessationMode": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PlaybackCessationMode",
+      "minimal": 1,
+      "full": 1
+    },
+    "PlaybackMethod": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PlaybackMethod",
+      "minimal": 1,
+      "full": 1
+    },
+    "PlcmtSubtypeVideo": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PlcmtSubtypeVideo",
+      "minimal": 1,
+      "full": 1
+    },
+    "PodDeduplicationSetting": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PodDeduplicationSetting",
+      "minimal": 1,
+      "full": 1
+    },
+    "PodSequence": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PodSequence",
+      "minimal": -1,
+      "full": -1
+    },
+    "Producer": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Producer",
+      "minimal": {},
+      "full": {
+        "cat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "domain": "examplepub.example",
+        "ext": {},
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US."
+      }
+    },
+    "ProductionQuality": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ProductionQuality",
+      "minimal": 0,
+      "full": 0
+    },
+    "Publisher": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Publisher",
+      "minimal": {},
+      "full": {
+        "cat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "domain": "examplepub.example",
+        "ext": {},
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US."
+      }
+    },
+    "Regs": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Regs",
+      "minimal": {},
+      "full": {
+        "coppa": 1,
+        "ext": {},
+        "gdpr": 1,
+        "gpp": "EP-104233",
+        "gpp_sid": [
+          250000
+        ]
+      }
+    },
+    "Restrictions": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Restrictions",
+      "minimal": {},
+      "full": {
+        "acat": [
+          "EP-104233"
+        ],
+        "badv": [
+          "examplepub.example"
+        ],
+        "bapp": [
+          "EP-104233"
+        ],
+        "battr": [
+          1
+        ],
+        "bcat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "ext": {}
+      }
+    },
+    "Segment": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Segment",
+      "minimal": {},
+      "full": {
+        "ext": {},
+        "id": "EP-104233",
+        "name": "Weekday reach among business news readers in the US.",
+        "value": "Weekday reach among business news readers in the US."
+      }
+    },
+    "Site": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Site",
+      "minimal": {},
+      "full": {
+        "amp": 1,
+        "cat": [
+          "EP-104233"
+        ],
+        "cattax": 1,
+        "content": {
+          "album": "Weekday reach among business news readers in the US.",
+          "artist": "Weekday reach among business news readers in the US.",
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "channel": {
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "context": 1,
+          "data": [
+            {
+              "cids": [
+                "EP-104233"
+              ],
+              "ext": {},
+              "id": "EP-104233",
+              "name": "Weekday reach among business news readers in the US.",
+              "segment": [
+                {
+                  "ext": {},
+                  "id": "EP-104233",
+                  "name": "Weekday reach among business news readers in the US.",
+                  "value": "Weekday reach among business news readers in the US."
+                }
+              ]
+            }
+          ],
+          "embed": 1,
+          "episode": 250000,
+          "ext": {},
+          "firstbroadcast": 1,
+          "genre": "Weekday reach among business news readers in the US.",
+          "genres": [
+            "EP-104233"
+          ],
+          "gtax": 1,
+          "id": "EP-104233",
+          "isrc": "EP-104233",
+          "keywords": "Weekday reach among business news readers in the US.",
+          "kwarray": [
+            "Weekday reach among business news readers in the US."
+          ],
+          "lang": "EP-104233",
+          "langb": "EP-104233",
+          "len": 250000,
+          "live": 1,
+          "mrating": 1,
+          "network": {
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "prodq": 0,
+          "producer": {
+            "cat": [
+              "EP-104233"
+            ],
+            "cattax": 1,
+            "domain": "examplepub.example",
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US."
+          },
+          "rating": "Weekday reach among business news readers in the US.",
+          "realtime": 1,
+          "season": "Weekday reach among business news readers in the US.",
+          "series": "Weekday reach among business news readers in the US.",
+          "srcrel": 1,
+          "title": "Weekday reach among business news readers in the US.",
+          "urating": "Weekday reach among business news readers in the US.",
+          "url": "Weekday reach among business news readers in the US."
+        },
+        "domain": "examplepub.example",
+        "ext": {},
+        "id": "EP-104233",
+        "keywords": "Weekday reach among business news readers in the US.",
+        "kwarray": [
+          "Weekday reach among business news readers in the US."
+        ],
+        "mobile": 1,
+        "name": "Weekday reach among business news readers in the US.",
+        "page": "Weekday reach among business news readers in the US.",
+        "pagecat": [
+          "EP-104233"
+        ],
+        "privpolicy": 1,
+        "pub": {
+          "cat": [
+            "EP-104233"
+          ],
+          "cattax": 1,
+          "domain": "examplepub.example",
+          "ext": {},
+          "id": "EP-104233",
+          "name": "Weekday reach among business news readers in the US."
+        },
+        "ref": "Weekday reach among business news readers in the US.",
+        "search": "Weekday reach among business news readers in the US.",
+        "sectcat": [
+          "EP-104233"
+        ]
+      }
+    },
+    "SizeUnit": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/SizeUnit",
+      "minimal": 1,
+      "full": 1
+    },
+    "SlotPositionInPod": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/SlotPositionInPod",
+      "minimal": -1,
+      "full": -1
+    },
+    "StartDelayMode": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/StartDelayMode",
+      "minimal": 0,
+      "full": 0
+    },
+    "Text": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/Text",
+      "minimal": "Weekday reach among business news readers in the US.",
+      "full": "Weekday reach among business news readers in the US."
+    },
+    "TitleAsset": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/TitleAsset",
+      "minimal": {
+        "text": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "ext": {},
+        "len": 250000,
+        "text": "Weekday reach among business news readers in the US."
+      }
+    },
+    "TitleAssetFormat": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/TitleAssetFormat",
+      "minimal": {
+        "len": 250000
+      },
+      "full": {
+        "ext": {},
+        "len": 250000
+      }
+    },
+    "User": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/User",
+      "minimal": {},
+      "full": {
+        "buyeruid": "EP-104233",
+        "consent": "EP-104233",
+        "data": [
+          {
+            "cids": [
+              "EP-104233"
+            ],
+            "ext": {},
+            "id": "EP-104233",
+            "name": "Weekday reach among business news readers in the US.",
+            "segment": [
+              {
+                "ext": {},
+                "id": "EP-104233",
+                "name": "Weekday reach among business news readers in the US.",
+                "value": "Weekday reach among business news readers in the US."
+              }
+            ]
+          }
+        ],
+        "eids": [
+          {
+            "ext": {},
+            "inserter": "examplepub.example",
+            "matcher": "Weekday reach among business news readers in the US.",
+            "mm": 0,
+            "source": "examplepub.example",
+            "uids": [
+              {
+                "atype": 1,
+                "ext": {},
+                "id": "EP-104233"
+              }
+            ]
+          }
+        ],
+        "ext": {},
+        "gender": "Weekday reach among business news readers in the US.",
+        "geo": {
+          "accur": 250000,
+          "city": "EP-104233",
+          "country": "EP-104233",
+          "ext": {},
+          "ipserv": 1,
+          "lastfix": 250000,
+          "lat": 37.7749,
+          "lon": 37.7749,
+          "metro": "EP-104233",
+          "region": "EP-104233",
+          "type": 1,
+          "utcoffset": -300,
+          "zip": "EP-104233"
+        },
+        "id": "EP-104233",
+        "keywords": "Weekday reach among business news readers in the US.",
+        "kwarray": [
+          "Weekday reach among business news readers in the US."
+        ],
+        "yob": 250000
+      }
+    },
+    "UserAgent": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/UserAgent",
+      "minimal": {},
+      "full": {
+        "architecture": "EP-104233",
+        "bitness": "EP-104233",
+        "browsers": [
+          {
+            "brand": "Weekday reach among business news readers in the US.",
+            "ext": {},
+            "version": [
+              "EP-104233"
+            ]
+          }
+        ],
+        "ext": {},
+        "mobile": 1,
+        "model": "Weekday reach among business news readers in the US.",
+        "platform": {
+          "brand": "Weekday reach among business news readers in the US.",
+          "ext": {},
+          "version": [
+            "EP-104233"
+          ]
+        },
+        "source": 0
+      }
+    },
+    "UserAgentSource": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/UserAgentSource",
+      "minimal": 0,
+      "full": 0
+    },
+    "VendorCode": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/VendorCode",
+      "minimal": 500,
+      "full": 500
+    },
+    "Video": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Video",
+      "minimal": {},
+      "full": {
+        "adm": "Weekday reach among business news readers in the US.",
+        "api": [
+          1
+        ],
+        "ctype": 1,
+        "curl": "Weekday reach among business news readers in the US.",
+        "dur": 250000,
+        "ext": {},
+        "mime": [
+          "EP-104233"
+        ]
+      }
+    },
+    "VideoAsset": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoAsset",
+      "minimal": {
+        "adm": "Weekday reach among business news readers in the US."
+      },
+      "full": {
+        "adm": "<VAST/>",
+        "ext": {}
+      },
+      "notes": [
+        {
+          "path": "/curl",
+          "holds": "omitted",
+          "reason": "rule:object_videoasset:6f5d60d7: /: has both `adm` and `curl`; exactly one of the two is required"
+        }
+      ]
+    },
+    "VideoPlacement": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
+      "minimal": {
+        "mime": []
+      },
+      "full": {
+        "api": [
+          1
+        ],
+        "boxing": 1,
+        "clktype": 0,
+        "comp": [
+          {
+            "display": {
+              "ampren": 250000,
+              "api": [
+                1
+              ],
+              "clktype": 0,
+              "context": 10,
+              "ctype": [
+                1
+              ],
+              "displayfmt": [
+                {
+                  "expdir": [
+                    1
+                  ],
+                  "ext": {},
+                  "h": 250000,
+                  "hratio": 250000,
+                  "w": 250000,
+                  "wratio": 250000
+                }
+              ],
+              "event": [
+                {
+                  "api": [
+                    1
+                  ],
+                  "ext": {},
+                  "jstrk": [
+                    "examplepub.example"
+                  ],
+                  "method": [
+                    1
+                  ],
+                  "pxtrk": [
+                    "examplepub.example"
+                  ],
+                  "type": 1,
+                  "wjs": 1,
+                  "wpx": 1
+                }
+              ],
+              "ext": {},
+              "h": 250000,
+              "ifrbust": [
+                "EP-104233"
+              ],
+              "instl": 1,
+              "mime": [
+                "EP-104233"
+              ],
+              "nativefmt": {
+                "asset": [
+                  {
+                    "id": 250000,
+                    "title": {
+                      "len": 250000
+                    }
+                  }
+                ],
+                "ext": {}
+              },
+              "pos": 0,
+              "priv": 1,
+              "ptype": 1,
+              "topframe": 1,
+              "unit": 1,
+              "w": 250000
+            },
+            "ext": {},
+            "id": "EP-104233",
+            "vcm": 1
+          }
+        ],
+        "comptype": [
+          1
+        ],
+        "ctype": [
+          1
+        ],
+        "delay": 0,
+        "delivery": [
+          1
+        ],
+        "expdir": [
+          1
+        ],
+        "ext": {},
+        "h": 250000,
+        "linear": 1,
+        "maxbitr": 250000,
+        "maxdur": 250000,
+        "maxext": 0,
+        "maxseq": 250000,
+        "mime": [
+          "EP-104233"
+        ],
+        "minbitr": 250000,
+        "mincpmpersec": 1200000,
+        "mindur": 250000,
+        "overlayexpdir": [
+          1
+        ],
+        "playend": 1,
+        "playmethod": [
+          1
+        ],
+        "poddur": 250000,
+        "podid": 250000,
+        "podseq": -1,
+        "pos": 0,
+        "ptype": 1,
+        "rqddurs": [
+          250000
+        ],
+        "skip": 1,
+        "skipafter": 250000,
+        "skipmin": 250000,
+        "slotinpod": -1,
+        "unit": 1,
+        "w": 250000
+      }
+    },
+    "VolumeNormalizationMode": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/VolumeNormalizationMode",
+      "minimal": 0,
+      "full": 0
+    }
+  }
+}

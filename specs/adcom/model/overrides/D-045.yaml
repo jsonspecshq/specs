@@ -1,0 +1,22 @@
+format: 2
+id: D-045
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_playbackmethods:6
+value: INITIATES_ON_ENTERING_VIEWPORT_SOUND_OFF
+rule_would_give: INITIATES_ON_ENTERING_VIEWPORT_WITH_SOUND_OFF
+reading: D-037
+covers:
+  - ir: def:list_playbackmethods:6
+    digest: 2852b601f07001bdbc8db852fc59610e2695e5f2e1b0fafe9e9712566d059f6a
+    quote: "`6` | Initiates on Entering Viewport or scrolling into view with Sound Off by Default"
+reason: >-
+  Every content word of the title D-031 sets stays, at 40 characters; the
+  one word D-037 drops is "with", which tells no code of List: Playback
+  Methods from another and which codes 8 to 11 already name the sound state
+  without. Forty is the length at which a name is reviewed, not a length it
+  must beat, and the next word to go would be the trigger or the sound, each
+  of which tells code 6 from another code; that is also the whole of how the
+  name differs from the title.

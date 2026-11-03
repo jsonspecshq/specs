@@ -1,0 +1,79 @@
+OpenProposal schema tooling
+Copyright 2026 Konstantin Mirin
+
+Code is licensed under the Apache License 2.0 (LICENSE-CODE); everything else
+under the Creative Commons Attribution 3.0 License (LICENSE).
+
+This repository contains and adapts material from the OpenProposal
+Specification by IAB Tech Lab, licensed under CC BY 3.0
+(https://creativecommons.org/licenses/by/3.0/): the specification text and its
+examples, which the schemas, rules, decision records, IR, and SDK types quote
+and adapt. spec-input/snapshots/with-open-prs/ merges open pull requests into
+it; the lock and spec-input/INTEGRATION*.md record every change. This is an
+independent work, not a product of IAB Tech Lab, and it implies no endorsement.
+
+kernel/lists.yaml reproduces code lists from AdCOM 1.0 by IAB Tech Lab
+(CC BY 3.0): API frameworks, playback methods, and video placement subtypes.
+
+specs/adcom/ contains and adapts material from the AdCOM 1.0 Specification by
+IAB Tech Lab (https://github.com/InteractiveAdvertisingBureau/AdCOM), which its
+repository's README and the specification itself release under CC BY 3.0
+(https://creativecommons.org/licenses/by/3.0/): specs/adcom/spec-input/snapshots/
+holds the specification text at each locked commit, unmodified, and the IR, and
+the mapping, decision records, and schemas generated from it, quote and adapt
+it. This is an independent work, not a product of IAB Tech Lab, and it implies
+no endorsement.
+
+specs/adcom/outputs/enum-drift/snapshots/ holds one folder of each of two
+artifacts that define AdCOM's lists as enums, reproduced whole and
+unmodified at the commits specs/adcom/outputs/enum-drift/sources.yaml pins,
+with each one's license, so the enum drift report can be checked without a
+clone: the enums folder of IAB Tech Lab's
+adcom-proto (https://github.com/IABTechLab/adcom-proto, at 921f85e), and the
+adcom1/ folder of Prebid's openrtb (https://github.com/prebid/openrtb, at
+0d01af1), with its Go types, tests, and test data. Both are licensed under
+the Apache License 2.0.
+
+specs/adcom/input/external/prebid-openrtb/ holds a second, separate copy of
+the adcom1/testdata/ folder of the same Prebid openrtb artifact at the same
+commit (0d01af1) -- three JSON payloads and the license -- reproduced whole
+and unmodified at the tree specs/adcom/input/external/sources.yaml pins. It
+is a copy rather than a reference to the folder above because the two serve
+different purposes and are pinned by different records: the snapshot above
+is evidence for a report, and may be narrowed by whoever narrows that
+report, while this copy is the payload corpus an emitted schema is graded
+against. A corpus that could be emptied by an unrelated change would be an
+oracle of record that quietly decides nothing. It is licensed under the
+Apache License 2.0.
+
+specs/dealsapi/ contains and adapts material from the Deals API 1.0
+Specification (the Deal Sync API) by IAB Tech Lab
+(https://github.com/IABTechLab/deal-api), which its repository's README
+releases under CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/):
+specs/dealsapi/spec-input/snapshots/ holds the specification text at each
+locked commit, unmodified, and the IR, mapping, decision records, and schemas
+generated from it quote and adapt it. This is an independent work, not a
+product of IAB Tech Lab, and it implies no endorsement.
+
+kernel/lists.yaml also lists the zone names of the IANA Time Zone Database
+(tzdata), which is in the public domain.
+
+kernel/sources/iso-3166-1-iso-codes-4.20.1.json is the ISO 3166-1 data file
+of the iso-codes project (https://salsa.debian.org/iso-codes-team/iso-codes,
+release 4.20.1, at commit 7462323), reproduced whole and unmodified so its
+SHA-256 can be verified, and kernel/lists.yaml lists its alpha-3 codes and
+names. The file is Copyright 2016 Dr. Tobias Quathamer, as the project's
+REUSE.toml states, and licensed under the GNU Lesser General Public License,
+version 2.1 or later, whose text is kernel/sources/iso-codes-LGPL-2.1-or-later.txt.
+The codes themselves are ISO 3166-1's; ISO 3166 is (c) ISO.
+
+kernel/sources/iso-4217-list-one-2026-09-17.xml is ISO 4217 List One as
+published by SIX Financial Information AG for the ISO 4217 Maintenance Agency,
+reproduced unmodified so its SHA-256 can be verified, and kernel/lists.yaml
+lists its currency codes. ISO 4217 is (c) ISO.
+
+test/fixtures/seller-agent-payloads.json holds eleven proposal payloads produced
+by the OpenProposal mapper of IAB Tech Lab's seller agent
+(https://github.com/IABTechLab/seller-agent, branch feat/openproposal-mapping
+at e77022e), licensed under the Apache License 2.0. They are test inputs only,
+reproduced unmodified.

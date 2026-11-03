@@ -1,0 +1,85 @@
+---
+title: How it's built · Deals API 1.0 JSON Schema
+description: How Postindustria generates the Deals API 1.0 schemas from the specification text.
+---
+{/*
+  The Deals API's How it's built page, in its own words. Moved from the
+  predecessor's `methodPage` (`src/specs/dealsapi/site.ts:129-231`) with every
+  word in its place, except where the step records a difference:
+
+   - The five steps of "One attribute, end to end" are `<WorkedExample />`,
+     which renders them from `walkthrough` in the bundle: the row's quote and
+     link, the element and its digest, the vocabulary, the emitted schema and
+     the example value. The predecessor wrote the five `<li>`s out and
+     interpolated each value; the selection is still this specification's, in
+     `src/specs/dealsapi/site.ts`.
+   - The worked example now has a **proto line**, because this repository
+     publishes a proto target for the Deals API and the predecessor did not.
+     It is conditional on `walkthrough.target`, which MDX cannot express, so it
+     stays in `WorkedExample.astro` and nothing here says it.
+   - The design notes' two sentences are the `codes` and `flags` slots of
+     `<DesignNotes />`, as they were the predecessor's two arguments.
+   - The repository the last section links is this one, and the lock the
+     command names moved with the target layout of the plan's § 1.4:
+     `specs/dealsapi/input/spec-lock.yaml`, where the predecessor wrote
+     `specs/dealsapi/spec-input/spec-lock.yaml`.
+
+  Every figure is read from the bundle through <Stat>. The whole page is one
+  `<div class="wrap method">` written with no blank line inside it, so MDX
+  reads it as one JSX block and every component below resolves as a component.
+*/}
+<div class="wrap method">
+<h1>How it's built</h1>
+<p class="lede">Postindustria, an IAB Tech Lab member, generates these schemas from the Deals API <Stat of="brand.edition" /> specification text. Nobody writes a schema file by hand. Every schema is a function of two things: the specification at a pinned commit, and a mapping and a set of decision records that we review by hand. This page explains each step for the Deals API, and what it shapes in the <a href="map.html">type map</a> and the <a href="downloads.html">files</a>.</p>
+<nav class="toc" aria-label="On this page"><p class="note">On this page</p><ol><li><a href="#pipeline">The pipeline</a></li><li><a href="#extraction">Extraction</a></li><li><a href="#mapping">Mapping and decisions</a></li><li><a href="#emission">What a row becomes</a></li><li><a href="#verification">Verification</a></li><li><a href="#inputs">The two inputs</a></li><li><a href="#example">One attribute, end to end</a></li><li><a href="#design">Design notes: codes and flags</a></li><li><a href="#reproduce">How to reproduce it</a></li></ol></nav>
+<section id="pipeline">
+<h2>The pipeline</h2>
+<p>The same pipeline generates every specification on this site. The Deals API has no SDK types yet, since the schemas come first.</p>
+<Pipeline />
+</section>
+<section id="extraction">
+<h2>Extraction</h2>
+<p>The text writes each object as an <code>Attribute | Type | Description</code> table under a heading <code>Object: Deal</code>, and every section heading of the body follows an anchor, such as <code>object-deal</code>, which is the section's ID. A Type cell states the base type and, after it, the presence and the default, as <code>int, default 0, recommended</code>. A Description cell lists a code's meanings as <code>n = label</code> runs, most of them with the code in a code span. The text adopts no RFC 2119 convention and writes its keywords in lowercase, so a keyword in any case makes a statement (<Decision of="D-001" />).</p>
+<p>On <code><Stat of="walkthrough.lock" /></code>, the IR holds <Stat of="fields" unit="attribute row" /> in <Stat of="tables" unit="table" />, <Stat of="valueLists" unit="code list" />, and <Stat of="statements" unit="statement" />. Each element has an ID, such as <code><Stat of="walkthrough.element" /></code>: an attribute row (<code>field</code>) in the section <code>object-deal</code>.</p>
+</section>
+<section id="mapping">
+<h2>Mapping and decisions</h2>
+<p>Every element has exactly one entry in the mapping, on each input. Of the <Stat of="mappingEntries" /> entries across both inputs, <Stat of="mappingByRule" /> come from mapping rules and <Stat of="mappingByDecision" /> cite a decision record.</p>
+<ul>
+<li><strong>An object no attribute holds is a document.</strong> <code>Object: Deal</code> and <code>Object: BuyerSeat</code> are the two payloads; <code>terms</code> holds <code>Object: Terms</code>, so <TypeLink of="Terms" /> is an object, named by its heading.</li>
+<li><strong>A row's concept types it.</strong> The kernel binding cites each row for a concept of the domain model, and the concept's type is the row's: an identifier is <TypeLink of="ExternalId" />, a domain <TypeLink of="Domain" />, a UTC timestamp <TypeLink of="UtcTimestamp" /> (<Decision of="D-002" />).</li>
+<li><strong>A code list is a vocabulary.</strong> Each own list becomes one, named for what its codes are (<Decision of="D-031" />), each code labeled with its row's text.</li>
+<li><strong>Decisions fill the gaps.</strong> <Stat of="gaps" unit="decision record" /> settle what the text leaves open, from how an evergreen deal leaves <code>enddate</code> blank (<Decision of="D-003" />) to which field "Price attribute" names (<Decision of="D-007" />). Read them in the <a href="decisions/index.html">decision records</a>.</li>
+</ul>
+</section>
+<section id="emission">
+<h2>What a row becomes</h2>
+<p>An attribute is a property of its object: a <code>$ref</code> to its type, with its row's description and, where the Type cell states one, its <code>default</code>. A code list is <code>type: integer</code> and a <code>oneOf</code> of titled <code>const</code> branches, one per code (see the <a href="#design">design notes</a>); <code>pricetype</code>'s list also takes an exchange's own code from <Stat of="vendorFloor" /> up. <Stat of="rules" unit="rule" /> of the text that JSON Schema can't express, such as "at most one of <code>wseat</code> and <code>bseat</code>", are in the rules file beside the kernel's, each with valid and invalid vectors and its level: a <em>should</em> is a warning, a <em>must</em> an error.</p>
+</section>
+<section id="verification">
+<h2>Verification</h2>
+<ul>
+<li><strong>The fidelity oracle.</strong> A separate program reads each attribute row from the IR alone, never the mapping, and checks the emitted schemas: the presence, the type and the default its Type cell states, every code its Description cell lists, and what an empty list means.</li>
+<li><strong>The round trip.</strong> Each attribute table is rendered back from the model and compared with the text, cell by cell. The recorded differences are Type cells whose wording the schemas don't keep, such as <code>integer</code> beside <code>int</code> (<Decision of="D-033" />), and <code>guar</code>'s codes (<Decision of="D-018" />).</li>
+<li><strong>The registry agreement.</strong> Every list the text cites is AdCOM's, at the commit the registry pins, and no schema copies its codes.</li>
+<li><strong>Determinism and drift.</strong> Every generated file is written twice in separate processes and compared with the committed one, byte for byte.</li>
+<li><strong>Known-bad fixtures.</strong> Every gate has fixtures it must reject, such as a code list that lost a code, or a default the schema dropped.</li>
+</ul>
+</section>
+<section id="inputs">
+<h2>The two inputs</h2>
+<p>The Deals API calls every revision "<Stat of="brand.edition" />", and its errata changed <code>sellerstatus</code> after the tag. So the schemas are built twice: from <code>main</code>, the default, and from the tag. The lock comparison shows that they differ in that one list, where the tag gives the code 4 both meanings, and the release differ classes the change as breaking.</p>
+</section>
+<section id="example">
+<h2>One attribute, end to end</h2>
+<WorkedExample />
+</section>
+<DesignNotes>
+<Fragment slot="codes">The text writes its own lists as integer codes, such as <code>pricetype</code>'s <code>3</code> for Fixed Price, and cites two lists from AdCOM <Stat of="brand.edition" />.</Fragment>
+<Fragment slot="flags">The text writes <code>guar</code> as <code>0</code>, not a guaranteed deal, or <code>1</code>, a guaranteed deal, so it is <code>IntegerFlag</code>.</Fragment>
+</DesignNotes>
+<section id="reproduce">
+<h2>How to reproduce it</h2>
+<p>The tooling is public at <a href={props.doc.brand.repo}>{props.doc.brand.repo.replace("https://github.com/", "")}</a>. It needs Node 22, and the gates also need Python 3.12 and Go 1.25 or later. <code>npm run ci</code> runs every gate on every specification, as CI does; <code>npm run extract -- --lock specs/dealsapi/input/spec-lock.yaml</code> and the other steps run on one.</p>
+</section>
+</div>

@@ -1,0 +1,103 @@
+format: 2
+id: D-058
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Three pairs of objects have the same attribute table, attribute for attribute: Audio and Video, Channel and Network, Producer and Publisher. Is each pair one type or two?"
+covers:
+  - ir: key:object_audio:Audio.adm
+    digest: 2b0ce51808303f047cd615325221be8b4af214531e9244b268aa776728d39b78
+    quote: "`adm` | Audio markup (e.g., DAAST). Note that including both `adm` and `curl` is not recommended."
+  - ir: key:object_video:Video.adm
+    digest: 72c2bad70b6ea9ba76049838d5939ef911adc9c545f4e29f76707793f3d7641a
+    quote: "`adm` | Video markup (e.g., VAST). Note that including both `adm` and `curl` is not recommended."
+  - ir: key:object_channel:Channel.id
+    digest: 59d6cc7f972a4fc16d67df929d24518768034147519ff5d91180060cf59a674c
+    quote: "`id` | A unique identifier assigned by the publisher. This may not be a unique identifier across all supply sources."
+  - ir: key:object_network:Network.id
+    digest: 59d6cc7f972a4fc16d67df929d24518768034147519ff5d91180060cf59a674c
+    quote: "`id` | A unique identifier assigned by the publisher. This may not be a unique identifier across all supply sources."
+  - ir: key:object_producer:Producer.id
+    digest: 1f4fd8cc1ab4ea4f1eda9ef8033de2a98c6e8ac7dbe3954be09dc86bb5e30110
+    quote: "`id` | Vendor-specific unique producer identifier. Useful if content is syndicated and may be posted on a site using embed tags."
+  - ir: key:object_publisher:Publisher.id
+    digest: 646ea635a012c4c18ca493f8f2c3372e33ce47950954bfd9021251062ef9e7e1
+    quote: "`id` | Vendor-specific unique publisher identifier, as used in ads.txt files."
+options:
+  - id: two-types-as-written
+    summary: >-
+      Each pair stays two named types, as the text writes two sections, and
+      the record states that the two share one structure so that the
+      duplication gate reads the pair as one definition in two sections
+      rather than as one type under two names.
+  - id: merge-each-pair
+    summary: >-
+      Each pair becomes one named type, named after one of the two, and every
+      attribute row that references either references that one type.
+  - id: narrow-one-of-each-pair
+    summary: >-
+      Each pair stays two types and one of the two takes a constraint the
+      other lacks, so the two structures differ and the gate is satisfied by
+      the schemas rather than by a record.
+chosen: two-types-as-written
+rationale: >-
+  The text writes six sections, each headed `Object:` with a name of its own,
+  and every attribute row that references one of the six names it and not its
+  twin: `Ad.audio` refers to Object: Audio and `Ad.video` to Object: Video;
+  `Content.channel` refers to Object: Channel and `Content.network` to Object:
+  Network; `Content.producer` refers to Object: Producer and
+  `DistributionChannel.pub` to Object: Publisher. Merging a pair would make
+  those references name a type the text does not write, and would make the
+  round-trip render one section's table under the other's name, so
+  `merge-each-pair` is a reading the text contradicts.
+
+  `narrow-one-of-each-pair` would satisfy the gate by adding a constraint no
+  row states, which is the one thing a generated schema may not do: the
+  attribute rows of Audio and Video are the same seven rows -- `mime`, `api`,
+  `ctype`, `dur`, `adm`, `curl`, `ext` -- with the same types and the same
+  presence, and the only difference the text writes is in the definition
+  cells' prose, which is an annotation and no constraint.
+
+  So each pair is two types with one structure, and the structures are equal
+  because the specification says the same thing twice, not because this
+  pipeline said it twice. That is what a receiver sees too: it reads an
+  `Audio` where the `Ad` carried `audio` and a `Video` where it carried
+  `video`, and nothing in either payload tells the two apart. The record
+  therefore states the pairs under `twins`, and the duplication gate fails any
+  entry whose two types stop sharing one structure, so the listing cannot
+  outlive the text that justifies it.
+
+  What this rejects: nothing a payload can hold. Two schemas that accept the
+  same payloads accept the same payloads whether they are one definition or
+  two, so the reading changes no verdict. What it costs is that a reader of
+  the published tree sees six definitions where four would do, and a consumer
+  generating types from the tree gets six.
+twins:
+  - types: [Audio, Video]
+    reason: >-
+      Object: Audio and Object: Video state the same seven attribute rows.
+      `Ad.audio` refers to the first and `Ad.video` to the second, so the two
+      names are two sections of the text and not one type named twice.
+  - types: [Channel, Network]
+    reason: >-
+      Object: Channel and Object: Network state the same three attribute rows
+      and the same `ext`. `Content.channel` refers to the first and
+      `Content.network` to the second.
+  - types: [Producer, Publisher]
+    reason: >-
+      Object: Producer and Object: Publisher state the same five attribute
+      rows and the same `ext`. `Content.producer` refers to the first and
+      `DistributionChannel.pub` to the second.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L783"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2065"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2116"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2148"
+feedback: >-
+  Say what distinguishes an Audio from a Video, a Channel from a Network, and
+  a Producer from a Publisher, in the attributes rather than in the prose. As
+  the tables stand, a receiver handed one of a pair cannot tell which it was
+  sent except by the attribute it arrived on, so the three pairs are six names
+  for three shapes. Either give each of a pair an attribute the other lacks,
+  or state that the two are one object used in two positions.

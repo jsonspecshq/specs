@@ -1,0 +1,19 @@
+format: 2
+id: D-036
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_playbackcessationmodes:3
+value: On Leaving Viewport Continues as Floating Unit
+reading: D-024
+covers:
+  - ir: def:list_playbackcessationmodes:3
+    digest: 0e9953ee45b8b8eb18cbd777c8503dd9d64067512626e639ec8b1d8cb35b7b78
+    quote: "`3` | On Leaving Viewport Continues as a Floating/Slider Unit until Video Completion or when Terminated by User"
+reason: >-
+  The row describes code 3 in a sentence too long to name it, so D-024
+  keeps what sets the code apart, that playback continues as a floating
+  unit once the player leaves the viewport, and leaves the row's end,
+  when that unit stops, and "Floating/Slider" in full, to the
+  description.

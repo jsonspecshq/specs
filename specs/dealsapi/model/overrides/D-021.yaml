@@ -1,0 +1,102 @@
+format: 2
+id: D-021
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Does a Deals API object accept members its table doesn't name, and what is `ext`?"
+covers:
+  - ir: field:object-deal:ext
+    digest: d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c
+    quote: "`ext` | object | Placeholder for deal-specific extensions"
+  - ir: field:object-terms:ext
+    digest: d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c
+    quote: "`ext` | object | Placeholder for deal-specific extensions"
+  - ir: field:object-inventory:ext
+    digest: d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c
+    quote: "`ext` | object | Placeholder for deal-specific extensions"
+  - ir: field:object-curation:ext
+    digest: d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c
+    quote: "`ext` | object | Placeholder for deal-specific extensions"
+  - ir: field:object-buyerseat:ext
+    digest: d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c
+    quote: "`ext` | object | Placeholder for deal-specific extensions"
+  - ir: field:object-buyerstatus:ext
+    digest: d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c
+    quote: "`ext` | object | Placeholder for deal-specific extensions"
+options:
+  - id: closed-with-ext
+    summary: >-
+      Each object accepts only the members its table names, and `ext`, on
+      every object, takes an object of any members, which the parties agree
+      on.
+  - id: open
+    summary: >-
+      Each object accepts any member, and a receiver ignores the members it
+      doesn't know.
+chosen: closed-with-ext
+rationale: >-
+  Every table lists its object's members and gives each object an `ext`
+  "for deal-specific extensions", so the text names where a member it
+  doesn't define goes. The text never says what a receiver does with a
+  member outside the table, and no row forbids one, so whether an object
+  is open or closed is a point it leaves open. That differs from a minimum
+  the rows would rule out: an object with none of its optional members is
+  one each row allows, so the schema keeps it valid. A member outside the
+  table is one no row describes, and the text gives such members a place,
+  `ext`, so closing the object sends them there. A closed object also lets
+  the schema find a misspelled member, which an open one accepts as an
+  extension.
+challenge:
+  - type: Terms
+    value:
+      pricetype: 1
+      dealfloor: 2.5
+      cur: USD
+      audiencetargeting: true
+    verdict: reject
+    context: >-
+      A seller's platform that flags audience-targeted deals to its buyers
+      and writes the flag beside the price, as its own API does, rather than
+      inside `ext`.
+    reason: >-
+      `audiencetargeting` is no member of the Terms table, and the chosen
+      option closes the object, so `additionalProperties: false` refuses it
+      at the top of Terms. This is the value the option `open` would have
+      taken and the one the rationale's "a closed object also lets the schema
+      find a misspelled member" is about.
+  - type: Terms
+    value:
+      pricetype: 1
+      dealfloor: 2.5
+      cur: USD
+      ext:
+        audiencetargeting: true
+    verdict: accept
+    context: >-
+      The same seller's payload with the flag where the text puts a member it
+      doesn't define.
+    reason: >-
+      `ext` is a member of the Terms table and takes the kernel's extension
+      part, whose shell is `{ type: object, additionalProperties: true }`, so
+      every member of it is accepted whatever it is called. The pair is what
+      closing the object costs and where the cost is paid.
+  - type: Curation
+    value:
+      curator: curator.example
+      cfeepct: 12
+    verdict: reject
+    context: >-
+      A curator that states its fee as a percentage, which the Deals API
+      numbers under `curfee` and a curation platform numbers under its own
+      name.
+    reason: >-
+      `cfeepct` is no member of the Curation table, so the closed object
+      refuses it. A second object from a different party to the deal, because
+      one object's verdict says nothing about the reading and six objects
+      carry the same `ext` row.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L101"
+feedback: >-
+  Say whether a receiver must reject, or must ignore, a member that no table
+  names, and whether a sender may put one anywhere but `ext`.

@@ -1,0 +1,18 @@
+format: 2
+id: D-033
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:user-agent_source:2
+value: High-Entropy Client Hints
+reading: D-021
+covers:
+  - ir: def:user-agent_source:2
+    digest: c1e2efa1cd3731488c5390ca24d3a2a522f4d5207215c7ef133e9c324e871791
+    quote: "`2` | User-Agent Client Hints (with high-entropy headers available)"
+reason: >-
+  The list names codes 1 and 2 alike, "User-Agent Client Hints", and
+  tells them apart only in the parentheses, the headers that were
+  available, so D-021 keeps that difference in the name, in the row's
+  own words.

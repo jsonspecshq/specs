@@ -1,0 +1,21 @@
+format: 2
+id: D-048
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_poddedupe:2
+value: DEDUPLICATED_ON_CONTENT_TAXONOMY
+rule_would_give: DEDUPLICATED_ON_IAB_TECH_LAB_CONTENT_TAXONOMY
+reading: D-037
+covers:
+  - ir: def:list_poddedupe:2
+    digest: 2ccc62e1328f24b6d73a78ff47823ccdf256985f8d705cb2ed8d5a60a3904e7e
+    quote: "`2` | Deduplicated on IAB Tech Lab Content Taxonomy"
+reason: >-
+  The code is a key to deduplicate on, and the key is the content taxonomy;
+  IAB Tech Lab is who publishes it, which the other four keys of List: Pod
+  Deduplication Settings — an adomain, a creative ID, a mediafile URL, no
+  deduplication at all — never need, so D-037 drops the publisher and leaves
+  the key at 32 characters. "IAB Tech Lab" is not shortened to "IAB",
+  which names a different body; it is dropped, and the row keeps it in full.

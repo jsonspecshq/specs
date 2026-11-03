@@ -1,0 +1,22 @@
+format: 2
+id: D-038
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_categorytaxonomies:1
+value: CONTENT_CATEGORY_TAXONOMY_1_0
+rule_would_give: IAB_TECH_LAB_CONTENT_CATEGORY_TAXONOMY_1_0
+reading: D-037
+covers:
+  - ir: def:list_categorytaxonomies:1
+    digest: 92880a789bb6693cbc38773c7069b77cd224fac85c63f4e84273acb001aacb13
+    quote: "`1` | IAB Tech Lab Content Category Taxonomy 1.0: Deprecated, and recommend NOT be used since it does not have SCD flags."
+reason: >-
+  All nine of List: Category Taxonomies' codes name IAB Tech Lab as the
+  taxonomy's publisher, so the publisher tells no code of the list from
+  another and D-037 drops it, leaving the taxonomy's own name and version
+  whole at 29 characters. Nothing shorter would do: "Content Category
+  Taxonomy" is what codes 1 and 2 are called, and codes 5 to 9 are a
+  "Content Taxonomy", so dropping "Category" instead would name two
+  documents alike.

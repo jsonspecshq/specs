@@ -1,0 +1,316 @@
+format: 2
+id: D-050
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Does an AdCOM object accept an attribute no row of its table names, and what does `ext` hold?"
+covers:
+  - ir: key:object_ad:Ad.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_display:Display.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_banner:Banner.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_native:Native.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_asset:Asset.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_linkasset:LinkAsset.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_titleasset:TitleAsset.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_imageasset:ImageAsset.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_videoasset:VideoAsset.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_dataasset:DataAsset.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_event:Event.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_video:Video.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_audio:Audio.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_audit:Audit.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_placement:Placement.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_displayplacement:DisplayPlacement.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_displayformat:DisplayFormat.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_nativeformat:NativeFormat.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_assetformat:AssetFormat.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_titleassetformat:TitleAssetFormat.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_imageassetformat:ImageAssetFormat.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_dataassetformat:DataAssetFormat.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_eventspec:EventSpec.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_videoplacement:VideoPlacement.ext
+    digest: 59eda54b9d1ce5baa080657289f9979a37ba3925be4c3d2d4e9e3e3e30b259a5
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_audioplacement:AudioPlacement.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_companion:Companion.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_site:Site.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_app:App.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_dooh:Dooh.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_publisher:Publisher.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_content:Content.ext
+    digest: edfd1b1997afafeaa764dc75906ea25320ebd8c4a2ef164459e28267f4e8e174
+    quote: "`ext` | Placeholder for vendor-specific extensions."
+  - ir: key:object_producer:Producer.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_network:Network.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_channel:Channel.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_user:User.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_device:Device.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_useragent:UserAgent.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_brandversion:BrandVersion.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_geo:Geo.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_data:Data.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_segment:Segment.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_eids:ExtendedIdentifiers.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_eid_uids:ExtendedIdentifierUids.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_regs:Regs.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: key:object_restrictions:Restrictions.ext
+    digest: 4bbccfff12792b724116e12182c7f6c4d05a53a4576015541c9a0c6fd1f054b2
+    quote: "`ext` | Optional vendor-specific extensions."
+  - ir: rule:adcomprinciples:0f8c9ced
+    digest: 2cfa49df8af66463d660f62096bee94fb358d5a352444eed2680e5ba37da4d45
+    quote: New objects and attributes may be added and enumerated lists may be extended at any time and thus implementers must accept these types of changes without breakage within a version number.
+options:
+  - id: closed-with-ext
+    summary: >-
+      Each object accepts only the attributes its table names, and `ext`, on
+      every one of the 45 objects, takes an object of any members, which the
+      parties agree between them.
+  - id: open-objects
+    summary: >-
+      Each object accepts any attribute and a receiver ignores the ones it
+      doesn't know, so `ext` takes an object of any members and so does the
+      object around it.
+  - id: ext-per-object
+    summary: >-
+      Each object's `ext` is an extension object of its own, named for that
+      object, so the 45 are 45 separate declarations of one structure.
+  - id: ext-stated-members
+    summary: >-
+      `ext` takes a stated set of members, read from what vendors send
+      today.
+chosen: closed-with-ext
+rationale: >-
+  Measured on both locks: 45 of the specification's 45 Object: sections carry
+  an `ext` row, the Abstract Class: section carries none, and the 45 rows are
+  one reading. All 45 state the type `object` with no target object, and none
+  states a presence, so each is optional. 44 define it as "Optional
+  vendor-specific extensions." and one, `Content.ext`, as "Placeholder for
+  vendor-specific extensions."; the two sentences say the same thing. Of the
+  45, 43 carry one digest, so a reader can see that nothing distinguishes
+  them. Neither of the other two carries a difference a schema can read:
+  `Content.ext` is in the one attribute table the specification writes in
+  Markdown rather than HTML and is the row whose definition says
+  "Placeholder", and `VideoPlacement.ext`, at line 1543, is the one attribute
+  row in the HTML tables whose opening `<tr>` is missing, so its source bytes
+  differ from the other 43 while its three cells do not.
+
+  What `ext` becomes. The type rules already name this case: a specification
+  that names an extension point, as the Deals API's `ext` on each object,
+  gives it the kernel's `Ext`. `Ext` is a part and not a constructor -- it
+  takes no parameters, so there is one of it rather than one copy per use --
+  declared in `kernel/constructors.yaml` under the concept extension, with
+  the shell `{ type: object, additionalProperties: true }`. So the published
+  `ext` takes any members and says so in its own bytes, rather than taking
+  them by saying nothing. AdCOM's kernel binding marks `Ext` absent, at line
+  44 of `specs/adcom/kernel-binding.yaml`, because its lists write nothing of
+  the kind, and these 45 rows are what make it present. That is a reachable
+  option and not a hypothesis: with `Ext` no longer marked absent and the 45
+  rows typed as it, the emitter reports no problem. One
+  definition serves all 45, so no structure is restated and the duplication
+  gate has nothing to compare: `ext-per-object` would give 45 names one
+  structure, which say no more than one name does and which that gate refuses
+  without a distinction none of the 45 rows draws. `ext-stated-members` would
+  publish members no row writes, which is the invention the type rules refuse
+  for an object whose structure the specification never states.
+
+  Why the 45 objects stay closed. Every table lists its object's attributes,
+  and every object has an `ext` for the ones it does not, so the text names
+  where an attribute it doesn't define goes. It never says what a receiver
+  does with an attribute outside the table, and no row forbids one, so
+  openness is a point the text leaves open rather than one it settles. Closed
+  is what each of the 45 objects is here, and that reaches the published
+  bytes: the emitter writes `additionalProperties: false` on every object it
+  does not mark open (`src/emit.ts`), so each of the 45 says in its own
+  schema that it takes no attribute it doesn't name. Marking an object open
+  instead omits the keyword rather than writing `additionalProperties: true`,
+  so an open object states nothing about what it takes and a reader cannot
+  tell openness from an oversight; none of the 45 is marked open by this
+  record.
+  AdCOM's own principle -- "New objects and attributes may be added and
+  enumerated lists may be extended at any time and thus implementers must
+  accept these types of changes without breakage within a version number" --
+  binds receivers and not the schema of a revision, which is the reading
+  D-007 took of the same sentence for a code a list does not name yet. A
+  schema of the pinned revision says which attributes an object held at its
+  commit, and an attribute added later arrives as a new release, which the
+  release comparison classes as additive.
+
+  Measured against the one corpus of payloads this repository did not write.
+  Walking all three Prebid golden files under
+  `specs/adcom/input/external/prebid-openrtb/adcom1/testdata/` gives 17 object
+  positions and 60 attribute occurrences. 57 are named by a row of the object
+  they sit in, 3 are the abstract class's inherited `id`, `name`, and `pub`
+  (D-053), and none is an attribute no row of the specification names. So
+  closing the 45 objects rejects nothing in the corpus, and the choice is
+  tested by something other than its own reasoning.
+
+  What a consumer loses under `open-objects`, the option not taken: the
+  misspelled attribute. With every object open, a `site` that writes `domian`
+  for `domain` validates, and the value arrives as an extension nobody
+  declared and nobody reads; closed, it fails where it was written. The
+  mirror of that is what closing costs: a payload that carries a vendor's
+  attribute at the top of an object, outside `ext`, is rejected, and the
+  record's answer is that `ext` is where the text puts it. An attribute a
+  later revision of AdCOM adds is rejected too, until the release that reads
+  that revision -- which is the receiver's job the principle describes, not
+  the schema's.
+challenge:
+  - type: Device
+    value:
+      type: 4
+      ifa: "8846d6fa10008bceaaf322908dfcb221"
+      make: Apple
+      model: iPhone
+      atts: 3
+    verdict: reject
+    context: >-
+      A mobile supply platform that passes an iOS app's App Tracking
+      Transparency status to its buyers, written beside the device's `ifa`
+      the way its own bid request writes it.
+    reason: >-
+      `atts` is none of the 29 members Device publishes, and `closed-with-ext`
+      marks no object open, so `src/emit.ts` writes
+      `additionalProperties: false` at `#/$defs/Device` of
+      `specs/adcom/schemas/modules/objects/1/objects.json` and that keyword
+      refuses the attribute. Under `open-objects` the same payload validates
+      and the tracking status arrives as an extension nothing declared. The
+      value is the `device` of
+      `specs/adcom/input/external/prebid-openrtb/adcom1/testdata/request-context.json`,
+      cut to four of its members, with `atts` added at the top.
+  - type: Device
+    value:
+      type: 4
+      ifa: "8846d6fa10008bceaaf322908dfcb221"
+      make: Apple
+      model: iPhone
+      ext:
+        atts: 3
+    verdict: accept
+    context: >-
+      The same platform's request with the tracking status where the text puts
+      an attribute it does not define.
+    reason: >-
+      `ext` is a row of the Device table and takes the kernel's `Ext` part,
+      whose shell is `{ type: object, additionalProperties: true }` at
+      `specs/adcom/schemas/kernel/1/kernel.json#/$defs/Ext`, so every member
+      of it is accepted whatever it is called. The pair is what closing the 45
+      objects costs and where the cost is paid.
+  - type: Site
+    value:
+      id: "1234"
+      name: Awesome Example Site
+      domian: examplesitedomain.com
+      mobile: 1
+    verdict: reject
+    context: >-
+      A publisher's ad server whose site template misspells the domain key,
+      sending `domian` for `domain` on every request from one property.
+    reason: >-
+      `domian` is none of the 18 members Site publishes, so
+      `additionalProperties: false` at `#/$defs/Site` refuses it and the
+      request fails where the typo was written. This is the rationale's
+      misspelling case as a value: under `open-objects` the same payload
+      validates, `domain` is absent, and nothing reports either. A second
+      object, because one object's verdict says nothing about a reading that
+      covers 45 of them.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L179"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L316"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2071"
+feedback: >-
+  Say whether a receiver must reject, or must ignore, an attribute that no
+  table names, and whether a sender may write a vendor's attribute anywhere
+  but `ext`. Say also what `ext` itself holds: today two vendors that both
+  extend one object may pick one member name, and nothing in the text keeps
+  them apart, so a namespace per vendor would be worth stating. Two small
+  things, both in the markup rather than the content: `Content.ext` is
+  defined as a "Placeholder for vendor-specific extensions" where the other
+  44 read "Optional vendor-specific extensions", which reads as a difference
+  and is not one; and the `ext` row of the VideoPlacement table, at line
+  1543, has no opening `<tr>` tag, so a parser that reads the tables as HTML
+  may fold it into the row above it.

@@ -1,0 +1,250 @@
+format: 2
+id: D-048
+# Raised with the working group, so this record names the issue where. It is
+# the first record in this tree to do so. Counted over the records committed
+# before this one: 71 carry `feedback` -- 38 of AdCOM's 63 and all 33 of the
+# Deals API's -- exactly one of those 71 is a departure, and none carries
+# `status: filed` or an `issue`. So the outward-facing half of the format had
+# never run on committed data, and this is its first consumer.
+status: filed
+issue: https://github.com/IABTechLab/OpenProposal/issues/58
+kind: reading
+basis: departure
+author: agent
+question: >-
+  The proposals lock states `time_zone` on the targeting envelope in one row,
+  as the clock for a daypart window and a frequency cap's period. What value
+  does that row take, and does typing it move anything the schema already
+  publishes for the window it clocks?
+covers:
+  - ir: field:5.5:time_zone
+    digest: c3a3201d895ffca4363f6b17d138858db2a32c7ba2bb5352647cec4a596de13d
+    quote: "`time_zone` | String | seller-set | IANA time zone name, or `viewer_local` (where the ad renders). The clock for `daypart` and `frequency_cap.period`. REQUIRED with either"
+    locks:
+      - with-open-prs
+    # The one form the schema narrows: the Type cell says `String`, so as the
+    # row is written any string is a zone name. It is not the `type` form the
+    # fidelity oracle reads off a Type cell -- that form agrees, because the
+    # published type is a string too -- and it is none of the other ten
+    # (src/constraint-forms.ts). A departure the oracle cannot see states its
+    # narrowing as a value, which is the `challenge` below.
+    departs: ["the bare `String` the Type cell states, which admits any string as a zone name"]
+  - ir: sentence:5.5:3ec41b49
+    digest: d28f7a045f76828d2402a2595875e5dc09466aac3c71c79f5f20c833b51e312f
+    quote: "`time_zone` names a zone in the IANA time zone database, such as America/New_York or UTC."
+    locks:
+      - with-open-prs
+  - ir: sentence:5.5:bcaa431b
+    digest: dd32a6368f87c6f3cc3b6ecb6ff87b8aa69d0332a9b99e1a2b7467f2c3ea5f00
+    quote: Like the calendar Day of OpenDirect 2.1 `Line.frequencyinterval`, `frequency_cap.period` is a calendar period in `time_zone`; weeks start on Monday.
+    locks:
+      - with-open-prs
+  - ir: rule:5.5:9ecd641d
+    digest: c37f21cc8bb5c80d8f9e838792d2b22fe5db9df4451f26d0dc225961e2a23a8a
+    quote: REQUIRED with either
+    locks:
+      - with-open-prs
+  - ir: field:5.5:daypart
+    digest: 25c80cd35ce4831dfbd372627f2d794511fffe5f029243e586ee1e607be4fdc2
+    quote: "`daypart` | Object | settable | `allowed[]` of time windows"
+    locks:
+      - main
+  - ir: field:5.5:daypart
+    digest: b34d1818bf80b3e5947f9902057ac882707ef3a893fc370c97efc81487d64080
+    quote: "`daypart` | Object | settable | `allowed[]` of `{ days[], start, end }`: `days[]` from `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`, HH:MM civil time, `end` exclusive, up to `24:00`"
+    locks:
+      - with-open-prs
+  - ir: sentence:5.5:348ea676
+    digest: b653534aab2fd12f0dad1b1f4422634068e90af810a75414b00aa4d346e379fc
+    quote: A `daypart` window is `{ days[], start, end }`, with `days[]` from Monday to Sunday, `start` and `end` as HH:MM, and `end` exclusive, later than `start`, and allowed to be `24:00`.
+    locks:
+      - with-open-prs
+options:
+  - id: zone-name-or-viewer-local
+    summary: >-
+      The row's value is a zone name of the IANA time zone database, such as
+      `America/New_York`, or `viewer_local`, where the ad renders. The spelling
+      is held by a pattern, and that the name is one the database lists is
+      held by a rule. The daypart window keeps the members the text writes,
+      `start` and `end`.
+  - id: opaque-string
+    summary: >-
+      Any string, as the Type cell types it. The row's prose names the IANA
+      database and `viewer_local` as what a seller writes, and nothing checks
+      that it did.
+  - id: two-zone-types
+    summary: >-
+      Two value domains instead of one: a zone name of the database, and a
+      zone name or `viewer_local`. A field whose value can never mean "where
+      the ad renders", such as the zone a billing period is read on, takes the
+      first and cannot be given the second.
+  - id: window-end-renamed-before
+    summary: >-
+      As `zone-name-or-viewer-local`, and the daypart window's `end` is
+      renamed `before`, so the member's name says that the window stops short
+      of it rather than reaching it.
+chosen: zone-name-or-viewer-local
+rationale: >-
+  **Measured over the two committed snapshots, counting occurrences in each.**
+  `time_zone` occurs 0 times in `specs/openproposal/input/snapshots/main/spec/openproposal-3.0.md`
+  and 7 times in the proposals lock's snapshot of the same file, where the row
+  is line 463; `viewer_local` occurs 0 times and 1; `IANA` 0 times and 2. So
+  there is one row to read and it is on one lock. `daypart` is on both, and the
+  two covers above are what each lock writes for it: "`allowed[]` of time
+  windows" on `main`, where the window has no clock at all, against the full
+  window form on the proposals lock. Which clock reads a line item's calendar
+  values is D-038's question and it stays answered there, including that the
+  clock of a flight stays open on both locks; this record reads what the row's
+  own value is.
+
+  **The reading agrees with what is already published, which is worth stating
+  rather than assuming.** `specs/openproposal/kernel-binding.yaml` publishes
+  the time-zone primitive scoped to the proposals lock, citing this row and the
+  IANA sentence as its sources, and binds the kernel rule that a value other
+  than `viewer_local` must be a zone name the database lists, with the same
+  sentence as that rule's source. `kernel/primitives.yaml` states the primitive
+  as a string whose pattern is
+  `^(viewer_local|[A-Z][A-Za-z0-9_+-]*(/[A-Za-z0-9_+-]+)*)$`, with five valid
+  and nine invalid vectors, and the listing rule with three valid and four
+  invalid. So the previous unit landed the type and the rule; this record
+  settles that the row's value is that type, and that is all it settles.
+
+  **Why the schema departs from the row, and what the choice costs.** The Type
+  cell types the value `String`, and the row's prose names the database and
+  `viewer_local` without constraining how either is written, so as written a
+  seller may send a fixed offset or the lowercase spelling of a zone and
+  nothing refuses it. The schema refuses both, which the challenge states as
+  values. The cost is the half of the row the schema cannot hold: the pattern
+  holds the *spelling* of a zone name and not its *existence*, so
+  `America/Springfield` matches it and the published schema accepts it --
+  measured against the emitted type with the repository's own validator -- and
+  only the listing rule refuses it, which a consumer gets as generated vectors
+  rather than as a keyword its validator reads. A record is not a configuration
+  switch and cannot make a validator check a database it has no copy of; that
+  the schema is the weaker of the two checks is the honest state of it.
+
+  **Why the two rejected type options are rejected.** `opaque-string` leaves
+  the row saying what a value means and nothing holding it, which is the state
+  the schema is being asked to improve on: two sellers can write
+  `america/new_york` and `-05:00` for the same clock and no receiver can tell
+  that either is wrong. `two-zone-types` is the better shape of the concept and
+  it is not this record's to take: the kernel has one time-zone primitive and
+  it admits `viewer_local`, so the two concepts are conflated one layer below
+  this reading, and separating them edits `kernel/primitives.yaml`, which is a
+  reviewed commit of the kernel rather than anything a record about one row of
+  one specification may do. It is raised with the working group in `feedback`
+  instead, where the question belongs.
+
+  **Why `window-end-renamed-before` is listed and not taken, and where it came
+  from.** The rename is not the specification's and it is not the working
+  group's: it arrived with a local clean-up of this section that the owner has
+  not approved, on a branch that is in no lock -- the four type names that
+  clean-up proposes occur 0 times in both snapshots, which is the measurement
+  that settles that they are a proposal and not a text. So the option is
+  weighed and set aside, as D-003 weighed `map-now` and D-006 weighed
+  `validate`, each of which a later record took on its own authority rather
+  than being read into the record that first listed it. Were the rename taken
+  here it would move a published member name on the strength of a branch
+  nobody reviewed.
+
+  **The argument this record was filed on, and the sentence it cannot quote.**
+  The issue argues that a rule making every value UTC, as issue 37 proposes,
+  suits an instant and not a civil-time window: 06:00 in New York is 10:00 UTC
+  in summer and 11:00 in winter, so one window becomes two, and at a
+  daylight-saving change a skipped hour matches no instant while a repeated
+  hour matches both. The § 5.5 Clock paragraph states that last point in as
+  many words -- "Windows follow daylight-saving rules: a skipped hour matches
+  no instant; a repeated hour matches both." at line 532 of the proposals
+  lock's snapshot -- and **that sentence is no element of the IR**, so no cover
+  above quotes it. It is not dropped by accident: `src/extract.ts`'s
+  `statements` keeps a prose sentence that carries no RFC 2119 keyword only
+  when it carries a code span, and that sentence carries neither, so
+  `block:5.5:13` hosts 2 sentence elements of the paragraph's 3. The two it
+  hosts are both covered here. The consequence is worth stating plainly: the
+  record rests on the row and on the two sentences that survived extraction,
+  and the sentence a reader would most expect it to quote is one no record of
+  this repository can cover.
+
+  **The reading this record is least sure of.** That `viewer_local` belongs in
+  the same value domain as a zone name at all. The row writes the two as
+  alternatives in one cell, so one type is what the text states, and the
+  schema follows it; but `viewer_local` is not a clock, it is an instruction to
+  find one, and a receiver that stores the field as a zone has to special-case
+  it. That is the half of the point the `two-zone-types` option carries to the
+  working group.
+challenge:
+  - type: TimeZone
+    value: "-05:00"
+    verdict: reject
+    context: >-
+      A seller whose ad server stores a line item's clock as the fixed offset
+      its own reports are rendered in, setting the targeting envelope's clock
+      from that store.
+    reason: >-
+      The pattern takes `viewer_local` or a zone name beginning with a capital,
+      so a fixed offset matches neither branch. This is the departure as a
+      value: the row types the field `String` and admits it, and the schema
+      does not -- which is the point, because an offset records no
+      daylight-saving rule and a daypart window moves with one.
+  - type: TimeZone
+    value: "america/new_york"
+    verdict: reject
+    context: >-
+      A seller writing the zone in the lowercase its own configuration files
+      use, for the same clock the specification's example writes as
+      America/New_York.
+    reason: >-
+      The pattern requires the capitalised spelling the database publishes, so
+      the lowercase form is refused. Two parties that spell one zone two ways
+      cannot compare two line items' clocks, which is what holding the spelling
+      buys.
+  - type: TimeZone
+    value: "America/New_York"
+    verdict: accept
+    context: >-
+      The clock the specification's own daypart example names for a line item
+      running on eastern-time dayparts.
+    reason: >-
+      A zone name of the database, written as the database writes it, so the
+      pattern takes it and the listing rule is satisfied. This is what the
+      reading keeps, and `viewer_local` is accepted beside it on the same
+      branch of the pattern.
+evidence:
+  - https://github.com/IABTechLab/OpenProposal/issues/58
+  - https://github.com/IABTechLab/OpenProposal/pull/123
+  - https://www.iana.org/time-zones
+feedback: >-
+  Name the standard and the spelling for `time_zone`, and separate the two
+  things the row runs together. A value is either a zone name of the IANA time
+  zone database, written as the database writes it, such as America/New_York,
+  or `viewer_local`. State that a fixed offset such as -05:00 is not one, and
+  that the lowercase spelling of a zone name is not one either, so two parties
+  compare one clock the same way.
+
+  Separating the two also lets a field say which of them it can mean. Four
+  types would carry the distinction:
+
+  - An instant: a timestamp in UTC, ending in `Z`. Every point in time the
+  specification already writes with an offset is one.
+
+  - A zone name of the database, and nothing else. A field that can never mean
+  "where the ad renders" takes this one. The targeting envelope's `time_zone`,
+  as written, cannot say that it is this rather than the next.
+
+  - A zone name of the database or `viewer_local`. State what `viewer_local`
+  means for digital out-of-home, where it is each screen's own zone rather than
+  one zone for the line item: a campaign across three time zones has three
+  clocks, and the row does not say so.
+
+  - A daypart window: the days, and the civil-time start and end the window
+  runs between.
+
+  Where these turn up beyond the targeting envelope: a screen's own
+  `time_zone`, and a billing `time_zone` that is UTC when it is absent. State
+  the UTC default where the field is, so a receiver does not have to infer it.
+
+  A rule making every time value UTC suits an instant and not a civil-time
+  window. 06:00 in New York is 10:00 UTC in summer and 11:00 in winter, so one
+  daypart becomes two, and at a daylight-saving change a skipped hour matches
+  no instant while a repeated hour matches both. § 5.5 already says the last
+  part; say that it is why a window keeps its zone name.

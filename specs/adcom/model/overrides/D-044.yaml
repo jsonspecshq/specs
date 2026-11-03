@@ -1,0 +1,21 @@
+format: 2
+id: D-044
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_playbackmethods:5
+value: INITIATES_ON_ENTERING_VIEWPORT_SOUND_ON
+rule_would_give: INITIATES_ON_ENTERING_VIEWPORT_WITH_SOUND_ON
+reading: D-037
+covers:
+  - ir: def:list_playbackmethods:5
+    digest: 41d43f2edf5812daff99809221bc5d7cbca95e84ad4cc02fe09b5f444a6e9d64
+    quote: "`5` | Initiates on Entering Viewport or scrolling into view with Sound On"
+reason: >-
+  Every content word of the title D-030 sets stays, at 39 characters; the
+  one word D-037 drops is "with", which tells no code of List: Playback
+  Methods from another and which codes 8 to 11 already name the sound state
+  without. The trigger and the sound both stay, because the trigger tells
+  code 5 from codes 1 to 4 and the sound tells it from code 6, and that is
+  the whole of how the name differs from the title.

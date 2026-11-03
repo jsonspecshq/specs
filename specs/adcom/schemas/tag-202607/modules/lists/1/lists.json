@@ -1,0 +1,1926 @@
+{
+  "$defs": {
+    "AgentType": {
+      "description": "The codes of List: Agent Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: BROWSER_OR_DEVICE_ID",
+          "const": 1,
+          "description": "An ID which is tied to a specific web browser or device (cookie-based, probabilistic, or other).",
+          "title": "Browser or device ID"
+        },
+        {
+          "$comment": "code-name: IN_APP_IMPRESSIONS",
+          "const": 2,
+          "description": "In-app impressions, which will typically contain a type of device ID (or rather, the privacy-compliant versions of device IDs).",
+          "title": "In-app impressions"
+        },
+        {
+          "$comment": "code-name: PERSON_BASED_ID",
+          "const": 3,
+          "description": "A person-based ID, i.e., that is the same across devices.",
+          "title": "Person-based ID"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Agent Types",
+      "type": "integer"
+    },
+    "ApiFramework": {
+      "description": "The codes of List: API Frameworks",
+      "oneOf": [
+        {
+          "$comment": "code-name: VPAID_1_0",
+          "const": 1,
+          "title": "VPAID 1.0"
+        },
+        {
+          "$comment": "code-name: VPAID_2_0",
+          "const": 2,
+          "title": "VPAID 2.0"
+        },
+        {
+          "$comment": "code-name: MRAID_1_0",
+          "const": 3,
+          "title": "MRAID 1.0"
+        },
+        {
+          "$comment": "code-name: ORMMA",
+          "const": 4,
+          "title": "ORMMA"
+        },
+        {
+          "$comment": "code-name: MRAID_2_0",
+          "const": 5,
+          "title": "MRAID 2.0"
+        },
+        {
+          "$comment": "code-name: MRAID_3_0",
+          "const": 6,
+          "title": "MRAID 3.0"
+        },
+        {
+          "$comment": "code-name: OMID_1_0",
+          "const": 7,
+          "title": "OMID 1.0"
+        },
+        {
+          "$comment": "code-name: SIMID_1_0",
+          "const": 8,
+          "title": "SIMID 1.0"
+        },
+        {
+          "$comment": "code-name: SIMID_1_1",
+          "const": 9,
+          "title": "SIMID 1.1"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: API Frameworks",
+      "type": "integer"
+    },
+    "AuditStatusCode": {
+      "description": "The codes of List: Audit Status Codes",
+      "oneOf": [
+        {
+          "$comment": "code-name: PENDING_AUDIT",
+          "const": 1,
+          "description": "Pending Audit: An audit has not yet been completed on this ad. A recommendation cannot be made to use this ad, but vendors' policies may override.",
+          "title": "Pending Audit"
+        },
+        {
+          "$comment": "code-name: PRE_APPROVED",
+          "const": 2,
+          "description": "Pre-Approved: An audit has not yet been completed on this ad. Subject to vendors' policies, it can be recommended for use. However, once the audit has been completed, its status will change and it may or may not be approved for continued use.",
+          "title": "Pre-Approved"
+        },
+        {
+          "$comment": "code-name: APPROVED",
+          "const": 3,
+          "description": "Approved: The audit is complete and the ad is approved for use. Note, however, that some attributes (e.g., `adomain`, `cat`, `attr`, etc.) may have been changed in the process by the auditor.",
+          "title": "Approved"
+        },
+        {
+          "$comment": "code-name: DENIED",
+          "const": 4,
+          "description": "Denied: The audit is complete, but the ad has been found unacceptable in some material aspect and is disapproved for use.",
+          "title": "Denied"
+        },
+        {
+          "$comment": "code-name: CHANGED_RESUBMISSION_REQUESTED",
+          "const": 5,
+          "description": "Changed; Resubmission Requested: A version of the ad has been detected in use that is materially different from the version that was previously audited, which may result in rejection during use until the ad is resubmitted for audit and approved. Vendors need to communicate offline as to the criteria that constitutes a material change.",
+          "title": "Changed; Resubmission Requested"
+        },
+        {
+          "$comment": "code-name: EXPIRED",
+          "const": 6,
+          "description": "Expired: The ad has been marked as expired by the vendor. Vendors need to communicate offline as to the expected bidding behavior for ads with this status.",
+          "title": "Expired"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Audit Status Codes",
+      "type": "integer"
+    },
+    "AutoRefreshTrigger": {
+      "description": "The codes of List: Auto Refresh Triggers",
+      "oneOf": [
+        {
+          "$comment": "code-name: UNKNOWN",
+          "const": 0,
+          "title": "UNKNOWN"
+        },
+        {
+          "$comment": "code-name: USER_ACTION",
+          "const": 1,
+          "description": "User Action: Refresh triggered by user-initiated action such as scrolling.",
+          "title": "User Action"
+        },
+        {
+          "$comment": "code-name: EVENT",
+          "const": 2,
+          "description": "Event: Event-driven content change. For example, ads refresh when the football game score changes on the page.",
+          "title": "Event"
+        },
+        {
+          "$comment": "code-name: TIME",
+          "const": 3,
+          "description": "Time:Time-based refresh. Ads refresh on a predefined time interval even without user activity.",
+          "title": "Time"
+        }
+      ],
+      "title": "List: Auto Refresh Triggers",
+      "type": "integer"
+    },
+    "CategoryTaxonomy": {
+      "description": "The codes of List: Category Taxonomies",
+      "oneOf": [
+        {
+          "$comment": "code-name: CONTENT_CATEGORY_TAXONOMY_1_0",
+          "const": 1,
+          "description": "IAB Tech Lab Content Category Taxonomy 1.0: Deprecated, and recommend NOT be used since it does not have SCD flags.",
+          "title": "IAB Tech Lab Content Category Taxonomy 1.0"
+        },
+        {
+          "$comment": "code-name: CONTENT_CATEGORY_TAXONOMY_2_0",
+          "const": 2,
+          "description": "IAB Tech Lab Content Category Taxonomy 2.0: Deprecated, and recommend NOT be used since it does not have SCD flags.",
+          "title": "IAB Tech Lab Content Category Taxonomy 2.0"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_AD_PRODUCT_TAXONOMY_1_0",
+          "const": 3,
+          "description": "IAB Tech Lab Ad Product Taxonomy 1.0.",
+          "title": "IAB Tech Lab Ad Product Taxonomy 1.0"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_AUDIENCE_TAXONOMY_1_1",
+          "const": 4,
+          "title": "IAB Tech Lab Audience Taxonomy 1.1"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_CONTENT_TAXONOMY_2_1",
+          "const": 5,
+          "title": "IAB Tech Lab Content Taxonomy 2.1"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_CONTENT_TAXONOMY_2_2",
+          "const": 6,
+          "title": "IAB Tech Lab Content Taxonomy 2.2"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_CONTENT_TAXONOMY_3_0",
+          "const": 7,
+          "title": "IAB Tech Lab Content Taxonomy 3.0"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_AD_PRODUCT_TAXONOMY_2_0",
+          "const": 8,
+          "title": "IAB Tech Lab Ad Product Taxonomy 2.0"
+        },
+        {
+          "$comment": "code-name: IAB_TECH_LAB_CONTENT_TAXONOMY_3_1",
+          "const": 9,
+          "title": "IAB Tech Lab Content Taxonomy 3.1"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Category Taxonomies",
+      "type": "integer"
+    },
+    "ClickType": {
+      "description": "The codes of List: Click Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: NON_CLICKABLE",
+          "const": 0,
+          "title": "Non-Clickable"
+        },
+        {
+          "$comment": "code-name: CLICKABLE_DETAILS_UNKNOWN",
+          "const": 1,
+          "title": "Clickable - Details Unknown"
+        },
+        {
+          "$comment": "code-name: CLICKABLE_EMBEDDED_BROWSER_WEBVIEW",
+          "const": 2,
+          "title": "Clickable - Embedded Browser/Webview"
+        },
+        {
+          "$comment": "code-name: CLICKABLE_NATIVE_BROWSER",
+          "const": 3,
+          "title": "Clickable - Native Browser"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Click Types",
+      "type": "integer"
+    },
+    "CompanionType": {
+      "description": "The codes of List: Companion Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: STATIC_RESOURCE",
+          "const": 1,
+          "title": "Static Resource"
+        },
+        {
+          "$comment": "code-name: HTML_RESOURCE",
+          "const": 2,
+          "title": "HTML Resource"
+        },
+        {
+          "$comment": "code-name: IFRAME_RESOURCE",
+          "const": 3,
+          "title": "iframe Resource"
+        }
+      ],
+      "title": "List: Companion Types",
+      "type": "integer"
+    },
+    "ConnectionType": {
+      "description": "The codes of List: Connection Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: ETHERNET_WIRED_CONNECTION",
+          "const": 1,
+          "title": "Ethernet; Wired Connection"
+        },
+        {
+          "$comment": "code-name: WIFI",
+          "const": 2,
+          "title": "WIFI"
+        },
+        {
+          "$comment": "code-name: CELLULAR_NETWORK_UNKNOWN_GENERATION",
+          "const": 3,
+          "title": "Cellular Network - Unknown Generation"
+        },
+        {
+          "$comment": "code-name: CELLULAR_NETWORK_2G",
+          "const": 4,
+          "title": "Cellular Network - 2G"
+        },
+        {
+          "$comment": "code-name: CELLULAR_NETWORK_3G",
+          "const": 5,
+          "title": "Cellular Network - 3G"
+        },
+        {
+          "$comment": "code-name: CELLULAR_NETWORK_4G",
+          "const": 6,
+          "title": "Cellular Network - 4G"
+        },
+        {
+          "$comment": "code-name: CELLULAR_NETWORK_5G",
+          "const": 7,
+          "title": "Cellular Network - 5G"
+        }
+      ],
+      "title": "List: Connection Types",
+      "type": "integer"
+    },
+    "ContentContext": {
+      "description": "The codes of List: Content Contexts",
+      "oneOf": [
+        {
+          "$comment": "code-name: VIDEO",
+          "const": 1,
+          "description": "Video (i.e., video file or stream such as Internet TV broadcasts)",
+          "title": "Video"
+        },
+        {
+          "$comment": "code-name: GAME",
+          "const": 2,
+          "description": "Game (i.e., an interactive software game)",
+          "title": "Game"
+        },
+        {
+          "$comment": "code-name: MUSIC",
+          "const": 3,
+          "description": "Music (i.e., audio file or stream such as Internet radio broadcasts)",
+          "title": "Music"
+        },
+        {
+          "$comment": "code-name: APPLICATION",
+          "const": 4,
+          "description": "Application (i.e., an interactive software application)",
+          "title": "Application"
+        },
+        {
+          "$comment": "code-name: TEXT",
+          "const": 5,
+          "description": "Text (i.e., primarily textual document such as a web page, eBook, or news article)",
+          "title": "Text"
+        },
+        {
+          "$comment": "code-name: OTHER",
+          "const": 6,
+          "description": "Other (i.e., none of the other categories applies)",
+          "title": "Other"
+        },
+        {
+          "$comment": "code-name: UNKNOWN",
+          "const": 7,
+          "title": "Unknown"
+        }
+      ],
+      "title": "List: Content Contexts",
+      "type": "integer"
+    },
+    "CreativeAttribute": {
+      "description": "The codes of List: Creative Attributes",
+      "oneOf": [
+        {
+          "$comment": "code-name: AUDIO_AD_AUTOPLAY",
+          "const": 1,
+          "title": "Audio Ad (Autoplay)"
+        },
+        {
+          "$comment": "code-name: AUDIO_AD_USER_INITIATED",
+          "const": 2,
+          "title": "Audio Ad (User Initiated)"
+        },
+        {
+          "$comment": "code-name: EXPANDABLE_AUTOMATIC",
+          "const": 3,
+          "title": "Expandable (Automatic)"
+        },
+        {
+          "$comment": "code-name: EXPANDABLE_USER_INITIATED_CLICK",
+          "const": 4,
+          "title": "Expandable (User Initiated - Click)"
+        },
+        {
+          "$comment": "code-name: EXPANDABLE_USER_INITIATED_ROLLOVER",
+          "const": 5,
+          "title": "Expandable (User Initiated - Rollover)"
+        },
+        {
+          "$comment": "code-name: IN_BANNER_VIDEO_AD_AUTOPLAY",
+          "const": 6,
+          "title": "In-Banner Video Ad (Autoplay)"
+        },
+        {
+          "$comment": "code-name: IN_BANNER_VIDEO_AD_USER_INITIATED",
+          "const": 7,
+          "title": "In-Banner Video Ad (User Initiated)"
+        },
+        {
+          "$comment": "code-name: POP",
+          "const": 8,
+          "description": "Pop (e.g., Over, Under, or Upon Exit)",
+          "title": "Pop"
+        },
+        {
+          "$comment": "code-name: PROVOCATIVE_OR_SUGGESTIVE_IMAGERY",
+          "const": 9,
+          "title": "Provocative or Suggestive Imagery"
+        },
+        {
+          "$comment": "code-name: SHAKY_FLASHING_OR_EXTREME_ANIMATION",
+          "const": 10,
+          "description": "Shaky, Flashing, Flickering, Extreme Animation, Smileys",
+          "title": "Shaky, Flashing, or Extreme Animation"
+        },
+        {
+          "$comment": "code-name: SURVEYS",
+          "const": 11,
+          "title": "Surveys"
+        },
+        {
+          "$comment": "code-name: TEXT_ONLY",
+          "const": 12,
+          "title": "Text Only"
+        },
+        {
+          "$comment": "code-name: USER_INTERACTIVE",
+          "const": 13,
+          "description": "User Interactive (e.g., Embedded Games)",
+          "title": "User Interactive"
+        },
+        {
+          "$comment": "code-name: WINDOWS_DIALOG_OR_ALERT_STYLE",
+          "const": 14,
+          "title": "Windows Dialog or Alert Style"
+        },
+        {
+          "$comment": "code-name: HAS_AUDIO_ON_OFF_BUTTON",
+          "const": 15,
+          "title": "Has Audio On/Off Button"
+        },
+        {
+          "$comment": "code-name: AD_PROVIDES_SKIP_BUTTON",
+          "const": 16,
+          "description": "Ad Provides Skip Button (e.g. VPAID-rendered skip button on pre-roll video)",
+          "title": "Ad Provides Skip Button"
+        },
+        {
+          "$comment": "code-name: ADOBE_FLASH",
+          "const": 17,
+          "title": "Adobe Flash"
+        },
+        {
+          "$comment": "code-name: RESPONSIVE_SIZELESS_FLUID",
+          "const": 18,
+          "description": "Responsive; Sizeless; Fluid (i.e., creatives that dynamically resize to environment)",
+          "title": "Responsive; Sizeless; Fluid"
+        },
+        {
+          "$comment": "code-name: CONTAINS_ADVERTISER_QR_CODE",
+          "const": 19,
+          "title": "Contains advertiser QR Code"
+        },
+        {
+          "$comment": "code-name: SUPPORT_ALPHA_CHANNEL_TRANSPARENCY",
+          "const": 20,
+          "title": "Support alpha channel transparency"
+        },
+        {
+          "$comment": "code-name: STATIC_VISUAL",
+          "const": 21,
+          "description": "Static Visual. Creative contains no perceptible motion and renders as a static visual, even if delivered in a video file format (e.g., MP4). No animated elements or time-based visual transitions are present.",
+          "title": "Static Visual"
+        },
+        {
+          "$comment": "code-name: LIMITED_MOTION",
+          "const": 22,
+          "description": "Limited Motion (Cinemagraph). Creative contains subtle or localized motion within an otherwise static composition. Motion is minimal, looped, and does not constitute full-scene animation or continuous narrative progression.",
+          "title": "Limited Motion"
+        },
+        {
+          "$comment": "code-name: FULL_MOTION_VIDEO",
+          "const": 23,
+          "description": "Full-Motion Video. Creative contains continuous or scene-level motion typical of standard video assets, including dynamic visual transitions, camera movement, or narrative progression across frames.",
+          "title": "Full-Motion Video"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Creative Attributes",
+      "type": "integer"
+    },
+    "CreativeSubtypeAudioVideo": {
+      "description": "The codes of List: Creative Subtypes - Audio/Video",
+      "oneOf": [
+        {
+          "$comment": "code-name: VAST_1_0",
+          "const": 1,
+          "title": "VAST 1.0"
+        },
+        {
+          "$comment": "code-name: VAST_2_0",
+          "const": 2,
+          "title": "VAST 2.0"
+        },
+        {
+          "$comment": "code-name: VAST_3_0",
+          "const": 3,
+          "title": "VAST 3.0"
+        },
+        {
+          "$comment": "code-name: VAST_1_0_WRAPPER",
+          "const": 4,
+          "title": "VAST 1.0 Wrapper"
+        },
+        {
+          "$comment": "code-name: VAST_2_0_WRAPPER",
+          "const": 5,
+          "title": "VAST 2.0 Wrapper"
+        },
+        {
+          "$comment": "code-name: VAST_3_0_WRAPPER",
+          "const": 6,
+          "title": "VAST 3.0 Wrapper"
+        },
+        {
+          "$comment": "code-name: VAST_4_0",
+          "const": 7,
+          "title": "VAST 4.0"
+        },
+        {
+          "$comment": "code-name: VAST_4_0_WRAPPER",
+          "const": 8,
+          "title": "VAST 4.0 Wrapper"
+        },
+        {
+          "$comment": "code-name: DAAST_1_0",
+          "const": 9,
+          "title": "DAAST 1.0"
+        },
+        {
+          "$comment": "code-name: DAAST_1_0_WRAPPER",
+          "const": 10,
+          "title": "DAAST 1.0 Wrapper"
+        },
+        {
+          "$comment": "code-name: VAST_4_1",
+          "const": 11,
+          "title": "VAST 4.1"
+        },
+        {
+          "$comment": "code-name: VAST_4_1_WRAPPER",
+          "const": 12,
+          "title": "VAST 4.1 Wrapper"
+        },
+        {
+          "$comment": "code-name: VAST_4_2",
+          "const": 13,
+          "title": "VAST 4.2"
+        },
+        {
+          "$comment": "code-name: VAST_4_2_WRAPPER",
+          "const": 14,
+          "title": "VAST 4.2 Wrapper"
+        },
+        {
+          "$comment": "code-name: VAST_4_3",
+          "const": 15,
+          "title": "VAST 4.3"
+        },
+        {
+          "$comment": "code-name: VAST_4_3_WRAPPER",
+          "const": 16,
+          "title": "VAST 4.3 Wrapper"
+        }
+      ],
+      "title": "List: Creative Subtypes - Audio/Video",
+      "type": "integer"
+    },
+    "CreativeSubtypeDisplay": {
+      "description": "The codes of List: Creative Subtypes - Display",
+      "oneOf": [
+        {
+          "$comment": "code-name: HTML",
+          "const": 1,
+          "title": "HTML"
+        },
+        {
+          "$comment": "code-name: AMPHTML",
+          "const": 2,
+          "title": "AMPHTML"
+        },
+        {
+          "$comment": "code-name: STRUCTURED_IMAGE_OBJECT",
+          "const": 3,
+          "title": "Structured Image Object"
+        },
+        {
+          "$comment": "code-name: STRUCTURED_NATIVE_OBJECT",
+          "const": 4,
+          "title": "Structured Native Object"
+        }
+      ],
+      "title": "List: Creative Subtypes - Display",
+      "type": "integer"
+    },
+    "DeliveryMethod": {
+      "description": "The codes of List: Delivery Methods",
+      "oneOf": [
+        {
+          "$comment": "code-name: STREAMING",
+          "const": 1,
+          "title": "Streaming"
+        },
+        {
+          "$comment": "code-name: PROGRESSIVE",
+          "const": 2,
+          "title": "Progressive"
+        },
+        {
+          "$comment": "code-name: DOWNLOAD",
+          "const": 3,
+          "title": "Download"
+        }
+      ],
+      "title": "List: Delivery Methods",
+      "type": "integer"
+    },
+    "DeviceType": {
+      "description": "The codes of List: Device Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: MOBILE_TABLET_GENERAL",
+          "const": 1,
+          "title": "Mobile/Tablet - General"
+        },
+        {
+          "$comment": "code-name: PERSONAL_COMPUTER",
+          "const": 2,
+          "title": "Personal Computer"
+        },
+        {
+          "$comment": "code-name: CONNECTED_TV",
+          "const": 3,
+          "title": "Connected TV"
+        },
+        {
+          "$comment": "code-name: PHONE",
+          "const": 4,
+          "title": "Phone"
+        },
+        {
+          "$comment": "code-name: TABLET",
+          "const": 5,
+          "title": "Tablet"
+        },
+        {
+          "$comment": "code-name: CONNECTED_DEVICE",
+          "const": 6,
+          "title": "Connected Device"
+        },
+        {
+          "$comment": "code-name: SET_TOP_BOX",
+          "const": 7,
+          "title": "Set Top Box"
+        },
+        {
+          "$comment": "code-name: OOH_DEVICE",
+          "const": 8,
+          "title": "OOH Device"
+        }
+      ],
+      "title": "List: Device Types",
+      "type": "integer"
+    },
+    "DisplayContextType": {
+      "description": "The codes of List: Display Context Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: CONTENT_CENTRIC_CONTEXT",
+          "const": 10,
+          "description": "Content-centric context (e.g., newsfeed, article, image gallery, video gallery, etc.).",
+          "title": "Content-centric context"
+        },
+        {
+          "$comment": "code-name: PRIMARILY_ARTICLE_CONTENT",
+          "const": 11,
+          "description": "- Primarily article content, which could include images, etc. as part of the article.",
+          "title": "Primarily article content"
+        },
+        {
+          "$comment": "code-name: PRIMARILY_VIDEO_CONTENT",
+          "const": 12,
+          "description": "- Primarily video content.",
+          "title": "Primarily video content"
+        },
+        {
+          "$comment": "code-name: PRIMARILY_AUDIO_CONTENT",
+          "const": 13,
+          "description": "- Primarily audio content.",
+          "title": "Primarily audio content"
+        },
+        {
+          "$comment": "code-name: PRIMARILY_IMAGE_CONTENT",
+          "const": 14,
+          "description": "- Primarily image content.",
+          "title": "Primarily image content"
+        },
+        {
+          "$comment": "code-name: USER_GENERATED_CONTENT",
+          "const": 15,
+          "description": "- User-generated content (e.g., forums, comments, etc.).",
+          "title": "User-generated content"
+        },
+        {
+          "$comment": "code-name: SOCIAL_CENTRIC_CONTEXT",
+          "const": 20,
+          "description": "Social-centric context (e.g., social network feed, email, chat, etc.).",
+          "title": "Social-centric context"
+        },
+        {
+          "$comment": "code-name: PRIMARILY_EMAIL_CONTENT",
+          "const": 21,
+          "description": "- Primarily email content.",
+          "title": "Primarily email content"
+        },
+        {
+          "$comment": "code-name: PRIMARILY_CHAT_IM_CONTENT",
+          "const": 22,
+          "description": "- Primarily chat/IM content.",
+          "title": "Primarily chat/IM content"
+        },
+        {
+          "$comment": "code-name: PRODUCT_CONTEXT",
+          "const": 30,
+          "description": "Product context (e.g., product listings, details, recommendations, reviews, etc.).",
+          "title": "Product context"
+        },
+        {
+          "$comment": "code-name: APP_STORE_MARKETPLACE",
+          "const": 31,
+          "description": "- App store/marketplace.",
+          "title": "App store/marketplace"
+        },
+        {
+          "$comment": "code-name: PRODUCT_REVIEWS_SITE_PRIMARILY",
+          "const": 32,
+          "description": "- Product reviews site primarily, which may sell product secondarily.",
+          "title": "Product reviews site primarily"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Display Context Types",
+      "type": "integer"
+    },
+    "DisplayPlacementType": {
+      "description": "The codes of List: Display Placement Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: IN_THE_FEED_OF_CONTENT",
+          "const": 1,
+          "description": "In the feed of content (e.g., as an item inside the organic feed, grid, listing, carousel, etc.).",
+          "title": "In the feed of content"
+        },
+        {
+          "$comment": "code-name: IN_THE_ATOMIC_UNIT_OF_THE_CONTENT",
+          "const": 2,
+          "description": "In the atomic unit of the content (e.g., in the article page or single image page).",
+          "title": "In the atomic unit of the content"
+        },
+        {
+          "$comment": "code-name: OUTSIDE_THE_CORE_CONTENT",
+          "const": 3,
+          "description": "Outside the core content (e.g., in the ads section on the right rail, as a banner-style placement near the content, etc.).",
+          "title": "Outside the core content"
+        },
+        {
+          "$comment": "code-name: RECOMMENDATION_WIDGET",
+          "const": 4,
+          "description": "Recommendation widget; most commonly presented below article content.",
+          "title": "Recommendation widget"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Display Placement Types",
+      "type": "integer"
+    },
+    "DoohMultiplierMeasurementSourceType": {
+      "description": "The codes of List: DOOH Multiplier Measurement Source Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: UNKNOWN",
+          "const": 0,
+          "title": "Unknown"
+        },
+        {
+          "$comment": "code-name: MEASUREMENT_VENDOR_PROVIDED",
+          "const": 1,
+          "title": "Measurement Vendor Provided"
+        },
+        {
+          "$comment": "code-name: PUBLISHER_PROVIDED",
+          "const": 2,
+          "title": "Publisher Provided"
+        },
+        {
+          "$comment": "code-name: EXCHANGE_PROVIDED",
+          "const": 3,
+          "title": "Exchange Provided"
+        }
+      ],
+      "title": "List: DOOH Multiplier Measurement Source Types",
+      "type": "integer"
+    },
+    "DoohVenueTaxonomy": {
+      "description": "The codes of List: DOOH Venue Taxonomies",
+      "oneOf": [
+        {
+          "$comment": "code-name: ADCOM_DOOH_VENUE_TYPES_DEPRECATED",
+          "const": 0,
+          "title": "AdCom DOOH Venue Types (deprecated)"
+        },
+        {
+          "$comment": "code-name: OPENOOH_VENUE_TAXONOMY_1_0",
+          "const": 1,
+          "description": "OpenOOH Venue Taxonomy 1.0 https://github.com/openooh/venue-taxonomy/blob/main/specification-1.0.md",
+          "title": "OpenOOH Venue Taxonomy 1.0"
+        },
+        {
+          "$comment": "code-name: DPAA_DEVICE_VENUE_TYPES",
+          "const": 2,
+          "description": "DPAA Device Venue Types https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/master/AdCOM%20v1.0%20FINAL.md#list--dooh-venue-types-",
+          "title": "DPAA Device Venue Types"
+        },
+        {
+          "$comment": "code-name: DMI_CATEGORIZATION_OF_VENUES_1_1",
+          "const": 3,
+          "description": "DMI Categorization of Venues 1.1 https://www.dmi-org.com/download/DMI_Standards_for_DOOH_Venues.pdf",
+          "title": "DMI Categorization of Venues 1.1"
+        },
+        {
+          "$comment": "code-name: OMA_TAXONOMY_JAN_2022",
+          "const": 4,
+          "description": "OMA taxonomy Jan 2022 https://www.oma.org.au/industry-standards",
+          "title": "OMA taxonomy Jan 2022"
+        },
+        {
+          "$comment": "code-name: OPENOOH_VENUE_TAXONOMY_1_1",
+          "const": 5,
+          "description": "OpenOOH Venue Taxonomy 1.1 https://github.com/openooh/venue-taxonomy/blob/main/specification-1.1.md",
+          "title": "OpenOOH Venue Taxonomy 1.1"
+        }
+      ],
+      "title": "List: DOOH Venue Taxonomies",
+      "type": "integer"
+    },
+    "EventTrackingMethod": {
+      "description": "The codes of List: Event Tracking Methods",
+      "oneOf": [
+        {
+          "$comment": "code-name: IMAGE_PIXEL",
+          "const": 1,
+          "description": "Image-Pixel: URL provided will be inserted as a 1x1 pixel at the time of the event.",
+          "title": "Image-Pixel"
+        },
+        {
+          "$comment": "code-name: JAVASCRIPT",
+          "const": 2,
+          "description": "JavaScript: URL provided will be inserted as a JavaScript tag at the time of the event.",
+          "title": "JavaScript"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Event Tracking Methods",
+      "type": "integer"
+    },
+    "EventType": {
+      "description": "The codes of List: Event Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: LOADED",
+          "const": 1,
+          "description": "loaded: Delivered as a part of the creative markup. Creative may be pre-cached or pre-loaded; prior to initial rendering.",
+          "title": "loaded"
+        },
+        {
+          "$comment": "code-name: IMPRESSION",
+          "const": 2,
+          "description": "impression: Ad impression per IAB/MRC Ad Impression Measurement Guidelines.",
+          "title": "impression"
+        },
+        {
+          "$comment": "code-name: VIEWABLE_MRC50",
+          "const": 3,
+          "description": "viewable-mrc50: Visible impression using MRC definition of 50% in view for 1 second.",
+          "title": "viewable-mrc50"
+        },
+        {
+          "$comment": "code-name: VIEWABLE_MRC100",
+          "const": 4,
+          "description": "viewable-mrc100: 100% in view for 1 second (i.e., the GroupM standard).",
+          "title": "viewable-mrc100"
+        },
+        {
+          "$comment": "code-name: VIEWABLE_VIDEO50",
+          "const": 5,
+          "description": "viewable-video50: Visible impression for video using MRC definition of 50% in view for 2 seconds.",
+          "title": "viewable-video50"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Event Types",
+      "type": "integer"
+    },
+    "ExpandableDirection": {
+      "description": "The codes of List: Expandable Directions",
+      "oneOf": [
+        {
+          "$comment": "code-name: LEFT",
+          "const": 1,
+          "title": "Left"
+        },
+        {
+          "$comment": "code-name: RIGHT",
+          "const": 2,
+          "title": "Right"
+        },
+        {
+          "$comment": "code-name: UP",
+          "const": 3,
+          "title": "Up"
+        },
+        {
+          "$comment": "code-name: DOWN",
+          "const": 4,
+          "title": "Down"
+        },
+        {
+          "$comment": "code-name: FULL_SCREEN",
+          "const": 5,
+          "title": "Full Screen"
+        },
+        {
+          "$comment": "code-name: RESIZE_MINIMIZE_MAKE_SMALLER",
+          "const": 6,
+          "title": "Resize/Minimize (make smaller)"
+        }
+      ],
+      "title": "List: Expandable Directions",
+      "type": "integer"
+    },
+    "FeedType": {
+      "description": "The codes of List: Feed Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: MUSIC_STREAMING_SERVICE",
+          "const": 1,
+          "description": "AOD: Music streaming service",
+          "title": "Music streaming service"
+        },
+        {
+          "$comment": "code-name: FM_AM_BROADCAST",
+          "const": 2,
+          "description": "LIVE: FM/AM broadcast (live content broadcast over the air but also available via online streaming)",
+          "title": "FM/AM broadcast"
+        },
+        {
+          "$comment": "code-name: PODCAST",
+          "const": 3,
+          "description": "AOD: Podcast (original, pre-recorded content distributed as episodes in a series)",
+          "title": "Podcast"
+        },
+        {
+          "$comment": "code-name: CATCH_UP_RADIO",
+          "const": 4,
+          "description": "AOD: Catch-up radio (recorded segment of a radio show that was originally broadcast live)",
+          "title": "Catch-up radio"
+        },
+        {
+          "$comment": "code-name: WEB_RADIO",
+          "const": 5,
+          "description": "LIVE: Web radio (live content only available via online streaming, not as AM/FM broadcast)",
+          "title": "Web radio"
+        },
+        {
+          "$comment": "code-name: VIDEO_GAME_BACKGROUND_AUDIO",
+          "const": 6,
+          "description": "MISC: Video game (background audio in video games)",
+          "title": "Video game (background audio in video games)"
+        },
+        {
+          "$comment": "code-name: TEXT_TO_SPEECH",
+          "const": 7,
+          "description": "MISC: Text to speech (audio books, website plugin that can read article)",
+          "title": "Text to speech"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "MISC: Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Feed Types",
+      "type": "integer"
+    },
+    "IdMatchMethod": {
+      "description": "The codes of List: ID Match Methods",
+      "oneOf": [
+        {
+          "$comment": "code-name: UNKNOWN",
+          "const": 0,
+          "title": "Unknown"
+        },
+        {
+          "$comment": "code-name: NO_MATCH",
+          "const": 1,
+          "description": "No Match: No matching has occurred. The associated ID came directly from a 3rd-party cookie or OS-provided resettable device ID for advertising (IFA).",
+          "title": "No Match"
+        },
+        {
+          "$comment": "code-name: BROWSER_COOKIE_SYNC",
+          "const": 2,
+          "description": "Browser Cookie Sync: Real time cookie sync as described in Appendix: Cookie Based ID Syncing of OpenRTB 2.x",
+          "title": "Browser Cookie Sync"
+        },
+        {
+          "$comment": "code-name: AUTHENTICATED",
+          "const": 3,
+          "description": "Authenticated: ID match was based on user authentication such as an email login or hashed PII",
+          "title": "Authenticated"
+        },
+        {
+          "$comment": "code-name: OBSERVED",
+          "const": 4,
+          "description": "Observed: ID match was based on a 1st party observation, but without user authentication (e.g. GUID, SharedID, Session IDs, CHIPS or other 1st party cookies contained in localStorage)",
+          "title": "Observed"
+        },
+        {
+          "$comment": "code-name: INFERENCE",
+          "const": 5,
+          "description": "Inference: ID match was inferred from linkage based on non-authenticated features across multiple browsers or devices (e.g. IP address and/or UserAgent)",
+          "title": "Inference"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor Specific",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: ID Match Methods",
+      "type": "integer"
+    },
+    "IpLocationService": {
+      "description": "The codes of List: IP Location Services",
+      "oneOf": [
+        {
+          "$comment": "code-name: IP2LOCATION",
+          "const": 1,
+          "title": "ip2location"
+        },
+        {
+          "$comment": "code-name: NEUSTAR_QUOVA",
+          "const": 2,
+          "title": "Neustar (Quova)"
+        },
+        {
+          "$comment": "code-name: MAXMIND",
+          "const": 3,
+          "title": "MaxMind"
+        },
+        {
+          "$comment": "code-name: NETACUITY_DIGITAL_ELEMENT",
+          "const": 4,
+          "title": "NetAcuity (Digital Element)"
+        },
+        {
+          "$comment": "code-name: CODE_51DEGREES_HIGH_CONFIDENCE",
+          "const": 511,
+          "title": "51Degrees (High Confidence)"
+        },
+        {
+          "$comment": "code-name: CODE_51DEGREES_MEDIUM_CONFIDENCE",
+          "const": 512,
+          "title": "51Degrees (Medium Confidence)"
+        }
+      ],
+      "title": "List: IP Location Services",
+      "type": "integer"
+    },
+    "LinearityMode": {
+      "description": "The codes of List: Linearity Modes",
+      "oneOf": [
+        {
+          "$comment": "code-name: LINEAR",
+          "const": 1,
+          "title": "Linear"
+        },
+        {
+          "$comment": "code-name: NON_LINEAR",
+          "const": 2,
+          "description": "Non-Linear (i.e., Overlay)",
+          "title": "Non-Linear"
+        }
+      ],
+      "title": "List: Linearity Modes",
+      "type": "integer"
+    },
+    "LocationType": {
+      "description": "The codes of List: Location Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: GPS_LOCATION_SERVICES",
+          "const": 1,
+          "title": "GPS/Location Services"
+        },
+        {
+          "$comment": "code-name: IP_ADDRESS",
+          "const": 2,
+          "title": "IP Address"
+        },
+        {
+          "$comment": "code-name: USER_PROVIDED",
+          "const": 3,
+          "description": "User Provided (e.g., registration data)",
+          "title": "User Provided"
+        }
+      ],
+      "title": "List: Location Types",
+      "type": "integer"
+    },
+    "MediaRating": {
+      "description": "The codes of List: Media Ratings",
+      "oneOf": [
+        {
+          "$comment": "code-name: ALL_AUDIENCES",
+          "const": 1,
+          "title": "All Audiences"
+        },
+        {
+          "$comment": "code-name: EVERYONE_OVER_AGE_12",
+          "const": 2,
+          "title": "Everyone Over Age 12"
+        },
+        {
+          "$comment": "code-name: MATURE_AUDIENCES",
+          "const": 3,
+          "title": "Mature Audiences"
+        }
+      ],
+      "title": "List: Media Ratings",
+      "type": "integer"
+    },
+    "NativeDataAssetType": {
+      "description": "The codes of List: Native Data Asset Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: SPONSORED",
+          "const": 1,
+          "description": "sponsored: \"Sponsored By\" message which should contain the brand name of the sponsor. Recommended maximum length of at least 25 characters.",
+          "title": "sponsored"
+        },
+        {
+          "$comment": "code-name: DESC",
+          "const": 2,
+          "description": "desc: Descriptive text associated with the product or service being advertised. Long text lengths may be truncated or ellipsed when rendered. Recommended maximum length of at least 140 characters.",
+          "title": "desc"
+        },
+        {
+          "$comment": "code-name: RATING",
+          "const": 3,
+          "description": "rating: Numeric rating of the product (e.g., an app's rating). Recommended integer range of 0-5.",
+          "title": "rating"
+        },
+        {
+          "$comment": "code-name: LIKES",
+          "const": 4,
+          "description": "likes: Number of social ratings or \"likes\" of the product.",
+          "title": "likes"
+        },
+        {
+          "$comment": "code-name: DOWNLOADS",
+          "const": 5,
+          "description": "downloads: Number downloads and/or installs of the product.",
+          "title": "downloads"
+        },
+        {
+          "$comment": "code-name: PRICE",
+          "const": 6,
+          "description": "price: Price of the product, app, or in-app purchase. Value should include currency symbol in localized format (e.g., \"$10\").",
+          "title": "price"
+        },
+        {
+          "$comment": "code-name: SALEPRICE",
+          "const": 7,
+          "description": "saleprice: Sale price that can be used together with \"price\" to indicate a comparative discounted price. Value should include currency symbol in localized format (e.g., \"$8.50\").",
+          "title": "saleprice"
+        },
+        {
+          "$comment": "code-name: PHONE",
+          "const": 8,
+          "description": "phone: A formatted phone number.",
+          "title": "phone"
+        },
+        {
+          "$comment": "code-name: ADDRESS",
+          "const": 9,
+          "description": "address: A formatted address.",
+          "title": "address"
+        },
+        {
+          "$comment": "code-name: DESC2",
+          "const": 10,
+          "description": "desc2: Additional descriptive text associated with the product.",
+          "title": "desc2"
+        },
+        {
+          "$comment": "code-name: DISPLAYURL",
+          "const": 11,
+          "description": "displayurl: Display URL for the ad. To be used when sponsoring entity doesn't own the content (e.g., \"Sponsored by Brand on Site\", where Site is specified in this data asset).",
+          "title": "displayurl"
+        },
+        {
+          "$comment": "code-name: CTATEXT",
+          "const": 12,
+          "description": "ctatext: Description of the call to action (CTA) button for the destination URL. Recommended maximum length of at least 15 characters.",
+          "title": "ctatext"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Native Data Asset Types",
+      "type": "integer"
+    },
+    "NativeImageAssetType": {
+      "description": "The codes of List: Native Image Asset Types",
+      "oneOf": [
+        {
+          "$comment": "code-name: ICON",
+          "const": 1,
+          "description": "Icon: Icon image. Maximum height at least 50 device independent pixels (DIPS); aspect ratio 1:1.",
+          "title": "Icon"
+        },
+        {
+          "$comment": "code-name: MAIN",
+          "const": 3,
+          "description": "Main: Large image preview for the ad. At least one of 2 size variants required: Small: Maximum height at least 200 DIPS; maximum width at least 200, 267, or 382 DIPS (i.e., aspect ratios of 1:1, 4:3, or 1.91:1, respectively). Large: Maximum height at least 627 DIPS; maximum width at least 627, 836, or 1198 DIPS (i.e., aspect ratios of 1:1, 4:3, or 1.91:1, respectively).",
+          "title": "Main"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Native Image Asset Types",
+      "type": "integer"
+    },
+    "OperatingSystem": {
+      "description": "The codes of List: Operating Systems",
+      "oneOf": [
+        {
+          "$comment": "code-name: OTHER_NOT_LISTED",
+          "const": 0,
+          "title": "Other Not Listed"
+        },
+        {
+          "$comment": "code-name: CODE_3DS_SYSTEM_SOFTWARE",
+          "const": 1,
+          "title": "3DS System Software"
+        },
+        {
+          "$comment": "code-name: ANDROID",
+          "const": 2,
+          "title": "Android"
+        },
+        {
+          "$comment": "code-name: APPLE_TV_SOFTWARE",
+          "const": 3,
+          "title": "Apple TV Software"
+        },
+        {
+          "$comment": "code-name: ASHA",
+          "const": 4,
+          "title": "Asha"
+        },
+        {
+          "$comment": "code-name: BADA",
+          "const": 5,
+          "title": "Bada"
+        },
+        {
+          "$comment": "code-name: BLACKBERRY",
+          "const": 6,
+          "title": "BlackBerry"
+        },
+        {
+          "$comment": "code-name: BREW",
+          "const": 7,
+          "title": "BREW"
+        },
+        {
+          "$comment": "code-name: CHROMEOS",
+          "const": 8,
+          "title": "ChromeOS"
+        },
+        {
+          "$comment": "code-name: DARWIN",
+          "const": 9,
+          "title": "Darwin"
+        },
+        {
+          "$comment": "code-name: FIREOS",
+          "const": 10,
+          "title": "FireOS"
+        },
+        {
+          "$comment": "code-name: FIREFOXOS",
+          "const": 11,
+          "title": "FirefoxOS"
+        },
+        {
+          "$comment": "code-name: HELENOS",
+          "const": 12,
+          "title": "HelenOS"
+        },
+        {
+          "$comment": "code-name: IOS",
+          "const": 13,
+          "title": "iOS"
+        },
+        {
+          "$comment": "code-name: LINUX",
+          "const": 14,
+          "title": "Linux"
+        },
+        {
+          "$comment": "code-name: MACOS",
+          "const": 15,
+          "title": "MacOS"
+        },
+        {
+          "$comment": "code-name: MEEGO",
+          "const": 16,
+          "title": "MeeGo"
+        },
+        {
+          "$comment": "code-name: MORPHOS",
+          "const": 17,
+          "title": "MorphOS"
+        },
+        {
+          "$comment": "code-name: NETBSD",
+          "const": 18,
+          "title": "NetBSD"
+        },
+        {
+          "$comment": "code-name: NUCLEUSPLUS",
+          "const": 19,
+          "title": "NucleusPLUS"
+        },
+        {
+          "$comment": "code-name: PS_VITA_SYSTEM_SOFTWARE",
+          "const": 20,
+          "title": "PS Vita System Software"
+        },
+        {
+          "$comment": "code-name: PS3_SYSTEM_SOFTWARE",
+          "const": 21,
+          "title": "PS3 System Software"
+        },
+        {
+          "$comment": "code-name: PS4_SOFTWARE",
+          "const": 22,
+          "title": "PS4 Software"
+        },
+        {
+          "$comment": "code-name: PSP_SYSTEM_SOFTWARE",
+          "const": 23,
+          "title": "PSP System Software"
+        },
+        {
+          "$comment": "code-name: SYMBIAN",
+          "const": 24,
+          "title": "Symbian"
+        },
+        {
+          "$comment": "code-name: TIZEN",
+          "const": 25,
+          "title": "Tizen"
+        },
+        {
+          "$comment": "code-name: WATCHOS",
+          "const": 26,
+          "title": "WatchOS"
+        },
+        {
+          "$comment": "code-name: WEBOS",
+          "const": 27,
+          "title": "WebOS"
+        },
+        {
+          "$comment": "code-name: WINDOWS",
+          "const": 28,
+          "title": "Windows"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/VendorCode",
+          "description": "Vendor-specific codes.",
+          "title": "Vendor-specific"
+        }
+      ],
+      "title": "List: Operating Systems",
+      "type": "integer"
+    },
+    "PlacementPosition": {
+      "description": "The codes of List: Placement Positions",
+      "oneOf": [
+        {
+          "$comment": "code-name: UNKNOWN",
+          "const": 0,
+          "title": "Unknown"
+        },
+        {
+          "$comment": "code-name: ABOVE_THE_FOLD",
+          "const": 1,
+          "title": "Above The Fold"
+        },
+        {
+          "$comment": "code-name: LOCKED",
+          "const": 2,
+          "description": "Locked (i.e., fixed position)",
+          "title": "Locked"
+        },
+        {
+          "$comment": "code-name: BELOW_THE_FOLD",
+          "const": 3,
+          "title": "Below The Fold"
+        },
+        {
+          "$comment": "code-name: HEADER",
+          "const": 4,
+          "title": "Header"
+        },
+        {
+          "$comment": "code-name: FOOTER",
+          "const": 5,
+          "title": "Footer"
+        },
+        {
+          "$comment": "code-name: SIDEBAR",
+          "const": 6,
+          "title": "Sidebar"
+        },
+        {
+          "$comment": "code-name: FULLSCREEN",
+          "const": 7,
+          "title": "Fullscreen"
+        },
+        {
+          "$comment": "code-name: PARTIAL_SCREEN",
+          "const": 8,
+          "title": "Partial Screen"
+        },
+        {
+          "$comment": "code-name: TOP_LEFT",
+          "const": 9,
+          "title": "Top Left"
+        },
+        {
+          "$comment": "code-name: TOP_RIGHT",
+          "const": 10,
+          "title": "Top Right"
+        },
+        {
+          "$comment": "code-name: FRAME_THE_CONTENT",
+          "const": 11,
+          "title": "Frame the content"
+        },
+        {
+          "$comment": "code-name: DOUBLE_BOX",
+          "const": 12,
+          "title": "Double box"
+        },
+        {
+          "$comment": "code-name: DOUBLE_BOX_WITH_BACKGROUND",
+          "const": 13,
+          "title": "Double box with background"
+        },
+        {
+          "$comment": "code-name: BOTTOM_LEFT",
+          "const": 14,
+          "title": "Bottom Left"
+        },
+        {
+          "$comment": "code-name: BOTTOM_RIGHT",
+          "const": 15,
+          "title": "Bottom Right"
+        },
+        {
+          "$comment": "code-name: L_SHAPE",
+          "const": 16,
+          "title": "L shape"
+        },
+        {
+          "$comment": "code-name: REVERSED_L_SHAPE",
+          "const": 17,
+          "title": "Reversed L shape"
+        }
+      ],
+      "title": "List: Placement Positions",
+      "type": "integer"
+    },
+    "PlaybackCessationMode": {
+      "description": "The codes of List: Playback Cessation Modes",
+      "oneOf": [
+        {
+          "$comment": "code-name: ON_VIDEO_COMPLETION",
+          "const": 1,
+          "title": "On Video Completion or when Terminated by User"
+        },
+        {
+          "$comment": "code-name: ON_LEAVING_VIEWPORT",
+          "const": 2,
+          "title": "On Leaving Viewport or when Terminated by User"
+        },
+        {
+          "$comment": "code-name: ON_LEAVING_VIEWPORT_CONTINUES_FLOATING",
+          "const": 3,
+          "description": "On Leaving Viewport Continues as a Floating/Slider Unit until Video Completion or when Terminated by User",
+          "title": "On Leaving Viewport Continues as Floating Unit"
+        }
+      ],
+      "title": "List: Playback Cessation Modes",
+      "type": "integer"
+    },
+    "PlaybackMethod": {
+      "description": "The codes of List: Playback Methods",
+      "oneOf": [
+        {
+          "$comment": "code-name: INITIATES_AUTOMATICALLY_WITH_SOUND_ON",
+          "const": 1,
+          "description": "Initiates without any specific user interaction with Sound On",
+          "title": "Initiates Automatically with Sound On"
+        },
+        {
+          "$comment": "code-name: INITIATES_AUTOMATICALLY_WITH_SOUND_OFF",
+          "const": 2,
+          "description": "Initiates without any specific user interaction Sound Off by Default",
+          "title": "Initiates Automatically with Sound Off"
+        },
+        {
+          "$comment": "code-name: INITIATES_ON_CLICK_WITH_SOUND_ON",
+          "const": 3,
+          "title": "Initiates on Click with Sound On"
+        },
+        {
+          "$comment": "code-name: INITIATES_ON_MOUSE_OVER_WITH_SOUND_ON",
+          "const": 4,
+          "description": "Initiates on Mouse-Over or cursor over with Sound On",
+          "title": "Initiates on Mouse-Over with Sound On"
+        },
+        {
+          "$comment": "code-name: INITIATES_ON_ENTERING_VIEWPORT_SOUND_ON",
+          "const": 5,
+          "description": "Initiates on Entering Viewport or scrolling into view with Sound On",
+          "title": "Initiates on Entering Viewport with Sound On"
+        },
+        {
+          "$comment": "code-name: INITIATES_ON_ENTERING_VIEWPORT_SOUND_OFF",
+          "const": 6,
+          "description": "Initiates on Entering Viewport or scrolling into view with Sound Off by Default",
+          "title": "Initiates on Entering Viewport with Sound Off"
+        },
+        {
+          "$comment": "code-name: CONTINUOUS_PLAYBACK",
+          "const": 7,
+          "description": "Continuous Playback - Media playback is set to play additional media automatically without user interaction. The media player will keep playing additional media (playlist or generated) for the user until the user actively stops this from happening.",
+          "title": "Continuous Playback"
+        },
+        {
+          "$comment": "code-name: INITIATED_BY_CONTENT_PAUSE_SOUND_ON",
+          "const": 8,
+          "title": "Initiated by user pausing content, Sound on"
+        },
+        {
+          "$comment": "code-name: INITIATED_BY_CONTENT_PAUSE_SOUND_OFF",
+          "const": 9,
+          "title": "Initiated by user pausing content, Sound off"
+        },
+        {
+          "$comment": "code-name: INITIATED_BY_IDLING_SOUND_ON",
+          "const": 10,
+          "description": "Initiated by idling (e.g. screensaver), Sound on",
+          "title": "Initiated by idling, Sound on"
+        },
+        {
+          "$comment": "code-name: INITIATED_BY_IDLING_SOUND_OFF",
+          "const": 11,
+          "description": "Initiated by idling (e.g. screensaver), Sound off",
+          "title": "Initiated by idling, Sound off"
+        }
+      ],
+      "title": "List: Playback Methods",
+      "type": "integer"
+    },
+    "PlcmtSubtypeVideo": {
+      "description": "The codes of List: Plcmt Subtypes - Video",
+      "oneOf": [
+        {
+          "$comment": "code-name: INSTREAM",
+          "const": 1,
+          "description": "Instream: Pre-roll, mid-roll, and post-roll ads that are played before, during or after the streaming video content that the consumer has requested. Instream video must be set to “sound on” by default at player start, or have explicitly clear user intent to watch the video content. While there may be other content surrounding the player, the video content must be the focus of the user’s visit. It should remain the primary content on the page and the only video player in-view capable of audio when playing. If the player converts to floating/sticky subsequent ad calls should accurately convey the updated player size.",
+          "title": "Instream"
+        },
+        {
+          "$comment": "code-name: ACCOMPANYING_CONTENT",
+          "const": 2,
+          "description": "Accompanying Content: Pre-roll, mid-roll, and post-roll ads that are played before, during, or after streaming video content. The video player loads and plays before, between, or after paragraphs of text or graphical content, and starts playing only when it enters the viewport. Accompanying content should only start playback upon entering the viewport. It may convert to a floating/sticky player as it scrolls off the page.",
+          "title": "Accompanying Content"
+        },
+        {
+          "$comment": "code-name: INTERSTITIAL",
+          "const": 3,
+          "description": "Interstitial:Video ads that are played without video content. During playback, it must be the primary focus of the page and take up the majority of the viewport and cannot be scrolled out of view. This can be in placements like in-app video or slideshows.",
+          "title": "Interstitial"
+        },
+        {
+          "$comment": "code-name: NO_CONTENT_STANDALONE",
+          "const": 4,
+          "description": "No Content/Standalone: Video ads that are played without streaming video content. This can be in placements like slideshows, native feeds, in-content or sticky/floating.",
+          "title": "No Content/Standalone"
+        },
+        {
+          "$comment": "code-name: PAUSE",
+          "const": 5,
+          "description": "Pause: An ad present in streaming video content that the consumer has requested. While there may be other content surrounding the player, the video content must be the focus of the user’s visit. It should remain the primary content on the page and the only video player in-view.",
+          "title": "Pause"
+        },
+        {
+          "$comment": "code-name: SCREENSAVER",
+          "const": 6,
+          "description": "Screensaver: An ad present, when OS/App Screen Saver are initiated.",
+          "title": "Screensaver"
+        },
+        {
+          "$comment": "code-name: OVERLAY",
+          "const": 7,
+          "description": "Overlay: Ads occurring during program content and outside of the traditional ad break. The ad format places ad creatives over top of the program content, often as a banner or picture in picture execution. While there may be other content surrounding the player with the overlay, the player with the overlay must be the focus of the user’s visit. It should remain the primary content on the page and the primary video player in-view.",
+          "title": "Overlay"
+        },
+        {
+          "$comment": "code-name: SQUEEZEBACK",
+          "const": 8,
+          "description": "Squeezeback: Ads Alongside or Adjacent to Content, also known as L-Shape Ads & Double Box, are ads that occur during program content and outside of the traditional ad break. The program content is resized to allow for placement of an ad on the screen. In a squeezeback, none of the content is covered by the ad, instead it shares screen space with the ad. This is the major distinction between squeezeback and overlay. While there may be other content surrounding the player with the squeezeback, the player with the squeezeback must be the focus of the user’s visit. It should remain the primary content on the page and the primary video player in-view.",
+          "title": "Squeezeback"
+        },
+        {
+          "$comment": "code-name: IN_SCENE",
+          "const": 9,
+          "description": "In-scene: A form of advertising that integrates branded elements directly within the content itself, rather than appearing as separate pre-roll, mid-roll, overlay, or display formats. In Scene Advertising is composited into the video content and blends the brand naturally into the scene, environment, or storyline, ensuring contextual relevance and viewer immersion without interrupting the user experience. In-scene ads typically consist of product placements or virtual out of A insertions. At this time, the standardization focuses on the out of home insertions in non-live content. While there may be other content surrounding the player with the in-scene ad, the player with the in-scene ad must be the focus of the user’s visit. It should remain the primary content on the page and the primary video player in-view.",
+          "title": "In-scene"
+        }
+      ],
+      "title": "List: Plcmt Subtypes - Video",
+      "type": "integer"
+    },
+    "PodDeduplicationSetting": {
+      "description": "The codes of List: Pod Deduplication Settings",
+      "oneOf": [
+        {
+          "$comment": "code-name: DEDUPLICATED_ON_ADOMAIN",
+          "const": 1,
+          "title": "Deduplicated on adomain"
+        },
+        {
+          "$comment": "code-name: DEDUPLICATED_ON_CONTENT_TAXONOMY",
+          "const": 2,
+          "title": "Deduplicated on IAB Tech Lab Content Taxonomy"
+        },
+        {
+          "$comment": "code-name: DEDUPLICATED_ON_CREATIVE_ID",
+          "const": 3,
+          "title": "Deduplicated on creative ID"
+        },
+        {
+          "$comment": "code-name: DEDUPLICATED_ON_MEDIAFILE_URL",
+          "const": 4,
+          "title": "Deduplicated on mediafile URL"
+        },
+        {
+          "$comment": "code-name: NO_DEDUPLICATION",
+          "const": 5,
+          "title": "No deduplication"
+        }
+      ],
+      "title": "List: Pod Deduplication Settings",
+      "type": "integer"
+    },
+    "PodSequence": {
+      "description": "The codes of List: Pod Sequence",
+      "oneOf": [
+        {
+          "$comment": "code-name: LAST_POD_IN_THE_CONTENT_STREAM",
+          "const": -1,
+          "title": "Last pod in the content stream"
+        },
+        {
+          "$comment": "code-name: ANY_POD_IN_THE_CONTENT_STREAM",
+          "const": 0,
+          "title": "Any pod in the content stream"
+        },
+        {
+          "$comment": "code-name: FIRST_POD_IN_THE_CONTENT_STREAM",
+          "const": 1,
+          "title": "First pod in the content stream"
+        }
+      ],
+      "title": "List: Pod Sequence",
+      "type": "integer"
+    },
+    "ProductionQuality": {
+      "description": "The codes of List: Production Qualities",
+      "oneOf": [
+        {
+          "$comment": "code-name: UNKNOWN",
+          "const": 0,
+          "title": "Unknown"
+        },
+        {
+          "$comment": "code-name: PROFESSIONALLY_PRODUCED",
+          "const": 1,
+          "title": "Professionally Produced"
+        },
+        {
+          "$comment": "code-name: PROSUMER",
+          "const": 2,
+          "title": "Prosumer"
+        },
+        {
+          "$comment": "code-name: USER_GENERATED_UGC",
+          "const": 3,
+          "title": "User Generated (UGC)"
+        }
+      ],
+      "title": "List: Production Qualities",
+      "type": "integer"
+    },
+    "SizeUnit": {
+      "description": "The codes of List: Size Units",
+      "oneOf": [
+        {
+          "$comment": "code-name: DEVICE_INDEPENDENT_PIXELS_DIPS",
+          "const": 1,
+          "title": "Device Independent Pixels (DIPS)"
+        },
+        {
+          "$comment": "code-name: INCHES",
+          "const": 2,
+          "title": "Inches"
+        },
+        {
+          "$comment": "code-name: CENTIMETERS",
+          "const": 3,
+          "title": "Centimeters"
+        }
+      ],
+      "title": "List: Size Units",
+      "type": "integer"
+    },
+    "SlotPositionInPod": {
+      "description": "The codes of List: Slot Position in Pod",
+      "oneOf": [
+        {
+          "$comment": "code-name: LAST_AD_IN_THE_POD",
+          "const": -1,
+          "title": "Last ad in the pod"
+        },
+        {
+          "$comment": "code-name: ANY_AD_IN_THE_POD",
+          "const": 0,
+          "title": "Any ad in the pod"
+        },
+        {
+          "$comment": "code-name: FIRST_AD_IN_THE_POD",
+          "const": 1,
+          "title": "First ad in the pod"
+        },
+        {
+          "$comment": "code-name: FIRST_OR_LAST_AD_IN_THE_POD",
+          "const": 2,
+          "title": "First or Last ad in the pod"
+        }
+      ],
+      "title": "List: Slot Position in Pod",
+      "type": "integer"
+    },
+    "StartDelayMode": {
+      "description": "The codes of List: Start Delay Modes, or, for a mid-roll at a given second, the delay in seconds, which the row `>0` stands for",
+      "oneOf": [
+        {
+          "$comment": "code-name: PRE_ROLL",
+          "const": 0,
+          "title": "Pre-Roll"
+        },
+        {
+          "$comment": "code-name: GENERIC_MID_ROLL",
+          "const": -1,
+          "title": "Generic Mid-Roll"
+        },
+        {
+          "$comment": "code-name: GENERIC_POST_ROLL",
+          "const": -2,
+          "title": "Generic Post-Roll"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MediaOffset",
+          "not": {
+            "const": 0
+          },
+          "title": "Media offset"
+        }
+      ],
+      "title": "List: Start Delay Modes",
+      "type": "integer"
+    },
+    "UserAgentSource": {
+      "description": "The codes of List: User-Agent Source",
+      "oneOf": [
+        {
+          "$comment": "code-name: UNSPECIFIED_UNKNOWN",
+          "const": 0,
+          "title": "Unspecified/unknown"
+        },
+        {
+          "$comment": "code-name: LOW_ENTROPY_CLIENT_HINTS",
+          "const": 1,
+          "description": "User-Agent Client Hints (only low-entropy headers were available)",
+          "title": "Low-Entropy Client Hints"
+        },
+        {
+          "$comment": "code-name: HIGH_ENTROPY_CLIENT_HINTS",
+          "const": 2,
+          "description": "User-Agent Client Hints (with high-entropy headers available)",
+          "title": "High-Entropy Client Hints"
+        },
+        {
+          "$comment": "code-name: PARSED_FROM_USER_AGENT_HEADER",
+          "const": 3,
+          "description": "Parsed from User-Agent header (the same string carried by the ua field)",
+          "title": "Parsed from User-Agent header"
+        }
+      ],
+      "title": "List: User-Agent Source",
+      "type": "integer"
+    },
+    "VolumeNormalizationMode": {
+      "description": "The codes of List: Volume Normalization Modes",
+      "oneOf": [
+        {
+          "$comment": "code-name: NONE",
+          "const": 0,
+          "title": "None"
+        },
+        {
+          "$comment": "code-name: AD_VOLUME_AVERAGE_NORMALIZED_TO_CONTENT",
+          "const": 1,
+          "title": "Ad Volume Average Normalized to Content"
+        },
+        {
+          "$comment": "code-name: AD_VOLUME_PEAK_NORMALIZED_TO_CONTENT",
+          "const": 2,
+          "title": "Ad Volume Peak Normalized to Content"
+        },
+        {
+          "$comment": "code-name: AD_LOUDNESS_NORMALIZED_TO_CONTENT",
+          "const": 3,
+          "title": "Ad Loudness Normalized to Content"
+        },
+        {
+          "$comment": "code-name: CUSTOM_VOLUME_NORMALIZATION",
+          "const": 4,
+          "title": "Custom Volume Normalization"
+        }
+      ],
+      "title": "List: Volume Normalization Modes",
+      "type": "integer"
+    }
+  },
+  "$id": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/lists/1/lists.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The AdCOM `lists` module: its 42 vocabularies.",
+  "title": "lists"
+}

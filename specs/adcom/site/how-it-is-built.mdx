@@ -1,0 +1,92 @@
+---
+title: How it's built · AdCOM 1.0 JSON Schema
+description: How Postindustria generates the AdCOM 1.0 code lists as JSON Schema from the specification text.
+---
+{/*
+  AdCOM's How it's built page, in its own words. Moved from the predecessor's
+  `methodPage` (`src/specs/adcom/site.ts:139-242`) with every word in its
+  place, except where the slice records a difference:
+
+   - The proto sentence of the design notes is the slice's difference 9. It is
+     not written here at all: it is conditional on the worked example having a
+     published target name, which MDX cannot express, so it stays with the
+     condition in `DesignNotes.astro` and reads all four of its values from
+     `walkthrough.target`.
+   - The emitted schema the worked example shows carries difference 19's
+     `$comment` lines, one per code, which is the slice's difference 22. The
+     block is the bundle's own `walkthrough.schema`, so it carries them without
+     anything here saying so.
+   - The repository the last section links is this one, not the predecessor's,
+     which is the slice's difference 14, and the lock the command names moved
+     with the target layout of the plan's § 1.4.
+
+  Every figure is read from the bundle through <Stat>. The one that would be
+  easiest to get wrong is the IR's tables: `definitionTables` is the 42 tables
+  that define a value, where `tables` is all 89 of the text's, objects
+  included.
+
+  Two were not read until the review of step 13 measured it: the vendor range's
+  floor, typed as 500 under "A vendor range is an open branch" and again under
+  "What a list becomes", while `counts.vendorFloor` was published for exactly
+  this and read by nothing. Both read it now. The `500+` left written out is
+  the label of the row the text writes, cited as the start delays' `>0` row is
+  cited, not the floor restated.
+
+  The whole page is one `<div class="wrap method">`, written with no blank line
+  inside it, so MDX reads it as one JSX block and every component below
+  resolves as a component.
+*/}
+<div class="wrap method">
+<h1>How it's built</h1>
+<p class="lede">Postindustria, an IAB Tech Lab member, generates these schemas from the AdCOM <Stat of="brand.edition" /> specification text. Nobody writes a schema file by hand. Every vocabulary is a function of two things: the specification at a pinned commit, and a mapping and a set of decision records that we review by hand. This page explains each step for AdCOM's lists, and what it shapes in the <a href="map.html">type map</a> and the <a href="downloads.html">files</a>.</p>
+<nav class="toc" aria-label="On this page"><p class="note">On this page</p><ol><li><a href="#pipeline">The pipeline</a></li><li><a href="#extraction">Extraction</a></li><li><a href="#mapping">Mapping and decisions</a></li><li><a href="#emission">What a list becomes</a></li><li><a href="#verification">Verification</a></li><li><a href="#inputs">The two inputs</a></li><li><a href="#example">One list, end to end</a></li><li><a href="#design">Design notes: codes and flags</a></li><li><a href="#reproduce">How to reproduce it</a></li></ol></nav>
+<section id="pipeline">
+<h2>The pipeline</h2>
+<p>The same pipeline generates every specification on this site. For AdCOM's lists it runs every step but two: the lists need no constructors, and AdCOM has no SDK types yet, since the schemas come first.</p>
+<Pipeline />
+</section>
+<section id="extraction">
+<h2>Extraction</h2>
+<p>AdCOM writes its tables in HTML, not Markdown. The extractor reads each HTML table into the same rows a Markdown table gives, keeping each row's source bytes, and fails on any tag a table doesn't use, so no row is skipped silently. Each heading carries its own anchor, such as <code>list_devicetypes</code>, which every link to it names, so each section takes that anchor as its ID. The text adopts no RFC 2119 convention and writes its keywords in either case, so a keyword in any case makes a statement (<Decision of="D-001" />).</p>
+<p>On <code><Stat of="walkthrough.lock" /></code>, the IR holds <Stat of="definitions" /> list rows in <Stat of="definitionTables" /> tables, <Stat of="keys" /> object attribute rows, and <Stat of="statements" /> statements. Each element has an ID, such as <code><Stat of="walkthrough.element" /></code>: a value-definition row (<code>def</code>), in the section <code>list_devicetypes</code>, for the code <code><Stat of="walkthrough.target.number" /></code>.</p>
+</section>
+<section id="mapping">
+<h2>Mapping and decisions</h2>
+<p>Every element has exactly one entry in the mapping, on each input. Of the <Stat of="mappingEntries" /> entries across both inputs, <Stat of="mappingByRule" /> come from mapping rules and <Stat of="mappingByDecision" /> cite a decision record.</p>
+<ul>
+<li><strong>A list is a vocabulary.</strong> A table of codes that a <code>List:</code> heading alone names becomes one vocabulary, named after the list's title in PascalCase with its head noun in the singular (<Decision of="D-002" />), and each code row becomes one of its terms, labeled with its row's text.</li>
+<li><strong>A vendor range is an open branch.</strong> A <code>500+</code> row opens its list to a vendor's code of <Stat of="vendorFloor" /> or more; a list without one stays closed (<Decision of="D-008" />).</li>
+<li><strong>An object is an object.</strong> A table of attribute rows that an <code>Object:</code> heading names becomes one object type, and each row becomes one of its members, typed by what its Type cell states and by the code list or object it cites (<Decision of="D-049" />). The four rows of the one <code>Abstract Class:</code> heading are written into each of the three objects that inherit them (<Decision of="D-053" />).</li>
+<li><strong>Decisions fill the gaps.</strong> <Stat of="gaps" unit="decision record" /> settle what the text leaves open, from the start delays' <code>&gt;0</code> row (<Decision of="D-004" />) to the revision of record (<Decision of="D-016" />). Read them in the <a href="decisions/index.html">decision records</a>.</li>
+</ul>
+</section>
+<section id="emission">
+<h2>What a list becomes</h2>
+<p>A list is <code>type: integer</code> and a <code>oneOf</code> of one <code>const</code> branch per code, titled with the code's name, so a reader of the schema alone sees what each code means. An open list adds one branch for its extension: an integer of at least <Stat of="vendorFloor" /> for a vendor range, as <TypeLink of="VendorCode" /> is, or, for the start delay, a whole number of seconds other than <code>0</code>, as <TypeLink of="MediaOffset" /> is. The <a href="#design">design notes</a> say why.</p>
+</section>
+<section id="verification">
+<h2>Verification</h2>
+<ul>
+<li><strong>The fidelity oracle.</strong> A separate program reads each list's rows from the IR alone, never the mapping, and checks the emitted schemas: every code valid, a code no row names invalid, the first vendor code valid and the code below it invalid. On <code><Stat of="walkthrough.lock" /></code> it checks every list with codes.</li>
+<li><strong>The round trip.</strong> Each list's table is rendered back from the model and compared with the text, cell by cell. The one recorded difference is the start delays' <code>&gt;0</code> row, which no single term can render.</li>
+<li><strong>Determinism and drift.</strong> Every generated file is written twice in separate processes and compared with the committed one, byte for byte, and each release manifest's digests are recomputed.</li>
+<li><strong>Known-bad fixtures.</strong> Every gate has fixtures it must reject, such as an HTML cell with a tag the reader doesn't know, or a vocabulary that lost a code.</li>
+</ul>
+</section>
+<section id="inputs">
+<h2>The two inputs</h2>
+<p>AdCOM has changed its lists many times while calling every revision "<Stat of="brand.edition" />", and its last tag isn't <code>main</code>. So the registry is built twice: from <code>main</code>, the default, and from the last tag. The lock comparison shows that their lists are the same, code for code, and that they differ only in the <code>Content</code> object's table.</p>
+</section>
+<section id="example">
+<h2>One list, end to end</h2>
+<WorkedExample />
+</section>
+<DesignNotes>
+<Fragment slot="codes">Every list here is integer codes, such as <code><Stat of="walkthrough.target.number" /></code> for Connected TV in List: Device Types.</Fragment>
+<Fragment slot="flags">The registry maps lists only, so no flag appears here yet; when the objects are mapped, a flag such as <code>instl</code> keeps the <code>0</code> | <code>1</code> the text writes.</Fragment>
+</DesignNotes>
+<section id="reproduce">
+<h2>How to reproduce it</h2>
+<p>The tooling is public at <a href={props.doc.brand.repo}>{props.doc.brand.repo.replace("https://github.com/", "")}</a>. It needs Node 22, and the gates also need Python 3.12 and Go 1.25 or later. <code>npm run ci</code> runs every gate on every specification, as CI does; <code>npm run extract -- --lock specs/adcom/input/spec-lock.yaml</code> and the other steps run on one.</p>
+</section>
+</div>

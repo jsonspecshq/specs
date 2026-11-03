@@ -1,0 +1,18 @@
+format: 2
+id: D-031
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_playbackmethods:6
+value: Initiates on Entering Viewport with Sound Off
+reading: D-020
+covers:
+  - ir: def:list_playbackmethods:6
+    digest: 2852b601f07001bdbc8db852fc59610e2695e5f2e1b0fafe9e9712566d059f6a
+    quote: "`6` | Initiates on Entering Viewport or scrolling into view with Sound Off by Default"
+reason: >-
+  The row runs past the length a name can have, and a cut would drop
+  the sound, which is what tells code 6 from code 5, so D-020 keeps the
+  trigger and the sound in the form code 3 already has, dropping "or
+  scrolling into view", which says the same as "on Entering Viewport".

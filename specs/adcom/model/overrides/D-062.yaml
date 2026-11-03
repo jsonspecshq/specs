@@ -1,0 +1,105 @@
+format: 2
+id: D-062
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "The two `podid` rows open with \"Unique identifier\" and state their Type as an integer, and the mapping types them `Count`, which publishes a lower bound, an ordering and a maximum. Which value domain is an identifier's value of?"
+covers:
+  - ir: key:object_audioplacement:AudioPlacement.podid
+    digest: 11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3
+    quote: "`podid` | Unique identifier indicating that an impression opportunity belongs to a video ad pod. If multiple impression opportunities within a bid request share the same podid, this indicates that those impression opportunities belong to the same video ad pod."
+  - ir: key:object_videoplacement:VideoPlacement.podid
+    digest: 11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3
+    quote: "`podid` | Unique identifier indicating that an impression opportunity belongs to a video ad pod. If multiple impression opportunities within a bid request share the same podid, this indicates that those impression opportunities belong to the same video ad pod."
+options:
+  - id: count-concept
+    summary: >-
+      The rows are values of the `count` concept, which is what the bare-type
+      rule gives them and what the kernel binding cites today, and nothing
+      states what that costs. The published type keeps its lower bound, its
+      ordering and its maximum, and a reader of the schema cannot tell a
+      counted quantity from an opaque label.
+  - id: integer-identifier
+    summary: >-
+      The domain model gains an identifier concept whose values are integers,
+      the two rows are bound to it, and the published type carries the Type
+      cell's integer and no bound. It is the reading the rows' own words give,
+      and it moves published bytes: `podid` on both locks, the `count`
+      concept's two citations in the kernel binding, and the provenance of two
+      emitted values per lock.
+  - id: external-id
+    summary: >-
+      The rows are values of the kernel's existing identifier primitive, which
+      is a string. It reads the first two words of the row and ignores the
+      Type cell, so it refuses every payload anyone sends today, and the
+      specification states an integer.
+  - id: count-with-the-cost-stated
+    summary: >-
+      The rows stay values of the `count` concept, and what the concept adds
+      beyond the row's own words is stated as a value a check reads: the
+      published type refuses `-1`, which the row leaves open. The reviewed
+      reading of each row names this record for exactly that value, so the
+      finding is held by a gate and not by a paragraph, and the retyping is
+      the next reading of the kernel's domain model.
+chosen: count-with-the-cost-stated
+rationale: >-
+  Measured over the committed schemas of both locks: `AudioPlacement.podid`
+  and `VideoPlacement.podid` are published at the kernel's `Count`, "a whole
+  number of things, never negative and at most 2^53 - 1", which is
+  `{ type: integer, minimum: 0, maximum: 9007199254740991 }`. The rows say
+  "Unique identifier" and then say what the identifier is for: two impression
+  opportunities that "share the same podid" belong to one pod. Nothing in
+  either sentence counts anything and nothing orders anything, so three of
+  the four things the published type states about the value come from the
+  concept the bare-type rule picked and not from the text.
+
+  What that costs is one value, and it is now stated as a value rather than
+  as this paragraph: the published type refuses `-1`, by `minimum`, and the
+  rows leave an identifier's sign open. A payload that labels its pods from a
+  counter that starts below zero is refused by a bound AdCOM never wrote. The
+  other two values the rows do settle: `0.7` and `"pod-1"` are refused by
+  `type`, which is AdCOM's own integer Type cell and not the concept, so the
+  `count` reading is doing no work there at all. That asymmetry is the
+  finding, and it is why the chosen option is neither of the first two.
+
+  `integer-identifier` is the reading the rows' words give, and it is not
+  taken here because it changes what the published schemas accept on both
+  locks and the domain model has no integer identifier concept to move the
+  rows to: the kernel's identifier primitive is a string, so taking the rows
+  at their word means stating a concept, which is a decision about the
+  kernel and not about this specification. `external-id` refuses every
+  payload sent today and contradicts the Type cell. So the rows keep the
+  `count` concept, the cost is a value a check reads, and the question the
+  next reading of the kernel's domain model has to answer is stated here.
+
+  Held by two things rather than by this record alone. The reviewed readings
+  `M-001` and `M-002` of `formats/meanings.yaml` name this record as what
+  accounts for the `-1` vector on each placement, and the `meaning-bounds`
+  gate fails if that accounting is dropped and fails again, as stale, on the
+  day the published type stops refusing it. The `override-challenge` gate
+  holds the three values below to the verdicts claimed here.
+feedback: >-
+  Two rows of the object tables, `AudioPlacement.podid` and
+  `VideoPlacement.podid`, open with "Unique identifier" and give their Type as
+  an integer. A reader cannot tell from the rows whether the value is ordered,
+  whether it has a lowest value, or whether a sender may label pods with
+  negative integers, and a machine-readable form of the specification has to
+  decide all three. Stating in the row that the identifier is opaque, or
+  stating the range it is drawn from, would settle it.
+challenge:
+  - type: Count
+    value: -1
+    verdict: reject
+    context: A CTV ad server that labels the pods of a break from a counter seeded below zero, so the first pod of a stream is -1.
+    reason: Refused by `minimum`, which the `count` concept states and the row does not; this is the cost of reading an opaque identifier as a counted quantity.
+  - type: Count
+    value: 1
+    verdict: accept
+    context: The same CTV ad server's second pod, labelled 1, which is what nearly every sender in the wild writes today.
+    reason: Taken, because a positive whole number satisfies `type`, `minimum` and `maximum` alike, so the reading keeps every payload anyone sends.
+  - type: Count
+    value: pod-1
+    verdict: reject
+    context: A DOOH player that labels pods with the screen's own string keys, as "pod-1", which is how an opaque identifier is usually written.
+    reason: Refused by `type`, and this refusal is AdCOM's own, since the row states its Type as an integer and the string is out whichever concept the value belongs to.

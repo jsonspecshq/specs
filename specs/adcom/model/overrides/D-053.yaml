@@ -1,0 +1,202 @@
+format: 2
+id: D-053
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "The specification heads 45 sections Object: and one Abstract Class:, whose four attributes `Site`, `App`, and `Dooh` inherit. What do those four attributes become, and what does the abstract class itself become?"
+covers:
+  - ir: key:abstract_distributionchannel:DistributionChannel.id
+    digest: 7a8e6c77298b2c741e8075271f0a4e2da79adfb8ace55b5cae1942595e9579aa
+    quote: "`id` | Vendor-specific unique identifier of the distribution channel."
+  - ir: key:abstract_distributionchannel:DistributionChannel.name
+    digest: 01d05acce2803b9bc5eb11b0ec61ef3ab053532fadbbd6842ce040e8c0f6e5f3
+    quote: "`name` | Displayable name of the distribution channel."
+  - ir: key:abstract_distributionchannel:DistributionChannel.pub
+    digest: 9807686082b9e560639f11e1e47ef84883ffb1ce0168d87068b574443c97a546
+    quote: "`pub` | Details about the publisher of the distribution channel. Refer to Object: Publisher."
+  - ir: key:abstract_distributionchannel:DistributionChannel.content
+    digest: cf06882c23d405dccb619dff80f4aafcec7c2ce037aeed2c99f4162acd2b4f5d
+    quote: "`content` | Details about the content within the distribution channel. Refer to Object: Content."
+  - ir: sentence:abstract_distributionchannel:7bb8a267
+    digest: 3d158cee5a69b341425b95f55c0b6c3d094fecd560b028992976a65356d6e552
+    quote: "Note: As an abstract class, a `DistributionChannel` is never instantiated on its own."
+  - ir: sentence:object_site:3af19bc7
+    digest: 36cc2e90b6508b66d32a65843cadf07b5fc5a2ae546264c4ec5acbd3319a5149
+    quote: As a derived class, a `Site` object inherits all `DistributionChannel` attributes and adds those defined below.
+  - ir: sentence:object_app:1e9e13c6
+    digest: 5157db0740ffa030709fce8b9a5134ffbd5f2b8b96bd0c7efd0670e763a929fd
+    quote: As a derived class, an `App` object inherits all `DistributionChannel` attributes and adds those defined below.
+  - ir: sentence:object_dooh:91443f6e
+    digest: f5265e4c8bbbbf482eaf14b57e3caddef5e50acbd099ba2c87b3db3eb88d1830
+    quote: As a derived class, a `Dooh` object inherits all `DistributionChannel` attributes and adds those defined below.
+options:
+  - id: copied-rows
+    summary: >-
+      The four are attributes of each of `Site`, `App`, and `Dooh`, written
+      out in each, before the attributes that object's own section defines;
+      the abstract class carries no payload of its own, as the text says it
+      is never instantiated.
+  - id: emitted-schema
+    summary: >-
+      `DistributionChannel` carries a payload of its own and each derived
+      object builds on it, so the four attributes are defined once and three
+      objects extend that definition.
+  - id: shared-part
+    summary: >-
+      The four are one group that each derived object refers to, so a `Site`
+      carries them under an attribute of its own rather than at its top.
+  - id: informative
+    summary: >-
+      The abstract class is prose about the three objects and none of its
+      four attributes is an attribute of theirs, so a `Site` has only the
+      attributes its own section defines.
+chosen: copied-rows
+rationale: >-
+  Measured on both locks: 112 sections, of which 45 are headed Object: and
+  one Abstract Class: DistributionChannel, at line 1744. 411 attribute rows,
+  of which 407 are in the 45 object sections and 4 -- `id`, `name`, `pub`,
+  and `content` -- in the abstract class. Three sentences state the
+  inheritance, one per derived object, in the same words: "As a derived
+  class, a `Site` object inherits all `DistributionChannel` attributes and
+  adds those defined below", and the same for `App` and `Dooh`. A fourth
+  says that "As an abstract class, a `DistributionChannel` is never
+  instantiated on its own". Each derived section also carries "Derived from:
+  DistributionChannel" as a link, at lines 1781, 1866, and 1951.
+
+  `informative` is refused by measurement and not by reading, which is why it
+  is written down here rather than dismissed. The one corpus of payloads this
+  repository did not write holds a `site` of five members -- `id`, `name`,
+  `domain`, `mobile`, and `pub` -- and three of them, `id`, `name`, and
+  `pub`, are not among the 14 rows of the Site section. Walking all three
+  files in
+  `specs/adcom/input/external/prebid-openrtb/adcom1/testdata/` gives 17
+  object positions and 60 attribute occurrences: 57 are named by a row of the
+  object they sit in, 3 are these, and none is an attribute no row of the
+  specification names anywhere. So a model that reads the 45 object sections
+  alone publishes a `Site` short of three attributes and rejects a payload a
+  real implementation of this specification serialises -- and every check that
+  compares such a model against itself agrees with it, since the 45 sections
+  are self-consistent. An outside payload is what settles this, and it is the
+  reason this corpus is pinned.
+
+  `emitted-schema` and `shared-part` are refused by the type rules, each for
+  the same reason: no published object inherits from another, `allOf` is not
+  used, and objects are named and referred to whole. So there is no way to
+  publish the abstract class and have `Site` extend it.
+  `shared-part` would put the four attributes one level down, under an
+  attribute of `Site`, which no payload writes: the corpus writes `id`,
+  `name`, and `pub` at the top of `site`, beside `domain` and `mobile`.
+
+  So the four rows map once each, to the abstract class, and the model writes
+  them into each of the three derived objects. `Site` then has 18 attributes,
+  `App` 18, and `Dooh` 9, each closed with its own `ext` (D-050), and nothing
+  publishes `DistributionChannel`, because the text says nothing is ever an
+  instance of it.
+
+  Attribute order follows the text, and it is the one difference between the
+  three readings that reaches a consumer. The inherited four come first, in
+  the order the abstract class's table gives them -- `id`, `name`, `pub`,
+  `content` -- then the attributes the derived section defines, in its own
+  table's order, because each of the three sentences says the derived object
+  "inherits all `DistributionChannel` attributes and adds those defined
+  below". That is the order a reader of the two tables reads in sequence, and
+  it is the order a generated class's fields take.
+
+  `pub` and `content` keep the targets their cells link, Publisher and
+  Content, so copying a row copies its link: `Site`, `App`, and `Dooh` each
+  reach the same two objects, and neither object is defined again. Nothing
+  here narrows a value: the four attributes are optional, as their rows leave
+  them -- `id` is "string; recommended" and the other three state no presence
+  -- so the choice adds four attributes to each of three objects and rejects
+  no payload the text permits. The one payload it rejects that `shared-part`
+  would take is a `site` carrying the four one level down, under an attribute
+  of its own, and no implementation writes that. The measurement above is
+  therefore the whole of the argument.
+challenge:
+  - type: Site
+    value:
+      id: "1234"
+      name: Awesome Example Site
+      domain: examplesitedomain.com
+      mobile: 1
+      pub:
+        id: "9876"
+        name: Example Publisher, Inc.
+        domain: examplepubdomain.com
+    verdict: accept
+    context: >-
+      A publisher's request context for an article page, as Prebid's own
+      AdCOM test data writes it: the distribution channel's identifier and
+      displayable name and its publisher, beside the site's domain and its
+      mobile flag.
+    reason: >-
+      `copied-rows` writes the abstract class's `id`, `name` and `pub` into
+      Site, so all five members are named under
+      `specs/adcom/schemas/modules/objects/1/objects.json#/$defs/Site/properties`
+      and `additionalProperties: false` has nothing left to refuse. Under
+      `informative` the same payload is refused, because none of `id`, `name`
+      and `pub` is a row of the Site section's own table. The value is the
+      `site` of
+      `specs/adcom/input/external/prebid-openrtb/adcom1/testdata/request-context.json`,
+      byte for byte, which is the corpus the rationale's measurement rests on.
+  - type: Site
+    value:
+      domain: examplesitedomain.com
+      mobile: 1
+      distributionchannel:
+        id: "1234"
+        name: Awesome Example Site
+        pub:
+          id: "9876"
+    verdict: reject
+    context: >-
+      An exchange that groups the inherited attributes under one member,
+      reading the abstract class as a block a derived object refers to rather
+      than as rows each derived object carries.
+    reason: >-
+      `additionalProperties: false` at `#/$defs/Site` refuses any member the
+      Site table does not name, and the name of the group is none of Site's
+      18; the verdict is the same whatever the group is called. This is the
+      one payload `shared-part` would have taken, and the corpus writes `id`,
+      `name` and `pub` at the top of `site` instead.
+  - type: Dooh
+    value:
+      id: "dooh-1"
+      name: Mall Atrium Screens
+      pub:
+        id: "9876"
+        name: Example Publisher, Inc.
+      fixed: 1
+      etime: 10
+    verdict: accept
+    context: >-
+      A digital-out-of-home seller offering mall screens, naming the
+      distribution channel and its publisher and stating that the placement
+      is fixed and each creative is exposed for ten seconds.
+    reason: >-
+      The same four rows are written into Dooh, so `id`, `name` and `pub` are
+      among its nine published members. A second of the three derived
+      objects, because the record copies the rows three times and one
+      object's verdict says nothing about the other two. `emitted-schema`
+      would take this payload as well -- it is refused by the type rules and
+      not by a value -- which is why the pair that locates the edge here is
+      this accept against the `shared-part` reject above.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1744"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1748"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1756"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1781"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1866"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1951"
+  - "specs/adcom/input/external/prebid-openrtb/adcom1/testdata/request-context.json (site.id, site.name, site.pub)"
+feedback: >-
+  State the attributes of `Site`, `App`, and `Dooh` in full, or say where in
+  each object's attribute order the inherited four sit. Today "inherits all
+  `DistributionChannel` attributes and adds those defined below" is the whole
+  of the instruction, so an implementation that reads the attribute tables
+  builds a `Site` with no `id`, `name`, `pub`, or `content`, while a real
+  payload of a `Site` carries three of those four. Say also whether an
+  abstract class may ever be sent: the note says it is never instantiated,
+  and nothing in the attribute tables marks the one section that is abstract,
+  so a generator that reads the tables cannot tell it from the 45 objects.

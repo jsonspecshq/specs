@@ -1,0 +1,22 @@
+# The disagreements the Deals API's fidelity gate (gates/fidelity.ts) expects,
+# each group under the open task that removes them. The gate fails on a
+# disagreement listed nowhere, on a listed one whose detail changed, and on a
+# listed one that no longer occurs, so the task that fixes the model removes
+# its entries. This file is an exemption: changing it changes the gate's
+# fingerprint, which a gate decision must accept.
+#
+# The file is keyed per spec, so one specification's exemptions never excuse
+# another's. The Deals API expects none: its readers
+# (src/specs/dealsapi/fidelity-readers.ts) read the presence, the type, the
+# default, the empty-list meaning and the listed codes of every attribute row
+# from the IR alone, and the schemas the model emits state each of them.
+format: 1
+groups: []
+# Constraints the schema can't state, left to a rule. The gate passes such an
+# invalid vector only when the listed rule applies to an object on the
+# constraint's path and gives an invalid vector the constraint rules out, and
+# fails an entry that no longer disagrees. The Deals API leaves none: the three
+# rules its text states -- the guidance's -- are checks over a whole deal
+# rather than constraints on one member, so no constraint this file's readers
+# produce is left to one.
+ruled: []

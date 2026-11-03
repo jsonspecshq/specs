@@ -1,0 +1,21 @@
+format: 2
+id: D-047
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_playbackmethods:9
+value: INITIATED_BY_CONTENT_PAUSE_SOUND_OFF
+rule_would_give: INITIATED_BY_USER_PAUSING_CONTENT_SOUND_OFF
+reading: D-037
+covers:
+  - ir: def:list_playbackmethods:9
+    digest: f34ce6c039a5c5285f17cb7fe57953ba60a65bb0fd890fdc627e5c2ed068d1e1
+    quote: "`9` | Initiated by user pausing content, Sound off"
+reason: >-
+  Codes 10 and 11 of List: Playback Methods are INITIATED_BY_IDLING, so what
+  follows "initiated by" in this list is the event, and D-037 names code 9's
+  event as one: the content pauses, at 36 characters. What is paused stays,
+  because the ad is what plays and the content is what stopped; who paused
+  it goes, since nothing but a user pauses content and the row says so where
+  a reader can read it.

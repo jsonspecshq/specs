@@ -1,0 +1,18 @@
+format: 2
+id: D-035
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_creativeattributes:10
+value: Shaky, Flashing, or Extreme Animation
+reading: D-023
+covers:
+  - ir: def:list_creativeattributes:10
+    digest: 4a8d97753380014578856e65fa63e88266cc83b79b02a3cf2c579512089a0165
+    quote: "`10` | Shaky, Flashing, Flickering, Extreme Animation, Smileys"
+reason: >-
+  The row lists five kinds of motion and a name can't hold them all, so
+  D-023 keeps three, reading Flickering as close to Flashing, and
+  leaves Smileys, the one term that names no kind of motion, to the
+  description, which keeps the whole row.

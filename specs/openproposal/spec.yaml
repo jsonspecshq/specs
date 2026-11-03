@@ -1,0 +1,51 @@
+# The OpenProposal profile (formats/spec.schema.json): how the pipeline reads
+# OpenProposal 3.0 and what it produces from it. The readers are in
+# src/specs/openproposal/. It is the first specification in this tree of the
+# numbered-section family (docs/architecture/pipeline-architecture.md § 2): its
+# headings carry numbers rather than anchors, its field tables are
+# `Field | Type | Mutability | Description`, and it writes its RFC 2119
+# keywords in capitals.
+format: 1
+id: openproposal
+title: OpenProposal 3.0
+upstream: https://github.com/IABTechLab/OpenProposal
+front_end: text
+plugin: openproposal
+# The last stage this specification has reached. It arrives one hook at a
+# time: this is its pinned text, its extracted IR, its kernel binding and its
+# mapping, so its folder holds `input/`, `ir/`, `kernel-binding.yaml` and
+# `model/`, and no later stage's jobs are built for it. The schemas, the
+# rules and the outputs follow, each advancing this line.
+through: model
+# § 4 describes the proposal and § 5 the line item.
+documents:
+  - { owner: proposal, document: Proposal, section: "4" }
+  - { owner: line_item, document: LineItem, section: "5" }
+# The text states the RFC 2119 convention and writes its keywords in capitals,
+# so a lowercase "must" is prose and states no requirement.
+statements: uppercase
+features:
+  # The field rows carry a Mutability marker, which no other specification in
+  # this tree has, and the plugin lists the eight the text may write.
+  markers: true
+  # Appendix A restates every field row and Appendix B the marker counts, so
+  # the lint checks each against the body it claims to index.
+  appendices: true
+  # § 2.1's Summary Representation states what a manifest entry carries of a
+  # proposal, which the mapping writes as six entries of role `profile`.
+  profiles: true
+# The registry whose code lists the text cites, at the lock its links pin:
+# AdCOM's lists at main, 26c59ba (src/imports.ts). § 5.2.2 maps a placement's
+# keys onto AdCOM's Plcmt Subtypes - Video, Playback Methods and API
+# Frameworks, so those three vocabularies are the registry's and not a copy.
+imports:
+  - { spec: adcom, lock: main }
+# The names the outputs carry: the name in prose, the edition people name it
+# by, the draft the default lock pins, and the base of every schema's `$id`,
+# which sits on the multi-spec hub where every spec's $ids sit. It has no SDK
+# types and no proto target yet.
+names:
+  short: OpenProposal
+  edition: "3.0"
+  release: draft 1
+  schema_base: "https://jsonspecs.com/openproposal/"

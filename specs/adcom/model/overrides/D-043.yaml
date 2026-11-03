@@ -1,0 +1,22 @@
+format: 2
+id: D-043
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_playbackcessationmodes:3
+value: ON_LEAVING_VIEWPORT_CONTINUES_FLOATING
+rule_would_give: ON_LEAVING_VIEWPORT_CONTINUES_AS_FLOATING_UNIT
+reading: D-037
+covers:
+  - ir: def:list_playbackcessationmodes:3
+    digest: 0e9953ee45b8b8eb18cbd777c8503dd9d64067512626e639ec8b1d8cb35b7b78
+    quote: "`3` | On Leaving Viewport Continues as a Floating/Slider Unit until Video Completion or when Terminated by User"
+reason: >-
+  D-024 already cut this row to the title D-036 sets, and the rule's name
+  from that title still runs to 46 characters, so D-037 drops the two words
+  that carry nothing once the verb is there, "as" and "unit", leaving 38.
+  The name differs from the title in just that: the title is a line a reader
+  sees and keeps the noun, and the name says what the title says — on
+  leaving the viewport, playback continues floating — in the words a
+  constant has room for.

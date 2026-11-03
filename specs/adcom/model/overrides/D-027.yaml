@@ -1,0 +1,18 @@
+format: 2
+id: D-027
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_playbackmethods:1
+value: Initiates Automatically with Sound On
+reading: D-020
+covers:
+  - ir: def:list_playbackmethods:1
+    digest: e9bffcb505edad849ce580d8c2968b6fce9351455def9d23d5320c43d385ce11
+    quote: "`1` | Initiates without any specific user interaction with Sound On"
+reason: >-
+  The row runs past the length a name can have, and a cut would drop
+  its last words, the sound, so D-020 keeps the trigger and the sound
+  in the form code 3 already has, with "Automatically" restating
+  "without any specific user interaction".

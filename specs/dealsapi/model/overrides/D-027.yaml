@@ -1,0 +1,91 @@
+format: 2
+id: D-027
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Which AdCOM list do `devicetype` and `cattax` take, when the text links List: Device Type and List: Category Taxonomies on AdCOM's `main`?"
+covers:
+  - ir: field:object-inventory:devicetype
+    digest: f28b832f472525a0929387afa28ef897954d5378eb463912610e0ae4d07d9b49
+    quote: "`devicetype` | integer array | The general type of device. Refer to List: Device Type in AdCOM 1.0"
+  - ir: field:object-inventory:cattax
+    digest: ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e
+    quote: "`cattax` | integer | The taxonomy in use for the cat attribute. Refer to List: Category Taxonomies."
+options:
+  - id: pinned-registry
+    summary: >-
+      AdCOM 1.0's List: Device Types and List: Category Taxonomies, at the
+      commit this site's registry pins, by reference to the registry's
+      lists, so the schema copies none of their codes.
+  - id: latest
+    summary: >-
+      Whatever AdCOM's `main` holds when the deal is read, as the links
+      point.
+chosen: pinned-registry
+rationale: >-
+  The links point at AdCOM's `main`, which changes inside 1.0, so the codes
+  a deal may send would move with it. The schema takes both lists from the
+  registry at its pinned commit, by reference, and the link's "Device Type"
+  names the list AdCOM titles Device Types, whose anchor it links.
+challenge:
+  - type: Inventory
+    value:
+      cattax: 99
+    verdict: reject
+    context: >-
+      A curator whose own content taxonomy is the ninety-ninth in its
+      internal list, sent as the taxonomy in use for `cat`.
+    reason: >-
+      Taking the list from the pinned registry closes `cattax` to the nine
+      codes AdCOM 1.0 states and to the vendor range the list reserves from
+      500 up, so 99 matches no branch of the `oneOf` and no minimum. Under
+      the option `latest` it would be rejected today and accepted the day
+      AdCOM's `main` numbered a ninety-ninth taxonomy, which is the
+      instability the record is about.
+  - type: Inventory
+    value:
+      cattax: 500
+    verdict: accept
+    context: >-
+      The same curator using the range the list reserves for a vendor's own
+      taxonomy instead of a number of its own choosing.
+    reason: >-
+      List: Category Taxonomies reserves 500 and above for vendors, so the
+      registry's vocabulary is open to exactly those and the pinned reading
+      keeps them. This is where a curator's own taxonomy belongs, and it is
+      the accept the rejected 99 is owed.
+  - type: Inventory
+    value:
+      devicetype:
+        - 8
+    verdict: accept
+    context: >-
+      A digital-out-of-home seller offering screens, which is the party
+      `D-005` of AdCOM was wrong about and so the context a second example
+      is worth drawing from.
+    reason: >-
+      Code 8, OOH Device, is in List: Device Types at the commit the registry
+      pins, so pinning the list does not cost the out-of-home seller its own
+      device type. A reading pinned to a commit can only narrow by leaving a
+      code out, and this is the check that it left none of them out.
+  - type: Inventory
+    value:
+      devicetype:
+        - 99
+    verdict: reject
+    context: >-
+      A buying platform that numbers an in-car screen 99 in its own device
+      table and sends that number through.
+    reason: >-
+      99 is no code of List: Device Types and the list reserves no vendor
+      range, so every branch of the `oneOf` refuses it. What the record costs
+      a sender is exactly this: a device type AdCOM has not numbered has
+      nowhere to go.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L127"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_devicetypes"
+feedback: >-
+  Link AdCOM at a release or a commit, so a deal's `devicetype` and `cattax`
+  codes don't change when AdCOM's `main` does; and write the list's title,
+  "List: Device Types".

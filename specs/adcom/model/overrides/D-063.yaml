@@ -1,0 +1,231 @@
+format: 2
+id: D-063
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Four attribute rows open their definition cell with \"Timestamp of\" and state a bare `integer`, and the mapping types them `Count`, which publishes a lower bound of 0, an ordering and a maximum. Which value domain is a point in time written as milliseconds since the Unix epoch a value of?"
+covers:
+  - ir: key:object_ad:Ad.init
+    digest: 10848abff390e3678c5b540d0374e1e94fdbc6ced1e75fa7742ded3c6c1929ef
+    quote: "`init` | Timestamp of the original instantiation of this ad (i.e., this object or any of its children) in Unix format (i.e., milliseconds since the epoch)."
+  - ir: key:object_ad:Ad.lastmod
+    digest: e6440c92c82d87c6dc58c981867a36bc21b5ff5724c1d9b1515e655fd3ace100
+    quote: "`lastmod` | Timestamp of most recent modification to this ad (i.e., this object or any of its children other than the `Audit` object) in Unix format (i.e., milliseconds since the epoch)."
+  - ir: key:object_audit:Audit.init
+    digest: 90bf50c81f1fb0681f0b74c54573c14eb308ddb7132c7d00c820422ed5d9806e
+    quote: "`init` | Timestamp of the original instantiation of this object in Unix format (i.e., milliseconds since the epoch)."
+  - ir: key:object_audit:Audit.lastmod
+    digest: f180d0ea7677636e9d7d5f93d53e8f29e42113e4148ba8a57f04ed1ac2f9f37c
+    quote: "`lastmod` | Timestamp of most recent modification to this object in Unix format (i.e., milliseconds since the epoch)."
+  - ir: key:object_geo:Geo.utcoffset
+    digest: e55cd0b7227c584a94b60ad4b427a3ef32cd313df26f5eaa8300fb683cf475af
+    quote: "`utcoffset` | Local time as the number +/- of minutes from UTC."
+options:
+  - id: count-concept
+    summary: >-
+      The four rows stay values of the `count` concept, which is what the
+      bare-type rule gives them and what the kernel binding cited, and nothing
+      states what that costs. The published type keeps `minimum: 0`, so a
+      millisecond timestamp before 1970 is refused by a bound AdCOM never
+      wrote, and the rows sit in a domain whose own description reads "numbers
+      of things, which add up, never negative".
+  - id: count-with-the-cost-stated
+    summary: >-
+      The four rows stay values of the `count` concept, and what the concept
+      adds beyond the rows' own words is stated as a value a check reads, as
+      `D-062` states `podid`'s `-1`. Nothing published moves, and the domain
+      model is still the model in which a point in time cannot be an integer.
+  - id: instant-concept
+    summary: >-
+      The four rows are values of the kernel's existing `instant` concept,
+      whose type is `Timestamp`, an RFC 3339 date-time string. It reads the
+      rows' first word and ignores the rest of the cell, so it refuses every
+      payload anyone sends today, and the rows state an integer.
+  - id: epoch-instant-concept
+    summary: >-
+      The domain model gains a concept for a point in time written as a whole
+      number of milliseconds since the Unix epoch, the kernel gains the one
+      type that represents it, `EpochMilliseconds`, a signed integer within
+      the I-JSON range, and the four rows are bound to it. It is the reading
+      the rows' own words give, and it moves published bytes: four properties
+      on both locks, the kernel document each lock publishes, the four
+      citations the `count` concept carried, and the provenance of the values
+      that move.
+  - id: bare-integer
+    summary: >-
+      The four rows take the JSON type their Type cell names and nothing more,
+      `type: integer`, with the words "milliseconds since the epoch" left in
+      the description. No bound is published, so nothing is refused that the
+      text does not refuse, and nothing names what the value means either, so
+      a consumer cannot tell the four rows from any other integer and the
+      value is checked only for being whole.
+chosen: epoch-instant-concept
+rationale: >-
+  Re-derived 2026-11-03 against the committed mapping and both locks'
+  committed `spec-ir.json`, reading each row's `type_states` and the type its
+  mapping entry gives it. Five rows were measured, the four this record moves
+  and the one that was already right.
+
+  `Ad.init`, `Ad.lastmod`, `Audit.init` and `Audit.lastmod` each state a bare
+  `integer` in their Type cell, cite no code list, name no object, and open
+  their definition cell with "Timestamp of". Each was typed
+  `kernel/1/kernel.json#/$defs/Count`, "A whole number of things, never
+  negative and at most 2^53 - 1", which is
+  `{ type: integer, minimum: 0, maximum: 9007199254740991 }`, by the mapping
+  rule `domain-row` and the `count` citation in AdCOM's kernel binding.
+  `Geo.utcoffset` states a bare `integer` too and is typed `MinuteOffset`,
+  `{ type: integer }` with no bound, which is right and is the control: that
+  row says "the number +/- of minutes from UTC", and the one time primitive
+  AdCOM reached before this record is the one its words name.
+
+  Why `count` is the wrong concept, in three measurements rather than in an
+  adjective. First, the bound: `Count` states `minimum: 0` and the rows say
+  "Unix format (i.e., milliseconds since the epoch)", which is a signed count
+  of milliseconds in every system that writes one, so a payload whose instant
+  is before 1970-01-01 is refused by a bound AdCOM never wrote. Second, the
+  processing: the domain model's own test for a concept is that its values
+  validate differently or are processed differently, and a receiver adds two
+  counts of the same thing and compares two instants as instants. Third, the
+  domain: `count` sits under `quantity`, whose description reads "Numbers of
+  things, which add up, never negative", and a timestamp is not a number of
+  things and does not add up — so the binding filed four rows under a domain
+  whose one-line description denies them.
+
+  Why a new concept and a new primitive rather than the nearest one that fits.
+  The kernel's census, measured on `kernel/primitives.yaml` before this
+  record: 29 primitives, of which 6 are integers — `Count`, `IntegerFlag`,
+  `MinuteOffset`, `ExtendedDuration`, `VendorCode` and `MediaOffset` — and
+  none of the six is a point in time. The `time` domain held 7 concepts over 8
+  primitives, and the three that are a point in time or a part of one are
+  strings: `Timestamp` is "an RFC 3339 date-time with a UTC offset",
+  `UtcTimestamp` is the same "whose offset is zero", and `TimeOfDay` is
+  `HH:MM`. So the kernel had a concept whose meaning fits these rows exactly,
+  `instant`, and no type for it that an integer can be: one concept has one
+  type, and `instant`'s is a string. A concept of its own is the only way the
+  domain model can hold both spellings, and the kernel already makes exactly
+  this distinction once — `utc-instant` exists beside `instant` because a
+  specification that says its timestamps are UTC writes a point in time that
+  validates differently. A third spelling is the second time the same
+  distinction is made, not a new kind of move.
+
+  Why the new primitive is not a fifth name for `Count`'s structure, which is
+  what `D-055` refused this reading for. `D-055`'s sentence is "a concept of
+  its own would need a primitive whose structure is `Count`'s exactly", and
+  that is true only of a primitive that copies `Count`'s `minimum: 0`.
+  `EpochMilliseconds` is `{ type: integer, minimum: -9007199254740991,
+  maximum: 9007199254740991 }`: signed, because the text's "milliseconds since
+  the epoch" leaves the sign open, and bounded symmetrically by the integers
+  an I-JSON receiver reads exactly, which is the same RFC 7493 clause `Count`
+  and `MediaOffset` already cite for their own maximum. Measured against every
+  integer primitive the kernel now holds — `Count` and `MediaOffset`
+  (`minimum: 0`), `IntegerFlag` (two titled codes), `MinuteOffset` (no
+  constraint), `ExtendedDuration` (`minimum: -1`) and `VendorCode`
+  (`minimum: 500`) — that structure is shared with none of them, so the
+  duplication gate needs no new shared-structure entry and none is written.
+  Leaving the type unconstrained, which would have been the other honest
+  reading, is what *would* have made it a twin: of `MinuteOffset`, with which
+  a point in time shares nothing a receiver does.
+
+  What the four rejected options cost. `count-concept` is the state this
+  record found and it states nothing at all, which is the defect rather than
+  an option. `count-with-the-cost-stated` is `D-062`'s reading applied here,
+  and it is the right answer for `podid` and the wrong one here: `podid`'s row
+  says "Unique identifier" and the kernel has no integer identifier concept to
+  move it to, so stating the cost is all a record can do without deciding a
+  question about the kernel; these four rows name a kind the kernel's own
+  domain model already lists, `instant`, under the `time` domain, and the only
+  thing missing is its integer spelling. Recording the cost of a concept the
+  domain model can be made to hold correctly is a note where a reading is
+  owed. `instant-concept` refuses every payload anyone sends — measured
+  against the kernel's `Timestamp` constraint set, `1793664000000` is refused
+  by `type`, "must be string" — and contradicts AdCOM's own Type cell, which
+  is why no AdCOM lock publishes `Timestamp` at all.
+  `bare-integer` publishes no bound and no name, so the
+  four rows become indistinguishable from the 61 rows that really are counts,
+  and the type rules put a value's meaning in a named type and not in prose.
+
+  What this record does to `D-055`, and what it does not. `D-055` reads 241
+  bare-typed rows into nine concepts and its chosen option is
+  `by-domain-concept`: "each row's value is of the one concept of
+  `kernel/domains.yaml` whose meaning the row's own words state". This record
+  keeps that choice and applies it to four rows it could not reach, because on
+  the day it was written the domain model had no concept whose meaning those
+  words state. So `D-055` is **narrowed, not superseded**: it stands, its
+  chosen option stands, 237 of its 241 rows are untouched, and the four it
+  named as "the four rows this reading is least sure of, named so a reviewer
+  can attack them rather than find them" are the four this record moves. That
+  paragraph is the attack landing, which is what naming a weak reading is for.
+  Superseding `D-055` would withdraw the reading of 237 rows nothing is wrong
+  with; amending it in place is forbidden, since a pushed record is
+  append-only. `D-055` keeps `Ad.init` among its covers, which two records may
+  rest on, and its rationale keeps the figure it measured: the `count` concept
+  cited 65 rows when `D-055` was written and cites 61 now, and the four that
+  left are these.
+
+  What the choice costs. Three things, each measured. The published schemas on
+  both locks change what they accept at four properties: an instant before
+  1970 is taken where it was refused, which is the correction, and nothing
+  that was accepted is refused — `EpochMilliseconds` is strictly wider than
+  `Count` over the integers. A frozen release would make that a breaking
+  change in the other direction for a consumer who had narrowed its own reader
+  to non-negative integers; nothing is frozen in this slice, so the cost is
+  recorded rather than waived. The kernel grows by one primitive and one
+  concept — 30 primitives over 32 concepts, 7 of the primitives integers and
+  the `time` domain's concepts 8 — and every specification's binding has to
+  say something about the new one: AdCOM binds it with the four rows, and the
+  Deals API's and OpenProposal's bindings mark it `absent: true`, each with
+  the one-line reason that every point in time either text writes is an
+  ISO-8601 string. And the `maximum` this record publishes refuses
+  `9007199254740992`, which the rows themselves leave open; that is the one
+  value the chosen reading refuses and `bare-integer` would have taken, and it
+  is stated below as a value rather than as this sentence.
+
+  The reading this record is least sure of, named so a reviewer can attack it
+  rather than find it: the symmetric I-JSON bound. The text states no bound at
+  all, so `bare-integer` is right that any bound is this repository's and not
+  AdCOM's. It is published anyway for the reason `Count` publishes its own —
+  an integer outside ±(2^53 − 1) does not survive a JSON reader that holds
+  numbers as doubles, which a millisecond timestamp is more exposed to than a
+  count of impressions is — and the two bounds stand or fall together, so a
+  reviewer who refuses this one is refusing `Count`'s maximum too.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_ad"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_audit"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_geo"
+feedback: >-
+  Four rows of the object tables — `Ad`'s `init` and `lastmod` and `Audit`'s
+  `init` and `lastmod` — give their Type as an integer and describe the value
+  as "Timestamp of ... in Unix format (i.e., milliseconds since the epoch)".
+  Two things a machine-readable form has to decide are not in the rows. The
+  first is the sign: "milliseconds since the epoch" is a signed quantity in
+  the systems that produce it, and nothing says whether a sender may write an
+  instant before 1970-01-01, which matters for an ad record imported from an
+  older system with a zeroed or defaulted date. The second is the unit, which
+  the rows do state and which the surrounding tables do not state for any
+  other time value: `Geo`'s `utcoffset` is in minutes, several durations are
+  in seconds, and these four are in milliseconds, so a reader has to check the
+  unit per row. Stating the permitted range beside these four, and saying in
+  the same place that every other time-valued attribute is in seconds or
+  minutes, would settle both.
+challenge:
+  - type: EpochMilliseconds
+    value: -86400000
+    verdict: accept
+    context: An ad server importing a creative library from a legacy system that recorded no creation date and exported the day before the epoch, so the ad's `init` is one day before 1970-01-01.
+    reason: Taken, because the type states no lower bound of 0. This is the value the whole record is about — the published `Count` refused it by `minimum`, and the rows say "milliseconds since the epoch" without putting a sign on it.
+  - type: EpochMilliseconds
+    value: 1793664000000
+    verdict: accept
+    context: An ad server stamping `init` with the ordinary wall clock, 2026-11-03T00:00:00Z in milliseconds, which is what every sender in the wild writes.
+    reason: Taken, because a positive whole number within the range satisfies `type`, `minimum` and `maximum` alike, so the retyping keeps every payload anyone sends today.
+  - type: EpochMilliseconds
+    value: 9007199254740992
+    verdict: reject
+    context: A publisher's pipeline that stamps `lastmod` in microseconds instead of milliseconds, which pushes a present-day instant past the integers a JSON reader holding numbers as doubles can read exactly.
+    reason: Refused by `maximum`, which this record states and the row does not. It is the one value the chosen reading refuses that the `bare-integer` option would have taken, and it is published for the reason `Count`'s own maximum is.
+  - type: EpochMilliseconds
+    value: "1793664000000"
+    verdict: reject
+    context: A tag server that serialises every field as a string, so the timestamp arrives quoted, which is how a JavaScript sender that has been through a URL query usually writes it.
+    reason: Refused by `type`, and this refusal is AdCOM's own rather than this record's, since the row states its Type as an integer and the string is out whichever concept the value belongs to.

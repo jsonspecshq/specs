@@ -1,0 +1,81 @@
+---
+title: Deals API 1.0 as JSON Schema, unofficial
+description: An unofficial JSON Schema for the Deals API 1.0, the Deal Sync API, generated from the specification text by Postindustria, an IAB Tech Lab member.
+---
+{/*
+  The Deals API's landing page, in its own words. Moved from the predecessor's
+  `landingPage` (`src/specs/dealsapi/site.ts:59-127`) with every word in its
+  place, except where a sentence was a branch on a count that MDX cannot write
+  and the generic components now carry:
+
+   - The three stat tiles' figures are `<Stat>`, so a rebuild moves them. The
+     predecessor branched on `f.departures === 1` in four places to choose
+     between "change we propose" and "changes we propose"; that is `unit`,
+     which renders through `plural`, so the wording is the data's.
+   - **The example-rows tile's clause is not ported, and that is a
+     difference.** The predecessor read the example findings report and wrote
+     either "every one validates in both variants" or "they fail in N places
+     as written"; the bundle publishes `exampleRows` and no per-variant place
+     count, so the sentence here states the figure and names the gate that
+     holds it instead of a count nothing in the bundle answers. A sentence
+     whose subject the bundle does not hold is the silent-blank this
+     repository keeps meeting.
+   - **The proposals table is not ported.** The predecessor built it from the
+     example report's `switches`, which this repository's bundle has no
+     counterpart for; the one proposal has its own decision page, which the
+     paragraph links. A table rendered from a key the bundle does not hold
+     would fail the build, and a table written out by hand would be a reading
+     typed into prose.
+   - `<EnumDrift />` is **not** written here: no artifact outside this
+     repository defines enums for the Deals API, so it has no drift report,
+     and that component throws rather than rendering a hole.
+
+  Every figure is read from the bundle through <Stat>, and every record and
+  type the prose names is read by a component that refuses a name the bundle
+  does not hold, so a stale citation stops the build.
+*/}
+<section class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">Unofficial · Not an IAB Tech Lab artifact</p>
+    <h1>Deals&nbsp;API&nbsp;<Stat of="brand.edition" />, generated as JSON&nbsp;Schema</h1>
+    <p class="lede">An unofficial JSON Schema for the Deals API <Stat of="brand.edition" />, the Deal Sync API, <Stat of="brand.release" />, generated from the specification text by Postindustria, an IAB Tech Lab member. The specification remains the reference: where this site and the text differ, the text wins.</p>
+    <p class="actions"><a class="button primary" href="map.html">Open the type map</a><a class="button" href="how-it-is-built.html">How it's built</a><a class="button" href="downloads.html">Get the schema files</a><a class="button" href="decisions/index.html">Read the decisions</a></p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What generating it took</h2>
+    <p>A pipeline reads the specification's markdown and, through a mapping of every attribute row, code list and statement to a type, generates the JSON Schema 2020-12 files and the rules JSON Schema can't express, each with test vectors. The mapping and the <Stat of="decisions" /> decisions are recorded by hand, each with the lines of the text it rests on. <a href="how-it-is-built.html">How it's built</a> explains each step.</p>
+    <div class="stats">
+      <div class="stat gap"><span class="num"><Stat of="gaps" /></span><span class="what">open points filled</span><span class="why">Where the text leaves a point open, a decision fills it, the same way in both variants: how a timestamp is written, what <code>recommended</code> asks, which field "Price attribute" names.</span></div>
+      <div class="stat prop"><span class="num"><Stat of="departures" /></span><span class="what"><Stat of="departures" unit="change we propose" /></span><span class="why">Where the text settles a point and we would write it differently. You can switch it off.</span></div>
+      <div class="stat ex"><span class="num"><Stat of="exampleRows" /></span><span class="what">example rows checked</span><span class="why">The Example Scenarios table's rows are parts of a deal, and each is validated against the schemas and the rules it claims a type of.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap two">
+  <div>
+    <h2>What the schemas cover</h2>
+    <p>Two documents: <TypeLink of="Deal" />, the push body, and <TypeLink of="BuyerSeat" />, the status response. Each other object an attribute holds is a closed object of its own, and every object's <code>ext</code> is <TypeLink of="Ext" />, open to the parties' extensions (<Decision of="D-021" />). The text's own code lists are <Stat of="own" unit="vocabulary" />, each code with the label the text gives it, and <TypeLink of="DeviceType" /> and <TypeLink of="CategoryTaxonomy" /> take AdCOM <Stat of="brand.edition" />'s lists from <a href="../adcom/registry.html">the registry on this site</a>, at the commit it pins (<Decision of="D-027" />).</p>
+    <h2>What they leave out</h2>
+    <p>The text defines no paths, no request body for the status call, no response codes and no authorization, so there is no OpenAPI here: the schemas cover the two payloads (<Decision of="D-025" />). Duties that no payload shows, such as a buyer validating bid requests against the deal, are <Stat of="obligations" unit="obligation" /> of the party they name, not schema keywords.</p>
+  </div>
+  <div>
+    <h2>How to read the two switches</h2>
+    <div class="switch-card">
+      <h3>Input</h3>
+      <p><strong>main</strong> is the text on the Deals API's <code>main</code> branch, with the errata applied after the tag. <strong>Tag 1.0-202602</strong> is the text at the tag, where <code>sellerstatus</code> gives the code 4 twice (<Decision of="D-010" />).</p>
+    </div>
+    <div class="switch-card">
+      <h3>Variant</h3>
+      <p><strong>As written</strong> switches our proposal off, so the field it changes takes the form the text writes. <strong>With our proposals</strong> switches it on. In both, the <Stat of="gaps" /> open points stay filled by their decisions.</p>
+    </div>
+    <h2>The change we propose</h2>
+    <p><Decision of="D-004" /> reads <code>countries</code> as ISO 3166-1 alpha-3, not the ISO-3166-3 the row names: ISO 3166-3 holds the codes of countries that no longer exist, so a deal "available" in them can run nowhere. Its own page states the value the schema takes and the value it refuses.</p>
+    <h2>Inputs</h2>
+    <Inputs />
+    <p>The two inputs differ in one code list, <code>sellerstatus</code>, and in a spelling. The lock comparison classes each schema change as breaking, additive or an annotation.</p>
+  </div>
+</section>

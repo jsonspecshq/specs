@@ -1,0 +1,289 @@
+format: 2
+id: D-052
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Five attribute rows state the type `object` and name no object anywhere in the row. What does each hold?"
+covers:
+  - ir: key:object_content:Content.producer
+    digest: 88212fa67fef1c4a6da3f31e25027d6ae9803feafc53835245786e26554e0d6b
+    quote: "`producer` | Details about the content `Producer` (Section 3.2.17)."
+  - ir: key:object_content:Content.network
+    digest: 308af3095d29b6bdbf32d84d62f674d1b048a309a13e736be5f643c44f3833b3
+    quote: "`network` | Details about the network (Section 3.2.23) the content is on."
+  - ir: key:object_content:Content.channel
+    digest: 28d6a4a7acd20d8a4407c83e061ebafbb4e2e7a987ce64470969c9e7bf69c1fe
+    quote: "`channel` | Details about the channel (Section 3.2.24) the content is on."
+  - ir: key:object_content:Content.data
+    digest: 7e8f978757d15282de4a77f52c669ad72622fd66e42e31042ab8078efe336e00
+    quote: "`data` | Additional content data. Each `Data` object (Section 3.2.21) represents a different data source."
+  - ir: key:object_audit:Audit.corr
+    digest: 370bcdb594ec09838455f0617dc85cc5ae879472ecc67b2e039059b3c4a3bdfd
+    quote: "`corr` | Correction object wherein the auditor can specify changes to attributes of the `Ad` object or its children they believe to be proper. For example, if the original `Ad` indicated a category of “IAB3”, but the auditor deems the correct category to be “IAB13”, then `corr` could include a sparse `Ad` object including just the `cat` array indicating “IAB13”."
+  - ir: key:object_producer:Producer.id
+    digest: 1f4fd8cc1ab4ea4f1eda9ef8033de2a98c6e8ac7dbe3954be09dc86bb5e30110
+    quote: "`id` | Vendor-specific unique producer identifier. Useful if content is syndicated and may be posted on a site using embed tags."
+  - ir: key:object_network:Network.id
+    digest: 59d6cc7f972a4fc16d67df929d24518768034147519ff5d91180060cf59a674c
+    quote: "`id` | A unique identifier assigned by the publisher. This may not be a unique identifier across all supply sources."
+  - ir: key:object_channel:Channel.id
+    digest: 59d6cc7f972a4fc16d67df929d24518768034147519ff5d91180060cf59a674c
+    quote: "`id` | A unique identifier assigned by the publisher. This may not be a unique identifier across all supply sources."
+  - ir: key:object_data:Data.id
+    digest: 2482ca489574239c0c7fd885195471d1ed424e2a8a6eb22f664ce548bb9f4820
+    quote: "`id` | Vendor-specific ID for the data provider."
+  - ir: key:object_user:User.data
+    digest: 2a4df60d9b344beafc02db8c9bae76cd8e2f0c88f21d035bcd479296ba46a4ef
+    quote: "`data` | Additional user data. Each `Data` object represents a different data source. Refer to Object: Data."
+  - ir: key:object_ad:Ad.id
+    digest: c91212e637bf4a9042b519fb7a02592147d4222d58f6a4d20ab052b0f540a60d
+    quote: "`id` | ID of the creative; unique at least throughout the scope of a vendor (e.g., an exchange or buying platform). Note that multiple instances of the same ad when used in transactions must have the same ID."
+  - ir: key:object_ad:Ad.display
+    digest: 2806d3cda429ef3f3500d6b0b12c02d7a9231e5712d25dc63be208dbf7079134
+    quote: "`display` | Media Subtype Object that indicates this is a display ad and provides additional detail as such. Refer to Object: Display. * Required if no other media subtype object is specified."
+  - ir: key:object_ad:Ad.video
+    digest: 372324f3cad4bb830db034ad76e191a6718e4954a15de0b27704cbf87476906a
+    quote: "`video` | Media Subtype Object that indicates this is a video ad and provides additional detail as such. Refer to Object: Video. * Required if no other media subtype object is specified."
+  - ir: key:object_ad:Ad.audio
+    digest: f806334e00c1317058573d9ca04304dbd282447ffac49fd47f3acb484be6fe6e
+    quote: "`audio` | Media Subtype Object that indicates this is an audio ad and provides additional detail as such. Refer to Object: Audio. * Required if no other media subtype object is specified."
+options:
+  - id: by-name-else-open
+    summary: >-
+      Where the attribute's name is an object the specification defines, the
+      attribute holds that object: `producer` a Producer, `network` a
+      Network, `channel` a Channel, and `data` an array of Data. Where it is
+      not, the attribute holds an object of any members, so `corr` stays as
+      unstated as the text leaves it.
+  - id: open-all-five
+    summary: >-
+      All five hold an object of any members, so a `producer` is not checked
+      against the Producer table and nothing reaches Producer, Network,
+      Channel, or Data from Content.
+  - id: unmapped
+    summary: >-
+      The five attributes are left out, since no row says what they hold, so
+      a payload that writes one is rejected.
+  - id: corr-as-ad
+    summary: >-
+      The four as above, and `corr` holds an Ad, which its definition names
+      three times.
+chosen: by-name-else-open
+rationale: >-
+  Measured on both locks: 91 attribute rows carry an object. 45 are each
+  object's `ext` (D-050), one is `Event.cdata` (D-051), and 40 name the
+  object they hold -- 37 as a link in the definition cell to the target's
+  section, and 3 in the Type cell itself, "UserAgent object", "BrandVersion
+  object", and "array of BrandVersion objects". The five this record covers
+  are what is left. Naming the target is the rule in this text and these five
+  are the exception, which is why a reviewed reading settles them and not a
+  rule of the pipeline.
+
+  What each row does give. `Content.producer`'s definition cell writes
+  `Producer` in a code span and `Content.data`'s writes `Data`; the
+  specification heads a table Object: Producer at line 2074 and Object: Data
+  at line 2576, so for those two the target is named in the row, just not
+  linked. `Content.network` and `Content.channel` name no object at all:
+  their cells read "the network" and "the channel", in lower case, and the
+  only thing that matches Object: Network at line 2116 and Object: Channel at
+  line 2148 is the attribute's own name. All four cells cite a section number
+  -- "(Section 3.2.17)", "(Section 3.2.21)", "(Section 3.2.23)", "(Section
+  3.2.24)" -- and the pinned text numbers no heading, so each citation
+  resolves to nothing a reader can follow. Reading a target off an
+  attribute's name is an inference and not a derivation, which is what this
+  record is for, and the inference is strictly needed for two of the four.
+
+  Why the inference holds. Producer has 6 attribute rows, Network 4, Channel
+  4, and Data 5 -- the `id` row of each is quoted above, so the reading rests
+  on text and not on a table of names -- and in each case the matching object
+  is the only object of the specification whose name matches the attribute.
+  Each definition reads
+  as that object and as nothing else: "Details about the content `Producer`",
+  "Details about the network the content is on", "Details about the channel
+  the content is on", and "Each `Data` object represents a different data
+  source". `User.data`, which links Object: Data, is the same relationship
+  stated the usual way, so the four are the usual relationship stated
+  carelessly rather than a different one. None of the four appears in the one
+  corpus of payloads this repository did not write, so nothing outside the
+  text tests them; the inference rests on the text alone and this record says
+  so plainly.
+
+  `Audit.corr` is a different decision, and the answer is not `Ad`. Its name
+  matches no object the specification defines. Its definition names `Ad`
+  three times -- "changes to attributes of the `Ad` object or its children",
+  and `corr` "could include a sparse `Ad` object including just the `cat`
+  array" -- but it cannot be an `Ad`: `Ad.id` is "string; required" and
+  `Ad.display`, `Ad.video`, and `Ad.audio` are each "required *", required if
+  no other media subtype object is specified, so an `Ad` carrying only `cat`
+  -- the very value the row offers as its example -- is not a valid `Ad`.
+  "Sparse" is the row saying that in this position every attribute of `Ad` is
+  optional, and the specification states no second form of an object with its
+  presence dropped. So `corr` holds a named object whose members the text
+  does not state, which the type rules already provide for, under the name
+  the naming rules give it, `Corr`. Nothing in this record sets it aside, and
+  it says so because the first draft of this sentence claimed otherwise. What
+  leaves `Corr` out of the duplication gate's comparison is a derived
+  predicate applied to every type: `src/conventions.ts`' `unstated` reads an
+  open object all of whose properties a constructor gives -- and so an open
+  object with no properties at all -- as a type with no stated structure, and
+  `modelStructures` yields no structure for it, because a type the text never
+  shapes cannot be the structural twin of anything. No listing is involved:
+  `sets_aside` names an open vocabulary with no core terms, which is a
+  vocabulary and not an object, and no record of this repository carries one.
+  The value-list gate is untouched either way -- it compares vocabularies'
+  value sets -- so one gate sets `Corr` aside and it does so by measuring the
+  model, which is what override-rules § 1 asks of a record that would
+  otherwise read as a configuration switch.
+
+  `Corr` is marked open, and three things about that are worth saying
+  outright. It has to be open: closed with no members it would accept `{}`
+  alone and reject the sparse `Ad` carrying `cat` that the row itself offers.
+  It is not the kernel's extension part, which `Event.cdata` takes (D-051):
+  that part represents the extension concept, and a correction an auditor
+  writes is not a vendor's extension, so one type for one concept keeps the
+  two apart. And open is weaker than it reads: the emitter omits
+  `additionalProperties` on an object marked open rather than writing it
+  `true` (`src/emit.ts`), so `Corr` publishes `type: object` and states
+  nothing about what it takes, and a reader cannot tell the mark from an
+  oversight. Nothing in the harness holds `open` to anything today either: an
+  object marked open by mistake loses a corpus case and no gate reports it,
+  and the check that would catch a wrong mark is separate work. So this is
+  the one place in this record where the choice rests on the reading with no
+  check behind it, and it is the first place to look if `corr` is ever found
+  accepting more than the auditor's sparse `Ad`.
+
+  What a consumer loses under `open-all-five`, the nearest option not taken:
+  every check the four objects carry. A `content.producer` of `{"id": 3}`
+  validates where `Producer.id` is a string, a `content.data` entry's
+  `segment` is not checked against Segment, and Producer, Network, and
+  Channel are reachable from nothing, so a consumer that walks the published
+  schema never meets them. Under `unmapped` a payload that writes
+  `content.producer` at all is rejected. Under `corr-as-ad` the
+  specification's own example of `corr` is rejected.
+
+  What the choice itself rejects, which is the cost of taking it. Typing
+  `producer` as Producer closes the attribute to the six members Producer's
+  table names -- `id`, `name`, `domain`, `cat`, `cattax` and `ext`, the last
+  of which D-050 decides the contents of -- so `{"id": "p-1", "vertical":
+  "news"}`
+  is rejected where an open object would take it, and `vertical` belongs in
+  `producer.ext`. The same holds for `network`, `channel`, and each entry of
+  `data`. `corr` rejects nothing but a non-object, which is all the text
+  supports.
+challenge:
+  - type: Content
+    value:
+      id: "c-1"
+      producer:
+        id: "p-1"
+        name: Example Studios
+        vertical: news
+    verdict: reject
+    context: >-
+      A content syndicator whose feed tags each programme's producer with the
+      editorial vertical it commissions for, a field its own system carries
+      beside the producer's name.
+    reason: >-
+      Reading `producer` as a Producer sends the value at
+      `specs/adcom/schemas/modules/objects/1/objects.json#/$defs/Producer`,
+      whose six published members are `id`, `name`, `domain`, `cat`, `cattax`
+      and `ext`, and whose `additionalProperties: false` refuses `vertical`.
+      This is the value `open-all-five` would have taken while checking
+      nothing else either.
+  - type: Content
+    value:
+      id: "c-1"
+      producer:
+        id: "p-1"
+        name: Example Studios
+        ext:
+          vertical: news
+    verdict: accept
+    context: >-
+      The same syndicator's feed with the vertical where the text puts an
+      attribute it does not define.
+    reason: >-
+      `Producer.ext` takes the kernel's `Ext` part (D-050), so the vertical is
+      accepted there, which is where the pair says it belongs. The entry also
+      answers `unmapped`: that option publishes no `producer` at all, so
+      `additionalProperties: false` on Content refuses this payload and every
+      other shape of it.
+  - type: Content
+    value:
+      id: "c-1"
+      network:
+        id: "n-1"
+        name: ABC
+        callsign: WABC
+    verdict: reject
+    context: >-
+      A US broadcaster's supply that names the network the content is on and
+      adds the station's call sign, which AdCOM numbers nowhere.
+    reason: >-
+      `network` is read as a Network, whose four published members are `id`,
+      `name`, `domain` and `ext`, so `additionalProperties: false` at
+      `#/$defs/Network` refuses `callsign`. A second of the four rows, and the
+      one that matters most: `network` is one of the two whose definition cell
+      names no object at all, so the inference rests on the attribute's name
+      alone and this is what it costs when it is right.
+  - type: Content
+    value:
+      id: "c-1"
+      channel:
+        id: "ch-1"
+        name: WABC-TV
+        domain: abc7ny.com
+      data:
+        - id: "d-1"
+          name: Acme Data
+          segment:
+            - name: genre
+              value: sport
+    verdict: accept
+    context: >-
+      The same broadcaster's local station, with one data provider's genre
+      segment attached to the programme.
+    reason: >-
+      `channel` reaches `#/$defs/Channel` and each entry of `data` reaches
+      `#/$defs/Data`, whose `segment` items reach `#/$defs/Segment`, so the
+      nested segment is checked two levels down. Under `open-all-five` none
+      of this is checked and Channel, Data and Segment are reachable from
+      nothing, which is the reachability the rationale says that option costs.
+  - type: Audit
+    value:
+      status: 3
+      corr:
+        cat:
+          - IAB13
+    verdict: accept
+    context: >-
+      An auditor that keeps a creative but corrects its category from IAB3 to
+      IAB13, which is the example the `corr` row itself gives.
+    reason: >-
+      `corr` reaches `#/$defs/Corr`, which this reading publishes open with no
+      members -- the one keyword `{ "type": "object" }` -- so the sparse
+      correction is accepted. Under `corr-as-ad` the same value is refused,
+      because `#/$defs/Ad` states `required: ["id"]`, so the specification's
+      own example of `corr` would not validate. No entry states a reject at
+      `Corr`, and the reason is the rationale's: an open object with no
+      members accepts every object, so there is no value for the record to
+      claim it refuses.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L863"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2065"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2074"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2116"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2148"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2576"
+feedback: >-
+  Link `Content.producer`, `Content.network`, `Content.channel`, and
+  `Content.data` to the objects they hold, the way the other 37 object-valued
+  rows do, and drop the section numbers "3.2.17", "3.2.21", "3.2.23", and
+  "3.2.24": the document numbers no heading, so a reader has nothing to look
+  them up by, and two of the four rows name no object at all, so the
+  attribute's name is the only clue left. Then state what `corr` holds. Its
+  definition calls it a "sparse `Ad`", and an `Ad` requires `id` and one
+  media subtype object, so the example that row gives -- an `Ad` carrying
+  only `cat` -- is not an `Ad`. Either define a correction object with its
+  own attributes, or say that in `corr` every attribute of `Ad` is optional.

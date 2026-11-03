@@ -1,0 +1,690 @@
+{
+  "format": 1,
+  "input": {
+    "blob": "ec21cf8425559495261d2b9c4084ddd3d26c4802",
+    "commit": "d67a6a8dedc883e0655e239d97116a91df6052ed",
+    "lock": "tag-202607"
+  },
+  "rules": [
+    {
+      "applies_to": [
+        "Ad.display"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_ad:e54fb6a6",
+      "level": "REQUIRED",
+      "owner": "Ad",
+      "severity": "error",
+      "sources": [
+        "key:object_ad:Ad.display",
+        "rule:object_ad:e54fb6a6"
+      ],
+      "statement": "* Required if no other media subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": "ad-1"
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Ad",
+        "type": "Ad",
+        "valid": [
+          {
+            "value": {
+              "display": {},
+              "id": "ad-1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Ad.video"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_ad:e54fb6a6-2",
+      "level": "REQUIRED",
+      "owner": "Ad",
+      "severity": "error",
+      "sources": [
+        "key:object_ad:Ad.video",
+        "rule:object_ad:e54fb6a6-2"
+      ],
+      "statement": "* Required if no other media subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": "ad-1"
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Ad",
+        "type": "Ad",
+        "valid": [
+          {
+            "value": {
+              "id": "ad-1",
+              "video": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Ad.audio"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_ad:e54fb6a6-3",
+      "level": "REQUIRED",
+      "owner": "Ad",
+      "severity": "error",
+      "sources": [
+        "key:object_ad:Ad.audio",
+        "rule:object_ad:e54fb6a6-3"
+      ],
+      "statement": "* Required if no other media subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": "ad-1"
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Ad",
+        "type": "Ad",
+        "valid": [
+          {
+            "value": {
+              "audio": {},
+              "id": "ad-1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Asset.title"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_asset:e6a2f365",
+      "level": "REQUIRED",
+      "owner": "Asset",
+      "severity": "error",
+      "sources": [
+        "key:object_asset:Asset.title",
+        "rule:object_asset:e6a2f365"
+      ],
+      "statement": "* Required if no other asset subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Asset",
+        "type": "Asset",
+        "valid": [
+          {
+            "value": {
+              "title": {
+                "text": "Buy a widget"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Asset.image"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_asset:e6a2f365-2",
+      "level": "REQUIRED",
+      "owner": "Asset",
+      "severity": "error",
+      "sources": [
+        "key:object_asset:Asset.image",
+        "rule:object_asset:e6a2f365-2"
+      ],
+      "statement": "* Required if no other asset subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Asset",
+        "type": "Asset",
+        "valid": [
+          {
+            "value": {
+              "image": {
+                "url": "https://example.invalid/a.png"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Asset.video"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_asset:e6a2f365-3",
+      "level": "REQUIRED",
+      "owner": "Asset",
+      "severity": "error",
+      "sources": [
+        "key:object_asset:Asset.video",
+        "rule:object_asset:e6a2f365-3"
+      ],
+      "statement": "* Required if no other asset subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Asset",
+        "type": "Asset",
+        "valid": [
+          {
+            "value": {
+              "video": {
+                "adm": "<VAST/>"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Asset.data"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_asset:e6a2f365-4",
+      "level": "REQUIRED",
+      "owner": "Asset",
+      "severity": "error",
+      "sources": [
+        "key:object_asset:Asset.data",
+        "rule:object_asset:e6a2f365-4"
+      ],
+      "statement": "* Required if no other asset subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Asset",
+        "type": "Asset",
+        "valid": [
+          {
+            "value": {
+              "data": {
+                "value": "5 stars"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Asset.link"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_asset:e6a2f365-5",
+      "level": "REQUIRED",
+      "owner": "Asset",
+      "severity": "error",
+      "sources": [
+        "key:object_asset:Asset.link",
+        "rule:object_asset:e6a2f365-5"
+      ],
+      "statement": "* Required if no other asset subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Asset",
+        "type": "Asset",
+        "valid": [
+          {
+            "value": {
+              "link": {
+                "url": "https://example.invalid/l"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "AssetFormat.title"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_assetformat:a5e2df16",
+      "level": "REQUIRED",
+      "owner": "AssetFormat",
+      "severity": "error",
+      "sources": [
+        "key:object_assetformat:AssetFormat.title",
+        "rule:object_assetformat:a5e2df16"
+      ],
+      "statement": "* Required if no other asset format subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": 1
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/AssetFormat",
+        "type": "AssetFormat",
+        "valid": [
+          {
+            "value": {
+              "id": 1,
+              "title": {
+                "len": 90
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "AssetFormat.img"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_assetformat:a5e2df16-2",
+      "level": "REQUIRED",
+      "owner": "AssetFormat",
+      "severity": "error",
+      "sources": [
+        "key:object_assetformat:AssetFormat.img",
+        "rule:object_assetformat:a5e2df16-2"
+      ],
+      "statement": "* Required if no other asset format subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": 1
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/AssetFormat",
+        "type": "AssetFormat",
+        "valid": [
+          {
+            "value": {
+              "id": 1,
+              "img": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "AssetFormat.video"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_assetformat:a5e2df16-3",
+      "level": "REQUIRED",
+      "owner": "AssetFormat",
+      "severity": "error",
+      "sources": [
+        "key:object_assetformat:AssetFormat.video",
+        "rule:object_assetformat:a5e2df16-3"
+      ],
+      "statement": "* Required if no other asset format subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": 1
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/AssetFormat",
+        "type": "AssetFormat",
+        "valid": [
+          {
+            "value": {
+              "id": 1,
+              "video": {
+                "mime": [
+                  "video/mp4"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "AssetFormat.data"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_assetformat:a5e2df16-4",
+      "level": "REQUIRED",
+      "owner": "AssetFormat",
+      "severity": "error",
+      "sources": [
+        "key:object_assetformat:AssetFormat.data",
+        "rule:object_assetformat:a5e2df16-4"
+      ],
+      "statement": "* Required if no other asset format subtype object is specified.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "id": 1
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/AssetFormat",
+        "type": "AssetFormat",
+        "valid": [
+          {
+            "value": {
+              "data": {
+                "type": 1
+              },
+              "id": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Event.url"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_event:2bbe0e06",
+      "level": "REQUIRED",
+      "owner": "Event",
+      "severity": "error",
+      "sources": [
+        "key:object_event:Event.url",
+        "rule:object_event:2bbe0e06"
+      ],
+      "statement": "* Required for Image-Pixel or JavaScript methods.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {
+              "method": 1,
+              "type": 2
+            }
+          },
+          {
+            "value": {
+              "method": 2,
+              "type": 2
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Event",
+        "type": "Event",
+        "valid": [
+          {
+            "value": {
+              "method": 1,
+              "type": 2,
+              "url": "https://example.invalid/px.gif"
+            }
+          },
+          {
+            "value": {
+              "method": 500,
+              "type": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Placement.display"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_placement:c424dfde",
+      "level": "REQUIRED",
+      "owner": "Placement",
+      "severity": "error",
+      "sources": [
+        "key:object_placement:Placement.display",
+        "rule:object_placement:c424dfde"
+      ],
+      "statement": "* At least one placement subtype object is required.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Placement",
+        "type": "Placement",
+        "valid": [
+          {
+            "value": {
+              "display": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Placement.video"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_placement:c424dfde-2",
+      "level": "REQUIRED",
+      "owner": "Placement",
+      "severity": "error",
+      "sources": [
+        "key:object_placement:Placement.video",
+        "rule:object_placement:c424dfde-2"
+      ],
+      "statement": "* At least one placement subtype object is required.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Placement",
+        "type": "Placement",
+        "valid": [
+          {
+            "value": {
+              "video": {
+                "mime": [
+                  "video/mp4"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "Placement.audio"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_placement:c424dfde-3",
+      "level": "REQUIRED",
+      "owner": "Placement",
+      "severity": "error",
+      "sources": [
+        "key:object_placement:Placement.audio",
+        "rule:object_placement:c424dfde-3"
+      ],
+      "statement": "* At least one placement subtype object is required.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/Placement",
+        "type": "Placement",
+        "valid": [
+          {
+            "value": {
+              "audio": {
+                "mime": [
+                  "audio/mp4"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "VideoAsset.adm"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_videoasset:6f5d60d7",
+      "level": "REQUIRED",
+      "owner": "VideoAsset",
+      "severity": "error",
+      "sources": [
+        "key:object_videoasset:VideoAsset.adm",
+        "rule:object_videoasset:6f5d60d7"
+      ],
+      "statement": "* Exactly one of `adm` and `curl` is required.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          },
+          {
+            "value": {
+              "adm": "<VAST/>",
+              "curl": "https://example.invalid/v.xml"
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/VideoAsset",
+        "type": "VideoAsset",
+        "valid": [
+          {
+            "value": {
+              "adm": "<VAST/>"
+            }
+          },
+          {
+            "value": {
+              "curl": "https://example.invalid/v.xml"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "applies_to": [
+        "VideoAsset.curl"
+      ],
+      "decisions": [
+        "D-057"
+      ],
+      "id": "rule:object_videoasset:6f5d60d7-2",
+      "level": "REQUIRED",
+      "owner": "VideoAsset",
+      "severity": "error",
+      "sources": [
+        "key:object_videoasset:VideoAsset.curl",
+        "rule:object_videoasset:6f5d60d7-2"
+      ],
+      "statement": "* Exactly one of `adm` and `curl` is required.",
+      "vectors": {
+        "invalid": [
+          {
+            "value": {}
+          },
+          {
+            "value": {
+              "adm": "<VAST/>",
+              "curl": "https://example.invalid/v.xml"
+            }
+          }
+        ],
+        "schema": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json#/$defs/VideoAsset",
+        "type": "VideoAsset",
+        "valid": [
+          {
+            "value": {
+              "adm": "<VAST/>"
+            }
+          },
+          {
+            "value": {
+              "curl": "https://example.invalid/v.xml"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

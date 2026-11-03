@@ -1,0 +1,19 @@
+# The disagreements AdCOM's fidelity gate (gates/fidelity.ts) expects, each
+# group under the open task that removes them. The gate fails on a disagreement
+# listed nowhere, on a listed one whose detail changed, and on a listed one
+# that no longer occurs, so the task that fixes the model removes its entries.
+# This file is an exemption: changing it changes the gate's fingerprint, which
+# a gate decision must accept.
+#
+# The file is keyed per spec, so one specification's exemptions never excuse
+# another's. AdCOM expects none: the fidelity oracle reads its 42 code lists
+# from the IR and every vocabulary the model places their rows in gives each
+# code the verdict its row states.
+format: 1
+groups: []
+# Constraints the schema can't state, left to a rule. The gate passes such an
+# invalid vector only when the listed rule applies to an object on the
+# constraint's path and gives an invalid vector the constraint rules out, and
+# fails an entry that no longer disagrees. AdCOM leaves none: its lists state
+# no rule, so `schemas/rules/rules.json` holds none to leave a constraint to.
+ruled: []

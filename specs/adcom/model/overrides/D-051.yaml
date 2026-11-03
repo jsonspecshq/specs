@@ -1,0 +1,162 @@
+format: 2
+id: D-051
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "`Event.cdata` states the type \"object (Map)\", the one parenthesised qualifier in the specification, and defines it as an array of key-value pairs. What does `cdata` hold?"
+covers:
+  - ir: key:object_event:Event.cdata
+    digest: e75ef4e80e694823d46b2b19e79b66b0ea60117c53ffa171e0d5880aab8d635a
+    quote: '`cdata` | An array of key-value pairs to support vendor-specific data required for custom tracking. For example, the account number of a buyer with a tracking company might be represented as: {"acct": "123"}.'
+  - ir: rule:object_event:feba7140
+    digest: 74df65e67260fb774c86e52175a196099809b6f9621064b060980f0368435642
+    quote: An array of key-value pairs to support vendor-specific data required for custom tracking.
+options:
+  - id: open-object
+    summary: >-
+      An object of any members, so its keys and its values are the parties'
+      to agree and nothing is read from the one example.
+  - id: map-of-text
+    summary: >-
+      An object whose keys are the vendor's and whose values are strings, as
+      the one example writes them, so every pair carries text.
+  - id: own-open-object
+    summary: >-
+      An object of any members, of a kind named for this attribute alone, so
+      the attribute's definition sits on a thing of its own.
+  - id: array-of-pairs
+    summary: >-
+      An array whose items are key-value objects, as the word "array" in the
+      definition says.
+chosen: open-object
+rationale: >-
+  Measured on both locks: of 411 attribute rows, `cdata` is the one whose
+  Type cell carries a parenthesised qualifier, and the IR records that cell
+  as the base `object` with the qualifier `Map`. 88 rows state the type
+  `object`: 45 are an object's `ext` (D-050), 37 link the object they hold
+  from their definition cell, 5 name no object anywhere (D-052), and `cdata`
+  is the one that remains. Three further rows carry an object by naming it in
+  the Type cell -- "UserAgent object", "BrandVersion object", and "array of
+  BrandVersion objects" -- so 91 attribute rows carry an object in all, 90 of
+  them an object the specification defines or an extension point. The
+  qualifier is the only thing the text gives `cdata` beyond "object".
+
+  Why not the map. The kernel defines a `Map` constructor and AdCOM's binding
+  marks it absent, so making it present on this one row would be the whole of
+  its use here. Applying it needs both of its parameters: a key type whose
+  values are strings, and a value type that is named. The specification
+  states neither. Its definition gives one example, `{"acct": "123"}`, and an
+  example is not a statement: a vendor that writes `{"acct": 123}`, or
+  `{"session": {"id": "s-1"}}`, writes vendor-specific data for custom
+  tracking, which is exactly what the row describes, and no sentence rules
+  either out. The kernel has no named type that stands for any value, so
+  there is no value type to supply that does not narrow the row past what it
+  says. Choosing the map therefore means choosing a value type the text does
+  not give, which is the invention the type rules refuse for an object whose
+  structure the specification never states. The qualifier is kept where it
+  can be read -- the row's own wording stays on the attribute as its
+  description, "(Map)" included -- so a reader sees that the author meant a
+  dictionary rather than an instance of one of the 45 objects.
+
+  So `cdata` takes the kernel's `Ext`, the part whose shell is
+  `{ type: object, additionalProperties: true }`, which D-050 makes present
+  for AdCOM. That adds no type and defines no structure twice. It is also not
+  the same device as marking an object open: the part states what it takes in
+  its own bytes, where an object marked open carries no openness keyword at
+  all, so `cdata`'s schema says "any members" rather than saying nothing.
+  That is why `own-open-object` is refused twice over: a kind of its own with
+  the same structure and nothing to tell the two apart is what the
+  duplication gate exists to catch, and an object marked open would publish
+  less than the part does. The attribute's description already carries what
+  is particular about `cdata`.
+
+  `array-of-pairs` is refused on the text's own example. The Type cell says
+  `object` and the definition says "An array of key-value pairs"; one of the
+  two is wrong, and `{"acct": "123"}` is an object and not an array, so the
+  example settles it with the Type cell. The feedback asks for the sentence
+  to be corrected rather than the schema to follow it.
+
+  What `map-of-text` would have bought, and what it costs. It would let a
+  generated class type `cdata` as a map of string to string, which is more
+  than "an object" tells a developer. Against that, it rejects `{"acct":
+  123}` and `{"session": {"id": "s-1"}}` -- two payloads the row's own words
+  permit -- on the strength of quotation marks in one example. A value is
+  narrowed here only where the text states the narrowing, so the contract
+  stays what the text gives: an object, with the parties' keys and the
+  parties' values. What a consumer loses by that is the key and value
+  contract: `cdata` and `ext` have one structure in the published schema, and
+  only their descriptions say that one carries custom tracking data and the
+  other a vendor's extensions.
+challenge:
+  - type: Event
+    value:
+      type: 1
+      method: 1
+      url: "https://somebuyer.com/pixel"
+      cdata:
+        - key: acct
+          value: "123"
+    verdict: reject
+    context: >-
+      A buyer whose tracking company issues it an account number, and whose
+      own API carries custom tracking data as a list of key-value records,
+      written straight into `cdata`.
+    reason: >-
+      `cdata` takes the kernel's `Ext` part, whose shell states
+      `type: object`, so the reference at
+      `specs/adcom/schemas/modules/objects/1/objects.json#/$defs/Event/properties/cdata`
+      refuses an array before it reads a member. This is the payload
+      `array-of-pairs` would have taken: the definition cell's own words, "An
+      array of key-value pairs", describe it, and the Type cell and the row's
+      example `{"acct": "123"}` do not. The entry is sent at `Event` and not
+      at `Ext`, so what it answers is the row's binding and not the kernel
+      part alone.
+  - type: Event
+    value:
+      type: 1
+      method: 1
+      url: "https://somebuyer.com/pixel"
+      cdata:
+        acct: 123
+    verdict: accept
+    context: >-
+      The same buyer sending its account number as the number its billing
+      system holds, rather than as text.
+    reason: >-
+      `Ext` is `{ type: object, additionalProperties: true }`, which states
+      nothing about a member's value, so `acct` is accepted at any JSON type.
+      `map-of-text` would have refused this on the two quotation marks in the
+      row's one example, which is the narrowing this record declined to read
+      into it.
+  - type: Event
+    value:
+      type: 1
+      method: 1
+      url: "https://somebuyer.com/pixel"
+      cdata:
+        session:
+          id: "s-1"
+          start: 1699999999000
+    verdict: accept
+    context: >-
+      A measurement vendor on a different desk from the buyer, which groups a
+      viewer's session under one member, so the data it needs for custom
+      tracking is a nested object rather than a flat pair.
+    reason: >-
+      The same keyword and a second shape: `additionalProperties: true` puts
+      no constraint on a member's value, so a nested object is accepted.
+      `map-of-text` refuses it, and so would the kernel's `Map` constructor
+      under any value type the kernel can supply, which is the argument the
+      rationale makes against making `Map` present for this one row.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L720"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L723"
+feedback: >-
+  The Type cell reads "object (Map)" and the definition reads "An array of
+  key-value pairs"; the two disagree, and the example settles it as an
+  object. Correct the sentence, and state what `cdata` holds: whether a key
+  is a vendor's own namespace, and whether a value may be a number, a list,
+  or a nested object, or must be a string as the one example writes it.
+  "(Map)" is the only parenthesised qualifier in any of the 411 attribute
+  rows, so a reader has nothing to read it against.

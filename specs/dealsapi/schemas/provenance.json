@@ -1,0 +1,2632 @@
+{
+  "files": {
+    "https://jsonspecs.com/dealsapi/schemas/documents/1/buyer-seat.json": {
+      "/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      },
+      "/properties/buyerstatus/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5038fc294dbe88abe4cb2e9ca459b2fd103038dec958ed846f5fcbaa959350bf",
+            "ir": "field:object-buyerseat:buyerstatus"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerseat:ext"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/id/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5c05c04b0c154b57aed8809bba4a456224e9f73ee22cbc43f894abe5a06cb316",
+            "ir": "field:object-buyerseat:id"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/version/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      }
+    },
+    "https://jsonspecs.com/dealsapi/schemas/documents/1/deal.json": {
+      "/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      },
+      "/properties/adtypes/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8f0369b4d12f77930e955ee5ef4ef0618d59216027769aeed806c9bbc9029877",
+            "ir": "field:object-deal:adtypes"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/auxdata/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "a54bc5be4e3e90af39d7552efc830d21622de6949cd0989680631fe215260bbe",
+            "ir": "field:object-deal:auxdata"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/bseat/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "601e1c992da55aa364a39079a713fa6073dcdf00613b08a66ab7851958b1cb56",
+            "ir": "field:object-deal:bseat"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/created/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/curation/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "0c064e9b4c80eefd545851d380b771959a44f3d519ecb3c0b3f999a84b2a3905",
+            "ir": "field:object-deal:curation"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/desc/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "9e98c8164cc05f0999a8fe6d5ffefaf8b0807ba21750e1875ba69cc5740f6410",
+            "ir": "field:object-deal:desc"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/dinventory/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "37ba973c0e2b1da392bf2e11fb03546f9327680c3fccc14b9c43ad01859894b9",
+            "ir": "field:object-deal:dinventory"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-deal:ext"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/id/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/inventory/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "0c5af0dd15314d1dacc4b7e547dfd1fc83d2cd33ca84f8277fb4d1ebbb862608",
+            "ir": "field:object-deal:inventory"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/name/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "aafbf8178f16173d1bb333bc69b942832a17100d282908c02d766ca4442dd0e7",
+            "ir": "field:object-deal:name"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/origin/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ce99360cea2bbe7a1ce0062398ecda06b2329079842d82cca3fc60bf41fa6a47",
+            "ir": "field:object-deal:origin"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/pubcount/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d53a10a4a88794de1888b57e6938f196337c685a492bb08110f916a93483884e",
+            "ir": "field:object-deal:pubcount"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/seller/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "340feab53f097fa9b7675d9a9ee782b92c911a70cbc87d953d9454ae7236741d",
+            "ir": "field:object-deal:seller"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/sellerstatus/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "0c8cf640c2946620c962742b4ddebacad40140806db8b1e55a56ac71589d4d9f",
+            "ir": "field:object-deal:sellerstatus"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/terms/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "234f134f13604c3f69380cebe949555d4d9a93c6f85e8ad15351e40af4585b59",
+            "ir": "field:object-deal:terms"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/properties/wseat/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d2802374ec07a59552e98a2ac62cdaccc6bd829b27c3d73dc70288c2440257aa",
+            "ir": "field:object-deal:wseat"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      }
+    },
+    "https://jsonspecs.com/dealsapi/schemas/kernel/1/kernel.json": {
+      "/$defs/Amount": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "4884dfb2518a4b08a4ba8ea197f13ab31af115ad8fc6b33e403f3ad44ca50b05",
+            "ir": "field:object-terms:dealfloor"
+          },
+          {
+            "digest": "d99b424a4b4835aa25da211b0ddc98b0b34b83535b9a62fde60a50ba06494fb6",
+            "ir": "field:object-terms:totalcost"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Amount/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "4884dfb2518a4b08a4ba8ea197f13ab31af115ad8fc6b33e403f3ad44ca50b05",
+            "ir": "field:object-terms:dealfloor"
+          },
+          {
+            "digest": "d99b424a4b4835aa25da211b0ddc98b0b34b83535b9a62fde60a50ba06494fb6",
+            "ir": "field:object-terms:totalcost"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/Count": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e9a8fe666cbf1b98dc9f22407b967fe7368d45ad3d3b0d5c75ea8ab993a9b2a8",
+            "ir": "field:object-terms:units"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Count/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e9a8fe666cbf1b98dc9f22407b967fe7368d45ad3d3b0d5c75ea8ab993a9b2a8",
+            "ir": "field:object-terms:units"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/CountryCode": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2163f6ca4661e298607dfcb0835a31140673ce8edde999f59c94ea2df16fdb2b",
+            "ir": "field:object-terms:countries"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/CountryCode/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2163f6ca4661e298607dfcb0835a31140673ce8edde999f59c94ea2df16fdb2b",
+            "ir": "field:object-terms:countries"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/CurrencyCode": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b5e0a9eb31eac74f657557986f97aae80b5be5963393228c78cf24e65fc31c61",
+            "ir": "field:object-terms:cur"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/CurrencyCode/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b5e0a9eb31eac74f657557986f97aae80b5be5963393228c78cf24e65fc31c61",
+            "ir": "field:object-terms:cur"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/Domain": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          },
+          {
+            "digest": "ce99360cea2bbe7a1ce0062398ecda06b2329079842d82cca3fc60bf41fa6a47",
+            "ir": "field:object-deal:origin"
+          },
+          {
+            "digest": "340feab53f097fa9b7675d9a9ee782b92c911a70cbc87d953d9454ae7236741d",
+            "ir": "field:object-deal:seller"
+          },
+          {
+            "digest": "de6ddbd885bf947a9fc3fd819ff72501645828f9cdf1e68654b4a5512bf03475",
+            "ir": "field:object-inventory:sitedomains"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Domain/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          },
+          {
+            "digest": "ce99360cea2bbe7a1ce0062398ecda06b2329079842d82cca3fc60bf41fa6a47",
+            "ir": "field:object-deal:origin"
+          },
+          {
+            "digest": "340feab53f097fa9b7675d9a9ee782b92c911a70cbc87d953d9454ae7236741d",
+            "ir": "field:object-deal:seller"
+          },
+          {
+            "digest": "de6ddbd885bf947a9fc3fd819ff72501645828f9cdf1e68654b4a5512bf03475",
+            "ir": "field:object-inventory:sitedomains"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/Ext": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerseat:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerstatus:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-curation:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-deal:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-inventory:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-terms:ext"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerseat:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerstatus:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-curation:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-deal:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-inventory:ext"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-terms:ext"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/ExternalId": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5c05c04b0c154b57aed8809bba4a456224e9f73ee22cbc43f894abe5a06cb316",
+            "ir": "field:object-buyerseat:id"
+          },
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          },
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          },
+          {
+            "digest": "a0cb0fca2b0ff05d740f29c78047f83c14fd83b5e45c53a6421e7e0df768de75",
+            "ir": "field:object-curation:cdealid"
+          },
+          {
+            "digest": "601e1c992da55aa364a39079a713fa6073dcdf00613b08a66ab7851958b1cb56",
+            "ir": "field:object-deal:bseat"
+          },
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          },
+          {
+            "digest": "d2802374ec07a59552e98a2ac62cdaccc6bd829b27c3d73dc70288c2440257aa",
+            "ir": "field:object-deal:wseat"
+          },
+          {
+            "digest": "771b52f9b47e459f73dc14c5ae7e81b200a388848c0d64398bda2509166f910f",
+            "ir": "field:object-inventory:appbundles"
+          },
+          {
+            "digest": "63b3ef5441314652c6531a76cba2bc222e9fdcd444456851d372bdaeff7a6c46",
+            "ir": "field:object-inventory:cat"
+          },
+          {
+            "digest": "fd8b923ff3aeb9c7ac6c293a840c28165315d62dda90e0e8ff95737c47764ba6",
+            "ir": "field:object-inventory:sellerids"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/ExternalId/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5c05c04b0c154b57aed8809bba4a456224e9f73ee22cbc43f894abe5a06cb316",
+            "ir": "field:object-buyerseat:id"
+          },
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          },
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          },
+          {
+            "digest": "a0cb0fca2b0ff05d740f29c78047f83c14fd83b5e45c53a6421e7e0df768de75",
+            "ir": "field:object-curation:cdealid"
+          },
+          {
+            "digest": "601e1c992da55aa364a39079a713fa6073dcdf00613b08a66ab7851958b1cb56",
+            "ir": "field:object-deal:bseat"
+          },
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          },
+          {
+            "digest": "d2802374ec07a59552e98a2ac62cdaccc6bd829b27c3d73dc70288c2440257aa",
+            "ir": "field:object-deal:wseat"
+          },
+          {
+            "digest": "771b52f9b47e459f73dc14c5ae7e81b200a388848c0d64398bda2509166f910f",
+            "ir": "field:object-inventory:appbundles"
+          },
+          {
+            "digest": "63b3ef5441314652c6531a76cba2bc222e9fdcd444456851d372bdaeff7a6c46",
+            "ir": "field:object-inventory:cat"
+          },
+          {
+            "digest": "fd8b923ff3aeb9c7ac6c293a840c28165315d62dda90e0e8ff95737c47764ba6",
+            "ir": "field:object-inventory:sellerids"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/IntegerFlag": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/IntegerFlag/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/IntegerFlag/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          }
+        ],
+        "rule": "type-rules § 6 extension branches"
+      },
+      "/$defs/IntegerFlag/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          }
+        ],
+        "rule": "type-rules § 6 extension branches"
+      },
+      "/$defs/Text": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "9e98c8164cc05f0999a8fe6d5ffefaf8b0807ba21750e1875ba69cc5740f6410",
+            "ir": "field:object-deal:desc"
+          },
+          {
+            "digest": "aafbf8178f16173d1bb333bc69b942832a17100d282908c02d766ca4442dd0e7",
+            "ir": "field:object-deal:name"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Text/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "9e98c8164cc05f0999a8fe6d5ffefaf8b0807ba21750e1875ba69cc5740f6410",
+            "ir": "field:object-deal:desc"
+          },
+          {
+            "digest": "aafbf8178f16173d1bb333bc69b942832a17100d282908c02d766ca4442dd0e7",
+            "ir": "field:object-deal:name"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/UtcTimestamp": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          },
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/UtcTimestamp/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          },
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/$defs/VendorCode": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          },
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/VendorCode/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          },
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
+      "/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerseat:ext"
+          },
+          {
+            "digest": "5c05c04b0c154b57aed8809bba4a456224e9f73ee22cbc43f894abe5a06cb316",
+            "ir": "field:object-buyerseat:id"
+          },
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          },
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerstatus:ext"
+          },
+          {
+            "digest": "a0cb0fca2b0ff05d740f29c78047f83c14fd83b5e45c53a6421e7e0df768de75",
+            "ir": "field:object-curation:cdealid"
+          },
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-curation:ext"
+          },
+          {
+            "digest": "601e1c992da55aa364a39079a713fa6073dcdf00613b08a66ab7851958b1cb56",
+            "ir": "field:object-deal:bseat"
+          },
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          },
+          {
+            "digest": "9e98c8164cc05f0999a8fe6d5ffefaf8b0807ba21750e1875ba69cc5740f6410",
+            "ir": "field:object-deal:desc"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-deal:ext"
+          },
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          },
+          {
+            "digest": "aafbf8178f16173d1bb333bc69b942832a17100d282908c02d766ca4442dd0e7",
+            "ir": "field:object-deal:name"
+          },
+          {
+            "digest": "ce99360cea2bbe7a1ce0062398ecda06b2329079842d82cca3fc60bf41fa6a47",
+            "ir": "field:object-deal:origin"
+          },
+          {
+            "digest": "340feab53f097fa9b7675d9a9ee782b92c911a70cbc87d953d9454ae7236741d",
+            "ir": "field:object-deal:seller"
+          },
+          {
+            "digest": "d2802374ec07a59552e98a2ac62cdaccc6bd829b27c3d73dc70288c2440257aa",
+            "ir": "field:object-deal:wseat"
+          },
+          {
+            "digest": "771b52f9b47e459f73dc14c5ae7e81b200a388848c0d64398bda2509166f910f",
+            "ir": "field:object-inventory:appbundles"
+          },
+          {
+            "digest": "63b3ef5441314652c6531a76cba2bc222e9fdcd444456851d372bdaeff7a6c46",
+            "ir": "field:object-inventory:cat"
+          },
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-inventory:ext"
+          },
+          {
+            "digest": "fd8b923ff3aeb9c7ac6c293a840c28165315d62dda90e0e8ff95737c47764ba6",
+            "ir": "field:object-inventory:sellerids"
+          },
+          {
+            "digest": "de6ddbd885bf947a9fc3fd819ff72501645828f9cdf1e68654b4a5512bf03475",
+            "ir": "field:object-inventory:sitedomains"
+          },
+          {
+            "digest": "2163f6ca4661e298607dfcb0835a31140673ce8edde999f59c94ea2df16fdb2b",
+            "ir": "field:object-terms:countries"
+          },
+          {
+            "digest": "b5e0a9eb31eac74f657557986f97aae80b5be5963393228c78cf24e65fc31c61",
+            "ir": "field:object-terms:cur"
+          },
+          {
+            "digest": "4884dfb2518a4b08a4ba8ea197f13ab31af115ad8fc6b33e403f3ad44ca50b05",
+            "ir": "field:object-terms:dealfloor"
+          },
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-terms:ext"
+          },
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          },
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          },
+          {
+            "digest": "d99b424a4b4835aa25da211b0ddc98b0b34b83535b9a62fde60a50ba06494fb6",
+            "ir": "field:object-terms:totalcost"
+          },
+          {
+            "digest": "e9a8fe666cbf1b98dc9f22407b967fe7368d45ad3d3b0d5c75ea8ab993a9b2a8",
+            "ir": "field:object-terms:units"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      },
+      "/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerseat:ext"
+          },
+          {
+            "digest": "5c05c04b0c154b57aed8809bba4a456224e9f73ee22cbc43f894abe5a06cb316",
+            "ir": "field:object-buyerseat:id"
+          },
+          {
+            "digest": "5d8347a4aab6be0ffe130b75daacb6b2f8256fb276f5650f58178098ce88baec",
+            "ir": "field:object-buyerseat:version"
+          },
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerstatus:ext"
+          },
+          {
+            "digest": "a0cb0fca2b0ff05d740f29c78047f83c14fd83b5e45c53a6421e7e0df768de75",
+            "ir": "field:object-curation:cdealid"
+          },
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-curation:ext"
+          },
+          {
+            "digest": "601e1c992da55aa364a39079a713fa6073dcdf00613b08a66ab7851958b1cb56",
+            "ir": "field:object-deal:bseat"
+          },
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          },
+          {
+            "digest": "9e98c8164cc05f0999a8fe6d5ffefaf8b0807ba21750e1875ba69cc5740f6410",
+            "ir": "field:object-deal:desc"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-deal:ext"
+          },
+          {
+            "digest": "aaddfa0cb70710aabb5451db0b5e92e7742131f02f5f813adb9ec840edf64da9",
+            "ir": "field:object-deal:id"
+          },
+          {
+            "digest": "aafbf8178f16173d1bb333bc69b942832a17100d282908c02d766ca4442dd0e7",
+            "ir": "field:object-deal:name"
+          },
+          {
+            "digest": "ce99360cea2bbe7a1ce0062398ecda06b2329079842d82cca3fc60bf41fa6a47",
+            "ir": "field:object-deal:origin"
+          },
+          {
+            "digest": "340feab53f097fa9b7675d9a9ee782b92c911a70cbc87d953d9454ae7236741d",
+            "ir": "field:object-deal:seller"
+          },
+          {
+            "digest": "d2802374ec07a59552e98a2ac62cdaccc6bd829b27c3d73dc70288c2440257aa",
+            "ir": "field:object-deal:wseat"
+          },
+          {
+            "digest": "771b52f9b47e459f73dc14c5ae7e81b200a388848c0d64398bda2509166f910f",
+            "ir": "field:object-inventory:appbundles"
+          },
+          {
+            "digest": "63b3ef5441314652c6531a76cba2bc222e9fdcd444456851d372bdaeff7a6c46",
+            "ir": "field:object-inventory:cat"
+          },
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-inventory:ext"
+          },
+          {
+            "digest": "fd8b923ff3aeb9c7ac6c293a840c28165315d62dda90e0e8ff95737c47764ba6",
+            "ir": "field:object-inventory:sellerids"
+          },
+          {
+            "digest": "de6ddbd885bf947a9fc3fd819ff72501645828f9cdf1e68654b4a5512bf03475",
+            "ir": "field:object-inventory:sitedomains"
+          },
+          {
+            "digest": "2163f6ca4661e298607dfcb0835a31140673ce8edde999f59c94ea2df16fdb2b",
+            "ir": "field:object-terms:countries"
+          },
+          {
+            "digest": "b5e0a9eb31eac74f657557986f97aae80b5be5963393228c78cf24e65fc31c61",
+            "ir": "field:object-terms:cur"
+          },
+          {
+            "digest": "4884dfb2518a4b08a4ba8ea197f13ab31af115ad8fc6b33e403f3ad44ca50b05",
+            "ir": "field:object-terms:dealfloor"
+          },
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          },
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-terms:ext"
+          },
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          },
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          },
+          {
+            "digest": "d99b424a4b4835aa25da211b0ddc98b0b34b83535b9a62fde60a50ba06494fb6",
+            "ir": "field:object-terms:totalcost"
+          },
+          {
+            "digest": "e9a8fe666cbf1b98dc9f22407b967fe7368d45ad3d3b0d5c75ea8ab993a9b2a8",
+            "ir": "field:object-terms:units"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      }
+    },
+    "https://jsonspecs.com/dealsapi/schemas/modules/buyer-seat/1/buyer-seat.json": {
+      "/$defs/BuyerDealStatus": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/BuyerDealStatus/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/BuyerDealStatus/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/1/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/BuyerDealStatus/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/3/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/BuyerDealStatus/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/oneOf/4": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/4/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/BuyerDealStatus/oneOf/4/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/oneOf/5": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/5/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/oneOf/6": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/BuyerDealStatus/oneOf/6/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/BuyerDealStatus/oneOf/6/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/BuyerDealStatus/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/BuyerStatus": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerStatus/properties/buyerseatid/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerStatus/properties/ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-buyerstatus:ext"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerStatus/properties/status/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "67c40cf27fbe1bff3aaa5a6d84e98c469e1f6ae0dc7006d060bf4100d6c78310",
+            "ir": "field:object-buyerstatus:status"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          },
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      },
+      "/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2ae010783c34370a10304479cc9eef7d4b338ba61f035c1d234a907165ef3517",
+            "ir": "field:object-buyerstatus:buyerseatid"
+          },
+          {
+            "digest": "5b918970fa29b9656907c682521a48643bcd46a2062c468d61731738435c0ddc",
+            "ir": "field:object-buyerstatus:status#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      }
+    },
+    "https://jsonspecs.com/dealsapi/schemas/modules/deal/1/deal.json": {
+      "/$defs/AdType": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/AdType/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/AdType/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AdType/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AdType/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AdType/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AdType/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AdType/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AdType/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AdType/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AdType/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/AuxiliaryData": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/AuxiliaryData/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/AuxiliaryData/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AuxiliaryData/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AuxiliaryData/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AuxiliaryData/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AuxiliaryData/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AuxiliaryData/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AuxiliaryData/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AuxiliaryData/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AuxiliaryData/oneOf/4": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AuxiliaryData/oneOf/4/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AuxiliaryData/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/CategoryTaxonomy": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/CategoryTaxonomy/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/Curation": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Curation/properties/cdealid/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "a0cb0fca2b0ff05d740f29c78047f83c14fd83b5e45c53a6421e7e0df768de75",
+            "ir": "field:object-curation:cdealid"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Curation/properties/curator/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Curation/properties/curfeetype/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ebecc92b7d1c65164f063024324d9bd47109ee72c36cb1e85c15797062b0b499",
+            "ir": "field:object-curation:curfeetype"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Curation/properties/ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-curation:ext"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/CurationFeeType": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/CurationFeeType/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/CurationFeeType/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/CurationFeeType/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/CurationFeeType/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/CurationFeeType/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/CurationFeeType/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/CurationFeeType/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/CurationFeeType/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/CurationFeeType/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/CurationFeeType/oneOf/4": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/CurationFeeType/oneOf/4/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/CurationFeeType/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/DeviceType": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "f28b832f472525a0929387afa28ef897954d5378eb463912610e0ae4d07d9b49",
+            "ir": "field:object-inventory:devicetype"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/DeviceType/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "f28b832f472525a0929387afa28ef897954d5378eb463912610e0ae4d07d9b49",
+            "ir": "field:object-inventory:devicetype"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/DynamicInventory": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/DynamicInventory/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/DynamicInventory/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/DynamicInventory/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/DynamicInventory/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/DynamicInventory/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/DynamicInventory/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/DynamicInventory/oneOf/2/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/DynamicInventory/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/DynamicInventory/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/IncludedInventory": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/IncludedInventory/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/IncludedInventory/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/IncludedInventory/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/IncludedInventory/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/IncludedInventory/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/IncludedInventory/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/IncludedInventory/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/IncludedInventory/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/IncludedInventory/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/IncludedInventory/oneOf/4": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/IncludedInventory/oneOf/4/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/IncludedInventory/oneOf/5": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/IncludedInventory/oneOf/5/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/IncludedInventory/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/Inventory": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "bb02493c6c76dcd01e09607847e4344f199f6e978bdc683f9d49e0171e10e631",
+            "ir": "field:object-inventory:inclinventory"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Inventory/properties/appbundles/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "771b52f9b47e459f73dc14c5ae7e81b200a388848c0d64398bda2509166f910f",
+            "ir": "field:object-inventory:appbundles"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/cat/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "63b3ef5441314652c6531a76cba2bc222e9fdcd444456851d372bdaeff7a6c46",
+            "ir": "field:object-inventory:cat"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/cattax/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/devicetype/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "f28b832f472525a0929387afa28ef897954d5378eb463912610e0ae4d07d9b49",
+            "ir": "field:object-inventory:devicetype"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-inventory:ext"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/inclinventory/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "bb02493c6c76dcd01e09607847e4344f199f6e978bdc683f9d49e0171e10e631",
+            "ir": "field:object-inventory:inclinventory"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/sellerids/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "fd8b923ff3aeb9c7ac6c293a840c28165315d62dda90e0e8ff95737c47764ba6",
+            "ir": "field:object-inventory:sellerids"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Inventory/properties/sitedomains/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "de6ddbd885bf947a9fc3fd819ff72501645828f9cdf1e68654b4a5512bf03475",
+            "ir": "field:object-inventory:sitedomains"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/PriceType": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/PriceType/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/PriceType/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PriceType/oneOf/0/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/PriceType/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PriceType/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PriceType/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PriceType/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PriceType/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PriceType/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PriceType/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PriceType/oneOf/4/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 extension branches"
+      },
+      "/$defs/PriceType/oneOf/4/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 extension branches"
+      },
+      "/$defs/PriceType/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/PublisherCount": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/PublisherCount/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/PublisherCount/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PublisherCount/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PublisherCount/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PublisherCount/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PublisherCount/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/PublisherCount/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/PublisherCount/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/SellerDealStatus": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/SellerDealStatus/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/SellerDealStatus/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/SellerDealStatus/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/SellerDealStatus/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/SellerDealStatus/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/SellerDealStatus/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/SellerDealStatus/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/SellerDealStatus/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/SellerDealStatus/oneOf/3/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/SellerDealStatus/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/SellerDealStatus/oneOf/4": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/SellerDealStatus/oneOf/4/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/SellerDealStatus/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
+      "/$defs/Terms": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Terms/properties/countries/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2163f6ca4661e298607dfcb0835a31140673ce8edde999f59c94ea2df16fdb2b",
+            "ir": "field:object-terms:countries"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/cur/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b5e0a9eb31eac74f657557986f97aae80b5be5963393228c78cf24e65fc31c61",
+            "ir": "field:object-terms:cur"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/dealfloor/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "4884dfb2518a4b08a4ba8ea197f13ab31af115ad8fc6b33e403f3ad44ca50b05",
+            "ir": "field:object-terms:dealfloor"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/enddate/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/ext/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d77fd0190a84fd80548a33546659284d5320efe14c9aee797814d7b647b28f0c",
+            "ir": "field:object-terms:ext"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/guar/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "372ad02a0bfed4c5e8dca1c18389f2ccccefa680f7850c8a8664e06eb7b81219",
+            "ir": "field:object-terms:guar"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/pricetype/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "23f820410859f9fc1c37fac093d06257fa086ab3e6ba61d25c91b78f1d60cba9",
+            "ir": "field:object-terms:pricetype"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/startdate/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/totalcost/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d99b424a4b4835aa25da211b0ddc98b0b34b83535b9a62fde60a50ba06494fb6",
+            "ir": "field:object-terms:totalcost"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/Terms/properties/units/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e9a8fe666cbf1b98dc9f22407b967fe7368d45ad3d3b0d5c75ea8ab993a9b2a8",
+            "ir": "field:object-terms:units"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          },
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          },
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          },
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          },
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          },
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          },
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          },
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          },
+          {
+            "digest": "f28b832f472525a0929387afa28ef897954d5378eb463912610e0ae4d07d9b49",
+            "ir": "field:object-inventory:devicetype"
+          },
+          {
+            "digest": "bb02493c6c76dcd01e09607847e4344f199f6e978bdc683f9d49e0171e10e631",
+            "ir": "field:object-inventory:inclinventory"
+          },
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          },
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      },
+      "/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "526328206505761bd3a8da9bf7a66e2af9fe4ec6cbe02fbfce0db4484aae11c4",
+            "ir": "field:object-curation:curator"
+          },
+          {
+            "digest": "74ab661b0a825540109857897ab7331f22f55d875d7da723b8839f16245613b3",
+            "ir": "field:object-curation:curfeetype#description/values:1"
+          },
+          {
+            "digest": "c450f513d0156df7705444e2842eafed98660ec654150c96fd98ce98e8edb20f",
+            "ir": "field:object-deal:adtypes#description/values:1"
+          },
+          {
+            "digest": "1696a768464c77ab21183bc64e468c588005fc08c129745a5b6824803385ce00",
+            "ir": "field:object-deal:auxdata#description/values:1"
+          },
+          {
+            "digest": "512446407269bd50f54a8aae594fedc2142ca885fa5716df4a591b20c7873e5b",
+            "ir": "field:object-deal:dinventory#description/values:1"
+          },
+          {
+            "digest": "193f92539017a3974502dd533b45b4ecd2317ca3fd69713ea6e63131a4cb5c6a",
+            "ir": "field:object-deal:pubcount#description/values:1"
+          },
+          {
+            "digest": "dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9",
+            "ir": "field:object-deal:sellerstatus#description/values:1"
+          },
+          {
+            "digest": "ae0fd641c1a0a516c0ade07a25a9ab9f9df146bdb50d3f1e404c0e3877c5860e",
+            "ir": "field:object-inventory:cattax"
+          },
+          {
+            "digest": "f28b832f472525a0929387afa28ef897954d5378eb463912610e0ae4d07d9b49",
+            "ir": "field:object-inventory:devicetype"
+          },
+          {
+            "digest": "bb02493c6c76dcd01e09607847e4344f199f6e978bdc683f9d49e0171e10e631",
+            "ir": "field:object-inventory:inclinventory"
+          },
+          {
+            "digest": "96b041c3c80699d7935cc53fe8d9c0282179d17bba1086ae658e57bce9588d15",
+            "ir": "field:object-inventory:inclinventory#description/values:1"
+          },
+          {
+            "digest": "474f321e54bd54eab1921d7b09104a0348d398494a579ae6c3640eed98654d41",
+            "ir": "field:object-terms:pricetype#description/values:1"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3 schema files"
+      }
+    }
+  },
+  "format": 1,
+  "lock": "main"
+}

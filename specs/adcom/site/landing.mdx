@@ -1,0 +1,97 @@
+---
+title: AdCOM 1.0 code lists as JSON Schema, unofficial
+description: An unofficial registry of AdCOM 1.0's code lists as JSON Schema vocabularies, generated from the specification text by Postindustria, an IAB Tech Lab member.
+---
+{/*
+  AdCOM's landing page, in its own words. Moved from the predecessor's
+  `landingPage` (`src/specs/adcom/site.ts:61-108`) with every word in its
+  place; the one sentence this slice reworks is on How it's built, and the
+  third stat tile's figure and breakdown are the slice's differences 20 and 21.
+
+  Every figure is read from the bundle through <Stat>, so a rebuild moves the
+  numbers and a key the bundle stops holding fails the build. What is written
+  down here is words and names: the specification's own name, which belongs in
+  its own prose and nowhere under `site/src`, and the names of the types and
+  records the prose cites -- and <Decision> refuses a name the bundle does not
+  hold, so a stale one stops the build too. The types this page links it no
+  longer names at all: `<Stat links>` reads them from the same key it counts.
+
+  Three figures were **not** read from the bundle until the review of step 13
+  measured it, and all three are the vendor range's floor: `counts.vendorFloor`
+  existed and nothing read it, while 500 was typed into this page twice and
+  into the method page twice. They read the key now. The `500+` that stays
+  written out is not that figure: it is the label of the row the text writes,
+  cited the way this page cites `List: Device Types` and the method page cites
+  the start delays' `>0` row.
+
+  **Three clauses of this page were conditional in the predecessor and
+  asserted here** (`src/specs/adcom/site.ts` branched on a count in each). The
+  two whose subject is a list of names are now `<Clause>`, which renders the
+  names itself and leaves itself out where the list holds none; the third is a
+  figure, which always renders, so it needs no clause:
+
+   - The lists with no codes: `<Clause of="empty" omits>` with a `one` form
+     and a `many` form, since "holds ... it becomes" and "hold ... they
+     become" are two sentences and only the second was written here. At none
+     the clause leaves itself out, as the predecessor's did; it used to print a
+     hole.
+   - The kernel's primitives: `<Clause of="primitives" omits links>`, its
+     `lead` carrying the words before the names and a `some` form the sentence
+     after them, the wording not turning on the number because
+     `<Stat count unit>` carries it. It used to assert the sentence and name
+     the two primitives by hand, so with none published the page read "the 0
+     types the lists need, MediaOffset and VendorCode" -- the figure counted
+     from the bundle and the names typed here, two readings that could
+     disagree. Both are one reading of `counts.primitives` now.
+   - The proposals: `<Stat of="departures" unit="proposal" zero="..." />`, the
+     predecessor's `f.departures === 0` conditional with both readings in the
+     prose and the choice between them in the data. The clause used to assert
+     "no proposal" outright while `counts.departures` sat in the bundle unread,
+     so a filed departure would have made this page state a falsehood with the
+     key that disproves it one line away.
+
+  **Why the two clauses do not write their own subject.** MDX evaluates a
+  component's children eagerly, so every tag in every form runs whatever form
+  the data picks -- measured: a `<Stat of="empty" />` inside a form threw at
+  `counts.empty: []` even in a build where the clause omitted itself without
+  touching its slots. A form may therefore hold no tag that refuses the data it
+  would be spared from, which is why `<Clause>` renders the names and the prose
+  writes only the words around them.
+*/}
+<section class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">Unofficial · Not an IAB Tech Lab artifact</p>
+    <h1>AdCOM&nbsp;<Stat of="brand.edition" />'s code lists, generated as JSON&nbsp;Schema</h1>
+    <p class="lede">An unofficial registry of the code lists of AdCOM <Stat of="brand.edition" />, one JSON Schema vocabulary per list, generated from the specification text by Postindustria, an IAB Tech Lab member. The specification remains the reference: where this site and the text differ, the text wins.</p>
+    <p class="actions"><a class="button primary" href="map.html">Open the type map</a><a class="button" href="registry.html">Who cites each list</a><a class="button" href="how-it-is-built.html">How it's built</a><a class="button" href="decisions/index.html">Read the decisions</a><a class="button" href="downloads.html">Get the schema files</a></p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What the registry holds</h2>
+    <p>AdCOM keeps the code lists that OpenRTB and other specifications cite, such as the device types and the API frameworks. Here each list with codes is one vocabulary, with each code's label from its row, so a specification that cites a list can take its codes from one place.</p>
+    <div class="stats">
+      <div class="stat gap"><span class="num"><Stat of="vocabularies" /></span><span class="what">lists as vocabularies</span><span class="why">Of the <Stat of="lists" /> lists the text writes, <Stat of="vocabularies" /> have codes. <Clause of="empty" omits><Fragment slot="one"> holds a deprecation note and no codes, so it becomes no vocabulary.</Fragment><Fragment slot="many"> hold a deprecation note and no codes, so they become no vocabulary.</Fragment></Clause></span></div>
+      <div class="stat prop"><span class="num"><Stat of="codes" /></span><span class="what">codes, each with its label</span><span class="why"><Stat of="vendor" /> lists also take a vendor's code from <Stat of="vendorFloor" /> up, as their <code>500+</code> rows reserve, and List: Start Delay Modes takes a mid-roll's delay in seconds.</span></div>
+      <div class="stat ex"><span class="num"><Stat of="decisions" /></span><span class="what">recorded decisions</span><span class="why"><Stat of="gaps" unit="gap" />, where the text leaves a point open, <Stat of="names" unit="name" />, where a generated value takes a name a record sets rather than the one the rules would give, and <Stat of="departures" unit="proposal" zero="no proposal: we propose no change to what the text settles, so the site has no variant switch" />.</span></div>
+    </div>
+    <p><a href="registry.html">The registry page</a> lists each one with the specifications on this site that cite it. Each decision says what we ask AdCOM's owners to state, and each has its own page.</p>
+  </div>
+</section>
+
+<EnumDrift />
+
+<section class="wrap two">
+  <div>
+    <h2>The objects</h2>
+    <p>AdCOM also defines <Stat of="objects" /> objects, such as <code>Ad</code> and <code>Device</code>, with <Stat of="keys" /> attribute rows, and the schemas now hold those too (<Decision of="D-049" />): each row is typed by what its Type cell states and by the code list or object it cites, and the rows no rule could read are settled by records that quote them. The records on the objects' known inconsistencies, such as how the protocol buffer definitions type a timestamp or a flag, quote the rows they rest on already.</p>
+    <h2>How to read a vocabulary</h2>
+    <p>Each list is <code>type: integer</code> and a <code>oneOf</code> of one titled <code>const</code> branch per code, as List: Device Types gives <code><Stat of="walkthrough.target.number" /></code> the title "Connected TV". A list with a <code>500+</code> row is open: one more branch takes a vendor's code of <Stat of="vendorFloor" /> or more. <Clause of="primitives" omits links><Fragment slot="lead">The kernel holds the <Stat of="primitives" count unit="type" /> the schemas need, </Fragment><Fragment slot="some">.</Fragment></Clause></p>
+  </div>
+  <div>
+    <h2>Inputs</h2>
+    <Inputs />
+    <p>The two inputs have the same lists, code for code; they differ only in the <code>Content</code> object's table, which the tag still writes with the attribute names that <code>main</code> reverted (<Decision of="D-016" />). The type map's input switch shows either. AdCOM calls every revision since 2018 "<Stat of="brand.edition" />", so every release of these schemas names the commit it rests on.</p>
+  </div>
+</section>

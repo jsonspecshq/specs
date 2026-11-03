@@ -1,0 +1,78 @@
+format: 2
+id: D-049
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "The registry of AdCOM's lists is published. What do AdCOM's objects become now?"
+covers:
+  - ir: key:object_ad:Ad.id
+    digest: c91212e637bf4a9042b519fb7a02592147d4222d58f6a4d20ab052b0f540a60d
+    quote: "`id` | ID of the creative; unique at least throughout the scope of a vendor (e.g., an exchange or buying platform). Note that multiple instances of the same ad when used in transactions must have the same ID."
+  - ir: key:object_content:Content.id
+    digest: 1d3d95ea80bc74d6651c82461edc5edf178a53a9b21d9fcc82523d04fe5e4059
+    quote: "`id` | Publisher-provided ID uniquely identifying the content."
+  - ir: key:object_dooh:Dooh.venue
+    digest: 299c1c33f2a9a4eb78fc87e4fb99c9f4300fe8b3236141cdc98f89b0da10d363
+    quote: "`venue` | The type of out-of-home venue. Refer to List: DOOH Venue TypesList: DOOH Venue Types."
+  - ir: key:object_videoplacement:VideoPlacement.delay
+    digest: fa11435f9ba22e71c2d11edb03732c978a8c5615a757b94446a43ddaa2a77021
+    quote: "`delay` | Indicates the start delay in seconds for pre-roll, mid-roll, or post-roll placements. For additional generic values, refer to List: Start Delay Modes."
+options:
+  - id: defer
+    summary: >-
+      Every element of the Object: sections stays informative; the registry
+      of lists is what is published, and the objects' rows stay extracted,
+      so a decision can cite them.
+  - id: map-now
+    summary: >-
+      Map every row of the Object: sections and of the Abstract Class:
+      section, and publish a schema per object, so a payload of AdCOM
+      objects validates and each row is an attribute with a type rather
+      than text a reader has to interpret.
+chosen: map-now
+rationale: >-
+  The earlier reading of this question chose `defer` for two reasons, and
+  both are spent. The first was that the other specifications name AdCOM's
+  lists and not its objects, so the registry -- 42 vocabularies, one per list
+  with codes -- was useful on its own and could be referenced first; it is
+  published, so nothing waits on it. The second was that the objects carry their own open points, "how a
+  timestamp, an integer flag, or an extension object is typed", which
+  deserve their own decisions; the timestamps and the integer flags have them
+  in D-012 and D-013, and the extension object, the one map, the five object
+  rows that name no target, and the abstract class have them in D-050, D-051,
+  D-052, and D-053. Deferring was a decision about the order of two phases,
+  and the second phase has arrived.
+
+  Why a new record and not an edit. A reading is append-only once pushed, and
+  `map-now` is the alternative the earlier record weighed and set aside, so
+  the two cannot stand together: a record cannot both defer the objects and
+  deliver them. D-003 is marked superseded and keeps its four covers
+  unchanged, so a citation filed against its ID still resolves and the
+  history of the reading is readable. Nothing about the registry of lists is
+  retracted: every reading that rests on a list stands as written.
+
+  What changes, measured. Both locks hold 411 key rows in 46 sections: 407 in
+  the 45 sections headed Object: and 4 in the one headed Abstract Class:, at
+  line 1744. Under `defer` each of the 411 maps to informative text and no
+  schema names it. Under `map-now` each becomes an attribute of an object's
+  schema, and the 46 sections give 45 published objects, since the abstract
+  class is never instantiated on its own and so publishes no payload of its
+  own (D-053).
+
+  D-012 and D-013 need no re-reading. Each chose `defer` in the words "Until
+  AdCOM's objects are mapped, the schemas say nothing about these attributes;
+  when they are, they follow the text", so mapping the objects does what each
+  of them already chose for the case where the objects are mapped, and
+  neither record's chosen option is contradicted.
+
+  The locks read are `main`, at commit 26c59ba1b235cd8d938c9877409e506f1b8d3f0c,
+  and `tag-202607`, at commit d67a6a8dedc883e0655e239d97116a91df6052ed. All
+  four covered rows carry on both locks the digest the earlier record recorded
+  for them, so no cover is lock-scoped and the reading rests on the same text
+  it did.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L233"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1383"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1961"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2038"

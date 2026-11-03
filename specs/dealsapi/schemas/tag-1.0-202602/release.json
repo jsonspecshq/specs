@@ -1,0 +1,41 @@
+{
+  "changes": [],
+  "digest": "e6fabed08bbe3441335e479e8b7dffe7837eaf303bdbbc56044671dce7d249df",
+  "files": {
+    "documents/1/buyer-seat.json": {
+      "digest": "9f7cf1e2f2e9c8dfe3c2aba69fa643130a26772893fa825f29c3a95e1c680401",
+      "version": "1.0.0"
+    },
+    "documents/1/deal.json": {
+      "digest": "ac39a19c34d314c95892c051e2c702093c81e15b080b63fe9f1f96e2c6ba375b",
+      "version": "1.0.0"
+    },
+    "kernel/1/kernel.json": {
+      "digest": "d2db8b8b4dcbb51272eeef18222312e2f6ed56b7ab7f9e1b61e613071f79479c",
+      "version": "1.0.0"
+    },
+    "modules/buyer-seat/1/buyer-seat.json": {
+      "digest": "8bc9e71737e1ac66ae1e2fad38e45ef01b79cb096f7d36b0efbeea2f58477e81",
+      "version": "1.0.0"
+    },
+    "modules/deal/1/deal.json": {
+      "digest": "3bbbe5ca694bbedf0bde31fd30a13a1f7dbf6b7cc01ee98c6e01075450e1d552",
+      "version": "1.0.0"
+    }
+  },
+  "format": 1,
+  "imports": {
+    "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json": "1b326d0df4432fd05f0dd1e31e996184e8fbdc1d9b96e5abfa958b1d567a9485",
+    "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json": "644b49278e0d3a5e2c9772d006672854bc9c1b8f5a099e9d29c0c50ebf53341d"
+  },
+  "input": {
+    "blob": "f675232c0e0d57b77ce1fc34b74baa2e42bc700a",
+    "commit": "938a5d1fdb5705ae53b2584c90b9eb325b71a96b",
+    "ir_sha256": "e2ed6504e59a480cfc8b2805bdde8bccf5d8414088b9126fde4a3b1c890e4130"
+  },
+  "lock": "tag-1.0-202602",
+  "model": "9e87c4d246cd90b726b2e1832ce73ade8e8339aa8ce1aa867dde5995fb9e3c99",
+  "previous": null,
+  "release": "1.0.0",
+  "rules": "512fe143125674af0d4e6d0aff64948f1a06079b8c0abaf18318f98258cb4301"
+}

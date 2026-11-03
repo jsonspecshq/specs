@@ -1,0 +1,20 @@
+format: 2
+id: D-040
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_feedtypes:6
+value: VIDEO_GAME_BACKGROUND_AUDIO
+rule_would_give: VIDEO_GAME_BACKGROUND_AUDIO_IN_VIDEO_GAMES
+reading: D-037
+covers:
+  - ir: def:list_feedtypes:6
+    digest: 628e75f6e52f843c86df83fbf8b36b39d9448295a771590d42f8bc66ae73ff26
+    quote: "`6` | MISC | Video game (background audio in video games)"
+reason: >-
+  The row glosses "Video game" with "background audio in video games", which
+  repeats the name it glosses, so D-037 drops the repetition and keeps what
+  the gloss adds: the feed is a video game's background audio, at 27
+  characters. The row stays the code's description, where the gloss reads as
+  the sentence it is.

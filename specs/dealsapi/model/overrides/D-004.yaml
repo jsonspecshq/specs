@@ -1,0 +1,72 @@
+format: 2
+id: D-004
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: "What is a country code in `countries`, which the text writes as \"ISO-3166-3\"?"
+covers:
+  - ir: field:object-terms:countries
+    digest: 2163f6ca4661e298607dfcb0835a31140673ce8edde999f59c94ea2df16fdb2b
+    quote: "`countries` | string array | An array of country codes in which the deal is available, where country code is a string using ISO-3166-3. If this is empty or missing, the deal is assumed to apply to all countries."
+    # Format 2 obliges a departure to say which form of the element it departs
+    # from. Format 1 asked for no such statement, which is why the ported
+    # record carried none, and the form this cover first named -- `type` -- was
+    # written while nothing read the field (gates/decisions/G-034.yaml says so
+    # in as many words). The verification stage reads it, and `type` was wrong:
+    # the fidelity oracle reads the Type cell, which states `string array`, and
+    # every alpha-3 code is a string, so its `type` form agrees with the schema
+    # and no disagreement of that form can occur.
+    #
+    # What the schema departs from is the standard the Description cell names,
+    # which is none of the eleven forms the oracle reads
+    # (src/constraint-forms.ts). A departure the oracle cannot see says which
+    # value its narrowing rejects, as a value, which is the `challenge` below:
+    # `src/overrides.ts` requires it of exactly this shape of cover and
+    # `override-challenge` sends it at the published schema.
+    departs: ["the standard the Description cell names for the codes"]
+options:
+  - id: iso-3166-1-alpha-3
+    summary: >-
+      An ISO 3166-1 alpha-3 code, such as `USA`, as OpenRTB 2.6 writes
+      `geo.country`, checked against the codes ISO 3166-1 assigns.
+  - id: as-written
+    summary: >-
+      Any string, as the row types it: the codes ISO 3166-3 names are the
+      four-letter codes of countries that no longer exist, which no current
+      deal can run in, so the row's string type is all that stays.
+chosen: iso-3166-1-alpha-3
+rationale: >-
+  ISO 3166-3 is the part of the standard that holds the codes of former
+  countries, such as `CSHH` for Czechoslovakia, so a deal "available" in
+  them can run nowhere. The intent is plainly current countries, and OpenRTB
+  2.6, whose bid requests the deal's terms are checked against, writes
+  `geo.country` in ISO 3166-1 alpha-3. The schema departs from the text: it
+  takes ISO 3166-1 alpha-3 codes. As written, the schema takes any string.
+challenge:
+  - type: CountryCode
+    value: "CSHH"
+    verdict: reject
+    context: >-
+      A seller porting a deal from a system that stored Czechoslovakia's code,
+      which ISO 3166-3 assigns and which the row's own words therefore admit.
+    reason: >-
+      CountryCode's pattern `^[A-Z]{3}$` takes three letters, so the four of an
+      ISO 3166-3 code are refused. This is the departure as a value: the row
+      names ISO-3166-3 and the schema does not take its codes.
+  - type: CountryCode
+    value: "USA"
+    verdict: accept
+    context: >-
+      A deal running in the United States, which the example scenarios and the
+      field examples both show.
+    reason: >-
+      ISO 3166-1 assigns `USA` as the alpha-3 code of the United States, and
+      CountryCode's pattern takes it.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L110"
+  - "https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/1debba8001f40eb14597102dec3205afddf811d4/2.6.md#objectgeo"
+feedback: >-
+  Write "ISO 3166-1 alpha-3" for `countries`, as OpenRTB 2.6 writes
+  `geo.country`. ISO 3166-3 holds the codes of countries that no longer
+  exist.

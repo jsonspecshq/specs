@@ -1,0 +1,96 @@
+format: 2
+id: D-037
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "AdCOM names no constant: a code is a number and a row of prose, so an implementation that generates code has to make an identifier out of the row. Eleven of the 287 codes make one of 42 to 46 characters that way. What identifier does such a code get?"
+covers:
+  - ir: def:list_categorytaxonomies:1
+    digest: 92880a789bb6693cbc38773c7069b77cd224fac85c63f4e84273acb001aacb13
+    quote: "`1` | IAB Tech Lab Content Category Taxonomy 1.0: Deprecated, and recommend NOT be used since it does not have SCD flags."
+  - ir: def:list_categorytaxonomies:2
+    digest: a2bf4459dc264451aa3f9d4ac94104951dff9c0875433f5b51e8edd64c74be69
+    quote: "`2` | IAB Tech Lab Content Category Taxonomy 2.0: Deprecated, and recommend NOT be used since it does not have SCD flags."
+  - ir: def:list_feedtypes:6
+    digest: 628e75f6e52f843c86df83fbf8b36b39d9448295a771590d42f8bc66ae73ff26
+    quote: "`6` | MISC | Video game (background audio in video games)"
+  - ir: def:list_playbackcessationmodes:1
+    digest: ea187921e13fcb30ff0f126202c3c5f9223a9a55c296bcc5a87d0d6b0d2fd5a6
+    quote: "`1` | On Video Completion or when Terminated by User"
+  - ir: def:list_playbackcessationmodes:2
+    digest: a1d48ad00b12869c100f31ce021da4004d2c89eb494ae2a67952cb83c43b93ac
+    quote: "`2` | On Leaving Viewport or when Terminated by User"
+  - ir: def:list_playbackcessationmodes:3
+    digest: 0e9953ee45b8b8eb18cbd777c8503dd9d64067512626e639ec8b1d8cb35b7b78
+    quote: "`3` | On Leaving Viewport Continues as a Floating/Slider Unit until Video Completion or when Terminated by User"
+  - ir: def:list_playbackmethods:5
+    digest: 41d43f2edf5812daff99809221bc5d7cbca95e84ad4cc02fe09b5f444a6e9d64
+    quote: "`5` | Initiates on Entering Viewport or scrolling into view with Sound On"
+  - ir: def:list_playbackmethods:6
+    digest: 2852b601f07001bdbc8db852fc59610e2695e5f2e1b0fafe9e9712566d059f6a
+    quote: "`6` | Initiates on Entering Viewport or scrolling into view with Sound Off by Default"
+  - ir: def:list_playbackmethods:8
+    digest: 2c1531accdf22cd0c8e583b185e0532ff936cf662024ef0fe09fdcf32eeac74c
+    quote: "`8` | Initiated by user pausing content, Sound on"
+  - ir: def:list_playbackmethods:9
+    digest: f34ce6c039a5c5285f17cb7fe57953ba60a65bb0fd890fdc627e5c2ed068d1e1
+    quote: "`9` | Initiated by user pausing content, Sound off"
+  - ir: def:list_poddedupe:2
+    digest: 2ccc62e1328f24b6d73a78ff47823ccdf256985f8d705cb2ed8d5a60a3904e7e
+    quote: "`2` | Deduplicated on IAB Tech Lab Content Taxonomy"
+options:
+  - id: long-names
+    summary: >-
+      Every code's identifier is its row's name, word for word, however long it
+      runs; the eleven stay at 42 to 46 characters.
+  - id: drop-by-rule
+    summary: >-
+      A rule drops words from any identifier past a length, from a list of the
+      words that may go, so no code is named one at a time.
+  - id: name-per-code
+    summary: >-
+      A code whose identifier runs too long is named once, in review, with the
+      reason beside the name, and no word-dropping rule is written.
+chosen: name-per-code
+rationale: >-
+  Nesting each enum in a message drops the prefix every value name carried,
+  and that is a rule doing nearly all of the work: over AdCOM's 287 code
+  names the median falls from 32 characters to 14, the names over 40 from 99
+  to 11, and the longest from 71 to 46. What is left is eleven names, and
+  each is long for a reason of this one text — a taxonomy's publisher that
+  every code of its list names, a clause that every mode of its list ends
+  with, a parenthesis that repeats the words it glosses.
+
+  Leaving them long costs no machinery and ships
+  ON_VIDEO_COMPLETION_OR_WHEN_TERMINATED_BY_USER to every language a target
+  emits, where the words that tell the code from its neighbour are the first
+  nineteen characters of forty-six and the rest is the same in both. A
+  word-dropping rule would buy eight of the eleven and cost a reviewed table
+  of words that may go; it would also answer a question about AdCOM's prose
+  rather than about every text, which is the test a rule has to pass. One
+  rule with eleven exceptions is honest; eleven records standing in for a
+  rule is the table of names the target rules refuse. So the rule names 276
+  of the 287 and a record names 11, each with its reason beside the value.
+
+  What the eleven follow, so that a reader can predict them: drop a word that
+  tells no code of its list from another, keep every word that tells one code
+  from another, and nominalise only where nothing is left to drop. Forty
+  characters is the trigger for review and not a target — the eleven names
+  run from 19 to 40 characters, and none was cut to reach a number. No name
+  may collide with another of its own list, suffixed or not: the suffix rule
+  resolves none of AdCOM's 287 names today, and a record that set it working
+  would hide a collision inside a name.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2970"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L3730"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L4261"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L4301"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L4344"
+feedback: >-
+  Give every code of every list a short name beside its number and its
+  definition, so that each implementation names the code alike. Today a code
+  has a number and a sentence, an implementation that generates constants has
+  to make a name out of the sentence, and eleven of the 287 come out over
+  forty characters with the words that tell one code from the next buried at
+  the end.

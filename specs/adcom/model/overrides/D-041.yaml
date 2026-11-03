@@ -1,0 +1,21 @@
+format: 2
+id: D-041
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_playbackcessationmodes:1
+value: ON_VIDEO_COMPLETION
+rule_would_give: ON_VIDEO_COMPLETION_OR_WHEN_TERMINATED_BY_USER
+reading: D-037
+covers:
+  - ir: def:list_playbackcessationmodes:1
+    digest: ea187921e13fcb30ff0f126202c3c5f9223a9a55c296bcc5a87d0d6b0d2fd5a6
+    quote: "`1` | On Video Completion or when Terminated by User"
+reason: >-
+  Every mode of List: Playback Cessation Modes ends "or when Terminated by
+  User" — codes 1 and 2 in the row itself, code 3 in the clause its title
+  already drops — so the clause tells no code of the list from another and
+  D-037 drops it. What is left, at 19 characters, is the mode: playback
+  ceases when the video completes. The row stays the description, where the
+  user's own termination is written out.

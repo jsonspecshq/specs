@@ -1,0 +1,167 @@
+format: 2
+id: D-060
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Nine of the 46 published objects are referenced by no type of AdCOM and rooted by no document of it. What reaches them?"
+covers:
+  - ir: rule:adcomprinciples:2319688c
+    digest: de8bea50e05c30aed593f16dfb95bf0ead180b37f05505c877561a9df6c473e5
+    quote: OpenRTB) must indicate the version of AdCOM in use and specify where and how it interfaces with AdCOM objects.
+  - ir: rule:spec:e820d36a
+    digest: 41bb7fce4f64aa45314d4e8673d788f437175906bd2c4b734372cb179de310ab
+    quote: Transaction layers in which AdCOM is used may provide additional required and/or recommended guidance specific to the application.
+options:
+  - id: entered-by-the-transaction-layer
+    summary: >-
+      The nine are the types a transaction specification enters the model at,
+      as the text says it must say where it interfaces with AdCOM objects, so
+      each is reachable by a payload the transaction layer carries and by
+      nothing inside AdCOM. The record names the nine, and the reachability
+      check reads the list.
+  - id: one-document
+    summary: >-
+      AdCOM states a document of its own that holds the nine as members, so
+      each is referenced and the reachability check needs no list. The
+      document is this repository's and no section of the text states it.
+  - id: unreferenced-is-allowed
+    summary: >-
+      A published object needs no referrer, so the reachability check runs
+      over the primitives and the parts alone and an object nothing reaches
+      is published without comment.
+  - id: drop-the-nine
+    summary: >-
+      An object no type references is published for no payload to carry, so
+      the nine are left out and the module publishes the 37 objects some
+      other object holds.
+chosen: entered-by-the-transaction-layer
+rationale: >-
+  Measured on both locks over the model the objects phase resolves: 46
+  published objects, of which 37 are referenced by at least one other type and
+  nine by none -- `Ad`, `App`, `Device`, `Dooh`, `Placement`, `Regs`,
+  `Restrictions`, `Site` and `User`. AdCOM states no document and no profile,
+  so nothing inside it roots them either.
+
+  The text says why, in the architecture section and in its own principles.
+  AdCOM is a layer-4 model whose objects two transaction specifications share:
+  "There are a number of objects that are common to multiple transaction
+  specifications. For example, both OpenRTB and OpenDirect share a common
+  concept of a 'site', a 'placement', an 'ad'". A transaction specification
+  "must indicate the version of AdCOM in use and specify where and how it
+  interfaces with AdCOM objects", and a transaction layer "may provide
+  additional required and/or recommended guidance specific to the
+  application". So the position an `Ad` or a `Site` sits at is stated by the
+  transaction specification and not by AdCOM, and an AdCOM object with no
+  AdCOM referrer is the interface the sentence above names rather than an
+  object nothing can reach.
+
+  The one corpus of payloads this repository did not write measures the same
+  nine from the outside. The three files under
+  `specs/adcom/input/external/prebid-openrtb/adcom1/testdata/` write seven
+  top-level positions between them: `ad` in `media-response.json`, `placement`
+  in `item-specifications.json`, and `regs`, `restrictions`, `site`, `user`
+  and `device` in `request-context.json`. Each is one of the nine. The two
+  that no file writes, `app` and `dooh`, sit at the position `site` sits at:
+  the three are the derived classes of one abstract class (`D-053`), and a
+  payload carries whichever of them the distribution channel is. Nothing
+  outside the nine appears at a top-level position, and `distributionchannel`
+  appears at none, which is the same reading from the other side.
+
+  `one-document` is refused because the document would be this repository's
+  invention. No section of AdCOM heads a request, a response or any container
+  of the nine; the figure the text offers instead is a diagram of three groups
+  -- Media, Placement and Context -- and it says of them that this is "purely
+  a means of organization; no technical distinctions or restrictions are
+  implied". Writing a document to make the reachability arithmetic close would
+  publish a payload shape the specification does not state, and every
+  self-consistent check would then agree with it.
+
+  `unreferenced-is-allowed` is refused by what it let through. Until this
+  record, `src/domains.ts`' `useProblems` returned early on anything that was
+  not a primitive or a part, so no gate could report a published object
+  nothing references -- and `modules/objects/1/objects.json` published
+  `DistributionChannel` as a full `$defs` entry on both locks, four properties
+  and `additionalProperties: false`, a payload the text says is never
+  instantiated. `grep -c DistributionChannel` on that file answered 1, its own
+  key. An object nothing reaches has to be reported, and then answered: by a
+  referrer, by a document, or by this record.
+
+  `drop-the-nine` is refused because it drops the whole of what AdCOM is for.
+  `Ad` is the root of the Media group -- "This object is the root of a
+  structure that defines in instance of advertising media" -- and `Placement`
+  of the Placement group -- "Placements of all types begin with this object as
+  their root". A tree that published neither would publish the leaves of a
+  model and none of its entry points, and the external corpus's three payloads
+  would all be rejected at their first member.
+
+  What the listing costs, and what holds it to its reason. The nine are
+  written down, so a tenth object that loses its last referrer is reported
+  rather than quietly joining them. The list is held in both directions on
+  each lock: a listed type the model lacks fails, a listed type some other
+  type does reference fails, a listed type a document or a profile roots
+  fails, and a listed type two records name fails. So the day a transaction
+  specification is mapped in this repository and references `Site` from its
+  own request object, this record's entry for `Site` fails and has to come
+  out.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L173"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L183"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L201"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L225"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L886"
+  - "specs/adcom/input/external/prebid-openrtb/adcom1/testdata/media-response.json (ad)"
+  - "specs/adcom/input/external/prebid-openrtb/adcom1/testdata/item-specifications.json (placement)"
+  - "specs/adcom/input/external/prebid-openrtb/adcom1/testdata/request-context.json (site, user, device, regs, restrictions)"
+roots:
+  - type: Ad
+    reason: >-
+      The root of the Media group, which the text states in those words:
+      "This object is the root of a structure that defines in instance of
+      advertising media". A transaction specification carries it as the media
+      of a response; `media-response.json` writes it at `ad`.
+  - type: App
+    reason: >-
+      A derived class of the abstract distribution channel (`D-053`), carried
+      at the position a transaction specification gives the channel, beside
+      `Site` and `Dooh`.
+  - type: Device
+    reason: >-
+      A Context object a transaction specification carries beside the channel;
+      `request-context.json` writes it at `device`.
+  - type: Dooh
+    reason: >-
+      A derived class of the abstract distribution channel (`D-053`), carried
+      at the position a transaction specification gives the channel, beside
+      `Site` and `App`.
+  - type: Placement
+    reason: >-
+      The root of the Placement group, which the text states in those words:
+      "Placements of all types begin with this object as their root".
+      `item-specifications.json` writes it at `placement`.
+  - type: Regs
+    reason: >-
+      A Context object a transaction specification carries beside the channel;
+      `request-context.json` writes it at `regs`.
+  - type: Restrictions
+    reason: >-
+      A Context object a transaction specification carries beside the channel;
+      `request-context.json` writes it at `restrictions`.
+  - type: Site
+    reason: >-
+      A derived class of the abstract distribution channel (`D-053`), carried
+      at the position a transaction specification gives the channel;
+      `request-context.json` writes it at `site`.
+  - type: User
+    reason: >-
+      A Context object a transaction specification carries beside the channel;
+      `request-context.json` writes it at `user`.
+feedback: >-
+  Say which objects a transaction specification may enter AdCOM at, and at
+  which position. Today the text says a transaction specification "must
+  indicate the version of AdCOM in use and specify where and how it interfaces
+  with AdCOM objects", which leaves the set to each transaction
+  specification's own prose: a generator that reads AdCOM alone cannot tell an
+  entry point from an object that lost its last reference. Naming the entry
+  points in AdCOM -- or stating one container per group -- would let a
+  consumer walk the published schemas from a stated root.

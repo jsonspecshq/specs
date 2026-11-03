@@ -1,0 +1,17 @@
+format: 2
+id: D-029
+status: proposed
+kind: name
+author: agent
+attribute: title
+element: def:list_playbackmethods:4
+value: Initiates on Mouse-Over with Sound On
+reading: D-020
+covers:
+  - ir: def:list_playbackmethods:4
+    digest: e01b8c8069612c4893e433fcbd936b255914d6eee1919f948febb7ae845c3b1e
+    quote: "`4` | Initiates on Mouse-Over or cursor over with Sound On"
+reason: >-
+  A cut of this row would end the name at "with", so D-020 keeps the
+  trigger and the sound in the form code 3 already has, dropping "or
+  cursor over", which says the same as "on Mouse-Over".

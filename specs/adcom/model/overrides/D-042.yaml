@@ -1,0 +1,21 @@
+format: 2
+id: D-042
+status: proposed
+kind: name
+author: agent
+attribute: code-name
+element: def:list_playbackcessationmodes:2
+value: ON_LEAVING_VIEWPORT
+rule_would_give: ON_LEAVING_VIEWPORT_OR_WHEN_TERMINATED_BY_USER
+reading: D-037
+covers:
+  - ir: def:list_playbackcessationmodes:2
+    digest: a1d48ad00b12869c100f31ce021da4004d2c89eb494ae2a67952cb83c43b93ac
+    quote: "`2` | On Leaving Viewport or when Terminated by User"
+reason: >-
+  "Or when Terminated by User" ends every mode of List: Playback Cessation
+  Modes and tells no code of the list from another, so D-037 drops it and
+  the mode is left at 19 characters: playback ceases on leaving the
+  viewport. Code 3 begins with the same words and goes on
+  CONTINUES_FLOATING, which is the one thing that tells the two apart, so
+  neither name can be read for the other.

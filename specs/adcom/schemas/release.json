@@ -1,0 +1,29 @@
+{
+  "changes": [],
+  "digest": "a446dd1b99ad645121ab805cd1fda69f6aa5d7ab5877f23ad2ff11489f3e076d",
+  "files": {
+    "kernel/1/kernel.json": {
+      "digest": "1b326d0df4432fd05f0dd1e31e996184e8fbdc1d9b96e5abfa958b1d567a9485",
+      "version": "1.0.0"
+    },
+    "modules/lists/1/lists.json": {
+      "digest": "644b49278e0d3a5e2c9772d006672854bc9c1b8f5a099e9d29c0c50ebf53341d",
+      "version": "1.0.0"
+    },
+    "modules/objects/1/objects.json": {
+      "digest": "e2cd4a1277e807fda705301be5ebecb7a77c1170a4e1673db0f73e01eb5f70fe",
+      "version": "1.0.0"
+    }
+  },
+  "format": 1,
+  "input": {
+    "blob": "aca75af65c4261239d907bfd73705555874c85b1",
+    "commit": "26c59ba1b235cd8d938c9877409e506f1b8d3f0c",
+    "ir_sha256": "2d6be34b23cdc02d6194d4edd910d021c221bc4d0e8c517ea1f141d595acb38e"
+  },
+  "lock": "main",
+  "model": "55269801f3b79e686b48849cec98127a6dda70686b4f13f04b364f52ecaf8b23",
+  "previous": null,
+  "release": "1.0.0",
+  "rules": "678a35c7dfc848d8ec9ee866e2c5968f78eb9de38efc386aff9b63e803ac2eb5"
+}

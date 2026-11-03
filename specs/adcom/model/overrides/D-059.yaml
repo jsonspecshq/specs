@@ -1,0 +1,133 @@
+format: 2
+id: D-059
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Eight member names recur across the objects with values of more than one kind: `context`, `ctype`, `id`, `len`, `priv`, `ptype`, `source`, and `type`. Is each name one thing the objects spell alike, or several things that happen to share a spelling?"
+covers:
+  - ir: key:object_content:Content.context
+    digest: 0bec9f02955eda6d37ccab3dac3a3dd21e83339ef7c1451ce33204df1b0d4de8
+    quote: "`context` | Type of content (game, video, text, etc.). Refer to List: Content Contexts in AdCOM 1.0."
+  - ir: key:object_displayplacement:DisplayPlacement.context
+    digest: 713d2577ac45f188b8d10b05804d7f6428a2d37f5b9a8c41bf9fb1101a1873d9
+    quote: "`context` | The context of the placement. Refer to List: Display Context Types."
+  - ir: key:object_audio:Audio.ctype
+    digest: c9a9d15761b8de510ecd20350b31793fdd56444267b95afe463c5ae124d4b5af
+    quote: "`ctype` | Subtype of audio creative. Refer to List: Creative Subtypes - Audio/Video."
+  - ir: key:object_display:Display.ctype
+    digest: fc07532a7508a18110651b7fa64754c3b29292e82a181b0a53f817e2f72e88f5
+    quote: "`ctype` | Subtype of display creative. Refer to List: Creative Subtypes - Display."
+  - ir: key:object_ad:Ad.id
+    digest: c91212e637bf4a9042b519fb7a02592147d4222d58f6a4d20ab052b0f540a60d
+    quote: "`id` | ID of the creative; unique at least throughout the scope of a vendor (e.g., an exchange or buying platform). Note that multiple instances of the same ad when used in transactions must have the same ID."
+  - ir: key:object_asset:Asset.id
+    digest: 20f9dbb87c647e6bed67fd41018875c5c1eac85cdda743171d9f551070014cd2
+    quote: "`id` | The value of `AssetFormat.id` if this ad references a specific native placement defined by a `Placement` object and its structure."
+  - ir: key:object_content:Content.len
+    digest: 734e76b9c86c187a1491d491bc4b96149e91daad7b1dbe7ec455e02da0f81de1
+    quote: "`len` | Length of content in seconds; appropriate for video or audio."
+  - ir: key:object_dataasset:DataAsset.len
+    digest: 666803ea48fce00374f02b1c473fa7692d6bf97c41723d834921177aeec2303e
+    quote: "`len` | The length of the `value` contents. This length should conform to recommendations provided in List: Native Data Asset Types"
+  - ir: key:object_display:Display.priv
+    digest: bcbc4b27efe2000d43e261678588169d7ee8fde059d7f1e3600a325d19b9213b
+    quote: "`priv` | URL of a page informing the user about a buyer's targeting activity."
+  - ir: key:object_displayplacement:DisplayPlacement.priv
+    digest: a549ab8611a7669c3c6d6f18aa87edea8bfffadcb3743e18cdb2aac35952a840
+    quote: "`priv` | Indicator of whether or not the placement supports a buyer-specific privacy notice URL, where 0 = no, 1 = yes."
+  - ir: key:object_displayplacement:DisplayPlacement.ptype
+    digest: aa096660702bcef866630a614fc1e8430f66f21ba071fc2f40611e7ee0fb1bda
+    quote: "`ptype` | The display placement type. Refer to List: Display Placement Types."
+  - ir: key:object_videoplacement:VideoPlacement.ptype
+    digest: 7fd630fc17162d2a404ce15295de00f06d5058e3df80de6f588e1ed9b7a8573b
+    quote: "`ptype` | Placement subtype. Refer to List: Plcmt Subtypes - Video."
+  - ir: key:object_eids:ExtendedIdentifiers.source
+    digest: 3bfff530d8d2b6604d38aa4c2e80b927397a44f7791c5fc89aff9ec284f5c2ba
+    quote: "`source` | Source domain of the UID provider. Should be the root domain name of the provider, not the URL. For example, \"liveramp.com\" not \"https://liveramp.com/connect\""
+  - ir: key:object_useragent:UserAgent.source
+    digest: 1cf7402784336561545b0da64b2e2e1e4488878068d1a16f924acf264ab264dd
+    quote: "`source` | The source of data used to create this object. Refer to List: User-Agent Source"
+  - ir: key:object_device:Device.type
+    digest: 0b9ea24cf39319d9e08813dd836a93e1727965e5bd87a24389aced16eaaa82fb
+    quote: "`type` | The general type of device. Refer to List: Device Types."
+  - ir: key:object_event:Event.type
+    digest: b8e8e3f5e4bbc2809de405bd4f6530196d4ef444d61c0f729fbb001846939b7e
+    quote: "`type` | Type of event to track. Refer to List: Event Types."
+options:
+  - id: homonyms-as-written
+    summary: >-
+      Each of the eight names is a homonym: the objects that write it mean
+      different things by it, each row's own words and its own citation say
+      which, and the eight are listed as homonyms so that the recurring-name
+      check stops asking them to agree.
+  - id: one-concept-each
+    summary: >-
+      Each of the eight names is one thing, so the values it carries are
+      widened to the one type that accepts all of them -- a bare integer for
+      `context`, `ctype`, `ptype` and `type`, a bare string for `priv`, and a
+      whole number for `id` and `len`.
+  - id: rename-by-object
+    summary: >-
+      Each member is renamed so that no two objects spell two things alike,
+      as `contentContext` and `displayContext`, and the published schemas
+      stop carrying the names the specification writes.
+chosen: homonyms-as-written
+rationale: >-
+  Measured on both locks over the 419 properties the 46 objects hold. Eight
+  member names carry values of more than one kind, and each one is a different
+  reading of the same spelling by two different objects:
+
+  `context` is List: Content Contexts on a `Content` and List: Display Context
+  Types on a `DisplayPlacement` -- a kind of content against a kind of
+  placement. `ctype` is List: Creative Subtypes - Audio/Video on an `Audio`,
+  an `AudioPlacement`, a `Video` and a `VideoPlacement`, and List: Creative
+  Subtypes - Display on a `Display` and a `DisplayPlacement`. `ptype` is List:
+  Display Placement Types on a `DisplayPlacement` and List: Plcmt Subtypes -
+  Video on a `VideoPlacement`. `type` is five lists over five objects: Device
+  Types, Event Types, Location Types, Native Data Asset Types and Native Image
+  Asset Types. In each of those four the two rows cite two different code
+  lists by name, so the text states the difference and no reading is needed to
+  find it.
+
+  The remaining four are the kind the check exists for, because the
+  difference is in what the value is and not in which list it comes from.
+  `id` is an identifier a vendor assigns on fifteen objects and the number of
+  an `AssetFormat` on `Asset` and `AssetFormat` themselves -- the row says so:
+  "the value of `AssetFormat.id`". `len` is a count of seconds on a `Content`
+  and of characters on the three asset-format rows, and on `DataAsset` it is a
+  code of List: Native Data Asset Types. `priv` is a URL on a `Display` and
+  the 0 | 1 flag on a `DisplayPlacement`, which is the sharpest of the eight:
+  one carries a page's address and the other says whether such a page is
+  supported. `source` is a domain name on `ExtendedIdentifiers` and a code of
+  List: User-Agent Source on a `UserAgent`.
+
+  `one-concept-each` is refused because it widens eight members to accept
+  values the text rules out: a `DisplayPlacement.priv` of `"https://..."` and
+  a `Display.priv` of `1` would both validate, and the schemas would stop
+  saying what the rows say. `rename-by-object` is refused because a member
+  name is the specification's own and a receiver reads the name the
+  specification writes; renaming would make every published schema reject a
+  real payload.
+
+  What this rejects: nothing a payload can hold, since the reading changes no
+  member's type. What it costs is that a reader of the published tree meets
+  eight names that mean different things in different objects, which is the
+  specification's own shape and is why each is listed with its reason rather
+  than silently allowed.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_display"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_displayplacement"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_asset"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_dataasset"
+feedback: >-
+  Four member names carry values of different kinds in different objects, and
+  a reader has to read each definition cell to find out which: `priv` is a URL
+  on a `Display` and a 0 | 1 flag on a `DisplayPlacement`; `id` is a
+  vendor-assigned identifier on fifteen objects and an `AssetFormat.id`
+  reference on two; `len` is seconds on a `Content`, characters on the
+  asset-format rows and a code of List: Native Data Asset Types on a
+  `DataAsset`; `source` is a domain name on `ExtendedIdentifiers` and a code
+  of List: User-Agent Source on a `UserAgent`. Consider giving the narrower
+  use of each a name of its own -- `privsupport`, `fmtid`, `lentype` -- so
+  that one name means one thing across the specification.

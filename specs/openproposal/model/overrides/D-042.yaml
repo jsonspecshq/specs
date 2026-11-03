@@ -1,0 +1,72 @@
+format: 2
+id: D-042
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: Is a commitment's flight start and end a calendar date, as the examples write them, or a point in time?
+# Format 2 obliges a departure to say which form of each covered element it
+# departs from, and format 1 asked for no such statement, so both entries below
+# are this conversion's. Neither is one of the eleven forms the fidelity oracle
+# reads (src/constraint-forms.ts), and that is the record's own finding: the
+# § 5.6.1 table is `Key | Required | Meaning`, so the IR holds `required` and
+# `meaning` for each of these rows and no `type` at all. There is no stated
+# type to contradict; what the schema departs from is the calendar date every
+# example writes, and the examples are snapshot files rather than elements of
+# the IR. A departure the oracle cannot see states its narrowing as a value,
+# which is the `challenge` below.
+covers:
+  - ir: key:5.6.1:commitment.flight_start
+    digest: f55507bcfbcdffa24a4949e12e1e59a92cef3e9b56f23e47b59e6b8c20f0d4fb
+    quote: "`flight_start` | REQUIRED | The buyer's campaign start. Distinct from `valid_from`"
+    departs: ["the calendar date the examples write for a flight's start"]
+  - ir: key:5.6.1:commitment.flight_end
+    digest: d3bd830cbe989315172dc25dcb1f42bdb93752cfa4f6f0112d4fca784f286345
+    quote: "`flight_end` | REQUIRED | The buyer's campaign end. Distinct from `valid_until`"
+    departs: ["the calendar date the examples write for a flight's end"]
+options:
+  - id: timestamp
+    summary: A point in time, a `Timestamp`, as the offer window's `valid_from` and `valid_until` are.
+  - id: date
+    summary: A calendar date, `YYYY-MM-DD`, as the examples write it.
+chosen: timestamp
+rationale: >-
+  The text gives `flight_start` and `flight_end` no type, and every example
+  writes a calendar date, such as `2026-10-06`. A calendar date names no
+  instant until a time zone reads it (D-038), and no clock the specification
+  has reads a flight: `main` has none, and the open PRs' `time_zone` reads
+  only the daypart and the frequency cap's period. So two parties can
+  disagree on when a flight starts. One
+  form for every point in time also lets a receiver compare a flight with the
+  offer window, `valid_from` and `valid_until`, which are Timestamps. The
+  schema departs from the examples: a flight starts and ends at a date-time
+  with an offset.
+challenge:
+  - type: Timestamp
+    value: "2026-10-06"
+    verdict: reject
+    context: >-
+      A buyer committing to a campaign that starts on the sixth of October,
+      written as the display example of a commitment writes a flight start.
+    reason: >-
+      Timestamp requires a `T` between the date and the time and an offset of
+      `Z` or `±hh:mm`, on both its pattern and `format: date-time`, so a bare
+      calendar date is refused. This is the departure as a value: the examples
+      write it and the schema does not take it.
+  - type: Timestamp
+    value: "2026-10-06T00:00:00-04:00"
+    verdict: accept
+    context: >-
+      The same campaign start, written as the instant the buyer's own
+      eastern-time calendar means by it.
+    reason: >-
+      The offset names the instant, which is what lets two parties compare a
+      flight with the offer window's `valid_from` and `valid_until`, both of
+      them Timestamps. This is what the reading keeps.
+evidence:
+  - examples/line-item-display.yaml (commitment)
+feedback: >-
+  Write a commitment's `flight_start` and `flight_end` as RFC 3339
+  date-times, as `valid_from` and `valid_until` are, such as
+  `2026-10-06T00:00:00-04:00`. The examples write calendar dates, which name
+  no instant until a time zone reads them.

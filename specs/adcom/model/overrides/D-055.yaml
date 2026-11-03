@@ -1,0 +1,219 @@
+format: 2
+id: D-055
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "241 attribute rows state a bare `string`, `integer`, `float`, or array of one of those, cite no code list and name no object. Which value domain is each row's value of?"
+covers:
+  
+  - ir: key:object_ad:Ad.id
+    digest: c91212e637bf4a9042b519fb7a02592147d4222d58f6a4d20ab052b0f540a60d
+    quote: "`id` | ID of the creative; unique at least throughout the scope of a vendor (e.g., an exchange or buying platform). Note that multiple instances of the same ad when used in transactions must have the same ID."
+  - ir: key:object_titleasset:TitleAsset.text
+    digest: 6bcfdf00df9965c3ef80d506a1732072684292505c929e6504902c2a24142ca7
+    quote: "`text` | The text content of the text element."
+  - ir: key:object_ad:Ad.adomain
+    digest: 37f86ea90c1b17021ac578859cc9cba64cd065978d9e2d5aa2f4be4616bb6a44
+    quote: "`adomain` | Advertiser domain; top two levels only (e.g., “ford.com”). This can be an array for the case of rotating creatives."
+  - ir: key:object_display:Display.w
+    digest: 6c0ff9e6133bc5bc5f640ff02c6caf29c2e8a6372b031dbb6a07c9caf2ca7789
+    quote: "`w` | Absolute width of the creative in device independent pixels (DIPS), typically for non-native ads. Note that mixing absolute and relative sizes is not recommended."
+  - ir: key:object_device:Device.pxratio
+    digest: ae0db2cf6bb9662b332b186468f64d9cf5e2389003583c47e1a336475cf34047
+    quote: "`pxratio` | The ratio of physical pixels to device independent pixels."
+  - ir: key:object_displayplacement:DisplayPlacement.instl
+    digest: 501331cae23b6eef0670063359fb7c8fdce19fed89fb21e50f736d8ab387f56d
+    quote: "`instl` | Indicates if this is an interstitial placement, where 0 = no, 1 = yes."
+  - ir: key:object_geo:Geo.lat
+    digest: d357a6c70250003b5587a0655321b96d4ee4c746530a9ee7529c2340d5440f01
+    quote: "`lat` | Latitude from -90.0 to +90.0, where negative is south."
+  - ir: key:object_geo:Geo.lon
+    digest: fbf61a00e58b973d44f2d509df9904cc58dc6bf2f94beed2c3a28e1021af4083
+    quote: "`lon` | Longitude from -180.0 to +180.0, where negative is west."
+  - ir: key:object_geo:Geo.utcoffset
+    digest: e55cd0b7227c584a94b60ad4b427a3ef32cd313df26f5eaa8300fb683cf475af
+    quote: "`utcoffset` | Local time as the number +/- of minutes from UTC."
+  - ir: key:object_videoplacement:VideoPlacement.maxext
+    digest: cd19f77abdf31ac4b5e1e72c91160e7d2aca303f974dcd1816c4d0f7462d45c4
+    quote: "`maxext` | Maximum extended creative duration if extension is allowed. If 0, extension is not allowed. If -1, extension is allowed and there is no time limit imposed. If greater than 0, then the value represents the number of seconds of extended play supported beyond the `maxdur` value."
+  - ir: key:object_videoplacement:VideoPlacement.mincpmpersec
+    digest: 70f14b78ecf817849f7a38b85d9a314d52b9db057783860bfbb5c9317b4df445
+    quote: "`mincpmpersec` | Minimum CPM per second. This is a price floor for the “dynamic” portion of a video ad pod, relative to the duration of bids an advertiser may submit."
+  - ir: key:object_ad:Ad.init
+    digest: 10848abff390e3678c5b540d0374e1e94fdbc6ced1e75fa7742ded3c6c1929ef
+    quote: "`init` | Timestamp of the original instantiation of this ad (i.e., this object or any of its children) in Unix format (i.e., milliseconds since the epoch)."
+  - ir: key:object_ad:Ad.iurl
+    digest: 00d118af4209ccf6f72ca7cd87cd41b1bb73ac74e77a99d782661ba85c644080
+    quote: "`iurl` | URL without cache-busting to an image that is representative of the ad content for cursory level ad quality checking."
+  - ir: key:object_geo:Geo.country
+    digest: de1432beb4ba5d771b7063103dc8d99a1a8f23a84f0533c333740469a2c3b785
+    quote: "`country` | Country code using ISO-3166-1-alpha-2. Note that alpha-3 codes may be encountered and vendors are encouraged to be tolerant of them."
+  - ir: key:object_placement:Placement.ssai
+    digest: b3d83eb33cc28ae925ab0a7185276cd50bddaf077bc722a06bdab4a2d5669295
+    quote: "`ssai` | Indicates if server-side ad insertion (e.g., stitching an ad into an audio or video stream) is in use and the impact of this on asset and tracker retrieval, where 0 = status unknown, 1 = all client-side (i.e., not server-side), 2 = assets stitched server-side but tracking pixels fired client-side, 3 = all server-side."
+options:
+  - id: by-domain-concept
+    summary: >-
+      Each row's value is of the one concept of `kernel/domains.yaml` whose
+      meaning the row's own words state, so the concept cites the row and the
+      mapping rule `domain-row` types it; a value the text constrains in no
+      way is text or an opaque identifier, and no row is narrowed past what
+      its words say.
+  - id: base-type-only
+    summary: >-
+      Each row takes the JSON type its Type cell names and nothing more, so
+      every string row is one type, every integer row another, and the
+      specification's own statements about ranges, flags, and domains are
+      left in the description.
+  - id: record-per-row
+    summary: >-
+      Each of the 241 rows gets its own reading, so the mapping entry cites a
+      record rather than a rule and nothing is derived.
+  - id: narrow-by-example
+    summary: >-
+      Where a row gives an example, the value takes the shape of that
+      example, so a row that writes "e.g., “ford.com”" takes a domain name
+      and a row that writes a URL takes the kernel's `Url`.
+chosen: by-domain-concept
+rationale: >-
+  Re-derived 2026-11-02 against the committed `objects.yaml` and each lock's
+  committed `spec-ir.json`, matching a mapping entry to a key row by id and
+  digest, so a row the two texts write differently is counted once per lock:
+  of the 411 attribute rows, 241 are typed by the rule `domain-row` and are
+  what this record reads, 73 cite a code list that yields a vocabulary and are
+  typed by `enum-row`, 38 name an object and are typed by `named-object-row`,
+  45 are the `ext` rows (`D-050`), 5 are typed `object` and name none
+  (`D-052`), 4 cite a code list whose citation yields no vocabulary (`D-056`),
+  4 are the abstract class's inherited rows (`D-053`), and 1 is `Event.cdata`
+  (`D-051`). The eight groups sum to 411. The 241 rows' Type cells give
+  nineteen spellings over three base types: 134 string, 102 integer, and 5
+  float.
+
+  ~~73 … 38 … 51 … 4 … 3 … and 241 remain~~ — the first version of this
+  paragraph, superseded by the measurement above, which it disagreed with in
+  two ways. It summed to **410**, one row short of the 411 it opened with. And
+  it credited `D-014` with the broken-citation group and counted that group as
+  three rows. The group is **four** rows and the record that reads them is
+  `D-056`: `Content.prodq`, `Content.context` and `Content.mrating` link a
+  heading slug the published document never anchors, and `Dooh.venue` links a
+  section AdCOM kept and emptied of its table. `D-014` is the upstream cause
+  of `Dooh.venue` alone, so it accounts for one of the four and not for any of
+  the other three. The three records of the `ext`, untargeted-object and
+  `Event.cdata` groups are also counted separately here, at 45, 5 and 1,
+  because one record per group is what each row's mapping entry cites; the
+  earlier "51" merged the three.
+
+  Why a concept and not a base type. `base-type-only` publishes `type:
+  string` for a row that says "Advertiser domain; top two levels only" and
+  `type: integer` for one that says "where 0 = no, 1 = yes", which drops a
+  constraint the text states; the type rules put a value's meaning in a named
+  type and not in prose, and the domain model is where the meaning is
+  written. `record-per-row` would give 241 records that each repeat one of
+  nine readings, and a record exists where the prose leaves a choice, not
+  where it leaves 241 copies of the same choice. `narrow-by-example` is
+  refused for the reason D-051 refuses the map: an example is not a
+  statement, and the rows that write a URL state no scheme, so the kernel's
+  `Url`, which requires `https`, would reject the `http` URLs the text
+  permits.
+
+  The nine concepts, with the count of rows each takes and what the words are
+  that put a row in it.
+
+  `external-id` (66 rows, `ExternalId`): a row whose value another system,
+  list, or taxonomy defines and a receiver compares by exact equality and
+  never shows as prose -- `Ad.id`, `Ad.cat` ("IDs from the taxonomy indicated
+  in `cattax`"), `Ad.lang` ("ISO-639-1-alpha-2"), the `mime` rows, the
+  `storeid`, `ver` and `isrc` rows, `Geo.country`, `Geo.region`, `Geo.metro`,
+  `Geo.city` and `Geo.zip`, the two IP rows, and the `consent` and `gpp`
+  strings another specification's grammar defines.
+
+  `text` (56 rows, `Text`): a row whose value a person reads and nothing
+  parses -- the `name`, `title`, `series`, `keywords` and `feedback` rows,
+  the markup rows (`adm`), and the 16 rows that say "URL" without saying what
+  a URL is here. The URL rows are the one place this reading is weaker than a
+  reader would like, and it is deliberate: the kernel's `Url` is `https`-only
+  and the text never says `https`, so typing them as `Url` would reject a
+  payload the specification allows. The word URL stays in each row's
+  description, and a `Uri` primitive is the work that would let these 16 rows
+  say more than "a string".
+
+  `count` (65 rows, `Count`): a whole number that is never negative -- every
+  width, height, ratio, length, duration in seconds, bit rate, DPI, episode
+  number and pod identifier, and `Placement.ssai`, `DisplayPlacement.ampren`
+  and `Dooh.fixed`, whose rows enumerate three or four values inline with no
+  List: section behind them, so the vocabulary a reader would want cannot be
+  built from the text and the non-negative integer is what the row leaves.
+
+  `integer-flag` (34 rows, `IntegerFlag`): a row that states exactly the two
+  values 0 and 1. Four of the 34 label the two states as something other than
+  no and yes -- `EventSpec.wjs` and `EventSpec.wpx` ("0 = block list, 1 =
+  allow list"), `Content.srcrel` ("0 = indirect, 1 = direct"), and
+  `Device.dnt` ("0 = tracking is unrestricted, 1 = do not track") -- so the
+  published titles read No and Yes where the row's words read otherwise. The
+  two-valued-ness is what the schema checks and the row's own description
+  carries the labels; publishing a vocabulary per row instead would define
+  four types of two codes each for four rows out of 411.
+
+  `domain-name` (12 rows, `Domain`): a row whose words are "domain" and whose
+  example is a hostname -- `Ad.adomain`, the four `domain` rows of Site, App,
+  Publisher, Producer, Network and Channel, `EventSpec.jstrk` and
+  `EventSpec.pxtrk` ("Array of domains, top two levels only"),
+  `ExtendedIdentifiers.source` and `.inserter`, and `Restrictions.badv`.
+
+  `measure` (3 rows, `Measure`): a number that is never negative and not
+  always whole -- `Device.pxratio`, and the two `mincpmpersec` rows. The two
+  `mincpmpersec` rows are a price floor and the money domain would be the
+  closer reading; it is refused because `amount` requires a sibling
+  `currency` of the concept `currency`, no `VideoPlacement` or
+  `AudioPlacement` row states one, and un-absenting the money domain would
+  publish four kernel types -- `Amount`, `PriceAdjustment`, `CurrencyCode`
+  and the `PriceDelta` part -- that no row of this specification reaches. The
+  missing currency is the implementation feedback below.
+
+  `geo-degrees` (2 rows, `Degrees`): `Geo.lat` and `Geo.lon`.
+
+  `extended-duration` (2 rows, `ExtendedDuration`): `VideoPlacement.maxext`
+  and `AudioPlacement.maxext`, the two rows whose definition gives `-1` a
+  meaning of its own.
+
+  `utc-offset` (1 row, `MinuteOffset`): `Geo.utcoffset`.
+
+  The four rows this reading is least sure of, named so a reviewer can attack
+  them rather than find them. `Ad.init`, `Ad.lastmod`, `Audit.init` and
+  `Audit.lastmod` are each "Timestamp ... in Unix format (i.e., milliseconds
+  since the epoch)" and they are typed `count`. The kernel's `instant` is an
+  RFC 3339 string and these rows are integers, so `instant` is not available;
+  a concept of its own would need a primitive whose structure is
+  `Count`'s exactly, which is a fifth name for one structure and a shared
+  structure for a reason that is about neither kind. `count` checks what the
+  text states -- a whole number, never negative -- and states nothing the
+  text denies. What it loses is that a consumer reading the published schema
+  alone cannot tell a millisecond timestamp from a number of impressions, and
+  only the row's description says which.
+
+  What the two shared structures in this record's name say. `ExternalId` and
+  `Text` have one structure, a string with no constraint, and AdCOM is the
+  first specification in this repository to publish both: 66 rows carry an
+  identifier another system defines and 56 carry prose, and a receiver
+  compares the first and shows the second. `Count` and `MediaOffset` have one
+  structure too, a whole number from 0 to 2^53 − 1, and the bound they share
+  is the range of a JSON integer rather than a statement about a number of
+  things or a position in a video.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_geo"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_videoplacement"
+feedback: >-
+  Three things in the attribute tables cannot be read from the text alone.
+  First, `VideoPlacement.mincpmpersec` and `AudioPlacement.mincpmpersec` are
+  prices and no attribute of either object states the currency they are in,
+  so a receiver cannot tell 2.50 USD from 2.50 EUR; state a currency beside
+  them, as OpenRTB writes `bidfloor` and `bidfloorcur`. Second, sixteen rows
+  say "URL" and none says whether the scheme may be `http`, so a validator
+  has to accept both or reject one on no authority. Third, `Placement.ssai`,
+  `DisplayPlacement.ampren`, `Dooh.fixed`, `Content.live`,
+  `Content.realtime` and `Content.firstbroadcast` enumerate their values
+  inside the definition cell rather than in a List: section; a List: section
+  for each would make them code lists like the other 73 enumerated rows, and
+  would give the four two-valued rows whose states are not no and yes a
+  vocabulary that says so.

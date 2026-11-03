@@ -1,0 +1,730 @@
+format: 2
+id: D-057
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "The 46 object sections hold 208 RFC 2119 statements inside their attribute rows' definition cells. Which of them is a rule the published schemas carry, and what are the rest?"
+covers:
+  - ir: rule:object_ad:f389f272
+    digest: 367ff266b36c53df9aafb664dd440cbd9993047897fef31ec4b6f624cd9c0d09
+    quote: Note that multiple instances of the same ad when used in transactions must have the same ID.
+  - ir: rule:object_ad:af1702e2
+    digest: 613ce76026ba11a23956b45029b6a2766ee4dc396702a14ea06baed85b398fce
+    quote: This should NOT be an app store ID (e.g., no iTunes store IDs).
+  - ir: rule:object_ad:80e5afa9
+    digest: 66a366a87ebd75b667d854c3ae2faaff2c869a7c71bfe566506464cc1cb73073
+    quote: Implementer should ensure compliance with regional legislation around data usage and sharing.
+  - ir: rule:object_ad:3598896a
+    digest: 762e9594779097c6c9a859434293a200cc0e490d1e557443baf4eeb75050e099
+    quote: In practice, vendors using this object may elect an alternate standard (e.g., BCP-47) in which case this must be communicated beforehand.
+  - ir: rule:object_ad:d3cce13f
+    digest: bb914293ec90632cff893612b56fd3cb0600bff2d399103c00f0dc8480bd111b
+    quote: The non-standard code “xx” may also be used if the creative has no linguistic content (e.g., a banner with just a company logo).
+  - ir: rule:object_ad:e54fb6a6
+    digest: aecf4975a81fb6b84a608136ecb7f25730571cf423cb1811a6693b9797b7ce48
+    quote: "* Required if no other media subtype object is specified."
+  - ir: rule:object_ad:e54fb6a6-2
+    digest: 2640fe2b2ffcd3e755de7dda32849c9f865a7f8e3dec6fc0db33422d5bb3e5df
+    quote: "* Required if no other media subtype object is specified."
+  - ir: rule:object_ad:e54fb6a6-3
+    digest: fee8cafe93c3d9fd27b05610905f2e08b4ea6e133b9fbeb7c23399c8ef6357bc
+    quote: "* Required if no other media subtype object is specified."
+  - ir: rule:object_ad:91a2cd39
+    digest: d6542c7c1e149f2a27aff0b2186596ed523fb3d97cc0859cc194f81147ae8fb0
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_display:8b56a468
+    digest: 80cc35c0e2e815a587b05753a8b854a819ca45a8ef31c74cbe44397affb9686a
+    quote: In any given `Display` object, only one of these attributes should be used to avoid confusion.
+  - ir: rule:object_display:f3887cc8
+    digest: 36fa9caaecca58379952105d75bebc2b0a00bcd417e1615b35ae100f02ffe0c9
+    quote: To the extent feasible, structured objects should be favored over general markup for quality and safety issues.
+  - ir: rule:object_display:5045d053
+    digest: 8c48ce8c51f5bf403338c847ccbcfde9b9c26957b03ceae5675bffc790208128
+    quote: API required by the ad if applicable.
+  - ir: rule:object_display:c25ca41a
+    digest: 90e6041cfac845ef4ed44adf6a86262f04b69d1755ce169de0f03b9efae7da74
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_display:c25ca41a-2
+    digest: ccc5de51ba58b64e4ddd0349ca1c2bb14f46def6a7d65643c0f1d506b86ab340
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_display:c25ca41a-3
+    digest: ed66cd3b680f6bafc43492c01624638db36a6d0de26e4dff6af047d8c3c23e91
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_display:c25ca41a-4
+    digest: 10efc752b32cafff04675758f074c95bb1d9cf110f39d3499b450dff8b799e4d
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_display:ccaa6047
+    digest: 402a84977cfd92f20c8d271cbf830757ac8bc6c26e1272ba2065d1f4b4cbf971
+    quote: Note that including both `adm` and `curl` is not recommended.
+  - ir: rule:object_display:70aa634b
+    digest: 99e70c39947e9360179cb34295962d6ae6b2a8d598a2e46e86c23d4397385c1d
+    quote: Optional means of retrieving display markup by reference; a URL that can return HTML, AMPHTML, or a collection native `Asset` object and their subordinates).
+  - ir: rule:object_display:ccaa6047-2
+    digest: 2e05068070d55488d41b9ed0ff93d5b626fe21a87d1697550e7fe61f7dc49e8a
+    quote: Note that including both `adm` and `curl` is not recommended.
+  - ir: rule:object_display:86b67742
+    digest: 49f22ffacbceb8e568658625be62d4e4863c5bb28e8699331a04634b6e73aecb
+    quote: Structured banner image object, recommended for simple banner creatives.
+  - ir: rule:object_display:e5f6116a
+    digest: 9b56026c84626b142bdac07611f5c976f9106aa654a705185c18e7f8eaa4c73a
+    quote: Structured native object, recommended for native ads.
+  - ir: rule:object_display:91a2cd39
+    digest: 8eaaceed1511daff7d3a57a35ebde636f936fe803753f6cb7cd2d5c3348a46eb
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_banner:91a2cd39
+    digest: 4746b285431fd4d1ae4ad2c5f46cd1aa94a52f3eef492c9f3091a5874bf13cbb
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_native:91a2cd39
+    digest: a83e2d134cab03ced4f42d743176af42ed49172bd43975a0d57fcc8ecb6ea24f
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_asset:a743a0a2
+    digest: 1dbf379d3bc50df131f6a99aab729249fef220a965c6a56e7f1b6c6371d9d6af
+    quote: Each asset is of a specific type and to reflect this, one and only one of the subtype objects (i.e., `title`, `img`, `video`, `data`) must be present; all others should be omitted.
+  - ir: rule:object_asset:fec82023
+    digest: fe7edb1ee5a9b129d3c26ecc57bf7fb34fc0b62106a1c64edbeea5765bc0f46d
+    quote: Indicates if the asset is required to be displayed, where 0 = no, 1 = yes.
+  - ir: rule:object_asset:e6a2f365
+    digest: b4295c7dd7e3c619c020dcd975e3e9c29ffa574425ea8a4da30d9bf30e2db9cb
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-2
+    digest: 1b9d6d4451d5bf5786c50cf898d87586a098218fa1be3ed5e678a29372b0196e
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-3
+    digest: dc95399c9a84ee4c1e2d0ebb29ca0b4da3727e129f5bd945993a9fcb7b737005
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-4
+    digest: 39075d027a7e74ae7b10315b8eb2f457e21cf0abaf0e5709e8b387e6710758ea
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-5
+    digest: e13fa797859ee4700d6fcbfcb66aa9a1695aa52857e53e46cc203addd329bd64
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:91a2cd39
+    digest: 663246dfe739feda5614e2badc3e7bf0541e0292d40f6d2c9cba94b86a363998
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_linkasset:91a2cd39
+    digest: 316bed21cf700a26f1d460fbfbfb45b30a5d9cfd6b3e6430171a23880f839931
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_titleasset:91a2cd39
+    digest: beb6a03542db1283a090e1c9113971ec0ca10b1e7b4c2fd20d7251ff4427fe27
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_imageasset:91a2cd39
+    digest: 4d5b33cc638ea5bea06c461ceb5b455e02c4f1587abc1236d349fc968aadcb12
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_videoasset:aa0a74c1
+    digest: 966d56761cd3e3aa06a210e3ea7be7daaf19e7bb3873865e8b8c3edd2826eccd
+    quote: Video markup (e.g., VAST) must be either included or referenced.
+  - ir: rule:object_videoasset:6f5d60d7
+    digest: 396ae7d8ba249af140ea773b795c18ee01dfcb24a07beffd26b55ad72d58e0b1
+    quote: "* Exactly one of `adm` and `curl` is required."
+  - ir: rule:object_videoasset:0375af38
+    digest: 5ac7e58d4f1ad97f226a078c0eaa244cee387413b83b749c84eeb4aabd7f4470
+    quote: Including both is not recommended.
+  - ir: rule:object_videoasset:6f5d60d7-2
+    digest: b68ae87938416a2fb53da35c0a71b7345eeef76ac5f9910090755ed81627557b
+    quote: "* Exactly one of `adm` and `curl` is required."
+  - ir: rule:object_videoasset:0375af38-2
+    digest: 9183cc8551c38ee9c9da04d627ea12076eb95e77fe3071711571c415d6f1b124
+    quote: Including both is not recommended.
+  - ir: rule:object_videoasset:91a2cd39
+    digest: f6051906a8764864844cd06c5ceaf22ba511c7578a232350beba6e637a0ab353
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_dataasset:fe7d4b68
+    digest: 392e3792100e8a09438a32be4ab31981e8455d382ab9e653b9b074e6fac2131f
+    quote: "This length should conform to recommendations provided in List: Native Data Asset Types"
+  - ir: rule:object_dataasset:91a2cd39
+    digest: 52e5cdd6b0520f2334fe8a1b8999f63437a585de28e29f7b6157aa2aa5cb6c82
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_event:b169087d
+    digest: 0607e73c4e9b9576d88c645356862365a201d6d415c729db51bc6faeb7760062
+    quote: This object specifies a type of event that the advertiser or buying platform wants to track along with the information required to do so.
+  - ir: rule:object_event:2bbe0e06
+    digest: e7d34cdc66c3eaff1c365d2fb95d267d2bdc7fc3e1c4da9b4ccb9ad1e7eca0d5
+    quote: "* Required for Image-Pixel or JavaScript methods."
+  - ir: rule:object_event:feba7140
+    digest: 74df65e67260fb774c86e52175a196099809b6f9621064b060980f0368435642
+    quote: An array of key-value pairs to support vendor-specific data required for custom tracking.
+  - ir: rule:object_event:91a2cd39
+    digest: 4c838af4ace37168cc98d9f26c4ac344bf128e6157714bbecd4d12904fce90e8
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_video:5045d053
+    digest: 716cc532eb9c23085ca4418fca3a2e21e7b46f783ab571f182dbe63f273f9208
+    quote: API required by the ad if applicable.
+  - ir: rule:object_video:ccaa6047
+    digest: 3500da514ba9e01ab6115b0b0f62976a6b0fd6774206483da4fe903269e68be7
+    quote: Note that including both `adm` and `curl` is not recommended.
+  - ir: rule:object_video:60e477e3
+    digest: 2700d234b2407e73d4e381041d18b66020ef2d83dd3093f506d95a5f72083e67
+    quote: Optional means of retrieving markup by reference; a URL that returns video markup (e.g., VAST).
+  - ir: rule:object_video:ccaa6047-2
+    digest: a5d3e08ae10b16a61b5d90e046c7058dc3ba749adfee4d6d49c520ecf5aa619c
+    quote: Note that including both `adm` and `curl` is not recommended.
+  - ir: rule:object_video:91a2cd39
+    digest: bb4345528b20439cb532360ed0fb2043b5fe7e8fd49f2be259b5c2d62daead8e
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_audio:5045d053
+    digest: 63201d62108fcbf87dceb4d1f8eb0ee461ee49d357cf975b827f78b1518efbb5
+    quote: API required by the ad if applicable.
+  - ir: rule:object_audio:ccaa6047
+    digest: f2f03a3c213b69cdc3078ac7f7c079f14b9bf52478e6f7581ecd14a325403465
+    quote: Note that including both `adm` and `curl` is not recommended.
+  - ir: rule:object_audio:57e3374d
+    digest: 7ee2328b77d9af3dc47467fb2d550174efa202fa13278b7afab133d4dec57c54
+    quote: Optional means of retrieving markup by reference; a URL that returns audio markup (e.g., DAAST).
+  - ir: rule:object_audio:ccaa6047-2
+    digest: 250d4ab30a9ac5983b3dd04a0bb7dc39b1cbdfcd0b24c9a7c85df18cd93b7aef
+    quote: Note that including both `adm` and `curl` is not recommended.
+  - ir: rule:object_audio:91a2cd39
+    digest: 7a9bfdc6814dae4da4d5709246a94062c2119ee21c7929ecaff6f3d7238d065a
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_audit:91a2cd39
+    digest: ef9e1c41461be3476e5acf658ed447155fcefb9c100511ed05bb27e367cb0b85
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_placement:3598896a
+    digest: a32d8382956dda91c69251049bebfc9e7378e1d3ffa167880809eb820cf5c8c9
+    quote: In practice, vendors using this object may elect an alternate standard (e.g., BCP-47) in which case this must be communicated beforehand.
+  - ir: rule:object_placement:79e998a4
+    digest: af632d654d593bf3892d42f421333475637df739b369186141144afd43f1bc3a
+    quote: Placement Subtype Object that indicates that this may be a display placement and provides additional detail related thereto.
+  - ir: rule:object_placement:c424dfde
+    digest: 50939694c8eba101092fae18a3a70c4ed3a2e6aa0db92eaaeacbf921056adad0
+    quote: "* At least one placement subtype object is required."
+  - ir: rule:object_placement:d72ca680
+    digest: 7a2f6acd3516d78e4b9f317e58e9da9a61fc6df4761a2a2c1eb12c36ff84ac51
+    quote: Placement Subtype Object that indicates that this may be a video placement and provides additional detail related thereto.
+  - ir: rule:object_placement:c424dfde-2
+    digest: 68d7e283cceb0905d41426d53a3dc69cae5d051b6bb6f365e3f02dd39c6bdfb6
+    quote: "* At least one placement subtype object is required."
+  - ir: rule:object_placement:e884ea09
+    digest: 3efbacc403f9b49685bae3ceee6daaf0196418de8cb18cd21068f90c8754ca82
+    quote: Placement Subtype Object that indicates that this may be an audio placement and provides additional detail related thereto.
+  - ir: rule:object_placement:c424dfde-3
+    digest: 52046595ab8d8fda298cdba7140427c452f40bd06c9271a2750b7794aa97eff1
+    quote: "* At least one placement subtype object is required."
+  - ir: rule:object_placement:91a2cd39
+    digest: 12b37c014660e7adf219605fa1d89f5675dee8a28e1814087260997042d3b4dd
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_displayplacement:5c4bcbd4
+    digest: f47a1523bb1fed469f4af538bf0bf326cdd861e1a77c21d4c70d5b18cd7fd578
+    quote: This object signals that the placement may be a display placement.
+  - ir: rule:object_displayplacement:048c20a3
+    digest: 7805c6e228f9c9941f2527e0f3cf7126adc8d32f369986c6508b8e087ccda414
+    quote: The meaning of strings in this attribute must be coordinated beforehand among vendors.
+  - ir: rule:object_displayplacement:bf984e44
+    digest: d885adb969d02451b6f58b816c19ee065a8be2888b15819e42e210048e1706a7
+    quote: This object specified the required and permitted assets and attributes of a native display placement.
+  - ir: rule:object_displayplacement:91a2cd39
+    digest: 21781cb34d367c971b11a1818f902a0d6c08d5235c0fe9de8d19bda1d942e3fa
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_displayformat:c25ca41a
+    digest: a84c52383932525eed79c7607b300ba3373bc0abc80327bb0eedc8fac11746d0
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_displayformat:c25ca41a-2
+    digest: 94b897a243600524a7ea5cd7355d8f12bf9a71be022270375fb16ede0bd2a5c0
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_displayformat:c25ca41a-3
+    digest: 197bbcf0c4e8d2de33722362ea4f377f67d3cbb411546684126ee4011d7689b3
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_displayformat:c25ca41a-4
+    digest: ab75073c781b8b45b2280eea26a6fb6b2b51aa5ae21f4833a04c7ad247b8a549
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_displayformat:91a2cd39
+    digest: 6eb87843a1fd3606c1db5cfa2c634f7788baad14dcff8fec6c7f977b0bc49f06
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_nativeformat:91a2cd39
+    digest: 577e4de01345113f74a56c0b1b6d1d14279ffac180bad60013f8d38aecf0d2ec
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_assetformat:194a18e3
+    digest: 727edf6d743dc9ff4486f3cfad8750258e588c14f3314eaa4df8028726251e7c
+    quote: Along with its own attributes, exactly one of the asset subtype objects must be included.
+  - ir: rule:object_assetformat:1bc0e4a5
+    digest: 25a9331bdfb6f880ad92f057724bb82e89ae648236d620300aa7b92b3656122a
+    quote: All others must be omitted.
+  - ir: rule:object_assetformat:9d256de4
+    digest: ace508d66a3eb512186374436472469a0ee9488343263195559e839cfa424560
+    quote: Indicator of whether or not this asset is required, where 0 = no, 1 = yes.
+  - ir: rule:object_assetformat:a5e2df16
+    digest: 3da937c81787c23429fac5e434cc09fbc6ed111a422c264fdfcca84f5140424c
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:a5e2df16-2
+    digest: 90bd1f2f81b81ca296afa6fe591f859e1377a8a6c7c11d5ec67c13f189b063d4
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:a5e2df16-3
+    digest: 76aae42ba176c90862b803d69308c9469503c30c9b984bce7b4b0802f477d59a
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:a5e2df16-4
+    digest: 2e52186ec6a425f98bdc737752c1d0d78049e8d0ecf00ae4d617826464c7fe15
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:91a2cd39
+    digest: 6935a801d14aeb696fc9bbf0e74d4e0e1880103d7ae26070e50fd3e97ae32924
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_titleassetformat:099fc915
+    digest: 845d7046a241108f9c58e117ea26ba3a8e1bd17ac2da8bbfaedacc35a49ba6ad
+    quote: Recommended lengths are 25, 90, or 140.
+  - ir: rule:object_titleassetformat:91a2cd39
+    digest: 4e9e876f91723d1c408f01a820b462eddb39a59bc7667521ff33a63608a2e17b
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_imageassetformat:c25ca41a
+    digest: f3759508d9b9ea27714df38c06b02310af17f6c6d086acfd6f13b5fe8c1767a8
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_imageassetformat:c25ca41a-2
+    digest: 09fc3a50f3116a91621f0ae957d1a2f673d2cc8fbef068282aefce440bdfd39d
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_imageassetformat:10aa44e1
+    digest: 6cdc396987f22b8b3498e2388c50df3225add0e08265697c0734649cf0615539
+    quote: This option should be used for any scaling of images by the client.
+  - ir: rule:object_imageassetformat:10aa44e1-2
+    digest: 22b77e2cae162adabd9f5acbca52d688a5c446d0c97cd253aa25a2ee40f8c613
+    quote: This option should be used for any scaling of images by the client.
+  - ir: rule:object_imageassetformat:c25ca41a-3
+    digest: 2db502c8b15543ee3cf46b710f78be4b7504d2540162efe9826046528bfae125
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_imageassetformat:c25ca41a-4
+    digest: 3824c1728272882d25536313d0a0920e84dc949b7eb7c9aa04068aabd017492e
+    quote: Note that mixing absolute and relative sizes is not recommended.
+  - ir: rule:object_imageassetformat:91a2cd39
+    digest: 157fa973a0e5c286840f48615983e413d4bede12778cfb9c60baaee1d5343bc4
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_dataassetformat:91a2cd39
+    digest: 17f882dff4c292c846bfdb1456ac010922e081845e397fe2d2713f30fbabacd3
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_eventspec:3b3b34eb
+    digest: c34cc74b7779146c625aa74565743d70e118b10f8a6b99f87df13cd030953546
+    quote: This object may appear as an array for a given placement indicating various types of available tracking events.
+  - ir: rule:object_eventspec:91a2cd39
+    digest: c431855aaa80a0dd074285e1189a2bda01c740fbe3affc0f396918c22797771a
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_videoplacement:45be3b00
+    digest: 993e8c1105b9e0e13d7f80d4b425638c03bc66f2c7881e2d605a32559147d613
+    quote: This object signals that the placement may be a video placement and provides additional detail about permitted video ads (e.g., VAST).
+  - ir: rule:object_videoplacement:70536a02
+    digest: 36760a72f6f26c113fa9cbe7fd77918bb7dcdd6b67d381fbb0d1dc1afb09bb77
+    quote: Number of seconds a creative must play before the placement enables skipping; only applicable if the ad is skippable.
+  - ir: rule:object_videoplacement:f7ed0d1b
+    digest: a56961eb16250761a4e2fd2f95a842e460985ecb073ee70b6f366a3e286e40a1
+    quote: This field is mutually exclusive with rqddurs; only one of mindur and rqddurs may be in a bid request.
+  - ir: rule:object_videoplacement:4cf78110
+    digest: 72996c71daa82b32828ff9c3f7016cc8faa25bc82f1750ab228b2fa3cd471cf4
+    quote: This field is mutually exclusive with rqddurs; only one of maxdur and rqddurs may be in a bid request.
+  - ir: rule:object_videoplacement:278ba706
+    digest: 01e1d4922e63a3c76a436817975501c460e74ba1d544617529ab6413caad3de2
+    quote: This field is mutually exclusive with mindur and maxdur; if rqddurs is specified, mindur and maxdur must not be specified and vice versa.
+  - ir: rule:object_videoplacement:02b226dd
+    digest: 8497cef4b6c5cfac73c26f4fbadde5624c3822bb3ae1e6cfd3459bf58883f54c
+    quote: Indicates the total amount of time in seconds that advertisers may fill for a “dynamic” video ad pod, or the dynamic portion of a “hybrid” ad pod.
+  - ir: rule:object_videoplacement:da8b9c41
+    digest: 840ff1a5a70946da1134eb751674e2b1122d76f0fbd41ee93baa13265032bfeb
+    quote: This field is required only for the dynamic portion(s) of video ad pods.
+  - ir: rule:object_videoplacement:14768d35
+    digest: 7f5ddc4bbd874633ff656b2aa5b482e43b6229a64e8d6012d2cb9a6ce1f92aeb
+    quote: This is a price floor for the “dynamic” portion of a video ad pod, relative to the duration of bids an advertiser may submit.
+  - ir: rule:object_videoplacement:85fc28b3
+    digest: d7530b2a581e343ce136df2a55d708a3a45af4c9c6664e9b4ef89f688ed198a2
+    quote: Indicates if the creative must be linear, nonlinear, etc.
+  - ir: rule:object_videoplacement:caab2a79
+    digest: 99c5d00dc7d0f538cdd1a1be08a598ed73845dcf35b3845b41fa2df3f8ae97ab
+    quote: Supported companion ad types; recommended if companion ads are specified in `comp`.
+  - ir: rule:object_videoplacement:91a2cd39
+    digest: 6bad690d38d6d366a787775c9929c6f9c8ae7eab6e22cc022615634714a88fdf
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_audioplacement:7d86e0ab
+    digest: 2a4d0448952803c2fb24fc9fda35d00ab05977608d2b1e93979acb3ac31842a2
+    quote: This object signals that the placement may be an audio placement and provides additional detail about permitted audio ads (e.g., DAAST).
+  - ir: rule:object_audioplacement:70536a02
+    digest: 04eab4ef44cdcdbf05b3b650da8fa5821117e704038fc4cee937789a79310e8e
+    quote: Number of seconds a creative must play before the placement enables skipping; only applicable if the ad is skippable.
+  - ir: rule:object_audioplacement:f7ed0d1b
+    digest: 3c725244652d60c2ffa0f7c5996ec8a61b58cd22e7a98934374b051f48a32736
+    quote: This field is mutually exclusive with rqddurs; only one of mindur and rqddurs may be in a bid request.
+  - ir: rule:object_audioplacement:4cf78110
+    digest: 8fcf0fab22a11e6e8eb8a3dc75cf518d133f4015bb8e11c52078ddca5e64f446
+    quote: This field is mutually exclusive with rqddurs; only one of maxdur and rqddurs may be in a bid request.
+  - ir: rule:object_audioplacement:278ba706
+    digest: 942b8331d1a1e4756de0f2cc74e7495569b7ab545b697c1c531e3afeb57fbca9
+    quote: This field is mutually exclusive with mindur and maxdur; if rqddurs is specified, mindur and maxdur must not be specified and vice versa.
+  - ir: rule:object_audioplacement:02b226dd
+    digest: c2a7f0f9c692aadac4e49299290eefd80e4bd1c041ab53f01e29480f527c2e73
+    quote: Indicates the total amount of time in seconds that advertisers may fill for a “dynamic” video ad pod, or the dynamic portion of a “hybrid” ad pod.
+  - ir: rule:object_audioplacement:da8b9c41
+    digest: a27fc8df56e4db211637b97b504eddb317cea3b999ccefaf7285f8bb149b33ea
+    quote: This field is required only for the dynamic portion(s) of video ad pods.
+  - ir: rule:object_audioplacement:14768d35
+    digest: 349660455095ffc232afed83ed76e686d7ced8ec545448d93661c690aff92197
+    quote: This is a price floor for the “dynamic” portion of a video ad pod, relative to the duration of bids an advertiser may submit.
+  - ir: rule:object_audioplacement:caab2a79
+    digest: c470e044295a8842b357e881927557c8fcf83e57ad76ab51c76fda72a60fb159
+    quote: Supported companion ad types; recommended if companion ads are specified in `comp`.
+  - ir: rule:object_audioplacement:91a2cd39
+    digest: 6b669ce6c15507fd90abb3bfe1ade9f82c3a493661f8346b043dcb476d5c5268
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_companion:2b5cb81c
+    digest: 32ccc69f6982d06bb30619afcb2d36d8884ab514613631cb2470bf9cd7567317
+    quote: For a given placement, typically only one companion at most should be designated as an end card.
+  - ir: rule:object_companion:91a2cd39
+    digest: 9a6bf3d5daf8c81ac0489a2e3f250ff295a97c6e11ac3c01e4176bff58eaec21
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_site:b3feb8dc
+    digest: 1244f3d0e945be0a64b026f6c38895236cb2b1dc411a8eacffbca0b6794c2990
+    quote: Only one of 'keywords' or 'kwarray' may be present.
+  - ir: rule:object_site:91a2cd39
+    digest: b0515f209e46d93295c963700eea8acb0cd851820d9177a02aeb06bb75bc5321
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_app:b3feb8dc
+    digest: f342e10a091ab885bb8171f8b464b10346a512b1f7c5c87c534620a3a13a7132
+    quote: Only one of 'keywords' or 'kwarray' may be present.
+  - ir: rule:object_app:e08ab743
+    digest: cf4c32bf05138a6e959f09780627d4763dfdad252bc9100b02d7d75e07a3717e
+    quote: Bundle or package name of the app (e.g., “com.foo.mygame”) and should NOT be app store IDs (e.g., not iTunes store IDs).
+  - ir: rule:object_app:91a2cd39
+    digest: cb84fccfe3ad378a2e11e76a174ce2951551baabde450b123b54b28a16dd4984
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_dooh:91a2cd39
+    digest: 8fb041862de0fb5a0d48589ee1032afafaa648cd805faf8ca4061808f8d5f364
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_publisher:80e5afa9
+    digest: f4598c27d2cee47508ead20dd2fa28711f27a1b0ef52fdb9ea0908b56cbd2009
+    quote: Implementer should ensure compliance with regional legislation around data usage and sharing.
+  - ir: rule:object_publisher:91a2cd39
+    digest: e010ff709bfc848971ff6cb6cd6a5a14f7c5bcbb353048bce08fdb6b0bcab41d
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_content:d4fbd50c
+    digest: a9f9369f906b01aa31da8571ebf4624a6c333bb4a2b9dcb31c5831e94be010e8
+    quote: This object describes the content in which an impression can appear, which may be syndicated or non-syndicated content.
+  - ir: rule:object_content:962c6efa
+    digest: 7bff5945e809a3028ec5ddb8448ef59c13c2a4cff94fdae77971299369682a1d
+    quote: This object may be useful when syndicated content contains impressions and does not necessarily match the publisher's general content.
+  - ir: rule:object_content:b479240f
+    digest: cb46ca93d7054e9918e10d720f0d0af88111a3829da809aa694ee8e50d7707ed
+    quote: An exchange may or may not have knowledge of the page where the content is running as a result of the syndication method (e.g., a video impression embedded in an iframe on an unknown web property or device).
+  - ir: rule:object_content:d9a8245c
+    digest: ba20431e85d6690502965981c2f0338f3873d42739758c77d458df9b8bbcc82c
+    quote: Only one of `keywords` or `kwarray` may be present.
+  - ir: rule:object_content:d9a8245c-2
+    digest: d58aaf7a6c77bb358c4552e8597297f8cc56b194de2ca73a9c17928260b965c6
+    quote: Only one of `keywords` or `kwarray` may be present.
+  - ir: rule:object_content:8e235a11
+    digest: 5b686f7b2a7087be17f6de922b9794f830a57dda46ce9bed0c49d78ffc0f278a
+    quote: Only one of `lang` or `langb` should be present.
+    locks:
+      - main
+  - ir: rule:object_content:8e235a11-2
+    digest: 3c7a3a0cd2af781a7e756a5bd9f37d88c9a8d798ba8cbb287d351b3cc0b68c7e
+    quote: Only one of `lang` or `langb` should be present.
+    locks:
+      - main
+  - ir: rule:object_producer:43f7d905
+    digest: ce3166a966cea32d8d1968e35d1bc3cb199a8a2c9e440ba7701912105ab407a1
+    quote: This is particularly useful when the content is syndicated and may be distributed through different publishers and thus when the producer and publisher are not necessarily the same entity.
+  - ir: rule:object_producer:ccdc0845
+    digest: b731bb6c6ba95eaa6ab77fd3edcf239a2af5c58c15494fbe9ed7a4244c677174
+    quote: Useful if content is syndicated and may be posted on a site using embed tags.
+  - ir: rule:object_producer:91a2cd39
+    digest: 07c442a4892dbc00d3aca4058e3adfb91f50caa74d790b3f073138774b827126
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_network:ba4a2d5f
+    digest: 064c5423118e531e8e5fbf1fe76bfa826e4b395a533d91c5f0df77e7bb9288b2
+    quote: This may not be a unique identifier across all supply sources.
+  - ir: rule:object_network:d34e1eb7
+    digest: 758dc89b92f75be23a2ebfc8be9010e18325ccc6d3d653deb539f1d9b0066061
+    quote: It is recommended to include the top private domain (PSL+1) for DSP targeting normalization purposes.
+  - ir: rule:object_network:91a2cd39
+    digest: 3a59bec61a1edd642c441dd04caeb873092e43dec2e071928790482285415cbc
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_channel:ba4a2d5f
+    digest: 9303fb596adfc5cff9efef0ef9bc9abff1c00f175532c933056f5d25a4388322
+    quote: This may not be a unique identifier across all supply sources.
+  - ir: rule:object_channel:d34e1eb7
+    digest: 98390aff218a4320b6f003528a1c6427ddf4e0421874c68cda892f0df4d40b18
+    quote: It is recommended to include the top private domain (PSL+1) for DSP targeting normalization purposes.
+  - ir: rule:object_channel:91a2cd39
+    digest: b0967d507f2a2aa7e1aa6b1f94cd3bfd6744c41a6d98bbe68c127ffa739bb0a9
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_user:8252509c
+    digest: a519a53fa47a7288f83dc2c66dc46c53ca729ccb2e989ca347e8107b38ec0f8d
+    quote: The user ID is a vendor-specific artifact and may be subject to rotation or other privacy policies.
+  - ir: rule:object_user:37e78377
+    digest: 07c52e61e7951059f0df51734eb4789ada6fac25f9248268c7c03521f218e277
+    quote: However, this user ID must be stable long enough to serve reasonably as the basis for frequency capping and retargeting.
+  - ir: rule:object_user:80e5afa9
+    digest: d127c8648771015b29010a06db0ae22d9a35e4d5554b9a26a17a0810c5382fb4
+    quote: Implementer should ensure compliance with regional legislation around data usage and sharing.
+  - ir: rule:object_user:62bdb84a
+    digest: 5b3bd982b222fe32784be52dbc65612975e20a5c76bc7f7ce6d2d855f6ae85d3
+    quote: Exchange-specific ID for the user At least one of `id` or `buyeruid` is strongly recommended.
+  - ir: rule:object_user:46559593
+    digest: 4fba07d195cea3665ae83b9cf9e798487e819089d05965a82f2ace5815856d6c
+    quote: At least one of `id` or `buyeruid` is strongly recommended.
+  - ir: rule:object_user:b3feb8dc
+    digest: 8ad148306244608a61444dcba4682186c1d814f05fb9614033f3a61753ba6e25
+    quote: Only one of 'keywords' or 'kwarray' may be present.
+  - ir: rule:object_user:91a2cd39
+    digest: 0aff54ed551997e13fe9e42598dd3508b7c69efb4cb46d479275c89b0fab54c6
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_device:80e5afa9
+    digest: da089c1760e095c7bc7bc46bb8903b076291507cd5432bf7c66e953c10cca4c6
+    quote: Implementer should ensure compliance with regional legislation around data usage and sharing.
+  - ir: rule:object_device:18b02d3b
+    digest: 9d8c864de5a561371d2240b8efe64f577a2942b4e5d146f0794efd3753a636ed
+    quote: For backwards compatibility, exchanges are recommended to always populate `ua` with the User-Agent string, when available from the end user’s device, even if an alternative representation, such as the User-Agent Client-Hints, is available and gets used to populate `sua`.
+  - ir: rule:object_device:ed864e43
+    digest: 42231722a04502cea0792aee884ff7590ed631da455e840f9e790c9c79493892
+    quote: If both `ua` and `sua` are present in the bid request, `sua` should be considered the more accurate representation of the device attributes.
+  - ir: rule:object_device:93c9ce16
+    digest: 849909d97af7c4f50f62b646b971a3b77ebc29ebf7fa18e6385b830142fc85dd
+    quote: This is because the `ua` may contain a frozen or reduced UserAgent string.
+  - ir: rule:object_device:ed864e43-2
+    digest: 2861375bc2c7d3e768c739a52473a4bf6dacc250562ef2d95d67e66becb558d4
+    quote: If both `ua` and `sua` are present in the bid request, `sua` should be considered the more accurate representation of the device attributes.
+  - ir: rule:object_device:93c9ce16-2
+    digest: c26b688c159a826457b706a7b988ef0b14f7c610e439c47644dbbec35184b09b
+    quote: This is because the `ua` may contain a frozen or reduced UserAgent string.
+  - ir: rule:object_device:dff3bf67
+    digest: 28b3fa972935d65fa2826c356d1b55d4ca8f94e44c90bb0c7f770de74c2a68ee
+    quote: “Limit Ad Tracking” signal commercially endorsed (e.g., iOS, Android), where 0 = tracking is unrestricted, 1 = tracking must be limited per commercial guidelines.
+  - ir: rule:object_device:776d2311
+    digest: 6385e6ff686c3bdeded57960b0257c739ddb13d838a5ecf072b7f9dd8820a49d
+    quote: The value obtained from the device O/S should be used when available.
+  - ir: rule:object_device:bb49100d
+    digest: d3fd03867284f7f79d8b9e29906cfaa8008769f206371010e7c15c0a5e1c72c7
+    quote: Only one of lang or langb should be present.
+  - ir: rule:object_device:bb49100d-2
+    digest: 2e6d716556faff8a39a21a0510593573c35f358fb46d15db74058944dd072f71
+    quote: Only one of lang or langb should be present.
+  - ir: rule:object_device:ae88d289
+    digest: 4d3777c4d3ee07143add7412ee81d89ebb0fbbd7f0b4d2b20b8d06c9e52f9f07
+    quote: Carrier or ISP (e.g., “VERIZON”) using exchange curated string names which should be published to bidders beforehand.
+  - ir: rule:object_device:424b8fd2
+    digest: 671fe606e13b4d96caf14f0a868161ed121bcf92083c6301af3c6c8648fb2a1b
+    quote: Note that the dash between the MCC and MNC parts is required to remove parsing ambiguity.
+  - ir: rule:object_device:ff8fa3ff
+    digest: b33376a01bbc35576f68469e17b2bd6b4aa337cade5d3b6d9e5ef288f1e69c44
+    quote: Roaming may be inferred by a combination of the MCC-MNC, geo, IP and other data signals.
+  - ir: rule:object_device:91a2cd39
+    digest: 911a6c97af4405520e55cda3abc02661bc65178c47e1f4f13bcdbb6e3a53b792
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_useragent:9e5ffb0b
+    digest: 308bb0f615ec113d7a95f9bb541ee76fbdcae5e5536683ffd4ec4dcea5fe3b92
+    quote: If both `device.ua` and `device.sua` are present in the bid request, `device.sua` should be considered the more accurate representation of the device attributes.
+  - ir: rule:object_useragent:23431226
+    digest: 0ad31dbe7c01c071fa99e3b1672640e2a191a15548e76f24667984e02bb2fade
+    quote: This is because the `device.ua` may contain a frozen or reduced UserAgent string.
+  - ir: rule:object_useragent:0c118d46
+    digest: f9c9a3de7bdb207d918584016a9b605b7a796eff44a343f98583c0b11623e329
+    quote: Implementers should send brands and versions derived from the Sec-CH-UA-Full-Version-List header*.
+  - ir: rule:object_useragent:39268cd6
+    digest: 4614a19f8ea8b670c417b88e772646735ea4159c33b2315ab854477518de4a46
+    quote: Implementers should send a brand derived from the Sec-CH-UA-Platform header, and version derived from the Sec-CH-UA-Platform-Version header *.
+  - ir: rule:object_useragent:c7dd5e2a
+    digest: 2f63a86f75bbe3ad0bb3d00fd92b70f30dc11a4a555c52ffa9ee7d24429055f7
+    quote: Implementers should derive this value from the Sec-CH-UA-Mobile header *.
+  - ir: rule:object_useragent:d841eaee
+    digest: ac7bd05b01a73e67606340bab2bbd06fc3c15a63007c1936348302d6a3f162c8
+    quote: Implementers should retrieve this value from the Sec-CH-UA-Arch header*.
+  - ir: rule:object_useragent:6b047d0a
+    digest: 7ec724ba3659f1e1b81a87476aefd091fb5bfef5368137077a116ee9e5da05d6
+    quote: Implementers should retrieve this value from the Sec-CH-UA-Bitness header *.
+  - ir: rule:object_useragent:892a38b7
+    digest: 522946b14ba06d8298a5c149bbfb98543603bc40c4600a7860dd14581c89e1da
+    quote: Implementers should retrieve this value from the Sec-CH-UA-Model header *.
+  - ir: rule:object_useragent:91a2cd39
+    digest: f058f663753a43dc7e3f0dfa570cff2d90f2feec0b7603b346d81859f6ef7af9
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_useragent:49580a24
+    digest: 6cd200180397d4038863ca8091921332ac91b6445f74aaa4a8045ad97a7db3ac
+    quote: For browsers that don’t support User-Agent Client Hints, implementers may choose to populate this field by parsing the raw User-Agent string.
+  - ir: rule:object_brandversion:103cd8fb
+    digest: d4a830e54e6a602eacd522cbe1ca38170820e0872380f302a78e43069274baff
+    quote: The value may be sourced from the User-Agent Client Hints headers, representing either the user agent brand (from the Sec-CH-UA-Full-Version header) or the platform brand (from the Sec-CH-UA-Platform header).
+  - ir: rule:object_brandversion:91a2cd39
+    digest: ea0490aacd570fc4fb1f0cada25f86635c3e40b6354b91b0ab99fbc3b0654713
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_geo:400ed98d
+    digest: 6e8fd941dc661663570489ce97a1add2bdc0c2627ff3a341d625c309c6a4cd4b
+    quote: The `lat` and `lon` attributes should only be passed if they conform to the accuracy depicted in the `type` attribute.
+  - ir: rule:object_geo:735fd37a
+    digest: 411b7c4effdfd280c08f726765370229d099b917464f7af9892103c64c5c8fee
+    quote: For example, the centroid of a large region (e.g., postal code) should not be passed.
+  - ir: rule:object_geo:0789a971
+    digest: e78eba260c8567482eab3fbd296b56ba4b11bb4d1209f5f45c71f13523eb4a69
+    quote: Source of location data; recommended when passing lat/lon.
+  - ir: rule:object_geo:b1b4a4b7
+    digest: f428cacc1a4803e24cf674454780ea3a5aa1381d8c9b1254565596830f69ee3b
+    quote: Estimated location accuracy in meters; recommended when lat/lon are specified and derived from a device's location services (i.e., type = 1).
+  - ir: rule:object_geo:f15c4b2b
+    digest: af9a63e57da779850f5cd1bc1493deaec4a67b226e2037349cfbc4f68822637c
+    quote: Note that devices may cache location data across multiple fetches.
+  - ir: rule:object_geo:8d712c9e
+    digest: ad8d9002746a2103a425712aff50699c6099c3d2e33f8ceec464fca3e335239b
+    quote: Ideally, this value should be from the time the actual fix was taken.
+  - ir: rule:object_geo:f50d8f72
+    digest: d1145fd8fb15237963a2a8761b1f8d5dac764cbe99d964d60eb138e66a6d8dd1
+    quote: Note that alpha-3 codes may be encountered and vendors are encouraged to be tolerant of them.
+  - ir: rule:object_geo:91a2cd39
+    digest: 36b63f447752ffccc0c586af9789aecb4726df011efc700503ef26cedfcb14af
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_data:39fdccbb
+    digest: 69bfce088f72c76cb21fa3af94e7d84ef7f9eefb26c663068247be1ada9dd512
+    quote: This data may be from multiple sources whether from the exchange itself or third parties as specified by the `id` attribute.
+  - ir: rule:object_data:63223575
+    digest: a9cbb5ccc22db65d0a5722823de6acc50deeb8449dd29930296ca37a9787fbd6
+    quote: When in use, vendor-specific IDs should be discussed beforehand among the parties.
+  - ir: rule:object_data:80e5afa9
+    digest: 247ea17a0a6eeacd67c0f54366e2e0e38ced77e9c1e8d1e8d8e0adbd98051635
+    quote: Implementer should ensure compliance with regional legislation around data usage and sharing.
+  - ir: rule:object_data:91a2cd39
+    digest: 7688e0ba2337f4cc73b3337e4d4baca5f5c638040cecf6979015ba6e606ea144
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_segment:63223575
+    digest: 8f6d474f9049b0a8b87b35f859782b99049f0e484a82293778e4b61856932b83
+    quote: When in use, vendor-specific IDs should be discussed beforehand among the parties.
+  - ir: rule:object_segment:91a2cd39
+    digest: 5c75a2afe4dc3b70c101ee9b161ca01d3755db3af75912d20f5f88cf63bff691
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_eids:10d4b297
+    digest: 3b44426f0b4449f2a2aaebe25ea7eee512fb67ca17b9afbd62a2f4db462abe34
+    quote: The exchange should ensure that business agreements allow for the sending of this data.
+  - ir: rule:object_eids:2727ebab
+    digest: ee2323b9e7f13e4f685329bc9dc8972df8461f90cfb1a29e42732e9b37a175a1
+    quote: Should be the root domain name of the provider, not the URL.
+  - ir: rule:object_eids:34965079
+    digest: d62045b3ab1b8a74dcb6e94a908b9cc6c94c727bed234bb3059d39ce82c2d61c
+    quote: This may be the operational domain of the system, if that is different from the parent corporate domain, to facilitate WHOIS and reverse IP lookups to establish clear ownership of the delegate system.
+  - ir: rule:object_eids:22c5fee8
+    digest: 759269c417a0a5fbda3a68337bd2e41e014f62d04c0ba02a4076f665cbb1c79d
+    quote: This should be the same value as used to identify sellers in an ads.txt file if one exists.
+  - ir: rule:object_eids:01844f6a
+    digest: feb171eda4630273ecb455b25595cca16e3f218e7df98b5932a0436d965d2dce
+    quote: In some cases, this may be the same value as inserter.
+  - ir: rule:object_eids:4c67a72f
+    digest: 5a6923ddee5be45b9399664c08436939c10c60164b634f9909fce5ee4907ed8f
+    quote: When blank, it is assumed that the `matcher` is equal to the `source` May be omitted when mm=0, 1, or 2.
+  - ir: rule:object_eids:91a2cd39
+    digest: f5bb381b2c4523a6028b8963dddb7d7eade70ba3755e5a11f6dc898b4a77786d
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_eid_uids:929c82e3
+    digest: 7b0dff00041a484a8c55801a3e8c58da4493728eb404cc9895b2c003e7585e13
+    quote: It is highly recommended to set this, as many DSPs separate app-native IDs from browser-based IDs and require a type value for ID resolution.
+  - ir: rule:object_eid_uids:91a2cd39
+    digest: 8f8ffce0a24335a568411b792a96fda179d3a48d99955e4a1116ab4b537b74c1
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_regs:454e6a10
+    digest: 29f7d06fccbfaa8c201efcce84636c42a86631592dbf0d62d217f92248b3b1ae
+    quote: Array of the section(s) of the string which should be applied for this transaction.
+  - ir: rule:object_regs:421f1bca
+    digest: 1a139c43738677af3b47d587a8e158ef65a13d3f1061046a0b91a013fc9aafc2
+    quote: Generally will contain one and only one value, but there are edge cases where more than one may apply.
+  - ir: rule:object_regs:91a2cd39
+    digest: 97f69629def9304d2d2284b5f571adae056dd1850a537724301b7234f2af5558
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_restrictions:9c6fbbf2
+    digest: 767da51442a100e9c924a8c0ad6ce5ef47157196e7fdc971362d8cab9e9fbafa
+    quote: Only one of `acat` or `bcat` should be present.
+  - ir: rule:object_restrictions:9c6fbbf2-2
+    digest: 5ee245a488a41261a80e9cd82595c98340bfb9085df378e96025c45438bade13
+    quote: Only one of `acat` or `bcat` should be present.
+  - ir: rule:object_restrictions:c4c6bed7
+    digest: ab6c0e9aca5aa7f46d42c88e1790c028d89eb6e4bfc6f00897d77b1628c3caf2
+    quote: These should be bundle or package names (e.g., “com.foo.mygame”) and should NOT be app store IDs (e.g., not iTunes store IDs).
+  - ir: rule:object_restrictions:91a2cd39
+    digest: f9125dd3c0a63c6c0b756e7458381160b3cefc2e8a4c9772b488640b2317ab89
+    quote: Optional vendor-specific extensions.
+  - ir: rule:object_content:7faee66b
+    digest: 9a78ea15ebdceb4201f37cf6349245898a36a4e992fe471c4bda4956fc56c3ce
+    quote: Only one of `language` or `langb` should be present.
+    locks:
+      - tag-202607
+  - ir: rule:object_content:7faee66b-2
+    digest: a92d9fab44086402cb1078a49b856b5e5d3f584b113de4a84e1c2afa96251b3e
+    quote: Only one of `language` or `langb` should be present.
+    locks:
+      - tag-202607
+options:
+  - id: conditions-as-rules
+    summary: >-
+      The statements that state the condition of a conditional attribute are
+      rules, with vectors, because the schema cannot express them and the
+      attribute's presence depends on them; every other statement is
+      informative, and its words stay on the attribute as its description.
+  - id: every-statement-a-rule
+    summary: >-
+      All 208 are rules, each with its own valid and invalid vectors, so
+      every RFC 2119 sentence of the object sections is graded.
+  - id: all-informative
+    summary: >-
+      All 208 are informative, so the schemas state no condition and the
+      eighteen conditional attributes are published as plain optional ones.
+  - id: levelled
+    summary: >-
+      The statements whose level is REQUIRED or MUST are rules and the rest
+      are informative.
+chosen: conditions-as-rules
+rationale: >-
+  Measured on both locks. The 46 object sections hold 208 body statements:
+  206 on the `main` lock and 2 more the `tag-202607` lock writes, every one
+  of them inside an attribute row's definition cell or the section's own
+  prose. 23 of the 208 sit in the rows of the eighteen attributes whose
+  presence the text makes conditional, and the schema emitter lists exactly
+  those eighteen in `conditions.left` with the reason "the condition is
+  unstated" -- it can write an `if` / `then` for a condition that names a
+  sibling and a value, and these name neither. 18 of the 23 are the
+  statements that state the condition; the other 5 are a second sentence in
+  the same row.
+
+  So the eighteen are the statements the published artifacts need, and this
+  record maps those eighteen as rules, each with a vectors entry in
+  `specs/adcom/model/vectors/objects.yaml`. Each rule's own sources carry the
+  row it sits in, which is what `src/rules.ts` reads to match a rule to the
+  condition it answers, so the condition the schema leaves open is answered
+  by a graded rule and not by a sentence.
+
+  The eighteen, in four groups of one sentence each, repeated per attribute:
+  "At least one placement subtype object is required" (`Placement.display`,
+  `.video`, `.audio`); "Required if no other media subtype object is
+  specified" (`Ad.display`, `.video`, `.audio`); "Required if no other asset
+  subtype object is specified" (`Asset.title`, `.image`, `.video`, `.data`,
+  `.link`) and its asset-format twin (`AssetFormat.title`, `.img`, `.video`,
+  `.data`); "Exactly one of `adm` and `curl` is required"
+  (`VideoAsset.adm`, `.curl`); and "Required for Image-Pixel or JavaScript
+  methods" (`Event.url`).
+
+  Why not every statement. `every-statement-a-rule` is the reading this
+  record would prefer and cannot afford to assert: type rules § 9 gives a
+  rule no standing without valid and invalid vectors, so 208 rules means 208
+  pairs of payloads, each of which has to be accepted by its type's schema
+  and rejected by that rule alone. The 190 that are not conditions are of two
+  further kinds -- a statement about a value's content that a payload cannot
+  decide ("Note that multiple instances of the same ad when used in
+  transactions must have the same ID", which is about two payloads in two
+  transactions), and a recommendation that rejects nothing ("This should NOT
+  be an app store ID") -- and a rule that rejects nothing has no invalid
+  vector to give. Writing them as rules with invented vectors would publish
+  grading that is not grading. They are informative here, with their words
+  kept on the attribute as its description, and the work of reading them
+  properly is named in the feedback below rather than pretended at.
+
+  `levelled` is refused because the level is not the question: `Event.url`'s
+  condition is REQUIRED and so is "all material aspects of this
+  specification are to be considered REQUIRED", and the second is a sentence
+  about the document. `all-informative` is refused by the emitter's own
+  output: with no rule naming their rows, the eighteen conditions are
+  reported by `rules-emit` as conditions the schema left to nobody, which is
+  the gate working.
+
+  What this costs a consumer, stated plainly. Of the 208 statements in
+  AdCOM's object sections, 18 are graded and 190 are published as prose on
+  the attribute they sit in. A reader of the schemas gets the eighteen
+  conditions as rules with vectors, and gets the other 190 as descriptions,
+  which no validator reads.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_ad"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_asset"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_placement"
+feedback: >-
+  Eighteen attributes are marked "required *" and the condition is a footnote
+  under the table rather than a statement in the row, so nothing says which
+  sibling and which value decide it. State each condition in the row, naming
+  the attributes it depends on: "required if `display`, `video` and `audio`
+  are all absent" is readable by a validator, and "Required if no other media
+  subtype object is specified" is not. `Event.url`'s condition names two
+  terms of List: Event Tracking Methods and no attribute, so a reader has to
+  know that `method` is the attribute those terms belong to.

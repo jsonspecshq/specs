@@ -1,0 +1,184 @@
+# The vectors of the eighteen rules D-057 maps: each is the condition of an
+# attribute the text marks `required *` and states in a footnote under the
+# table, which the schema emitter lists in `conditions.left` because the
+# sentence names no sibling and no value. Every payload here is accepted by
+# its type's own schema, so the rule alone decides it (type rules § 9).
+format: 1
+module: objects
+rules:
+- rule: rule:object_ad:e54fb6a6
+  digest: aecf4975a81fb6b84a608136ecb7f25730571cf423cb1811a6693b9797b7ce48
+  valid:
+  - value:
+      id: ad-1
+      display: {}
+  invalid:
+  - value:
+      id: ad-1
+- rule: rule:object_ad:e54fb6a6-2
+  digest: 2640fe2b2ffcd3e755de7dda32849c9f865a7f8e3dec6fc0db33422d5bb3e5df
+  valid:
+  - value:
+      id: ad-1
+      video: {}
+  invalid:
+  - value:
+      id: ad-1
+- rule: rule:object_ad:e54fb6a6-3
+  digest: fee8cafe93c3d9fd27b05610905f2e08b4ea6e133b9fbeb7c23399c8ef6357bc
+  valid:
+  - value:
+      id: ad-1
+      audio: {}
+  invalid:
+  - value:
+      id: ad-1
+- rule: rule:object_asset:e6a2f365
+  digest: b4295c7dd7e3c619c020dcd975e3e9c29ffa574425ea8a4da30d9bf30e2db9cb
+  valid:
+  - value:
+      title:
+        text: Buy a widget
+  invalid:
+  - value: {}
+- rule: rule:object_asset:e6a2f365-2
+  digest: 1b9d6d4451d5bf5786c50cf898d87586a098218fa1be3ed5e678a29372b0196e
+  valid:
+  - value:
+      image:
+        url: https://example.invalid/a.png
+  invalid:
+  - value: {}
+- rule: rule:object_asset:e6a2f365-3
+  digest: dc95399c9a84ee4c1e2d0ebb29ca0b4da3727e129f5bd945993a9fcb7b737005
+  valid:
+  - value:
+      video:
+        adm: <VAST/>
+  invalid:
+  - value: {}
+- rule: rule:object_asset:e6a2f365-4
+  digest: 39075d027a7e74ae7b10315b8eb2f457e21cf0abaf0e5709e8b387e6710758ea
+  valid:
+  - value:
+      data:
+        value: 5 stars
+  invalid:
+  - value: {}
+- rule: rule:object_asset:e6a2f365-5
+  digest: e13fa797859ee4700d6fcbfcb66aa9a1695aa52857e53e46cc203addd329bd64
+  valid:
+  - value:
+      link:
+        url: https://example.invalid/l
+  invalid:
+  - value: {}
+- rule: rule:object_assetformat:a5e2df16
+  digest: 3da937c81787c23429fac5e434cc09fbc6ed111a422c264fdfcca84f5140424c
+  valid:
+  - value:
+      id: 1
+      title:
+        len: 90
+  invalid:
+  - value:
+      id: 1
+- rule: rule:object_assetformat:a5e2df16-2
+  digest: 90bd1f2f81b81ca296afa6fe591f859e1377a8a6c7c11d5ec67c13f189b063d4
+  valid:
+  - value:
+      id: 1
+      img: {}
+  invalid:
+  - value:
+      id: 1
+- rule: rule:object_assetformat:a5e2df16-3
+  digest: 76aae42ba176c90862b803d69308c9469503c30c9b984bce7b4b0802f477d59a
+  valid:
+  - value:
+      id: 1
+      video:
+        mime:
+        - video/mp4
+  invalid:
+  - value:
+      id: 1
+- rule: rule:object_assetformat:a5e2df16-4
+  digest: 2e52186ec6a425f98bdc737752c1d0d78049e8d0ecf00ae4d617826464c7fe15
+  valid:
+  # `data: {}` was rejected by the schema, which the rule's own contract
+  # forbids: a valid vector passes the schema so that the rule alone decides
+  # it. DataAssetFormat requires `type`, a Native Data Asset Type, and 1 is
+  # `sponsored`.
+  - value:
+      id: 1
+      data: { type: 1 }
+  invalid:
+  - value:
+      id: 1
+- rule: rule:object_placement:c424dfde
+  digest: 50939694c8eba101092fae18a3a70c4ed3a2e6aa0db92eaaeacbf921056adad0
+  valid:
+  - value:
+      display: {}
+  invalid:
+  - value: {}
+- rule: rule:object_placement:c424dfde-2
+  digest: 68d7e283cceb0905d41426d53a3dc69cae5d051b6bb6f365e3f02dd39c6bdfb6
+  valid:
+  - value:
+      video:
+        mime:
+        - video/mp4
+  invalid:
+  - value: {}
+- rule: rule:object_placement:c424dfde-3
+  digest: 52046595ab8d8fda298cdba7140427c452f40bd06c9271a2750b7794aa97eff1
+  valid:
+  - value:
+      audio:
+        mime:
+        - audio/mp4
+  invalid:
+  - value: {}
+- rule: rule:object_videoasset:6f5d60d7
+  digest: 396ae7d8ba249af140ea773b795c18ee01dfcb24a07beffd26b55ad72d58e0b1
+  valid:
+  - value:
+      adm: <VAST/>
+  - value:
+      curl: https://example.invalid/v.xml
+  invalid:
+  - value: {}
+  - value:
+      adm: <VAST/>
+      curl: https://example.invalid/v.xml
+- rule: rule:object_videoasset:6f5d60d7-2
+  digest: b68ae87938416a2fb53da35c0a71b7345eeef76ac5f9910090755ed81627557b
+  valid:
+  - value:
+      adm: <VAST/>
+  - value:
+      curl: https://example.invalid/v.xml
+  invalid:
+  - value: {}
+  - value:
+      adm: <VAST/>
+      curl: https://example.invalid/v.xml
+- rule: rule:object_event:2bbe0e06
+  digest: e7d34cdc66c3eaff1c365d2fb95d267d2bdc7fc3e1c4da9b4ccb9ad1e7eca0d5
+  valid:
+  - value:
+      type: 2
+      method: 1
+      url: https://example.invalid/px.gif
+  - value:
+      type: 2
+      method: 500
+  invalid:
+  - value:
+      type: 2
+      method: 1
+  - value:
+      type: 2
+      method: 2

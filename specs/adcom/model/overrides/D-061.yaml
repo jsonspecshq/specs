@@ -1,0 +1,266 @@
+format: 2
+id: D-061
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "AdCOM's 46 objects are mapped and its object schemas are published. What do Appendix C's three JSON examples become now?"
+covers:
+  - ir: code:requestcontext:1
+    digest: 2fb399758d0e5decbe6b15709801fc13699c81ade55384d69b4036a6e43c222b
+    quote: |-
+      {
+         "openrtb": {
+            "ver": "3.0",
+            "domainspec": "adcom",
+            "domainver": "1.0",
+            "request": {
+               ...
+               "context": {
+                  "regs": {
+                     "gdpr": 0,
+                     "coppa": 0
+                  },
+                  "restrictions": {
+                     "bcat": [ "IAB24", "IAB25", "IAB26" ],
+                     "cattax": 1,
+                     "badv": [ "ford.com", "buick.com" ]
+                  },
+                  "site": {
+                     "id": "1234",
+                     "name": "Awesome Example Site",
+                     "domain": "examplesitedomain.com",
+                     "mobile": 1,
+                     "amp": 0,
+                     "pub": {
+                        "id": "9876",
+                        "name": "Example Publisher, Inc.",
+                        "domain": "examplepubdomain.com"
+                     }
+                  },
+                  "user": {
+                     "id": "a0af45c77890045deec100acb8443baff57c",
+                     "buyeruid": "fcd4282456238256034abcdef220d9aa5892",
+                  },
+                  "device": {
+                     "type": 4,
+                     "ifa": "8846d6fa10008bceaaf322908dfcb221",
+                     "ip": "1.2.3.4",
+                     "ua": "...user agent string...",
+                     "make": "Apple",
+                     "model": "iPhone",
+                     "hwv": "6s",
+                     "os": 13,
+                     "osv": "11.4.1",
+                     "mccmnc": "310-005",
+                     "geo": {
+                        "type": 1,
+                        "lat": 42.3601,
+                        "lon": 71.0581,
+                        "country": "USA",
+                        "utcoffset": -300
+                     }
+                  }
+               }
+               ...
+            }
+         }
+      }
+  - ir: code:itemspecs:1
+    digest: f8de3c5f8ccb85803e1b25019f6969fbd830ae193f32dffa5eacb772e93769ef
+    quote: |-
+      {
+         "openrtb": {
+            "ver": "3.0",
+            "domainspec": "adcom",
+            "domainver": "1.0",
+            "request": {
+               ...
+               "item": [
+                  {
+                     ...
+                     "spec": {
+                        "placement": {
+                           "tagid": "plc-ftr-123abc",
+                           "secure": 1,
+                           "display": {
+                              "ctype": [ 2, 3 ],
+                              "ampren": 0,
+                              "instl": 0,
+                              "displayfmt": [
+                                 {
+                                    "w": 320,
+                                    "h": 50
+                                 },
+                                 {
+                                    "w": 320,
+                                    "h": 250
+                                 }
+                              ],
+                              "event": [
+                                 {
+                                    "type": 1,
+                                    "method": [ 1 ]
+                                 }
+                              ]
+                           }
+                        }
+                     }
+                     ...
+                  }
+               ]
+               ...
+            }
+         }
+      }
+  - ir: code:mediaresponse:1
+    digest: b45c59f8d6d59879a9db05ec2bac9505933cf5da4c0a761a1456c610a2a41e52
+    quote: |-
+      {
+         "openrtb": {
+            "ver": "3.0",
+            "domainspec": "adcom",
+            "domainver": "1.0",
+            "response": {
+               ...
+               "seatbid": [
+                  {
+                     ...
+                     "bid": [
+                        {
+                           ...
+                           "media": {
+                              "ad": {
+                                 "id": "d0bcb39723af87c2bb00942afee5710e",
+                                 "adomain": [ "ford.com" ],
+                                 "secure": 1,
+                                 "display": {
+                                    "mime": "image/jpeg",
+                                    "ctype": 3,
+                                    "w": 320,
+                                    "h": 50,
+                                    "banner": {
+                                       "img": "https://somebuyer.com/creative",
+                                       "link": {
+                                          "url": "https://somebuyer.com/click",
+                                          "urlfb": "https://somebuyer.com"
+                                       }
+                                    },
+                                    "event": [
+                                       {
+                                          "type": 1,
+                                          "method": 1,
+                                          "url": "https://somebuyer.com/pixel"
+                                       }
+                                    ]
+                                 }
+                              }
+                           }
+                           ...
+                        }
+                     ]
+                  }
+               ]
+            }
+         }
+      }
+options:
+  - id: informative
+    summary: >-
+      Every element of the three code blocks stays informative, as the
+      earlier reading left it, and nothing of Appendix C is validated
+      against anything.
+  - id: validate
+    summary: >-
+      Map each block as an example of a document and validate it against the
+      object schemas, which the objects phase has now published.
+  - id: corpus
+    summary: >-
+      The three blocks stay informative, because none of them parses and
+      none of them is an instance of any object AdCOM defines; the payloads
+      they show are graded instead through the external payload corpus,
+      where the upstream's repaired copies of exactly these three blocks are
+      claimed at the pointers where AdCOM's own objects begin.
+chosen: corpus
+rationale: >-
+  The earlier reading of this question chose `informative` and gave two
+  reasons. One is spent: "the objects they show have no schema until the
+  objects phase" -- the objects phase has arrived, D-049 maps all 411
+  attribute rows, and both locks publish 46 object schemas. The other
+  stands, and is measured below. So the condition the earlier reading was
+  written under has expired while the option it set aside is still not
+  available, and the answer is a third option that record did not weigh.
+
+  **What `validate` would take, measured.** Neither block parses, on either
+  lock. Each of the three writes four runs of `...` as a placeholder, where
+  JSON has no such token, and `code:requestcontext:1` also writes a trailing
+  comma after `buyeruid`. Run through the loader the examples gate uses
+  (`src/examples.ts`'s `loadJsonYaml`, YAML 1.2 core with JSON types only),
+  `code:requestcontext:1` and `code:mediaresponse:1` give one problem each
+  and `code:itemspecs:1` gives two; all three are "Missing , between flow map
+  items", and all three are identical on `main` at 26c59ba and on
+  `tag-202607` at d67a6a8. A block that does not parse has no value for any
+  schema to accept or reject, so `validate` decides nothing about it.
+
+  **And it could not reach the objects even repaired.** Every block's top
+  level is a single key, `openrtb`, and the specification heads 46 sections
+  `Object:` or `Abstract Class:` of which not one is named Openrtb, Request,
+  Response, Context, Item, ItemSpec, Seatbid, Bid, Media or BidMedia: the
+  envelope is OpenRTB 3.0's and AdCOM defines no object for any level of it.
+  The first value that is an instance of an AdCOM object sits at
+  `/openrtb/request/context/site` in `code:requestcontext:1`, at
+  `/openrtb/request/item/0/spec/placement` in `code:itemspecs:1`, and at
+  `/openrtb/response/seatbid/0/bid/0/media/ad` in `code:mediaresponse:1` --
+  four, six and eight segments down. An example of the model
+  (`src/examples.ts`'s `ModelExample`) is validated whole against one type,
+  or, as a `part`, field by field against that type's members; neither form
+  carries a pointer, so neither can say "the object starts here". Mapping a
+  block to an example would therefore state that the whole block is a Site,
+  a Placement or an Ad, which it is not.
+
+  **What `corpus` grades instead, measured.** The upstream Prebid openrtb
+  repository round-trips exactly these three blocks through its Go types and
+  commits the result, with the envelope removed and the placeholders replaced
+  by the values an implementation really sends; `specs/adcom/input/external/sources.yaml`
+  holds that folder at the pinned tree 329e3d0 of commit 0d01af1, says in
+  `independence` that these are the specification's own examples and not
+  independent payloads, and claims each at the pointer where AdCOM's objects
+  begin. Measured on this tree: 3 payloads, 28 claims on each of the two
+  builds and 56 in all, of which 21 per build are paired with their type by
+  the row's own citation in the IR and 7 are authored because their parent is
+  the envelope no row of AdCOM states. The `external-corpus` gate validates
+  every one of them against the published object schemas, and a failure there
+  needs a recorded finding citing a record that covers an element of the
+  failing location.
+
+  So the three blocks' own elements stay informative, which is what the three
+  mapping entries in `specs/adcom/model/mapping/overview.yaml` now cite this
+  record for, and the payloads they show are graded. The distinction matters
+  for the feedback: we are not reporting that AdCOM's examples are
+  unvalidated, we are reporting that they cannot be parsed and that the
+  object they show begins below an envelope they never name.
+
+  Why a new record and not an edit. A reading is append-only once pushed, and
+  this one takes an option the earlier record did not list. D-006 is marked
+  superseded and keeps its three covers unchanged, so a citation filed
+  against its ID still resolves and the history of the reading is readable,
+  as D-003 does under D-049.
+
+  The locks read are `main`, at commit 26c59ba1b235cd8d938c9877409e506f1b8d3f0c,
+  and `tag-202607`, at commit d67a6a8dedc883e0655e239d97116a91df6052ed. All
+  three covered blocks carry on both locks the digest the earlier record
+  recorded for them, so no cover is lock-scoped and the reading rests on the
+  same text it did.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L4697"
+  - "https://github.com/prebid/openrtb/blob/0d01af1cd27503d7edd0584fadb7e740ab83cc9c/adcom1/adcom1_test.go#L27"
+feedback: >-
+  Make each of Appendix C's three examples valid JSON: replace the `...`
+  placeholders with values, and remove the trailing comma after `buyeruid` in
+  the Request Context block. Each block's AdCOM content begins four, six or
+  eight levels inside an OpenRTB envelope, so state for each example which
+  AdCOM object it shows and at which path, and give each one a complete
+  payload that implementations can use as a test fixture. Prebid's openrtb
+  repository already publishes a repaired copy of all three; adopting those
+  bytes would make the appendix's examples machine-checkable without changing
+  what they teach.
