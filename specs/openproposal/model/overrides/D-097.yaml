@@ -1,0 +1,68 @@
+format: 2
+id: D-097
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Two members carry a value whose concept a sibling's term decides. Which sibling, and which concept
+  per term?
+covers:
+- ir: key:5.6.1:CommitmentAmount.basis
+  digest: 3f2b2e5aa501bc2e06555afd93e4f7180b4d7a51bb93a18807b9b18671dcc373
+  quote: '`basis` | REQUIRED | `spend` | `units`'
+  locks:
+  - with-open-prs
+- ir: key:5.6.1:CommitmentAmount.amount
+  digest: c86da179b6125a87987ded010bdcf718b33df838acd429a72dc4c892cf9fcbae
+  quote: '`amount` | REQUIRED | The figure committed: an `Amount` when `basis` is `spend`, otherwise a
+    whole number of the entry''s units (§ 5.6.5)'
+  locks:
+  - with-open-prs
+- ir: key:5.7.1:CommittedMetric.metric
+  digest: 3ff5f55cf9dd210bdb9a2a1f05b4d2d10d45fcffce624b26a2d22ae1562d9f7c
+  quote: '`metric` | REQUIRED | What is measured. Core terms below. A receiver that doesn''t know the
+    term skips the line item (§ 2.2): a tuple binds outside any option'
+  locks:
+  - with-open-prs
+- ir: key:5.7.1:CommittedMetric.level
+  digest: d55f880f7cfb47eeb4395791bcd3842d67f3b4471748a026efb5d8557b576788
+  quote: '`level` | REQUIRED | The offered level: a `Fraction` under a rate term, a count under a count
+    term'
+  locks:
+  - with-open-prs
+options:
+- id: the-sibling-s-term-decides
+  summary: >-
+    Each member's concept is the one its sibling's term names: a commitment's `amount` is money under
+    `spend` and a count under `units`, and a committed metric's `level` is a fraction under a rate term,
+    a count under the count term, and a measure under any other.
+- id: one-concept-each
+  summary: >-
+    Each member takes one concept for every term, whichever is wider, so a commitment's `amount` is a
+    number and a committed metric's `level` is a number.
+chosen: the-sibling-s-term-decides
+rationale: 'Both rows state the dependence in their own words, and both name the sibling that decides
+  it. A commitment''s `amount` is "The figure committed: an `Amount` when `basis` is `spend`, otherwise
+  a whole number of the entry''s units (§ 5.6.5)", and `basis` is "`spend` | `units`". A committed metric''s
+  `level` is "The offered level: a `Fraction` under a rate term, a count under a count term", and `metric`
+  is what is measured, whose core terms § 5.7.1 lists.
+
+
+  So the concept of each is its sibling''s term''s, which is what a basis states: `spend` gives the amount
+  concept and `units` the count. § 5.7.1''s metric table gives each term its Kind, and the Kind is the
+  concept: `viewable_rate`, `completion_rate` and `ivt_rate` are Rates and give the fraction,
+  `impressions` is a Count and gives the count, and every other term gives the measure. The "any other"
+  half is the open vocabulary''s: a term the specification does not list is still a metric, and its level
+  is a measure and not a fraction, because nothing bounds it at 1.
+
+
+  `one-concept-each` publishes a number for both and loses every bound either row states: a commitment
+  on a spend basis would accept a negative sum, and a viewable rate would accept 4. The domain model
+  exists to hold those, which is why the basis mechanism is in it.
+
+
+  **The member a basis names is the row''s and not the predecessor''s.** The `Metric` basis named `value`,
+  which is what the earlier text called this member, and `domains-properties` reported it in its own
+  words: "basis `Metric`: no object holds it beside `value`". § 5.7.1 now writes `level`, so the basis
+  names `level`. Both bases also cited `D-036`, a record the restart deleted.'

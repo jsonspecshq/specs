@@ -1,0 +1,77 @@
+format: 2
+id: D-070
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What type does a row take that states a length of time as a whole number of seconds, where section
+  2.2 states `Duration` as an ISO 8601 string?
+covers:
+- ir: key:5.2.8:Loop.length_s
+  digest: 7797744630e9f12050c32c91311b81a6bcf49b639d0df73140c64024bfae5d21
+  quote: "`length_s` | REQUIRED | Loop length, in seconds, counting every item the loop plays, paid or not"
+- ir: key:5.2.8:Loop.slot_s
+  digest: 7f545a560618e7a8978658d20632e28d186b174586a8429f571536a57f3b10ff
+  quote: '`slot_s` | REQUIRED | Slot length, in seconds'
+- ir: key:5.6.5:CostParameters.view_s
+  digest: 07c3ce92aff2f4d5079df371767846cbd707637eec0a113f9b1737580634ae30
+  quote: '`view_s` | REQUIRED when `cost_method` is `CPV` and `view_fraction` is absent | Seconds played
+    that make a view. Absent when `view_fraction` is present'
+- ir: key:5.2.2:Refresh.min_interval_s
+  digest: 858d83b183216c3319adeb6bb3882f4c9b9efc6d5f54ee31fc71a54ba64b3743
+  quote: '`min_interval_s` | REQUIRED | Minimum seconds a creative renders before the slot refreshes'
+- ir: key:5.2.3:BreakPositionOption.poddur
+  digest: 37180c898a9cfe74fa941482b963b5a8517e7560080ad41c3fd03570807dc9cd
+  quote: '`poddur` | OPTIONAL | Ceiling: the most seconds of dynamic ad time a served pod holds | `poddur`,
+    `poddur`'
+options:
+- id: seconds-as-an-integer
+  summary: A row that states its length in seconds takes the kernel's `DurationSeconds`, a whole number
+    of seconds that is never negative. Section 2.2's `Duration` stays the type of the rows that state
+    an ISO 8601 string.
+- id: one-duration
+  summary: Every length of time takes section 2.2's `Duration`, so a row stating seconds publishes a string
+    and a sender writes `PT30S` where the row says 30.
+- id: a-plain-count
+  summary: A row stating seconds takes `Count`, a whole number of things, and what the number counts is
+    left to the row's prose.
+chosen: seconds-as-an-integer
+rationale: 'Five rows state their length in seconds and say so in the cell: a loop''s `length_s` is "Loop
+  length, in seconds", its `slot_s` is "Slot length, in seconds", a placement''s `min_interval_s` is "minimum
+  seconds a creative renders before the slot refreshes", a pod''s `poddur` is "the most seconds of dynamic
+  ad time a served pod holds", and a cost parameter''s `view_s` is "seconds played that make a view".
+  A payload carrying 30 for any of them is what the specification asks for.
+
+
+  `one-duration` would publish a string where the row states a number, so every one of the five would
+  refuse the value the text invites, which is narrower than the document in the one direction a published
+  type may not be. It would also make a sender of a DOOH loop length write a grammar the row never mentions.
+
+
+  `a-plain-count` publishes the right shape and throws away what the number is. A generated library would
+  offer a count of things where the specification offers a length of time, and nothing in the type would
+  say that two such numbers may be added, compared against a flight, or converted.
+
+
+  So the kernel''s `second-duration` concept is published here, whose type is a whole number of seconds
+  that is never negative, and section 2.2''s `Duration` keeps the rows that state a string. The specification
+  writes a length of time in two forms, and the model states both rather than choosing one the text does
+  not use.
+
+
+  A delivery counting''s `play_tolerance_ms` is left: it states milliseconds, which is a third form, and
+  no type of the kernel carries one.
+
+
+  Re-read on the lock re-pinned on today''s PR heads, and the document now states this.
+  Section 2.2''s `Duration` row carries a sentence it did not: "A length within the playback of an ad or
+  a placement, such as a play, view, read, loop, slot, or refresh, is instead an Integer whose key ends
+  `_s` or `_ms`, except a key imported from another standard, which keeps its spelling (section 2.6)".
+  That sentence names a loop, a slot, a view and a refresh, which is four of the five rows this record
+  covers, and its exception reaches the fifth: `poddur` is the only one whose key does not end `_s`, and
+  section 5.2.3 imports it. So the reading is unchanged and the text has closed the gap it was written
+  for. `play_tolerance_ms` is answered by the same sentence, which states the millisecond form; the
+  kernel still carries no type for it, and that is where that one rests. `basis` admits `gap` and
+  `departure` and has no value for a gap the document has since closed, so it stays `gap` rather than
+  taking a value the format does not define. Whether a mapping rule should now read the key''s suffix as
+  form and retire this record is a separate question, and not one this re-read settles.'

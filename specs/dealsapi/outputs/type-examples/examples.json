@@ -227,6 +227,12 @@
       "minimal": 1,
       "full": 1
     },
+    "Instant": {
+      "kind": "primitive",
+      "schema": "https://jsonspecs.com/dealsapi/schemas/kernel/1/kernel.json#/$defs/Instant",
+      "minimal": "2026-10-06T12:00:00Z",
+      "full": "2026-10-06T12:00:00Z"
+    },
     "IntegerFlag": {
       "kind": "primitive",
       "schema": "https://jsonspecs.com/dealsapi/schemas/kernel/1/kernel.json#/$defs/IntegerFlag",
@@ -296,7 +302,11 @@
     "Terms": {
       "kind": "object",
       "schema": "https://jsonspecs.com/dealsapi/schemas/modules/deal/1/deal.json#/$defs/Terms",
-      "minimal": {},
+      "minimal": {
+        "guar": 1,
+        "totalcost": 50000,
+        "units": 4000000
+      },
       "full": {
         "countries": [
           "USA",
@@ -309,8 +319,8 @@
         "guar": 1,
         "pricetype": 3,
         "startdate": "2026-11-01T00:00:00Z",
-        "totalcost": 50000,
-        "units": 4000000
+        "totalcost": 5000,
+        "units": 1000000
       }
     },
     "Text": {
@@ -318,12 +328,6 @@
       "schema": "https://jsonspecs.com/dealsapi/schemas/kernel/1/kernel.json#/$defs/Text",
       "minimal": "Weekday reach among business news readers in the US.",
       "full": "Weekday reach among business news readers in the US."
-    },
-    "UtcTimestamp": {
-      "kind": "primitive",
-      "schema": "https://jsonspecs.com/dealsapi/schemas/kernel/1/kernel.json#/$defs/UtcTimestamp",
-      "minimal": "2026-11-02T00:00:00Z",
-      "full": "2026-11-02T00:00:00Z"
     },
     "VendorCode": {
       "kind": "primitive",

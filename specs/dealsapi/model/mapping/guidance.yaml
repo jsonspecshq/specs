@@ -92,7 +92,10 @@ entries:
   - ir: rule:terms-object-1:647b6593
     digest: e4b08754ebc34fe5523007e2fd84a060e9e66d1f30a39a9464535f296698db97
     source: { decision: D-007 }
-    as: { role: rule, object: Terms }
+    as:
+      role: rule
+      object: Terms
+      keyword: { construct: required-when, member: pricetype, values: [ 3 ], require: [ dealfloor ] }
   - ir: rule:terms-object-1:fcbe8020
     digest: 8d4fb46d02c74e5e90f2182fa3812628e69e160e833a2621ba989b8cfb5fdd48
     source: { decision: D-001 }

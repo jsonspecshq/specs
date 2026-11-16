@@ -1,0 +1,53 @@
+format: 2
+id: D-061
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: § 2.2 states `FractionDelta`, "Number greater than -1", "Used only by `delta_fraction` (§ 3.1)",
+  and one row names it. The kernel carries `Fraction`, 0 to 1, and `PriceAdjustment`, an unbounded number.
+  Which value domain is a change to a fraction a value of?
+covers:
+- ir: def:2.2:FractionDelta
+  digest: d1df316a19e8a8701b794b94dd6737989aab1ed8e0fadfb55b30d418c261123d
+  quote: '`FractionDelta` | Number greater than -1 | Used only by `delta_fraction` (§ 3.1)'
+- ir: key:3.1:Delta.delta_fraction
+  digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+  quote: '`delta_fraction` | OPTIONAL | Multiplies the rate of any entry by 1 plus this value. `0.20`
+    is 20 percent more'
+options:
+- id: a-concept-of-its-own
+  summary: 'Its own. `FractionDelta` is added to the kernel under a `fraction-delta` concept in the ratio
+    domain, `{ type: number, exclusiveMinimum: -1 }`, and the row takes it.'
+- id: price-adjustment
+  summary: '`PriceAdjustment`, the kernel''s unbounded number for a change to a money value, which admits
+    the row''s values and states no lower bound.'
+- id: percent-change
+  summary: '`PercentChange`, a number at least -100, since the row''s own words are "20 percent more".'
+chosen: a-concept-of-its-own
+rationale: '**The bound is the reading.** "Number greater than -1" is a real constraint and it has a cause
+  the row states: the value multiplies a rate by `1 +` itself, so at -1 the rate is nothing and below
+  -1 it is negative. `PriceAdjustment` states no lower bound, so publishing the row there drops a constraint
+  the specification wrote — which type rules § 1 refuses in that direction.
+
+  **`percent-change` is refused although the row says "percent".** `PercentChange` is at least -100 and
+  is a number of percent; this value is a fraction, `0.20` for twenty percent more, so the two differ
+  by a factor of a hundred and a payload valid at one is wrong at the other. The row''s prose explains
+  the arithmetic in percent and states the value as a fraction, and the type follows the value.
+
+  **It sits in the ratio domain beside `fraction` and not in money.** The value is dimensionless: it scales
+  a rate rather than adding to one, so it is not an amount of money and `delta_cpm` and `delta_flat`,
+  which are, keep their own types. A fraction is bounded at both ends and a change to one is bounded at
+  neither, which is why it is a concept of its own rather than `fraction` widened.
+
+  **One row is the whole prize, and it is still worth a type**, because the alternative is a published
+  number with no lower bound where the specification wrote one, and a constraint dropped is the defect
+  the pipeline exists to prevent. The radius is three binding files and no published byte of another specification,
+  by the measurement `D-055` rests on.'
+evidence:
+- docs/reports/reading-runs/openproposal-d050-binding-2026-11-08.md § 10 for the omission-is-publication
+  mechanism and the binding-file radius.
+feedback: '`FractionDelta`''s Rules cell says "Used only by `delta_fraction`", which is a note about the
+  specification''s own current shape rather than a rule about the value. State the bound''s cause instead
+  -- that the value multiplies a rate by `1 +` itself -- so a later field taking the same type inherits
+  the reason.'

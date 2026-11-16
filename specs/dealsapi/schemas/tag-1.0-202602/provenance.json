@@ -539,6 +539,42 @@
         ],
         "rule": "type-rules § 3a value domains"
       },
+      "/$defs/Instant": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          },
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/Instant/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
+            "ir": "field:object-deal:created"
+          },
+          {
+            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
+            "ir": "field:object-terms:enddate"
+          },
+          {
+            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
+            "ir": "field:object-terms:startdate"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
       "/$defs/IntegerFlag": {
         "by": "rule",
         "from": [
@@ -603,42 +639,6 @@
           {
             "digest": "aafbf8178f16173d1bb333bc69b942832a17100d282908c02d766ca4442dd0e7",
             "ir": "field:object-deal:name"
-          }
-        ],
-        "rule": "type-rules § 3a value domains"
-      },
-      "/$defs/UtcTimestamp": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
-            "ir": "field:object-deal:created"
-          },
-          {
-            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
-            "ir": "field:object-terms:enddate"
-          },
-          {
-            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
-            "ir": "field:object-terms:startdate"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/UtcTimestamp/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed",
-            "ir": "field:object-deal:created"
-          },
-          {
-            "digest": "387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4",
-            "ir": "field:object-terms:enddate"
-          },
-          {
-            "digest": "85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a",
-            "ir": "field:object-terms:startdate"
           }
         ],
         "rule": "type-rules § 3a value domains"

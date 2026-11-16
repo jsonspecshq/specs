@@ -1,0 +1,101 @@
+format: 2
+id: D-113
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  A `GeoCode` is stated as a String that is one of three things: an ISO 3166-1
+  alpha-2 country code, an ISO 3166-2 subdivision code, or an extension
+  `VocabularyTerm`. What type is it, and what are its arms?
+covers:
+- ir: def:5.5:GeoCode
+  digest: 00199fb1320521bce65188b2ddcc281db1bbac486f33976cdc44868bf4e25a79
+  quote: "`GeoCode` | is a String: an ISO 3166-1 alpha-2 country code, an ISO 3166-2 subdivision code,\
+    \ or an extension `VocabularyTerm` for any other area, such as a metro list. The country of an ISO\
+    \ 3166-2 code is the part before the hyphen, and a country covers every subdivision code it prefixes.\
+    \ An extension term covers only itself. § 1.1 states the conversion to OpenRTB 2.6 and the Deals API."
+- ir: field:5.5:geo
+  digest: f492a26496f05549bd2f597bfb46224f68b3eb347aee1c5e0e5974d88dabe693
+  quote: "`geo` | Settable[GeoCode] | settable | Where the line item runs. `allowed[]` of `GeoCode` (below).\
+    \ A line item MUST NOT declare both `geo` and `markets`"
+- ir: field:5.5:markets
+  digest: 1603dc1239ea39c1b1522500dbc9fd246e3e00d035a92d32e36ca1288ae8ef13
+  quote: "`markets` | Selectable[GeoCode] | selectable | For a line item priced by market. See `GeoCode`\
+    \ below"
+options:
+- id: a-union-of-three-arms
+  summary: >-
+    `GeoCode` is a union of three named types: a `ShortCountryCode`, a
+    `SubdivisionCode`, and a `NamespacedTerm` for any other area.
+- id: the-country-concept
+  summary: >-
+    `GeoCode` is the kernel's country concept, `CountryCode`, since the row
+    opens by naming a country code.
+- id: one-primitive
+  summary: >-
+    `GeoCode` is a primitive of its own, a string whose pattern admits all
+    three forms at once.
+chosen: a-union-of-three-arms
+rationale: 'Three alternatives in one cell are what a union publishes, and `Measurer` is this specification''s
+  precedent: `D-064` reads "A `Side`, or a `RegistrableDomain`" as a union because no term list can hold
+  the second arm. Here no single type can hold any two of the three: an alpha-2 code is two letters, a
+  subdivision code is an alpha-2 code and a hyphen and a code of its own, and an extension term is namespaced.
+
+
+  `the-country-concept` is refused on the codes themselves. The kernel''s country concept is `CountryCode`,
+  the ISO 3166-1 **alpha-3** code, as OpenRTB 2.6 writes `geo.country`; this row states the **alpha-2**
+  code, and the examples write `US`, `CA` and `GB`. The two are different codes of one country and they
+  validate differently, so they are two concepts and two types, which is why the kernel gains `short-country`
+  and `ShortCountryCode` beside `country` and `CountryCode` rather than widening either. § 1.1 states
+  the conversion -- OpenRTB 2.6''s `country` "takes the ISO 3166-1 alpha-3 code of the country" and its
+  `region` "the part of an ISO 3166-2 code after the hyphen" -- and a conversion between two spellings
+  is the proof that they are two, not one.
+
+
+  `one-primitive` publishes a pattern that admits the three forms and then cannot say which of them a
+  value is. A receiver has to tell them apart: the row''s own rules are that a country covers every subdivision
+  code it prefixes and that an extension term covers only itself, so what a value covers depends on which
+  arm it is. A union names the arms and a pattern erases them.
+
+
+  The third arm is the namespaced half of a `VocabularyTerm` and not the whole of it. The row says "an
+  extension `VocabularyTerm`", and § 2.2 states a `VocabularyTerm` as "a bare core term, or `<domain>:<term>`",
+  of which the kernel''s `NamespacedTerm` is the extension half -- the kernel''s own description says
+  so. Taking the whole type would publish a union that states nothing: `VocabularyTerm`''s pattern already
+  matches `US` and `US-NY`, so the two ISO arms would constrain nothing and any bare word would name an
+  area. The arm is `NamespacedTerm`, so an area this specification does not code is written by the party
+  that defines it, under its own domain.
+
+
+  `geo` and `markets` need no entry of their own on this record. Their cells are `Settable[GeoCode]` and
+  `Selectable[GeoCode]`, applications of constructors the kernel defines to a type the model now defines,
+  which `applied-constructor-row` derives. They are covered here because this record is what gives `GeoCode`
+  its arms, and the rows are where the specification uses it.'
+evidence:
+- '`D-064` reads `Measurer` as a union of two arms on the same grounds, and is the precedent for the shape.'
+- examples/line-item-display.yaml (geo.allowed[] "US-NY", "US-CA", "US-IL", "US-TX")
+- examples/line-item-audio.yaml (markets.available[] "US", "CA", "GB")
+challenge:
+- type: GeoCode
+  value: US-NY
+  verdict: accept
+  context: >-
+    A display line item a seller confines to four states, which is what
+    `geo.allowed[]` carries in the examples.
+  reason: >-
+    `a-union-of-three-arms` publishes a `SubdivisionCode` arm, an alpha-2
+    code and a hyphen and the subdivision's own code, and `US-NY` is one.
+- type: GeoCode
+  value: USA
+  verdict: reject
+  context: >-
+    A sender that writes the alpha-3 code the OpenRTB conversion uses where
+    the row states the alpha-2 code.
+  reason: >-
+    The arms are the alpha-2 code, the subdivision code and a namespaced
+    term, and `USA` is none: three letters is no alpha-2 code, it carries no
+    hyphen, and it is not namespaced. `the-country-concept`, the option not
+    taken, publishes `CountryCode` and accepts exactly this value while
+    refusing the `US` and `US-NY` the examples write, which is how the two
+    readings tell apart on a payload.

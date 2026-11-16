@@ -19,6 +19,13 @@ names:
   schema_base: "https://jsonspecs.com/adcom/"
   # The proto target's package (docs/design/target-rules.md): its lists as proto3 enums under proto/.
   proto: { package: com.jsonspecshq.adcom.v1 }
+  # The SDK targets' packages. Each target reads its own, so the name a
+  # committed package carries is stated here and not in an argument. The
+  # TypeScript name is the validation layer's; the static types take
+  # `TYPES_SUFFIX` after it.
+  sdk:
+    python: { package: jsonspecs_adcom }
+    ts: { package: "@jsonspecshq/adcom" }
 # Its pages on the public site (src/site/; specs/site.yaml gives the site).
 site:
   # The type map opens at the device types, a list other specs cite.

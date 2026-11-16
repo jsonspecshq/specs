@@ -1,0 +1,73 @@
+format: 2
+id: D-058
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: § 2.2 states `RegistrableDomain`, "a `Domain` that is the Public Suffix List registrable domain,
+  taken over the whole list, PRIVATE section included", whose Rules cell reads "It names a business",
+  and nine rows name it. The kernel carries `Domain`, any host name. Is a business's domain the same value
+  domain as a host's, or its own?
+covers:
+- ir: def:2.2:RegistrableDomain
+  digest: 996140da167fae546cefbbdb984df61f7cf0780a2eca6d4d5aa48a5bed5e2666
+  quote: '`RegistrableDomain` | A `Domain` that is the Public Suffix List registrable domain, taken over
+    the whole list, PRIVATE section included | It names a business'
+- ir: key:2.2:Party.domain
+  digest: 4f993cad977cd8f3893ae6f792ea716454b17eebcd62dd765320bf7056eca545
+  quote: '`domain` | REQUIRED | The party''s domain'
+- ir: key:2.2:SeatRef.dsp
+  digest: a7e019396f0b10d9ccd414c756e345fae410c3538d9504d4219d3b1e4b1c72ba
+  quote: '`dsp` | REQUIRED | The DSP''s primary domain'
+options:
+- id: its-own-type
+  summary: Its own. `RegistrableDomain` is added to the kernel under a `registrable-domain` concept, with
+    the registrable-boundary requirement as a rule beside the type, as `kernel:TimeZone:listed` carries
+    the IANA listing. `Domain` is untouched. The two share one syntax, so the domain model lists the two
+    concepts together as a shared structure with this record as the reason.
+- id: type-the-rows-as-domain
+  summary: The same. The nine rows take `Domain`, and the registrable boundary lives in prose beside the
+    schema.
+- id: narrow-domain-itself
+  summary: The same, narrowed. `Domain` becomes the registrable domain, and the rows that name a host
+    below the boundary carry a wider type added for them.
+chosen: its-own-type
+rationale: '**The two are told apart by what a receiver does with them.** A registrable domain is compared:
+  § 2.2''s own Rules cell for `Measurer` says "Two values name one party only when they are equal byte
+  for byte", which is a comparison that only holds at the registrable boundary — `ads.examplepub.example`
+  and `examplepub.example` are one business and two domain names. A domain name is resolved, not compared.
+  So a type that admits a host below the boundary cannot carry a field whose whole purpose is that equality
+  means identity.
+
+  **`type-the-rows-as-domain` is refused** because it publishes a type that accepts `ads.examplepub.example`
+  where the text says the value names a business, and the comparison the specification rests on then holds
+  for values it should not. **`narrow-domain-itself` is refused** on the measurement that decided the
+  time zone: `Domain` is bound by AdCOM, by the Deals API and by OpenProposal, so narrowing it moves bytes
+  two other specifications publish, where adding a type beside it moves none of theirs.
+
+  **The addition''s radius, measured and not assumed.** `src/binding.ts`''s `mergeBinding` starts from
+  every kernel primitive and removes only what a binding marks `absent`, so **omission is publication**
+  and a new primitive needs an `absent` entry in every specification that does not want it. That makes
+  an addition''s radius three binding files and no more: AdCOM and the Deals API each gain markers for
+  the primitive and its concept and nothing else, which is checked by hashing both specification trees
+  with their binding files excluded, before and after.
+
+  **Three member names become homonyms, and each is listed with this record.** `domain` reads as a business
+  on a party and as a host on an exclusion; `vendor` as a business on an impression multiplier and as
+  another system''s id on a measurement source option; `verification` as businesses on an accepted exclusion
+  and as ids on the predecessor''s `exclusions_accepted`, which is the same field on the other lock. None
+  of the three is one concept under two names, so each is carried where the gate reads it rather than
+  merged.
+
+  **The shared structure is declared rather than merged.** `Domain` and `RegistrableDomain` have the same
+  pattern and the same maximum length, which `duplication-kernel` refuses unless the domain model lists
+  the two concepts together with the reason. They are listed, because one syntax carrying two value domains
+  is exactly what the mechanism is for, and the reason is the comparison above.'
+evidence:
+- 'docs/reports/reading-runs/openproposal-d050-binding-2026-11-08.md § 10: the omission-is-publication
+  mechanism and the binding-file radius it implies.'
+- '`D-055` is the same shape on the time zone: the kernel kept the union and gained the narrow type, and
+  no byte AdCOM or the Deals API publishes moved.'
+feedback: § 2.2 states the registrable boundary for `RegistrableDomain` and leaves `Domain` to mean any
+  host. Say which of the two each domain-valued row takes, because `domain` on a party and `domain` on
+  an exclusion read the same and are not.

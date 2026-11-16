@@ -1,0 +1,85 @@
+format: 2
+id: D-150
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Of the thirteen normative statements of sections 1 to 4 that no entry maps, which binds a party, and
+  what does each of the rest need before a payload can decide it?
+covers:
+
+- ir: rule:4.3.2:4825c8da
+  digest: 63cab315e04772a46d16a682943f4ad70b37c51095af8f81424f77c554bf81d7
+  quote: While it holds, a seller revision MUST NOT change that entry, `pricing_id` included, and MUST
+    NOT end it sooner by moving `offer_window.end`.
+options:
+- id: by-what-decides-it
+  summary: >-
+    Read each statement by what would decide it: a party's duty is an obligation naming the party, a
+    constraint one payload shows is a rule on the object it constrains, and a constraint over two
+    versions or over a relation nothing maps is reported until the thing it turns on exists.
+- id: map-them-all-as-rules
+  summary: >-
+    Map all thirteen as rules on the object each names, which closes the bijection count now and
+    leaves each one owing the valid and invalid vectors and the check the rules stage demands.
+chosen: by-what-decides-it
+rationale: 'One of the thirteen binds a party and twelve do not, and the one that does is the only one
+  this record maps.
+
+
+  **The one.** Section 4.3.2''s firm-entry paragraph reads "While it holds, a seller revision MUST NOT
+  change that entry, `pricing_id` included, and MUST NOT end it sooner by moving `offer_window.end`."
+  Its subject is a seller revision, and the paragraph beside it names the actor twice more — "A seller
+  MAY revise a line item while an ask is open or a hold runs" and "the seller MUST release a `held` hold
+  it makes stale" — both of which `D-084` already maps as the seller''s duties. So this is the third
+  sentence of one duty, read the way `D-084` read the other two, and it needs no vector: an obligation
+  states who is bound and a payload shows nothing about it.
+
+
+  **Three are rules over two versions, and no single payload decides one.** The offered terms of a frozen
+  version not changing, with a change creating `n+1` (§ 4.1); every `seller-set`, `selectable`, `settable`
+  and `requestable` value remaining as in the version `assent[]` names (§ 4.1.2); and a line item of a
+  frozen version never removed from the proposal nor moved to another package (§ 4.1.3). Section 4.1.3''s
+  Versions paragraph states the first of them a second time — "Each change to the offered terms of a frozen
+  version MUST create" a new one — so the reading is corroborated and the obstacle is not the reading. A
+  vector pair is one payload against a type, and a rule whose two sides are two versions of a proposal has
+  no such pair; the rules stage already excludes eleven rules of this shape from its one-payload checks.
+  Reported, not mapped.
+
+
+  **Two turn on a relation nothing maps.** Section 3.2''s `include[]` row reads "Each entry MUST be covered
+  by an `allowed[]` entry" and its `exclude[]` row "Each entry MUST be covered by an `include[]` entry".
+  The relation both turn on is defined two lines below the table — "An entry covers itself and what the
+  field says it contains. Nothing else is assumed." — and instantiated for a geo code in section 5.5, and
+  neither of those sits on an element any entry maps. The `exclude[]` one is internal to `Narrowing` and
+  has a home ready for it, beside `constructor:Narrowing:exclusion-wins`, which is the same shape with its
+  vectors inline. The `include[]` one is not a `Narrowing` rule at all: `allowed[]` is a member of
+  `Settable`, so the statement relates a narrowing to the holder that carries it. Both are reported, and
+  the covering relation they need is the one the first line sweep missed.
+
+
+  **Seven are rules one payload decides, each needing the pair and the check the rules stage demands.**
+  An option priced only by `delta_cpm` not resolving against another entry (§ 3.1), which the `delta_cpm`
+  row states a second time in its own Meaning — "Added to the rate of a `CPM` or `CPMV` entry (§ 5.6.5),
+  and to no other". An assent entry''s `line_item_ids[]` naming line items whose `commitment` is populated,
+  and no line item named by two live `commitment` entries nor by two `acceptance` entries (§ 4.1.2). A
+  `commit` naming one line item of a package naming all of them, and an add-on''s `commit` naming every
+  line item of its package and meeting every `min_commitments[]` (§ 4.1.4) — both stated a second time in
+  section 2.4''s `not_committable` row, "a `commit` names part of a package or an add-on without its
+  package (§ 4.1.4)", which is how a seller rejects one. A `commit` carrying no `requestable` ask
+  (§ 4.3.2). And `hold.valid_until` exceeding neither `offer_window.end` nor the earliest
+  `pricing[].price_valid_until` (§ 4.3.4), which the table above it states from the other side, one row per
+  date and what passing it does.
+
+
+  **Why `map-them-all-as-rules` is refused.** A statement mapped as a rule on an object is a rule the
+  rules stage emits, and every one of the fifty-four it emits carries a valid and an invalid vector; the
+  thirty-four that come from a statement each have theirs. Mapping these twelve would close twelve
+  bijection problems and open twelve in `rules-emit`, which is a count moved and nothing learned. The
+  pairs are real work and the source''s own payloads supply the valid half of most of them, which is the
+  job these readings leave ready rather than the job this reading does. The twelve are queued
+  apart from this record, one group per route, with the second statement of the source named for each
+  one that has one.'
+evidence:
+- https://github.com/IABTechLab/OpenProposal/blob/a36266907148c7fe7f79fd3706d4bd2ff1e99b16/spec/openproposal-3.0.md

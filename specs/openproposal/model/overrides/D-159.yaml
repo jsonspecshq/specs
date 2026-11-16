@@ -1,0 +1,136 @@
+format: 2
+id: D-159
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.1's `RequestedValue` now holds a `retention` row of the same form as § 5.9's field, so
+  the copy `RetentionRange` is stated by two modules where the rule allows one. Is it one
+  thing or two, and where does the copy live?
+covers:
+  - ir: def:4.1:RequestedValue
+    digest: 8ccf1166df7363586fe86fb42012fe9de789758af6f358808149867d2251fba0
+    quote: "`RequestedValue` | holds exactly one key: the `requestable` field `pointer` names, in the form its row states. `pointer` says which `pricing[]` entry."
+  - ir: key:4.1:RequestedValue.retention
+    digest: d894cdd00a918d11313b2c9060083489d895d1c9dc48a3ee705cd56c6b5d3a9b
+    quote: "`retention` | OPTIONAL | The line item's `retention`"
+  - ir: field:5.9:retention
+    digest: 3e9712ff57aa7e91db5c73fb72e61fc7410635c243b103bf5d83e779eb5d66de
+    quote: "`retention` | Range[Duration] | requestable | From release or air. The ad stays in every copy of the content the seller distributes for at least `min` and is removed by `max`. No `max`: indefinitely. When `placement.feed` is present, only copies in that feed count toward delivery"
+options:
+  - id: one-copy-in-the-module-that-states-the-form
+    summary: >-
+      One thing. § 4.1 restates § 5.9's field, so § 5.9 states the form and owns the copy, and
+      § 4.1's row references it by name as its siblings reference theirs. `proposal` declares
+      the dependency on `execution` that the reference is.
+  - id: lift-the-copy-to-a-module-both-depend-on
+    summary: >-
+      One thing, and the copy belongs to neither module: it moves to this specification's
+      `kernel` module, where § 2.2's shared types live, and both modules reference it from
+      there.
+  - id: two-things-one-of-which-needs-its-own-name
+    summary: >-
+      § 4.1's row states a requested value and § 5.9's an offered term, so the two are
+      different types and § 4.1's needs a name of its own.
+chosen: one-copy-in-the-module-that-states-the-form
+rationale: >-
+  **One thing, because the table says what it holds.** § 4.1's lead-in states it outright:
+  `RequestedValue` "holds exactly one key: the `requestable` field `pointer` names, **in the
+  form its row states**". The row then says "The line item's `retention`". So the key is
+  § 5.9's field restated, not a second range, and § 3's marker table lists `retention` among
+  the requestable fields beside `materials_due`, `commitment_bounds` and
+  `committed_metrics[]`.
+
+  **Its siblings show the construct.** Every other key of this table whose form is a named
+  type references it by name: `commitment_bounds` is `CommitmentBounds`, `materials_due` is
+  `MaterialsDue`, `committed_metrics[]` is a list of `CommittedMetric`. None of them restates
+  the type's definition; each points at it. `retention` is the same construct and was mapped
+  differently only because `applied-constructor-row` read the Type cell and minted a fresh
+  application, which is what put the copy in two modules.
+
+  `two-things-one-of-which-needs-its-own-name` is refused by what the two cells say. The form
+  is identical -- `Range[Duration]` in both -- and § 5.9's row did not move its Type cell,
+  its Required cell or its description in the re-pin; only its Mutability moved, `seller-set`
+  to `requestable`, which is the cell that puts the field in this table at all. A second name
+  would publish two types a reader must be told are the same thing.
+
+  **Where the copy lives is not something the text decides, and this record says so rather
+  than pretending otherwise.** The document has no module concept. Modules are this
+  repository's layering of it, and the only place this text names shared types is § 2.2, whose
+  list does not hold `RetentionRange`. So neither `lift-the-copy-to-a-module-both-depend-on`
+  nor the chosen option follows from a sentence.
+
+  The choice is made on the repository's own rules, and it has a cost that is stated here
+  rather than left for a reader to find. The copy stays in `execution` because that is the
+  module that states the form, which is the settled half of the question, and `proposal` adds
+  `execution` to its `depends`. Measured: `execution` declares no dependencies, so the module
+  graph stays a DAG, and `dependsProblems` asks only that a listed module be referenced on
+  some lock, which this reference is.
+
+  **The cost: this is the first cross-module copy reference in the tree.** Measured over the
+  resolved model, 25 copies and 0 properties referencing a copy another module owns. So the
+  chosen option sets a convention by landing rather than by a decision anyone took, and the
+  alternative's cost is worse: moving `RetentionRange` to the `kernel` module would assert it
+  is one of § 2.2's shared types, which the document does not say, and a false claim about the
+  text is worse than a convention this repository can revise. Where a copy lives when two
+  modules state the same form is the owner's to settle, and this record does not settle it.
+
+  **What this record does not decide.** § 4.1's `unit_bounds` row is the same shape and is a
+  different question: it states `Range[Integer]` where § 5.6's states `Range[Count]`, so the
+  two are not the same form and whether they should be is its own reading. It stays unmapped
+  and unclaimed, which is why `applied-constructor-row` declined it, and it belongs to that
+  same question.
+challenge:
+- type: RequestedValue
+  value:
+    retention:
+      min: "P90D"
+      max: "P1Y"
+  verdict: accept
+  context: >-
+    A buyer asking for the retention the shipped
+    `line-item-podcast-embedded.yaml` already states on its line item, which is
+    the value § 5.9's row carries.
+  reason: >-
+    The key is § 5.9's field restated, so a value of that row is a value of this
+    key: the same two written durations, at the same `Duration`. This is the
+    reading's whole content on a payload, and the example is the source's own
+    bytes.
+- type: RequestedValue
+  value:
+    retention:
+      min: 7776000
+      max: 31536000
+  verdict: reject
+  context: >-
+    A buyer that writes the same two bounds as counts of seconds, which is how
+    a podcast platform's own API carries a retention window.
+  reason: >-
+    Referencing `RetentionRange` is what refuses this: § 5.9's row types both
+    bounds `Duration`, a string in the ISO 8601 grammar, so a number is refused
+    here exactly as it is on the line item. A key that stated no type at all --
+    the state before this record, where `applied-constructor-row` derived
+    nothing and § 4.1's Meaning cell says only "The line item's `retention`" --
+    publishes no property and refuses nothing.
+- type: RequestedValue
+  value:
+    retention: {}
+  verdict: reject
+  context: >-
+    A buyer that sends the key to say it wants the subject negotiated and names
+    neither bound.
+  reason: >-
+    `RetentionRange` carries `minProperties: 1` from § 5.9's row, which states a
+    range "with at least one bound", so an empty range is refused in § 4.1
+    because it is refused in § 5.9. That is the half of this record a payload
+    can see: not which module holds the copy, but that § 4.1 asks § 5.9 what the
+    form is.
+feedback: >-
+  § 4.1's `RequestedValue` table restates the form of each field it can carry, and § 4.1's
+  `retention` row and § 5.9's agree while § 4.1's `unit_bounds` row says `Range[Integer]`
+  where § 5.6's says `Range[Count]`. A reader cannot tell whether that difference is meant.
+  Since the lead-in already says each key is "the `requestable` field `pointer` names, in the
+  form its row states", the Type column of this table restates what another row states and can
+  disagree with it; dropping the column, or stating that a disagreement is an error, would
+  remove the question.

@@ -1,0 +1,114 @@
+format: 2
+id: D-096
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: >-
+  Is section 5.5's `ClockWindow` the kernel's daypart window, where the kernel names the window's end
+  `end` and this text names it `before`?
+covers:
+- ir: def:5.5:ClockWindow
+  digest: bfa31e5d0cb79e574db850c0b46711c30c904bb7d6d235473a4ab945e650a121
+  quote: '`ClockWindow` | is a repeating window of civil time, deliberately not an `Interval`. A window
+    that crosses midnight is two windows.'
+  departs:
+  - The kernel's part named the window's end `end` and described it as "exclusive and later than `start`",
+    which is what this text calls `before`. One member under two names is what a shared kernel removes,
+    so the kernel takes the name the text uses.
+  locks:
+  - with-open-prs
+- ir: "key:5.5:ClockWindow.days[]"
+  digest: 75d34865bfd1e0a581d00620d7eb3ef980d021a345ef1c6da96c1a114b1c64c1
+  quote: '`days[]` | REQUIRED | The days the window repeats on'
+  locks:
+  - with-open-prs
+- ir: key:5.5:ClockWindow.start
+  digest: 7fec487433d27928cea2eca9db2671bf7d7b346e02056282524924d04206a45d
+  quote: '`start` | REQUIRED | The first minute. Not `24:00`'
+  locks:
+  - with-open-prs
+- ir: key:5.5:ClockWindow.before
+  digest: d70b10f2d89e83df52a13d2440603029487cf760dfc0ccc049b34bf2707019d9
+  quote: '`before` | REQUIRED | The first minute after the window, later than `start`'
+  locks:
+  - with-open-prs
+options:
+- id: one-part-under-the-text-s-name
+  summary: >-
+    The two are one shape. The kernel's part takes `before`, the name this text uses for the minute the
+    window ends at, and this specification publishes the part rather than an object of its own.
+- id: two-parts
+  summary: >-
+    The kernel's window and this text's are two shapes, so the part stays absent here and `ClockWindow`
+    is this specification's own object.
+chosen: one-part-under-the-text-s-name
+rationale: 'The kernel''s part says what its third member is, in the description and not only in the
+  name: "the window runs from `start` up to `end`, **which is exclusive** and later than `start`". Section
+  5.5 says the same thing and names it for what it is: "`before` | REQUIRED | The first minute after
+  the window, later than `start`". Exclusive end and first minute after are one bound, so the two are
+  one shape under two names -- which is what a shared kernel exists to remove, and what D-091 removed
+  from `Selectable` when the kernel called a price map `pricing` and the text called it `deltas`.
+
+
+  `two-parts` is what this branch landed first, and the record that landed it gives the reason as
+  "its window is closed at both ends ... Half-open against closed is two shapes".
+  That reading is wrong: the kernel''s `end` is exclusive, so both windows are half-open. It was taken
+  from the member names without the description beside them, and the correction is this record''s, because
+  a gate decision is never changed once it is on the base.
+
+
+  **What marking the part absent cost, which is the measurement.** A concept names a type, so
+  `daypart-window` went absent with the part -- and its components did not. `DayName` and `TimeOfDay`
+  are that concept''s components, and `ClockWindow`''s three members are typed at them, so all three
+  came to represent no concept of the domain model: `domains-properties` reported each one. Publishing
+  the part publishes the concept, and the three members are its components again.
+
+
+  The one thing the text adds beyond the name is in the lead-in, and it is the reason the type is a part
+  and not an interval: a `ClockWindow` "is a repeating window of civil time, deliberately not an
+  `Interval`. A window that crosses midnight is two windows." The kernel''s rule says the second half
+  already -- "The window holds each minute from `before` up to `start`" is false and the rule refuses
+  it -- so the part''s own `kernel:DaypartWindow:ordered` is this row''s rule and is sourced at it.
+
+
+  Nothing AdCOM or the Deals API publishes moves. Each already marks the part absent, so neither
+  publishes it and neither names the member -- measured by `map --check` and `emit` on both locks of
+  each.'
+challenge:
+- type: DaypartWindow
+  value:
+    days:
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    start: "06:00"
+    before: "22:00"
+  verdict: accept
+  context: >-
+    The weekday business-hours window `line-item-display.yaml` writes under
+    `daypart.allowed[]`, which is the shipped payload for this type.
+  reason: >-
+    `before` is a required member of the published part, at `TimeOfDay`, so the window the
+    text writes validates against the part the kernel states.
+- type: DaypartWindow
+  value:
+    days:
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    start: "06:00"
+    end: "22:00"
+  verdict: reject
+  context: >-
+    The same window written to the kernel's earlier spelling, which named the exclusive end
+    `end`, as a sender porting a daypart from a kernel of that shape would write it.
+  reason: >-
+    `before` is required and `additionalProperties` is false, so the payload fails twice:
+    `before` is absent and `end` is no member. That is what taking the text's name for the
+    member costs, and it is the whole of the cost, since the bound is the same minute under
+    either name.

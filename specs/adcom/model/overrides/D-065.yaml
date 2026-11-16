@@ -1,0 +1,207 @@
+format: 2
+id: D-065
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Sixteen attribute rows state a value the kernel's domain model has no type for: fourteen state a length of time in whole seconds, and two state an identifier an integer spells. All sixteen are published as `Count`, \"a whole number of things\". Which value domain is each of them of, and does the kernel gain the types or do the rows keep a type that names the wrong concept?"
+covers:
+  - ir: key:object_audio:Audio.dur
+    digest: 3da7e84e8964c608346470fe900e5fe79b8a9b3b47610c04c1e435ba895859ff
+    quote: "`dur` | Duration of the audio creative in seconds."
+  - ir: key:object_audioplacement:AudioPlacement.maxdur
+    digest: fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e
+    quote: "`maxdur` | Maximum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of maxdur and rqddurs may be in a bid request."
+  - ir: key:object_audioplacement:AudioPlacement.mindur
+    digest: d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e
+    quote: "`mindur` | Minimum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of mindur and rqddurs may be in a bid request."
+  - ir: key:object_audioplacement:AudioPlacement.poddur
+    digest: 13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176
+    quote: "`poddur` | Indicates the total amount of time in seconds that advertisers may fill for a “dynamic” video ad pod, or the dynamic portion of a “hybrid” ad pod. This field is required only for the dynamic portion(s) of video ad pods. This field refers to the length of the entire ad break, whereas mindur/maxdur/rqddurs are constraints relating to the slots that make up the pod."
+  - ir: key:object_audioplacement:AudioPlacement.rqddurs
+    digest: 44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e
+    quote: "`rqddurs` | Precise acceptable durations for video creatives in seconds. This field specifically targets the Live TV use case where non-exact ad durations would result in undesirable 'dead air'. This field is mutually exclusive with mindur and maxdur; if rqddurs is specified, mindur and maxdur must not be specified and vice versa."
+  - ir: key:object_audioplacement:AudioPlacement.skipmin
+    digest: c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b
+    quote: "`skipmin` | The placement allows creatives of total duration greater than this number of seconds to be skipped; only applicable if the ad is skippable."
+  - ir: key:object_content:Content.len
+    digest: 734e76b9c86c187a1491d491bc4b96149e91daad7b1dbe7ec455e02da0f81de1
+    quote: "`len` | Length of content in seconds; appropriate for video or audio."
+  - ir: key:object_dooh:Dooh.etime
+    digest: 7519a72f86e7afd5d4c0a9e6f031583a641a38f1d7a858ac06d3143c9532a294
+    quote: "`etime` | The exposure time in seconds per view that the creative will be displayed before refreshing to the next creative."
+  - ir: key:object_video:Video.dur
+    digest: 4db0dce8a5b0b983851637a50191fcd7ef77c1acde18a3fd7037f12735187845
+    quote: "`dur` | Duration of the video creative in seconds."
+  - ir: key:object_videoplacement:VideoPlacement.maxdur
+    digest: fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e
+    quote: "`maxdur` | Maximum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of maxdur and rqddurs may be in a bid request."
+  - ir: key:object_videoplacement:VideoPlacement.mindur
+    digest: d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e
+    quote: "`mindur` | Minimum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of mindur and rqddurs may be in a bid request."
+  - ir: key:object_videoplacement:VideoPlacement.poddur
+    digest: 13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176
+    quote: "`poddur` | Indicates the total amount of time in seconds that advertisers may fill for a “dynamic” video ad pod, or the dynamic portion of a “hybrid” ad pod. This field is required only for the dynamic portion(s) of video ad pods. This field refers to the length of the entire ad break, whereas mindur/maxdur/rqddurs are constraints relating to the slots that make up the pod."
+  - ir: key:object_videoplacement:VideoPlacement.rqddurs
+    digest: 44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e
+    quote: "`rqddurs` | Precise acceptable durations for video creatives in seconds. This field specifically targets the Live TV use case where non-exact ad durations would result in undesirable 'dead air'. This field is mutually exclusive with mindur and maxdur; if rqddurs is specified, mindur and maxdur must not be specified and vice versa."
+  - ir: key:object_videoplacement:VideoPlacement.skipmin
+    digest: c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b
+    quote: "`skipmin` | The placement allows creatives of total duration greater than this number of seconds to be skipped; only applicable if the ad is skippable."
+  - ir: key:object_audioplacement:AudioPlacement.podid
+    digest: 11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3
+    quote: "`podid` | Unique identifier indicating that an impression opportunity belongs to a video ad pod. If multiple impression opportunities within a bid request share the same podid, this indicates that those impression opportunities belong to the same video ad pod."
+  - ir: key:object_videoplacement:VideoPlacement.podid
+    digest: 11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3
+    quote: "`podid` | Unique identifier indicating that an impression opportunity belongs to a video ad pod. If multiple impression opportunities within a bid request share the same podid, this indicates that those impression opportunities belong to the same video ad pod."
+options:
+  - id: count-concept
+    summary: >-
+      The rows stay values of the `count` concept and are published as `Count`.
+      The kernel gains nothing, and a reader of the published schema is told a
+      duration and an identifier are numbers of things.
+  - id: count-with-the-cost-stated
+    summary: >-
+      The rows stay `Count` and what the concept adds beyond each row's own
+      words is stated as a value a check reads, so the finding is held by a
+      gate rather than by a paragraph. This is what `D-062` chose for the two
+      identifier rows, and it names the retyping as the next reading of the
+      kernel's domain model.
+  - id: existing-time-type
+    summary: >-
+      The fourteen length-of-time rows are published at a type the kernel
+      already has: `Duration`, `ExtendedDuration`, or `MediaOffset`.
+  - id: two-concepts-and-two-primitives
+    summary: >-
+      The kernel gains a concept and a primitive for each of the two value
+      domains the rows are of, and the sixteen rows are published at them. A
+      length of time in whole seconds becomes `DurationSeconds` under a
+      `second-duration` concept, and an identifier an integer spells becomes
+      `IntegerId` under an `integer-id` concept. Each new structure is declared
+      as shared with the structure it duplicates.
+  - id: bare-integer
+    summary: >-
+      The rows are published as a bare integer with no named type, so the
+      schema states only what each row's Type cell states and the domain model
+      says nothing about them.
+chosen: two-concepts-and-two-primitives
+rationale: >-
+  Measured over the committed schemas of both locks. All sixteen rows are
+  published at the kernel's `Count`, which states "a whole number of things,
+  never negative and at most 2^53 - 1, such as impressions, options, or a
+  proposal's revisions", and which is `{ type: integer, minimum: 0, maximum:
+  9007199254740991 }`.
+
+  Fourteen of the rows state a length of time in whole seconds and nothing
+  else. `Video.dur` is "Duration of the video creative in seconds",
+  `Content.len` is "Length of content in seconds", `VideoPlacement.mindur` and
+  `maxdur` are a minimum and a maximum creative duration in seconds,
+  `poddur` is "the total amount of time in seconds that advertisers may fill",
+  `skipmin` is a total duration in seconds above which a creative may be
+  skipped, `Dooh.etime` is "the exposure time in seconds per view", and
+  `rqddurs` is an array of "precise acceptable durations for video creatives in
+  seconds". Nothing in any of those sentences counts a thing.
+
+  Two of the rows state an identifier. Both `podid` rows open "Unique
+  identifier indicating that an impression opportunity belongs to a video ad
+  pod", and then say what the identifier is for, that two opportunities
+  sharing a `podid` belong to one pod. Nothing counts and nothing orders.
+
+  **What this costs the accepted set, and the two halves differ.** For the
+  fourteen length-of-time rows it costs nothing at all. A length of time in
+  whole seconds is a non-negative integer within the integers an I-JSON
+  receiver reads exactly, so `DurationSeconds` is `{ type: integer, minimum:
+  0, maximum: 9007199254740991 }`, which is `Count`'s own structure, and the
+  published schema accepts and refuses exactly what it accepted and refused
+  before. For the two identifier rows the schema gets **strictly wider**, as
+  `D-062` found: `Count` refuses `-1`, which neither row forbids, and
+  `IntegerId` is signed and bounded only by exact representation, so nothing
+  that was accepted is refused and one value that was refused is accepted.
+
+  So the defect this record fixes is **what the published type says**, not what
+  it admits. That distinguishes it from `D-063`, which was an accepted-set
+  defect on four rows, where `minimum: 0` refused an instant before 1970.
+
+  **Why the deliverable settles it.** A target reads the published schema and
+  nothing else, and names a type from what it reads. A developer holding a
+  value of a duration field is told by the generated type that the value
+  counts things, and no amount of description beside it changes the name the
+  target writes. The schema, the kernel and the shared-structure declarations
+  exist to carry a specification's own statement into that type. Where the
+  domain model has no type for a value a specification states, the domain model
+  is what is incomplete.
+
+  Why not `existing-time-type`. The kernel's `Duration` is an ISO 8601 string
+  in the grammar of RFC 3339 Appendix A, so publishing these rows at it would
+  change the wire form from `30` to `"PT30S"` and make the artifact disagree
+  with the specification. `ExtendedDuration` admits `-1` as "no limit", which
+  these fourteen rows do not state and `maxext` does. `MediaOffset` is a point
+  within a piece of media and not a length, so a receiver reads it against the
+  start of the media rather than adding it to another; it has this structure
+  exactly, which is why the structure is declared shared rather than reused as
+  a type.
+
+  Why not `count-concept` or `count-with-the-cost-stated`. The first publishes
+  a name that states the wrong concept. The second is what `D-062` chose for
+  the two identifier rows, and `D-062` itself names its successor, that "the
+  retyping is the next reading of the kernel's domain model". This is that
+  reading. A cost held by a gate is better than a cost held by a paragraph, and
+  a type that states the concept is better than either.
+
+  Why not `bare-integer`. It discards what each row says beyond its Type cell,
+  and the rows say what the value is.
+
+  **What it supersedes.** `D-062`'s chosen option keeps the two identifier rows
+  at `Count` and cannot stand beside this one, so `D-062` is marked superseded
+  and gains `superseded_by`. This record carries `D-062`'s two covers
+  unchanged, because a citation resolves only against a record that stands and
+  covers the element cited.
+
+  **What moves.** The kernel gains two primitives and two concepts, and two
+  shared-structure declarations, one joining the existing count and
+  media-offset group and one pairing an integer identifier with an epoch
+  instant. AdCOM's binding cites fourteen rows for `second-duration` and two
+  for `integer-id`, and its `count` concept cites forty-five rows where it
+  cited sixty-one. Sixteen entries of the objects mapping retype, each keeping
+  `source: { rule: domain-row }`, because the rule reads the binding's
+  citations and moving a citation is what moves a type. Both locks' published
+  kernel gains two definitions and both objects modules point sixteen
+  properties at them.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_video"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_videoplacement"
+  - "https://www.rfc-editor.org/rfc/rfc7493#section-2.2"
+feedback: >-
+  Fourteen attribute rows state a length of time in whole seconds and state it
+  only in the definition cell, with a Type cell reading `integer`. Two more
+  state an identifier the same way. An implementer reading the Type cell alone
+  cannot tell a duration from a count from an identifier, and the three are
+  processed differently. Please state the unit and the kind in the row, so that
+  `dur` reads as a duration in seconds and `podid` as an identifier, rather
+  than leaving both as a bare integer whose meaning is in the prose beside it.
+challenge:
+  - type: DurationSeconds
+    value: 30
+    verdict: accept
+    context: An exchange describing a thirty-second video creative.
+    reason: A length of time in whole seconds, within the integers an I-JSON receiver reads exactly.
+  - type: DurationSeconds
+    value: -1
+    verdict: reject
+    context: A seller sending a sentinel for "no limit" in a field that states no sentinel.
+    reason: >-
+      A length of time is never negative. The field that does state "no limit"
+      is `maxext`, which is `ExtendedDuration` and admits `-1`.
+  - type: IntegerId
+    value: -1
+    verdict: accept
+    context: A publisher whose pod identifiers start below zero.
+    reason: >-
+      Nothing in either `podid` row reserves a value, so a negative integer
+      identifies a pod like any other. This is the value `Count` refused and
+      the one `D-062` named as the cost of leaving the rows as counts.
+  - type: IntegerId
+    value: "42"
+    verdict: reject
+    context: A seller sending the identifier as a string.
+    reason: Both rows state their Type as an integer, and a string is not one.

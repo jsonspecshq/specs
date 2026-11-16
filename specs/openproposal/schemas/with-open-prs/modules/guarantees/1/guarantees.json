@@ -1,0 +1,462 @@
+{
+  "$defs": {
+    "CommittedMetric": {
+      "additionalProperties": false,
+      "else": {
+        "else": {
+          "else": {
+            "if": {
+              "properties": {
+                "metric": {
+                  "const": "impressions"
+                }
+              },
+              "required": [
+                "metric"
+              ]
+            },
+            "then": {
+              "properties": {
+                "level": {
+                  "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+                }
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "metric": {
+                "const": "ivt_rate"
+              }
+            },
+            "required": [
+              "metric"
+            ]
+          },
+          "then": {
+            "properties": {
+              "level": {
+                "$ref": "../../../kernel/1/kernel.json#/$defs/Fraction"
+              }
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "metric": {
+              "const": "completion_rate"
+            }
+          },
+          "required": [
+            "metric"
+          ]
+        },
+        "then": {
+          "properties": {
+            "level": {
+              "$ref": "../../../kernel/1/kernel.json#/$defs/Fraction"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "metric": {
+            "const": "viewable_rate"
+          }
+        },
+        "required": [
+          "metric"
+        ]
+      },
+      "properties": {
+        "direction": {
+          "$ref": "#/$defs/CommittedMetricDirection",
+          "description": "`at_least` | `at_most`"
+        },
+        "level": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Measure",
+          "description": "The offered level: a `Fraction` under a rate term, a count under a count term"
+        },
+        "metric": {
+          "$ref": "#/$defs/Metric",
+          "description": "What is measured. Core terms below. A receiver that doesn't know the term skips the line item (§ 2.2): a tuple binds outside any option"
+        }
+      },
+      "required": [
+        "direction",
+        "level",
+        "metric"
+      ],
+      "then": {
+        "properties": {
+          "level": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/Fraction"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "CommittedMetricDirection": {
+      "enum": [
+        "at_least",
+        "at_most"
+      ],
+      "type": "string"
+    },
+    "ControllingMeasurementOption": {
+      "additionalProperties": false,
+      "properties": {
+        "counted_by": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Measurer",
+          "description": "Who counts. When the `pricing[]` entry the buyer commits under has `cost_method` `CPP`, `counted_by` MUST be its `cost_parameters.rating_source`. When it has `cost_method` `CPA`, `counted_by` MUST be its `cost_parameters.action_source`. Otherwise, when `channel` is `dooh` and the line item counts impressions, `counted_by` MUST be the source of the line item's `delivery_counting.impression_multiplier`"
+        },
+        "discrepancy_threshold": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Fraction",
+          "description": "A fraction of the controlling count. When the other measurement, a party's own count of the same units, exceeds the controlling count by more than this over an invoice period, reconciliation opens"
+        },
+        "final_after": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Duration",
+          "description": "Such as `P30D` (30 days). A count is final that long after its invoice period ends. Committed values, whichever source measures them, are final that long after `commitment.flight.end`"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "qualifier": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "A product or method of `counted_by`, such as a named ad server"
+        }
+      },
+      "required": [
+        "counted_by",
+        "id"
+      ],
+      "type": "object"
+    },
+    "ControllingMeasurementSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/ControllingMeasurementOption"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "DeliveryMethod": {
+      "anyOf": [
+        {
+          "enum": [
+            "api",
+            "s3"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ]
+    },
+    "MakegoodType": {
+      "anyOf": [
+        {
+          "enum": [
+            "same_unit",
+            "comparable_unit",
+            "added_time"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ],
+      "description": "`same_unit`: more delivery on the inventory bought; `comparable_unit`: delivery on other inventory; `added_time`: more running time"
+    },
+    "MeasurementOption": {
+      "additionalProperties": false,
+      "properties": {
+        "attribution_window": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Duration",
+          "description": "How long after exposure the provider attributes an event"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "measured_by": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Measurer",
+          "description": "The measurement provider"
+        },
+        "qualifier": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "A product or method of `measured_by`"
+        }
+      },
+      "required": [
+        "id",
+        "measured_by"
+      ],
+      "type": "object"
+    },
+    "MeasurementSourceSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/MeasurementOption"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "Metric": {
+      "anyOf": [
+        {
+          "enum": [
+            "viewable_rate",
+            "completion_rate",
+            "ivt_rate",
+            "impressions"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ]
+    },
+    "RemedyKind": {
+      "anyOf": [
+        {
+          "enum": [
+            "makegood",
+            "credit",
+            "none"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ]
+    },
+    "RemedyTerms": {
+      "additionalProperties": false,
+      "properties": {
+        "makegood_type": {
+          "$ref": "#/$defs/MakegoodType",
+          "description": "What a makegood delivers. Core terms: `same_unit` (more delivery on the inventory bought) | `comparable_unit` (delivery on other inventory) | `added_time` (more running time)"
+        },
+        "makegood_window": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Duration",
+          "description": "How long past `commitment.flight.end` a makegood may run"
+        }
+      },
+      "type": "object"
+    },
+    "ReportType": {
+      "anyOf": [
+        {
+          "enum": [
+            "log_level",
+            "aggregate"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ],
+      "description": "`log_level`: one record per event; `aggregate`: totals over a period or a dimension"
+    },
+    "ReportingOption": {
+      "additionalProperties": false,
+      "properties": {
+        "cadence": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/TimeUnit",
+          "description": "How often a report arrives"
+        },
+        "delivery_method": {
+          "$ref": "#/$defs/DeliveryMethod",
+          "description": "How a report arrives. Core terms: `api` | `s3`"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "latency": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Duration",
+          "description": "How long after the period a report arrives"
+        },
+        "provided_metrics": {
+          "description": "The metrics a report holds. Core terms: the `unit` terms of § 5.6.5, and the Rate terms of the `metric` table (§ 5.7.1)",
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/VocabularyTerm"
+          },
+          "type": "array"
+        },
+        "report_type": {
+          "$ref": "#/$defs/ReportType",
+          "description": "The report's grain. Core terms: `log_level` (one record per event) | `aggregate` (totals over a period or a dimension)"
+        }
+      },
+      "required": [
+        "id",
+        "report_type"
+      ],
+      "type": "object"
+    },
+    "ReportingSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/ReportingOption"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "ShortfallRemedy": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/RemedyKind"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/RemedyKind"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "#/$defs/RemedyKind"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "remedy_terms": {
+          "$ref": "#/$defs/RemedyTerms",
+          "description": "The seller's terms for a remedy"
+        },
+        "selected": {
+          "items": {
+            "$ref": "#/$defs/RemedyKind"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/guarantees/1/guarantees.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The OpenProposal `guarantees` module: the vocabularies, objects, unions, and constructor copies of § 5.7 and § 5.7.1.",
+  "title": "guarantees"
+}

@@ -1,6 +1,7 @@
 format: 2
 id: D-057
-status: proposed
+status: superseded
+superseded_by: D-064
 kind: reading
 basis: gap
 author: agent

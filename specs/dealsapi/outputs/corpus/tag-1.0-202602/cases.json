@@ -476,6 +476,36 @@
     },
     {
       "at": "",
+      "baseline": "2026-10-06T12:00:00Z",
+      "id": "Instant#/format",
+      "keyword": "format",
+      "mutant": "9999-99-99T99:99:99Z",
+      "path": "",
+      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/Instant",
+      "type": "Instant"
+    },
+    {
+      "at": "",
+      "baseline": "2026-10-06T12:00:00Z",
+      "id": "Instant#/pattern",
+      "keyword": "pattern",
+      "mutant": "2026-10-06T12:00:00.500Z",
+      "path": "",
+      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/Instant",
+      "type": "Instant"
+    },
+    {
+      "at": "",
+      "baseline": "2026-10-06T12:00:00Z",
+      "id": "Instant#/type",
+      "keyword": "type",
+      "mutant": 0,
+      "path": "",
+      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/Instant",
+      "type": "Instant"
+    },
+    {
+      "at": "",
       "baseline": 0,
       "id": "IntegerFlag#/oneOf",
       "keyword": "oneOf",
@@ -676,11 +706,18 @@
     },
     {
       "at": "",
-      "baseline": {},
+      "baseline": {
+        "guar": 1,
+        "totalcost": 5000,
+        "units": 1000000
+      },
       "id": "Terms#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "undefined_member": true
+        "guar": 1,
+        "totalcost": 5000,
+        "undefined_member": true,
+        "units": 1000000
       },
       "path": "",
       "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/modules/deal/1/deal.json#/$defs/Terms",
@@ -689,20 +726,52 @@
     {
       "at": "/properties/countries",
       "baseline": {
-        "countries": []
+        "countries": [],
+        "guar": 1,
+        "totalcost": 5000,
+        "units": 1000000
       },
       "id": "Terms#/properties/countries/type",
       "keyword": "type",
       "mutant": {
-        "countries": ""
+        "countries": "",
+        "guar": 1,
+        "totalcost": 5000,
+        "units": 1000000
       },
       "path": "/countries",
       "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/modules/deal/1/deal.json#/$defs/Terms",
       "type": "Terms"
     },
     {
+      "at": "/then",
+      "baseline": {
+        "dealfloor": 0,
+        "guar": 1,
+        "pricetype": 3,
+        "totalcost": 5000,
+        "units": 1000000
+      },
+      "id": "Terms#/then/required/dealfloor",
+      "keyword": "required",
+      "mutant": {
+        "guar": 1,
+        "pricetype": 3,
+        "totalcost": 5000,
+        "units": 1000000
+      },
+      "name": "dealfloor",
+      "path": "",
+      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/modules/deal/1/deal.json#/$defs/Terms",
+      "type": "Terms"
+    },
+    {
       "at": "",
-      "baseline": {},
+      "baseline": {
+        "guar": 1,
+        "totalcost": 5000,
+        "units": 1000000
+      },
       "id": "Terms#/type",
       "keyword": "type",
       "mutant": "",
@@ -719,36 +788,6 @@
       "path": "",
       "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/Text",
       "type": "Text"
-    },
-    {
-      "at": "",
-      "baseline": "2026-11-02T00:00:00Z",
-      "id": "UtcTimestamp#/format",
-      "keyword": "format",
-      "mutant": "2026-02-30T00:00:00Z",
-      "path": "",
-      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/UtcTimestamp",
-      "type": "UtcTimestamp"
-    },
-    {
-      "at": "",
-      "baseline": "2026-11-02T00:00:00Z",
-      "id": "UtcTimestamp#/pattern",
-      "keyword": "pattern",
-      "mutant": "2026-11-02T00:00:00+05:00",
-      "path": "",
-      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/UtcTimestamp",
-      "type": "UtcTimestamp"
-    },
-    {
-      "at": "",
-      "baseline": "2026-11-02T00:00:00Z",
-      "id": "UtcTimestamp#/type",
-      "keyword": "type",
-      "mutant": 0,
-      "path": "",
-      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/kernel/1/kernel.json#/$defs/UtcTimestamp",
-      "type": "UtcTimestamp"
     },
     {
       "at": "",
@@ -1226,44 +1265,6 @@
         {
           "value": {
             "guar": 0
-          }
-        },
-        {
-          "value": {}
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "pricetype": 3
-          }
-        },
-        {
-          "value": {
-            "guar": 1,
-            "pricetype": 3,
-            "totalcost": 5000,
-            "units": 1000000
-          }
-        }
-      ],
-      "owner": "Terms",
-      "rule": "rule:terms-object-1:647b6593",
-      "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/modules/deal/1/deal.json#/$defs/Terms",
-      "severity": "error",
-      "type": "Terms",
-      "valid": [
-        {
-          "value": {
-            "dealfloor": 2.5,
-            "pricetype": 3
-          }
-        },
-        {
-          "value": {
-            "pricetype": 1
           }
         },
         {

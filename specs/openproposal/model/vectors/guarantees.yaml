@@ -1,0 +1,391 @@
+# Rule vectors for the statements of section 5.7 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: guarantees
+rules:
+  # § 5.7's `controlling_measurement` row ends "`included[]` MUST name exactly
+  # one option": one party's count is invoiced, so naming two says whose count
+  # is billed twice over (D-142).
+  #
+  # Derived from the same trimmed line item: its
+  # `controlling_measurement.included` names one of the two options its
+  # `available[]` offers.
+  #
+  # The invalid half is that line item with `buyer-3pas` added to
+  # `controlling_measurement.included`, which that field's `available[]`
+  # already offers, so the one thing the mutation changes is how many options
+  # are named.
+  - rule: rule:5.7:dfffe633
+    digest: 884efa85c4476ee29c35e44f1a224350101c375f12366ebf4e1905ae80d6fcf4
+    decision: D-142
+    type: LineItem
+    valid:
+      - value:
+          channel: display
+          controlling_measurement:
+            available:
+            - counted_by: seller
+              discrepancy_threshold: 0.1
+              final_after: P10D
+              id: seller-count
+            - counted_by: buyer
+              discrepancy_threshold: 0.1
+              final_after: P15D
+              id: buyer-3pas
+              qualifier: Buyer ad server A
+            included:
+            - seller-count
+            max_select: 1
+          geo:
+            allowed:
+            - US-NY
+            - US-CA
+            - US-IL
+            - US-TX
+            default:
+              include:
+              - US-NY
+              - US-CA
+              - US-IL
+              - US-TX
+          line_item_id: business-daily-display
+          pricing:
+          - cost_method: CPM
+            currency: USD
+            list_rate: 24.0
+            min_rate: 21.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-usd
+          - cost_method: CPM
+            currency: EUR
+            list_rate: 22.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-eur
+          status: published
+          transaction_mechanism:
+            available:
+            - delivery_type: guaranteed
+              id: programmatic_guaranteed
+            - delivery_type: non_guaranteed
+              id: preferred_deal
+            included:
+            - programmatic_guaranteed
+            max_select: 1
+          visibility: registry_gated
+    invalid:
+      - value:
+          channel: display
+          controlling_measurement:
+            available:
+            - counted_by: seller
+              discrepancy_threshold: 0.1
+              final_after: P10D
+              id: seller-count
+            - counted_by: buyer
+              discrepancy_threshold: 0.1
+              final_after: P15D
+              id: buyer-3pas
+              qualifier: Buyer ad server A
+            included:
+            - seller-count
+            - buyer-3pas
+            max_select: 1
+          geo:
+            allowed:
+            - US-NY
+            - US-CA
+            - US-IL
+            - US-TX
+            default:
+              include:
+              - US-NY
+              - US-CA
+              - US-IL
+              - US-TX
+          line_item_id: business-daily-display
+          pricing:
+          - cost_method: CPM
+            currency: USD
+            list_rate: 24.0
+            min_rate: 21.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-usd
+          - cost_method: CPM
+            currency: EUR
+            list_rate: 22.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-eur
+          status: published
+          transaction_mechanism:
+            available:
+            - delivery_type: guaranteed
+              id: programmatic_guaranteed
+            - delivery_type: non_guaranteed
+              id: preferred_deal
+            included:
+            - programmatic_guaranteed
+            max_select: 1
+          visibility: registry_gated
+  # § 5.7's `controlling_measurement` row: REQUIRED when `serving_mode`
+  # is `embedded` or the line item has `committed_metrics[]`,
+  # `commitment_bounds.spend`, or a `pricing[].unit_bounds`. Each of the
+  # four is a figure that only a count settles, and § 5.7 gives
+  # `controlling_measurement` the count the invoice reads, so a line item
+  # that carries any of them and no option says whose count that is.
+  #
+  # Derived from examples/line-item-podcast-embedded.yaml, whole: its
+  # `serving_mode` is `embedded` and its one pricing entry carries
+  # `unit_bounds`, so two of the four clauses hold. D-037's id form is
+  # applied to every id the document mints and to every reference to one,
+  # each the UUID version 5 of the document's own readable id in the DNS
+  # namespace. Every other value is that file's own bytes.
+  #
+  # The invalid half is that payload with `controlling_measurement`
+  # removed, and nothing else.
+  - rule: rule:5.7:76df804b
+    digest: c1ad8c132d41a5f46d02fe035f5895f7c0314505c6ead3321c0ae5ddd9c025df
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: 9a4cb687-15e5-5f3d-8d56-1acd5d2d5c88
+          status: published
+          channel: audio
+          properties:
+            available:
+              - id: adc9124b-94e4-5447-8f9c-c5d8c3cb38e6
+                name: Show X
+                domains:
+                  - show-x.example
+                child_audience: general
+                seller_relationship: owner
+            included:
+              - adc9124b-94e4-5447-8f9c-c5d8c3cb38e6
+          placement:
+            feed: 3
+          episodes: new
+          formats:
+            available:
+              - audio/host-read-30s
+            included:
+              - audio/host-read-30s
+          format_specs:
+            audio/host-read-30s:
+              spec:
+                asset: script
+                read_length_s: 30
+                language: en
+          pricing:
+            - pricing_id: b3964738-cef8-5853-ae6d-92d893d7997d
+              cost_method: CPM
+              list_rate: 30
+              agreed_rate: 30
+              price_valid_until: 2026-10-30T23:59:59Z
+              currency: USD
+              unit_bounds:
+                min: 100000
+          controlling_measurement:
+            available:
+              - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                counted_by: seller
+                discrepancy_threshold: 0.1
+                final_after: P30D
+            included:
+              - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+            max_select: 1
+          commitment:
+            basis: units
+            amount: 400000
+            flight:
+              start: 2026-11-02T00:00:00Z
+              end: 2026-11-30T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+          visibility: named
+          eligible_buyers:
+            - agency-a.example
+          transaction_mechanism:
+            available:
+              - id: direct_io
+                delivery_type: guaranteed
+            included:
+              - direct_io
+            max_select: 1
+          serving_mode: embedded
+          retention:
+            min: P90D
+            max: P1Y
+    invalid:
+      - value:
+          line_item_id: 9a4cb687-15e5-5f3d-8d56-1acd5d2d5c88
+          status: published
+          channel: audio
+          properties:
+            available:
+              - id: adc9124b-94e4-5447-8f9c-c5d8c3cb38e6
+                name: Show X
+                domains:
+                  - show-x.example
+                child_audience: general
+                seller_relationship: owner
+            included:
+              - adc9124b-94e4-5447-8f9c-c5d8c3cb38e6
+          placement:
+            feed: 3
+          episodes: new
+          formats:
+            available:
+              - audio/host-read-30s
+            included:
+              - audio/host-read-30s
+          format_specs:
+            audio/host-read-30s:
+              spec:
+                asset: script
+                read_length_s: 30
+                language: en
+          pricing:
+            - pricing_id: b3964738-cef8-5853-ae6d-92d893d7997d
+              cost_method: CPM
+              list_rate: 30
+              agreed_rate: 30
+              price_valid_until: 2026-10-30T23:59:59Z
+              currency: USD
+              unit_bounds:
+                min: 100000
+          commitment:
+            basis: units
+            amount: 400000
+            flight:
+              start: 2026-11-02T00:00:00Z
+              end: 2026-11-30T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+          visibility: named
+          eligible_buyers:
+            - agency-a.example
+          transaction_mechanism:
+            available:
+              - id: direct_io
+                delivery_type: guaranteed
+            included:
+              - direct_io
+            max_select: 1
+          serving_mode: embedded
+          retention:
+            min: P90D
+            max: P1Y
+  # § 5.7.1's `counted_by` row states three conditions and orders them; this is
+  # the third, which the cell's "Otherwise" binds only where the committed
+  # entry is neither `CPP` nor `CPA`. `line-item-dooh.yaml` commits under a
+  # `CPM` entry, so the clause is in force; it counts impressions, and its one
+  # option is counted by the vendor its multiplier comes from. The valid half
+  # is that line item trimmed to the keys it requires plus the three fields the
+  # rule reads, with the proposal's `seller` as context, since § 5.6.4 reads
+  # the multiplier's source against it. The invalid half is that payload
+  # counted by `seller`, the value `line-item-display.yaml` gives the same
+  # member. No shipped payload prices a line item at `CPP` or `CPA`, so the
+  # case where the clause stands aside has no pair (D-151).
+  - rule: rule:5.7.1:d9939d8b
+    digest: 43183329b1994ca4030c14cff27b1b5ca451dc81b3cecf4d804bfa35cf2f60a3
+    decision: D-151
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: metro-platforms-dooh
+          status: published
+          channel: dooh
+          visibility: named
+          delivery_counting:
+            play_tolerance_ms: 500
+            proof_of_performance:
+              logged_by: seller
+              evidence: [ play_log, photo ]
+            impression_multiplier:
+              impression_type: viewable
+              source_type: 1
+              vendor: audience-vendor.example
+              accreditation: industry_currency
+              dataset: 2026-R2
+              settles_on: declared
+          pricing:
+            - { pricing_id: metro-cpm-usd, cost_method: CPM, list_rate: 8.00, agreed_rate: 8.00,
+                currency: USD, price_type: 3, price_valid_until: "2026-12-15T23:59:59Z" }
+          controlling_measurement:
+            available:
+              - { id: vendor-count, counted_by: audience-vendor.example,
+                  discrepancy_threshold: 0.10, final_after: P30D }
+            included: [ vendor-count ]
+            max_select: 1
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+            max_select: 1
+        context:
+          Proposal.seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+    invalid:
+      - value:
+          line_item_id: metro-platforms-dooh
+          status: published
+          channel: dooh
+          visibility: named
+          delivery_counting:
+            play_tolerance_ms: 500
+            proof_of_performance:
+              logged_by: seller
+              evidence: [ play_log, photo ]
+            impression_multiplier:
+              impression_type: viewable
+              source_type: 1
+              vendor: audience-vendor.example
+              accreditation: industry_currency
+              dataset: 2026-R2
+              settles_on: declared
+          pricing:
+            - { pricing_id: metro-cpm-usd, cost_method: CPM, list_rate: 8.00, agreed_rate: 8.00,
+                currency: USD, price_type: 3, price_valid_until: "2026-12-15T23:59:59Z" }
+          controlling_measurement:
+            available:
+              - { id: vendor-count, counted_by: seller,
+                  discrepancy_threshold: 0.10, final_after: P30D }
+            included: [ vendor-count ]
+            max_select: 1
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+            max_select: 1
+        context:
+          Proposal.seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+  # § 5.7's `committed_metrics[]` row, marked `requestable`, states what a
+  # request may do to a tuple and what it may not in the same breath: "A buyer
+  # MAY request a stricter `level`, one further in `direction`. A request MUST
+  # NOT change a tuple's `direction`". No one payload decides it, so the
+  # vectors are a pair of versions under the party that made the second, and
+  # the party is the buyer. Both halves are
+  # `line-item-rewarded-video.yaml`'s own `viewable_rate` tuple. The valid half
+  # moves its `level` to `0.95`, the level the sibling tuple of the same file
+  # states and a stricter one in its direction; the invalid half changes
+  # `direction` to `at_most`, the value `line-item-display.yaml` states for its
+  # `ivt_rate` tuple (D-164).
+  - rule: rule:5.7:13d06c59
+    digest: 686a127369ca4eb013f05a21cfc1522d1a7cf6ba8c570186881f61719ddee709
+    decision: D-164
+    type: CommittedMetric
+    valid:
+      - party: buyer
+        before: { metric: viewable_rate, level: 0.90, direction: at_least }
+        after: { metric: viewable_rate, level: 0.95, direction: at_least }
+    invalid:
+      - party: buyer
+        before: { metric: viewable_rate, level: 0.90, direction: at_least }
+        after: { metric: viewable_rate, level: 0.90, direction: at_most }

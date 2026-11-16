@@ -1,0 +1,78 @@
+format: 2
+id: D-145
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.2.9 states that a tentative program option is not in `included[]` and that its entry in
+  `deltas` is a `delta_flat`. The field those three members belong to is an inline
+  `Selectable[ProgramOption, MintedId]` that no type names. Which object owns the rule, and can
+  the pair be derived from a payload the specification ships?
+covers:
+- ir: rule:5.2.9:775db74d
+  digest: 655694cd1b135a8ae279820285816e2d1f09a7969b5e1e85ca4e8cd5cdb2eb16
+  quote: An option whose `schedule.eventstatus` is tentative (`2`) MUST NOT be in `included[]`, and its entry in `deltas`, if any, MUST be `delta_flat`.
+- ir: key:5.2.9:EventSchedule.eventstatus
+  digest: 3aab32f44a23c332b94f1510a1773b1109bf33b24fd84f1217a86b4b06387264
+  quote: "`eventstatus` | RECOMMENDED | `1` (scheduled) | `2` (tentative) | `3` (cancelled). Absent: `1`"
+- ir: field:5.2:programs
+  digest: 0bd24b7fed13b4603b984b13e1cd96e94f05ae0297bc8d344bcd2c4402a8f744
+  quote: "`programs` | Selectable[ProgramOption] | selectable | The content the line item serves within. See 5.2.9. Absent, or nothing in effect: no content is promised"
+options:
+- id: a-rule-of-the-line-item
+  summary: >-
+    It is a rule of `LineItem`, the smallest object the model names that holds the three members
+    it reads, and the pair is `line-item-ctv-live-series.yaml`'s own `programs` field with one
+    mutation for each of the sentence's two clauses.
+- id: a-rule-of-the-program-option
+  summary: >-
+    It is a rule of `ProgramOption`, the object whose `schedule` the condition reads.
+- id: name-the-field-s-type-first
+  summary: >-
+    The applied `Selectable` is given a name of its own, and the rule is owned by that type.
+chosen: a-rule-of-the-line-item
+rationale: >-
+  A rule is owned by the type whose payload decides it (type rules § 9), and the sentence reads
+  three members: a `ProgramOption`'s `schedule.eventstatus`, and the `included[]` and `deltas` of
+  the field that holds the option. § 5.2.9 is the `programs` section and the only field whose
+  options are `ProgramOption`s is `programs`, so the `included[]` the sentence names without
+  qualification is that field's. The field is an inline applied constructor that no declaration
+  names, so the smallest object the model names that holds all three is `LineItem`, and a line
+  item is what a payload has to be to decide the rule.
+
+
+  `a-rule-of-the-program-option` is refused by the sentence: an option holds no `included[]` and
+  no `deltas`, so it shows the condition and neither requirement.
+
+
+  `name-the-field-s-type-first` would name a type to own a rule, which is backwards: a type is
+  named because the document names it or because two places share it (type rules § 5), and
+  § 5.2.9 writes the field once. The rule needs an owner whose payload decides it, and the line
+  item is already that.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES. `line-item-ctv-live-series.yaml` offers seven games, the
+  last three tentative; its `included[]` names the four scheduled ones and no tentative one; and
+  its one `deltas` entry, on the tentative `series-g7`, is a `delta_flat`. So the shipped line
+  item satisfies both clauses. The valid half is that line item trimmed to the keys a `LineItem`
+  requires plus the `programs` field, which is carried whole with every option, every included id
+  and the delta as the file writes them.
+
+
+  Each clause gets its own invalid half, each a single mutation. The first adds `series-g5` to
+  `included[]`, an id the field's own `available[]` offers, so a tentative option is in effect.
+  The second reads `series-g7`'s delta as `delta_cpm: 4.00`, the value
+  `line-item-audio.yaml` gives a `deltas` entry of its own, so the tentative option's charge is
+  no longer flat.
+
+
+  WHAT THE CHECK READS, stated because the sentence leaves it open: an entry that states
+  `delta_flat` satisfies the second clause. The text says the entry "MUST be `delta_flat`" and
+  does not say what an entry stating a flat charge beside another kind is, and no shipped payload
+  writes one, so the check asks for the member the sentence names and nothing more.
+feedback: >-
+  § 5.2.9 states the rule of `programs` in a paragraph that names `included[]` and `deltas`
+  without naming the field they are on, which only the section heading supplies. Saying
+  "`programs.included[]`" and "`programs.deltas`", as § 5.8's bullets name the fields they
+  restrict, would let a reader who arrives at the paragraph alone see what it is about.

@@ -1,0 +1,114 @@
+format: 2
+id: D-164
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Two statements of § 5 forbid a change rather than a value: a revision may not reuse a
+  `pricing_id` for a different `cost_method`, `cost_parameters`, `currency` or
+  `transaction_mechanisms[]`, and a request may not change a tuple's `direction`. No single
+  payload decides either. Does the vectors format carry them, and which object's two versions
+  decide each?
+covers:
+- ir: rule:5.6:6b704eb1
+  digest: 4f87454b18fa4d4115b85f13b8f103fb915640336c6efc416785bd32ddc565f7
+  quote: A revision MUST NOT reuse it for a different `cost_method`, `cost_parameters`, `currency`, or `transaction_mechanisms[]`
+- ir: rule:5.7:13d06c59
+  digest: 686a127369ca4eb013f05a21cfc1522d1a7cf6ba8c570186881f61719ddee709
+  quote: A request MUST NOT change a tuple's `direction`
+- ir: field:5.6:pricing[].pricing_id
+  digest: 20cd37022edf6b216eab7d933128110573ca6011c455b945d7bf3fd4b7c037a5
+  quote: "`pricing[].pricing_id` | String | immutable | Names the entry within the line item. A revision MUST NOT reuse it for a different `cost_method`, `cost_parameters`, `currency`, or `transaction_mechanisms[]`"
+- ir: field:5.7:committed_metrics[]
+  digest: f780f0eb75a5d9c437e7bcbf98c882ea50a0854c0b25beab8f57a96fdecfce11
+  quote: "`committed_metrics[]` | Array[CommittedMetric] | requestable | `CommittedMetric` tuples (§ 5.7.1). Seller declares its offered `level`. A buyer MAY request a stricter `level`, one further in `direction`. A request MUST NOT change a tuple's `direction`"
+- ir: key:5.7.1:CommittedMetric.direction
+  digest: 95d2bd7f41da47d0c4bd824fc8c1cac742b7ef0976115d0910253dd15996f419
+  quote: "`direction` | REQUIRED | `at_least` | `at_most`"
+options:
+- id: a-mutability-rule-of-the-object-the-change-is-to
+  summary: >-
+    Each is a rule whose vectors are a pair of versions and the party that produced the second
+    from the first, which is the shape the vectors format states for a mutability rule. The object
+    is the one the change is to: a `PricingEntry` for § 5.6's, since the four members it names are
+    that entry's own, and a `CommittedMetric` for § 5.7's, since the tuple is what a request
+    changes. Neither takes a check, because no one payload decides either.
+- id: an-obligation-of-the-party-that-changes-it
+  summary: >-
+    § 5.6's binds the seller, who writes a revision, and § 5.7's binds the buyer, who makes a
+    request, so each is an obligation and no artifact checks it.
+- id: left-unpaired-because-no-payload-decides-them
+  summary: >-
+    A rule needs a payload a check can read, and neither has one, so both stay unmapped until the
+    specification states them as a value a payload carries.
+chosen: a-mutability-rule-of-the-object-the-change-is-to
+rationale: >-
+  THE FORMAT ALREADY CARRIES THIS SHAPE, AND IT IS NOT THE PAYLOAD SHAPE. `formats/vectors.schema.json`
+  states three kinds of vector: one payload, "for a rule about one payload: a comparison, a
+  membership, a uniqueness, or arithmetic"; "a pair of versions and the party that produced `after`
+  from `before`, for a mutability rule"; and a payload with what its receiver does. The rules stage
+  reads the second as a rule no check may have -- `checkProblems` fails a rule "whose vectors are
+  pairs of versions or responses, which one payload can't decide" if a check exists for it, and
+  records it as unchecked with the reason "two versions". So these two are mapped as rules, with a
+  version pair each and no check, and nothing is claimed that no artifact carries.
+
+
+  `left-unpaired-because-no-payload-decides-them` is the reading this record corrects, and it was
+  this branch's own: both statements were reported as ones "no single payload decides", which is
+  true of a payload and silent about the pair. The measurement that settles it is the format's,
+  quoted above, and `marker:3:immutable`'s vectors in `model/vectors/kernel.yaml`, which are
+  version pairs of a `Proposal` under `party: seller`.
+
+
+  § 5.6's IS A RULE OF `PricingEntry`. The row is `pricing[].pricing_id`, marked `immutable`, and
+  the four things a revision may not change under a reused id -- `cost_method`, `cost_parameters`,
+  `currency`, `transaction_mechanisms[]` -- are all members of the entry that id names. So two
+  versions of one entry show whether the rule holds, and the party is the seller: `pricing[]` is
+  seller-set and a revision is the seller's act (§ 4.3.1).
+
+
+  § 5.7's IS A RULE OF `CommittedMetric`. The row states what a request may do to a tuple in the
+  same breath as what it may not: "A buyer MAY request a stricter `level`, one further in
+  `direction`. A request MUST NOT change a tuple's `direction`". Both clauses read one tuple's two
+  members, so the tuple is what the pair is of, and the party is the buyer. What a request does to
+  the list rather than to a tuple -- adding one, dropping one -- is not this sentence and not this
+  record's.
+
+
+  `an-obligation-of-the-seller` and `an-obligation-of-the-buyer`, which is the second option in
+  both halves, would publish nothing: an obligation reaches no artifact this pipeline writes, which
+  is measured of the 105 already read that way: an obligation's statement reaches no reader. These two name a party, as many
+  rules do, and the thing they forbid is a difference between two payloads the party produces --
+  which the format carries and a consumer can check.
+
+
+  THE PAIRS ARE THE SOURCE'S OWN BYTES, ONE MUTATION EACH. `line-item-display.yaml` prices in two
+  entries, `bd-cpm-usd` in USD and `bd-cpm-eur` in EUR. § 5.6's valid half is a revision of
+  `bd-cpm-usd` that drops its `min_rate`, which the section's own "Seller prices" paragraph
+  describes -- "A seller that treats its floor as confidential leaves `min_rate` off" -- and
+  changes nothing the rule names. Its invalid half is that entry's id reused with
+  `currency: EUR`, the currency the sibling entry of the same file states.
+
+
+  `line-item-rewarded-video.yaml` commits two tuples, `completion_rate` at `0.95` and
+  `viewable_rate` at `0.90`, both `at_least`. § 5.7's valid half is a request that moves the
+  `viewable_rate` tuple to `0.95`, the level the sibling tuple of the same file states and a
+  stricter one in its direction, which is the request the row permits. Its invalid half is that
+  tuple with `direction: at_most`, the value `line-item-display.yaml` states for its `ivt_rate`
+  tuple and the other of the two the `direction` row lists.
+
+
+  WHAT THIS LEAVES, measured over the shipped examples rather than assumed. Four statements of
+  §§ 5.6 and 5.7 remain unclaimed and each waits on a payload the source does not write:
+  § 5.6.5's bound on `delta_flat` charges in effect, § 5.7.1's `none` remedy, and § 5.7.1's two
+  conditions on `counted_by` under a `CPP` or a `CPA` entry. None of the four is a mutability rule:
+  each reads one payload, and the payload that would make its condition true is one no example
+  ships, which is the state three rules of §§ 5.6.5 and 5.7.1 are already in.
+feedback: >-
+  § 5.6 states what a revision may not change inside the Description of the key that names the
+  entry, and § 5.7 states what a request may not change inside the Description of the field a
+  request asks about. Both are rules about two versions of a document, and a reader looking for
+  them in § 4.3.1, where asks and revisions are defined, will not find them. Collecting what each
+  party may change, or naming § 5's rows from § 4.3.1, would let an implementer find the whole set
+  before writing a revision or a request.

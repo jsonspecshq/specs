@@ -1,0 +1,109 @@
+format: 2
+id: D-081
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: Is the vocabulary of section 2.4's error codes open, and what do its ten rows become?
+covers:
+
+- ir: key:2.4:ErrorObject.code
+  digest: f02f2830fe2f27d6494b17eae053f9e3a699aa51be2baf902c4d1373d5613c85
+  quote: "`code` | REQUIRED | A core code (below) or an extension code"
+- ir: def:2.4:code.validation
+  digest: 73de17e1143c580bff438cc81eb46565ed1ea403b919caab337c5140fddb72f1
+  quote: "`validation` | A value breaks a rule of this specification and no other code applies"
+- ir: def:2.4:code.not_found
+  digest: dc83b50ab1c23dfb6ed526cb4ff85e1f25698d5d6fb0074f6aa9f5d0a96cb711
+  quote: "`not_found` | A named proposal or line item does not exist, or the requester may not read it (§ 5.8)"
+- ir: def:2.4:code.not_offered
+  digest: 83672df09a9f71f16784be3170ffb6578b9147d2a0a2cecd0fb2146ff6364ecf
+  quote: "`not_offered` | A buyer value is outside what the seller declared (§ 3.1, § 3.2, § 4.3.2, § 5.3, § 5.5, § 5.6, § 5.6.1), or a buyer asks for a hold where `hold_terms` offers none (§ 5.6.2)"
+- ir: def:2.4:code.unresolved_reference
+  digest: e677008360cf5b23f6e219f69eab0e567b909d4537c905e1ef839f24e7d944b3
+  quote: "`unresolved_reference` | A `DocumentRef` (§ 2.2) does not resolve, or its content does not match its `digest`"
+- ir: def:2.4:code.not_committable
+  digest: 5e82d87f6f5e4982c61b3ab22b7d3badbe540e1eeecf4ed62fde37a048b8cfb3
+  quote: "`not_committable` | A line item's `status` rules out an ask (§ 4.3.2), a `commit` names part of a package or an add-on without its package (§ 4.1.4), a live `commitment` entry already names a line item (§ 4.1.2), or a seller rejects a `commit` before `offer_window.start` (§ 5.6.1)"
+- ir: def:2.4:code.stale_version
+  digest: 4c5939d3846fae06d1e1b5c569f738af51f1dcc2bb560ec22c061b09b14a1fd7
+  quote: "`stale_version` | An ask is stale (§ 4.1.3)"
+- ir: def:2.4:code.expired
+  digest: 7eb832040426767133449d83181e9af9399c45c0f0fd3ec3b6501ea911089449
+  quote: "`expired` | `offer_window.end` or `price_valid_until` has passed"
+- ir: def:2.4:code.idempotency_conflict
+  digest: 5c30976e49ecc01b23a3b359d64f9647a7125d4b3e62738f951453ef2f1cf1cc
+  quote: "`idempotency_conflict` | An `idempotency_key` is reused with a different `Commit` (§ 5.6.1)"
+- ir: def:2.4:code.not_eligible
+  digest: 419f9f30abc32cf9f17a7ec58aba765593512ca0b31e85f93ae2857f1db7cf18
+  quote: "`not_eligible` | The buyer or the sender fails an eligibility or authority check the seller applies (§ 5.8)"
+- ir: def:2.4:code.record_mismatch
+  digest: bf152bd66a7af2a47c5ff8af115bf71ada5291e1c5eaeeda9fe346de5b6f88b2
+  quote: "`record_mismatch` | A `record_digest` in the request does not equal the one the receiver recomputes, and § 5.6.1 gives no other code (§ 4.1.1)"
+- ir: "block:2.4:4/values:1"
+  digest: d1e645ca8cce96208a8305a62ff25097316cc62d704ed072ab25056faabed259
+  quote: '`validation` | `not_found` | `not_offered` | `unresolved_reference` | `not_committable` | `stale_version` | `expired` | `idempotency_conflict` | `not_eligible`
+    | `record_mismatch`'
+options:
+- id: open-with-the-rows-as-terms
+  summary: '`ErrorCode` is open: the ten rows of the `code` table are its core terms and an extension
+    term is a code outside them. The `code` row takes it in place of the bare term type, and each row
+    becomes one term.'
+- id: closed-with-the-rows-as-terms
+  summary: The same ten terms and the same entries, closed, so a code outside them is refused.
+chosen: open-with-the-rows-as-terms
+rationale: 'This narrows D-073 and leaves it standing. That record read eight lists a sentence states
+  and made seven of them closed, "because each sentence lists what the member may carry and invites nothing
+  further". For section 2.4''s codes the sentence is not the only place the text speaks, and the two others
+  say the opposite.
+
+
+  The row that holds the value reads "`code` | REQUIRED | A core code (below) or an extension code". And
+  the section closes "An `ErrorObject` is open. A receiver that does not recognize a code, or a key of
+  the object, acts on `retry`." A receiver is told what to do with a code it does not know, which is a
+  statement that would mean nothing if an unknown code made the document invalid. The sentence D-073 read
+  begins "Core codes:", which is the same word `MediaChannel` and `CostMethod` use for the listed half
+  of an open vocabulary.
+
+
+  So the published enum of ten refused every extension code the specification admits, which is narrower
+  than the document -- the one direction a published type may not be. `closed-with-the-rows-as-terms`
+  is that form, and it is refused on the row and the closing statement rather than on preference.
+
+
+  The ten rows of the `code` table become the ten terms. Each gives one code the condition it is returned
+  under -- `stale_version` is "An ask is stale (§ 4.1.3)" -- so the row is where that term''s meaning is
+  stated and the sentence above is where the set is. The `code` row takes `ErrorCode`, where it took the
+  bare term type that admits every term of every vocabulary and lists none of these.'
+challenge:
+- type: ErrorCode
+  value: record_mismatch
+  verdict: accept
+  context: >-
+    A receiver that recomputes a `record_digest` and finds it different from
+    the one the request carried, which is the tenth row of the `code` table.
+  reason: >-
+    The ten rows are the vocabulary's core terms, so each is a value the
+    published type takes.
+- type: ErrorCode
+  value: examplessp.example:quota_exceeded
+  verdict: accept
+  context: >-
+    A seller that refuses a request for a reason this version lists no code
+    for, and names the reason in its own domain.
+  reason: >-
+    Open is the whole of this record: the `code` row admits "an extension
+    code" and the section tells a receiver what to do with a code it does not
+    know. `closed-with-the-rows-as-terms`, the option not taken, is the enum
+    of ten alone and refuses this value.
+- type: ErrorCode
+  value: quota_exceeded
+  verdict: reject
+  context: >-
+    The same seller, writing its own reason as a bare word rather than in its
+    domain.
+  reason: >-
+    An extension term carries the domain of the party that defines it, so a
+    bare word outside the ten is neither a core code nor an extension one.
+    Open admits a term the specification does not list; it does not admit a
+    term nobody can trace to a definer.

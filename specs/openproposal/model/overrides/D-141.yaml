@@ -1,0 +1,78 @@
+format: 2
+id: D-141
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `Selectable`'s `K` carries an option's `id`, and the binding states that
+  giving one to the production, measurement source and reporting options is a
+  departure, under a record that does not exist. Does the departure exist on
+  this lock?
+covers:
+  - ir: key:5.4:ProductionOption.id
+    digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+    quote: "`id` | REQUIRED | Option id (§ 3.1)"
+  - ir: key:5.7.1:MeasurementOption.id
+    digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+    quote: "`id` | REQUIRED | Option id (§ 3.1)"
+  - ir: key:5.7.1:ReportingOption.id
+    digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+    quote: "`id` | REQUIRED | Option id (§ 3.1)"
+options:
+  - id: no-departure-on-this-lock
+    summary: >-
+      It does not. Every option type of this lock states `id` REQUIRED in its
+      own keys table, so the member the constructor gives is the member the
+      text lists, and the binding's `departure` claims a cost nothing pays.
+  - id: write-the-departure
+    summary: >-
+      It does. The departure the binding cites is written as a record of its
+      own, stating the cost of giving an `id` to three option types whose
+      members the text lists without one.
+chosen: no-departure-on-this-lock
+rationale: >-
+  **Measured over every option type the model publishes as a `Selectable`
+  option on `with-open-prs`: all eleven state `id` REQUIRED in their own keys
+  table.** `ProductionOption`, `MeasurementOption` and `ReportingOption` — the
+  three the claim names — each read "`id` | REQUIRED | Option id (§ 3.1)", and
+  so do `AudienceOption`, `BreakPositionOption`, `CancellationOption`,
+  `ControllingMeasurementOption`, `ExclusivityOption`, `ProgramOption` and
+  `PropertyOption`. `MechanismOption`'s states "`id` | TransactionMechanism |
+  REQUIRED | The mechanism, which is the option id", which `D-095` reads. So
+  the `id` the constructor gives an object option is the `id` the text lists,
+  and there is nothing to depart from.
+
+
+  **`D-046`'s rationale asserts the departure and was true of the text it was
+  written against.** It says that giving an `id` to those three "changes what
+  the text settles, so that part is a change we propose", citing a departure
+  record by an id, and its `feedback` asks the working group to "Give the cancellation and exclusivity
+  options an `id` once their members are defined". The open PRs this lock pins
+  did that, for those two and for the rest. So the proposal was taken up, and
+  what remains of it in the tree is a citation to a record nobody wrote — which
+  `constructors-check` reports, because a departure the mapping claims must
+  rest on a record that stands.
+
+
+  `write-the-departure` is refused on the measurement: a `basis: departure`
+  record states the cost its narrowing accepts, and this one would have to
+  state a cost of zero. A record that departs from nothing would outlive the
+  departure by construction, which is the state the gate on a recorded finding
+  no longer occurring exists to prevent.
+
+
+  So the `departure` goes from `Selectable`'s `K` in OpenProposal's binding and
+  the `decision` stays: `D-095` reads what types the `id`, and nothing reads a
+  cost there is none of.
+evidence:
+- 11 of 11 option types on with-open-prs state `id` REQUIRED in their own keys table,
+  measured over every `*Option` the model publishes
+- '`D-046`''s feedback asked for exactly this change and the open PRs made it'
+feedback: >-
+  § 3.1 states that an object option is named by its REQUIRED `id`, and every
+  option type's keys table now states the `id` row, which is what this reading
+  rests on. Keeping the row in each table is what lets a reader of one option
+  type see the requirement without assembling it from § 3.1; if a later option
+  type is added without one, the constructor will give it an `id` the text does
+  not list and the departure this record closes will be open again.

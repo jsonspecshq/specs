@@ -3,16 +3,79 @@
     {
       "at": "",
       "baseline": {
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "id": "Ad#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "display": {},
-        "id": "ad-1",
+        "audio": {},
+        "id": "seat-99812",
         "undefined_member": true
       },
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
+      "type": "Ad"
+    },
+    {
+      "at": "",
+      "baseline": {
+        "audio": {},
+        "id": "seat-99812"
+      },
+      "id": "Ad#/anyOf",
+      "keyword": "anyOf",
+      "mutant": {
+        "id": "seat-99812"
+      },
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
+      "type": "Ad"
+    },
+    {
+      "at": "/anyOf/0",
+      "baseline": {
+        "audio": {},
+        "id": "seat-99812"
+      },
+      "id": "Ad#/anyOf/0/required/audio",
+      "keyword": "required",
+      "mutant": {
+        "id": "seat-99812"
+      },
+      "name": "audio",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
+      "type": "Ad"
+    },
+    {
+      "at": "/anyOf/1",
+      "baseline": {
+        "display": {},
+        "id": "seat-99812"
+      },
+      "id": "Ad#/anyOf/1/required/display",
+      "keyword": "required",
+      "mutant": {
+        "id": "seat-99812"
+      },
+      "name": "display",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
+      "type": "Ad"
+    },
+    {
+      "at": "/anyOf/2",
+      "baseline": {
+        "id": "seat-99812",
+        "video": {}
+      },
+      "id": "Ad#/anyOf/2/required/video",
+      "keyword": "required",
+      "mutant": {
+        "id": "seat-99812"
+      },
+      "name": "video",
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
       "type": "Ad"
@@ -21,15 +84,15 @@
       "at": "/properties/adomain",
       "baseline": {
         "adomain": [],
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "id": "Ad#/properties/adomain/type",
       "keyword": "type",
       "mutant": {
         "adomain": "",
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "path": "/adomain",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
@@ -39,15 +102,15 @@
       "at": "/properties/attr",
       "baseline": {
         "attr": [],
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "id": "Ad#/properties/attr/type",
       "keyword": "type",
       "mutant": {
         "attr": "",
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "path": "/attr",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
@@ -56,16 +119,16 @@
     {
       "at": "/properties/bundle",
       "baseline": {
+        "audio": {},
         "bundle": [],
-        "display": {},
-        "id": "ad-1"
+        "id": "seat-99812"
       },
       "id": "Ad#/properties/bundle/type",
       "keyword": "type",
       "mutant": {
+        "audio": {},
         "bundle": "",
-        "display": {},
-        "id": "ad-1"
+        "id": "seat-99812"
       },
       "path": "/bundle",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
@@ -74,16 +137,16 @@
     {
       "at": "/properties/cat",
       "baseline": {
+        "audio": {},
         "cat": [],
-        "display": {},
-        "id": "ad-1"
+        "id": "seat-99812"
       },
       "id": "Ad#/properties/cat/type",
       "keyword": "type",
       "mutant": {
+        "audio": {},
         "cat": "",
-        "display": {},
-        "id": "ad-1"
+        "id": "seat-99812"
       },
       "path": "/cat",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
@@ -92,13 +155,13 @@
     {
       "at": "",
       "baseline": {
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "id": "Ad#/required/id",
       "keyword": "required",
       "mutant": {
-        "display": {}
+        "audio": {}
       },
       "name": "id",
       "path": "",
@@ -108,8 +171,8 @@
     {
       "at": "",
       "baseline": {
-        "display": {},
-        "id": "ad-1"
+        "audio": {},
+        "id": "seat-99812"
       },
       "id": "Ad#/type",
       "keyword": "type",
@@ -127,6 +190,16 @@
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/AgentType",
       "type": "AgentType"
+    },
+    {
+      "at": "",
+      "baseline": 1,
+      "id": "AmpRenderingTreatment#/oneOf",
+      "keyword": "oneOf",
+      "mutant": 3,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AmpRenderingTreatment",
+      "type": "AmpRenderingTreatment"
     },
     {
       "at": "",
@@ -219,15 +292,15 @@
     {
       "at": "",
       "baseline": {
-        "title": {
-          "text": "Buy a widget"
+        "data": {
+          "value": "Prose, not a name."
         }
       },
       "id": "Asset#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "title": {
-          "text": "Buy a widget"
+        "data": {
+          "value": "Prose, not a name."
         },
         "undefined_member": true
       },
@@ -238,8 +311,97 @@
     {
       "at": "",
       "baseline": {
+        "data": {
+          "value": "Prose, not a name."
+        }
+      },
+      "id": "Asset#/anyOf",
+      "keyword": "anyOf",
+      "mutant": {},
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "type": "Asset"
+    },
+    {
+      "at": "/anyOf/0",
+      "baseline": {
+        "data": {
+          "value": "Prose, not a name."
+        }
+      },
+      "id": "Asset#/anyOf/0/required/data",
+      "keyword": "required",
+      "mutant": {},
+      "name": "data",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "type": "Asset"
+    },
+    {
+      "at": "/anyOf/1",
+      "baseline": {
+        "image": {
+          "url": "Prose, not a name."
+        }
+      },
+      "id": "Asset#/anyOf/1/required/image",
+      "keyword": "required",
+      "mutant": {},
+      "name": "image",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "type": "Asset"
+    },
+    {
+      "at": "/anyOf/2",
+      "baseline": {
+        "link": {
+          "url": "Prose, not a name."
+        }
+      },
+      "id": "Asset#/anyOf/2/required/link",
+      "keyword": "required",
+      "mutant": {},
+      "name": "link",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "type": "Asset"
+    },
+    {
+      "at": "/anyOf/3",
+      "baseline": {
         "title": {
-          "text": "Buy a widget"
+          "text": "Prose, not a name."
+        }
+      },
+      "id": "Asset#/anyOf/3/required/title",
+      "keyword": "required",
+      "mutant": {},
+      "name": "title",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "type": "Asset"
+    },
+    {
+      "at": "/anyOf/4",
+      "baseline": {
+        "video": {
+          "adm": "Prose, not a name."
+        }
+      },
+      "id": "Asset#/anyOf/4/required/video",
+      "keyword": "required",
+      "mutant": {},
+      "name": "video",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
+      "type": "Asset"
+    },
+    {
+      "at": "",
+      "baseline": {
+        "data": {
+          "value": "Prose, not a name."
         }
       },
       "id": "Asset#/type",
@@ -252,18 +414,18 @@
     {
       "at": "",
       "baseline": {
-        "id": 1,
-        "title": {
-          "len": 90
-        }
+        "data": {
+          "type": 1
+        },
+        "id": 0
       },
       "id": "AssetFormat#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "id": 1,
-        "title": {
-          "len": 90
+        "data": {
+          "type": 1
         },
+        "id": 0,
         "undefined_member": true
       },
       "path": "",
@@ -273,16 +435,101 @@
     {
       "at": "",
       "baseline": {
-        "id": 1,
+        "data": {
+          "type": 1
+        },
+        "id": 0
+      },
+      "id": "AssetFormat#/anyOf",
+      "keyword": "anyOf",
+      "mutant": {
+        "id": 0
+      },
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
+      "type": "AssetFormat"
+    },
+    {
+      "at": "/anyOf/0",
+      "baseline": {
+        "data": {
+          "type": 1
+        },
+        "id": 0
+      },
+      "id": "AssetFormat#/anyOf/0/required/data",
+      "keyword": "required",
+      "mutant": {
+        "id": 0
+      },
+      "name": "data",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
+      "type": "AssetFormat"
+    },
+    {
+      "at": "/anyOf/1",
+      "baseline": {
+        "id": 0,
+        "img": {}
+      },
+      "id": "AssetFormat#/anyOf/1/required/img",
+      "keyword": "required",
+      "mutant": {
+        "id": 0
+      },
+      "name": "img",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
+      "type": "AssetFormat"
+    },
+    {
+      "at": "/anyOf/2",
+      "baseline": {
+        "id": 0,
         "title": {
-          "len": 90
+          "len": 0
         }
+      },
+      "id": "AssetFormat#/anyOf/2/required/title",
+      "keyword": "required",
+      "mutant": {
+        "id": 0
+      },
+      "name": "title",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
+      "type": "AssetFormat"
+    },
+    {
+      "at": "/anyOf/3",
+      "baseline": {
+        "id": 0,
+        "video": {}
+      },
+      "id": "AssetFormat#/anyOf/3/required/video",
+      "keyword": "required",
+      "mutant": {
+        "id": 0
+      },
+      "name": "video",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
+      "type": "AssetFormat"
+    },
+    {
+      "at": "",
+      "baseline": {
+        "data": {
+          "type": 1
+        },
+        "id": 0
       },
       "id": "AssetFormat#/required/id",
       "keyword": "required",
       "mutant": {
-        "title": {
-          "len": 90
+        "data": {
+          "type": 1
         }
       },
       "name": "id",
@@ -293,10 +540,10 @@
     {
       "at": "",
       "baseline": {
-        "id": 1,
-        "title": {
-          "len": 90
-        }
+        "data": {
+          "type": 1
+        },
+        "id": 0
       },
       "id": "AssetFormat#/type",
       "keyword": "type",
@@ -357,13 +604,10 @@
     },
     {
       "at": "",
-      "baseline": {
-        "mime": []
-      },
+      "baseline": {},
       "id": "AudioPlacement#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "mime": [],
         "undefined_member": true
       },
       "path": "",
@@ -373,14 +617,12 @@
     {
       "at": "/properties/api",
       "baseline": {
-        "api": [],
-        "mime": []
+        "api": []
       },
       "id": "AudioPlacement#/properties/api/type",
       "keyword": "type",
       "mutant": {
-        "api": "",
-        "mime": []
+        "api": ""
       },
       "path": "/api",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
@@ -389,14 +631,12 @@
     {
       "at": "/properties/comp",
       "baseline": {
-        "comp": [],
-        "mime": []
+        "comp": []
       },
       "id": "AudioPlacement#/properties/comp/type",
       "keyword": "type",
       "mutant": {
-        "comp": "",
-        "mime": []
+        "comp": ""
       },
       "path": "/comp",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
@@ -405,14 +645,12 @@
     {
       "at": "/properties/comptype",
       "baseline": {
-        "comptype": [],
-        "mime": []
+        "comptype": []
       },
       "id": "AudioPlacement#/properties/comptype/type",
       "keyword": "type",
       "mutant": {
-        "comptype": "",
-        "mime": []
+        "comptype": ""
       },
       "path": "/comptype",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
@@ -421,14 +659,12 @@
     {
       "at": "/properties/ctype",
       "baseline": {
-        "ctype": [],
-        "mime": []
+        "ctype": []
       },
       "id": "AudioPlacement#/properties/ctype/type",
       "keyword": "type",
       "mutant": {
-        "ctype": "",
-        "mime": []
+        "ctype": ""
       },
       "path": "/ctype",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
@@ -437,14 +673,12 @@
     {
       "at": "/properties/delivery",
       "baseline": {
-        "delivery": [],
-        "mime": []
+        "delivery": []
       },
       "id": "AudioPlacement#/properties/delivery/type",
       "keyword": "type",
       "mutant": {
-        "delivery": "",
-        "mime": []
+        "delivery": ""
       },
       "path": "/delivery",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
@@ -467,13 +701,11 @@
     {
       "at": "/properties/overlayexpdir",
       "baseline": {
-        "mime": [],
         "overlayexpdir": []
       },
       "id": "AudioPlacement#/properties/overlayexpdir/type",
       "keyword": "type",
       "mutant": {
-        "mime": [],
         "overlayexpdir": ""
       },
       "path": "/overlayexpdir",
@@ -483,13 +715,11 @@
     {
       "at": "/properties/playmethod",
       "baseline": {
-        "mime": [],
         "playmethod": []
       },
       "id": "AudioPlacement#/properties/playmethod/type",
       "keyword": "type",
       "mutant": {
-        "mime": [],
         "playmethod": ""
       },
       "path": "/playmethod",
@@ -499,13 +729,11 @@
     {
       "at": "/properties/rqddurs",
       "baseline": {
-        "mime": [],
         "rqddurs": []
       },
       "id": "AudioPlacement#/properties/rqddurs/type",
       "keyword": "type",
       "mutant": {
-        "mime": [],
         "rqddurs": ""
       },
       "path": "/rqddurs",
@@ -514,22 +742,7 @@
     },
     {
       "at": "",
-      "baseline": {
-        "mime": []
-      },
-      "id": "AudioPlacement#/required/mime",
-      "keyword": "required",
-      "mutant": {},
-      "name": "mime",
-      "path": "",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AudioPlacement",
-      "type": "AudioPlacement"
-    },
-    {
-      "at": "",
-      "baseline": {
-        "mime": []
-      },
+      "baseline": {},
       "id": "AudioPlacement#/type",
       "keyword": "type",
       "mutant": "",
@@ -1370,6 +1583,16 @@
     },
     {
       "at": "",
+      "baseline": 1,
+      "id": "DoohPlacementMobility#/oneOf",
+      "keyword": "oneOf",
+      "mutant": 3,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/DoohPlacementMobility",
+      "type": "DoohPlacementMobility"
+    },
+    {
+      "at": "",
       "baseline": 0,
       "id": "DoohVenueTaxonomy#/oneOf",
       "keyword": "oneOf",
@@ -1377,6 +1600,36 @@
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DoohVenueTaxonomy",
       "type": "DoohVenueTaxonomy"
+    },
+    {
+      "at": "",
+      "baseline": 0,
+      "id": "DurationSeconds#/maximum",
+      "keyword": "maximum",
+      "mutant": 9007199254740992,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/DurationSeconds",
+      "type": "DurationSeconds"
+    },
+    {
+      "at": "",
+      "baseline": 0,
+      "id": "DurationSeconds#/minimum",
+      "keyword": "minimum",
+      "mutant": -1,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/DurationSeconds",
+      "type": "DurationSeconds"
+    },
+    {
+      "at": "",
+      "baseline": 0,
+      "id": "DurationSeconds#/type",
+      "keyword": "type",
+      "mutant": 2.5,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/DurationSeconds",
+      "type": "DurationSeconds"
     },
     {
       "at": "",
@@ -1412,17 +1665,35 @@
       "at": "",
       "baseline": {
         "method": 1,
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "id": "Event#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
         "method": 1,
-        "type": 2,
+        "type": 1,
         "undefined_member": true,
-        "url": "https://example.invalid/px.gif"
+        "url": "Prose, not a name."
       },
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
+      "type": "Event"
+    },
+    {
+      "at": "/else/then",
+      "baseline": {
+        "method": 2,
+        "type": 1,
+        "url": "Prose, not a name."
+      },
+      "id": "Event#/else/then/required/url",
+      "keyword": "required",
+      "mutant": {
+        "method": 2,
+        "type": 1
+      },
+      "name": "url",
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
       "type": "Event"
@@ -1432,16 +1703,16 @@
       "baseline": {
         "api": [],
         "method": 1,
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "id": "Event#/properties/api/type",
       "keyword": "type",
       "mutant": {
         "api": "",
         "method": 1,
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "path": "/api",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
@@ -1451,14 +1722,14 @@
       "at": "",
       "baseline": {
         "method": 1,
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "id": "Event#/required/method",
       "keyword": "required",
       "mutant": {
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "name": "method",
       "path": "",
@@ -1469,16 +1740,34 @@
       "at": "",
       "baseline": {
         "method": 1,
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "id": "Event#/required/type",
       "keyword": "required",
       "mutant": {
         "method": 1,
-        "url": "https://example.invalid/px.gif"
+        "url": "Prose, not a name."
       },
       "name": "type",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
+      "type": "Event"
+    },
+    {
+      "at": "/then",
+      "baseline": {
+        "method": 1,
+        "type": 1,
+        "url": "Prose, not a name."
+      },
+      "id": "Event#/then/required/url",
+      "keyword": "required",
+      "mutant": {
+        "method": 1,
+        "type": 1
+      },
+      "name": "url",
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
       "type": "Event"
@@ -1487,8 +1776,8 @@
       "at": "",
       "baseline": {
         "method": 1,
-        "type": 2,
-        "url": "https://example.invalid/px.gif"
+        "type": 1,
+        "url": "Prose, not a name."
       },
       "id": "Event#/type",
       "keyword": "type",
@@ -1859,6 +2148,36 @@
     },
     {
       "at": "",
+      "baseline": 0,
+      "id": "IntegerId#/maximum",
+      "keyword": "maximum",
+      "mutant": 9007199254740992,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/IntegerId",
+      "type": "IntegerId"
+    },
+    {
+      "at": "",
+      "baseline": 0,
+      "id": "IntegerId#/minimum",
+      "keyword": "minimum",
+      "mutant": -9007199254740992,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/IntegerId",
+      "type": "IntegerId"
+    },
+    {
+      "at": "",
+      "baseline": 0,
+      "id": "IntegerId#/type",
+      "keyword": "type",
+      "mutant": 2.5,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json#/$defs/IntegerId",
+      "type": "IntegerId"
+    },
+    {
+      "at": "",
       "baseline": 1,
       "id": "IpLocationService#/oneOf",
       "keyword": "oneOf",
@@ -2158,12 +2477,12 @@
     {
       "at": "",
       "baseline": {
-        "display": {}
+        "audio": {}
       },
       "id": "Placement#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "display": {},
+        "audio": {},
         "undefined_member": true
       },
       "path": "",
@@ -2171,15 +2490,66 @@
       "type": "Placement"
     },
     {
+      "at": "",
+      "baseline": {
+        "audio": {}
+      },
+      "id": "Placement#/anyOf",
+      "keyword": "anyOf",
+      "mutant": {},
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
+      "type": "Placement"
+    },
+    {
+      "at": "/anyOf/0",
+      "baseline": {
+        "audio": {}
+      },
+      "id": "Placement#/anyOf/0/required/audio",
+      "keyword": "required",
+      "mutant": {},
+      "name": "audio",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
+      "type": "Placement"
+    },
+    {
+      "at": "/anyOf/1",
+      "baseline": {
+        "display": {}
+      },
+      "id": "Placement#/anyOf/1/required/display",
+      "keyword": "required",
+      "mutant": {},
+      "name": "display",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
+      "type": "Placement"
+    },
+    {
+      "at": "/anyOf/2",
+      "baseline": {
+        "video": {}
+      },
+      "id": "Placement#/anyOf/2/required/video",
+      "keyword": "required",
+      "mutant": {},
+      "name": "video",
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
+      "type": "Placement"
+    },
+    {
       "at": "/properties/wlang",
       "baseline": {
-        "display": {},
+        "audio": {},
         "wlang": []
       },
       "id": "Placement#/properties/wlang/type",
       "keyword": "type",
       "mutant": {
-        "display": {},
+        "audio": {},
         "wlang": ""
       },
       "path": "/wlang",
@@ -2189,7 +2559,7 @@
     {
       "at": "",
       "baseline": {
-        "display": {}
+        "audio": {}
       },
       "id": "Placement#/type",
       "keyword": "type",
@@ -2489,6 +2859,16 @@
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Segment",
       "type": "Segment"
+    },
+    {
+      "at": "",
+      "baseline": 0,
+      "id": "ServerSideAdInsertionMode#/oneOf",
+      "keyword": "oneOf",
+      "mutant": 4,
+      "path": "",
+      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/ServerSideAdInsertionMode",
+      "type": "ServerSideAdInsertionMode"
     },
     {
       "at": "",
@@ -2871,12 +3251,12 @@
     {
       "at": "",
       "baseline": {
-        "adm": "<VAST/>"
+        "adm": "Prose, not a name."
       },
       "id": "VideoAsset#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "adm": "<VAST/>",
+        "adm": "Prose, not a name.",
         "undefined_member": true
       },
       "path": "",
@@ -2886,24 +3266,21 @@
     {
       "at": "",
       "baseline": {
-        "adm": "<VAST/>"
+        "adm": "Prose, not a name."
       },
-      "id": "VideoAsset#/type",
-      "keyword": "type",
-      "mutant": "",
+      "id": "VideoAsset#/oneOf",
+      "keyword": "oneOf",
+      "mutant": {},
       "path": "",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoAsset",
       "type": "VideoAsset"
     },
     {
       "at": "",
-      "baseline": {
-        "mime": []
-      },
+      "baseline": {},
       "id": "VideoPlacement#/additionalProperties",
       "keyword": "additionalProperties",
       "mutant": {
-        "mime": [],
         "undefined_member": true
       },
       "path": "",
@@ -2913,14 +3290,12 @@
     {
       "at": "/properties/api",
       "baseline": {
-        "api": [],
-        "mime": []
+        "api": []
       },
       "id": "VideoPlacement#/properties/api/type",
       "keyword": "type",
       "mutant": {
-        "api": "",
-        "mime": []
+        "api": ""
       },
       "path": "/api",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
@@ -2929,14 +3304,12 @@
     {
       "at": "/properties/comp",
       "baseline": {
-        "comp": [],
-        "mime": []
+        "comp": []
       },
       "id": "VideoPlacement#/properties/comp/type",
       "keyword": "type",
       "mutant": {
-        "comp": "",
-        "mime": []
+        "comp": ""
       },
       "path": "/comp",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
@@ -2945,14 +3318,12 @@
     {
       "at": "/properties/comptype",
       "baseline": {
-        "comptype": [],
-        "mime": []
+        "comptype": []
       },
       "id": "VideoPlacement#/properties/comptype/type",
       "keyword": "type",
       "mutant": {
-        "comptype": "",
-        "mime": []
+        "comptype": ""
       },
       "path": "/comptype",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
@@ -2961,14 +3332,12 @@
     {
       "at": "/properties/ctype",
       "baseline": {
-        "ctype": [],
-        "mime": []
+        "ctype": []
       },
       "id": "VideoPlacement#/properties/ctype/type",
       "keyword": "type",
       "mutant": {
-        "ctype": "",
-        "mime": []
+        "ctype": ""
       },
       "path": "/ctype",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
@@ -2977,14 +3346,12 @@
     {
       "at": "/properties/delivery",
       "baseline": {
-        "delivery": [],
-        "mime": []
+        "delivery": []
       },
       "id": "VideoPlacement#/properties/delivery/type",
       "keyword": "type",
       "mutant": {
-        "delivery": "",
-        "mime": []
+        "delivery": ""
       },
       "path": "/delivery",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
@@ -2993,14 +3360,12 @@
     {
       "at": "/properties/expdir",
       "baseline": {
-        "expdir": [],
-        "mime": []
+        "expdir": []
       },
       "id": "VideoPlacement#/properties/expdir/type",
       "keyword": "type",
       "mutant": {
-        "expdir": "",
-        "mime": []
+        "expdir": ""
       },
       "path": "/expdir",
       "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
@@ -3023,13 +3388,11 @@
     {
       "at": "/properties/overlayexpdir",
       "baseline": {
-        "mime": [],
         "overlayexpdir": []
       },
       "id": "VideoPlacement#/properties/overlayexpdir/type",
       "keyword": "type",
       "mutant": {
-        "mime": [],
         "overlayexpdir": ""
       },
       "path": "/overlayexpdir",
@@ -3039,13 +3402,11 @@
     {
       "at": "/properties/playmethod",
       "baseline": {
-        "mime": [],
         "playmethod": []
       },
       "id": "VideoPlacement#/properties/playmethod/type",
       "keyword": "type",
       "mutant": {
-        "mime": [],
         "playmethod": ""
       },
       "path": "/playmethod",
@@ -3055,13 +3416,11 @@
     {
       "at": "/properties/rqddurs",
       "baseline": {
-        "mime": [],
         "rqddurs": []
       },
       "id": "VideoPlacement#/properties/rqddurs/type",
       "keyword": "type",
       "mutant": {
-        "mime": [],
         "rqddurs": ""
       },
       "path": "/rqddurs",
@@ -3070,22 +3429,7 @@
     },
     {
       "at": "",
-      "baseline": {
-        "mime": []
-      },
-      "id": "VideoPlacement#/required/mime",
-      "keyword": "required",
-      "mutant": {},
-      "name": "mime",
-      "path": "",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoPlacement",
-      "type": "VideoPlacement"
-    },
-    {
-      "at": "",
-      "baseline": {
-        "mime": []
-      },
+      "baseline": {},
       "id": "VideoPlacement#/type",
       "keyword": "type",
       "mutant": "",
@@ -3112,6 +3456,13 @@
       "id": "AgentType#/type",
       "keyword": "type",
       "type": "AgentType"
+    },
+    {
+      "at": "",
+      "by": "oneOf",
+      "id": "AmpRenderingTreatment#/type",
+      "keyword": "type",
+      "type": "AmpRenderingTreatment"
     },
     {
       "at": "",
@@ -3224,6 +3575,13 @@
       "id": "DoohMultiplierMeasurementSourceType#/type",
       "keyword": "type",
       "type": "DoohMultiplierMeasurementSourceType"
+    },
+    {
+      "at": "",
+      "by": "oneOf",
+      "id": "DoohPlacementMobility#/type",
+      "keyword": "type",
+      "type": "DoohPlacementMobility"
     },
     {
       "at": "",
@@ -3375,6 +3733,13 @@
     {
       "at": "",
       "by": "oneOf",
+      "id": "ServerSideAdInsertionMode#/type",
+      "keyword": "type",
+      "type": "ServerSideAdInsertionMode"
+    },
+    {
+      "at": "",
+      "by": "oneOf",
       "id": "SizeUnit#/type",
       "keyword": "type",
       "type": "SizeUnit"
@@ -3403,6 +3768,13 @@
     {
       "at": "",
       "by": "oneOf",
+      "id": "VideoAsset#/type",
+      "keyword": "type",
+      "type": "VideoAsset"
+    },
+    {
+      "at": "",
+      "by": "oneOf",
       "id": "VolumeNormalizationMode#/type",
       "keyword": "type",
       "type": "VolumeNormalizationMode"
@@ -3416,434 +3788,5 @@
   "oracle": {
     "jsonschema": "4.26.0"
   },
-  "rules": [
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": "ad-1"
-          }
-        }
-      ],
-      "owner": "Ad",
-      "rule": "rule:object_ad:e54fb6a6",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
-      "severity": "error",
-      "type": "Ad",
-      "valid": [
-        {
-          "value": {
-            "display": {},
-            "id": "ad-1"
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": "ad-1"
-          }
-        }
-      ],
-      "owner": "Ad",
-      "rule": "rule:object_ad:e54fb6a6-2",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
-      "severity": "error",
-      "type": "Ad",
-      "valid": [
-        {
-          "value": {
-            "id": "ad-1",
-            "video": {}
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": "ad-1"
-          }
-        }
-      ],
-      "owner": "Ad",
-      "rule": "rule:object_ad:e54fb6a6-3",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Ad",
-      "severity": "error",
-      "type": "Ad",
-      "valid": [
-        {
-          "value": {
-            "audio": {},
-            "id": "ad-1"
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Asset",
-      "rule": "rule:object_asset:e6a2f365",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
-      "severity": "error",
-      "type": "Asset",
-      "valid": [
-        {
-          "value": {
-            "title": {
-              "text": "Buy a widget"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Asset",
-      "rule": "rule:object_asset:e6a2f365-2",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
-      "severity": "error",
-      "type": "Asset",
-      "valid": [
-        {
-          "value": {
-            "image": {
-              "url": "https://example.invalid/a.png"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Asset",
-      "rule": "rule:object_asset:e6a2f365-3",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
-      "severity": "error",
-      "type": "Asset",
-      "valid": [
-        {
-          "value": {
-            "video": {
-              "adm": "<VAST/>"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Asset",
-      "rule": "rule:object_asset:e6a2f365-4",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
-      "severity": "error",
-      "type": "Asset",
-      "valid": [
-        {
-          "value": {
-            "data": {
-              "value": "5 stars"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Asset",
-      "rule": "rule:object_asset:e6a2f365-5",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Asset",
-      "severity": "error",
-      "type": "Asset",
-      "valid": [
-        {
-          "value": {
-            "link": {
-              "url": "https://example.invalid/l"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": 1
-          }
-        }
-      ],
-      "owner": "AssetFormat",
-      "rule": "rule:object_assetformat:a5e2df16",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
-      "severity": "error",
-      "type": "AssetFormat",
-      "valid": [
-        {
-          "value": {
-            "id": 1,
-            "title": {
-              "len": 90
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": 1
-          }
-        }
-      ],
-      "owner": "AssetFormat",
-      "rule": "rule:object_assetformat:a5e2df16-2",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
-      "severity": "error",
-      "type": "AssetFormat",
-      "valid": [
-        {
-          "value": {
-            "id": 1,
-            "img": {}
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": 1
-          }
-        }
-      ],
-      "owner": "AssetFormat",
-      "rule": "rule:object_assetformat:a5e2df16-3",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
-      "severity": "error",
-      "type": "AssetFormat",
-      "valid": [
-        {
-          "value": {
-            "id": 1,
-            "video": {
-              "mime": [
-                "video/mp4"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "id": 1
-          }
-        }
-      ],
-      "owner": "AssetFormat",
-      "rule": "rule:object_assetformat:a5e2df16-4",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/AssetFormat",
-      "severity": "error",
-      "type": "AssetFormat",
-      "valid": [
-        {
-          "value": {
-            "data": {
-              "type": 1
-            },
-            "id": 1
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {
-            "method": 1,
-            "type": 2
-          }
-        },
-        {
-          "value": {
-            "method": 2,
-            "type": 2
-          }
-        }
-      ],
-      "owner": "Event",
-      "rule": "rule:object_event:2bbe0e06",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Event",
-      "severity": "error",
-      "type": "Event",
-      "valid": [
-        {
-          "value": {
-            "method": 1,
-            "type": 2,
-            "url": "https://example.invalid/px.gif"
-          }
-        },
-        {
-          "value": {
-            "method": 500,
-            "type": 2
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Placement",
-      "rule": "rule:object_placement:c424dfde",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
-      "severity": "error",
-      "type": "Placement",
-      "valid": [
-        {
-          "value": {
-            "display": {}
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Placement",
-      "rule": "rule:object_placement:c424dfde-2",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
-      "severity": "error",
-      "type": "Placement",
-      "valid": [
-        {
-          "value": {
-            "video": {
-              "mime": [
-                "video/mp4"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        }
-      ],
-      "owner": "Placement",
-      "rule": "rule:object_placement:c424dfde-3",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/Placement",
-      "severity": "error",
-      "type": "Placement",
-      "valid": [
-        {
-          "value": {
-            "audio": {
-              "mime": [
-                "audio/mp4"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        },
-        {
-          "value": {
-            "adm": "<VAST/>",
-            "curl": "https://example.invalid/v.xml"
-          }
-        }
-      ],
-      "owner": "VideoAsset",
-      "rule": "rule:object_videoasset:6f5d60d7",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoAsset",
-      "severity": "error",
-      "type": "VideoAsset",
-      "valid": [
-        {
-          "value": {
-            "adm": "<VAST/>"
-          }
-        },
-        {
-          "value": {
-            "curl": "https://example.invalid/v.xml"
-          }
-        }
-      ]
-    },
-    {
-      "invalid": [
-        {
-          "value": {}
-        },
-        {
-          "value": {
-            "adm": "<VAST/>",
-            "curl": "https://example.invalid/v.xml"
-          }
-        }
-      ],
-      "owner": "VideoAsset",
-      "rule": "rule:object_videoasset:6f5d60d7-2",
-      "schema": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/VideoAsset",
-      "severity": "error",
-      "type": "VideoAsset",
-      "valid": [
-        {
-          "value": {
-            "adm": "<VAST/>"
-          }
-        },
-        {
-          "value": {
-            "curl": "https://example.invalid/v.xml"
-          }
-        }
-      ]
-    }
-  ]
+  "rules": []
 }

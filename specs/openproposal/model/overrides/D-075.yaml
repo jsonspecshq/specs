@@ -1,0 +1,39 @@
+format: 2
+id: D-075
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What are a clock window's `start` and `before`, and the days it names, where the specification
+  states each in a lead-in of its own?
+covers:
+- ir: def:5.5:ClockTime
+  digest: 54ae9661ffb2a541fe08c1e20918fcdb690d40f440b2140ac214dc00d7f2df0a
+  quote: '`ClockTime` | is a String: `HH:MM` on a 24-hour clock, two digits each, from `00:00` to `23:59`,
+    or `24:00`, the end of the day.'
+- ir: def:5.5:DayOfWeek
+  digest: c33f22bda0cc4398646c8abc6c445f6300bc714605afb6d1295292a41a2a5c72
+  quote: '`DayOfWeek` | is `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`.'
+options:
+- id: the-kernel-already-states-them
+  summary: 'Each is the kernel type of the same form under the specification''s own name: `ClockTime`
+    is `TimeOfDay` and `DayOfWeek` is `DayName`, each sourced at the lead-in that states it.'
+- id: two-types-of-its-own
+  summary: Each is a type of this specification, defined from its lead-in, so the model carries both the
+    kernel's and this text's.
+chosen: the-kernel-already-states-them
+rationale: 'The forms are the same, stated twice. The lead-in reads "`ClockTime` is a String: `HH:MM`
+  on a 24-hour clock, two digits each, from `00:00` to `23:59`, or `24:00`", and the kernel''s `TimeOfDay`
+  is a civil time written `HH:MM` from `00:00` to `24:00`, whose pattern admits exactly those values.
+  The lead-in reads "`DayOfWeek` is `monday` | `tuesday` | ... | `sunday`", and the kernel''s `DayName`
+  is a day of the week named in lowercase English from `monday` to `sunday`, whose terms are those seven.
+
+
+  `two-types-of-its-own` would define a second type of each shape under a second name, which is the redundancy
+  a shared kernel removes: a library would offer `ClockTime` beside `TimeOfDay` with nothing to tell a
+  reader which to use, and a daypart carried between two specifications would convert for no reason.
+
+
+  So each is published under the kernel''s name and sourced at the lead-in that states it, as `VocabularyTerm`
+  is at its row of section 2.2. A row whose cell names the specification''s name resolves through that
+  source.'

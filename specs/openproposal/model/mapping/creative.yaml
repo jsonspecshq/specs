@@ -2,177 +2,447 @@
 # are kept as they are; every other entry and type is derived by a mapping rule (src/mapping-rules.ts).
 format: 1
 module: creative
-sections: [ "5.4", 5.4/creative-inspection-and-previews ]
+sections: [ 5.4/creative-inspection-and-previews, "5.4", 5.4.1 ]
 types:
-  - name: Specs
+  - name: FormatSpec
     kind: object
-    ir: field:5.4:specs
-    source: { decision: D-016 }
-    open: true
-    description: "A format's specs, as the referenced format registry entry defines them; the specification hardcodes no shape per channel, so the object accepts any member."
-  - name: ThirdPartyTags
+    ir: key:5.4:FormatSpec.spec_ref
+    source: { rule: key-table-object }
+    open: false
+  - name: FormatSpecification
     kind: object
-    ir: field:5.4:third_party_tags
-    source: { decision: D-016 }
+    ir: key:5.4:FormatSpec.spec
+    source: { decision: D-107 }
     open: true
-    description: "The third-party tag wrapper types and VAST versions the seller accepts. The specification states no members, so the object accepts any."
+    set_by: "the format registry entry a `spec_ref` names, at the version it names, or the seller where `spec_ref` is absent (§ 5.4)"
+  - name: MaterialsDue
+    kind: object
+    ir: key:5.4:MaterialsDue.at
+    source: { rule: key-table-object }
+    open: false
+  - name: Asset
+    kind: object
+    ir: key:5.4:Asset.asset_id
+    source: { rule: key-table-object }
+    open: false
+  - name: AssetProvenance
+    kind: object
+    ir: key:5.4:AssetProvenance.synthetic
+    source: { rule: key-table-object }
+    open: false
+  - name: CreativeDelivery
+    kind: object
+    ir: key:5.4:CreativeDelivery.method
+    source: { rule: key-table-object }
+    open: false
+  - name: CreativeSubtypeAudioVideo
+    kind: vocabulary
+    ir: "key:5.4:CreativeDelivery.protocols[]"
+    source: { decision: D-071 }
+    open: false
+    terms: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" ]
+    list: { name: "List: Creative Subtypes - Audio/Video" }
   - name: CreativeDeliveryProtocol
     kind: vocabulary
-    ir: field:5.4:creative_delivery#description/object:1
-    source: { decision: D-041 }
+    ir: "key:5.4:CreativeDelivery.other_protocols[]"
+    source: { decision: D-140 }
     open: true
-  - name: AssetApprovalStatus
-    kind: vocabulary
-    ir: "field:5.4:assets[]#description/object:1"
-    source: { decision: D-041 }
-    open: true
-  - name: MaterialsDue
-    kind: union
-    ir: field:5.4:materials_due
-    source: { decision: D-017 }
-    any_of: [ { kind: named, name: Timestamp }, { kind: named, name: Duration } ]
-  - name: Approval
+    terms: [ javascript_tag ]
+  - name: ProductionOption
     kind: object
-    ir: field:5.4:approval
-    source: { decision: D-016 }
-    open: true
-    description: "The seller's creative review SLA and revision policy. The specification states no members, so the object accepts any."
+    ir: key:5.4:ProductionOption.id
+    source: { rule: key-table-object }
+    open: false
 entries:
   - ir: field:5.4:formats
-    digest: 2a8a55ef5666b057f31306cadf667fc01dff13e5cc5e009f00d3f649de375016
-    source: { decisions: [ D-018, D-019 ] }
+    digest: 97f074e7283ce7c3cb2509b194a0989880e66ba5e32607c5c5e153d5a8e271b8
+    source: { rule: applied-constructor-row }
+    as:
+      role: property
+      object: LineItem
+      type: { kind: apply, constructor: Selectable, arguments: { T: &a1 { kind: named, name: FormatId }, K: *a1 } }
+      presence: optional
+  - ir: field:5.4:format_specs
+    digest: e1002f5a6ce64e7aab22acd2215df84e47e0bf49e0fc914d9765c2396556242d
+    source: { rule: applied-constructor-row }
     as:
       role: property
       object: LineItem
       type:
         kind: apply
-        constructor: Selectable
-        arguments: { T: { kind: named, name: FormatId }, K: { kind: named, name: FormatId } }
-      presence: optional
-  - ir: field:5.4:specs
-    digest: f3fa67ecc797ea15ee4ad04313861161f3e8fcec742af3d24e4ab1f99f20273a
-    source: { decision: D-016 }
-    as: { role: property, object: LineItem, type: { kind: named, name: Specs }, presence: optional }
-  - ir: field:5.4:third_party_tags
-    digest: 7c3e68646af2fcaf101cdd07a8abe4fd7ec5a36eabd7ed4e06a71e0d8b626d80
-    source: { decision: D-016 }
-    as: { role: property, object: LineItem, type: { kind: named, name: ThirdPartyTags }, presence: optional }
+        constructor: Map
+        arguments: { K: { kind: named, name: FormatId }, V: { kind: named, name: FormatSpec } }
+      presence: conditional
+  - ir: rule:5.4:3a677601
+    digest: 179391013b3fe6067fdac2f2d7dabe2586a3a9b7b4045826d22f0eb5f446d904
+    source: { rule: presence-statement }
+    as: { role: rule, object: LineItem }
   - ir: field:5.4:creative_delivery
-    digest: 1e4d650fa9016a43489601a2d8953f727c770d01481f20d46c2d086949509a56
-    source: { rule: inline-object-row }
+    digest: d5ee9e5aae084a4b2b8866a197c1f6dec9528d4b967ab81e714c6ec8f006b980
+    source: { rule: named-object-row }
     as: { role: property, object: LineItem, type: { kind: named, name: CreativeDelivery }, presence: optional }
-  - ir: field:5.4:creative_delivery#description/object:1
-    digest: 8d11a33a75a187ebd9affb849bab8593668de8189bf49460961af437a5c78c15
-    source: { decision: D-025 }
-    as:
-      role: type
-      name: CreativeDelivery
-      layer: object
-      open: false
-      members:
-        method: { type: { kind: named, name: CreativeDeliveryMethod }, presence: optional }
-        protocol: { type: { kind: named, name: CreativeDeliveryProtocol }, presence: optional }
-        secure_required: { type: { kind: boolean }, presence: optional }
-        endpoint: { type: { kind: named, name: Url }, presence: optional }
-  - ir: field:5.4:creative_delivery#description/object:1/method
-    digest: b7d0d2c4cac4d24771ed543d709be22d3e5211eecb074dca066161bd05a78187
-    source: { decisions: [ D-013, D-014 ] }
-    as: { role: type, name: CreativeDeliveryMethod, layer: vocabulary, open: true }
   - ir: "field:5.4:assets[]"
-    digest: 255610ac92f7e4ac1d15edbfed7d3201c5d317b1271c033372175e9eed0b40b2
-    source: { rule: inline-object-row }
+    digest: 8f1377243d7866defed5363e7ce20fe1f20f39a45b0cdd6d8a57cb8700ce575a
+    source: { rule: named-object-row }
     as:
       role: property
       object: LineItem
-      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: AssetsEntry } } }
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: Asset } } }
       presence: optional
-  - ir: "field:5.4:assets[]#description/object:1"
-    digest: e2ecbfe1e06380fb7c9966174c58ecc73d617563de6860287b1cd414bebcfff6
-    source: { decision: D-025 }
-    as:
-      role: type
-      name: AssetsEntry
-      layer: object
-      open: false
-      members:
-        asset_id: { type: { kind: named, name: Uuid }, presence: optional }
-        format_ref: { type: { kind: named, name: FormatId }, presence: optional }
-        url_or_tag: { type: { kind: named, name: Text }, presence: optional }
-        submitted_at: { type: { kind: named, name: Timestamp }, presence: optional }
-        approval_status: { type: { kind: named, name: AssetApprovalStatus }, presence: optional }
   - ir: field:5.4:materials_due
-    digest: cfa54510f53148d77ef0133fffea985d275148ab926796713470f40d9827f5b2
-    source: { decision: D-017 }
+    digest: 064b83cb3b9a78e5c3199d10be2050c55fff845ef38409275fae6f233e00d19e
+    source: { rule: named-object-row }
     as: { role: property, object: LineItem, type: { kind: named, name: MaterialsDue }, presence: optional }
   - ir: rule:5.4:2eaa294f
     digest: 61f09f4e064e43f2fa580ac4cbf4d7d5c34bd64f2539c58b40351900d38338fd
-    source: { decision: D-030 }
-    as: { role: rule, object: LineItem }
+    source: { decision: D-086 }
+    as: { role: informative }
   - ir: field:5.4:approval
-    digest: 099f711760829277a50ff8ea557e2d9131e53c929b364a23770815cbe7a074c8
-    source: { decision: D-016 }
-    as: { role: property, object: LineItem, type: { kind: named, name: Approval }, presence: optional }
+    digest: 99af7aa57b5240f96c95824540ea05ab9a2af3ee90927e17debd90e2cc714244
+    source: { decision: D-094 }
+    as: { role: property, object: LineItem, type: { kind: named, name: Text }, presence: optional }
+  - ir: field:5.4:creative_policy
+    digest: fdeee2307d43e492a541ea41f73584ad82b2fb6445fbe983237205093b286996
+    source: { decision: D-094 }
+    as: { role: property, object: LineItem, type: { kind: named, name: Text }, presence: optional }
   - ir: field:5.4:production
-    digest: 0168284e2ec3d43c2249add202b7c657a7a4b37fe78ccfbf2cee694a3e76d199
-    source: { decisions: [ D-018, D-019 ] }
+    digest: f4e3bd3d8bd3950ce809c7d0cf015ac9701d7c3fe22c69a202b0071d42c5f16c
+    source: { rule: applied-constructor-row }
     as:
       role: property
       object: LineItem
       type:
         kind: apply
         constructor: Selectable
-        arguments: { T: { kind: named, name: ProductionOption }, K: { kind: named, name: Uuid } }
+        arguments: { T: { kind: named, name: ProductionOption }, K: { kind: named, name: MintedId } }
       presence: optional
-  - ir: field:5.4:production#description/object:1
-    digest: 00eb00879b4a550444376e9812df5389c4a7066a43b48982f04bc6f35974f62d
-    source: { decisions: [ D-019, D-025, D-040 ] }
-    as:
-      role: type
-      name: ProductionOption
-      layer: object
-      open: false
-      members:
-        custom_unit: { type: { kind: named, name: Text }, presence: optional }
-        build_owner: { type: { kind: named, name: Party }, presence: optional }
-        lead_time: { type: { kind: named, name: Duration }, presence: optional }
-        cost: { type: { kind: named, name: Amount }, presence: optional }
-  - ir: rule:5.4/creative-inspection-and-previews:7adf48a7
-    digest: 8452a8faf2195c447f82260dc615f1a16b6d4cb0848cfd98996886b0aac2cd7f
-    locks: [ with-open-prs ]
-    source: { decision: D-032 }
-    as: { role: obligation, party: implementation }
-  - ir: rule:5.4/creative-inspection-and-previews:ef1a453e
-    digest: 0c69795a3e5a4d79030d87ba3aca2eec2a463d5ec700becc2eaf4426aad7eb64
-    locks: [ with-open-prs ]
-    source: { decision: D-032 }
-    as: { role: obligation, party: implementation }
-  - ir: sentence:5.4/creative-inspection-and-previews:239a73ec
-    digest: 50484b7b9404281d0d364baf1bcf6b33a32f3288a7f488bf30b5a4f46cbb6eeb
-    locks: [ with-open-prs ]
+  - ir: def:5.4:FormatId
+    digest: c7fd20e9ba81fe12291da0fd45035a76770ffbd03623e78668e0bb8a1bf2b037
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:5.4:75612a3e
+    digest: 05d8ff4481454a9e3746c619724bf506cef80e22376841d04065b3f9baf9caa9
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: rule:5.4/creative-inspection-and-previews:52bc805d
-    digest: 7e44b6e44232a7723b21c5a2abe16ce69d4683eaa4864927f93537ee6166ac54
+  - ir: def:5.4:FormatSpec
+    digest: fe7174f18dd8e645e3b2d241f134d6af9a742d853cde15abc4582595c4c6ed7f
+    source: { rule: lead-in-restates }
+    as: { role: same, name: FormatSpec }
+  - ir: sentence:5.4:c91aa765
+    digest: c5f81de50476142c0a097481dc52e3533ddeeb3c3f668d81d60dcdf3a405cbc5
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.4:FormatSpec.spec_ref
+    digest: ba4765a0dca73fdba7ffa92fb2d64d0b072e6308529050dccce34d9f3e4670b9
+    source: { rule: named-type-row }
+    as: { role: property, object: FormatSpec, type: { kind: named, name: CatalogRef }, presence: optional }
+  - ir: key:5.4:FormatSpec.spec
+    digest: d8784a32abebd527ce8396f0a800d576fc43f78ea95088e6e58be7c67414abd6
+    source: { decision: D-107 }
+    as: { role: property, object: FormatSpec, type: { kind: named, name: FormatSpecification }, presence: required }
+  - ir: rule:5.4:c07c0dd1
+    digest: c0931f38e0359ee1670e6d952b88e4f3e1361d9b44425e8d5250115357f37fab
+    source: { decision: D-144 }
+    as: { role: rule, object: LineItem }
+  - ir: rule:5.4:7f775a7d
+    digest: 74bc12f7b3c11a35dd2a39157c3b02e67bd997dcc65fdc45d052d9b7ca3da900
+    source: { decision: D-086 }
+    as: { role: obligation, party: seller }
+  - ir: sentence:5.4:e971be47
+    digest: 5df20e75b926688d18550dafb6e11b07f764addd2cf735b2a1238e3e1acff717
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:5.4:d81bbf40
+    digest: 1958b55e03198e024b5daac389b5fa6659c2b61f619a98bd612e9db18fabe06b
+    source: { decision: D-086 }
+    as: { role: informative }
+  - ir: block:5.4:4/values:1
+    digest: 6a9b8155781f0d5cae62ec361912d77688319c3949a31cbb655dcd39636b215a
+    source: { decisions: [ D-073, D-130 ] }
+    as: { role: type, name: AssetType, layer: vocabulary, open: true }
+  - ir: sentence:5.4:2fd61eda
+    digest: 08b4eca70b54edd7b393f3df596f4061ef9f69641e5504d369e8a12149310fb4
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:5.4:28521712
+    digest: 787eee3e0919999fbb86c081e774aaca223380f8de57df03acedc8c21f58374e
+    source: { decision: D-086 }
+    as: { role: informative }
+  - ir: block:5.4:5/values:1
+    digest: 55440eaa89536a4f4671a1fc72a4cea3a29b68a8e05f3a1a7ba191334747ffe0
+    source: { decisions: [ D-073, D-130 ] }
+    as: { role: type, name: SyntheticPolicy, layer: vocabulary, open: true }
+  - ir: sentence:5.4:d523872c
+    digest: 0a094b4353e0d2e202184aaf8440017e36a30cc6601f7d5e4fd4b406b675604a
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.4:729dfe04
+    digest: e88b5f0a669842761acefeddd37b0822978739dff790dd8cb6d8037a9db3b7c6
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.4:4ea9cf16
+    digest: d4cfc2bd54e2dc86e12ad2154f47a74b444def764f9833d26622975d186476ff
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.4:27843614
+    digest: bfaef9b3e2738c4afa8922ddb2f7450680fba68f505167a1595963b15629ac4c
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.4:8ccfd66f
+    digest: 52529463f302a3436c1e26fee684e43e5d1b8b9e294565443af068a9f8188ebd
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:5.4:MaterialsDue
+    digest: 7b3201da45e6bc957201fe9b9ea636a48f264ceabf6066ab426a93c698ae9268
+    source: { rule: lead-in-restates }
+    as: { role: same, name: MaterialsDue }
+  - ir: sentence:5.4:ddb46085
+    digest: 00f173c7da565eedfe863b682519bc22402e6ac834171d1dc93a54583d4bdfad
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.4:MaterialsDue.at
+    digest: b578221f277f710c3a05044e89d5006998c3d4a396d577ce1e2e186c58f7b8ee
+    source: { rule: named-type-row }
+    as: { role: property, object: MaterialsDue, type: { kind: named, name: Instant }, presence: conditional }
+  - ir: rule:5.4:58ab1d09
+    digest: cf367adda092c8b84706c8a4e8880a5ade2150be85b355e013666fad47d243aa
+    source: { rule: presence-statement }
+    as: { role: rule, object: MaterialsDue }
+  - ir: key:5.4:MaterialsDue.before_start
+    digest: 4fc1455a01dffca27f9df2a47fbab1e2d920ef0033fa2286d47b9b0b79728864
+    source: { rule: named-type-row }
+    as: { role: property, object: MaterialsDue, type: { kind: named, name: Duration }, presence: conditional }
+  - ir: rule:5.4:7a6f2ac4
+    digest: 5ba98f4787975291dbfde94c70dfbef4dad6d686fd41ff981709686ccaab795d
+    source: { rule: presence-statement }
+    as: { role: rule, object: MaterialsDue }
+  - ir: def:5.4:Asset
+    digest: 708fcabd13d5103cac57cd2e0302432030f2fdc90e8a173df281986fa72e2ce5
+    source: { rule: lead-in-restates }
+    as: { role: same, name: Asset }
+  - ir: sentence:5.4:a4fd0b15
+    digest: 8207c96d7725db8d5533288a7fc6da32d3f6bb04992a69b4944450bea8a40d57
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.4:Asset.asset_id
+    digest: 72b6febcdf7a17d7f0a15a9115d1696506f15cdf872aec8a02c72b1c496b1fc7
+    source: { rule: domain-row }
+    as: { role: property, object: Asset, type: { kind: named, name: MintedId }, presence: required }
+  - ir: key:5.4:Asset.format_id
+    digest: d9a7251d32967092b04bbb3a611d639ce1bc28946a654bff2ac1b62cb27bb2de
+    source: { rule: named-type-row }
+    as: { role: property, object: Asset, type: { kind: named, name: FormatId }, presence: required }
+  - ir: key:5.4:Asset.url
+    digest: 2c75977918fb7225eb4cd6708a04826cb23321db44d40f6014803232afffe67a
+    source: { rule: domain-row }
+    as: { role: property, object: Asset, type: { kind: named, name: Url }, presence: conditional }
+  - ir: rule:5.4:e2c0968b
+    digest: 3b906c757f35dbd7821ee80e05e1a1a0982d19a7e0b190d141c563deeaef8bd7
+    source: { rule: presence-statement }
+    as: { role: rule, object: Asset }
+  - ir: key:5.4:Asset.markup
+    digest: 1237f40e094ce62f23d5600b3d8d84150a17e30cab5fb5847da0fcc4bc8ddb45
+    source: { rule: domain-row }
+    as: { role: property, object: Asset, type: { kind: named, name: Text }, presence: conditional }
+  - ir: rule:5.4:45b02f49
+    digest: e7a0648c579d939c0bbb45a85074ab24d0c4d7ce307f475c91d9ad66f9dc518f
+    source: { rule: presence-statement }
+    as: { role: rule, object: Asset }
+  - ir: key:5.4:Asset.submitted_at
+    digest: d8b3c09d603dfc0cdc5d824622b46395c7f37357a491dce1bd26b772b0f2cbd3
+    source: { rule: named-type-row }
+    as: { role: property, object: Asset, type: { kind: named, name: Instant }, presence: optional }
+  - ir: key:5.4:Asset.built_by
+    digest: 737d81f7d399ae95626426cca5d82053c48055126040fb090c1583973a49745c
+    source: { rule: named-type-row }
+    as: { role: property, object: Asset, type: { kind: named, name: Side }, presence: optional }
+  - ir: key:5.4:Asset.provenance
+    digest: e93212ee2284092dbfd3ff6685ce85dabeb60df6c452ee4bceb9768d036e71d3
+    source: { rule: named-object-row }
+    as: { role: property, object: Asset, type: { kind: named, name: AssetProvenance }, presence: optional }
+  - ir: key:5.4:Asset.approval_status
+    digest: 0f698e499d127a87ac8039c01fe98caffe96e3d7b246a47e36304549da570bec
+    source: { rule: named-type-row }
+    as: { role: property, object: Asset, type: { kind: named, name: ApprovalStatus }, presence: optional }
+  - ir: sentence:5.4:616bf86c
+    digest: dc1dbdf192b0a652e50d9003d6813d1c94c00e348950d66a89c4ae3780101fb4
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:5.4:AssetProvenance
+    digest: 24a2e12fbe39dd9607f0e4764d884b04b2c5120c144cca28643959e692a19bf2
+    source: { rule: lead-in-restates }
+    as: { role: same, name: AssetProvenance }
+  - ir: sentence:5.4:b97e051a
+    digest: f131768360a9b1e14da4e45808e82c04ae12f842339acf47a5d89dba54affb7a
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.4:AssetProvenance.synthetic
+    digest: b7c77296d67b14f59d4763ec826ee55b876dc0ffeda0c4b420df7849ed98ba9a
+    source: { rule: domain-row }
+    as: { role: property, object: AssetProvenance, type: { kind: boolean }, presence: required }
+  - ir: key:5.4:AssetProvenance.generator
+    digest: 48832d25124cadc30aa81075808fd52ef10a514432ede7f3aa1196059835dbfd
+    source: { rule: domain-row }
+    as: { role: property, object: AssetProvenance, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:5.4:AssetProvenance.model_version
+    digest: dd368f60bccb8763b3c62cdfde7b11b5107b51ba932b4a7f849704198b6b5d20
+    source: { rule: domain-row }
+    as: { role: property, object: AssetProvenance, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:5.4:AssetProvenance.voice_consent_ref
+    digest: b612d4a08601d62e0e04185e51ee05c44ad53015857fd7c9a4c41b289cc5e3ce
+    source: { rule: named-object-row }
+    as: { role: property, object: AssetProvenance, type: { kind: named, name: DocumentRef }, presence: optional }
+  - ir: "key:5.4:AssetProvenance.disclosure_methods[]"
+    digest: c0486dde55ae5e9087b08427dcc5370dad2593286049202e87c7e0f4c7232744
+    source: { rule: named-type-row }
+    as:
+      role: property
+      object: AssetProvenance
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: DisclosureMethod } } }
+      presence: optional
+  - ir: "key:5.4:AssetProvenance.disclosure_methods[]#meaning/values:1"
+    digest: 144a3e07349f6d15c8a76e4e075d3210ee94e6eec7e0d1529c75feef24332960
     locks: [ with-open-prs ]
-    source: { decision: D-032 }
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: DisclosureMethod, layer: vocabulary, open: true }
+  - ir: key:5.4:AssetProvenance.content_digest
+    digest: d753191626ad61756156c7b17d73f8e5595d6b3c12345fafa2766f23bea42e77
+    source: { rule: named-type-row }
+    as: { role: property, object: AssetProvenance, type: { kind: named, name: QualifiedDigest }, presence: optional }
+  - ir: def:5.4:CreativeDelivery
+    digest: 873fa72d93b5a8fe836db2067f18d61c36b17994b2fcca4fa656f96a648e0ef2
+    source: { rule: lead-in-restates }
+    as: { role: same, name: CreativeDelivery }
+  - ir: sentence:5.4:c44e00ea
+    digest: 43002e4e69d5d9ce421f8d4e7525da25abf1f5f565c1a26d789183b4e7af6d3a
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.4:CreativeDelivery.method
+    digest: 0f09ecb39c0e410960a6d035670e1d567bdd75f2cbe37199fcb55516fd4d1acf
+    source: { rule: named-type-row }
+    as:
+      role: property
+      object: CreativeDelivery
+      type: { kind: named, name: CreativeDeliveryMethod }
+      presence: required
+  - ir: key:5.4:CreativeDelivery.method#meaning/values:1
+    digest: 99f3ff7301158c3051558dd9e8deb459c307187d5085d303d7dc4beb933af655
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: CreativeDeliveryMethod, layer: vocabulary, open: true }
+  - ir: "key:5.4:CreativeDelivery.protocols[]"
+    digest: 70e34a9954bb3a5aaf406bb2894b90d7c4c5fd7add912301326d845e72eb43fa
+    source: { decision: D-071 }
+    as:
+      role: property
+      object: CreativeDelivery
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: CreativeSubtypeAudioVideo } } }
+      presence: optional
+  - ir: "key:5.4:CreativeDelivery.other_protocols[]"
+    digest: e056eb0c6535a4c59aae2838b7ce0b9a7677e8c93f83a4a83d3d6b095969134f
+    source: { rule: named-type-row }
+    as:
+      role: property
+      object: CreativeDelivery
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: CreativeDeliveryProtocol } } }
+      presence: optional
+  - ir: key:5.4:CreativeDelivery.secure_required
+    digest: 9f274139a8c5ba8384e272aa1e31e1a25b3c85551da3e0ac8dcb66dc76c4e5e6
+    source: { rule: domain-row }
+    as: { role: property, object: CreativeDelivery, type: { kind: boolean }, presence: optional }
+  - ir: key:5.4:CreativeDelivery.endpoint
+    digest: 34dcb3af949033cded0bd08a012e93b695500adb5fffe6afc5d50da1ddb5e3dd
+    source: { rule: named-type-row }
+    as: { role: property, object: CreativeDelivery, type: { kind: named, name: Url }, presence: optional }
+  - ir: sentence:5.4:e0fd874c
+    digest: 1a595eba68d8a9e4821d9132642970fc47d28e17873685925cbbb99a3980a0f6
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:5.4:method.buyer_hosted
+    digest: d0da92121268a43f1cc631a7bed340bf4e1b9b5af25667769491b9bb0e15f401
+    source: { rule: header-named-value-row }
+    as: { role: term, vocabulary: CreativeDeliveryMethod }
+  - ir: def:5.4:method.seller_hosted
+    digest: f2a03cd29476f83b49d080614351c81fc24932f7aa21e5edaa68e7a6abe6e36e
+    source: { rule: header-named-value-row }
+    as: { role: term, vocabulary: CreativeDeliveryMethod }
+  - ir: def:5.4:method.api
+    digest: c4892d70fb60eefc47168223bcef1a3445504c8b5ddb15c13468fe100e278e8d
+    source: { rule: header-named-value-row }
+    as: { role: term, vocabulary: CreativeDeliveryMethod }
+  - ir: def:5.4:method.platform_managed
+    digest: 40601c2db2738d62a8458f9bd30ae2ff813aee8b927fcb3ed71ee755128b58f7
+    source: { rule: header-named-value-row }
+    as: { role: term, vocabulary: CreativeDeliveryMethod }
+  - ir: sentence:5.4:af91a182
+    digest: 13f808d9760e514bc54accac53fc205c63d433e1cba3dba3333253fd00ef148e
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.4:cde5c3c6
+    digest: f2eb32029b514164f3120ff1b84ffbee5dfab896e7ed62edfdd80b86e27385e6
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:5.4:ProductionOption
+    digest: ffe612df72c0e2b65a1c3f007519a444fdf4b31f7f6d8c096896759dae553c59
+    source: { rule: lead-in-restates }
+    as: { role: same, name: ProductionOption }
+  - ir: sentence:5.4:ae170996
+    digest: 29a3769582efec20d86f88395664786535669f1bb14b9c26c99e9fea80d087ed
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.4:ProductionOption.id
+    digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+    source: { rule: domain-row }
+    as: { role: property, object: ProductionOption, type: { kind: named, name: MintedId }, presence: required }
+  - ir: key:5.4:ProductionOption.custom_unit
+    digest: 888bbc2e34ce21245d2c8777e6af2dff5fbb679bb037c65be6390e127fe75255
+    source: { rule: domain-row }
+    as: { role: property, object: ProductionOption, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:5.4:ProductionOption.built_by
+    digest: 66c74965c9f528532664530c40ef8d72c85dbc055a935f288c59b076078dc676
+    source: { rule: named-type-row }
+    as: { role: property, object: ProductionOption, type: { kind: named, name: Side }, presence: optional }
+  - ir: key:5.4:ProductionOption.lead_time
+    digest: ab97aa529733eb83f214cf48bc59c735d5a46245008579e63094a76f3874dabc
+    source: { rule: named-type-row }
+    as: { role: property, object: ProductionOption, type: { kind: named, name: Duration }, presence: optional }
+  - ir: rule:5.4.1:7adf48a7
+    digest: 486cba5a65bc0a2494820d6b65ec2747235c264b7522ed61e0fad3736b30193c
+    source: { decision: D-086 }
     as: { role: obligation, party: implementation }
-  - ir: rule:5.4/creative-inspection-and-previews:f25ad098
-    digest: bc2a987c702de5bdff7700bd5bf69b649d35ed368bc859edf241f064049ab723
-    locks: [ with-open-prs ]
-    source: { decision: D-032 }
+  - ir: rule:5.4.1:ef1a453e
+    digest: 702d93033d23514221f5798da4ee7b4e54dbc0908d10c8531ddf1197cffa7e04
+    source: { decision: D-086 }
     as: { role: obligation, party: implementation }
-  - ir: rule:5.4/creative-inspection-and-previews:11d3ac1e
-    digest: 524ecbbb6fe7bd31d2c4a2dd460aaff47b7ebb72d3279be34404e4555fef54b7
-    locks: [ with-open-prs ]
-    source: { decision: D-032 }
+  - ir: sentence:5.4.1:239a73ec
+    digest: 1e2d2ceff2435bfe711eaf5bcf86334264cc6734c43df456cff80e38b8786ca4
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:5.4.1:52bc805d
+    digest: cfe16d22ffd2d0f2e3d49f049a28c178ca94159b3e8a0c1ebdd52c94fce755d2
+    source: { decision: D-086 }
     as: { role: obligation, party: implementation }
-  - ir: rule:5.4/creative-inspection-and-previews:fbc60b60
-    digest: d6952569ed589e6ba57b1286e7f37af7070cb21d616ffd328dafc314094a5f1c
-    locks: [ with-open-prs ]
-    source: { decision: D-032 }
+  - ir: rule:5.4.1:f25ad098
+    digest: d8b09c7544db3a170a7bf58a899ccad878888532880d67fcaff964de1df7a1fd
+    source: { decision: D-086 }
     as: { role: obligation, party: implementation }
-  - ir: rule:5.4/creative-inspection-and-previews:3a29e732
-    digest: f1f8201e1f0df8d05998a359fdec8d8d2f195b13a0f4473ea06c87f6c81bbb23
-    locks: [ with-open-prs ]
-    source: { decision: D-032 }
+  - ir: rule:5.4.1:11d3ac1e
+    digest: 7e3b3907d31559ccc90897194631f46013b0ec3b728f9a696294c52ebe81d7f3
+    source: { decision: D-086 }
+    as: { role: obligation, party: implementation }
+  - ir: rule:5.4.1:9a1bf7bd
+    digest: e9ff92a09a50feb9cc3f16cdfa50d0a93aeb2749ac812c5eb89ff2d539a8572e
+    source: { decision: D-086 }
+    as: { role: obligation, party: implementation }
+  - ir: rule:5.4.1:725c4a7c
+    digest: 4e2a13f0aaedca6bfad34b0a0fc0d68333db667543034768ce861497f925c155
+    source: { decision: D-086 }
+    as: { role: obligation, party: implementation }
+  - ir: rule:5.4.1:fbc60b60
+    digest: 0d5de1d4c83484fda64cf5e84d308dbed6b8a21f135de467c80c77c205c36f02
+    source: { decision: D-086 }
+    as: { role: obligation, party: implementation }
+  - ir: rule:5.4.1:3a29e732
+    digest: fd52a5b573a4af1d650c39a96cc29eb4b5b3e00f6c9a0eda125e7c768ae123ee
+    source: { decision: D-086 }
     as: { role: obligation, party: implementation }

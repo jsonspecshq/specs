@@ -1,0 +1,136 @@
+format: 2
+id: D-073
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Five attribute rows have a deprecation note for their whole definition: three say to use another member instead and two say only that the member is deprecated as of another specification's version. None of the five states what its value is. What witness does such a row leave, and what may be published from it?"
+covers:
+  - ir: key:object_app:App.keywords
+    digest: 70c2b88d4d1ca1ca60463575ef7c4781c66abc567aa1bc34ca884c8330b3c936
+    quote: "`keywords` | This field is deprecated, use 'kwarray' instead."
+  - ir: key:object_site:Site.keywords
+    digest: 70c2b88d4d1ca1ca60463575ef7c4781c66abc567aa1bc34ca884c8330b3c936
+    quote: "`keywords` | This field is deprecated, use 'kwarray' instead."
+  - ir: key:object_user:User.keywords
+    digest: 70c2b88d4d1ca1ca60463575ef7c4781c66abc567aa1bc34ca884c8330b3c936
+    quote: "`keywords` | This field is deprecated, use 'kwarray' instead."
+  - ir: key:object_user:User.gender
+    digest: b2dfca0409024a797685e171c6f41c4e13edbcaf7f9add153fd367f9212feb37
+    quote: "`gender` | Deprecated as of OpenRTB 2.6"
+  - ir: key:object_user:User.yob
+    digest: 333378412413d5c9173c70eaff8e5839d009ca8d33464125b06b6a59ea45d8fd
+    quote: "`yob` | Deprecated as of OpenRTB 2.6"
+options:
+  - id: the-cell-and-no-concept-beyond-it
+    summary: >-
+      The type cell is the only witness the row leaves, so the published value
+      states the cell's base type — a string, a number — and no concept that
+      says more about the value than the cell does. A deprecated member stays
+      in the schema at the shape a payload may still carry, and nothing is
+      asserted about what the value means.
+  - id: the-replacement-row
+    summary: >-
+      The member a row names as its replacement defines the deprecated member
+      too, so `keywords` holds what `kwarray` holds and the two differ only in
+      shape. The three `keywords` rows become a list of keywords as a single
+      value, and the two rows that name no replacement get nothing from this
+      option at all.
+  - id: the-other-specification
+    summary: >-
+      `gender` and `yob` are deprecated "as of OpenRTB 2.6", so OpenRTB's
+      definitions of those members are the witness, and a year of birth and a
+      gender code are read from a document this one does not include.
+  - id: no-value-until-the-document-states-one
+    summary: >-
+      A row that states no value publishes no member: the five are dropped
+      from the schema until AdCOM defines them or removes them.
+chosen: the-cell-and-no-concept-beyond-it
+rationale: >-
+  **Measured on both locks, by reading every attribute row of every object for
+  what its definition cell states.** Five rows of 411 have a deprecation note
+  and nothing else: `keywords` in Site, App and User, whose cells read `string`
+  and whose definitions say to use `kwarray`; and `gender` and `yob` in User,
+  whose cells read `string, DEPRECATED` and `integer, DEPRECATED` and whose
+  definitions are the sentence "Deprecated as of OpenRTB 2.6" entire. Six
+  independent readings of each row, two in each of three rounds on this lock,
+  settle no kind of value for any of the five and each quotes the deprecation
+  note as what blocks it; not one of the thirty readings proposes a kind. They
+  are the rows for which the document says the least of anything it defines.
+
+  **`the-replacement-row` reads a member that is not the one in hand.**
+  `kwarray` is a different member with a different cell — `string array`
+  against `string` — and the sentence that links them, "Only one of 'keywords'
+  or 'kwarray' may be present", states which may appear and not what either
+  holds. Reading one row's definition onto another is the defect class this
+  model's records exist to stop: the witness has to be in the row or in a
+  sentence about the row. It also answers nothing for `gender` and `yob`, so it
+  cannot cover the class.
+
+  **`the-other-specification` imports a definition this document does not
+  carry.** "Deprecated as of OpenRTB 2.6" is a statement about when the member
+  stopped being recommended, not a reference to where its value is defined, and
+  this specification pins no version of OpenRTB for its own members. A reading
+  that goes outside the pinned text cannot be checked against it, which is the
+  one property every record here has to have.
+
+  **`no-value-until-the-document-states-one` withholds what the document does
+  settle.** The cells state a shape, the members are in the tables, and a
+  payload that carries `"gender": "M"` is a payload this specification admits.
+  Dropping the five would refuse bytes the document permits, which is a
+  narrowing below the text, and it would do it to protest a silence about
+  meaning rather than about shape.
+
+  **What this record is for, since it moves no published byte.** The five rows
+  are derived by the domain rule and stay there. What the record settles is that
+  the cell is the whole witness, so no later reading may quietly fetch one from
+  the replacement member or from another specification, and a reader who finds
+  these rows unreadable has the answer in writing instead of re-deriving it
+  every round.
+
+  **The reading this record is least sure of, named rather than left to be
+  found.** `yob`'s cell reads `integer, DEPRECATED` and its published value is
+  at the count concept, which asserts a whole number of things. A year of birth
+  is not a number of things — nothing is counted, and the difference between
+  two of them is an age rather than a quantity — so the published value says
+  more than the cell does, which is more than this option licenses. The record
+  states the reading and does not set the value: which concept a bare integer
+  with no definition reaches is the binding's, so the gap between this reading
+  and what the binding publishes for this one row is the binding's to close and
+  is open.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1821"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1906"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2203"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2208"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2213"
+feedback: >-
+  Five rows are deprecated and no longer say what they hold.
+
+  `Site.keywords`, `App.keywords` and `User.keywords` have "This field is
+  deprecated, use 'kwarray' instead" for their entire definition, and
+  `User.gender` and `User.yob` have "Deprecated as of OpenRTB 2.6". A sender
+  with one of these fields already populated, and a receiver that still accepts
+  it, have nothing in AdCOM to agree on: whether `keywords` is a
+  comma-separated list, a space-separated one or free text; whether `yob` is a
+  four-digit year; whether `gender` takes the one-letter codes OpenRTB used.
+  One sentence per row saying what the value is, kept beside the deprecation
+  note, would let an implementation read a field it is still receiving. The
+  other AdCOM row that holds keywords shows how little it takes: Content's
+  `keywords` is defined as "Comma separated list of keywords describing the
+  content" and is not deprecated.
+
+  The specification's own example cannot state the facts its prose states.
+  Appendix C introduces the bid request with "The user is a female born in
+  1990", and the `user` object in the payload below carries only `id` and
+  `buyeruid` — the two members that would have carried a gender and a year of
+  birth are the two deprecated ones, and no other member holds either fact. If
+  the intent is that this information no longer travels in AdCOM, the prose
+  describing the example is now describing something the format cannot express.
+
+  Two smaller points in the same rows. `User.kwarray` is defined as "Array of
+  keywords describing the content", which is Content's wording rather than
+  User's — the keywords are about the user. And a deprecation note that cites
+  another specification's version number, as `gender` and `yob` do, leaves the
+  reader to guess whether AdCOM intends OpenRTB's definition of the member to
+  carry over; saying so either way would settle it.

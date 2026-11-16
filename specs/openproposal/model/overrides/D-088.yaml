@@ -1,0 +1,69 @@
+format: 2
+id: D-088
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Five of the statements the earlier records named as rules a payload decides have every field they
+  name in the model. What are their change pairs?
+covers:
+
+- ir: rule:4.1:b1f3c197
+  digest: 34aaac9abe19603f636fa41bf1b51998c2e9ca4745bc79df4b6ad517318dfeb4
+  quote: "`legal_name` is REQUIRED here"
+- ir: rule:4.1:b1f3c197-2
+  digest: ad1ac9da6dd24b90f0fb1d6d840c647266a6f8803045cb50780c4a460668005a
+  quote: "`legal_name` is REQUIRED here"
+- ir: rule:4.1.2:527c9881
+  digest: 451abbcc3afc2a441dce3577af85a734a2f688a513087ccca80fec5d0d07afaf
+  quote: MUST be non-empty
+- ir: rule:5.9:ed367af9
+  digest: 58ed8baf9c411cd155db2f060a3792996f3037942635e3499d96bc9126e6bd9f
+  quote: "`episodes`, when present, MUST be `new`."
+- ir: rule:5.9:5b2d3b90
+  digest: 6aa6280c205a75d04a97dc0defde1321a716323580a28f35c8a0bdaead7b12cc
+  quote: "`daypart` bounds air time, not listening or viewing time, so `time_zone` MUST NOT be `viewer_local`."
+options:
+- id: write-the-five-pairs
+  summary: Each of the five becomes a rule on the type that holds every field it names, with one payload
+    the schema accepts and one it refuses. A pair is written only where every field the statement names
+    is a property the model publishes.
+- id: wait-for-all-fifty
+  summary: No pair is written until every statement the records name as a rule has one, so the rules
+    output gains nothing until the model holds every field they name.
+chosen: write-the-five-pairs
+rationale: 'D-084 through D-087 named fifty statements as rules a payload decides and wrote no pair, because
+  a pair is written against the type it grades and that type has to hold the fields. Five of the fifty
+  do today, and measuring which was the first step: a statement''s fields are its backticked identifiers,
+  and a rule is writable when every one of them is a property of some type the model publishes. Twenty-three
+  of the fifty pass that test by name alone, and the five below are the ones whose payloads need no field
+  the model is still waiting on and no second entry of an array.
+
+
+  **A proposal''s two parties each state a legal name.** Section 4.1 says "`legal_name` is REQUIRED here"
+  twice, on `seller` and on `buyer`, and the kernel''s `Party` requires only `domain`, because a party
+  is named by its domain wherever it travels. So the requirement is the proposal''s and not the type''s,
+  which is why it is a rule and not a bound `Party` could carry: a `SeatRef.seat_owner` is a `Party` with
+  no legal name required. Each pair holds a proposal whose party carries the name and one whose party carries
+  only its domain.
+
+
+  **An assent entry names at least one line item.** `line_item_ids[]` is "The line items the entry names.
+  MUST be non-empty", and an array''s lower bound is a keyword the schema could carry -- but the model
+  publishes none, so the statement is a rule until it does. The invalid payload is the entry with an empty
+  array, which is the one case a reader would otherwise take as "this entry names nothing in particular".
+
+
+  **An embedded line item states two things about time.** Section 5.9 says of a line item whose
+  `serving_mode` is `embedded` that "`episodes`, when present, MUST be `new`" and that "`daypart` bounds
+  air time, not listening or viewing time, so `time_zone` MUST NOT be `viewer_local`". Both are
+  conditioned on a sibling the schema cannot read as a value, because `serving_mode` is typed at the bare
+  term type and not at a vocabulary -- its prose says "Core terms: `dai` | `scheduled` | `embedded`,
+  defined below" and the section heads no table for them. So each is a rule, and its pair holds an
+  embedded line item that obeys and one that does not.
+
+
+  `wait-for-all-fifty` keeps the rules output empty of these five for no gain. A pair is independent work
+  per rule: writing one does not make the next easier, and holding five back does not make the
+  forty-five that are waiting on fields arrive sooner.'

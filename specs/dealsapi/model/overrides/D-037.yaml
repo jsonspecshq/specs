@@ -1,0 +1,124 @@
+format: 2
+id: D-037
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Four sentences appear twice in the specification, once per row or section they govern, and the pipeline claims each copy separately. What does the second copy of a sentence claim?"
+covers:
+  - ir: rule:object-deal:c221f2e9
+    digest: 34e2b9506040e8a69c1ee546c635ff4fc9f6fdba9162d4aa343b9eb09674a540
+    quote: At most, only one of `wseat` and `bseat` should be used in the same request.
+  - ir: rule:object-deal:c221f2e9-2
+    digest: d096a73a6178528533b5dc2f5fcba04a87e97ca96d11c2670eb9daeaec9eeeea
+    quote: At most, only one of `wseat` and `bseat` should be used in the same request.
+  - ir: rule:object-deal:1ff4e5fa
+    digest: 6c1111d87370844130ee3a365a285cbd7ff28e7a11bea1c93f53fac5d211920d
+    quote: This object should only be included when the deal is for a static set of sites or applications (`dinventory=1`).
+  - ir: rule:inventory-object-1:1ff4e5fa
+    digest: 300117d6ff7b6c2a4ffd41c989eae5505c680b4854f05ceb66d78b0e159a73e6
+    quote: This object should only be included when the deal is for a static set of sites or applications (`dinventory=1`).
+  - ir: rule:object-deal:8540a232
+    digest: a56e4671aa673d0435b3b9b34066ea331070150478b426c2c10b00f4f24d446b
+    quote: IDs of seats and knowledge of the buyer's customers to which they refer must be coordinated between bidders and the exchange a priori.
+  - ir: rule:object-deal:8540a232-2
+    digest: ffa7e486838f6ecfe5641f7704813df302cc3f091dab68beaa98eec8e59c240b
+    quote: IDs of seats and knowledge of the buyer's customers to which they refer must be coordinated between bidders and the exchange a priori.
+  - ir: rule:object-terms:eb7dd0c3
+    digest: d61e85757a55a322a376fb5b456ac9cb026204f90a25796361c2a768d3d51951
+    quote: If the deal is not guaranteed this may be omitted.
+  - ir: rule:object-terms:eb7dd0c3-2
+    digest: 612e13dfa6ce65af179a0550fe6d2ba079a610824b2b0f27b29b3d7439b4caee
+    quote: If the deal is not guaranteed this may be omitted.
+options:
+  - id: same-words-same-claim
+    summary: >-
+      A sentence the document repeats states one requirement, so every copy
+      carries the same role; the copies differ only in which row or section
+      quotes them, which is provenance and not content.
+  - id: role-from-the-host
+    summary: >-
+      Each copy is read from the block that hosts it, so the same words may
+      be a rule where a table row quotes them and guidance where a prose
+      section does.
+  - id: one-claim-per-sentence
+    summary: >-
+      Only the first copy carries a claim and the rest are suppressed, so
+      no requirement is counted twice.
+chosen: same-words-same-claim
+rationale: >-
+  Measured on both locks, `main` and `tag-1.0-202602`, by grouping every
+  mapping claim on a statement or a sentence by that element's exact text:
+  4 texts the document states more than once, 8 claims among them, and 2 of
+  the 4 texts carry two different roles for the same words.
+
+  "At most, only one of `wseat` and `bseat` should be used in the same
+  request" sits in the `wseat` row at line 92 and in the `bseat` row at
+  line 93. The first copy is a `rule` on `Deal`; the second is
+  `informative`. "This object should only be included when the deal is for
+  a static set of sites or applications (`dinventory=1`)" sits in the
+  `inventory` row at line 99 and again in the Inventory Object guidance at
+  line 241. The first is a `rule` on `Deal`; the second is `informative`.
+  The other two texts agree with themselves: both copies of the seat-ID
+  coordination sentence are obligations on `implementation`, and both
+  copies of "If the deal is not guaranteed this may be omitted" are
+  `informative`.
+
+  So the specification states two requirements twice and the pipeline
+  counts each of them once as a requirement and once as not one. Whichever
+  role is right, the pair cannot both be: a consumer reading the model's
+  rules sees the mutual exclusion of `wseat` and `bseat` as a rule, and a
+  consumer reading the model's informative statements sees the same
+  sentence as carrying no requirement, from the same build.
+
+  `role-from-the-host` is what the tree carries today and it has a real
+  argument: a sentence in a guidance section is doing a different job from
+  the same sentence in a type cell, and that is why the extractor keeps
+  both. It is rejected because the role in this model is a property of
+  what the sentence *requires*, not of where it is printed, and the two
+  split texts are the proof: nothing about the `bseat` row makes the
+  mutual-exclusion sentence require less than the `wseat` row does. Where
+  the host genuinely matters — which object a rule constrains — it is
+  already carried in `as.object`, which is where the host belongs.
+
+  `one-claim-per-sentence` costs the coverage the forward pass rests on. An
+  element the extractor finds and the mapping suppresses is an element with
+  no claim, so the residue stops being zero and the only thing a clean
+  extraction tells you is lost. It also loses the fact that the document
+  says a thing twice, which is a property of the document worth keeping.
+
+  What `same-words-same-claim` costs: it makes two claims change, and both
+  the ones that change are the copies currently read as `informative`, so
+  the model gains two rules on `Deal` that restate rules it already
+  carries. Any count of distinct requirements over the model has to
+  de-duplicate by text, and nothing does that today. The reading this
+  record is least sure of is the `eb7dd0c3` pair — both copies are
+  `informative` and agree, but "If the deal is not guaranteed this may be
+  omitted" states a presence condition on `units` and on `totalcost`, which
+  is the kind of sentence `rule-on-the-object` would take, so the pair may
+  be consistently wrong rather than consistently right. That question is
+  D-036's and not this record's.
+
+  This record settles the reading and settles nothing about the value. A
+  statement's role is not derived by any mapping rule and is not among the
+  attributes a `name` record may set, so it lives in the hand-written `as`
+  of `specs/dealsapi/model/mapping/`, which `npm run map` preserves for
+  every entry that cites a decision. The two divergent copies keep
+  `role: informative` until the authority that owns those fields rewrites
+  them. A check that every group of claims sharing one statement text
+  agrees on its role is what would hold this reading, and registering a
+  check is a gate decision under `gates/decisions/`, which cites this
+  record and is not this record's to make.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L92"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L93"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L99"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L241"
+feedback: >-
+  Four sentences are written out twice, once in each row or section they
+  govern: the mutual exclusion of `wseat` and `bseat`, the seat-ID
+  coordination requirement, the condition on including the Inventory
+  object, and the omission of `units` and `totalcost` on a deal that is not
+  guaranteed. A reader cannot tell whether the second copy restates the
+  first or adds to it. Write each requirement once and have the other row
+  point at it.

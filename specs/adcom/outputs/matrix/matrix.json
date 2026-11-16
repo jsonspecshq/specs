@@ -43,7 +43,7 @@
       "language": "proto",
       "read": {
         "at": "../../targets/proto",
-        "pin": "291e279be5b72a54b986f7e1a757fbb4175ff097"
+        "pin": "5893ba7427b6f0a6728ed46c9a7a1dfe6a93f255"
       },
       "title": "jsonspecs proto"
     },

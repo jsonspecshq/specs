@@ -1,0 +1,79 @@
+format: 2
+id: D-115
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  A `play_tolerance_ms` is an `Integer` and is "how far short of its full
+  duration a play may end and still count". Which value domain is it of?
+covers:
+- ir: key:5.6.4:DeliveryCounting.play_tolerance_ms
+  digest: 9585d4f990efb99da04a661aa118cd4ce6adfea1a12c785b93cb0e3705dff933
+  quote: "`play_tolerance_ms` | REQUIRED | How far short of its full duration a play may end and still\
+    \ count"
+options:
+- id: a-length-in-milliseconds
+  summary: >-
+    The row is a length of time in whole milliseconds, a concept of its own
+    beside the kernel's seconds, so the kernel gains
+    `millisecond-duration` and `DurationMilliseconds`.
+- id: the-seconds-concept
+  summary: >-
+    The row is a length of time, so it takes the kernel's `DurationSeconds`,
+    which is what the domain model already has for a length an integer
+    spells.
+- id: a-count
+  summary: >-
+    The row is a whole number, so it takes `Count`, the kernel's quantity.
+chosen: a-length-in-milliseconds
+rationale: 'The row is a length of time: how far short of its full duration a play may end. It is not
+  a point in time, so a receiver never compares it with an instant, and it is not a number of things,
+  so nothing counts it -- which is what `a-count` would publish, and `Count` is where every integer that
+  is of no other domain would end up if a length could be one.
+
+
+  The unit is milliseconds, and the row''s name is where the specification says so: `play_tolerance_ms`.
+  `the-seconds-concept` publishes the same integer under a type whose own description says "the unit is
+  seconds and never milliseconds, so `30` is half a minute", so a receiver reading the row at that type
+  is out by a thousand on every value. The unit travels in the field''s name and not in the value, which
+  is exactly why a second spelling of one length is a concept of its own, as the kernel already keeps
+  `second-duration` beside `duration` and three points in time as three concepts.
+
+
+  So the kernel gains `millisecond-duration` and `DurationMilliseconds`, never negative and bounded at
+  the integers an I-JSON receiver reads exactly, as `DurationSeconds` is. AdCOM''s text writes no length
+  in milliseconds -- its four millisecond rows are points in time, which `EpochMilliseconds` already carries
+  -- and the Deals API writes no length of time at all, so each marks the primitive and the concept absent
+  and nothing either publishes moves.
+
+
+  `D-094` names this row among the scalar keys the domain model declines, and this is the concept it was
+  waiting for. With it, `domain-row` derives the entry: the rule the kernel''s own data answers, and no
+  rule of `src/mapping-rules.ts` changes.'
+evidence:
+- '`D-094` lists `play_tolerance_ms` among the rows no concept of the domain model cites.'
+- examples/line-item-dooh.yaml (delivery_counting.play_tolerance_ms)
+challenge:
+- type: DurationMilliseconds
+  value: 500
+  verdict: accept
+  context: >-
+    A digital out-of-home line item that counts a play ending half a second
+    short of its full duration, which is the tolerance the example states.
+  reason: >-
+    `a-length-in-milliseconds` publishes the row at a whole number of
+    milliseconds, never negative, so half a second is 500 and is a value of
+    the row.
+- type: DurationMilliseconds
+  value: -1
+  verdict: reject
+  context: >-
+    A sender that writes a sentinel for "no tolerance at all" where the row
+    states a length.
+  reason: >-
+    A length of time is never negative, so the type refuses it; a field that
+    states "no limit" in the value is `ExtendedDuration`, which this row is
+    not. `a-count`, the option not taken, refuses it too, which is why the
+    reading rests on what a receiver does with the value -- adds it to a
+    duration, never counts it -- and not on this value.

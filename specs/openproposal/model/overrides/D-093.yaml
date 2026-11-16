@@ -1,0 +1,79 @@
+format: 2
+id: D-093
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Four member names each resolve to two concepts. What makes the two different, in each case?
+covers:
+
+- ir: key:5.3:AddressableScale.quantity
+  digest: 97bf7301c757d616f4535d83357efab46ba49281508a20f633fe3b4ab8672552
+  quote: "`quantity` | REQUIRED | How many"
+- ir: key:5.6:Availability.quantity
+  digest: 5a1e531522540df9d1287ebd4d94a3c64b71c4bceea5674cf531ce171d98c1b6
+  quote: "`quantity` | REQUIRED | How many. It can be fractional where the unit is, such as `rating_points` per `day`"
+- ir: key:2.2:Interval.start
+  digest: eef6d2a736303d5d5081c1f1eb92b6d60df3fdb9d545f6071aea012805ee4d16
+  quote: "`start` | REQUIRED | The first second"
+- ir: key:5.5:ClockWindow.start
+  digest: 7fec487433d27928cea2eca9db2671bf7d7b346e02056282524924d04206a45d
+  quote: "`start` | REQUIRED | The first minute. Not `24:00`"
+- ir: key:5.6:Availability.unit
+  digest: 799e276073ecf9494833c499c7bf09978380730d8256bb742c2470492ffaba77
+  quote: "`unit` | REQUIRED | What `quantity` counts. Core terms: the `unit` terms of § 5.6.5, and `slots_per_loop` (as the § 5.2.4 key) | `unit_periods` (one unit for one period, such as a board for a 4-week cycle). A receiver that doesn't know a term can't compare the figure, and still reads the line item"
+- ir: key:5.3:AddressableScale.unit
+  digest: fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db
+  quote: "`unit` | REQUIRED | What `quantity` counts. Core terms: the `frequency_cap.per` terms (§ 5.5), and `person`. A receiver that doesn't know a term reads the figure as unstated"
+- ir: key:2.2:DocumentRef.url
+  digest: d7babd0940ebfef149fe9e3d3001d5742d4457b353d55ca48d7cff0b15c8761f
+  quote: "`url` | REQUIRED | The document. It MAY need authentication"
+- ir: key:5.4:Asset.url
+  digest: 2c75977918fb7225eb4cd6708a04826cb23321db44d40f6014803232afffe67a
+  quote: "`url` | REQUIRED when `markup` is absent | Where the asset is, such as a tag URL with its macros unexpanded"
+options:
+- id: the-text-tells-them-apart
+  summary: >-
+    Each of the four is two concepts and the rows say which, so the member is listed as a homonym with
+    the reason. Nothing is retyped to make one name carry one concept.
+- id: one-concept-each
+  summary: >-
+    Each pair is folded onto whichever concept is wider, so the member carries one concept and no
+    homonym is listed.
+chosen: the-text-tells-them-apart
+rationale: 'A member name that resolves to two concepts is either a name used for two things or a reading
+  that got one of them wrong, and the only way to tell is to read the two rows. All four here are the
+  first, and each pair''s rows differ in the clause that follows "How many" or "The first".
+
+
+  **`quantity`.** An addressable scale''s is "How many", a count of reachable things. An availability''s
+  is "How many. It can be fractional where the unit is, such as `rating_points` per `day`" -- a measure
+  and not a count, because a rating point is not a thing you can have three and a half of by counting.
+  Folding them would let a scale be fractional, which no row of it admits.
+
+
+  **`start`.** An interval''s is "The first second", a point in time with a date. A clock window''s is
+  "The first minute. Not `24:00`", a time of day with none: the window repeats on the days its `days[]`
+  names, so the same `start` is a different second on each of them. One concept would make a daypart''s
+  start a dated instant, which is the one thing a repeating window cannot carry.
+
+
+  **`unit`.** Both read "What `quantity` counts", and each then names a different list. An availability''s
+  core terms are "the `unit` terms of § 5.6.5, and `slots_per_loop` ... `unit_periods`", which this
+  specification lists, so it is a vocabulary. An addressable scale''s are "the `frequency_cap.per` terms
+  (§ 5.5), and `person`", stated by reference to another row rather than listed, so no rule reads the set
+  and the row stays at the bare term grammar. The two are two lists under one member name, and the second
+  is among the ten rows still waiting for a reading of its terms.
+
+
+  **`url`.** A document reference''s is an `HttpsUrl`, because § 2.2 makes the scheme part of the
+  requirement for a document a counterparty fetches and stores. An asset''s is a `Url` -- "Where the
+  asset is, such as a tag URL with its macros unexpanded" -- which admits `http`, as D-079 read for the
+  three rows that state no scheme. Folding them onto the narrower concept would refuse a tag URL the
+  text admits, and onto the wider one would drop the TLS requirement from a binding document.
+
+
+  `one-concept-each` is the option that would remove the listings, and in each of the four it publishes
+  a type one of the two rows refuses. So the model keeps two concepts and names the member once, with
+  the reason, which is what a homonym listing is for.'

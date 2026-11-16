@@ -4,114 +4,158 @@ format: 1
 module: settlement
 sections: [ "5.10" ]
 types:
-  - name: ExternalReferenceRole
-    kind: vocabulary
-    ir: "field:5.10:external_references[]"
-    locks: [ main ]
-    source: { decision: D-041 }
-    open: true
-  - name: ExternalReferenceRole
-    kind: vocabulary
-    ir: "field:5.10:external_references[]"
-    locks: [ with-open-prs ]
-    source: { decisions: [ D-013, D-014, D-027 ] }
-    open: true
-    terms: [ io, agreement ]
+  - name: ExternalReference
+    kind: object
+    ir: key:5.10:ExternalReference.system
+    source: { rule: key-table-object }
+    open: false
+  - name: Agreement
+    kind: object
+    ir: key:5.10:Agreement.agreement_id
+    source: { rule: key-table-object }
+    open: false
+  - name: Billing
+    kind: object
+    ir: key:5.10:Billing.delivering_party
+    source: { rule: key-table-object }
+    open: false
 entries:
   - ir: "field:5.10:external_references[]"
-    digest: 315c9cae8347b00baa3267037c8775e9c10e059dd224d92625ae98909a2eb3fc
-    locks: [ main ]
-    source: { rule: inline-object-row }
+    digest: 6a405607a96c4a601a846c2cda822ddf2d109de2dba4e1177c718d7decb4fb9b
+    source: { rule: named-object-row }
     as:
       role: property
       object: LineItem
-      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalReferencesEntry } } }
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalReference } } }
       presence: optional
-  - ir: "field:5.10:external_references[]"
-    digest: c485f45bc3cbc8ec5a3de73442f72bd677d690a622c813543befb0ffdcc1cbe6
-    locks: [ with-open-prs ]
-    source: { rule: inline-object-row }
-    as:
-      role: property
-      object: LineItem
-      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalReferencesEntry } } }
-      presence: optional
-  - ir: "field:5.10:external_references[]#description/object:1"
-    digest: b2b42bebd68eb2c875768df427a1cc02157d6b00c3b38861b6a3867b272132f3
-    source: { decision: D-027 }
-    as:
-      role: type
-      name: ExternalReferencesEntry
-      layer: object
-      open: false
-      members:
-        system: { type: { kind: named, name: ExternalId }, presence: optional }
-        namespace: { type: { kind: named, name: ExternalId }, presence: optional }
-        id: { type: { kind: named, name: ExternalId }, presence: optional }
-        role: { type: { kind: named, name: ExternalReferenceRole }, presence: optional }
-  - ir: field:5.10:agreement_ref
-    digest: ae5ce286fa84a7730978a877c06153fd6b63d58de64a21be6006207d61187576
-    locks: [ with-open-prs ]
-    source: { rule: inline-object-row }
-    as: { role: property, object: LineItem, type: { kind: named, name: AgreementRef }, presence: optional }
-  - ir: field:5.10:agreement_ref#description/object:1
-    digest: 9398197aa43f595b95bc73e5042b9264499fc283b4c11ec5deb7572fe6f9a16d
-    locks: [ with-open-prs ]
-    source: { decision: D-027 }
-    as:
-      role: type
-      name: AgreementRef
-      layer: object
-      open: false
-      members:
-        agreement_id: { type: { kind: named, name: ExternalId }, presence: optional }
-        parties:
-          type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalId } } }
-          presence: optional
-        type: { type: { kind: named, name: AgreementType }, presence: optional }
-        valid_from: { type: { kind: named, name: Timestamp }, presence: optional }
-        valid_until: { type: { kind: named, name: Timestamp }, presence: optional }
-  - ir: field:5.10:agreement_ref#description/object:1/type
-    digest: 7f900b4a21dd7d9a9c09b357aaddeff8aa6b66293b112a8a0c3254233efe05b0
-    locks: [ with-open-prs ]
-    source: { decisions: [ D-013, D-014 ] }
-    as: { role: type, name: AgreementType, layer: vocabulary, open: false }
-  - ir: rule:5.10:d539a004
-    digest: 142c4ec3bb326134fd128f9f3802a22799ee6035d9404fb3720e392ec793faef
-    locks: [ with-open-prs ]
-    source: { rule: presence-statement }
-    as: { role: schema, in: LineItem }
-  - ir: field:5.10:correlation_id
-    digest: e015a269b356797dbfe7737b7178f592b5fe280e8a95db0d446724b685cc80d9
-    source: { rule: domain-row }
-    as: { role: property, object: LineItem, type: { kind: named, name: Uuid }, presence: optional }
+  - ir: rule:5.10:24d8a5b3
+    digest: 9ee8a06ecca322e22d0723909fc03b1a2d36b4f49e6f85d06347dabf997c0999
+    source: { decision: D-087 }
+    as: { role: obligation, party: seller }
+  - ir: rule:5.10:57a4349f
+    digest: 9011e2cdbfcf10682e6c9a5c6eba736fbec4fb2d087e5aa3a9bf42ae9e288d86
+    source: { decision: D-087 }
+    as: { role: informative }
+  - ir: field:5.10:agreement
+    digest: 7d544665c8d2f036ea5eb7e3d1670a3a334ab4298247e4a22a34a084a8e2dd2a
+    source: { rule: named-object-row }
+    as: { role: property, object: LineItem, type: { kind: named, name: Agreement }, presence: optional }
   - ir: field:5.10:billing
-    digest: b9318d8b7c869d7a01907ca503fd4bc0b1fbf4d75569eb40d9a0c48701c96840
-    source: { rule: inline-object-row }
+    digest: b3871a6d539cd70ae996827fca5da47f1d9a0f70ac5c844884c91968992dd31e
+    source: { rule: named-object-row }
     as: { role: property, object: LineItem, type: { kind: named, name: Billing }, presence: optional }
-  - ir: field:5.10:billing#description/object:1
-    digest: 14e76c6d0000d0f7ec089bc36155c29a8d0225e9e070cd19954462053ef17317
-    source: { decision: D-027 }
-    as:
-      role: type
-      name: Billing
-      layer: object
-      open: false
-      members:
-        supplier_id: { type: { kind: named, name: ExternalId }, presence: optional }
-        billing_supplier_id: { type: { kind: named, name: ExternalId }, presence: optional }
-        payment_terms: { type: { kind: named, name: Text }, presence: optional }
-        invoicing_party: { type: { kind: named, name: Text }, presence: optional }
-  - ir: "field:5.10:supported_order_systems[]"
-    digest: 7aaf91ef69703a0a34d2843995fd0a71869f5ee333feecb94a1a897741380d07
+  - ir: def:5.10:ExternalReference
+    digest: 79f11f5cbad1951a5f5e3878d6a7ee00e0143427863709261309299be5b3f6d4
+    source: { rule: lead-in-restates }
+    as: { role: same, name: ExternalReference }
+  - ir: sentence:5.10:c5332d43
+    digest: 5e1700b65199cbdaf3955dba0c372c2ca52bbd036bd931ec2e84ec169218d141
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.10:ExternalReference.system
+    digest: 6fc2e266b3afd9f76a35b47846f673d917b6ef72e5cf1b82a39c0ee69512ca02
     source: { rule: domain-row }
+    as: { role: property, object: ExternalReference, type: { kind: named, name: Text }, presence: required }
+  - ir: key:5.10:ExternalReference.namespace
+    digest: 60145fded2a9fbe98116c6918a5b20863df316364792bdeacaf5a822a48927f9
+    source: { rule: domain-row }
+    as: { role: property, object: ExternalReference, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:5.10:ExternalReference.id
+    digest: 829ae4641922373ba42a86d3ffa5aef491a64e7d05f1810bbc42c4570f92972b
+    source: { rule: domain-row }
+    as: { role: property, object: ExternalReference, type: { kind: named, name: ExternalId }, presence: required }
+  - ir: key:5.10:ExternalReference.reference_type
+    digest: e0e3013d93ccad6313093cd5825a3c22822f9d14eb959c115a41e8247ced381b
+    source: { rule: named-type-row }
+    as: { role: property, object: ExternalReference, type: { kind: named, name: ReferenceType }, presence: required }
+  - ir: key:5.10:ExternalReference.reference_type#meaning/values:1
+    digest: 72633e50bb9b734ad7e80670b00839cd0bc5aa3399215f304d89e33d9d780b8f
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: ReferenceType, layer: vocabulary, open: true }
+  - ir: def:5.10:Agreement
+    digest: 80950c26cf32b9604ae09c536286ef9dcf406c62149db0a46531274d7f0dc09c
+    source: { rule: lead-in-restates }
+    as: { role: same, name: Agreement }
+  - ir: sentence:5.10:5f241d90
+    digest: 5f2a905c248e342ac212e85c239e2a41c0b5fe0439eb4940d2612fe9e5faac51
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.10:Agreement.agreement_id
+    digest: b6c51fb3a41a3f7c9aedc46e1762b68fbdf3e97654a2347a8f2b392bcdabd4c9
+    source: { rule: domain-row }
+    as: { role: property, object: Agreement, type: { kind: named, name: MintedId }, presence: required }
+  - ir: "key:5.10:Agreement.parties[]"
+    digest: 65f04ab6c86d801b048d14968edbdeab82bba72594a058e24cf284b2fe6646f7
+    source: { rule: named-object-row }
     as:
       role: property
-      object: LineItem
-      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalId } } }
+      object: Agreement
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: Party } } }
       presence: optional
-  - ir: sentence:5.10:e8da0f9e
-    digest: a186dd118adf0170b48077332fcef18ea992a541c481a3f2505327d876e762e8
+  - ir: key:5.10:Agreement.agreement_type
+    digest: d0d5832e26ad06520e6895e1965b8a5a5dddeada0be5a4b9b0b40b3da558234d
+    source: { rule: named-type-row }
+    as: { role: property, object: Agreement, type: { kind: named, name: AgreementType }, presence: optional }
+  - ir: key:5.10:Agreement.agreement_type#meaning/values:1
+    digest: a21ac7936f1209d368063da43370be13e13a777211d56f53198270dbdb3e647b
     locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: AgreementType, layer: vocabulary, open: true }
+  - ir: key:5.10:Agreement.term
+    digest: c585bb16b6ce40169cc76cef27a87d81a49b197eadbb536be6d3bdb7a77d06e7
+    source: { rule: named-object-row }
+    as: { role: property, object: Agreement, type: { kind: named, name: Interval }, presence: optional }
+  - ir: key:5.10:Agreement.document
+    digest: dbd37779e13f35f9f09865ff37d3f92ad6f1cb86ac7f96e0d36c610f8d9635b3
+    source: { rule: named-object-row }
+    as: { role: property, object: Agreement, type: { kind: named, name: DocumentRef }, presence: optional }
+  - ir: def:5.10:Billing
+    digest: 2b3d987fd26a190f9b09bc3db8af23ab2520f28b490733673663e3a1090fcf97
+    source: { rule: lead-in-restates }
+    as: { role: same, name: Billing }
+  - ir: sentence:5.10:b6c393ae
+    digest: 5ee3df4b90467d48d6089facee8ce439790e1d32f53b452813a5919e048697f5
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.10:Billing.delivering_party
+    digest: b8d45b056aed9e9f0ad84cbed205c6a06fb6f0a8ec7f06ed79a6496c0f422861
+    source: { rule: named-object-row }
+    as: { role: property, object: Billing, type: { kind: named, name: Party }, presence: optional }
+  - ir: key:5.10:Billing.invoicing_party
+    digest: 8587041e8db41a901dadade9a9da3dd153ad2b22051452cb49434e6580688cc8
+    source: { rule: named-object-row }
+    as: { role: property, object: Billing, type: { kind: named, name: Party }, presence: optional }
+  - ir: key:5.10:Billing.payment_terms
+    digest: b280539a3f33a652566d1e1378f729706fe28227baff8d94e2f0864f3af6cf67
+    source: { rule: domain-row }
+    as: { role: property, object: Billing, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:5.10:Billing.invoice_period
+    digest: cb8c1ac9d026b650229dde163feb0b4c3738bdc404703b8ce0829a61b8067ffe
+    source: { rule: named-type-row }
+    as: { role: property, object: Billing, type: { kind: named, name: InvoicePeriod }, presence: optional }
+  - ir: key:5.10:Billing.invoice_period#meaning/values:1
+    digest: 8fb018325632e8d689da43f817464086164c0e33f22642f734480f1926182c1a
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: InvoicePeriod, layer: vocabulary, open: true }
+  - ir: key:5.10:Billing.cycle_length
+    digest: d62c46adfa26c05945c1ee2a083eebd9dea66e00577f47c1b44c5973d962d3d6
+    source: { rule: named-type-row }
+    as: { role: property, object: Billing, type: { kind: named, name: Duration }, presence: conditional }
+  - ir: rule:5.10:71c0176a
+    digest: 0e50ba675df787f41e3885b3b0875cb87987105779d2cca63f66d929e8df725b
+    source: { rule: presence-statement }
+    as: { role: rule, object: Billing }
+  - ir: key:5.10:Billing.time_zone
+    digest: 8a3ffc03e1d828afb577c46430d48722d6f7aea224ff6d2d2e58774d3991dba3
+    source: { rule: named-type-row }
+    as: { role: property, object: Billing, type: { kind: named, name: IanaZone }, presence: optional }
+  - ir: sentence:5.10:4ab70d24
+    digest: a3a1f23c92064d1013aa5035ae49f01ae671105f60a81a9f0874d7f57010b0f8
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.10:4644ceda
+    digest: e926dd71dbba7b52401a8a2c22ee2950d11be26fdd583800cb8b3d04f276f03a
     source: { rule: prose-sentence }
     as: { role: informative }

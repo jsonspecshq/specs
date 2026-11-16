@@ -1,0 +1,112 @@
+format: 2
+id: D-166
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `reaches-outputs` reports that the rules output and a keyword of the published schema both
+  carry `rule:5.6:6981b8a3`, which `D-155` put in the rules output on the ground that the
+  schema states nothing about the value. § 5.6's `rate_per` row states a requirement in its
+  Required cell and another in its Description. Is one requirement carried twice, and what does
+  a check have to read to tell?
+covers:
+- ir: field:5.6:pricing[].rate_per
+  digest: 7e4207e926c3bc3ad125e4fb90e60d39c2da7f4932b255e95a32ce1b030f906f
+  quote: "`pricing[].rate_per` | Integer | seller-set | `1` | `1000`. Units per rate. For a core term, the vocabulary sets it, and a present value MUST match"
+- ir: rule:5.6:6981b8a3
+  digest: 55cb86ba10bc1848795d8be4772c4f7ade556b9eb9ce73d84612220a12642d98
+  quote: For a core term, the vocabulary sets it, and a present value MUST match
+options:
+- id: two-requirements-of-one-row-about-one-member
+  summary: >-
+    Two requirements, each carried once. The Required cell states when the member must be
+    present and the emitter expresses that in the schema; the Description states what a present
+    value must be and the rules output carries that. The gate reads a member and cannot see
+    which of the two the schema states, so its grain is the finding and the mapping is right.
+- id: the-rules-output-should-drop-it
+  summary: >-
+    One requirement. The schema already conditions `rate_per` on `cost_method`, so `D-155`'s
+    measurement is stale and the entry should claim `schema` and leave the rules output.
+- id: the-emitter-should-drop-the-presence-condition
+  summary: >-
+    One requirement. The row's own sentence is the whole of what it states about `rate_per`, so
+    the emitter's conditional presence is a second reading of the same words and should go.
+chosen: two-requirements-of-one-row-about-one-member
+rationale: >-
+  **The two requirements are different sentences about different things, and both are in the
+  row.** The Required cell reads "REQUIRED when `cost_method` is an extension term" -- a
+  requirement of presence, true or false of an entry by whether the key is there. The
+  Description's last sentence reads "For a core term, the vocabulary sets it, and a present
+  value MUST match" -- a requirement of value, which says nothing about whether the key is
+  present and everything about what it holds when it is. One binds an extension term and the
+  other binds a core term, so no payload can be under both at once.
+
+
+  **Each is carried once, and by the half that can state it.** The published `PricingEntry`
+  holds an `if`/`then` chain on `cost_method` whose extension-term branch requires
+  `cost_definition`, `rate_per` and `unit_label`: that is the Required cell, expressed. It holds
+  no narrowing of `rate_per` by the term, because the emitter expresses a condition on a
+  member's presence and not on its value, which is what `D-155` measured and what is still
+  true of the published bytes. So the value requirement is in the rules output and nowhere else,
+  and the presence requirement is in the schema and nowhere else. Type rules § 2a is satisfied:
+  neither artifact can disagree with the other, because neither states what the other states.
+
+
+  **What the gate reads, measured.** `src/reaches.ts`'s `schemaStates` takes the statement's host
+  row, `field:5.6:pricing[].rate_per#description`, strips the cell to the row, collects every
+  `<Type>.<member>` whose property cites that row -- one, `PricingEntry.rate_per` -- and asks
+  whether the emitter's `conditions.expressed` holds it. It does, from the Required cell. The
+  answer the gate gives is therefore true of the member and not of the statement it was asked
+  about, and no payload of the published tree contradicts the mapping.
+
+
+  `the-rules-output-should-drop-it` is refused by the bytes. `RatePer` admits `1` and `1000`
+  whatever the term, and the chain's branches add nothing about which, so a `CPM` entry stating
+  `rate_per: 1` validates. Dropping the rule would leave a requirement the text states in no
+  artifact a consumer reads, which is the failure the other direction of this same gate exists
+  to catch.
+
+
+  `the-emitter-should-drop-the-presence-condition` is refused by the row. The Required cell is a
+  cell of its own, with its own condition and its own level, and the extraction carries it as
+  `presence.clauses`; removing it would publish a member as unconditionally optional that the
+  text says is required for a whole class of entries.
+
+
+  **The cost this record accepts, stated rather than left for a reader to find.** The gate goes
+  on reporting one problem on this lock until its grain carries the statement rather than the
+  member. The fix is in the check and not in the mapping, the schemas or the rules output:
+  `conditions.expressed` names `<Type>.<member>`, and nothing in it says which statement the
+  keyword came from, so `schemaStates` has no finer question to ask. Narrowing it is a change to
+  a gate, with its fingerprint and its fixtures, and it has a second consumer -- `src/rules.ts`
+  reads the same list for the opposite question -- so it is its own piece of work and not this
+  record's. Measured on this lock: 1 problem of `reaches-outputs`, this one, and 54 statements
+  claimed as rules reaching the rules output.
+
+
+  **This record states no challenge, and that follows from what it decided.** A challenge is a
+  payload a record says the published schema refuses, held to what the published schema really
+  does (pipeline-architecture.md § 3.13(b)), and a pair of them locates an edge of that schema.
+  This reading's whole content is that the published schema states nothing about `rate_per`'s
+  value, so there is no value for it to refuse and no edge of it to locate: a pair here would
+  have to claim a boundary the artifact a challenge reads does not have. The boundary is real
+  and it is in the other half, where `rule:5.6:6981b8a3` carries its own valid and invalid
+  vectors -- `line-item-display.yaml`'s first pricing entry, with `rate_per` absent and with
+  `rate_per: 1` -- and the rules stage grades them against the check, which is where a
+  requirement the schema leaves is checked.
+
+
+  **Nor is this a narrowing record, which is the population a challenge is owed by.**
+  `narrowingReadings` reads a reading that a mapping entry cites to give a property a named
+  type, because such a reading decides what the property's values are checked against. No entry
+  cites this record at all: it types nothing and moves no member's type, it reads which artifact
+  carries which of a row's two requirements. Measured on this lock: 11 narrowing records --
+  `D-024`, `D-064`, `D-071`, `D-094`, `D-104`, `D-105`, `D-107`, `D-111`, `D-133`, `D-159`,
+  `D-162` -- and neither this record nor `D-155`, which owns the rule, is among them.
+feedback: >-
+  § 5.6's `rate_per` row states a condition of presence in its Required cell and a condition of
+  value in its Description, and a reader has to hold both at once to see that they bind
+  different terms -- an extension term and a core term. Splitting the sentence out of the
+  Description, or saying in the Required cell that a core term's value is set by § 5.6.5's Rate
+  per column, would let each requirement be read, and checked, on its own.

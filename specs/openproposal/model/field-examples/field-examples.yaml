@@ -1,0 +1,5 @@
+# Per-field example values for readers' example payloads (src/field-examples.ts).
+# A member whose type carries its own showcase values needs no entry here; this
+# registry holds the values a reader cannot derive from the type alone.
+format: 1
+fields: []

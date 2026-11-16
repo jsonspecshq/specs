@@ -1,0 +1,95 @@
+format: 2
+id: D-156
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  The kernel's `Marker` vocabulary owns eleven rules of the published rules output and no
+  emitted schema holds it. Is it a published type a consumer resolves, or the name a marker
+  rule is grouped under?
+covers:
+  - ir: marker:3:asserted
+    digest: adac5c0cbcb93033b5776a28f4fb27bd8ccc72bdd570f075d9626cba443664cd
+    quote: "`asserted` | The seller states it from data the buyer can't recompute. Not a term, and it changes without a new version."
+  - ir: marker:3:immutable
+    digest: 36e4c2830d95e3c4ae4166cdaccae23edbe3bfa8a26898faea72ba1cb8e37586
+    quote: "`immutable` | Set once at creation. Neither party may change it."
+  - ir: marker:3:seller-set
+    digest: 94e2c7f4738dab5dbf24aee02a582e7d10e43dd4f3aa76237063215e6867f186
+    quote: "`seller-set` | The seller sets it and MAY revise it while the `status` of the object that carries it is `draft`, `published` or `under_review`. § 4.3.2 states what a revision does to a line item `under_review`. The buyer cannot change it directly."
+options:
+  - id: grouping-name-not-published
+    summary: >-
+      It is the name § 9 groups a marker's rule under. Nothing is an instance of it, so no
+      file holds it and the agent surface skips it for a stated reason, as it already skips
+      a constructor. The published rules carry each marker's meaning in the rule's own
+      statement and each marker's reach in its `applies_to`.
+  - id: publish-it-as-a-vocabulary
+    summary: >-
+      The kernel file holds `Marker` as a vocabulary of the markers § 3's table declares, so
+      a reader of the published rules can resolve the owner's name and the terms it admits,
+      and the type map points at it like any other vocabulary.
+  - id: drop-the-owner
+    summary: >-
+      A marker rule names no owner, so nothing unresolvable is published and the rules
+      output states only the rule's statement, its reach and its vectors.
+chosen: grouping-name-not-published
+rationale: >-
+  **Type rules § 9 states three kinds of owner and two of them are not instantiable.** A rule
+  takes "the object that owns it (§ 5), or the kernel's `Marker` vocabulary for a rule about
+  every field that carries a marker", and a constructor rule "is listed on every lock, even
+  where no copy uses the constructor". So the output's owners are: an object, which a schema
+  holds; a constructor, which no file holds because it is a template emitted through each
+  copy; and `Marker`. The question is which of the two the third is like, and the
+  specification answers it three times over.
+
+  **Measured on the published rules output.** Of 22 distinct owners, exactly five are in no
+  emitted schema: `Marker`, and `Narrowing`, `Range`, `Selectable` and `SettableRange`, which
+  are the four constructors. The set of owners no file holds is the constructors plus this
+  one, and the agent surface already skips the four with the reason stated in its own
+  comment. So the choice is not whether to make an exception; it is whether this is the
+  exception the tree already makes.
+
+  **It is, because nothing is ever an instance of `Marker`.** § 9 gives a marker rule's reach
+  as "every property that carries the marker", and `marker:3:asserted` reaches
+  `LineItem.addressable_scale`, `LineItem.availability` and `LineItemSummary.addressable_scale`.
+  § 9 gives its vectors as pairs, "every marker rule's vectors are pairs", and requires that
+  "each payload of a valid or an invalid vector is an instance of the schema of the vector's
+  type" -- and that type is `LineItem`, not `Marker`. A type no payload instantiates and no
+  vector is of needs no address, which is the constructor's position exactly.
+
+  **And the consumer's test is answered by the rule itself.** § 9 says a marker's rule "takes
+  its § 3 row's ID, such as `marker:3:seller-set`, and holds the statements in that row ... so
+  the marker is one rule". The published rule therefore carries the marker's meaning as its
+  own `statement` -- `marker:3:asserted` states "The seller states it from data the buyer
+  can't recompute. Not a term, and it changes without a new version." -- and the properties it
+  governs as its `applies_to`. A reader of the published rules needs no second document to
+  learn what a marker is or which fields carry it, so the owner's name is a grouping and not
+  an address.
+
+  `publish-it-as-a-vocabulary` is refused because publishing it would state the markers twice
+  and say which governs where they disagree nowhere. The eleven statements are already
+  published, one per rule, with the row each comes from; a vocabulary of the same eleven terms
+  in the kernel file would be a second statement of them, and the kernel file is the one
+  document every other specification's reader fetches -- `features.markers` is true for this
+  text alone, so the two specifications with no § 3 table would gain a type their own texts
+  never mention.
+
+  `drop-the-owner` is refused on § 9's own words: the owner is what makes eleven rows eleven
+  rules rather than one undifferentiated list, and § 9 names `Marker` as that owner in the
+  same sentence as an object. Dropping it would also leave `applies_to` as the only statement
+  of a marker's reach, with nothing saying which marker a reach belongs to.
+
+  **What this does not decide.** Whether the schema should state each property's marker is a
+  different question and this record does not reach it; the properties' markers are published
+  through the rules' `applies_to` today. `D-066` decides that the markers are closed, which is
+  what makes the eleven rules a fixed set rather than an open one.
+feedback: >-
+  § 3's marker table declares the markers an implementation must honour, and § 9 of our own
+  type rules makes each marker's row one rule. The specification does not say whether a marker
+  is a value anything carries on the wire or a statement about a row, and the answer decides
+  whether a consumer needs a type for it: nothing in the ten shipped payloads carries a marker,
+  and the markers appear only in § 3's table and in each field row's Mutability cell. Saying in
+  § 3 that a marker is a property of the row rather than a value of the document would settle
+  it on the page.

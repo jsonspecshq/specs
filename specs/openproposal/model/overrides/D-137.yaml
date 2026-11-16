@@ -1,0 +1,92 @@
+format: 2
+id: D-137
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.4's `contacts[]` holds an object this specification states no member of. Which definition
+  states its members, what is the object called, and is it open?
+covers:
+- ir: key:4.4:ChangeRequest.contacts[]
+  digest: 2d63c167aaf84bfd4ea0c181515a69dcf428cf41c1cfdb20070980b0a31026c5
+  quote: "`contacts[]` | OPTIONAL | Contacts for this change, in addition to the buyer's and the advertiser's, one per contact type. As OpenDirect 2.1 Contact"
+- ir: key:4.4:ChangeRequest.providerdata
+  digest: 577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385
+  quote: "`providerdata` | OPTIONAL | Structured references a buyer uses to identify its order in the seller's system"
+options:
+- id: the-definition-the-row-names
+  summary: >-
+    `contacts[]` holds a `Contact`, an object of any members, which is OpenDirect 2.1's object of
+    that name: this specification states no member of it, so it is open and the model names the
+    definition that sets its content. `providerdata` names no definition, so it stays unmapped.
+- id: restate-the-shape-here
+  summary: >-
+    `Contact`'s members are restated in this specification's mapping, read off OpenDirect 2.1.
+- id: leave-both-rows-unmapped
+  summary: >-
+    Neither row names an object this specification defines, so both stay reported and the model
+    types neither.
+chosen: the-definition-the-row-names
+rationale: >-
+  This is `D-107`'s category at § 4.4, and § 2.5 states it: "An object whose content another
+  definition sets, such as a `FormatSpec`'s `spec` (§ 5.4), is unaffected". `contacts[]` says
+  which definition in the row itself -- "As OpenDirect 2.1 Contact" -- exactly as § 5.2.9's
+  `content` says "An AdCOM 1.0 `Content` object". So the object is `Contact`, the name the row
+  gives it, open, with `set_by` naming OpenDirect 2.1's object, and the field is a list of it.
+  The whole § 4.4 table is written this way: its `change_requests[]` row says each entry "carries
+  the fields of the OpenDirect 2.1 ChangeRequest, except its `webhook`, plus `baseline`, `actor`,
+  `at`, and `cancellation`", so the section's shape is another standard's with four additions, and
+  naming the standard is what the section does.
+
+
+  `providerdata` STAYS UNMAPPED, AND THE SAME SENTENCE OF § 2.5 IS WHY. Its row names no
+  definition: "Structured references a buyer uses to identify its order in the seller's system"
+  says who writes it and what for, and nothing about its members. § 2.5 separates two states and
+  tells them apart by naming the definition -- "an object whose content another definition sets,
+  and a row the mapping has not finished" -- so an open object that names none is the second, not
+  the first, and the openness check says the same in its own words: name the definition that sets
+  its content, or leave the row for the mapping to reach. There is none to name, so the row is
+  left, reported rather than typed at an object nothing defines.
+
+
+  `restate-the-shape-here` is the copy `D-107` refused. OpenDirect 2.1's `Contact` drifts the
+  moment that standard revises, and a payload valid against it would be refused by a copy that had
+  not been regenerated.
+
+
+  `leave-both-rows-unmapped` reports as undecided what the `contacts[]` row decides in its own
+  words, and leaves `ChangeRequest` publishing neither key.
+
+
+  WHAT THIS COSTS, stated rather than hidden: the published schema takes any member of a
+  `Contact`, so it checks that the value is a list and that each entry is an object, and nothing
+  more. That is the cost `D-107` states of its three. The row's "one per contact type" is a rule
+  over the list's entries that no keyword states while an entry's members are unstated, and it
+  stays unmapped with the rest of § 4.4's statements.
+challenge:
+- type: Contact
+  value:
+    name: Dana Reyes
+    email: dana.reyes@agency-a.example
+    type: billing
+  verdict: accept
+  context: >-
+    A buyer naming the person to bill for a change it requests, which is what OpenDirect 2.1's
+    `Contact` carries and what "one per contact type" counts.
+  reason: >-
+    This specification states no member of a `Contact`, so the object is open: every member
+    OpenDirect states is taken and none is required here.
+- type: Contact
+  value: dana.reyes@agency-a.example
+  verdict: reject
+  context: >-
+    The same buyer writing each contact as an address rather than as the object the row names.
+  reason: >-
+    The row says "As OpenDirect 2.1 Contact", so a contact is that object; open means it takes
+    any member, not that it takes a value that is no object at all.
+feedback: >-
+  § 4.4 names OpenDirect 2.1's `Contact` for `contacts[]` and names no definition for
+  `providerdata`, so a reader of this specification alone can type neither. Saying which keys of
+  OpenDirect's `Contact` a change request relies on, and whether `providerdata` has any shape a
+  seller may expect, would make the table readable without the other document.

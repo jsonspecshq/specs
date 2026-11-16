@@ -1,0 +1,68 @@
+format: 2
+id: D-127
+status: withdrawn
+kind: reading
+basis: gap
+author: agent
+question: >-
+  A hold's `available` is whether the line item may be held, and a selectable's `available[]` is
+  the options the seller offers. Is `available` one concept of the domain model or two?
+covers:
+- ir: key:5.6.2:HoldTerms.available
+  digest: 5c3c5a05196378e5359143820b6d258a0b0f8427b71e71442b99e692b663adf7
+  quote: "`available` | REQUIRED | Whether this line item may be held"
+- ir: key:3.1:Selectable.available[]
+  digest: 8bb943f22b2dcee8eb56a3baa8e9f0fb609852ba69d7f30e73bb0d47ba30bf4c
+  quote: "`available[]` | REQUIRED | The options the seller offers"
+options:
+- id: two-names-for-two-things
+  summary: >-
+    Two. A hold's `available` is a flag and a selectable's `available[]` is the set of options its
+    field offers, so the name is a homonym and the domain model lists it with the reason.
+- id: one-concept-of-availability
+  summary: >-
+    One. Both say what the seller offers, so one concept covers them and the flag is the degenerate
+    case of the list.
+chosen: two-names-for-two-things
+rationale: >-
+  The two rows state different JSON types and a receiver does different things with them. § 5.6.2's
+  `available` is "Boolean | REQUIRED | Whether this line item may be held", a flag a buyer reads to
+  decide whether to ask for a hold at all, and § 5.6's `hold_terms` row says "Absent means
+  `available` is `false`". § 3.1's `available[]` is "Array[T] | REQUIRED | The options the seller
+  offers", whose entries a buyer names in `selected[]` and whose price deltas `deltas` keys. One
+  compares nothing and the other is the set every other key of the selectable refers to.
+
+
+  `one-concept-of-availability` would make a flag and a list of options one concept, which the
+  domain model's own test refuses: a concept gets a type of its own where its values pass a
+  different constraint or a receiver does something different with them, and these differ on both.
+  There is no type that is a boolean and an array of options, so the merged concept would have to
+  pick one and leave the other's rows typed by nothing.
+
+
+  WHY THIS IS RECORDED NOW AND NOT BEFORE. § 3.1's `available[]` is a key of the `Selectable`
+  shell, so in the model it had been a member of copies alone -- `EnvironmentsSelection` and the
+  rest -- and the homonym check reads the objects. § 2.1's `LineItemSummary` lists
+  `environments.available[]`, so projecting it makes an object, `LineItemSummaryEnvironmentsSelection`,
+  whose `available` holds the `Environment` vocabulary. The collision is in the text either way and
+  the projection is what made a check able to see it, which is what a projection of the paths the
+  specification lists is for.
+feedback: >-
+  § 5.6.2 names a hold's flag `available` and § 3.1 names a selectable's options `available[]`.
+  A generated library gives both the same member name in different types, and a reader of one
+  section meets the other's meaning with no warning. `held` or `holdable` for the flag would leave
+  `available` to the options alone.
+withdrawn:
+  date: 2026-11-11
+  reason: >-
+    The reading is right about the text and the listing it asked for sets nothing. The homonym
+    check reads the model's objects, and a selectable's `available[]` is a key of the
+    `Selectable` shell, so it reaches the check only through a projection -- and a projection
+    restates the document's members rather than stating any of its own, which is why
+    `src/domains.ts` stopped reading one. With that, `available` resolves to one concept the
+    check can see, the mirror clause fails a listing that resolves to one concept on every lock,
+    and the entry had to go. The collision a reader meets in the published schemas is real and
+    invisible to every check for the same reason: no check reads a copy's shell keys, so neither
+    `available` nor `selected` is compared across the selectables at all. That is a gap in the
+    checks and not a reading of § 5.6.2, and it is one gap with the two properties typed by
+    the bare term grammar, which the same blindness hides.

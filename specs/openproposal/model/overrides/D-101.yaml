@@ -1,0 +1,39 @@
+format: 2
+id: D-101
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Section 5.6's `availability.certainty` MUST be `forecast` on a non-guaranteed line item. Its vectors
+  need an `Availability`, which a published type refused until D-100. What is its change pair?
+covers:
+
+- ir: rule:5.6:6a84a96c
+  digest: bb7149c74c353702ba295315b687b23e1fa6a777bea280cb31858716ec1ea642
+  quote: MUST be `forecast` when the line item's `delivery_type` (§ 5.9) is `non_guaranteed`
+options:
+- id: write-the-pair
+  summary: The statement becomes a rule on the `LineItem`, which is the one type that holds the
+    availability and the transaction mechanism whose options carry `delivery_type`, with one payload the
+    schema accepts and one it refuses.
+- id: leave-it-informative
+  summary: The statement reads as a description of what a seller reports, so the rules output carries it
+    as prose and no payload grades it.
+chosen: write-the-pair
+rationale: >-
+  A non-guaranteed line item reserves nothing, so the seller can estimate what it can deliver and
+  cannot say it will hold it: `reservable` is "the quantity the seller says it can reserve for
+  `window`", which a non-guaranteed delivery is the absence of. One payload decides it, so it is a rule
+  and not prose.
+
+
+  **The line item's `delivery_type`** is that of the mechanism in effect, which D-099 reads as
+  `included[]` and `selected[]` of the `transaction_mechanism` field. So the rule is on the `LineItem`,
+  which holds the availability and the options together, and the check returns null for a part that
+  carries one without the other.
+
+
+  **Why it was written after the other two of its section.** The vectors need an `Availability`, and
+  `availability.unit` published two of the thirteen core terms its row states, so the schema refused
+  every payload counting `impressions`. D-100 reads that row as a union and this pair rests on it.

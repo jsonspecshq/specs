@@ -1,0 +1,45 @@
+format: 2
+id: D-103
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Section 3.1 states that an object option's id is its REQUIRED `id`, unique in the field. One payload
+  decides the uniqueness. Whose rule is it?
+covers:
+
+- ir: rule:3.1:bfffacdf
+  digest: 705cdabdb624bd15e1d51d39445a32e68b2d7c9c3364e2beedeca3da9ca4e77f
+  quote: An object option's id is its REQUIRED `id`, unique in the field.
+options:
+- id: a-rule-on-the-line-item
+  summary: The rule is on `LineItem`, the one type that holds a selectable field, and its check reads
+    every field whose value states `available[]`, so a field composed from the constructor is read with
+    the rest.
+- id: a-constructor-rule-in-the-kernel
+  summary: The rule is the `Selectable` constructor's, stated in `kernel/constructors.yaml` with its own
+    vectors, so every specification that applies the constructor carries it.
+chosen: a-rule-on-the-line-item
+rationale: >-
+  Uniqueness is within one field, and a field belongs to a type. `LineItem` is the only type of this
+  specification that holds a selectable field -- twelve of them -- so the rule is on `LineItem` and its
+  `applies_to` names it.
+
+
+  **Why not the kernel's.** The constructor's shell states what a `Selectable` holds, and a rule on it
+  would travel to every specification that applies it. Neither AdCOM nor the Deals API applies
+  `Selectable` today, so such a rule would publish a requirement no text of theirs states and no payload
+  of theirs exercises; the first consumer that needs it is the one to generalise it for. This
+  specification's own § 3.1 is the statement, and it reads on this specification's objects.
+
+
+  **What it rejects.** Two options of one field under one id leave `included[]`, `selected[]` and the
+  `deltas` keys naming both at once, so what is in effect and what it costs are both undecidable. The
+  check reads every field whose value states `available[]` rather than a list of field names, so the two
+  types § 3.1 anticipates -- "a `Selectable[T]`, or a named type that holds its keys" -- are read with
+  the twelve the constructor types directly, as soon as they carry the constructor's keys.
+
+
+  A string option needs no rule: "A string option's id is its value", so two equal strings are one
+  option and the array states it twice, which is a different defect and not this one.

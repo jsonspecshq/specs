@@ -1,0 +1,117 @@
+format: 2
+id: D-075
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three attribute rows enumerate codes in their own prose that are not a flag's `0` and `1`.
+  What is each one's code list called?
+covers:
+- ir: key:object_placement:Placement.ssai#meaning/values:1
+  digest: 7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074
+  quote: "`0` (status unknown) | `1` (all client-side (i.e., not server-side)) | `2` (assets stitched server-side but tracking pixels fired client-side) | `3` (all server-side)"
+- ir: key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1
+  digest: 79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa
+  quote: "`1` (early loading) | `2` (standard loading)"
+- ir: key:object_dooh:Dooh.fixed#meaning/values:1
+  digest: b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355
+  quote: "`1` (fixed) | `2` (movable)"
+options:
+- id: by-meaning
+  summary: >-
+    After what the codes are, as each row's own prose names them: a server-side ad insertion
+    mode, an AMPHTML rendering treatment, and a DOOH placement's mobility.
+- id: by-attribute
+  summary: >-
+    After the attribute's name as written, such as `Ssai`, `Ampren` and `Fixed`.
+chosen: by-meaning
+rationale: 'A list is named for what its values are (type rules § 6), and each of these three rows
+  names that in its own prose.
+
+
+  **`Placement.ssai` is a server-side ad insertion mode.** Its prose is "Indicates if server-side
+  ad insertion (e.g., stitching an ad into an audio or video stream) is in use and the impact of
+  this on asset and tracker retrieval", and its four codes are how much of the insertion is
+  server-side: none of it, the assets but not the trackers, all of it, or not known. So the
+  vocabulary is `ServerSideAdInsertionMode`, which is the form AdCOM already names such a list
+  by -- `LinearityMode`, `PlaybackCessationMode` and `VolumeNormalizationMode` are each a list of
+  the ways one thing is done.
+
+
+  **`DisplayPlacement.ampren` is an AMPHTML rendering treatment.** The row says so in those words:
+  "AMPHTML rendering treatment for AMP ads in this placement". So the vocabulary is
+  `AmpRenderingTreatment`.
+
+
+  **`Dooh.fixed` is a placement''s mobility.** Its prose is "Indicates whether the DOOH placement
+  is in a fixed location (e.g., kiosk, billboard, elevator) or is movable (e.g., taxi)", and its
+  two codes are the two answers. So the vocabulary is `DoohPlacementMobility`, carrying the `Dooh`
+  prefix that `DoohVenueTaxonomy` and `DoohMultiplierMeasurementSourceType` carry, since the row
+  is a DOOH placement''s and the words "fixed" and "movable" name no subject on their own.
+
+
+  `by-attribute` is what a reader cannot check. `Fixed` says nothing about what is fixed, `Ampren`
+  is an abbreviation the text expands in the same cell, and `Ssai` is an acronym -- and AdCOM names
+  not one of its 42 published lists after the attribute that holds it. The attribute name also
+  collides across objects in a way the meaning does not: `fixed` is a Dooh''s and `skip` is a
+  VideoPlacement''s and an AudioPlacement''s alike.
+
+
+  **What is not named here.** The other 29 rows this form reaches enumerate exactly `0` and `1`,
+  which is the flag AdCOM''s kernel binding already cites each of them for, so their list restates
+  `IntegerFlag` and defines no vocabulary of its own. Four rows enumerate codes this form does not
+  reach, because they write the enumeration in a spelling it does not read: a Content''s `live`,
+  `realtime` and `firstbroadcast` write "where:" and separate the codes with periods, and its
+  `srcrel` writes "0 = indirect, 1 = direct." with no "where" at all. Those rows publish as they
+  did, and a list for them waits on a reading of those two spellings.
+
+
+  **These three rows were counts.** `specs/adcom/kernel-binding.yaml` cited each of them for the
+  `count` concept, so AdCOM published all three as `Count`: a whole number of things. A code is not
+  a quantity -- nothing adds `fixed` to `movable`, and the `Count` type accepts `7` where the row
+  states two values -- so the citation is withdrawn with this record. The cost it had was not a
+  type but a meaning: a reader of the published schema was told the value counts something.'
+challenge:
+- type: ServerSideAdInsertionMode
+  value: 3
+  verdict: accept
+  context: >-
+    A placement whose assets and trackers are both served server-side, which
+    the row's prose numbers 3, "all server-side".
+  reason: >-
+    `by-meaning` publishes the row's four codes as the vocabulary its own
+    prose enumerates, so 3 is a code of it and carries the label the text
+    gives it.
+- type: ServerSideAdInsertionMode
+  value: 7
+  verdict: reject
+  context: >-
+    A sender treating the value as a quantity and writing a number past the
+    four the row states.
+  reason: >-
+    The row enumerates 0, 1, 2 and 3 and no more, so 7 is no code of the
+    list. This is what `Count` accepted: a count is any whole number, so it
+    took 7 and published the row as a quantity rather than a vocabulary.
+- type: DoohPlacementMobility
+  value: 1
+  verdict: accept
+  context: >-
+    A kiosk, which the row gives as its own example of a fixed location, and
+    numbers 1.
+  reason: >-
+    The row's two codes are the vocabulary, and 1 is "fixed".
+- type: DoohPlacementMobility
+  value: 0
+  verdict: reject
+  context: >-
+    A sender using 0 for "not known", as a placement's `ssai` numbers status
+    unknown 0.
+  reason: >-
+    This row enumerates 1 and 2, and states no code for an unknown location,
+    so a placement whose mobility is not known carries no `fixed` at all. One
+    row's unknown code is not another's: `ssai` states 0 and this does not.
+feedback: >-
+  Name each of these three code lists in a List: section, as AdCOM names its
+  other 42, so that every implementation uses the same name and the same
+  codes for them.

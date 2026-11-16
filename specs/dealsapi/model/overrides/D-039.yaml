@@ -1,0 +1,113 @@
+format: 2
+id: D-039
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: D-007 chose `dealfloor` as the price a fixed-price deal must provide,
+  and AdCOM's `D-064` routes a MUST-level requirement whose shape a keyword states into
+  the published schema. Which construct carries it, and what does the schema
+  then refuse?
+covers:
+  - ir: rule:terms-object-1:647b6593
+    digest: e4b08754ebc34fe5523007e2fd84a060e9e66d1f30a39a9464535f296698db97
+    quote: Price attribute must be provided if the deal is a fixed price deal,
+      especially if it's a programmatic guaranteed deal, but otherwise can be
+      used as pricing guidance or not provided at all if there is no pricing
+      guidance (for example, for a Run-of-Exchange deal where there is no
+      pricing guidance)
+options:
+  - id: if-pricetype-3-then-dealfloor
+    summary: "An `if` on `pricetype` `const` 3 with `then` `required` `dealfloor`:
+      the construct § 2a names for required-when-a-code-is-one-of-N, carrying
+      D-007's chosen attribute."
+  - id: if-pricetype-3-then-either-price
+    summary: The same `if`, with a `then` requiring at least one of `dealfloor` and
+      `totalcost`, on the reading that "price attribute" names whichever of the
+      two the deal carries.
+  - id: leave-it-in-the-rules
+    summary: Leave it in the rules output, as the only MUST-level requirement of
+      this specification whose shape a keyword states.
+chosen: if-pricetype-3-then-dealfloor
+rationale: >-
+  The attribute is not chosen here: D-007 chose `dealfloor` over reading the
+  sentence as naming no field, and this record carries that choice into the
+  construct that record routes it to. Four readings of the pinned text agree, and they
+  were measured rather than assumed. `dealfloor`'s own row says *"Unless
+  `pricetype` is Fixed, this should be used as guidance to buyers"*, which is
+  the sentence's own two halves -- must be provided when fixed, guidance
+  otherwise -- stated of one attribute. `totalcost`'s row states a different
+  condition at a different level, *"If the deal is guaranteed, this value should
+  be provided"*, which is a SHOULD and stays in the rules output. `PriceType` 3
+  is Fixed Price, read off the value list of `pricetype`'s own row. And
+  `src/specs/dealsapi/rule-checks.ts` has graded this requirement as `dealfloor`
+  while `pricetype` is 3 since D-007.
+
+
+  Why not `if-pricetype-3-then-either-price`. It is the reading a payload of the
+  corpus appears to support -- a guaranteed fixed-price deal carrying
+  `totalcost` and no `dealfloor` -- and that payload is the rule's own
+  **invalid** vector, not a valid one. Taking it as valid would widen the
+  requirement to one the reviewed vectors call a violation, and would make the
+  sentence's "especially if it's a programmatic guaranteed deal" into a second
+  condition rather than the emphasis it is written as. The option is stated
+  because the distinction is one measurement deep: whoever reads the corpus
+  without the verdict beside it reaches it.
+
+
+  What the schema refuses now, measured over the emitted bytes on both locks:
+  `$defs/Terms` refuses `{"pricetype": 3}` and refuses `{"guar": 1, "pricetype":
+  3, "totalcost": 5000, "units": 1000000}`, and accepts `{"dealfloor": 2.5,
+  "pricetype": 3}`, `{"pricetype": 1}` and `{}`. An absent `pricetype` is its
+  default, 2, and the `if` requires the member to be present, so a payload that
+  states no price type is untouched.
+
+
+  The vectors are this record's challenge entries, for the reason AdCOM's `D-066`
+  states:
+  a rule the schema carries is not restated in the rules output, so the five
+  reviewed payloads would otherwise be graded by nothing.
+challenge:
+  - type: Terms
+    value:
+      pricetype: 3
+      dealfloor: 2.5
+    verdict: accept
+    context: A seller offering a fixed-price deal, with the floor it is fixed at.
+    reason: "`dealfloor` is the price a fixed-price deal is fixed at, which D-007
+      chose."
+  - type: Terms
+    value:
+      pricetype: 1
+    verdict: accept
+    context: A seller offering a deal whose price type is not Fixed.
+    reason: The requirement reads `pricetype` 3 alone, so no other price type
+      requires a floor.
+  - type: Terms
+    value: {}
+    verdict: accept
+    context: A seller stating no terms at all.
+    reason: "`pricetype` is absent, so it is its default, 2, and the deal is not
+      fixed price."
+  - type: Terms
+    value:
+      pricetype: 3
+    verdict: reject
+    context: A seller offering a fixed-price deal and stating no price.
+    reason: "A fixed-price deal must state `dealfloor`: D-007 chose it as the price
+      attribute the sentence names, `totalcost` carries the guaranteed deal's
+      total and its own row states a SHOULD on a different condition, and this
+      payload is the rule's own invalid vector."
+  - type: Terms
+    value:
+      pricetype: 3
+      guar: 1
+      units: 1000000
+      totalcost: 5000
+    verdict: reject
+    context: A seller offering a programmatic guaranteed fixed-price deal and
+      stating only the total cost.
+    reason: "A fixed-price deal must state `dealfloor`: D-007 chose it as the price
+      attribute the sentence names, `totalcost` carries the guaranteed deal's
+      total and its own row states a SHOULD on a different condition, and this
+      payload is the rule's own invalid vector."

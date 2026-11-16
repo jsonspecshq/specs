@@ -1,0 +1,104 @@
+format: 2
+id: D-073
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: Is a list the specification states in a sentence a vocabulary, where it has no table for it?
+covers:
+- ir: block:2.4:4/values:1
+  digest: d1e645ca8cce96208a8305a62ff25097316cc62d704ed072ab25056faabed259
+  quote: '`validation` | `not_found` | `not_offered` | `unresolved_reference` | `not_committable` | `stale_version`
+    | `expired` | `idempotency_conflict` | `not_eligible` | `record_mismatch`'
+- ir: block:5.4:4/values:1
+  digest: 6a9b8155781f0d5cae62ec361912d77688319c3949a31cbb655dcd39636b215a
+  quote: '`audio_file` | `video_file` | `image_file` | `markup` | `script`'
+- ir: block:5.4:5/values:1
+  digest: 55440eaa89536a4f4671a1fc72a4cea3a29b68a8e05f3a1a7ba191334747ffe0
+  quote: '`human_only` | `synthetic_permitted`'
+- ir: block:5.5:3/values:1
+  digest: 4447b79b61a233db828617624f9f99db188243b3ece0026f6ca3b7c94fe5b9f2
+  quote: '`domains` | `apps` | `categories` | `keywords`'
+- ir: block:5.6.5:1/values:1
+  digest: be1308cf74bc16b479553fc60339b6569527e55133519ee4031f435353e82a5f
+  quote: '`CPM` | `CPMV` | `CPC` | `CPCV` | `CPV` | `CPP` | `CPA` | `PLAY` | `TIME` | `FLAT`'
+- ir: block:5.7.1:3/values:1
+  digest: 61f2bec7b245ca2c4dd09f004fb8c233da2b6cc9a906a85d9c553961f13cd590
+  quote: '`viewable_rate` | `completion_rate` | `ivt_rate` | `impressions`'
+- ir: block:5.9:2/values:1
+  digest: 858303b428f6779e718da3b7ca48602b19b0ee2438c5d0d385667ee5ee835c85
+  quote: '`direct_io` | `programmatic_guaranteed` | `preferred_deal` | `private_auction`'
+- ir: block:5.9:4/values:1
+  digest: d1953e479a8f4c45c473a316204c9ddd222f6dbe031e40f2accc3d1556234500
+  quote: '`guaranteed` | `share_of_voice` | `non_guaranteed`'
+options:
+- id: a-sentence-states-a-list
+  summary: A sentence that lists every value a member may carry states a vocabulary, as a table would,
+    named for what its values are. Where the sentence invites more, the vocabulary is open.
+- id: only-tables-state-lists
+  summary: Only a table states a vocabulary; a list in a sentence is prose, and the member it belongs
+    to carries a string.
+chosen: a-sentence-states-a-list
+rationale: 'A specification writes a list in a sentence where it has no table for it, and the reader of
+  a generated library needs the list either way. `only-tables-state-lists` would publish a string for
+  a member whose values the text enumerates, so a payload carrying a word the specification never lists
+  would be accepted and the sender told nothing -- and which form the list was written in is an accident
+  of the document rather than a statement about the value.
+
+
+  So eight sentences state eight vocabularies: an error''s code, an asset''s type, whether synthetic content
+  is permitted, the kinds of exclusion a seller accepts, the cost methods, the metrics a commitment may
+  name, the transaction mechanisms, and the buying routes.
+
+
+  Four carry the name the earlier reading of this specification gave them -- `ExclusionType`, `CostMethod`,
+  `Metric` and `TransactionMechanism` -- so a reader of either tree sees one name for one thing, as D-065
+  does for the lists the tables hold.
+
+
+  The fifth is the text''s to name and not this record''s. The sentence listing `guaranteed`, `share_of_voice`
+  and `non_guaranteed` is read by a mechanism option''s `delivery_type`, whose own cell names the type
+  `DeliveryType`, so that is the name: where the specification names its type, no reading names it. The
+  earlier tree called it `BuyingRoute`, which this text does not. The values of `ExclusionType` are not
+  the earlier tree''s: the text now writes `domains`, `apps`, `categories` and `keywords` where it wrote
+  `domain`, `app_bundle`, `iab_content_category` and `keyword`.
+
+
+  WHETHER EACH IS OPEN IS THE FORM OF ITS OWN SENTENCE, AND ONE TEST READS ALL EIGHT. A list is the
+  core of its vocabulary where the text either spells it "Core terms" or "Core codes", or declares its
+  member a `VocabularyTerm`, or says what a term the list does not hold does -- any of the three
+  presupposes a term beyond the list. A list is the whole of its type where the sentence alternates the
+  values and says nothing further, which is the form "**`X`** is `a` | `b` | `c`".
+
+
+  Six are open and the sentence that decides each is its own. An error''s code: "Core codes:
+  `validation` | ...". An asset''s type: "Core terms: `audio_file` | ...". Whether synthetic content is
+  permitted: "Core terms: `human_only` | `synthetic_permitted`". The kinds of exclusion a seller
+  accepts: "**`ExclusionType`** is a `VocabularyTerm` (§ 2.2). Core terms: `domains` | ...", which says
+  it twice, and § 5.5 says it a third time in `ExclusionList`''s own Form cell -- "an extension term''s
+  definition gives its own" -- a sentence that states the entry form of a term the list does not hold.
+  The cost methods: "`cost_method` is a `VocabularyTerm` (§ 2.2)", with "Its core terms are `CPM` |
+  ...". The metrics a commitment may name: "Core terms: `viewable_rate` | ...", with "A term defines
+  whether its `level` is a rate or a count, and its definition names its standard", which is what a
+  term outside the list does.
+
+
+  Two are closed and the same test says so. "**`TransactionMechanism`** is `direct_io` |
+  `programmatic_guaranteed` | `preferred_deal` | `private_auction`." and "**`DeliveryType`** is
+  `guaranteed` | `share_of_voice` | `non_guaranteed`: what the seller promises to deliver" each
+  alternate the values, name no type, spell no "core", and say nothing of a term outside the list. The
+  colon in the second introduces what the three mean together, not a further value.
+
+
+  THIS PARAGRAPH REPLACES ONE THAT WAS WRONG ON SIX OF THE EIGHT. It read "`CostMethod` is open because
+  the text states a cost method may be an extension term; the other seven are closed, because each
+  sentence lists what the member may carry and invites nothing further" -- which applied one of the
+  three forms to one list and then asserted of the other seven what their own sentences deny. `D-130`
+  opened three of them on the declaration form, `D-089` opened the metrics and the error codes, and
+  this record is what now says the same thing of all eight in one test, so the reading no longer
+  disagrees with itself across two lists.
+
+
+  This is the second of the lists a prose block holds, after D-072''s hold states. D-065 deferred them
+  all, because whether a list in a sentence states a type of its own or restates one a table already defines
+  is a reading of the sentence -- and these eight state their own.'

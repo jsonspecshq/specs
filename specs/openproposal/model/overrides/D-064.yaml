@@ -1,0 +1,131 @@
+format: 2
+id: D-064
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: 'Three § 2.2 spellings are stated as one thing or another: `LineItemStatus` is "A `ProposalStatus`,
+  or `sold_out`", `TimeUnit` is "A `CalendarUnit`, or `flight`", and `Measurer` is "A `Side`, or a `RegistrableDomain`".
+  None enumerates terms of its own, so none has a value list `D-053` could rest a declaration on. What
+  type does each become?'
+covers:
+- ir: def:2.2:LineItemStatus
+  digest: 62873d0eb36415ad42149f8e55c9f4a4a6166e29494fe5a70860213904b9dbcb
+  quote: '`LineItemStatus` | A `ProposalStatus`, or `sold_out` | A line item''s `status`, moved as § 4.3.2
+    states'
+- ir: def:2.2:TimeUnit
+  digest: 7b83133f5ed981b823af1ff9c73b1769d3549b12de14863b0ae1959883133524
+  quote: '`TimeUnit` | A `CalendarUnit`, or `flight` | `flight` is the whole of `commitment.flight`'
+- ir: def:2.2:Measurer
+  digest: 8803264dc804871c16d2837330a0f52398e88a9494eca43226ae1e19bd5b445a
+  quote: '`Measurer` | A `Side`, or a `RegistrableDomain` | Who counts or measures. A seller writes `seller`,
+    never its own domain. Two values name one party only when they are equal byte for byte. A `qualifier`
+    beside a value names a product or method of that party and is not compared'
+
+- ir: key:5.6.4:ProofOfPerformance.logged_by
+  digest: 25f732d3d73d480f4cefbbb09a9cafe4ac433e20567e917da754237f3a22f31d
+  quote: "`logged_by` | REQUIRED | Who keeps the proof-of-play log"
+- ir: key:5.6.5:CostParameters.rating_source
+  digest: b65d516902c5a98bb0242c8ee45d639487f6970e0e38bfa7d8fe2a2e9fccb6d4
+  quote: "`rating_source` | REQUIRED when `cost_method` is `CPP` | Who supplies the ratings"
+- ir: key:5.6.5:CostParameters.action_source
+  digest: 8f01f9eb8f0c09a191dd0763d5ea61b2e7f0073b97c34f55b884abe1ebc1e751
+  quote: "`action_source` | REQUIRED when `cost_method` is `CPA` | Who reports the action"
+- ir: key:5.7.1:MeasurementOption.measured_by
+  digest: 03d3cedf74988a35beb9dc8c96979206e11cee3d929dc30ae9288a738c3854b9
+  quote: "`measured_by` | REQUIRED | The measurement provider"
+- ir: key:5.7.1:ControllingMeasurementOption.counted_by
+  digest: c4ab66331bbc87b7e12b669fecec43ada2ac53af659dabf6e692dcef983f47cd
+  quote: "`counted_by` | REQUIRED | Who counts. When the `pricing[]` entry the buyer commits under has `cost_method` `CPP`, `counted_by` MUST be its `cost_parameters.rating_source`. When it has `cost_method` `CPA`, `counted_by` MUST be its `cost_parameters.action_source`. Otherwise, when `channel` is `dooh` and the line item counts impressions, `counted_by` MUST be the source of the line item's `delivery_counting.impression_multiplier`"
+- ir: key:5.7.1:ReportingOption.cadence
+  digest: 1ed8cbd0e08a5feff46582bec6316a6a8c777aeb8b5df3f0e7b6247eee59a36a
+  quote: "`cadence` | OPTIONAL | How often a report arrives"
+- ir: field:5.1:status
+  digest: e7a1e7fc2dd43484786c82fc9093b351cfb31efd936921a38b88d439d65c0901
+  quote: "`status` | LineItemStatus | lifecycle | Independent of the proposal's status, so one line item may sell out while the rest of the shelf stays live"
+- ir: key:5.5:FrequencyCap.period
+  digest: 94550a8780fb7b67c814d558959539f10874a03b16bd563342851a2388df4805
+  quote: "`period` | REQUIRED | The bucket the count runs over"
+- ir: def:2.2:ProposalStatus
+  digest: b171ff0b93042012b4c8d72a4b5a30550166203bb1cef451ff7068a7ad66a777
+  quote: '`ProposalStatus` | `draft` | `published` | `under_review` | `agreed` | `withdrawn` | `expired` | A proposal''s `status`, computed by § 4.3.3'
+- ir: def:2.2:CalendarUnit
+  digest: 0dfca66cd38db96e5c4b0772df8e6c6e831c5f5ececf8c10e275dc6871a3545c
+  quote: '`CalendarUnit` | `hour` | `day` | `week` | `month` | A calendar bucket'
+options:
+- id: by-what-the-arms-are
+  summary: Each takes the shape its arms have. Where both arms are terms, the type is one vocabulary holding
+    the union of them — `LineItemStatus` over `ProposalStatus`'s six terms and `sold_out`, `TimeUnit`
+    over `CalendarUnit`'s four and `flight`. Where the arms are a vocabulary and a value domain, the type
+    is a union of the two, so `Measurer` is `Side` or `RegistrableDomain`.
+- id: all-three-unions
+  summary: All three are unions over their named arms, so `LineItemStatus` is `ProposalStatus` or a constant
+    `sold_out` and `TimeUnit` is `CalendarUnit` or a constant `flight`.
+- id: all-three-vocabularies
+  summary: All three are vocabularies, and `Measurer`'s domain arm is admitted as an open vocabulary's
+    extension term.
+chosen: by-what-the-arms-are
+rationale: '**A union of a term list and one more term is a longer term list.** Nothing a payload can
+  carry distinguishes `LineItemStatus` as "`ProposalStatus` or `sold_out`" from `LineItemStatus` as the
+  seven terms, and the second is one type where the first is three. So `all-three-unions` publishes a
+  `oneOf` over a constant for no gain, and every SDK then exposes a union where an enumeration is what
+  the document describes. `LineItemStatus` and `TimeUnit` are vocabularies, declared with their terms
+  and resting on their own § 2.2 rows.
+
+  **`Measurer`''s arms are not both terms, and that is the whole difference.** `Side` is two words, `buyer`
+  and `seller`; a `RegistrableDomain` is any business''s domain. No term list can hold the second arm,
+  so the type is a union — and `all-three-vocabularies` is refused because admitting a domain as an **extension
+  term** of an open vocabulary would state that a domain is a term outside a core list, which is what
+  `namespaced-term` means and a domain is not. It would also let `examplepub.example` and `ep:examplepub`
+  both through, where the row''s own words are that two values name one party only when they are equal
+  byte for byte.
+
+  **`Measurer` is declarable because `RegistrableDomain` now exists.** `D-058` added it as the kernel
+  type for the domain that names a business, with the comparison that makes it its own concept; before
+  that, `Measurer`''s second arm had no type and the union could not be written. The two records are one
+  reading taken in two steps.
+
+  **Why these three need an entry each rather than resolving by rule.** `src/mapping-rules.ts`''s `namedValueKind`
+  resolves a Type cell against a kernel primitive, a kernel part, or a mapping **entry** declaring a vocabulary
+  of that name — and not against a `types:` declaration. A vocabulary''s terms are read from the element
+  the entry sits on, and none of these three rows carries a value list: each names other types instead.
+  So each is declared in `types:` with its terms or its arms, where the format can hold them, and each
+  row that names it takes an entry on this record, which is the mechanism''s own rule that a decision
+  covers what no rule decides.
+
+  The eight rows: `field:5.1:status` takes `LineItemStatus`; `key:5.5:FrequencyCap.period` and `key:5.7.1:ReportingOption.cadence`
+  take `TimeUnit`; and `key:5.6.4:ProofOfPerformance.logged_by`, `key:5.6.5:CostParameters.rating_source`,
+  `key:5.6.5:CostParameters.action_source`, `key:5.7.1:MeasurementOption.measured_by` and `key:5.7.1:ControllingMeasurementOption.counted_by`
+  take `Measurer`. Each keeps the presence its own cell states, which is what the location gate holds
+  it to.'
+evidence:
+- '`D-053` declares a § 2.2 vocabulary on the value list that carries its terms; these three rows have
+  no value list, which is why they need a declaration with explicit terms instead.'
+- '`D-058` added `RegistrableDomain` under the `registrable-domain` concept, which is `Measurer`''s second
+  arm.'
+feedback: § 2.2 states `LineItemStatus` and `TimeUnit` as one type plus one more term, which reads as
+  a union and is an enumeration. List the terms where the type is defined, because a reader has to open
+  two rows to learn what a line item's status can be.
+challenge:
+- type: Measurer
+  value: ratings.example
+  verdict: accept
+  context: >-
+    A rating source on a `CPP` entry, named by the measurement house's own
+    domain rather than by a side of the deal.
+  reason: >-
+    `by-what-the-arms-are` reads `Measurer` as a union over its two arms, a
+    `Side` and a `RegistrableDomain`, so a business's domain matches the
+    second.
+- type: Measurer
+  value: ratings.example:nielsen
+  verdict: reject
+  context: >-
+    A sender that writes the measurement house and the product it uses in one
+    value, as an extension term of an open vocabulary is written.
+  reason: >-
+    `all-three-vocabularies`, the option not taken, declares `Measurer` an
+    open vocabulary whose extension half is a namespaced term, and it takes
+    this value. The union takes a domain or a side and neither is namespaced,
+    so the value is refused -- which is what makes the two readings tell
+    apart on a payload rather than only on a published form.

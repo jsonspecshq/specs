@@ -1,0 +1,56 @@
+format: 2
+id: D-060
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: '§ 2.2 states `FieldPointer`, "String: a JSON Pointer (RFC 6901)", whose Rules cell reads "A
+  location in the object this specification defines", and two rows name it. The kernel carries no type
+  for a location inside a payload. What do the two rows become?'
+covers:
+- ir: def:2.2:FieldPointer
+  digest: 81c9fe24955719224a5619829da66cd27e74ea53e642be90bb605fb6fcf9f39a
+  quote: '`FieldPointer` | String: a JSON Pointer (RFC 6901) | A location in the object this specification
+    defines'
+- ir: key:2.4:ErrorObject.pointer
+  digest: deeb4f4b44dbfec8db701e927b4ac9770cdecf2577992a578c53d6ab7ff0b4be
+  quote: '`pointer` | OPTIONAL | Into the object this specification defines that the request carries,
+    to the value that caused the error'
+- ir: key:4.1:HistoryPath.pointer
+  digest: abd363f19dbe5d883fcc02f8441d2c815971f2638bfe37d0b583057b5340809f
+  quote: '`pointer` | REQUIRED | Into that line item or the proposal'
+options:
+- id: a-primitive-of-its-own
+  summary: '`FieldPointer` is added to the kernel under a `field-pointer` concept, with RFC 6901''s grammar
+    as its pattern, and the two rows take it.'
+- id: text
+  summary: The two rows take `Text`, the kernel's unparsed string, and RFC 6901 lives in prose beside
+    the schema.
+- id: external-id
+  summary: The two rows take `ExternalId`, since a pointer is an opaque token to a receiver that does
+    not resolve it.
+chosen: a-primitive-of-its-own
+rationale: '**A pointer names a place, which no existing concept does.** `Text` is defined "a receiver
+  doesn''t parse it or compare it", and a pointer is parsed — that is its whole function, and the error
+  object exists so a client can walk to the value that failed. `ExternalId` is an identity another system
+  keeps, and a pointer identifies nothing; it is a path into a document this specification defines. So
+  neither concept carries it, and the domain model is what is incomplete rather than the rows being loose.
+
+  **The grammar is RFC 6901''s and is stated as a pattern**, so a value that is not a pointer is refused
+  where `Text` would have taken it: a bare `packages/0` with no leading solidus, an unknown escape `~2`,
+  and a URI fragment `#/packages`. The pattern excludes control characters, because RFC 6901 admits any
+  character in a reference token and a trailing newline is then accepted by a pattern anchored without
+  them — which the kernel''s own trailing-newline mutant check catches, and did.
+
+  **The radius is three binding files and no published byte of another specification**, by the measurement
+  `D-055` rests on: `mergeBinding` starts from every kernel primitive and removes only what a binding
+  marks `absent`, so omission is publication and AdCOM and the Deals API each take a marker for the primitive
+  and its concept. Neither defines a location inside a payload, so neither wants the type, and both trees
+  are byte-identical beside their bindings.'
+evidence:
+- 'RFC 6901, JavaScript Object Notation (JSON) Pointer: https://www.rfc-editor.org/rfc/rfc6901'
+- docs/reports/reading-runs/openproposal-d050-binding-2026-11-08.md § 10 for the omission-is-publication
+  mechanism.
+feedback: Say whether a `FieldPointer` is resolved against the request as sent or against the document
+  the server holds, because § 2.4's error pointer and § 4.1's history pointer are read against different
+  things and the type says only that it is a pointer.

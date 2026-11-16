@@ -1,0 +1,87 @@
+format: 2
+id: D-080
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: How is a digest written, where section 2.2 states a 71-character value carrying its algorithm
+  and the kernel states 64 bare hexadecimal characters?
+covers:
+- ir: def:2.2:Digest
+  digest: 3d8eea53cc986aa9993abb94385caee4c6baba8fdf1ff4c7f9a027f7c2202e58
+  quote: '`Digest` | String of 71 characters: `sha256:` followed by the 64 lowercase hexadecimal characters
+    of the SHA-256 of its input | The value carries the algorithm, and a field name never names it. `sha256`
+    is the only algorithm in this version. Each field that holds a `Digest` states its input'
+  departs:
+  - The kernel stated one digest type, 64 lowercase hexadecimal characters with no prefix, and this specification's
+    binding sourced that type at this row. The published type refused every value the text writes and
+    accepted a form it never writes.
+- ir: key:2.2:DocumentRef.digest
+  digest: 46a5bd414000136114ff38f74368009f644e074d5b755abf46d07191664d8266
+  quote: '`digest` | REQUIRED | Over the exact bytes served, with no content coding'
+- ir: key:4.1.2:AssentEntry.record_digest
+  digest: 41af590a865a2ee85a73d37dfe50ca46d1c7cd2cea7b2976c178780e26d62ad8
+  quote: '`record_digest` | REQUIRED | Of the binding record for the line items in `line_item_ids[]` (§
+    4.1.1)'
+- ir: key:5.4:AssetProvenance.content_digest
+  digest: d753191626ad61756156c7b17d73f8e5595d6b3c12345fafa2766f23bea42e77
+  quote: '`content_digest` | OPTIONAL | Over the exact bytes served at `url`'
+options:
+- id: second-type-for-the-qualified-form
+  summary: The kernel states two digest types. `QualifiedDigest` carries the algorithm in the value, as
+    section 2.2 states, and section 2.2's row is its source; `Digest` stays the bare form and this specification
+    marks it absent.
+- id: correct-the-kernel-s-digest
+  summary: The kernel's one `Digest` takes section 2.2's form, prefix and all, and every consumer of that
+    type moves with it.
+chosen: second-type-for-the-qualified-form
+rationale: 'Section 2.2 states the qualified form and means it: "String of 71 characters: `sha256:` followed
+  by the 64 lowercase hexadecimal characters of the SHA-256 of its input", and the reason is given in
+  the same cell -- "The value carries the algorithm, and a field name never names it". The three rows
+  that hold one take it: a document reference''s `digest`, an assent entry''s `record_digest`, and an
+  asset provenance''s `content_digest`. A published type may be wider than the document and never narrower,
+  and this one was neither -- the two forms are disjoint, so the type refused all three rows outright.
+
+
+  `correct-the-kernel-s-digest` is the change that looks right and is not, and what rules it out is a
+  second consumer the specification cannot see. The kernel''s `Digest` is also the release manifest''s,
+  whose digests are taken over schema bytes and written bare; `formats/release.schema.json` states that
+  form and `test/release.test.ts` holds it equal to the kernel''s pattern. Taking the kernel''s one type
+  to section 2.2''s form breaks the manifest, which is the evidence that two types are in play rather
+  than one type written wrongly. The algorithm is part of a manifest field''s definition and part of this
+  text''s value, and those are two concepts, so the domain model states both: `digest` beside `qualified-digest`
+  in the reference domain.
+
+
+  The kernel''s name stays with the bare form because the manifest''s schema and its design section already
+  state it, and this specification publishes the qualified form under the kernel''s name for it. A row
+  whose cell names section 2.2''s `Digest` resolves through that row to `QualifiedDigest`, which is how
+  a row naming `EntryRef` resolves to `CatalogRef` under D-077.
+
+
+  Nothing else moves. AdCOM and the Deals API each mark `Digest` absent and now mark `QualifiedDigest`
+  absent too, so neither publishes either -- measured by `map --check` and `emit` on both locks of each.'
+challenge:
+- type: QualifiedDigest
+  value: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  verdict: accept
+  context: >-
+    A document reference pinning the exact bytes it names, written as section
+    2.2 states: 71 characters, the algorithm and then the hash.
+  reason: >-
+    `second-type-for-the-qualified-form` publishes the form the text writes,
+    and the reason the text gives for it is in the same cell: the value
+    carries the algorithm, so a field name never names it.
+- type: QualifiedDigest
+  value: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  verdict: reject
+  context: >-
+    The same reference written as the kernel's `Digest` states it, the 64
+    bare hexadecimal characters the release manifest writes.
+  reason: >-
+    The two forms are disjoint, which is the departure this record names: the
+    kernel's type refused all three of this specification's rows and accepted
+    a form none of them writes. `correct-the-kernel-s-digest` would have made
+    the bare form invalid everywhere, including in the release manifest whose
+    own digests are over schema bytes -- which is how the second consumer was
+    found.

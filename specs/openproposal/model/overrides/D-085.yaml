@@ -1,0 +1,142 @@
+format: 2
+id: D-085
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Of the commercial module's thirty-five normative statements, which bind a party and which does a
+  published type already state?
+covers:
+
+- ir: rule:5.6:d1a0bbb2
+  digest: 64d9b57581ca322b768c58daf90c942f44828ac1861d4d10cab304bb3e12f9af
+  quote: A buyer MAY request another value, and a granted value is the `list_rate` of the next `version`
+- ir: rule:5.6:dd42c497
+  digest: 1db991d6fd2a6df27fc4d856d5b57f028753a4c8ebb979708442e97034a77431
+  quote: A buyer MAY request another.
+- ir: rule:5.6:ae808131
+  digest: 5e0a9b679d5c467abfca454bdbbf4f48edd81eb305d70d5831cdffad2a3d1e44
+  quote: The envelope inside which a buyer may commit, and a buyer MAY request another.
+- ir: rule:5.6.5:f0fab0a8
+  digest: b02d7dac467cd6f757df4c8c5b6c2fc5c65d4b738cd0cce2bb3fb8f7a370901b
+  quote: "`agreed_rate` MUST NOT be negative."
+- ir: rule:5.6.1:a9e897de
+  digest: d64204e518ff8d79ba37f06b97db2a7543141744f475cab740c1595d23f12651
+  quote: A seller MAY decline a resolved `commitment` with a `decline` entry; the buyer MAY recompose.
+- ir: rule:5.6.1:d10d0271
+  digest: fd807b7df7e9287c367093528729fb41a5392c029aa2c245cb53dca26fc8419c
+  quote: A decline for lack of availability MUST state the `availability` of each line item it covers, recomputed against the buyer's composition; the seller's determination is authoritative.
+- ir: rule:5.6.1:bee0b154
+  digest: e984279ec11d7e7f7c8fc407836770ab61688e607717a00536cb87319a59f107
+  quote: While a buyer's hold (§ 5.6.2) runs, the seller MUST NOT decline that buyer's `commitment` for lack of availability.
+- ir: rule:5.6.1:d0b0661f
+  digest: de3ff477392965367729ccce58f8ee04d849c5a468730b10944e09ff922fce22
+  quote: A value equal to the entry's means the line items have not changed and the buyer read the same terms, so the seller MAY accept, at the `version` the entry names.
+- ir: rule:5.6.1:e2d7680a
+  digest: d403160efdbea8a3abb66eebd49380f6ac79d07c0a3bf019cf9fc2108b9da517
+  quote: The seller MUST reject a new `commit` whose `record_digest` differs from the recomputed value, that is stale (§ 4.1.3), whose proposal is past `offer_window.end`, or where the committed entry is past its `price_valid_until`.
+- ir: rule:5.6.1:255884a5
+  digest: 6d59ca6113b2a2f63af6d9e383b59d55345d3871b6026bf56f4f17354b4c135c
+  quote: The rejection MUST carry `expired` when `offer_window.end` or `price_valid_until` has passed, `stale_version` when the `commit` is stale, `not_committable` when a ground of that code applies (§ 2.4), and otherwise `record_mismatch`, so the buyer can fetch it again.
+- ir: rule:5.6.1:a3c72e8a
+  digest: 7a50ff6687ae9619f9fd5c055a336a09ff43fb214d87c1d79c267c29271528fd
+  quote: "These checks MUST be deterministic: they depend only on the stored proposal, the `commit`, and the time the seller receives it."
+- ir: rule:5.6.1:a9a58c00
+  digest: e5246901813cae4dec60e0055972c57c2db2409b1e114bdd23c026abc66214f7
+  quote: "For a replay from the same buyer of a `commit` the seller has already processed, with the same `idempotency_key` and an otherwise equal `Commit`, the seller MUST return the result as it now stands: the rejection, or the `CommitResult`."
+- ir: rule:5.6.1:ad94cfb4
+  digest: f1cf5668d6d5b58f095c58989090375b2bac3d115b8f69a22fc663a5efdfc768
+  quote: It MUST NOT write a second `commitment` entry.
+- ir: rule:5.6.1:82cb5af0
+  digest: 76c8f428a5b5ba4f2993caa91f7a25679fef1871d918734d1ae9acedcfc0579a
+  quote: Reusing an `idempotency_key` with a different `Commit` MUST return `idempotency_conflict` and MUST NOT write an entry or change a `commitment`.
+- ir: rule:5.6.1:1d80425b
+  digest: 2b10b2e4ed675d1f1506ccd115e7d56c0aa964f7f1b7a2506832370fa8ab812b
+  quote: The seller MUST keep a rejection whose `retry` is not `same` at least until `offer_window.end`, or, on a proposal with no `offer_window.end`, for as long as it keeps the proposal.
+- ir: rule:5.6.2:59aeaf37
+  digest: ee74f22f1f4f6b5d975a276105aa43d5e622eedf8624adc6ee45ab4cff14eae4
+  quote: A seller's answer MUST set `status` to `held` or `declined`.
+- ir: rule:5.6.2:6842bab9
+  digest: 1860d0a3b25e582cd0c8a573a09e108f8cde0a44b034e541a01bb4b7d5ff374b
+  quote: A repeated request while `requested` or `held` MUST NOT start a second hold.
+- ir: rule:5.6.2:2e3103fc
+  digest: 4c2961cbb32011f1f134e733289aa5856c22e0a07a0dd4cee9d5a82f9faed9c7
+  quote: It MAY remain on `expired` and `released`
+- ir: rule:5.6.4:5a783437
+  digest: 7fb9b68359bd2e1a42ab009d49f6d0491260465ecfbe0576549d285a0b932be7
+  quote: Every impression count that settles or invoices the line item MUST use its multipliers, and a committed `impressions` level (§ 5.7.1) settles on that source's count.
+- ir: rule:5.6.4:c940cf70
+  digest: 012b0c11f765239c5bd2f555b20320e2c56ded3eb7f816a32f8282f08cae79c4
+  quote: Impressions MUST be summed unrounded over each invoice period and rounded once.
+- ir: rule:5.6.5:12747a05
+  digest: f6550f03252caa1697090da00a028f67d42ee5724f24376e5c3db2c1f9b9ebfc
+  quote: A seller's own extension terms MUST use its `seller.domain` as the `<domain>`.
+- ir: rule:5.6.5:d09c565b
+  digest: f86168eff00a835ca42a822cbdabdbad495f06d1793f9ac286bfe55b0d0a6066
+  quote: A receiver MUST treat an extension entry that breaks these rules as unavailable, not the line item as invalid.
+- ir: rule:5.6.7:650682d8
+  digest: 02e81b21b33160fe9cec2f04a746c05cb47e3b8857897b0fde5417a9dd231fd9
+  quote: A seller MUST decline a `commitment` whose term in effect conflicts with an accepted term on the same inventory and dates.
+- ir: rule:5.6.7:69534567
+  digest: 0d60a2405eb78c5585dd6a128826df67c9e3217ce12cff61e7fa2942f388dbf2
+  quote: A seller MUST NOT preempt a line item that has no `preemption`, or for a reason that its `preemption` doesn't name.
+options:
+- id: by-what-decides-it
+  summary: Each statement takes the role of whatever can decide it, as D-082, D-083 and D-084 read the
+    other modules. Twenty-four are read here and the eleven a payload decides are named and left, because
+    each needs a change pair written against the type it grades.
+- id: all-thirty-five-now
+  summary: Every statement is read in one record, with eleven change pairs written in the same step.
+chosen: by-what-decides-it
+rationale: 'Section 5.6.1 is a protocol and it dominates this module: eleven of its sentences bind the
+  seller in sequence, and none of them is about a value. The seller may decline a resolved `commitment`
+  with a `decline` entry; a decline for lack of availability states the `availability` of each line item
+  it covers, recomputed against the buyer''s composition; while a buyer''s hold runs the seller does not
+  decline that buyer''s `commitment` for lack of availability; the seller rejects a `commit` whose
+  `record_digest` differs from the recomputed value, that is stale, whose proposal is past
+  `offer_window.end`, or whose committed entry is past its `price_valid_until`, and the rejection carries
+  `expired`, `stale_version`, `not_committable` or `record_mismatch` as the ground requires; these checks
+  are deterministic, depending only on the stored proposal, the `commit`, and the time the seller receives
+  it; a replay with the same `idempotency_key` and an otherwise equal `Commit` returns the result as it
+  now stands and writes no second `commitment` entry; reusing that key with a different `Commit` returns
+  `idempotency_conflict` and writes nothing; and a rejection whose `retry` is not `same` is kept at least
+  until `offer_window.end`. Seven more bind the seller elsewhere in the module, and one binds a receiver:
+  an extension entry that breaks section 5.6.5''s rules is unavailable, not a line item that is invalid.
+
+
+  **One is a published type''s.** "`agreed_rate` MUST NOT be negative" is the kernel''s `Amount`, "A sum
+  of money or a price per unit of a cost method, never negative", whose schema carries `minimum: 0`. The
+  statement is the bound and the type publishes it.
+
+
+  **Three are the requestable marker''s words.** "A buyer MAY request another value, and a granted value
+  is the `list_rate` of the next `version`", and two more of the same form on `unit_bounds` and on the
+  commit envelope, are `marker:3:requestable`, which the model holds as a rule with a change pair. The
+  sentence and the rule are the same words read twice, which is the reading D-083 made of section 3''s
+  four and D-084 of section 4.1''s two.
+
+
+  **One looks like the seller''s own `ext` key and is read the same way.** "A seller''s own extension terms
+  MUST use its `seller.domain` as the `<domain>`" is the duty D-082 read for `ext`: a payload holds the
+  seller''s domain and the term''s domain, but nothing says whose a term is, and a pricing entry whose
+  `cost_method` carries a measurement house''s domain breaks no rule.
+
+
+  **Eleven are rules a payload decides, and they are not read here.** A revision does not reuse a
+  `pricing_id` for a different `cost_method`, `cost_parameters`, `currency` or
+  `transaction_mechanisms[]`, and two entries do not share all four (§ 5.6); for a core term the
+  vocabulary sets `rate_per` and a present value matches the table of § 5.6.5; the buyer commits under
+  exactly one entry, which covers the mechanism in effect; an availability is `forecast` when the line
+  item''s `delivery_type` is `non_guaranteed`; `hold_terms.available` is `true` where a hold is asked
+  for (§ 5.6.2); the host of `cost_definition.url` is the term''s domain or a subdomain of it; `agreed_rate`
+  is greater than 0 on a spend basis outside `FLAT` and `TIME`, and the charges in effect do not exceed
+  `amount`; a `FLAT` entry commits on a spend basis with no `derived_units`; and a cancellation option''s
+  `fees[]` is non-empty (§ 5.6.6).
+
+
+  `all-thirty-five-now` is the same reading with eleven change pairs in one step. The pairs are the work:
+  each is a payload the schema accepts and one it refuses, against `PricingEntry`, `LineItem`,
+  `Commitment` and `CancellationOption`, and three of them -- the `pricing_id` rules and the committed
+  entry -- rest on more than one entry of `pricing[]`, so their payloads are the largest this
+  specification has needed.'

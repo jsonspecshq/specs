@@ -1,0 +1,344 @@
+format: 2
+id: D-066
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: D-064 routes every MUST-level requirement whose shape a keyword states
+  into the published schema. Which construct carries each of the eighteen, and
+  what does the schema then refuse that it accepted before?
+covers:
+  - ir: rule:object_ad:e54fb6a6
+    digest: aecf4975a81fb6b84a608136ecb7f25730571cf423cb1811a6693b9797b7ce48
+    quote: "* Required if no other media subtype object is specified."
+  - ir: rule:object_ad:e54fb6a6-2
+    digest: 2640fe2b2ffcd3e755de7dda32849c9f865a7f8e3dec6fc0db33422d5bb3e5df
+    quote: "* Required if no other media subtype object is specified."
+  - ir: rule:object_ad:e54fb6a6-3
+    digest: fee8cafe93c3d9fd27b05610905f2e08b4ea6e133b9fbeb7c23399c8ef6357bc
+    quote: "* Required if no other media subtype object is specified."
+  - ir: rule:object_asset:e6a2f365
+    digest: b4295c7dd7e3c619c020dcd975e3e9c29ffa574425ea8a4da30d9bf30e2db9cb
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-2
+    digest: 1b9d6d4451d5bf5786c50cf898d87586a098218fa1be3ed5e678a29372b0196e
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-3
+    digest: dc95399c9a84ee4c1e2d0ebb29ca0b4da3727e129f5bd945993a9fcb7b737005
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-4
+    digest: 39075d027a7e74ae7b10315b8eb2f457e21cf0abaf0e5709e8b387e6710758ea
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_asset:e6a2f365-5
+    digest: e13fa797859ee4700d6fcbfcb66aa9a1695aa52857e53e46cc203addd329bd64
+    quote: "* Required if no other asset subtype object is specified."
+  - ir: rule:object_videoasset:6f5d60d7
+    digest: 396ae7d8ba249af140ea773b795c18ee01dfcb24a07beffd26b55ad72d58e0b1
+    quote: "* Exactly one of `adm` and `curl` is required."
+  - ir: rule:object_videoasset:6f5d60d7-2
+    digest: b68ae87938416a2fb53da35c0a71b7345eeef76ac5f9910090755ed81627557b
+    quote: "* Exactly one of `adm` and `curl` is required."
+  - ir: rule:object_event:2bbe0e06
+    digest: e7d34cdc66c3eaff1c365d2fb95d267d2bdc7fc3e1c4da9b4ccb9ad1e7eca0d5
+    quote: "* Required for Image-Pixel or JavaScript methods."
+  - ir: rule:object_placement:c424dfde
+    digest: 50939694c8eba101092fae18a3a70c4ed3a2e6aa0db92eaaeacbf921056adad0
+    quote: "* At least one placement subtype object is required."
+  - ir: rule:object_placement:c424dfde-2
+    digest: 68d7e283cceb0905d41426d53a3dc69cae5d051b6bb6f365e3f02dd39c6bdfb6
+    quote: "* At least one placement subtype object is required."
+  - ir: rule:object_placement:c424dfde-3
+    digest: 52046595ab8d8fda298cdba7140427c452f40bd06c9271a2750b7794aa97eff1
+    quote: "* At least one placement subtype object is required."
+  - ir: rule:object_assetformat:a5e2df16
+    digest: 3da937c81787c23429fac5e434cc09fbc6ed111a422c264fdfcca84f5140424c
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:a5e2df16-2
+    digest: 90bd1f2f81b81ca296afa6fe591f859e1377a8a6c7c11d5ec67c13f189b063d4
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:a5e2df16-3
+    digest: 76aae42ba176c90862b803d69308c9469503c30c9b984bce7b4b0802f477d59a
+    quote: "* Required if no other asset format subtype object is specified."
+  - ir: rule:object_assetformat:a5e2df16-4
+    digest: 2e52186ec6a425f98bdc737752c1d0d78049e8d0ecf00ae4d617826464c7fe15
+    quote: "* Required if no other asset format subtype object is specified."
+options:
+  - id: constructs-naming-their-members
+    summary: Each of the four shapes takes the construct type rules § 2a tabulates
+      for it, and every branch names the member it requires beside requiring it.
+  - id: constructs-with-bare-required
+    summary: The same four constructs, each branch a bare `required` clause, as § 2a
+      and § 8 write them in their examples.
+  - id: leave-them-in-the-rules
+    summary: Leave all eighteen in the rules output, which is what D-057 chose and
+      D-064 superseded.
+chosen: constructs-naming-their-members
+rationale: >-
+  The construct per shape is § 2a's table and is not chosen here:
+  at-least-one-of-a-set takes an `anyOf` of one `required` clause per member,
+  exactly-one-of-two a `oneOf` of the same, and required-when-a-code-is-one-of-N
+  an `if` on the sibling's `const` with `then` `required`, the two codes chained
+  through `else`. Fifteen of the eighteen are at-least-one-of-a-set over four
+  objects, two are exactly-one-of-two on `VideoAsset`, and one is
+  required-when-a-code-is-one-of-N on `Event`.
+
+
+  What is chosen is the branch's form, and it is forced by measurement rather
+  than preferred. A bare `required` clause inside an applicator does not
+  compile: the compiler `src/schema.ts` builds -- Ajv 2020 in strict mode, which
+  is the compiler every gate over a published document uses -- refuses all four
+  shapes with *strict mode: required property "display" is not defined at
+  "#/anyOf/0" (strictRequired)*, and refuses the `not` and the `then` forms the
+  same way. So `constructs-with-bare-required` is unpublishable, and the
+  examples in § 2a and § 8 that write it are examples of a document this
+  repository cannot emit. Each branch therefore names the member it requires, as
+  the empty schema, and the member's own type stays stated once in the owner's
+  `properties`.
+
+
+  What the schema refuses now, measured over the emitted bytes on both locks:
+  `$defs/Ad` refuses `{"id": "ad-1"}`, `$defs/Asset` refuses `{}`,
+  `$defs/AssetFormat` refuses `{"id": 1}`, `$defs/Placement` refuses `{}`,
+  `$defs/VideoAsset` refuses `{}` and refuses `adm` and `curl` together, and
+  `$defs/Event` refuses a payload whose `method` is 1 or 2 and that carries no
+  `url`. Nineteen verdicts were sent at the published types and all nineteen are
+  the verdict the rules' own vectors state, nothing this record means to keep is
+  refused, and the nineteen include the one payload D-064 could not write a
+  challenge entry for.
+
+
+  The vectors are this record's challenge entries. A rule the schema carries is
+  not restated in the rules output (§ 5, and § 2a clause 1), so the eighteen
+  leave `rules.json` and their reviewed valid and invalid payloads would
+  otherwise be graded by nothing: § 9's rule that the schema accepts every
+  vector is exactly what an expressed requirement inverts, since the invalid
+  payload is now refused. Twenty-seven distinct entries carry them, every one
+  taken from the vectors rather than written again, and the `override-challenge`
+  gate holds each to its verdict against the emitted schemas.
+evidence:
+  - https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_ad
+  - https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_asset
+  - https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_assetformat
+  - https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_event
+  - https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_placement
+  - https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_videoasset
+challenge:
+  - type: Ad
+    value:
+      id: ad-1
+      display: {}
+    verdict: accept
+    context: "A seller sending an ad: a payload the row admits."
+    reason: A media subtype object is required if no other is specified, so at least
+      one of the three is present.
+  - type: Ad
+    value:
+      id: ad-1
+    verdict: reject
+    context: "A seller sending an ad: a payload the row's footnote forbids."
+    reason: A media subtype object is required if no other is specified, so at least
+      one of the three is present.
+  - type: Ad
+    value:
+      id: ad-1
+      video: {}
+    verdict: accept
+    context: "A seller sending an ad: a payload the row admits."
+    reason: A media subtype object is required if no other is specified, so at least
+      one of the three is present.
+  - type: Ad
+    value:
+      id: ad-1
+      audio: {}
+    verdict: accept
+    context: "A seller sending an ad: a payload the row admits."
+    reason: A media subtype object is required if no other is specified, so at least
+      one of the three is present.
+  - type: Asset
+    value:
+      title:
+        text: Buy a widget
+    verdict: accept
+    context: "A buyer describing a native asset: a payload the row admits."
+    reason: An asset subtype object is required if no other is specified, so at
+      least one of the five is present.
+  - type: Asset
+    value: {}
+    verdict: reject
+    context: "A buyer describing a native asset: a payload the row's footnote forbids."
+    reason: An asset subtype object is required if no other is specified, so at
+      least one of the five is present.
+  - type: Asset
+    value:
+      image:
+        url: https://example.invalid/a.png
+    verdict: accept
+    context: "A buyer describing a native asset: a payload the row admits."
+    reason: An asset subtype object is required if no other is specified, so at
+      least one of the five is present.
+  - type: Asset
+    value:
+      video:
+        adm: <VAST/>
+    verdict: accept
+    context: "A buyer describing a native asset: a payload the row admits."
+    reason: An asset subtype object is required if no other is specified, so at
+      least one of the five is present.
+  - type: Asset
+    value:
+      data:
+        value: 5 stars
+    verdict: accept
+    context: "A buyer describing a native asset: a payload the row admits."
+    reason: An asset subtype object is required if no other is specified, so at
+      least one of the five is present.
+  - type: Asset
+    value:
+      link:
+        url: https://example.invalid/l
+    verdict: accept
+    context: "A buyer describing a native asset: a payload the row admits."
+    reason: An asset subtype object is required if no other is specified, so at
+      least one of the five is present.
+  - type: VideoAsset
+    value:
+      adm: <VAST/>
+    verdict: accept
+    context: "A buyer sending a video asset: a payload the row admits."
+    reason: Exactly one of `adm` and `curl` is required, so one is present and never
+      both.
+  - type: VideoAsset
+    value:
+      curl: https://example.invalid/v.xml
+    verdict: accept
+    context: "A buyer sending a video asset: a payload the row admits."
+    reason: Exactly one of `adm` and `curl` is required, so one is present and never
+      both.
+  - type: VideoAsset
+    value: {}
+    verdict: reject
+    context: "A buyer sending a video asset: a payload the row's footnote forbids."
+    reason: Exactly one of `adm` and `curl` is required, so one is present and never
+      both.
+  - type: VideoAsset
+    value:
+      adm: <VAST/>
+      curl: https://example.invalid/v.xml
+    verdict: reject
+    context: "A buyer sending a video asset: a payload the row's footnote forbids."
+    reason: Exactly one of `adm` and `curl` is required, so one is present and never
+      both.
+  - type: Event
+    value:
+      type: 2
+      method: 1
+      url: https://example.invalid/px.gif
+    verdict: accept
+    context: "A buyer asking for an event to be tracked: a payload the row admits."
+    reason: "A URL is required for the Image-Pixel and JavaScript methods, codes 1
+      and 2 of List: Event Tracking Methods, and for no other method."
+  - type: Event
+    value:
+      type: 2
+      method: 500
+    verdict: accept
+    context: "A buyer asking for an event to be tracked: a payload the row admits."
+    reason: "A URL is required for the Image-Pixel and JavaScript methods, codes 1
+      and 2 of List: Event Tracking Methods, and for no other method."
+  - type: Event
+    value:
+      type: 2
+      method: 1
+    verdict: reject
+    context: "A buyer asking for an event to be tracked: a payload the row's
+      footnote forbids."
+    reason: "A URL is required for the Image-Pixel and JavaScript methods, codes 1
+      and 2 of List: Event Tracking Methods, and for no other method."
+  - type: Event
+    value:
+      type: 2
+      method: 2
+    verdict: reject
+    context: "A buyer asking for an event to be tracked: a payload the row's
+      footnote forbids."
+    reason: "A URL is required for the Image-Pixel and JavaScript methods, codes 1
+      and 2 of List: Event Tracking Methods, and for no other method."
+  - type: Placement
+    value:
+      display: {}
+    verdict: accept
+    context: "A seller describing a placement: a payload the row admits."
+    reason: At least one placement subtype object is required, so at least one of
+      the three is present.
+  - type: Placement
+    value: {}
+    verdict: reject
+    context: "A seller describing a placement: a payload the row's footnote forbids."
+    reason: At least one placement subtype object is required, so at least one of
+      the three is present.
+  - type: Placement
+    value:
+      video:
+        mime:
+          - video/mp4
+    verdict: accept
+    context: "A seller describing a placement: a payload the row admits."
+    reason: At least one placement subtype object is required, so at least one of
+      the three is present.
+  - type: Placement
+    value:
+      audio:
+        mime:
+          - audio/mp4
+    verdict: accept
+    context: "A seller describing a placement: a payload the row admits."
+    reason: At least one placement subtype object is required, so at least one of
+      the three is present.
+  - type: AssetFormat
+    value:
+      id: 1
+      title:
+        len: 90
+    verdict: accept
+    context: "A seller describing the asset a native placement accepts: a payload
+      the row admits."
+    reason: An asset format subtype object is required if no other is specified, so
+      at least one of the four is present.
+  - type: AssetFormat
+    value:
+      id: 1
+    verdict: reject
+    context: "A seller describing the asset a native placement accepts: a payload
+      the row's footnote forbids."
+    reason: An asset format subtype object is required if no other is specified, so
+      at least one of the four is present.
+  - type: AssetFormat
+    value:
+      id: 1
+      img: {}
+    verdict: accept
+    context: "A seller describing the asset a native placement accepts: a payload
+      the row admits."
+    reason: An asset format subtype object is required if no other is specified, so
+      at least one of the four is present.
+  - type: AssetFormat
+    value:
+      id: 1
+      video:
+        mime:
+          - video/mp4
+    verdict: accept
+    context: "A seller describing the asset a native placement accepts: a payload
+      the row admits."
+    reason: An asset format subtype object is required if no other is specified, so
+      at least one of the four is present.
+  - type: AssetFormat
+    value:
+      id: 1
+      data:
+        type: 1
+    verdict: accept
+    context: "A seller describing the asset a native placement accepts: a payload
+      the row admits."
+    reason: An asset format subtype object is required if no other is specified, so
+      at least one of the four is present.

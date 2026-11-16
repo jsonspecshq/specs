@@ -1,0 +1,293 @@
+# Rule vectors for the statements of section 5.4 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: creative
+rules:
+  # § 5.4's `format_specs` row: REQUIRED when the proposal has left
+  # `draft` and `formats` is present. The map is keyed by format id, so a
+  # line item that offers formats and states no spec for them offers a
+  # creative requirement no buyer can build to; while the proposal is
+  # still `draft` the seller is still writing it.
+  #
+  # One clause is the proposal's `status`, which a line item does not
+  # hold, so the vector gives it as context and the check reads it from
+  # there. § 2.2 lists the values of a `ProposalStatus`, and `draft` is
+  # the one the condition excludes.
+  #
+  # Derived from examples/proposal-agreed.yaml at `/line_items/0`, whose
+  # proposal's `status` is `agreed`: the line item carries `formats` and
+  # `format_specs`. D-037's id form is applied to every id the document
+  # mints and to every reference to one, each the UUID version 5 of the
+  # document's own readable id in the DNS namespace. Every other value is
+  # that file's own bytes, the context value included.
+  #
+  # The invalid half is that payload with `format_specs` removed, and
+  # nothing else.
+  - rule: rule:5.4:3a677601
+    digest: 179391013b3fe6067fdac2f2d7dabe2586a3a9b7b4045826d22f0eb5f446d904
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+          status: agreed
+          channel: display
+          properties:
+            available:
+              - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                domains:
+                  - business-daily.example
+                child_audience: general
+                seller_relationship: owner
+                seller_accounts:
+                  - asi: ssp-a.example
+                    sid: pub-1001
+            included:
+              - 20d41300-2fbb-579b-bc61-5b334a26a30a
+          formats:
+            available:
+              - display/300x250
+            included:
+              - display/300x250
+          format_specs:
+            display/300x250:
+              spec_ref: registry.example/display/300x250@1
+              spec:
+                w: 300
+                h: 250
+          creative_delivery:
+            method: buyer_hosted
+            other_protocols:
+              - javascript_tag
+            secure_required: true
+          materials_due:
+            at: 2026-09-28T23:59:59Z
+          pricing:
+            - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+              cost_method: CPM
+              list_rate: 24
+              agreed_rate: 24
+              min_rate: 21
+              price_valid_until: 2026-11-15T23:59:59Z
+              currency: USD
+              price_type: 3
+          commitment_bounds:
+            spend:
+              min: 10000
+              max: 500000
+            earliest_start: 2026-10-05T00:00:00Z
+            latest_end: 2026-12-31T23:59:59Z
+          controlling_measurement:
+            available:
+              - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                counted_by: seller
+                discrepancy_threshold: 0.1
+                final_after: P10D
+            included:
+              - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+            max_select: 1
+          commitment:
+            basis: spend
+            amount: 80000
+            flight:
+              start: 2026-10-06T00:00:00Z
+              end: 2026-12-21T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+            derived_units: 3333333
+          hold_terms:
+            available: true
+            duration: P7D
+          transaction_mechanism:
+            available:
+              - id: programmatic_guaranteed
+                delivery_type: guaranteed
+            included:
+              - programmatic_guaranteed
+            max_select: 1
+          deal_origin: adserver.example
+          buyer_requirements:
+            seats:
+              dsp: dsp-a.example
+              ids:
+                - seat-99812
+                - seat-99813
+          visibility: named
+          eligible_buyers:
+            - agency-a.example
+          terms_refs:
+            - url: https://examplepub.example/legal/io-terms-2026.pdf
+              digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+              version: "2026.1"
+            - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+          external_references:
+            - system: orders.examplepub.example
+              id: "345233"
+              reference_type: order
+            - system: orders.examplepub.example
+              id: "778120"
+              reference_type: line
+            - system: adserver.example
+              id: ep-agency-a-display-q4
+              reference_type: deal
+        context:
+          Proposal.status: agreed
+    invalid:
+      - value:
+          line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+          status: agreed
+          channel: display
+          properties:
+            available:
+              - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                domains:
+                  - business-daily.example
+                child_audience: general
+                seller_relationship: owner
+                seller_accounts:
+                  - asi: ssp-a.example
+                    sid: pub-1001
+            included:
+              - 20d41300-2fbb-579b-bc61-5b334a26a30a
+          formats:
+            available:
+              - display/300x250
+            included:
+              - display/300x250
+          creative_delivery:
+            method: buyer_hosted
+            other_protocols:
+              - javascript_tag
+            secure_required: true
+          materials_due:
+            at: 2026-09-28T23:59:59Z
+          pricing:
+            - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+              cost_method: CPM
+              list_rate: 24
+              agreed_rate: 24
+              min_rate: 21
+              price_valid_until: 2026-11-15T23:59:59Z
+              currency: USD
+              price_type: 3
+          commitment_bounds:
+            spend:
+              min: 10000
+              max: 500000
+            earliest_start: 2026-10-05T00:00:00Z
+            latest_end: 2026-12-31T23:59:59Z
+          controlling_measurement:
+            available:
+              - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                counted_by: seller
+                discrepancy_threshold: 0.1
+                final_after: P10D
+            included:
+              - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+            max_select: 1
+          commitment:
+            basis: spend
+            amount: 80000
+            flight:
+              start: 2026-10-06T00:00:00Z
+              end: 2026-12-21T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+            derived_units: 3333333
+          hold_terms:
+            available: true
+            duration: P7D
+          transaction_mechanism:
+            available:
+              - id: programmatic_guaranteed
+                delivery_type: guaranteed
+            included:
+              - programmatic_guaranteed
+            max_select: 1
+          deal_origin: adserver.example
+          buyer_requirements:
+            seats:
+              dsp: dsp-a.example
+              ids:
+                - seat-99812
+                - seat-99813
+          visibility: named
+          eligible_buyers:
+            - agency-a.example
+          terms_refs:
+            - url: https://examplepub.example/legal/io-terms-2026.pdf
+              digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+              version: "2026.1"
+            - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+          external_references:
+            - system: orders.examplepub.example
+              id: "345233"
+              reference_type: order
+            - system: orders.examplepub.example
+              id: "778120"
+              reference_type: line
+            - system: adserver.example
+              id: ep-agency-a-display-q4
+              reference_type: deal
+        context:
+          Proposal.status: agreed
+  # § 5.4: once the proposal leaves `draft`, every id in `formats.available[]`
+  # has a `format_specs` entry. The valid half is `proposal-issued.yaml`'s
+  # first line item, which is `agreed` and states an entry for each of the two
+  # ids it offers, trimmed to the keys a `LineItem` requires plus the two
+  # fields the rule reads. The invalid half is that payload with the
+  # `display/970x250` entry removed, which leaves an offered id with no entry
+  # (D-144).
+  - rule: rule:5.4:c07c0dd1
+    digest: c0931f38e0359ee1670e6d952b88e4f3e1361d9b44425e8d5250115357f37fab
+    decision: D-144
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: business-daily-display
+          status: agreed
+          channel: display
+          visibility: named
+          formats:
+            available: [ display/300x250, display/970x250 ]
+            included: [ display/300x250 ]
+            deltas: { display/970x250: { delta_cpm: 3.00 } }
+            selected: [ display/300x250, display/970x250 ]
+          format_specs:
+            display/300x250:
+              spec_ref: registry.example/display/300x250@1
+              spec: { w: 300, h: 250 }
+            display/970x250:
+              spec_ref: registry.example/display/970x250@1
+              spec: { w: 970, h: 250 }
+          pricing:
+            - { pricing_id: bd-cpm-usd, cost_method: CPM, list_rate: 24.00, agreed_rate: 27.54,
+                price_valid_until: "2026-11-15T23:59:59Z", currency: USD, price_type: 3 }
+          transaction_mechanism:
+            available: [ { id: programmatic_guaranteed, delivery_type: guaranteed } ]
+            included: [ programmatic_guaranteed ]
+            max_select: 1
+    invalid:
+      - value:
+          line_item_id: business-daily-display
+          status: agreed
+          channel: display
+          visibility: named
+          formats:
+            available: [ display/300x250, display/970x250 ]
+            included: [ display/300x250 ]
+            deltas: { display/970x250: { delta_cpm: 3.00 } }
+            selected: [ display/300x250, display/970x250 ]
+          format_specs:
+            display/300x250:
+              spec_ref: registry.example/display/300x250@1
+              spec: { w: 300, h: 250 }
+          pricing:
+            - { pricing_id: bd-cpm-usd, cost_method: CPM, list_rate: 24.00, agreed_rate: 27.54,
+                price_valid_until: "2026-11-15T23:59:59Z", currency: USD, price_type: 3 }
+          transaction_mechanism:
+            available: [ { id: programmatic_guaranteed, delivery_type: guaranteed } ]
+            included: [ programmatic_guaranteed ]
+            max_select: 1

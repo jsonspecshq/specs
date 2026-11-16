@@ -1,0 +1,146 @@
+format: 2
+id: D-140
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Seven rows type their values at the bare term grammar and state what those values are
+  in a form no value list carries: five name one core term, and two say this version lists
+  none. The published type lists nothing any of them states. What is each list called?
+covers:
+- ir: field:5.6:renewal_right
+  digest: 48cf3d5378abf2c639e318431e2e929dc54b0cf7110d14a958166cf6bb6eff52
+  quote: "`renewal_right` | VocabularyTerm | seller-set | The current advertiser's right to the next cycle. Core term: `first_refusal`, the right to buy the next cycle before it opens up. Absent: no such right. It is not a place in a hold queue (`hold.position`)"
+- ir: key:5.4:CreativeDelivery.other_protocols[]
+  digest: e056eb0c6535a4c59aae2838b7ce0b9a7677e8c93f83a4a83d3d6b095969134f
+  quote: "`other_protocols[]` | OPTIONAL | How a creative that list has no code for is delivered. Core term: `javascript_tag`, a tag whose script renders the ad. A receiver that doesn't know a term treats only that term as unavailable"
+- ir: key:5.6.5:CostParameters.viewability_standard
+  digest: d213f91f3a635104e410c38f8b7a3a30e570fc1ba329d6b54df2766a43926bcc
+  quote: "`viewability_standard` | REQUIRED when `cost_method` is `CPMV` | The viewability standard that counts a unit. Core term: `mrc`, the MRC guidelines that `viewable_rate` cites (§ 5.7.1)"
+- ir: key:5.6.7:Preemption.reason
+  digest: bc0a93257bec658de7e469bedfa0cdfadf4f3d74ddcce31acea4b16a165adcf5
+  quote: "`reason` | REQUIRED | What can preempt this line item. Core term: `exclusivity`, an exclusivity term the seller accepts later that holds, under its `separation` and `window`, where and when this line item delivers"
+- ir: key:5.8:RequiredCredential.credential_type
+  digest: dfc293c59daa7936a562adf05997c1867ff0d4cfc047d92a7a83ac596ea739c8
+  quote: "`credential_type` | REQUIRED | What the buyer holds. Core term: `iab_registry`, an entry in the IAB Tech Lab Agent Registry"
+- ir: key:5.6.5:CostParameters.action_type
+  digest: 7f7212da7d23f9e925f14e45f9def1eb5a9856b694929e806ab5b722f8171672
+  quote: "`action_type` | REQUIRED when `cost_method` is `CPA` | The kind of action counted. Core terms in IAB Tech Lab ECAPI 1.0: its `event_type` values, from the Standard Events and Additional Events tables both, other than `custom`, such as `purchase` or `install`. Any other action is an extension term, such as `shop.example:store_visit`"
+- ir: key:5.6.4:ImpressionMultiplier.demographic
+  digest: 131967025f960f6bfeaa0f32e5482f8b05a4231955c8d50ac3b7d05e93bb4cf6
+  quote: "`demographic` | OPTIONAL | The demographic whose value settles when `dataset` gives a value per demographic. The same kind of term as `cost_parameters.demographic` (§ 5.6.5)"
+- ir: key:5.6.5:CostParameters.demographic
+  digest: 28f394d87003c6ac615d1126a28769db077572b544dfde8a08a57ec31a6a4f7b
+  quote: "`demographic` | REQUIRED when `cost_method` is `CPP` | The rated demographic, such as `ratings.example:adults_25_54`. Its definition states whether co-viewers and impressions of unknown age count, or says `unknown`. This version lists no core terms"
+options:
+- id: seven-named-lists
+  summary: >-
+    Each row holds a vocabulary of its own, open, named by this record under `D-065`'s
+    `concept-names` rule, with the core terms the row spells and none where the row says
+    this version lists none. The row references the name.
+- id: the-bare-grammar-is-what-the-text-states
+  summary: >-
+    A row that names one core term, or none, states no list worth publishing, so the bare
+    term grammar stays and the gate goes on reporting all seven.
+chosen: seven-named-lists
+rationale: >-
+  THIS RECORD INVENTS SEVEN NAMES AND SAYS SO. The specification writes none of
+  `RenewalRight`, `CreativeDeliveryProtocol`, `ViewabilityStandard`, `PreemptionReason`,
+  `CredentialType`, `ActionType` or `Demographic`. Type rules § 7 requires a record for a
+  name the mapping overrides, and this is that record; the names follow `D-065`'s
+  `concept-names`, which is the rule the other thirteen invented names of this
+  specification already follow, so a reader meets one convention and not two.
+
+  WHAT IS INVENTED IS THE NAME AND NOTHING ELSE. Every term below is the row's own
+  spelling, and a row that states no core term gets a list with none. The reading adds no
+  value, forbids no value, and changes no presence; it gives the list the row declares a
+  name so that something can reference it.
+
+  FIVE ROWS NAME ONE CORE TERM, AND ONE IS STILL A LIST. `renewal_right` is
+  "Core term: `first_refusal`", `other_protocols[]` "Core term: `javascript_tag`",
+  `viewability_standard` "Core term: `mrc`", `Preemption.reason` "Core term:
+  `exclusivity`", and `credential_type` "Core term: `iab_registry`". "Core term" in the
+  singular is "Core terms" in the plural with one entry, and each row's own next sentence
+  says what an unknown term does -- a receiver "treats only that term as unavailable" --
+  which is a sentence about a list that takes more. The bare grammar publishes none of the
+  five, so a consumer reading the type learns nothing the row says.
+
+  ONE ROW SAYS THIS VERSION LISTS NONE, WHICH IS A LIST THAT IS EMPTY AND NOT AN ABSENT
+  LIST. `demographic` ends "This version lists no core terms", a sentence that has a list
+  as its subject and says what this version of it holds. It is published as an open
+  vocabulary with no core terms, which type rules § 6 and `D-041` already read as the
+  namespaced term, so the bytes a payload may carry are what they were; what changes is
+  that the type has a name, a description, and a place for the terms a later version
+  states. `sets_aside` lists it, which is how an open vocabulary with no core terms is
+  held: the listing fails the moment it gains a term, so it cannot outlive its reason.
+
+  `action_type` SAID THE SAME AND NO LONGER DOES, WHICH IS WHAT THE RE-PINNED LOCK
+  CHANGED. The row read "The kind of action counted, such as `shop.example:purchase`. This
+  version lists no core terms"; it now reads "Core terms in IAB Tech Lab ECAPI 1.0: its
+  `event_type` values, from the Standard Events and Additional Events tables both, other
+  than `custom`, such as `purchase` or `install`. Any other action is an extension term,
+  such as `shop.example:store_visit`". So the document has closed what it left open: the
+  core terms are another body's list, named, with one of its values excluded by name, and
+  the extension half unchanged.
+
+  THE PUBLISHED TYPE NOW REFUSES A TERM THE ROW STATES, AND THAT IS THE COST THIS RECORD
+  CANNOT PAY. `ActionType` is published as an open vocabulary with no core terms, which is
+  the namespaced term, whose pattern requires `<domain>:<term>`. The row's own examples of
+  core terms are `purchase` and `install`, bare. So the type refuses two values the
+  specification names, which is the one direction a published type may not be wrong in.
+  Enumerating them needs ECAPI 1.0's two event tables pinned in `kernel/lists.yaml` as the
+  AdCOM and OpenDirect lists are, which is an external document this repository does not
+  hold; until it does, `ActionType` keeps its `sets_aside` listing and the reason for the
+  listing is this paragraph and not the old row. No payload the specification ships writes
+  an `action_type`, so no shipped example is refused today and `examples-validate` reports
+  nothing: the defect is in the published type a consumer reads, not in a vector.
+
+  THE NAMES, EACH UNDER `D-065`'s RULE. Where the row's name states the concept, the list
+  takes that name, singular: `RenewalRight`, `ViewabilityStandard`, `CredentialType`,
+  `ActionType`, `Demographic`. Where the row's name is generic or shared, the object's name
+  is added: `reason` says nothing on its own, so § 5.6.7's is `PreemptionReason`, beside
+  the `PreemptionRemedy` that record already named. `other_protocols[]` is named for what
+  its values are and not for the row: "other" is relative to the `protocols[]` beside it,
+  whose values are AdCOM creative subtypes, and the values here are ways a creative is
+  delivered, so the list is `CreativeDeliveryProtocol`, beside `CreativeDeliveryMethod` on
+  the same object.
+
+  `the-bare-grammar-is-what-the-text-states` is what the model published before this record
+  and it is refuted by each row's own sentence. A row that spells a term and says what a
+  receiver does with a term it doesn't know has stated a list. Leaving it bare publishes a
+  type that admits `anyone.example:whatever` and lists neither `mrc` nor `iab_registry`,
+  which is the one direction a published type may not be: wider than the document, with
+  the document's own terms invisible.
+
+  § 5.6.4's `demographic` HOLDS THE SAME LIST, AND ITS OWN ROW SAYS SO. This record named
+  § 5.6.5's list and left § 5.6.4's row on the bare term grammar, and the two member names
+  then resolved to two concepts, which `domains-homonyms` reported. The row settles it in
+  one clause: "The demographic whose value settles when `dataset` gives a value per
+  demographic. The same kind of term as `cost_parameters.demographic` (§ 5.6.5)". "The same
+  kind of term as" names the other row, so one vocabulary serves both and the second row
+  references `Demographic` rather than declaring a list of its own -- which is type rules
+  § 5's "each list is defined once and referenced" applied to the sentence that says they
+  are one.
+
+  THE SEVEN NAMES STAND. `action_type`'s row still states a kind of action and still needs
+  a name for the list it now cites, so `ActionType` is the name under `D-065`'s
+  `concept-names` rule exactly as before; what moved is where its terms come from, not
+  whether it has a name.
+
+  WHAT THIS LEAVES, MEASURED. Two more rows of the nine the gate reports are of a
+  different shape and this record does not touch them, because each needs a union across a
+  module boundary and the module graph is not a DAG: § 5.3's `AddressableScale.unit` holds
+  § 5.5's `frequency_cap.per` terms and `person`, so its union would make `audience`
+  depend on `targeting`, which already depends on `audience`; and § 5.7.1's
+  `provided_metrics[]` holds § 5.6.5's `unit` terms and the Rate terms of the `metric`
+  table, so its union would pull `guarantees` into the cycle `commercial`, `line-item` and
+  `proposal` already form. Both wait on the module cut, and `modules-depends` is where the
+  blocker is reported.
+sets_aside:
+- type: ActionType
+  field: cost_parameters.action_type
+  ir: key:5.6.5:CostParameters.action_type
+- type: Demographic
+  field: cost_parameters.demographic
+  ir: key:5.6.5:CostParameters.demographic

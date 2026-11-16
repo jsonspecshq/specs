@@ -1,0 +1,161 @@
+---
+title: How it's built · OpenProposal 3.0 JSON Schema
+description: How Postindustria generates the OpenProposal 3.0 schemas from the specification text, and how each step shapes the type map and the files.
+---
+{/*
+  OpenProposal's How it's built page, in its own words. Moved from the
+  predecessor's `methodPage` (`src/specs/openproposal/site.ts:154-242`) with
+  every word in its place, except where the step records a difference:
+
+   - **"Variants and inputs" is "The one input".** The predecessor's section
+     described two switches picking one of four builds; this specification has
+     one lock and one variant, so the section says what the one input is and
+     what it is not -- the merge is ours, the tree is on no branch upstream,
+     and upstream `main` as written is no lock of this specification.
+   - **The SDK section is not ported.** No SDK tree is published for this
+     specification, so a section describing its constants and its receive mode
+     would describe files the downloads page does not hold.
+   - **The worked example is `<WorkedExample />`**, which renders the steps
+     from `walkthrough` in the bundle: the row's quote and link, the element
+     and its digest, the vocabulary, the emitted schema and the example value.
+     The predecessor wrote seven `<li>`s and interpolated each value, and
+     followed the line item's `formats` field through its constructor and its
+     copy; the selection here is `field:5.1:channel`, in
+     `src/specs/openproposal/site.ts`, and the reason is written there.
+     **That component gained a third reading for this page**: its first two
+     were a row that is itself a term, and a row that holds its list in one of
+     its cells. This text's row does neither -- its Type cell names a
+     vocabulary another section states -- and the sentence written for the
+     second reading would have said the row's cell lists codes that the row
+     does not hold.
+   - The predecessor's extraction sentence counted inline objects, which the
+     bundle does not carry; this one cites the counts it does hold, and the
+     element-ID bullet states the grammar of an ID rather than listing ids,
+     since a typed id is a name no component holds the page to.
+   - The design notes' two sentences are the `codes` and `flags` slots of
+     `<DesignNotes />`, as they were the predecessor's two arguments.
+   - The repository the last section links is this one, and the lock the
+     command names is `specs/openproposal/input/with-open-prs.lock.yaml`.
+
+  Every figure is read from the bundle through <Stat>. The whole page is one
+  `<div class="wrap method">` written with no blank line inside it, so MDX
+  reads it as one JSX block and every component below resolves as a component.
+*/}
+<div class="wrap method">
+<h1>How it's built</h1>
+<p class="lede">Postindustria, an IAB Tech Lab member, generates these schemas from the OpenProposal <Stat of="brand.edition" /> specification text. Nobody writes a schema file by hand. Every schema, rule and example payload is a function of two things: the specification at a pinned commit, and a mapping and a set of decision records that we review by hand. This page explains each step, and what it shapes in the <a href="map.html">type map</a> and the <a href="downloads.html">files</a>.</p>
+<nav class="toc" aria-label="On this page"><p class="note">On this page</p><ol><li><a href="#pipeline">The pipeline</a></li><li><a href="#extraction">Extraction</a></li><li><a href="#domains">The value-domain model</a></li><li><a href="#mapping">Semantic mapping</a></li><li><a href="#constructors">Constructors and copies</a></li><li><a href="#layers">Layers</a></li><li><a href="#emission">Emission rules</a></li><li><a href="#beyond">What JSON Schema can't say</a></li><li><a href="#verification">Verification</a></li><li><a href="#input">The one input</a></li><li><a href="#example">One field, end to end</a></li><li><a href="#design">Design notes: codes and flags</a></li><li><a href="#reproduce">How to reproduce it</a></li></ol></nav>
+<section id="pipeline">
+<h2>The pipeline</h2>
+<p>The pipeline runs in six steps. Steps 1, 4 and 5 are programs: two runs write the same bytes, and the gates fail when the committed output differs from a fresh run. Step 2 and the decision records are reviewed input. Step 3 is both: mapping rules derive what the text decides, and a decision record covers everything else. Step 6 checks the result against the text.</p>
+<Pipeline />
+</section>
+<section id="extraction">
+<h2>Extraction</h2>
+<p>A deterministic parser reads the specification's markdown and writes an intermediate representation (IR). It makes no judgments and calls no language model. The text states the RFC 2119 convention and writes its keywords in capitals, so a lowercase "must" is prose and states no requirement. Across <Stat of="sections" unit="section" /> and <Stat of="tables" unit="table" />, the IR holds <Stat of="fields" unit="field row" />, <Stat of="keys" unit="key row" />, <Stat of="definitions" unit="list row" /> in the tables that define a list, <Stat of="valueLists" unit="value list" /> written inside a row's own cell, and <Stat of="statements" unit="RFC 2119 statement" />, with the marker rows, the code blocks and every prose sentence that names an identifier.</p>
+<p>Each element has a stable ID, a quote and a digest.</p>
+<ul>
+<li><strong>The ID</strong> says where the element is, in the order you would look for it. Read <code><Stat of="walkthrough.element" /></code> as: a field row (<code>field</code>), in the section whose number follows, and the row whose name cell is the last part. A key row names the object the table defines and then the key, a term of a list names the list and then the value, and a statement or a sentence has no name, so its ID ends in the first eight hex digits of the SHA-256 of its text.</li>
+<li><strong>The quote</strong> is the element's text as the specification writes it.</li>
+<li><strong>The digest</strong> is the SHA-256 of a table row's source bytes, or of any other element's canonical JSON without its location, so moving an element doesn't change it.</li>
+</ul>
+<p>Every mapping entry, decision record, domain concept, primitive and test vector that rests on an element stores the element's digest. When the text of the element changes, each of them goes stale, and the gates fail until someone reviews it and records the new digest.</p>
+<p class="where"><strong>Where you see it.</strong> In the type map, a type's <em>Specification lines it rests on</em> lists each element it rests on, with a readable label and the quote. Expand an item to see its ID.</p>
+</section>
+<section id="domains">
+<h2>The value-domain model</h2>
+<p>Before any mapping, we wrote and reviewed a model of the values the specification talks about: <Stat of="domains" unit="value domain" />, such as identity, money and time, with <Stat of="concepts" unit="concept" /> under them. Each concept says what a value means, names the one type that represents it, and cites the specification elements and standards it rests on. The kernel defines each of its <Stat of="primitives" count unit="primitive" /> once, by its meaning, not by its format. This text names its own types in § 2.2, so which of them are the kernel's primitives is itself a reading (<Decision of="D-067" />, <Decision of="D-057" />).</p>
+<p>A concept gets a type of its own only when its values validate differently, or a receiver handles them differently: compares them, adds them, fetches them, or shows them. Where a value comes from doesn't change either, so it goes in the field's description.</p>
+<dl class="cases">
+<dt>Money and its currency</dt>
+<dd>A sum of money is <TypeLink of="Amount" />, which § 2.2 states carries no currency of its own. So the currency is the <TypeLink of="CurrencyCode" /> in a sibling of the same object, never one inherited from an enclosing object, and where the money is optional <code>dependentRequired</code> requires the currency with it (<Decision of="D-036" />, <Decision of="D-092" />).</dd>
+<dt>Three kinds of time</dt>
+<dd>A point in time is an <TypeLink of="Instant" />. A span the text writes in the ISO 8601 grammar is a <TypeLink of="Duration" />, and a span a row states as a whole number is a <TypeLink of="DurationSeconds" /> or a <TypeLink of="DurationMilliseconds" />, by the unit the row names (<Decision of="D-070" />). A clock window is a <TypeLink of="DaypartWindow" />: the days it names and two <TypeLink of="TimeOfDay" /> ends, <code>HH:MM</code>, read on the line item's <TypeLink of="TimeZone" />, which <code>dependentRequired</code> requires with a daypart or a frequency cap (<Decision of="D-075" />, <Decision of="D-055" />). Each validates differently, and a receiver compares the first as an instant, the second as a length, and reads the third on a clock.</dd>
+<dt>A minted ID or an external one</dt>
+<dd>An ID that a party of the proposal mints, such as a <code>proposal_id</code>, is a <TypeLink of="MintedId" />, so every party compares it the same way (<Decision of="D-037" />). An ID, a code or a version that another system or list defines is an <TypeLink of="ExternalId" />: the proposal carries it as written and never parses it, and the field's description names the system. An <code>ExternalId</code> and a <TypeLink of="Text" /> have the same structure, a string, but a receiver compares one and shows the other, so the domain model declares them distinct types.</dd>
+<dt>Named vocabularies</dt>
+<dd>A field whose values are terms has a named vocabulary, such as <TypeLink of="MediaChannel" />, named after what its terms are where the text names only the row that holds them (<Decision of="D-065" />). A closed vocabulary is an <code>enum</code>. An open one also takes a <TypeLink of="NamespacedTerm" />, <code>&lt;domain&gt;:&lt;term&gt;</code>, where the domain is the definer's, which is the grammar § 2.2 states for a vocabulary term (<Decision of="D-078" />). Whether a particular vocabulary is open is twice a change we propose: where the row's own Type cell names that grammar (<Decision of="D-089" />), and where the text declares it somewhere other than the cell that lists the terms (<Decision of="D-130" />).</dd>
+</dl>
+<p class="where"><strong>Where you see it.</strong> The type map's first column groups the primitives by value domain, and a primitive's detail shows its domain, its concept, and the concept's meaning.</p>
+</section>
+<section id="mapping">
+<h2>Semantic mapping</h2>
+<p>The mapping says what each IR element becomes: a property, a named type, a vocabulary term, a rule, an obligation, a profile, an example, or informative text. Every element has exactly one entry, in the file of the module that owns its section. Of the <Stat of="mappingEntries" /> entries, <Stat of="mappingByRule" /> come from mapping rules and <Stat of="mappingByDecision" /> cite a decision record.</p>
+<ul>
+<li><strong>Rules first.</strong> A mapping rule maps what the IR, the domain model and the type rules decide. For example, a row a concept cites is typed by that concept, so no decision types it. An entry can't cite a decision where a rule applies.</li>
+<li><strong>Gaps.</strong> Where the text leaves a point open, a decision record settles it. There are <Stat of="gaps" /> such records, of kind <em>gap</em>.</li>
+<li><strong>Departures.</strong> Where the text or its examples settle a point and we would write it differently, a decision record of kind <em>departure</em> records the change and states the cost it accepts. There are <Stat of="departures" />.</li>
+</ul>
+<p>A decision record states its question, the options we weighed, the one we chose and why, what we ask the specification to state, and the elements it rests on, each quoted and digested. Read them all in the <a href="decisions/index.html">decision records</a>.</p>
+<p class="where"><strong>Where you see it.</strong> A type's detail lists its <em>Decision records</em>, and each record links the lines it quotes.</p>
+</section>
+<section id="constructors">
+<h2>Constructors and copies</h2>
+<p>The specification writes a few forms many times. The model holds each one once, as a template: <TypeLink of="Selectable" /><code>&lt;T, K&gt;</code> for a field the buyer selects options of (§ 3.1), <TypeLink of="Settable" /><code>&lt;T&gt;</code> for a field the buyer sets to one of the values the seller allows (§ 3.2), <TypeLink of="Range" /><code>&lt;T&gt;</code> for a pair of bounds, <code>min</code> and <code>max</code>, with at least one of them present, <TypeLink of="SettableRange" /><code>&lt;T&gt;</code> where the value the buyer sets is itself a range, <TypeLink of="TaxonomyCodes" /><code>&lt;T&gt;</code> for codes in one taxonomy, with the taxonomy that defines them (<Decision of="D-122" />), <TypeLink of="Narrowing" /><code>&lt;T&gt;</code> for what a buyer writes inside the set a seller allows, the entries it takes and the entries it drops, and <code>List&lt;T&gt;</code> and <code>Map&lt;K, V&gt;</code>. What a <code>selectable</code> and a <code>settable</code> field hold is two of the changes we propose, because the kernel's templates carry members the text's own tables don't list (<Decision of="D-091" />, <Decision of="D-090" />).</p>
+<p>Templates exist only in the model. Each application becomes a named, concrete copy in the schema, so a plain code generator that knows nothing about generics still produces correct classes.</p>
+<p>A copy is named after the field its mapping entry names, in PascalCase and with no singular form: <code>&lt;Field&gt;Selection</code>, <code>&lt;Field&gt;Bounds</code> or <code>&lt;Field&gt;Range</code>. So <code>formats</code> gives <TypeLink of="FormatsSelection" />, <code>markets</code> gives <TypeLink of="MarketsSelection" /> and <code>retention</code> gives <TypeLink of="RetentionRange" />. <code>List</code> and <code>Map</code> carry no rule of their own, so they stay inline. A copy belongs to the one module that states its form, and a row elsewhere that restates that form references it by name rather than minting a second copy of it (<Decision of="D-159" />).</p>
+<p class="where"><strong>Where you see it.</strong> In the type map, a template is in italics in the second column, and a copy has a dashed border. A copy's detail shows its application, such as <code>Settable&lt;T=GeoCode&gt;</code> for <TypeLink of="GeoBounds" />. The model holds <Stat of="counts.typesByKind.copy" unit="copy" units="copies" />.</p>
+</section>
+<section id="layers">
+<h2>Layers</h2>
+<p>Types build from the bottom up, and a type uses only the layers below it.</p>
+<ol class="layers-list">
+<li><strong>Primitives.</strong> Every scalar that validates or is handled differently, such as <TypeLink of="MintedId" /> and <TypeLink of="Amount" />.</li>
+<li><strong>Constructors and parts.</strong> The templates, and the parts their copies share, such as <TypeLink of="PriceDelta" />. A copy sits at the layer of the highest type it holds.</li>
+<li><strong>Vocabularies.</strong> Every value list a module owns, such as <TypeLink of="MediaChannel" />.</li>
+<li><strong>Objects and unions.</strong> Each module's structures, such as <TypeLink of="Commitment" />.</li>
+<li><strong>Documents and profiles.</strong> <TypeLink of="Proposal" />, <TypeLink of="LineItem" /> and <TypeLink of="ProposalManifest" />, and the profiles projected from them.</li>
+</ol>
+<p>The layering is a gate, and it matters for three reasons. No reference chain can form a cycle, so every generator can emit the types in order. Each concept is defined once, low in the stack, and every use references it, so a constraint can't drift between two copies. And the modules follow the specification's sections, each depending only on the kernel and on the modules it declares, which gives the schema files their structure: <code>kernel/1/kernel.json</code>, <code>modules/&lt;module&gt;/1/&lt;module&gt;.json</code> and <code>documents/1/&lt;document&gt;.json</code>.</p>
+<p class="where"><strong>Where you see it.</strong> The type map's five columns are the layers. Select a type to see what it's built from and what uses it.</p>
+</section>
+<section id="emission">
+<h2>Emission rules</h2>
+<p>The emitter turns the model into JSON Schema 2020-12. The schemas use standard keywords only, so any validator reads them the same way.</p>
+<ul>
+<li>No custom keywords: no <code>x-</code> keys, no <code>discriminator</code> and no <code>$dynamicRef</code>.</li>
+<li><code>oneOf</code> only for a tagged union, where every branch has a required <code>const</code> member that names it, and for an integer code list, one titled <code>const</code> per code (see the <a href="#design">design notes</a>).</li>
+<li><code>anyOf</code> for an open vocabulary, and for the untagged unions the text requires, such as a list of entries or the reference that stands for one. Our feedback lists each untagged union as a place where the specification should add a tag.</li>
+<li><code>if</code> / <code>then</code> for a condition a row's Required cell states, and <code>dependentRequired</code> for a member another member requires.</li>
+<li>No <code>allOf</code>: objects are named and referenced whole, so no schema inherits from another.</li>
+<li>A constraint lives only on a named type, and a property carries nothing beside its <code>$ref</code> but a description.</li>
+<li>An object is closed unless the specification leaves its structure to the object's publisher (<Decision of="D-106" />).</li>
+</ul>
+<p>A profile, such as § 2.1's summary of a proposal, projects paths, not whole fields. A path through an object makes a named object with only the members the paths name, such as <TypeLink of="PackageSummary" />.</p>
+<p class="where"><strong>Where you see it.</strong> A type's <em>Schema</em> view shows its emitted schema, and each <code>$ref</code> opens the type it names. The <a href="downloads.html">files page</a> links the schema folder, and this site serves each file at its path.</p>
+</section>
+<section id="beyond">
+<h2>What JSON Schema can't say</h2>
+<p>Some statements can't be checked by a schema of one payload: one field compared with another, an entry that must name an option in another list, uniqueness by a key, arithmetic, which party may change a field between two versions, and what a receiver does. Each one becomes a rule, with an ID, the text it comes from, the type that owns it, and at least one valid and one invalid test vector. A vector is a payload, or a pair of versions with the party that made the change. An invalid vector of a SHOULD rule is a warning, and of any other rule an error. There are <Stat of="rules" unit="rule" />.</p>
+<p>A vector's valid half is the specification's own bytes: an example it ships, mutated in exactly what the rule forbids. Where the text states a message row by row and ships no payload of it, a payload assembled from shipped values into the stated envelope is still derived, and that is a recorded reading rather than a licence to write one (<Decision of="D-134" />). Where a shipped example writes only part of a line item, a rule whose verdict turns on a field the example doesn't write is undecided on it, and the finding says so (<Decision of="D-135" />).</p>
+<p>A requirement that no payload can show, such as what a party must do before it answers, is an obligation on a party: the seller, the buyer, a consumer or an implementation. An obligation has no keyword and no vector. The model lists <Stat of="obligations" /> of them, and which statements are obligations rather than rules was read module by module (<Decision of="D-084" />, <Decision of="D-124" />).</p>
+<p class="where"><strong>Where you see it.</strong> A type's detail lists its <em>Rules beyond the schema</em>. The files page links the rules with their vectors.</p>
+</section>
+<section id="verification">
+<h2>Verification</h2>
+<ul>
+<li><strong>The fidelity oracle.</strong> A separate program reads, from the IR alone, every constraint the text states in a form that needs no judgment: a REQUIRED or OPTIONAL row, a conditional REQUIRED, a value list, a stated type, and a YAML example. It never reads the mapping or the decisions. For each constraint it builds a valid and an invalid payload and checks that the emitted schema gives each its verdict. A disagreement fails, unless a departure covers that exact element and lists that form of constraint.</li>
+<li><strong>Known-bad fixtures.</strong> Every gate has fixtures it must reject, such as a model with a currency deleted, a twin of <code>Amount</code>, or a link to a page the site doesn't hold. After the gates run, CI reruns each gate on each fixture, and the gate must fail with the expected message.</li>
+<li><strong>Append-only gate records.</strong> Each gate has a fingerprint of its code, its fixtures and its exemptions. When a fingerprint changes, a new gate decision must accept it and say why. CI fails when a commit edits, deletes or renames a gate decision, so a gate can't be relaxed in the change that needs it relaxed.</li>
+<li><strong>The specification's examples.</strong> Every example the specification gives runs against its document's schema and every rule one payload decides. A failure is recorded with the decision its location rests on, and goes into our implementation feedback. The model never changes to fit an example.</li>
+<li><strong>Determinism.</strong> Every generated file is written twice in separate processes and compared with the committed one, byte for byte.</li>
+</ul>
+</section>
+<section id="input">
+<h2>The one input</h2>
+<p><strong><Stat of="locks.0.label" /></strong> is the text <Stat of="locks.0.where" />: <code>main</code> at <code>{props.doc.locks[0].base.slice(0, 7)}</code>, with the <Stat of="locks.0.prs" count unit="pull request" /> that were open on <Stat of="locks.0.headsOn" /> merged in, each at its head that day. We merged them ourselves, so the tree exists on no branch upstream, and the <a href="index.html">landing page</a> lists every head the merge took.</p>
+<p>Upstream <code>main</code> as written is no lock of this specification and nothing here is published from it, so this site has no input switch. The <Stat of="departures" unit="change we propose" units="changes we propose" /> are recorded as decisions, each with the question it answers and the cost it accepts, and each with its own page; the site publishes no second build that switches them.</p>
+</section>
+<section id="example">
+<h2>One field, end to end</h2>
+<WorkedExample />
+</section>
+<DesignNotes>
+<Fragment slot="codes">This text writes most of its own lists as string terms, and two of them as integer codes: <TypeLink of="RatePer" />, whose row lists <code>1</code> and <code>1000</code> with no label at all, and <TypeLink of="EventStatus" />, whose three codes its row labels with one word each. The <Stat of="registry" count unit="list" /> it takes from another specification on this site are that specification's, at the commit the registry pins, and no schema here copies their codes (<Decision of="D-071" />).</Fragment>
+<Fragment slot="flags">A placement's <code>reward</code>, <code>instl</code> and <code>skip</code> copy AdCOM's <code>0</code> and <code>1</code>, so they are <TypeLink of="IntegerFlag" />. A flag this specification defines for itself, such as a property's <code>excludable</code>, stays the JSON boolean its text writes.</Fragment>
+</DesignNotes>
+<section id="reproduce">
+<h2>How to reproduce it</h2>
+<p>The tooling is public at <a href={props.doc.brand.repo}>{props.doc.brand.repo.replace("https://github.com/", "")}</a>. It needs Node 22. <code>npm run ci</code> runs every gate on every specification, as CI does; <code>npm run extract -- --lock specs/openproposal/input/with-open-prs.lock.yaml</code> and the other steps — <code>map</code>, <code>resolve</code>, <code>emit</code>, <code>rules</code>, <code>type-examples</code> and <code>site</code> — run on one.</p>
+</section>
+</div>

@@ -1,0 +1,77 @@
+format: 2
+id: D-062
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: 'With § 2.2''s `ApprovalStatus` and `CalendarUnit` declared, two member names resolve to two
+  concepts each: `approval_status` to `ApprovalStatus` on an asset and to `AssetApprovalStatus` on the
+  predecessor''s assets entry, and `granularity` to `CalendarUnit` on an availability and to the `duration`
+  concept on the predecessor''s. Is each one member meaning two things, or one member the rewrite retyped?'
+covers:
+- ir: def:2.2:ApprovalStatus
+  digest: 38bba06616bfd54dc4e52f369823131cf820f74e5da56d165ef1006bc2824605
+  quote: '`ApprovalStatus` | `PENDING` | `APPROVED` | `REJECTED` | An approval outcome, in the spelling
+    of OpenDirect 2.1''s ChangeRequest `status`'
+- ir: def:2.2:CalendarUnit
+  digest: 0dfca66cd38db96e5c4b0772df8e6c6e831c5f5ececf8c10e275dc6871a3545c
+  quote: '`CalendarUnit` | `hour` | `day` | `week` | `month` | A calendar bucket'
+- ir: key:5.4:Asset.approval_status
+  digest: 0f698e499d127a87ac8039c01fe98caffe96e3d7b246a47e36304549da570bec
+  quote: '`approval_status` | OPTIONAL | The seller''s review outcome. The seller moves it'
+- ir: key:5.6:Availability.granularity
+  digest: 2cd0c27d16af5e11cca6d10f3fde1d5ea6dab8c31158d92c1b2948d50d390cec
+  quote: '`granularity` | OPTIONAL | The bucket `quantity` counts per, within `window`. Absent: `quantity`
+    is the total over `window`'
+options:
+- id: one-member-retyped-per-lock
+  summary: 'One member each, retyped. Each pair is one member whose type the rewrite changed, so the two
+    concepts are one per lock and the member name is listed as a homonym with this record. Neither landed
+    reading is withdrawn: each is right about the lock it was taken against.'
+- id: the-section-2-2-type-governs
+  summary: The § 2.2 type governs on both locks, and the predecessor's readings — `AssetApprovalStatus`
+    on `D-041`, and the `duration` typing of `granularity` — are withdrawn or re-scoped so the member
+    resolves once.
+- id: merge-the-vocabularies
+  summary: '`AssetApprovalStatus` and `ApprovalStatus` are one vocabulary under one name, and `granularity`
+    takes whichever of `CalendarUnit` and a duration admits both locks'' values.'
+chosen: one-member-retyped-per-lock
+rationale: '**Measured: both of the predecessor''s readings rest on elements only `main` states.** `AssetApprovalStatus`
+  is declared from `field:5.4:assets[]#description/object:1` and the `duration` typing of `granularity`
+  from `field:5.6:availability#description/object:1`, and **neither element exists on `with-open-prs`**
+  — each is an inline object the rewrite replaced with a named key table. So the pairs never meet in one
+  payload: one concept is what the member is on `main` and the other is what it is on `with-open-prs`.
+
+  That makes this the same shape as `D-057`''s five — `at`, `generated_at`, `price_valid_until`, `submitted_at`,
+  `valid_until` — where the rewrite narrowed how an instant is written and the member therefore carries
+  one concept per lock. The member did not come to mean two things; the specification retyped it.
+
+  **Why `the-section-2-2-type-governs` is refused.** It would withdraw or re-scope a landed reading to
+  make a member resolve once, and `D-041` is right about the text it read: `main`''s assets entry states
+  its own approval values inline, and an open vocabulary over them is what that text supports. A reading
+  is not wrong because a later edition of the document retyped its subject. The same holds for the duration
+  typing of `granularity`, which `main`''s availability object states as a span and `with-open-prs` states
+  as a calendar bucket — genuinely different values, not two spellings of one.
+
+  **Why `merge-the-vocabularies` is refused.** The two approval vocabularies are not the same list: §
+  2.2 states `PENDING`, `APPROVED` and `REJECTED` "in the spelling of OpenDirect 2.1''s ChangeRequest
+  `status`", upper-case and from a named source, where the predecessor''s inline values are its own. And
+  a calendar bucket is not a duration: `hour` and `P1H` are different values of different types, so no
+  single type admits both locks without widening one of them past what its own text says.
+
+  **So each member name is listed as a homonym with this record**, which is the mechanism `domains-homonyms`
+  names in its own failure message and which already carries `basis`, `id`, `status`, `type`, `version`,
+  `actor`, `time_zone`, `domain`, `vendor`, `verification` and `D-057`''s five.
+
+  **What this record is not.** It was allocated for a reading about six rows where a hand-written list
+  and a § 2.2 type appeared to disagree. Four of those six — `method`, `metric`, `serving_mode` and `unit`
+  — turned out not to disagree at all: `D-063` reads a row naming `VocabularyTerm` as the open vocabulary
+  of the core terms its own Meaning cell lists, so the Type cell and the term list state two halves of
+  one type. Only these two remained, and they are cross-lock rather than contested.'
+evidence:
+- '`field:5.4:assets[]#description/object:1` and `field:5.6:availability#description/object:1` are present
+  on `main` and absent from `with-open-prs`, checked against both locks'' committed IR.'
+- '`D-057` establishes the cross-lock homonym for five time-valued members retyped by the same rewrite.'
+feedback: § 2.2 gives `ApprovalStatus` the spelling of OpenDirect 2.1's ChangeRequest `status` while §
+  5.4's own review values were lower-case in the predecessor. Say whether the upper-case spelling is deliberate
+  for the whole document, because a reader carrying both editions cannot tell a rename from a new vocabulary.

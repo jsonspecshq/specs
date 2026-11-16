@@ -1,0 +1,109 @@
+format: 2
+id: D-068
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: "Four rows state what omitting the member means, and two of those four also declare the member `required` in their type cell. A member cannot both be required and have a defined meaning when absent. Which witness states the presence?"
+covers:
+  - ir: key:object_videoplacement:VideoPlacement.mime
+    digest: b14743c48f99311f3a1ecf2eac08bb27c25bc635768e3429822c907131e440fc
+    quote: "`mime` | Array of supported mime types (e.g., “video/mp4”). If omitted, all types are assumed."
+    departs: [required]
+  - ir: key:object_audioplacement:AudioPlacement.mime
+    digest: 44971266fd90b09a17bffaf98a5fb5ec56691128db4dfb72c42de9c267873a95
+    quote: "`mime` | Array of supported mime types (e.g., “audio/mp4”). If omitted, all types are assumed."
+    departs: [required]
+  - ir: key:object_displayplacement:DisplayPlacement.mime
+    digest: af9102e54520b8b6cefa34bf6d0cf45fcf6a80be1a1b8b835832bbb83f1e2fe4
+    quote: "`mime` | Array of supported mime types (e.g., “image/jpeg”, “image/gif”). If omitted, all types are assumed."
+  - ir: key:object_imageassetformat:ImageAssetFormat.mime
+    digest: af9102e54520b8b6cefa34bf6d0cf45fcf6a80be1a1b8b835832bbb83f1e2fe4
+    quote: "`mime` | Array of supported mime types (e.g., “image/jpeg”, “image/gif”). If omitted, all types are assumed."
+options:
+  - id: cell-states-the-presence
+    summary: >-
+      The type cell is where this text declares presence, so `required` stands
+      on the two rows that write it. The published schema refuses a placement
+      carrying no `mime`, which the same row's definition describes as a valid
+      payload meaning all types are assumed.
+  - id: omission-sentence-states-the-presence
+    summary: >-
+      A sentence defining what absence means is the stronger statement about
+      presence, because it describes a payload a receiver must handle and says
+      what to do with it. All four rows are published optional, and the four
+      become consistent with one another.
+  - id: publish-no-presence-where-the-witnesses-disagree
+    summary: >-
+      Where a cell and a definition contradict each other, publish neither
+      reading: the member carries no presence until a record settles that row
+      alone.
+chosen: omission-sentence-states-the-presence
+rationale: >-
+  A member cannot be required and also have a stated meaning when omitted. One
+  of the two witnesses on `VideoPlacement.mime` and `AudioPlacement.mime` is a
+  mistake in the text, and the question is only which.
+
+  The other two rows answer it. `DisplayPlacement.mime` and
+  `ImageAssetFormat.mime` carry the identical sentence — their rows are
+  byte-identical, one digest for both — and neither cell says `required`. So
+  the sentence is what this specification means by the member's presence
+  across every row that carries it, and `required` appears on two of the four
+  cells and nowhere else. A slip in two cells is a likelier reading than one
+  sentence meaning something different on two rows than on the two beside them.
+
+  The direction of the departure decides the rest. Publishing `required`
+  **narrows** what the schema accepts below what the document accepts: a
+  `VideoPlacement` with no `mime` is refused by the schema and described by the
+  definition, and every generated package refuses it too, so a consumer cannot
+  express "all types are assumed" by omission on a video or audio placement
+  while the same omission is available on a display one. The directional floor
+  admits a type wider than the document and forbids one narrower, and
+  `cell-states-the-presence` is the narrower reading — which is why it is not
+  chosen even though the cell is normally where presence is declared.
+
+  `publish-no-presence-where-the-witnesses-disagree` refuses to publish a fact
+  the text states twice over, and leaves a consumer with less than either
+  reading gives.
+
+  What the choice costs, stated rather than hidden. The published schema no
+  longer enforces `mime` on a video or audio placement, so a seller may omit a
+  member two of AdCOM's cells call required, and nothing in the schema objects.
+  That is a real loss of enforcement and it is the price of not refusing a
+  payload the specification describes. It also overrides a type cell, which no
+  other reading in this specification does, and that is why this record exists
+  rather than a reader change: a rule that read the cell was right about the
+  cell.
+
+  The cover quotes carry each row's definition as the lock renders it, which
+  is not where the contradiction shows: the renderer does not put the type cell
+  in a quote. The two cells reading `string array; required` are at lines 1421
+  and 1603 of the pinned text, which the evidence links name, and the two
+  reading `string array` are at 1020 and 1238.
+
+  The class is these four rows and no others. Three more rows carry a `mime`
+  member — `Display.mime`, `Video.mime` and `Audio.mime` — and each describes
+  the mime type of a creative rather than the types a placement supports, so
+  none states what omission means and none is in this class.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1421"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1603"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1020"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1238"
+feedback: >-
+  Two rows contradict themselves about whether a member is required.
+
+  `VideoPlacement.mime` and `AudioPlacement.mime` declare `string array;
+  required` in the type cell, and their definitions end "If omitted, all types
+  are assumed." A member that is required cannot be omitted, so a reader cannot
+  tell whether a placement carrying no `mime` is invalid or means that every
+  mime type is acceptable. An implementation that reads the cell rejects it; one
+  that reads the definition accepts it and assumes all types; the two
+  implementations disagree about a payload the specification intended to define.
+
+  `DisplayPlacement.mime` and `ImageAssetFormat.mime` carry the same sentence
+  and do not declare `required`, which suggests the two `required` markers are
+  the slip rather than the sentence. The correction is to drop `required` from
+  those two cells, or — if the member really is required on a video and audio
+  placement — to drop the omission sentence from those two definitions and say
+  so.

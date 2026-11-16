@@ -1,0 +1,388 @@
+{
+  "$defs": {
+    "LineItemSummaryAudienceOption": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "name": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "The audience's name, for people"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryAudienceSelectable": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "description": "The line item's `audiences.available[]`, each entry projected to `id` and `name`.",
+          "items": {
+            "$ref": "#/$defs/LineItemSummaryAudienceOption"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryBreakPositionOption": {
+      "additionalProperties": false,
+      "properties": {
+        "delay": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/StartDelayMode",
+          "description": "A value from List: Start Delay Modes, such as Pre-Roll (0)"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "slotinpod": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/SlotPositionInPod",
+          "description": "A value from List: Slot Position in Pod"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryBreakPositionSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "description": "The line item's `break_position.available[]`, each entry projected to `id`, `delay`, and `slotinpod`.",
+          "items": {
+            "$ref": "#/$defs/LineItemSummaryBreakPositionOption"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryBuyerRequirements": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_dsps": {
+          "description": "The DSPs that may receive the deal (§ 5.8), each by its primary domain, as `SeatRef.dsp` (§ 2.2)",
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/RegistrableDomain"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "LineItemSummaryContent": {
+      "additionalProperties": false,
+      "properties": {
+        "series": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text"
+        },
+        "title": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text"
+        }
+      },
+      "type": "object"
+    },
+    "LineItemSummaryDeliveryCounting": {
+      "additionalProperties": false,
+      "properties": {
+        "impression_multiplier": {
+          "$ref": "#/$defs/LineItemSummaryImpressionMultiplier",
+          "description": "The line item's `delivery_counting.impression_multiplier`, projected to `impression_type`, `source_type`, and `accreditation`."
+        }
+      },
+      "type": "object"
+    },
+    "LineItemSummaryEnvironmentsSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "../../inventory/1/inventory.json#/$defs/Environment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryFormatsSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/FormatId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "included"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryImpressionMultiplier": {
+      "additionalProperties": false,
+      "properties": {
+        "accreditation": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/Accreditation",
+          "description": "The standing of the multiplier's source in the market. Core terms: `industry_currency` (the market's joint industry currency, such as Geopath in the US or Route in the UK) | `publisher_reported` (the publisher's own figure). A receiver that doesn't know a term reads the multiplier without it"
+        },
+        "impression_type": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/ImpressionType",
+          "description": "`gross` | `viewable` | `lts` | `audience`: Gross, Viewable (OTS), Likelihood-to-See, or Audience impressions, as the MRC Out-of-Home Measurement Standards (Phase 1 & 2 Combined, December 2025) define them"
+        },
+        "source_type": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/DoohMultiplierMeasurementSourceType",
+          "description": "Who supplies the multiplier. A value from AdCOM 1.0 List: DOOH Multiplier Measurement Source Types other than Unknown (`0`), such as Publisher Provided (`2`). The value OpenRTB 2.6 `imp.qty.sourcetype` carries"
+        }
+      },
+      "required": [
+        "impression_type",
+        "source_type"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryPlacement": {
+      "additionalProperties": false,
+      "properties": {
+        "feed": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/FeedType",
+          "description": "A value from List: Feed Types, such as Podcast (3)"
+        },
+        "instl": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "The ad is interstitial or full screen"
+        },
+        "plcmt": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/PlcmtSubtype",
+          "description": "A value from List: Plcmt Subtypes - Video, such as Instream (1). Its presence states that the line item is video, so a `ctv` line item that sells video carries it"
+        },
+        "reward": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "The user receives a reward for viewing the ad"
+        },
+        "skip": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "Video or audio. The placement lets the user skip the ad"
+        }
+      },
+      "type": "object"
+    },
+    "LineItemSummaryPricingEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "cost_method": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/CostMethod",
+          "description": "The billable unit. Core terms in § 5.6.5"
+        },
+        "currency": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/CurrencyCode",
+          "description": "The currency of the entry's rates (below)"
+        },
+        "list_rate": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Amount",
+          "description": "The rate before options. A buyer MAY request another value, and a granted value is the `list_rate` of the next `version`"
+        },
+        "price_type": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/PriceType",
+          "description": "How `agreed_rate` clears, as Deals API 1.0 `terms.pricetype`: Dynamic (0), the auction type of each bid request; First Price (1); Second Price Plus (2); Fixed Price (3); or an exchange-specific value, 500 and up"
+        },
+        "pricing_id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Names the entry within the line item. A revision MUST NOT reuse it for a different `cost_method`, `cost_parameters`, `currency`, or `transaction_mechanisms[]`"
+        },
+        "unit_bounds": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/UnitBoundsRange",
+          "description": "Bounds on the units committed under this entry, counted in its unit (§ 5.6.5): `commitment.amount` when `basis` is `units`, otherwise `derived_units`. A buyer MAY request another. Absent on a `FLAT` entry"
+        }
+      },
+      "required": [
+        "cost_method",
+        "currency",
+        "list_rate",
+        "pricing_id"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryProgramOption": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "$ref": "#/$defs/LineItemSummaryContent",
+          "description": "The line item's `programs.available.content`, projected to `series` and `title`."
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1). It is not compared with delivered content"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryProgramsSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "description": "The line item's `programs.available[]`, each entry projected to `id`, `content.series`, and `content.title`.",
+          "items": {
+            "$ref": "#/$defs/LineItemSummaryProgramOption"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryPropertiesSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "description": "The line item's `properties.available[]`, each entry projected to `id`, `name`, `domains[]`, `apps[]`, `child_audience`, `seller_relationship`, and `venue_type`.",
+          "items": {
+            "$ref": "#/$defs/LineItemSummaryPropertyOption"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryPropertyOption": {
+      "additionalProperties": false,
+      "properties": {
+        "apps": {
+          "description": "The line item's `properties.available.apps[]`, each entry projected to ``.",
+          "items": {
+            "$ref": "../../inventory/1/inventory.json#/$defs/AppId"
+          },
+          "type": "array"
+        },
+        "child_audience": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/ChildAudience",
+          "description": "`directed` | `mixed` | `general`. `directed`: children are its primary audience under the law the seller applies, or its app store lists it for children only. `mixed`: directed to children but not as its primary audience, or listed for children and older users. `general`: neither. § 5.2.7 states what follows"
+        },
+        "domains": {
+          "description": "The property's domains. On a `dooh` line item, the inventory owner's domain, as OpenRTB 2.6 `dooh.domain`",
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/Domain"
+          },
+          "type": "array"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "name": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "The property's name, for people"
+        },
+        "seller_relationship": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/SellerRelationship",
+          "description": "`owner` | `manager` | `inventory_partner` | `reseller`, checked as § 5.2.6 states"
+        },
+        "venue_type": {
+          "$ref": "../../inventory/1/inventory.json#/$defs/DoohVenueTaxonomyCodes",
+          "description": "`taxonomy` is a value of AdCOM 1.0 List: DOOH Venue Taxonomies. `ids[]` holds exactly one id. It covers only itself, not its descendants. The values OpenRTB 2.6 `dooh.venuetypetax` and `dooh.venuetype` carry"
+        }
+      },
+      "required": [
+        "child_audience",
+        "id",
+        "seller_relationship"
+      ],
+      "type": "object"
+    },
+    "LineItemSummaryTransactionMechanismSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "../../execution/1/execution.json#/$defs/MechanismOption"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available"
+      ],
+      "type": "object"
+    },
+    "PackageSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "add_ons": {
+          "description": "Its `add_ons[]`, each as a summary. In a manifest entry, only those § 2.3 lists",
+          "items": {
+            "$ref": "../../../documents/1/line-item-summary.json"
+          },
+          "type": "array"
+        },
+        "line_items": {
+          "description": "Its `line_items[]`, each as a summary",
+          "items": {
+            "$ref": "../../../documents/1/line-item-summary.json"
+          },
+          "type": "array"
+        },
+        "min_commitments": {
+          "description": "Its `min_commitments[]`",
+          "items": {
+            "$ref": "../../proposal/1/proposal.json#/$defs/MinCommitment"
+          },
+          "type": "array"
+        },
+        "package_id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "The package's `package_id` (§ 4.1.4)"
+        }
+      },
+      "required": [
+        "line_items",
+        "package_id"
+      ],
+      "type": "object"
+    },
+    "ProposalSummaryParty": {
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/RegistrableDomain",
+          "description": "The party's domain"
+        },
+        "legal_name": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "The party's legal name. A `registry_id` entry that applies can attest it; the value alone attests nothing"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/representation/1/representation.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The OpenProposal `representation` module: the vocabularies, objects, unions, and constructor copies of § 2.1.",
+  "title": "representation"
+}

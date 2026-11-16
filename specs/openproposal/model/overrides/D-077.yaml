@@ -1,0 +1,46 @@
+format: 2
+id: D-077
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What is a format specification's `spec_ref`, where section 2.2 states `EntryRef` as a named
+  entry at one exact version?
+covers:
+- ir: def:2.2:EntryRef
+  digest: f44558203adf4d0fe42abce8cd25edef3fdd370ff34a525e10a270d438c8235a
+  quote: '`EntryRef` | String: `<domain>/<collection>/<entry_id>@<version>`, with no `/` or `@` inside
+    a part | A named entry at one exact version, whose content does not change. `<domain>` is a `Domain`.
+    It carries no digest'
+- ir: key:5.4:FormatSpec.spec_ref
+  digest: ba4765a0dca73fdba7ffa92fb2d64d0b072e6308529050dccce34d9f3e4670b9
+  quote: '`spec_ref` | OPTIONAL | The format registry entry the spec comes from. Absent when the seller
+    defines it'
+options:
+- id: the-kernel-states-it
+  summary: '`EntryRef` is the kernel''s `CatalogRef`, the same written form under this specification''s
+    own name, sourced at the row that states it.'
+- id: a-primitive-of-its-own
+  summary: Mint a primitive for `EntryRef`, whose first part is a `Domain` where `CatalogRef`'s is a seller's
+    namespace.
+chosen: the-kernel-states-it
+rationale: 'The two state one form. Section 2.2 reads "String: `<domain>/<collection>/<entry_id>@<version>`,
+  with no `/` or `@` inside a part", and the kernel''s `CatalogRef` is "a version-pinned reference to
+  an entry in a seller-maintained catalog, written `<seller_namespace>/<collection>/<entry_id>@<version>`"
+  with the same rule, whose pattern admits exactly the same strings.
+
+
+  The one difference is what the first part names: a `Domain` here, a seller''s namespace in the kernel.
+  That makes the published type wider than this text, which is the direction a published type may be,
+  and narrower than the text is the one it may not. A sender writing a domain writes a string the kernel''s
+  pattern accepts.
+
+
+  `a-primitive-of-its-own` would define a second type of the same shape under a second name, which is
+  the redundancy a shared kernel removes, and the narrowing it would buy is a domain check the pattern
+  cannot make anyway -- the kernel holds a registrable domain to a list rather than to a pattern, for
+  the same reason.
+
+
+  So the primitive is published under the kernel''s name, sourced at the row that states it, as `VocabularyTerm`
+  and `ClockTime` are. A row whose cell names this specification''s name resolves through that source.'

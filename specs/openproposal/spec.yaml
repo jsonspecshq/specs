@@ -3,20 +3,38 @@
 # src/specs/openproposal/. It is the first specification in this tree of the
 # numbered-section family (docs/architecture/pipeline-architecture.md § 2): its
 # headings carry numbers rather than anchors, its field tables are
-# `Field | Type | Mutability | Description`, and it writes its RFC 2119
-# keywords in capitals.
+# `Field | Type | Required | Mutability | Description`, and it writes its RFC
+# 2119 keywords in capitals.
 format: 1
 id: openproposal
 title: OpenProposal 3.0
 upstream: https://github.com/IABTechLab/OpenProposal
 front_end: text
 plugin: openproposal
+# The one lock, and the variant it reads: `with-open-prs`, upstream `main` with
+# every open pull request applied. That is the text the model, the schemas and
+# every output below them are built from, and `input/snapshots/` holds a `main`
+# snapshot beside it only as the base the merge starts from -- upstream `main`
+# as written is no lock of this specification and nothing is published from it.
 # The last stage this specification has reached. It arrives one hook at a
-# time: this is its pinned text, its extracted IR, its kernel binding and its
-# mapping, so its folder holds `input/`, `ir/`, `kernel-binding.yaml` and
-# `model/`, and no later stage's jobs are built for it. The schemas, the
-# rules and the outputs follow, each advancing this line.
-through: model
+# time: this is its pinned text, its extracted IR, its kernel binding, its
+# mapping and its JSON Schemas, so its folder holds `input/`, `ir/`,
+# `kernel-binding.yaml`, `model/` and `schemas/`, and no later stage's jobs
+# are built for it. The outputs follow, advancing this line.
+through: schemas
+# `type-rules § 6 code descriptions` keeps a code's branch text where the row
+# says more than the code's name. No code of this text has such a row: § 5.6.5's
+# `rate_per` lists `1` | `1000` with no label at all, and § 5.2.9's
+# `eventstatus` lists `1` (scheduled) | `2` (tentative) | `3` (cancelled), where
+# each label is the whole of the row's text. The rule is visibly working on the
+# Deals API, whose deal statuses give it seven values.
+rules_unreached:
+  - rule: type-rules § 6 code descriptions
+    reason: >-
+      A code's branch keeps its row's text where that says more than the code's
+      name, and no code row of this text says more than its label: § 5.6.5's
+      `rate_per` labels neither of its two codes and § 5.2.9's `eventstatus`
+      labels its three with one word each.
 # § 4 describes the proposal and § 5 the line item.
 documents:
   - { owner: proposal, document: Proposal, section: "4" }
@@ -25,27 +43,57 @@ documents:
 # so a lowercase "must" is prose and states no requirement.
 statements: uppercase
 features:
-  # The field rows carry a Mutability marker, which no other specification in
-  # this tree has, and the plugin lists the eight the text may write.
+  # The field and key rows carry a Mutability marker, which no other
+  # specification in this tree has, and the plugin lists the markers § 3's
+  # table declares, which it is held to.
   markers: true
   # Appendix A restates every field row and Appendix B the marker counts, so
   # the lint checks each against the body it claims to index.
   appendices: true
-  # § 2.1's Summary Representation states what a manifest entry carries of a
-  # proposal, which the mapping writes as six entries of role `profile`.
+  # § 2.1 states a summary as a projection of a document's paths, which a
+  # profile carries, with the keys it adds as that profile's own members
+  # (D-069). A summary that projects nothing is an object.
   profiles: true
-# The registry whose code lists the text cites, at the lock its links pin:
-# AdCOM's lists at main, 26c59ba (src/imports.ts). § 5.2.2 maps a placement's
-# keys onto AdCOM's Plcmt Subtypes - Video, Playback Methods and API
-# Frameworks, so those three vocabularies are the registry's and not a copy.
+# The specifications on this site the text takes codes from, each at the lock
+# its links pin (src/imports.ts). AdCOM's lists at main, 26c59ba: § 5.2.2 maps
+# a placement's keys onto AdCOM's Plcmt Subtypes - Video, Playback Methods and
+# API Frameworks, so those three vocabularies are the registry's and not a
+# copy. That section's `ssai` row names no list but AdCOM's field, "in the
+# values of AdCOM 1.0 `Placement.ssai`", and AdCOM publishes that row's own
+# codes as `ServerSideAdInsertionMode`, a vocabulary of its model rather than
+# a list of its registry, so the row imports it the way the Deals API's is
+# imported (D-131). The Deals API at main, 3028ddc: § 5.6's
+# `pricing[].price_type` is "as Deals API 1.0 `terms.pricetype`", a vocabulary
+# of the Deals API's own model, which it publishes as `PriceType`.
 imports:
-  - { spec: adcom, lock: main }
+  - { spec: adcom, lock: main, vocabularies: [ { file: modules/objects/1/objects.json, def: ServerSideAdInsertionMode } ] }
+  - { spec: dealsapi, lock: main, vocabularies: [ { file: modules/deal/1/deal.json, def: PriceType } ] }
 # The names the outputs carry: the name in prose, the edition people name it
 # by, the draft the default lock pins, and the base of every schema's `$id`,
-# which sits on the multi-spec hub where every spec's $ids sit. It has no SDK
-# types and no proto target yet.
+# which sits on the multi-spec hub where every spec's $ids sit.
 names:
   short: OpenProposal
   edition: "3.0"
   release: draft 1
   schema_base: "https://jsonspecs.com/openproposal/"
+  # The proto target's package (docs/design/target-rules.md), on the same host
+  # and in the same shape as the other two specifications': the folder name,
+  # then the edition's major version.
+  proto: { package: com.jsonspecshq.openproposal.v1 }
+  # The SDK targets' packages. Each target reads its own, so the name a
+  # committed package carries is stated here and not in an argument. The
+  # TypeScript name is the validation layer's; the static types take
+  # `TYPES_SUFFIX` after it.
+  sdk:
+    python: { package: jsonspecs_openproposal }
+    ts: { package: "@jsonspecshq/openproposal" }
+# Its pages on the public site (src/site/; specs/site.yaml gives the site). The
+# type map opens at the proposal, which is the document § 4 states and the one
+# every other type of this specification hangs from. It publishes no code list
+# of its own -- § 5.2.2's codes are AdCOM's and § 5.6's are the Deals API's --
+# so it is no registry.
+site:
+  default_type: Proposal
+  registry: false
+  locks:
+    with-open-prs: { label: main + open PRs, short: with open PRs, where: on main with every open pull request applied }

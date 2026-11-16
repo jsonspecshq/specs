@@ -1,0 +1,79 @@
+format: 2
+id: D-133
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.2.2's `ssai` row names a field of AdCOM and not a list. What vocabulary are its values of?
+covers:
+- ir: key:5.2.2:Placement.ssai
+  digest: e4dc1163a0e9b2eb6e169545fbe874a884db7e8974cc5f36a4dc0e07b0023577
+  quote: "`ssai` | OPTIONAL | Whether server-side ad insertion is in use and what it does to asset and tracker retrieval, in the values of AdCOM 1.0 `Placement.ssai`, such as all server-side (3) | `Placement.ssai`, `imp.ssai`"
+options:
+- id: the-values-of-the-field-it-names
+  summary: >-
+    The codes AdCOM's `Placement.ssai` row states, which AdCOM publishes as the
+    `ServerSideAdInsertionMode` vocabulary, imported at the lock § 5.2.2's links pin.
+- id: a-bare-integer
+  summary: >-
+    An `Integer`, as the row's Type cell states, so the key accepts any whole number and the
+    published type says nothing about which ones mean anything.
+chosen: the-values-of-the-field-it-names
+rationale: 'The row says where its values come from in so many words: "in the values of AdCOM 1.0
+  `Placement.ssai`". That is a field and not a list, which is why § 5.2.2''s lead-in does not name
+  it -- the lead-in names the four keys whose values come from a list, `plcmt`, `playmethod[]`,
+  `api[]` and `feed`, and `ssai` is not among them because there is no list to name. AdCOM states
+  the codes in the row itself: "where 0 = status unknown, 1 = all client-side (i.e., not
+  server-side), 2 = assets stitched server-side but tracking pixels fired client-side, 3 = all
+  server-side", and publishes them as `ServerSideAdInsertionMode` under its own `D-075`. So the
+  values this row names are published, and a vocabulary of another specification''s own model is
+  imported rather than copied -- which is what § 5.6''s `pricing[].price_type` already does with
+  the Deals API''s `Terms.pricetype` under `D-111`.
+
+
+  **The text''s own example settles that the codes are AdCOM''s.** The row writes "such as all
+  server-side (3)", and "all server-side" is word for word the label AdCOM''s row gives code 3.
+  A reading that left the key a bare integer would make that parenthesis unverifiable: nothing
+  would hold `3` to meaning all server-side, and nothing would refuse `7`.
+
+
+  `a-bare-integer` is what the model published, and the cost is the six payloads the
+  specification ships. `line-item-ctv.yaml`, `line-item-ctv-live-series.yaml` and
+  `proposal.yaml` twice write `ssai: 3`, and `line-item-rewarded-video.yaml` and `proposal.yaml`
+  write `ssai: 1` -- and the published `Placement` named no `ssai` key at all, so
+  `examples-validate` refused all six as `undefined_key`. A vector the source''s own bytes state
+  and the schema refuses is a question about the schema.
+
+
+  **`D-094` reads this row as waiting on "the list it names".** It names no list, which is why
+  nothing arrived: the wait was on a list that does not exist, and the thing the row names is a
+  field whose codes its own prose enumerates. That record is right about `price_type`, which does
+  name the Deals API''s published vocabulary, and wrong about this key; this record answers it.
+
+
+  **The vocabulary is closed and this specification adds nothing to it.** AdCOM''s row reserves
+  no vendor range and states no extension, so the import carries four codes and no more, and the
+  key refuses every other number.'
+challenge:
+- type: Placement
+  value: { ssai: 3 }
+  verdict: accept
+  context: >-
+    A connected-TV line item whose assets and trackers are both served
+    server-side, which is what `line-item-ctv.yaml` ships and what the row's
+    own "such as all server-side (3)" names.
+  reason: >-
+    `the-values-of-the-field-it-names` publishes the key at the imported
+    vocabulary, whose code 3 is "all server-side", so the shipped payload
+    validates and the code carries AdCOM's own label.
+- type: Placement
+  value: { ssai: 7 }
+  verdict: reject
+  context: >-
+    A seller treating the key as the `Integer` its Type cell states and
+    writing a number past the four AdCOM enumerates.
+  reason: >-
+    The imported vocabulary is closed at AdCOM's four codes, so 7 is refused.
+    `a-bare-integer` is the option this rejects: it accepts 7 and tells a
+    receiver nothing about what any value means.

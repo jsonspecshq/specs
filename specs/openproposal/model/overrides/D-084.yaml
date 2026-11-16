@@ -1,0 +1,146 @@
+format: 2
+id: D-084
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Of the proposal module's forty-one normative statements, which bind a party, which does a published
+  schema already state, and which carry nothing a conformance check reads?
+covers:
+
+- ir: rule:4.1:8e9aacb8
+  digest: ff37aeb1ba84d151e43e278564e7de10cbcf52ae2f9cccb0f38b0191ac573247
+  quote: Entries MUST NOT be edited or removed
+- ir: rule:4.1:d401d65e
+  digest: 8a2eb18c5cd8e5b96a5903a2542e487bac8991b62a28a1a8fdc878e6901f6f26
+  quote: Entries MUST NOT be edited or removed.
+- ir: rule:4.1:ff8838af
+  digest: 4f52ba69650c864c333bc14f7fe814db4d8ba8c5afd6d94df32d1e9056aa277a
+  quote: MAY be empty
+- ir: rule:4.1:fae6ebab
+  digest: 9ab8f55b64b8d35d9b76de90e0207486bc671e1bd846dd0ea1701c9da007be1a
+  quote: "`proposal_template_id` MUST NOT be required for a buyer to transact."
+- ir: rule:4.1:4311c613
+  digest: b5979e26d5c685062eb0ea9dd7b054ba7b8d20c7eb45ff74b3d45056ef075542
+  quote: A seller MUST NOT name a domain it does not control.
+- ir: rule:4.1:9d47bb1c
+  digest: 4962e152924581675b2bf6bb0289222e18e886f56ed636396dcfa7c86dc8a153
+  quote: A selling entity that controls several registrable domains SHOULD use the same `seller.domain` for every proposal it publishes as one seller; a seller that publishes proposals under several domains holds an Agent Registry entry for each, or the entry does not apply.
+- ir: rule:4.1.1:e95eca3f
+  digest: 0094bc8f8b869bc24c45badb4cb62162353a0c38d061c288444eb5e872cec738
+  quote: Strings, `Instant` values included, are hashed as that value; a party MUST NOT trim, normalize, or reformat a value it did not write.
+- ir: rule:4.1.1:6e3d2c89
+  digest: a4eced90b997d6c4d28db7e51e09b74f4641d0af099cb94ac709f3b871ac9a76
+  quote: A producer MUST NOT write a Number that this serialization does not reproduce as the numeric value written; a Number with at most 15 significant digits inside the range of a double always does, and a document containing one that does not is invalid for this section.
+- ir: rule:4.1.1:e93caddf
+  digest: c3de0f370a6bd2da02352372e894c929f8dafe8d938d5ea949a6343206259e02
+  quote: A receiving party MUST recompute `record_digest` and compare it byte-for-byte before relying on a live `commitment` entry, over the line items as they stand plus the writes its `commit` carries (§ 5.6.1), or on a matching pair, from its agreed record (§ 4.1.2).
+- ir: rule:4.1.2:d5a6e326
+  digest: 8d84d6e26e3c4f1ed6fd50871d124dccef18acd62bfaa7af19033a2831ad585e
+  quote: The seller MUST NOT interpret it (§ 5.6.1)
+- ir: rule:4.1.2:c9ce18dd
+  digest: 8c00feda546efd02d92d57b6068d426acdda5961383e42d074c5a58488aafc5d
+  quote: An entry that is not live stays in `assent[]`, and the line items it names MAY appear in a new `commitment` entry.
+- ir: rule:4.1.2:b3c1ac3b
+  digest: f393f55a23f7c5d66538a25a2a908b2af4aa0bd7d35fb57260139a2d98a05dc1
+  quote: The evidence is OPTIONAL.
+- ir: rule:4.1.2:9a7a80e3
+  digest: 2c7fc4e8ca9617f8cc592c95816a8b00d437ec47f46fb1f020d7d9aa1eadc71d
+  quote: Within the limits on a decline (§ 4.3.2, § 5.6.1), a party MAY refuse to write its own entry for any reason, including a counterparty message it cannot verify.
+- ir: rule:4.1.3:fb70b3cb
+  digest: 60fcb1887f427c7b421f3448509c170666612fbf8921d73ca3ac3064fa06cafb
+  quote: "The following are not offered terms and MAY change without a new version: `status` (proposal and line item), `assent[]`, `negotiation_history[]`, `change_requests[]`, `availability`, `addressable_scale`, `hold`, `external_references[]`, `assets[].approval_status`, a `built_by: seller` entry of `assets[]`; `best_for[]`, `not_suitable_for[]`, and `seasonality_notes`, which are advisory (§ 4.2); `pricing[].min_rate`, which is a hint; `buyer_supplied.expected_match_rate`, which is the seller's stated expectation; every value the buyer writes (a `BuyerWrites` value, `commitment`, any other `supplied` field, and a `requestable` ask); and every `derived` value computed from a buyer's writes (`pricing[].agreed_rate`, `commitment.derived_units`)."
+- ir: rule:4.1.3:dd69dac7
+  digest: 3ba4c1077f2856bb1942f8145bec99a246e3514bcad8982680e5b5dc6b7b028d
+  quote: A seller MAY edit a proposal in place only while its current version is not yet frozen (§ 4.1).
+- ir: rule:4.1.3:862b74db
+  digest: 3ff132fb956552d2cf2a570951b4636228dfdd0a112020dbd5cd21a513adaf30
+  quote: A seller MUST keep every version that a `negotiation_history[]` or `assent[]` entry names retrievable by `(proposal_id, version)` for as long as the proposal is retrievable.
+- ir: rule:4.1.4:759b4d1f
+  digest: 9aa19d6dc8581fc0b966993bb5af9c54f3d165b8acd8565f8da3994abb0220cd
+  quote: A seller MUST reject a `commit` that breaks either rule with `not_committable` (§ 2.4).
+- ir: rule:4.1.4:7d683b70
+  digest: c53afc967c1d7d2675219077935e812c71974852bb2841aa0eca59c972925f34
+  quote: This check MUST be deterministic.
+- ir: rule:4.1.4:e6117ad4
+  digest: bb90e7fff20f4294c077493a28596ca29a005df1d28923c112910b560551ff95
+  quote: It asks for a change those options don't give, and the seller MAY decline it unless `terms_refs[]` (§ 5.8) gives it.
+- ir: rule:4.3.1:344cb94d
+  digest: 93450941ac85f97c706d212a8260a6e97380b2a614c1a14bce219b75afcbacd0
+  quote: A `counter` of `pricing[].list_rate` MAY also change `included[]`, with `paths[]` naming both
+- ir: rule:4.3.2:131efb6c
+  digest: 4c1a07084adfec99dbdb6ac5a25649be2f083e563069418cf38acf3df6079359
+  quote: A `grant` or `counter` of a `request` on that entry MAY lower its `list_rate` or widen its `unit_bounds`.
+- ir: rule:4.3.2:72de0cc2
+  digest: b3e5253083c356e414d080e0995c14216afa5acf7c5a6ff6c73a0c5dfda2acb9
+  quote: "The seller of an issued proposal MUST answer a resolved `commit` under it that arrives while the entry holds, on or after `offer_window.start`, and passes the checks of § 5.6.1 and any authority check the seller applies (§ 5.8): accept it, or decline it on an allowed ground."
+- ir: rule:4.3.2:d044b92c
+  digest: c27be7604c1620e42e0676ad54b1d047914dc8d1c7347763aa66eda23d9c1733
+  quote: "The answer MUST come before the entry stops holding: otherwise silence works as a decline on no ground."
+- ir: rule:4.3.2:29fded3f
+  digest: 16c549cb668a3f1a9d745136f42388d6bfae910c52b7e37fac05a1ee16043c90
+  quote: A seller MAY revise a line item while an ask is open or a hold runs.
+- ir: rule:4.3.2:31f66e42
+  digest: 864666506dea509244909c707f725d31c02a0e1c21662702a1495e7ca3738fd5
+  quote: An ask it makes stale ends (rule 1), and the seller MUST release a `held` hold it makes stale or re-offer it at the new `version`, where `hold.status` stays `held`.
+- ir: rule:4.3.4:6f1237a1
+  digest: 5013f24cebf8be0327b24dbb500ec6a3454dce6a5e8bf6288de7da5e57e001bc
+  quote: "`status` unchanged; a later `commit` under that entry is rejected (§ 5.6.1), and the seller SHOULD `publish` or `withdraw`"
+options:
+- id: by-what-decides-it
+  summary: Each statement takes the role of whatever can decide it, as D-082 and D-083 read the overview
+    and kernel modules. Twenty-six are read here and the fifteen a payload decides are named and left,
+    because each needs a change pair and a pair is written against the type it grades.
+- id: all-forty-one-now
+  summary: Every statement is read in one record, with fifteen rules whose change pairs are written in
+    the same step.
+chosen: by-what-decides-it
+rationale: 'Twenty-two of the twenty-six are duties, and the module is section 4, which states how a
+  proposal is negotiated, so almost every sentence binds a party rather than a value. The seller keeps
+  every version a `negotiation_history[]` or `assent[]` entry names retrievable by `(proposal_id, version)`;
+  edits a proposal in place only while its current version is not frozen; rejects a `commit` that breaks
+  a package rule with `not_committable`, by a check that MUST be deterministic; answers a resolved `commit`
+  that arrives while a firm entry holds, before that entry stops holding, because silence works as a
+  decline on no ground; releases or re-offers a `held` hold a revision makes stale; and names no domain
+  it does not control. A consumer recomputes `record_digest` and compares it byte for byte before relying
+  on a live `commitment` entry. A party writing a digest input trims, normalizes and reformats nothing
+  it did not write, and writes no Number this serialization does not reproduce.
+
+
+  **Two are the recorded marker''s words.** "Entries MUST NOT be edited or removed" appears twice in section
+  4.1, on `assent[]` and on `negotiation_history[]`, and both are the Meaning of `marker:3:recorded`,
+  which the model holds as a rule with a change pair. The sentence and the rule are the same words read
+  twice, which is the reading D-083 made of section 3''s four.
+
+
+  **One is a published type''s.** A history entry''s `paths[]` MAY be empty, which is an array with no
+  lower bound, so `HistoryEntry` states it.
+
+
+  **Two carry nothing a check reads.** Section 4.1.3 enumerates the fields that are not offered terms
+  and so may change without a new version -- a long list, from `status` through every value the buyer
+  writes -- which is the definition the frozen-version rule reads rather than a requirement of its own.
+  And section 4.1.2''s "The evidence is OPTIONAL. An entry is complete without it. No check in this
+  specification requires or verifies a signature" is a statement about this specification''s own checks,
+  which is the shape D-082 read in section 2.6''s columns.
+
+
+  **Fifteen are rules a payload decides, and they are not read here.** Each needs a valid and an invalid
+  payload against the type it grades, and a pair is the work of writing one: the offered terms of a frozen
+  version and the `version` that must move with them (§ 4.1); `legal_name` required on a proposal''s `seller`
+  and on its `buyer` (§ 4.1); an assent entry''s `line_item_ids[]` non-empty, naming line items whose
+  `commitment` is populated, with no line item named by two live `commitment` entries nor by two
+  `acceptance` entries, and every `seller-set`, `selectable`, `settable` and `requestable` value of it
+  unchanged from the version `assent[]` names (§ 4.1.2); each change to a frozen version creating `n+1`
+  and appending exactly one history entry, and a line item of a frozen version never removed (§ 4.1.3);
+  a `commit` naming one line item of a package naming all of them, and an add-on''s `commit` meeting every
+  `min_commitments[]` (§ 4.1.4); a firm entry unchanged while it holds (§ 4.3.2); a `commit` carrying no
+  `requestable` ask (§ 4.3.2); `hold.valid_until` no later than `offer_window.end` or the earliest
+  `price_valid_until` (§ 4.3.4); and a change request''s `line_item_id` required (§ 4.4).
+
+
+  `all-forty-one-now` is the same reading with fifteen change pairs in one step. Splitting it is not a
+  smaller answer: a pair is a payload the schema accepts and one it refuses, and writing fifteen of them
+  against six types is where the next record''s work is. Naming them here is what makes the remainder
+  countable rather than a residue.'

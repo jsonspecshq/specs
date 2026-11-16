@@ -1,0 +1,135 @@
+format: 2
+id: D-130
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: >-
+  Is a vocabulary open where the specification declares it a `VocabularyTerm` somewhere other than the
+  cell that lists its terms -- in the field row's own Type cell, inside a constructor that cell applies,
+  in the lead-in of a named type that holds a constructor's keys, or in the sentence that states the list?
+covers:
+
+- ir: field:5.9:serving_mode#description/values:1
+  digest: 41003de0bf64060dc0018dd80c709a94ad60347898ebc87652ecd39f315be1b3
+  locks: [ with-open-prs ]
+  quote: '`dai` | `scheduled` | `embedded`'
+  departs:
+  - D-065 declared this vocabulary closed, so the published type is the enum of these terms alone and
+    refuses every extension term the row's cell admits. The same is true of the other five this record
+    opens.
+- ir: field:5.3:activation_route#description/values:1
+  digest: 0672270fd9a485e9bbeec01539189d0a27c6fe6aae7251cec8a9d190c400c619
+  locks: [ with-open-prs ]
+  quote: "`seller_side` (the seller's systems) | `clean_room` (a clean room) | `id_partner` (a third-party identity provider)"
+- ir: field:5.7:shortfall_remedy#description/values:1
+  digest: a46ceeb424ccdb43840913451c071279ee6d106418132fa5df63c3872ffbff85
+  locks: [ with-open-prs ]
+  quote: '`makegood` | `credit` | `none`'
+- ir: block:5.4:4/values:1
+  digest: 6a9b8155781f0d5cae62ec361912d77688319c3949a31cbb655dcd39636b215a
+  quote: '`audio_file` | `video_file` | `image_file` | `markup` | `script`'
+- ir: block:5.4:5/values:1
+  digest: 55440eaa89536a4f4671a1fc72a4cea3a29b68a8e05f3a1a7ba191334747ffe0
+  quote: '`human_only` | `synthetic_permitted`'
+- ir: block:5.5:3/values:1
+  digest: 4447b79b61a233db828617624f9f99db188243b3ece0026f6ca3b7c94fe5b9f2
+  quote: '`domains` | `apps` | `categories` | `keywords`'
+options:
+- id: the-declaration-says-open
+  summary: >-
+    A vocabulary is open wherever the specification declares it a `VocabularyTerm`, and the place of
+    that declaration does not change what the type admits: a Type cell, a constructor's argument, the
+    lead-in of a named type that holds that constructor's keys, and a sentence that says "is a
+    `VocabularyTerm`" are four spellings of one fact.
+- id: only-the-meaning-cell-says-open
+  summary: >-
+    A vocabulary is open only where the cell that lists its terms is itself typed `VocabularyTerm`,
+    which is the form D-089 enumerated. A list reached from a Description cell, through a constructor,
+    through a named type, or stated in a sentence stays closed.
+chosen: the-declaration-says-open
+rationale: 'D-089 read this question and settled the meaning: section 2.2 states that a `VocabularyTerm`
+  is "String: a bare core term, or `<domain>:<term>` with `<domain>` a `Domain` the definer controls" and
+  that "Anyone MAY define an extension term", so a list declared as that type is the core of the
+  vocabulary and not the whole of it. Section 2.6 says the same of the list rather than of the type: "A
+  `VocabularyTerm` field says so and lists its core terms, or points to other lists, whole or in part,
+  and adds any others; every other list is closed."
+
+
+  **The six this record covers are the same fact declared somewhere D-089 did not look.** It enumerated
+  the rows whose Meaning cell lists the terms, and these six reach their declaration one step further
+  off. `serving_mode`''s own Type cell reads `VocabularyTerm` and its terms sit in its Description, so
+  the declaration is as plain as any D-089 covers and only the list''s address differs.
+  `activation_route`''s cell reads `Selectable[VocabularyTerm]`, so the declaration is the constructor''s
+  argument. `shortfall_remedy`''s cell names `ShortfallRemedy`, whose own lead-in reads "**`ShortfallRemedy`**
+  holds the keys of `Selectable[VocabularyTerm]` and this one", so the declaration is two names away and
+  still the specification''s. The remaining three are stated in sentences: "A `spec` MAY hold `asset`, a
+  `VocabularyTerm` (§ 2.2) that says what the buyer supplies for the format"; "A `spec` MAY also hold
+  `voice`, a `VocabularyTerm` that says whether a synthesized voice may read the ad"; "**`ExclusionType`**
+  is a `VocabularyTerm` (§ 2.2)."
+
+
+  **Each of the six tells a receiver what to do with a term it does not know**, which is the evidence
+  D-089 and D-081 read and which would mean nothing if an unknown term made the document invalid: an
+  `asset` or a `voice` term a receiver does not know "treats that format as unavailable", and a
+  `serving_mode` a receiver does not know leaves the mode unstated as the others do.
+
+
+  **`only-the-meaning-cell-says-open` is refused because the address of a list is not a statement about
+  the value.** Which cell of a row holds an alternation is a choice of layout -- `serving_mode` lists its
+  terms in a Description because its table has no Meaning column -- and reading openness off that choice
+  publishes two types for one declaration. It is also the reading that produced the defect: six closed
+  enums that refuse a term the cell above them admits, which is narrower than the document, the one
+  direction a published type may not be.
+
+
+  **Three closed vocabularies that look like these six stay closed, and the reason is the discriminator
+  D-089 named.** `HoldStatus`, `TransactionMechanism` and `DeliveryType` are each stated as a bold
+  sentence that alternates the values and names no type -- "**`DeliveryType`** is `guaranteed` |
+  `share_of_voice` | `non_guaranteed`" -- so the list is the whole of the type. `ChargeableUnit`, the
+  `unit` column of section 5.6.5, stays closed too: the section gives an extension cost method a free
+  label rather than a unit term, "An extension term has no row: its `unit_label`, a free label, names
+  its unit", and the vocabulary that does admit extension unit terms is `Availability.unit`, which D-089
+  opened.
+
+
+  Six declarations gain `open: true` and cite this record beside the one that read their terms. No term
+  moves and no name moves: the core half of each is the list D-065 and D-073 read, and the extension half
+  is the kernel''s `NamespacedTerm`, which is what `VocabularyTerm` already means.'
+evidence:
+- https://github.com/IABTechLab/OpenProposal/blob/a36266907148c7fe7f79fd3706d4bd2ff1e99b16/spec/openproposal-3.0.md
+twins:
+- types:
+  - PreemptionRemedy
+  - RemedyKind
+  reason: >-
+    The specification states the same three terms twice, for two remedies of two events: § 5.6.7's
+    `remedy` is what the seller gives when it preempts a line item it has sold, and § 5.7's
+    `shortfall_remedy` is what it gives when a committed metric falls short. Both cells declare a
+    `VocabularyTerm`, so opening the second under this record gives the pair one structure where
+    D-089's opening of the first had already given it half of one. They stay separate types because a
+    receiver reads each against the event it answers: a seller may offer a makegood for a shortfall
+    and no remedy at all for a preemption, and a buyer selecting one selects nothing in the other.
+  locks:
+  - with-open-prs
+challenge:
+- type: ExclusionType
+  value: agency-a.example:creative_competitors
+  verdict: accept
+  context: >-
+    A buyer excluding a kind of inventory this version lists no term for, named
+    in its own domain.
+  reason: >-
+    `the-declaration-says-open` publishes the vocabulary as the sentence above
+    the list declares it, a `VocabularyTerm`, whose extension half is a term in
+    the definer's domain, and section 2.2 states that anyone may define one.
+- type: ExclusionType
+  value: creative_competitors
+  verdict: reject
+  context: >-
+    The same buyer writing its own exclusion kind as a bare word rather than in
+    its domain.
+  reason: >-
+    An extension term carries the domain of the party that defines it, so a
+    bare word outside the four core terms is neither a core term nor an
+    extension one. Open is a wider type here and not an unchecked one.

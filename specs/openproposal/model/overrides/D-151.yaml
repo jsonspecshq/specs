@@ -1,0 +1,174 @@
+format: 2
+id: D-151
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three statements of § 5 constrain a member by reading others: § 5.8's two rules of who may
+  commit, and § 5.7.1's rule of who counts a `dooh` line item's impressions. Which object owns
+  each, and can each pair be derived from a payload the specification ships? § 5.7.1's cell now
+  states three conditions on `counted_by` and orders them, so the rule also asks when the `dooh`
+  condition binds at all.
+covers:
+- ir: rule:5.8:3976e4c0
+  digest: d7dcabf6669181fdad3f92941ae11871c5e94cc990970e00c7bd6026a599d859
+  quote: "`eligible_buyers[]`, `eligible_seats[]`: `buyer.domain` MUST be in `eligible_buyers[]`, or `buyer_requirements.seats` MUST name at least one seat, each in an `eligible_seats[]` entry for its `dsp`."
+- ir: rule:5.8:876ec9ff
+  digest: ec4d21fe317375d50cf5ee3aebe5063789aec798519845cf02cd4c1b5d817201
+  quote: "`buyer_requirements.allowed_dsps[]` (§ 5.9): when `buyer_requirements.seats` is present, its `dsp` MUST be in the list."
+- ir: rule:5.7.1:d9939d8b
+  digest: 43183329b1994ca4030c14cff27b1b5ca451dc81b3cecf4d804bfa35cf2f60a3
+  quote: Otherwise, when `channel` is `dooh` and the line item counts impressions, `counted_by` MUST be the source of the line item's `delivery_counting.impression_multiplier`
+- ir: key:5.7.1:ControllingMeasurementOption.counted_by
+  digest: c4ab66331bbc87b7e12b669fecec43ada2ac53af659dabf6e692dcef983f47cd
+  quote: "`counted_by` | REQUIRED | Who counts. When the `pricing[]` entry the buyer commits under has `cost_method` `CPP`, `counted_by` MUST be its `cost_parameters.rating_source`. When it has `cost_method` `CPA`, `counted_by` MUST be its `cost_parameters.action_source`. Otherwise, when `channel` is `dooh` and the line item counts impressions, `counted_by` MUST be the source of the line item's `delivery_counting.impression_multiplier`"
+- ir: sentence:5.6.4:6475cdc3
+  digest: 6154498eeb924234f68e7b9fe279ae3d6763760121c3d13d91b905ac1e36fd13
+  quote: "The multiplier's source controls the count of impressions: `seller` when `source_type` is Publisher Provided (`2`) or `vendor` is the proposal's `seller.domain`, and `vendor` otherwise."
+- ir: field:5.8:eligible_buyers[]
+  digest: fcb080416a0777109bf48264b90e81c5d69a23aac674f43657dd24ae3c615ac2
+  quote: "`eligible_buyers[]` | Array[RegistrableDomain] | seller-set | The buyers that may commit, by `buyer.domain`"
+- ir: field:5.8:eligible_seats[]
+  digest: 19f8c6b4e4206d2d7a9385d92f0847d9a0a5c7a9d4b35e17c9ab5a39e3e6fa7e
+  quote: "`eligible_seats[]` | Array[SeatRef] | seller-set | The seats that may commit. An entry with an absent or empty `ids[]` names no seat and admits no one, unlike an absent OpenRTB 2.6 `Deal.wseat`, which sets no restriction"
+- ir: key:5.9:BuyerRequirements.allowed_dsps[]
+  digest: 7ba8cf788ce10d1b41183d30dcfe35471e97d1d1f788c9005f943a4bac48f91f
+  quote: "`allowed_dsps[]` | OPTIONAL | The DSPs that may receive the deal (§ 5.8), each by its primary domain, as `SeatRef.dsp` (§ 2.2)"
+- ir: key:5.9:BuyerRequirements.seats
+  digest: 41ec107f02292d82f99a2fa5e116fc4b90f3e25b97f41a5be2371f5456f0a69e
+  quote: "`seats` | OPTIONAL | The buyer's seats on the deal, as the Deals API 1.0 `wseat`"
+options:
+- id: the-object-that-holds-the-members-the-sentence-names
+  summary: >-
+    Each is a rule of the smallest object that holds every member its sentence names:
+    `Proposal` for § 5.8's first, which reads the proposal's `buyer` and a line item's
+    restriction; `BuyerRequirements` for § 5.8's second, whose two members are both its own; and
+    `LineItem` for § 5.7.1's, which reads a `channel`, a `delivery_counting` and an option the
+    line item offers.
+- id: all-three-rules-of-the-line-item
+  summary: >-
+    All three are rules of `LineItem`, since § 5.8's bullets restrict a line item and the line
+    item carries `buyer_requirements`, `eligible_buyers[]` and `eligible_seats[]`.
+- id: a-rule-of-the-row-s-own-object
+  summary: >-
+    § 5.7.1's is a rule of `ControllingMeasurementOption`, the object whose row states it.
+chosen: the-object-that-holds-the-members-the-sentence-names
+rationale: >-
+  A rule is owned by the type whose payload decides it (type rules § 9), so the owner is the
+  smallest object that holds every member the sentence names.
+
+
+  § 5.8's SECOND BULLET IS A RULE OF `BuyerRequirements`. It names `allowed_dsps[]` and
+  `seats`, which are two of that object's four members, and reads nothing outside it, so one
+  `BuyerRequirements` shows whether it holds. § 5.8 opens the three bullets "A buyer is eligible
+  when each of these that is present holds", so the bullet asks nothing of an object that states
+  no `allowed_dsps[]`: a seller that lists no DSP allows none in particular.
+
+
+  § 5.8's FIRST BULLET IS A RULE OF `Proposal`. It reads `buyer.domain`, which is the proposal's,
+  against `eligible_buyers[]`, `eligible_seats[]` and `buyer_requirements.seats`, which are the
+  line item's, and no smaller object holds both sides. The bullet names both fields together, so
+  a line item that restricts by either admits the buyer only by one of the two routes the
+  sentence states, and an `eligible_seats[]` that lists no entry for the seat's `dsp` admits it by
+  no seat -- which the field's own row states, "An entry with an absent or empty `ids[]` names no
+  seat and admits no one".
+
+
+  § 5.7.1's IS A RULE OF `LineItem`. The sentence reads a `channel`, the line item's
+  `delivery_counting.impression_multiplier`, and the `counted_by` of an option its
+  `controlling_measurement` offers, and the line item is the only object that holds all three.
+  It now also reads the `cost_method` of the entry the buyer commits under, which the line item
+  holds too, so the owner is the same object the three members already made it.
+  Two further readings it rests on are the document's own: a line item counts impressions when any
+  of its `pricing[]`, `commitment`, `availability` or `committed_metrics[]` counts is in
+  impressions (§ 5.6.4), and § 5.6.5 gives `impressions` as the unit of `CPM` alone, so a `CPM`
+  entry is what puts those counts in impressions, as `rule:5.6.4:e58650b7` already reads it; and
+  the multiplier's source is `seller` where `source_type` is Publisher Provided (`2`) or the
+  `vendor` is the proposal's own domain, and the `vendor` otherwise (§ 5.6.4). That last reads the
+  proposal's `seller`, which a line item does not hold, so the vector gives it as context, as
+  § 5.6.4's other two rules give the fields they read.
+
+
+  `all-three-rules-of-the-line-item` would own the second bullet to a type that reads nothing of
+  it: a `BuyerRequirements` payload could then not be checked, and a vector would carry a whole
+  line item to say something about two members of one of its fields. The owner is what a payload
+  has to be to decide the rule, not what the section restricts.
+
+
+  `a-rule-of-the-row-s-own-object` is refused by the sentence itself. It names "the line item's
+  `delivery_counting.impression_multiplier`", so an option cannot decide it: the option holds no
+  `channel` and no `delivery_counting`, and a check given one would have nothing to compare.
+  § 5.7.1's row states two conditions and both reach outside the option, which is why the row's
+  own object is not the owner here.
+
+
+  THE PAIRS ARE THE SOURCE'S OWN BYTES. `proposal-issued.yaml` is an issued proposal whose
+  `buyer.domain` is `agency-a.example` and whose first line item restricts who may commit to
+  `eligible_buyers: ["agency-a.example"]`, so it holds by the first route. The `Proposal` pair's
+  valid half is that proposal trimmed to the seven keys the published object requires, plus the
+  `buyer` and the line item the rule reads, itself trimmed to the six keys a `LineItem` requires
+  plus its `eligible_buyers` and `buyer_requirements`; every value is the file's. The invalid half
+  is that payload with `agency-a.example` removed from `eligible_buyers[]`: one removal, no value
+  invented, and the buyer is then admitted by neither route, since the line item lists no
+  `eligible_seats[]` entry for its seat's `dsp`.
+
+
+  That line item's `buyer_requirements` is the `BuyerRequirements` pair, whole: it states
+  `allowed_dsps: ["dsp-a.example", "dsp-b.example"]` and `seats.dsp: dsp-a.example`, and the
+  object requires no member, so the published type takes that value with nothing trimmed. The
+  invalid half is it with `dsp-a.example` removed from `allowed_dsps[]`.
+
+
+  `line-item-dooh.yaml` is a `dooh` line item priced `CPM`, so it counts impressions; its
+  multiplier is a vendor's, `audience-vendor.example`, under `source_type` 1; and its one
+  controlling measurement option is counted by that same vendor. The `LineItem` pair's valid half
+  is that line item trimmed to the six keys it requires plus the `delivery_counting`, `pricing`
+  and `controlling_measurement` the rule reads, with the proposal's `seller` as context, the value
+  `proposal-issued.yaml` gives it. The invalid half is that payload with `counted_by` read as
+  `seller`, which is the value `line-item-display.yaml` ships for the same member: one value
+  changed, and a shipped one.
+
+
+  WHAT THIS COSTS, counted rather than described: a `dooh` rule of the line item is a rule the
+  four part-payloads of § 5.5 cannot decide, because none of them writes a `channel`, so each
+  leaves it undecided and D-135 is the reason, as it is for every other line-item rule they do not
+  write the fields of.
+
+
+  WHAT THE TEXT NOW DECIDES THAT IT LEFT OPEN, and this is a reading the document states rather
+  than one this record takes. The cell holds three conditions on `counted_by` and orders them: a
+  committed entry at `cost_method` `CPP` sets it to that entry's `cost_parameters.rating_source`;
+  one at `CPA` sets it to the entry's `cost_parameters.action_source`; and the `dooh` requirement
+  is prefixed "Otherwise", so it binds only where the committed entry is neither. Before, the cell
+  stated the `dooh` requirement and the `CPP` requirement side by side with no order, and a `dooh`
+  line item counting impressions under a `CPP` entry owed both at once -- satisfiable only where
+  the rating source and the multiplier's source happen to be the same party, and otherwise a
+  payload no `counted_by` could satisfy. The document has closed that, and the rule carries the
+  closure: the check reads the committed entry first and reports nothing where its `cost_method` is
+  `CPP` or `CPA`, and reports nothing either where no entry is determined -- a line item whose
+  `pricing[]` holds several entries and whose commitment names none does not say which entry the
+  buyer commits under, so it does not say whether the "Otherwise" is in force.
+
+
+  WHAT THIS LEAVES, and why each is not this record's. The two conditions the "Otherwise" defers
+  to are unpaired, and the reason is the source's payloads rather than the reading: no shipped
+  payload prices a line item at `CPP` or at `CPA`, so neither condition is ever true in the source
+  and a pair for either would have to invent the entry. The same holds of the `dooh` clause's own
+  new case: a pair showing that a `CPP`-priced `dooh` line item owes nothing to its multiplier's
+  source needs that same unshipped entry, so the vectors here show the clause binding and not the
+  clause standing aside. § 5.7.1's "When `none` is in effect, it MUST be the only option" is
+  unpaired for the same kind of reason: no shipped `shortfall_remedy` offers `none` at all, so
+  putting it in effect takes two invented values rather than one mutation.
+feedback: >-
+  § 5.7.1 states three conditions on `counted_by` in the member's own Meaning cell, and each reads
+  a field outside the object the member belongs to: the line item's `channel` and
+  `delivery_counting`, and the `pricing[]` entry a commitment names. A reader of the option's
+  table cannot tell what constrains it, and a validator given an option alone cannot check either.
+  Stating all three on the line item, where the fields they read are, would put each requirement
+  where the payload that decides it is. The "Otherwise" that now orders them settles what the
+  earlier wording left for a reader to resolve, and it is worth keeping that word if the conditions
+  move, because without it a `dooh` line item priced per rating point owes two different sources at
+  once. § 5.8's first bullet reads the proposal's `buyer` against three
+  of a line item's fields, so the same holds of it: a line item alone decides who may commit to it
+  only once something says who the buyer is.

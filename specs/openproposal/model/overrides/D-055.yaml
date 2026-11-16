@@ -1,0 +1,113 @@
+format: 2
+id: D-055
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: § 2.2 states two time-zone types — `IanaZone`, a name the IANA database lists, and `ZoneName`,
+  an `IanaZone` or `viewer_local` — and the kernel carries one, `TimeZone`, whose pattern is the union
+  of both. Three rows name one of the two. How many types does the model carry, and which does each row
+  take?
+covers:
+- ir: def:2.2:IanaZone
+  digest: a155797aac910548f8d5856f94bb63c7d3737a3a343dfac0a13179481951f330
+  quote: '`IanaZone` | String: a name in the IANA time zone database, such as `America/New_York` or `UTC`
+    | A time zone'
+- ir: def:2.2:ZoneName
+  digest: cec6f43072d265cffcfbc633af33a3754a3aca0edd981f46aba57fd9d17018b4
+  quote: '`ZoneName` | An `IanaZone`, or `viewer_local` | `viewer_local` is where the ad renders. On a
+    `dooh` line item that is each screen''s own zone, which its `time_zone` names when present'
+- ir: key:5.2.8:Screen.time_zone
+  digest: 3ff6012607b766df2a717a341e284efd9aa32f1efd19e1832c38b5188b1df4b7
+  quote: '`time_zone` | OPTIONAL | The screen''s time zone'
+- ir: key:5.10:Billing.time_zone
+  digest: 8a3ffc03e1d828afb577c46430d48722d6f7aea224ff6d2d2e58774d3991dba3
+  quote: '`time_zone` | OPTIONAL | The clock for a `month` invoice period. Absent: `UTC`'
+- ir: field:5.5:time_zone
+  digest: 958a94cb93aec0fc1e994aa1650a4973a0ecd1d859de960efcc516c8b0179a00
+  quote: '`time_zone` | ZoneName | seller-set | The clock for `daypart` and a calendar `frequency_cap.period`'
+options:
+- id: two-types-add-the-narrow-one
+  summary: Two, because the text states two concepts. `IanaZone` is added to the kernel as the narrow
+    listed-zone string, under its own concept, carrying the listed rule. `TimeZone` is left as it is,
+    the union, with its own rule and its `viewer_local` carve-out. The two rows that name `IanaZone` take
+    it, and the one that names `ZoneName` takes `TimeZone`, the union the kernel already carries.
+- id: rename-and-narrow
+  summary: One, narrowed. `TimeZone` is renamed `IanaZone` and its pattern narrowed to the bare zone name,
+    the listed rule's id moving with it, and the one row that admits `viewer_local` carries a union declared
+    in this specification's mapping.
+- id: one-type-the-union
+  summary: One, as now. All three rows take `TimeZone`, and the two that name `IanaZone` accept `viewer_local`
+    as well, which their own text does not admit.
+- id: zonename-as-a-vocabulary
+  summary: Two, with `ZoneName` declared as an open vocabulary whose one core term is `viewer_local` and
+    whose extension terms are zone names, so both rows resolve by rule and no entry rests on a record.
+chosen: two-types-add-the-narrow-one
+rationale: '**The text states two concepts and the faithful model states two types.** A listed zone resolves
+  to one offset at any instant; `viewer_local` resolves only once you know where an ad rendered. One type
+  doing double duty would let `Screen.time_zone` and `Billing.time_zone` accept `viewer_local`, which
+  neither row''s text admits — a screen has a zone and an invoice period is cut on one. So `IanaZone`
+  is added under its own concept, `listed-time-zone`: it cannot share `time-zone` with `TimeZone`, because
+  every concept names one type that declares it.
+
+  **Why `rename-and-narrow` is refused, measured.** `src/binding.ts`''s `mergeBinding` throws when a binding
+  names a primitive the kernel does not define, and AdCOM''s and the Deals API''s bindings both carry
+  a `TimeZone` entry marked absent. So a rename forces a byte change in **two specifications that do not
+  publish the type at all** — a radius of three binding files, where the narrowing alone was one specification.
+  The addition touches three as well, for a reason that is the more important half of the measurement:
+  **`mergeBinding` starts from every kernel primitive and removes only what a binding marks absent, so
+  a primitive a binding never mentions is published there.** Omission is publication. That is why AdCOM
+  can leave out `VendorCode` and `MediaOffset` — it publishes them — and why a new `IanaZone` needs an
+  `absent` entry in each of the other two rather than silence. The file count ties at three and every
+  other axis breaks the tie: the addition renames nothing, moves no rule id, changes no published type
+  name, and leaves `TimeZone`''s bytes exactly as they were.
+
+  **Why `zonename-as-a-vocabulary` is refused, although it would resolve by rule.** `ZoneName` is a string
+  with a pattern, not a term list. Declaring it a vocabulary would state something false about what the
+  type is, so that every SDK would publish it as an enumeration open at the edges and every reader would
+  be told its values are terms. Resolving by rule is not worth a false statement about a type''s structure.
+  `field:5.5:time_zone` takes an entry on this record instead, which is the mechanism''s own rule: a decision
+  covers what no rule decides, and no rule resolves a Type cell against a kernel type under another name.
+
+  **`TimeZone` keeps its name and its union** because that is what it is: the clock a line item''s daypart
+  and frequency cap period are read on, which the specification lets a seller give as a zone or as the
+  viewer''s own. The upstream question — whether `time_zone` should be stated as an IANA name or `viewer_local`,
+  required beside a daypart or a period — is filed against the specification and is not this record''s
+  to settle; the kernel already carries both halves and `kernel:TimeZone:listed` already carves `viewer_local`
+  out of its own rule.'
+evidence:
+- 'docs/reports/reading-runs/openproposal-d050-binding-2026-11-08.md §§ 10-11: the binding-file measurement,
+  the omission-is-publication mechanism, and which of the three rows resolves by rule.'
+- 'Blast radius: `TimeZone` is published by OpenProposal alone — AdCOM and the Deals API each mark it
+  `absent` in their own kernel binding — so neither the union nor the new narrow type moves a byte either
+  of them publishes.'
+- '`src/mapping-rules.ts`''s `namedValueKind` resolves a Type cell only against a kernel primitive, a
+  kernel part, or a mapping entry declaring a vocabulary, which is why the `ZoneName` row cannot resolve
+  by rule without the false vocabulary.'
+feedback: § 2.2 states `ZoneName` as "an `IanaZone`, or `viewer_local`" and then uses the bare `IanaZone`
+  in two of the three places a zone is written. Say which of the two each field takes, because a reader
+  meeting `time_zone` on a screen and `time_zone` on a line item cannot tell from the name whether `viewer_local`
+  is allowed there.
+challenge:
+- type: IanaZone
+  value: America/New_York
+  verdict: accept
+  context: >-
+    A screen in a shopping centre outside New York, whose `time_zone` names
+    the clock its dayparts are read on.
+  reason: >-
+    `two-types-add-the-narrow-one` mints `IanaZone` as the bare zone name, and
+    a database zone is what the row states.
+- type: IanaZone
+  value: viewer_local
+  verdict: reject
+  context: >-
+    A seller that fills every `time_zone` from one template and writes the
+    stand-in for "wherever the ad rendered" on a screen as well as on a
+    daypart.
+  reason: >-
+    `one-type-the-union`, the option not taken, is the kernel's former
+    `TimeZone` and accepts this value at all three rows. A screen has one
+    clock and an invoice period is cut on one, so a value that resolves only
+    by knowing where an ad rendered states nothing either row can use. The
+    refusal is the measurement that separates the two types.

@@ -1,0 +1,104 @@
+format: 2
+id: D-153
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.2.2 and § 5.2.7 each state a SHOULD NOT about a line item's own fields: who may measure
+  viewability in an app or on CTV without OMID, and what a line item may carry when a property it
+  offers is directed at children. Is a SHOULD a rule the rules output carries, and can each pair
+  be derived from a payload the specification ships?
+covers:
+- ir: rule:5.2.2:871e9967
+  digest: dc17c8c4801d7dd95aa299f8d41b1de10459f40d46501daaa75759cee3f1c0b1
+  quote: Unless `api[]` includes OMID 1.0 (7), a line item whose `committed_metrics[]` includes `viewable_rate` and whose `environments.available[]` includes `app_mobile` or `ctv` SHOULD NOT offer a `measurement_source` option whose `measured_by` is not `seller`.
+- ir: rule:5.2.7:d85c61b6
+  digest: 03789619c9af53abce7a668783c35c29fd8ec5721df0a51318370fbf9f48823c
+  quote: A line item with a `directed` entry in `properties.available[]` SHOULD NOT carry `audiences`, and its `buyer_supplied.segments_allowed` and `suppression_allowed` SHOULD be false.
+- ir: key:5.2.4:PropertyOption.child_audience
+  digest: d321342846c62489ae050922b506d2a03e2e54c00ac3489b1eab520508907473
+  quote: "`child_audience` | REQUIRED | `directed` | `mixed` | `general`. `directed`: children are its primary audience under the law the seller applies, or its app store lists it for children only. `mixed`: directed to children but not as its primary audience, or listed for children and older users. `general`: neither. § 5.2.7 states what follows"
+- ir: field:5.7:measurement_source
+  digest: 0d90aa76970d95008477e84de28f3691697be0f608623f357f1ccee169e7d221
+  quote: "`measurement_source` | Selectable[MeasurementOption] | selectable | Lets a buyer choose the measurement provider it transacts on. See § 5.7.1. Nothing in effect: no provider"
+- ir: field:5.3:audiences
+  digest: a0b120d54324830aacfcbf094c51a542138af32594d125cd7ac5cb2f199a0a9a
+  quote: "`audiences` | AudienceSelectable | selectable | See below"
+options:
+- id: two-rules-of-the-line-item-at-warning-severity
+  summary: >-
+    Each is a rule of `LineItem`, and its severity is `warning` because the level is SHOULD NOT,
+    which `severityOf` already reads from the statement's own level. Each pair is a shipped line
+    item and the one value its condition reads.
+- id: an-obligation-of-the-seller
+  summary: >-
+    Each asks the seller not to offer something, so each is an obligation of the seller and no
+    payload decides it.
+- id: informative-because-an-implementation-may-depart
+  summary: >-
+    RFC 2119 lets an implementation depart from a SHOULD, so neither constrains a payload and
+    both are informative.
+chosen: two-rules-of-the-line-item-at-warning-severity
+rationale: >-
+  A SHOULD IS A RULE THE OUTPUT ALREADY HAS A SEVERITY FOR. `severityOf` in `src/rules.ts` reads
+  SHOULD, SHOULD NOT, RECOMMENDED and NOT RECOMMENDED as `warning` and every other level as
+  `error`, and the examples stage counts a SHOULD rule's finding apart from an error and records
+  it with `severity: warning`. So the pipeline's answer to "an implementation may depart from
+  this" is already written: the rule is carried, the payload is checked, and the finding is a
+  warning. `informative-because-an-implementation-may-depart` would publish nothing for a
+  sentence the output can carry exactly as the text levels it, and would leave two of the
+  specification's own recommendations invisible to every consumer.
+
+
+  BOTH ARE RULES OF `LineItem`, by the owner reading `D-151` states: the smallest object the
+  model names that holds every member the sentence names. § 5.2.2's reads `placement.api`,
+  `committed_metrics[]`, `environments.available[]` and the `measured_by` of an option its
+  `measurement_source` offers -- four fields of one line item. § 5.2.7's reads the
+  `child_audience` of a `properties.available[]` entry, the presence of `audiences`, and two
+  members of `buyer_supplied` -- a property option's value and three of the line item's fields,
+  which only the line item holds together.
+
+
+  `an-obligation-of-the-seller` is refused by what the payload shows. The seller's offer IS the
+  payload: `measurement_source.available[]` is the offer § 5.2.2 speaks of, and `audiences`,
+  `segments_allowed` and `suppression_allowed` are the fields § 5.2.7 names. `D-087`'s
+  obligations ask something of a party's behaviour that no payload records; these ask what a line
+  item's own fields hold.
+
+
+  THE PAIRS ARE THE SOURCE'S OWN BYTES, AND EACH TURNS ON THE ONE VALUE ITS CONDITION READS.
+  `line-item-rewarded-video.yaml` is the in-app line item this specification ships: its
+  `committed_metrics[]` includes `viewable_rate`, its `environments.available[]` is
+  `app_mobile`, and it offers two vendor measurement options -- and its `placement.api` is
+  `[6, 7]`, so OMID 1.0 is in it and the sentence's "Unless" clears the whole requirement. The
+  file says so in its own comment, "third-party vendors run through OMID 1.0 (7)". The valid half
+  is that line item trimmed to the keys a `LineItem` requires plus the four fields the rule reads.
+  The invalid half is that payload with `7` removed from `api[]`: one removal, no value invented,
+  and the two vendor options are then offered without OMID.
+
+
+  `line-item-display.yaml` offers two properties, both `child_audience: general`, and carries
+  `audiences` with `buyer_supplied.segments_allowed: true` and `suppression_allowed: true`, so
+  the sentence's condition is false of it and the line item keeps the rule. The valid half is that
+  line item trimmed to the keys it requires plus the `properties`, `audiences` and
+  `buyer_supplied` the rule reads, with `audiences` carrying one of its three options so the
+  payload states a whole audience offer rather than a trimmed one. The invalid half reads the
+  first property's `child_audience` as `directed`, which is the first value that key's own row
+  lists: one value changed, from the row that defines it, and all three of the sentence's
+  requirements then fail at once.
+
+
+  WHAT THE SECOND CHECK READS, stated because the sentence leaves it open: a flag that is absent
+  is not `false` stated, and the sentence says the two flags SHOULD be false. A line item that
+  states neither flag offers the buyer nothing to supply, which is what `false` means, so the
+  check reports a flag only where the payload states `true`. § 5.2.7's next sentence, the MUST for
+  a property whose app store bars behavioural advertising, reads a fact about an app store that no
+  payload carries and is not this record's.
+feedback: >-
+  § 5.2.7 states its rules of a line item that offers a `directed` property, and `child_audience`
+  is a key of a property option, so a line item is directed at children by one entry of a list.
+  Saying which of the three values each rule reads -- `directed` alone, or `mixed` as well -- in
+  the sentence rather than in the key's row would settle what a `mixed` property owes. § 5.2.2's
+  "Unless `api[]` includes OMID 1.0 (7)" reads a placement field from a measurement sentence two
+  sections away; naming the field as `placement.api` would let a reader of § 5.2.2 alone find it.

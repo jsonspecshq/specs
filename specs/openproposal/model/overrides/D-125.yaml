@@ -1,0 +1,225 @@
+format: 2
+id: D-125
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `ExclusionList` is "an array of entries, or a `DocumentRef`", and an entry's form comes from
+  the Entry cell of an exclusion type's row. What type does the model publish for it, and what
+  types the four Entry rows?
+covers:
+- ir: field:5.5:exclusions
+  digest: bbeb46f5697324ba7ae0176140d23968269018116a18a3536e34f970a758e882
+  quote: "`exclusions` | Map[ExclusionType, ExclusionList] | supplied | The buyer's block lists, keyed by exclusion type. See below"
+- ir: def:5.5:ExclusionList
+  digest: 8d2c1f8f394e97938c070a7966b8aa1030fbe4453b04872e2d5090a09f2b1b82
+  quote: "`ExclusionList` | is an array of entries, or a `DocumentRef` (§ 2.2) to a JSON array of them. The Entry cell of an exclusion type's row gives an entry's form, and an extension term's definition gives its own. Each entry in that document counts as that type."
+- ir: def:5.5:exclusions.domains
+  digest: 76b04cb891b3e9d15e630f42b72ab1c5b38742e5dde5a6b337a0aa9f388c94a2
+  quote: "`domains` | `Domain` | A domain. It covers only itself, not its subdomains"
+- ir: def:5.5:exclusions.apps
+  digest: e2e756c26cfeabf02797f48fd83e9d10c93db5f2d8f282b901013aacfe788448
+  quote: "`apps` | `AppId` | An app (§ 5.2.5). A seller MUST reject an entry whose `store` it doesn't know, rather than apply it across stores, with `validation`"
+- ir: def:5.5:exclusions.categories
+  digest: c1247ebdca722641ead3b70561ef223b13375432d36b92740aa686da257dd381
+  quote: "`categories` | `TaxonomyCodes` | `taxonomy` per AdCOM 1.0 List: Category Taxonomies. An id covers only itself, not its descendants"
+- ir: def:5.5:exclusions.keywords
+  digest: 268c9685f8f10b231ed4d440ca610959197e80a26e1d48bd2c95a4fb923f803f
+  quote: "`keywords` | `String` | A keyword"
+- ir: def:5.5:ExclusionType
+  digest: fd3b844e7634e2d059e0a5ee5b05dfb837165f58c84b7ca1d4b027852ed1fd01
+  quote: "`ExclusionType` | is a `VocabularyTerm` (§ 2.2). Core terms: `domains` | `apps` | `categories` | `keywords`."
+- ir: key:5.5:AcceptedExclusions.types
+  digest: e3de8ef4aecb71d6f16e79742803fc13a03765505877ceb51d0d2c12426329c8
+  quote: "`types` | REQUIRED | The exclusion types the seller accepts (core terms above), and its terms for each"
+options:
+- id: one-union-of-the-entry-forms
+  summary: >-
+    `ExclusionList` is one type, a union of a list of `ExclusionEntry` and a `DocumentRef`, and
+    `ExclusionEntry` is a union of the four Entry cells' types. The map's value type is uniform,
+    as `accepted_exclusions.types` already is, and each Entry row states one arm.
+- id: a-value-type-per-key
+  summary: >-
+    The map is published as an object with one property per core term, each typed at that row's
+    Entry cell, so a domain under `categories` is refused and `ExclusionList` names no type.
+- id: entries-left-untyped
+  summary: >-
+    `ExclusionList` is a list of any JSON value, or a `DocumentRef`, because an entry's form
+    depends on a key the type cannot see.
+chosen: one-union-of-the-entry-forms
+rationale: >-
+  The Form cell states one type and states it whole: "`ExclusionList` is an array of entries, or
+  a `DocumentRef` (§ 2.2) to a JSON array of them". Two alternatives in one cell are what a
+  union publishes, as `D-113` reads `GeoCode` and `D-064` reads `Measurer`, and the field's own
+  cell names the type once, `Map[ExclusionType, ExclusionList]`, for every key. So what varies by
+  key is the entry, and the four Entry cells give the arms: `Domain`, `AppId` (§ 5.2.5),
+  `TaxonomyCodes[CategoryTaxonomy]`, and the `String` a keyword is, which is the `text` concept
+  and so `Text`. The categories arm is a copy the model already publishes: `D-122` made
+  `TaxonomyCodes` a constructor over the list its holder names and `D-104` declares
+  `CategoryTaxonomy`, so `CategoryTaxonomyCodes` is reached here and at § 5.6.7 alike.
+
+
+  THE INLINE FORM IS A NAMED COPY, `ExclusionEntries`. A union's branches are references (type
+  rules § 8), and a list is emitted inline, so the array arm is a copy of `List[ExclusionEntry]`
+  that this record names -- the only name here the text does not write, which is why it is a
+  record's and not a rule's. Naming it keeps the published union inside the constructs the
+  representable vocabulary grades: the arms are told apart by JSON type, an array against an
+  object, which is the untagged union the vocabulary already measures, where an inline array
+  beside a reference is a construct no probe has graded.
+
+
+  `a-value-type-per-key` is what the predecessor published, and the form it read is gone. There
+  § 5.5 wrote `exclusions` as an inline object in the field's description, so `D-025` typed an
+  `Exclusions` object with one member per type -- `domain`, `app_bundle`, `iab_content_category`,
+  `keyword` -- each a list of that member's own entry type, and put the reference form beside them
+  as a fifth member, `list_ref`. This text writes the field's Type cell as
+  `Map[ExclusionType, ExclusionList]`, gives `ExclusionList` a definition of its own that holds the
+  reference form inside the value rather than beside it, and renames the four keys. An object of
+  four members is no longer a reading of that: the keys are a vocabulary the text declares and
+  the value is a type the text names, which is a map.
+
+
+  It also cannot be written at all for the keys this section says it must cover.
+  `ExclusionList`'s own Form cell ends "and an extension term's definition gives its own", so an
+  exclusion type the specification does not list carries entries of a form its own definition
+  states. An object with one property per core term says nothing about such a key, and the one
+  place a per-key reading could put it -- `additionalProperties` -- is the uniform value type
+  this record publishes. The option also leaves `ExclusionList` named by nothing while the field
+  cell names it, which is a type the document states and the schema does not.
+
+
+  `entries-left-untyped` publishes the list and refuses no entry, so a buyer sending an app
+  object under `domains` is told nothing. It also loses the one thing the Entry cells do state:
+  that an entry is a domain, an app id, a taxonomy's codes, or a keyword, and nothing else.
+
+
+  THE COST THIS ACCEPTS, and it is the per-key narrowing. A uniform value type takes any arm
+  under any key: a domain string under `categories`, an `AppId` under `keywords`. The Entry cells
+  state which arm each key takes and the published type does not, so the schema is wider than the
+  document by exactly that. Nothing narrower is available: the narrowing reads a key's value
+  against the key's own name, which a map's value schema cannot see, and § 5.5 states it in
+  `ExclusionList`'s Form cell rather than as a MUST, so it is not a rule with a pair either --
+  § 5.5's two MUST statements are `rule:5.5:9d06dca4`, that a line item declares neither both
+  `geo` nor `markets`, and `rule:5.5:2e4a1b0c`, that a buyer supplies no exclusion type absent
+  from `accepted_exclusions.types`, and neither is this clause. The challenge below sends a
+  payload at each arm and one at none of them, so what the union does and does not refuse is a
+  value a gate holds rather than a sentence here.
+
+
+  Within a string entry the cost goes further and the record says so rather than leaving it to be
+  found: `Text` admits every string, so the `Domain` arm constrains nothing a keyword entry would
+  not already satisfy, and a malformed domain under `domains` is accepted as a keyword. The arm
+  stays because it is what the `domains` row states and what a reader of the published union
+  needs in order to see the four forms the section names.
+
+
+  THE FOUR ENTRY ROWS NEED NO ENTRY OF THIS RECORD'S, and typing the field is what frees them.
+  `header-named-value-row` declined them while the model typed no row named `exclusions` at a
+  vocabulary, which is what `field:5.5:exclusions` now does: its cell's `K` is `ExclusionType`, so
+  the rule reads the table headed `exclusions` and each row's first cell as a term of that
+  vocabulary, which is what those four cells spell. The reading costs nothing, because
+  `block:5.5:3/values:1` already declares the same four terms under `D-073` and the emitted bytes
+  do not move; what the rule gains is the elements that say the terms are this field's.
+
+
+  So the Entry cells reach the model through the union and not through an entry per row: the arms
+  are the declaration's content, as they are for `GeoCode` under `D-113`, and the declaration sits
+  on `def:5.5:ExclusionList`, the one element that says an entry exists at all. This record covers
+  the four rows because their cells are where the arms come from, and claims no entry for any of
+  them: a decision covers only what no rule decides.
+
+
+  WHAT THIS LEAVES, on each of the two sides § 5.5 writes alike. The seller's
+  `accepted_exclusions.types` is `Map[ExclusionType, ExclusionTerms]` and was already a map with a
+  uniform value type, derived by `applied-constructor-row`; this record changes nothing there, and
+  after it the buyer's side reads the same way, which is what the section's parallel wording asks
+  for. What it does not settle is whether `ExclusionType` is open. `D-073` declares it closed
+  because its sentence "lists what the member may carry and invites nothing further", and § 5.5
+  says in two places that it does invite more -- the lead-in calls it "a `VocabularyTerm` (§ 2.2)"
+  with "Core terms", and `ExclusionList`'s Form cell gives an extension term's definition its own
+  entry form. That is `D-073`'s element and `D-073`'s to correct, and it is recorded as a bead
+  rather than decided here; this reading holds either way, because the uniform value type is what
+  carries an extension term's entries if the vocabulary opens.
+challenge:
+- type: ExclusionEntry
+  value: example-gambling.example
+  verdict: accept
+  context: >-
+    A buyer blocking a gambling site by name, which is the entry
+    `proposal-issued.yaml` writes under `domains`.
+  reason: >-
+    The `Domain` arm takes a lowercase two-label domain, and the `Text` arm would take the same
+    string in any case.
+- type: ExclusionEntry
+  value:
+    store: roku_channel_store
+    bundle: '123456'
+  verdict: accept
+  context: >-
+    A buyer blocking one Roku channel, which is the entry § 5.5's own `exclusions` block writes
+    under `apps`.
+  reason: >-
+    The `AppId` arm requires `store` and `bundle`; `roku_channel_store` is a core term of
+    `StorePlatform` and `bundle` is an `ExternalId`.
+- type: ExclusionEntry
+  value:
+    taxonomy: 7
+    ids:
+    - '181'
+  verdict: accept
+  context: >-
+    A buyer blocking IAB Content Taxonomy 3.0's Casinos & Gambling, which is the entry § 5.5's
+    `exclusions` block writes under `categories`.
+  reason: >-
+    The `TaxonomyCodes[CategoryTaxonomy]` arm is the `CategoryTaxonomyCodes` copy, whose
+    `taxonomy` is a code of AdCOM 1.0 List: Category Taxonomies, of which 7 is one.
+- type: ExclusionEntry
+  value: casino bonus
+  verdict: accept
+  context: >-
+    A buyer blocking a phrase its brand safety team keeps on a keyword list.
+  reason: >-
+    The `Text` arm is a string on which the specification states no lexical constraint, which is
+    what the `keywords` row's `String` is.
+- type: ExclusionEntry
+  value:
+    taxonomy: 12
+    ids:
+    - '181'
+  verdict: reject
+  context: >-
+    A buyer naming taxonomy 12, reading the number as a taxonomy version rather than as a code of
+    the list the row names.
+  reason: >-
+    `CategoryTaxonomy` holds the codes 1 to 9 and reserves 500 and up for vendors, so 12 is no
+    code of it; and no other arm takes an object, so the union refuses the value outright.
+- type: ExclusionList
+  value:
+    url: https://agency-a.example/lists/keywords-2026-10.json
+    digest: sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06
+  verdict: accept
+  context: >-
+    A buyer whose keyword list is too long to inline, sending it by reference, which is what
+    § 5.5's `exclusions` block and `proposal-issued.yaml` both write under `keywords`.
+  reason: >-
+    The `DocumentRef` arm requires `url` and `digest`, and the Form cell states the reference form
+    beside the inline array.
+- type: ExclusionList
+  value: example-gambling.example
+  verdict: reject
+  context: >-
+    A buyer with one domain to block writing it bare, without the array the section states.
+  reason: >-
+    Both arms are structural -- an array of entries, or the `DocumentRef` object -- so a bare entry
+    matches neither. § 3.1 and § 3.2's bare-value fallbacks are the only places this specification
+    lets a scalar stand in for a form, and this is not one of them.
+feedback: >-
+  § 5.5 states an entry's form in the Entry cell of each exclusion type's row, so a validator
+  that reads `ExclusionList` alone cannot tell a domain under `categories` from a domain under
+  `domains`. Writing the field's cell as a type per key, or giving `ExclusionList` a parameter the
+  key supplies as § 2.2 already writes `Range[T]` -- `Map[ExclusionType, ExclusionList[Entry]]` --
+  would put the narrowing where a schema can carry it. The same cell also gives an extension
+  term's definition its own entry form while the `ExclusionType` lead-in's "Core terms" is the
+  only statement that extension terms exist; saying so in the lead-in's own words would settle
+  both.

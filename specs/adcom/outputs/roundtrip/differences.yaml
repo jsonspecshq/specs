@@ -15,3 +15,27 @@ differences:
       The row stands for every positive number of seconds, not one code, so
       the vocabulary holds no term for it: it takes a media offset in seconds
       as its extension, and its description carries the row's meaning.
+  - table: table:object_videoplacement:1
+    row: key:object_videoplacement:VideoPlacement.mime
+    column: Type
+    spec: "string array; required"
+    model: "string array"
+    decision: D-068
+    reason: >-
+      The cell says `required` and the same row's definition says "If omitted,
+      all types are assumed", so one of the two witnesses is a slip. D-068
+      reads the omission sentence, because the two sibling rows carrying that
+      sentence declare no `required` and publishing it would narrow the schema
+      below what the document accepts.
+  - table: table:object_audioplacement:1
+    row: key:object_audioplacement:AudioPlacement.mime
+    column: Type
+    spec: "string array; required"
+    model: "string array"
+    decision: D-068
+    reason: >-
+      The cell says `required` and the same row's definition says "If omitted,
+      all types are assumed", so one of the two witnesses is a slip. D-068
+      reads the omission sentence, because the two sibling rows carrying that
+      sentence declare no `required` and publishing it would narrow the schema
+      below what the document accepts.

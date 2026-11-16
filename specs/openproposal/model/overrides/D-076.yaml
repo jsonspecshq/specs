@@ -1,0 +1,60 @@
+format: 2
+id: D-076
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What is a line item's `channel`, where its lead-in says the type is a vocabulary term whose
+  core terms are a table's rows?
+covers:
+- ir: def:5.1.1:MediaChannel
+  digest: f68a85afce8842b9809b82419452751408f6907c1ca8e650919a88a84325ec74
+  quote: '`MediaChannel` | is a `VocabularyTerm` (§ 2.2) whose core terms are the rows of this table.
+    An impression a row matches has that row''s channel, so an extension term covers only impressions
+    no row matches.'
+- ir: field:5.1:channel
+  digest: f238dcbb62a5413240de2a29f590622682d582f8f8309999fe8b5b7abf5dc8b7
+  quote: '`channel` | MediaChannel | immutable | Core terms in § 5.1.1. The discriminator for how the
+    rest of the line item is read'
+- ir: def:5.1.1:channel.dooh
+  digest: d1bba9102900730605a740d32cec363c8c2d382499eae2fc2768dccaeee80800
+  quote: '`dooh` | Distribution channel `Dooh`'
+- ir: def:5.1.1:channel.audio
+  digest: 88a6c85592a38c9d19edb0df59c3e68ee0db38380e3dbdf7aeaced3a035ee092
+  quote: '`audio` | Audio ad (`AudioPlacement`)'
+- ir: def:5.1.1:channel.ctv
+  digest: 97dad39d5f32820b0162f83d2572c56f385a00632e1603638a41c7bfab11bcf3
+  quote: '`ctv` | A TV device type'
+- ir: def:5.1.1:channel.native
+  digest: 1a2087aca42d3a776529870b8419b5b090f3026c122acb360db00e5a1cdedbbd
+  quote: '`native` | Native ad (`DisplayPlacement.nativefmt`), including native ads with video assets'
+- ir: def:5.1.1:channel.video
+  digest: 68b21fd8ad5a7fea4a79c5ebac040b0e0d64223a912612abcd6292e8f9541b6e
+  quote: '`video` | Video ad (`VideoPlacement`)'
+- ir: def:5.1.1:channel.display
+  digest: c73de2743306b91a2f2f84087298bbf496c2fadf6a8ad2c5a394b4c4586b1854
+  quote: '`display` | Any other display ad (`DisplayPlacement`)'
+options:
+- id: open-over-the-rows
+  summary: '`MediaChannel` is an open vocabulary whose core terms are the six rows of the section 5.1.1
+    table, and an extension term covers an impression no row matches.'
+- id: closed-over-the-rows
+  summary: The six rows are the whole list and a sender may carry nothing else.
+- id: a-bare-term
+  summary: The member carries a vocabulary term with no core terms stated, so any term is accepted and
+    the table is prose.
+chosen: open-over-the-rows
+rationale: 'The lead-in states both halves: "`MediaChannel` is a `VocabularyTerm` (§ 2.2) whose core terms
+  are the rows of this table", and then "an impression a row matches has that row''s channel, so an extension
+  term covers only impressions no row matches". So the six rows are the core terms and a term outside
+  them is admitted, for an impression none of the six describes.
+
+
+  `closed-over-the-rows` would refuse the extension term the sentence invites, which is narrower than
+  the text in the one direction a published type may not be. `a-bare-term` would accept any term and publish
+  none of the six, so a buyer would learn the channels only by reading the specification and a library
+  would offer no names at all.
+
+
+  So the vocabulary is declared at the lead-in that states it, open, with `dooh`, `audio`, `ctv`, `native`,
+  `video` and `display` as its terms, each from the row that defines it.'

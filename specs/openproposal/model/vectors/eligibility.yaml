@@ -1,0 +1,104 @@
+# Rule vectors for the statements of section 5.8 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: eligibility
+rules:
+  # § 5.8's first bullet names both fields, so a line item that restricts who
+  # may commit admits the buyer by one of the two routes the sentence states.
+  # The valid half is `proposal-issued.yaml`, trimmed to the keys a proposal
+  # requires plus the `buyer` and the line item the rule reads. The invalid
+  # half is that payload with `agency-a.example` removed from
+  # `eligible_buyers[]`: the line item lists no `eligible_seats[]` entry for
+  # its seat's `dsp`, so neither route admits the buyer (D-151).
+  - rule: rule:5.8:3976e4c0
+    digest: d7dcabf6669181fdad3f92941ae11871c5e94cc990970e00c7bd6026a599d859
+    decision: D-151
+    type: Proposal
+    valid:
+      - value:
+          proposal_id: examplepub-agencya-q4-2026-omni
+          version: 2
+          spec_version: "3.0"
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          type: standard
+          status: published
+          description: Display and CTV line items for Agency A, issued from the Q4 omnichannel proposal.
+          line_items:
+            - line_item_id: business-daily-display
+              status: agreed
+              channel: display
+              visibility: named
+              eligible_buyers: [ agency-a.example ]
+              buyer_requirements:
+                seats_expected: true
+                allowed_dsps: [ dsp-a.example, dsp-b.example ]
+                seats: { dsp: dsp-a.example, ids: [ seat-99812, seat-99813 ] }
+                seat_owner: { domain: agency-a.example, legal_name: Agency A LLC }
+              pricing:
+                - { pricing_id: bd-cpm-usd, cost_method: CPM, list_rate: 24.00, agreed_rate: 27.54,
+                    price_valid_until: "2026-11-15T23:59:59Z", currency: USD, price_type: 3 }
+              transaction_mechanism:
+                available: [ { id: programmatic_guaranteed, delivery_type: guaranteed } ]
+                included: [ programmatic_guaranteed ]
+                max_select: 1
+    invalid:
+      - value:
+          proposal_id: examplepub-agencya-q4-2026-omni
+          version: 2
+          spec_version: "3.0"
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          type: standard
+          status: published
+          description: Display and CTV line items for Agency A, issued from the Q4 omnichannel proposal.
+          line_items:
+            - line_item_id: business-daily-display
+              status: agreed
+              channel: display
+              visibility: named
+              eligible_buyers: []
+              buyer_requirements:
+                seats_expected: true
+                allowed_dsps: [ dsp-a.example, dsp-b.example ]
+                seats: { dsp: dsp-a.example, ids: [ seat-99812, seat-99813 ] }
+                seat_owner: { domain: agency-a.example, legal_name: Agency A LLC }
+              pricing:
+                - { pricing_id: bd-cpm-usd, cost_method: CPM, list_rate: 24.00, agreed_rate: 27.54,
+                    price_valid_until: "2026-11-15T23:59:59Z", currency: USD, price_type: 3 }
+              transaction_mechanism:
+                available: [ { id: programmatic_guaranteed, delivery_type: guaranteed } ]
+                included: [ programmatic_guaranteed ]
+                max_select: 1
+  # § 5.8's second bullet reads two members of one `BuyerRequirements`, and the
+  # object requires none, so `proposal-issued.yaml`'s own value is the valid
+  # half whole. The invalid half is that value with `dsp-a.example` removed
+  # from `allowed_dsps[]`, which leaves the seat on a DSP the seller does not
+  # allow (D-151).
+  - rule: rule:5.8:876ec9ff
+    digest: ec4d21fe317375d50cf5ee3aebe5063789aec798519845cf02cd4c1b5d817201
+    decision: D-151
+    type: BuyerRequirements
+    valid:
+      - value:
+          seats_expected: true
+          allowed_dsps: [ dsp-a.example, dsp-b.example ]
+          seats: { dsp: dsp-a.example, ids: [ seat-99812, seat-99813 ] }
+          seat_owner: { domain: agency-a.example, legal_name: Agency A LLC }
+    invalid:
+      - value:
+          seats_expected: true
+          allowed_dsps: [ dsp-b.example ]
+          seats: { dsp: dsp-a.example, ids: [ seat-99812, seat-99813 ] }
+          seat_owner: { domain: agency-a.example, legal_name: Agency A LLC }

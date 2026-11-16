@@ -1,0 +1,59 @@
+format: 2
+id: D-136
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 2.3 states that a seller publishes a file at a well-known URL whose content is a
+  `ProposalManifest`, and § 6.6 ships that file as `examples/manifest.json`. The mapping
+  declares `ProposalManifest` from its key table, as an object. Is it an object or a
+  document, and what reaches it?
+covers:
+- ir: rule:2.3:8d420e7d
+  digest: 47897a6abedcfb890595b29a22e9e493aae6f29de22f82cae19b4cd25b36e979
+  quote: A seller MAY publish `https://<seller.domain>/.well-known/openproposal.json`, a `ProposalManifest`.
+- ir: key:2.3:ProposalManifest.generated_at
+  digest: c2519f7822433bafa3a84e42b69564ba778e84bd8bbb2c9f517ce34dcef64775
+  quote: "`generated_at` | REQUIRED | When the seller generated the file"
+options:
+- id: a-document-the-seller-publishes
+  summary: >-
+    `ProposalManifest` is a document: the whole value of a file a seller publishes, which a
+    buyer fetches and parses on its own. Its key table states its members, as a document's
+    own rows do.
+- id: an-object-some-envelope-carries
+  summary: >-
+    `ProposalManifest` is an object, and something outside this specification carries it,
+    so a record names it a type a transaction specification enters the model at.
+chosen: a-document-the-seller-publishes
+rationale: >-
+  THE SENTENCE STATES A FILE AND NOT A MESSAGE. "A seller MAY publish
+  `https://<seller.domain>/.well-known/openproposal.json`, a `ProposalManifest`" gives the
+  value a URL of its own, and § 2.3's own keys say the same of it from inside: `generated_at`
+  is "When the seller generated the file" and `spec_version` is "The version of this
+  specification the file follows". A value that carries when it was generated and which
+  release it follows is the root of a payload and not a member of one. § 2.3's two-phase
+  flow has a buyer "fetch the manifest" before it fetches anything else, so nothing of this
+  specification holds it; it is the first thing a buyer reads.
+
+
+  THE EXAMPLES SAY IT TOO. § 6.6 ships `examples/manifest.json`, a whole JSON file whose
+  top-level keys are `generated_at`, `spec_version` and `proposals`. Every other file under
+  `examples/` is the whole value of a document -- a `Proposal` or a `LineItem` -- and this
+  one is the whole value of a `ProposalManifest`.
+
+
+  `an-object-some-envelope-carries` is what the model published before this record, and it
+  is contradicted by the URL. § 1.2 gives the envelope and binding of a message to another
+  contract, and the manifest has neither: the seller writes it to a path and a buyer GETs
+  it. A `roots` entry would say a transaction specification enters the model at it, which
+  would be false -- this specification enters it, at a URL this specification writes.
+
+
+  WHAT IT CHANGES. The type's layer, and nothing else: the key table still states its
+  members, `ManifestEntry` and `HoldLimits` are still the objects it holds, and the emitted
+  schema is the same constraints under `documents/` rather than `modules/publication/`. A
+  document is a root, so `domains-used` no longer reports that nothing reaches it, and
+  `documentsOf` can name it, which is what lets § 6.6's sentence read as an example of a
+  document.

@@ -1,0 +1,80 @@
+format: 2
+id: D-116
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: When is a proposal's record of the acts that created its versions required?
+covers:
+- ir: rule:4.1.3:03718402
+  digest: 092cc55c0ada2fda38f021420c13e82af3269b0c45e7623e6f71579d27b5ea0c
+  quote: "Each change to the offered terms of a frozen version MUST create version `n+1` and MUST append
+    exactly one `negotiation_history[]` entry carrying that `version`, with `actor: seller` and `paths[]`
+    naming every offered-terms field whose value differs from version `n`."
+- ir: "field:4.1:negotiation_history[]"
+  digest: be8ec170ece0e752caa572bdcb2293159768eaf6894f4fdfb6f743924f73abec
+  quote: "`negotiation_history[]` | Array[HistoryEntry] | recorded | Ordered, append-only. Entries MUST
+    NOT be edited or removed. A commit and its answers are in `assent[]`, not here, and an entry here
+    voids nothing"
+- ir: field:4.1:version
+  digest: 95abf292cdcc32a9365e568b756c093f4d7e96c011d58783a43c90db738b0db5
+  quote: "`version` | Integer | derived | Monotonically increasing revision number, starting at 1, held
+    by the seller. Each version is a snapshot of the proposal's offered terms (§ 4.1.3). A version is
+    frozen at the earliest of: the proposal's `status` leaving `draft`; a `negotiation_history[]` or `assent[]`
+    entry naming it; a counterparty receiving it in any representation (§ 2.1). The offered terms of a
+    frozen version MUST NOT change; a change to them creates version `n+1`. The values § 4.1.3 lists
+    as not offered terms change without a new version"
+options:
+- id: frozen-from-the-payload
+  summary: 'A payload decides it by two of the three ways a version freezes: the status has left `draft`,
+    or a recorded act names the current version. The third way, a counterparty receiving the version,
+    is outside the payload, so a draft proposal no act names is undecided rather than wrong.'
+- id: every-proposal
+  summary: Every proposal carries the record, because every proposal a counterparty has seen is frozen.
+chosen: frozen-from-the-payload
+rationale: '§ 4.1''s `negotiation_history[]` row states the condition and only the condition: "REQUIRED
+  when the current `version` is frozen (§ 4.1.3)". § 4.1.3''s Versions paragraph is what the requirement
+  is -- each change to a frozen version''s offered terms creates version `n+1` and appends exactly one
+  entry carrying it -- and its first bullet closes the base case: `published` is the action "for version
+  1, appended no later than the moment version 1 is frozen". So a frozen version has an entry and the
+  row''s cell is that paragraph read at the row.
+
+
+  No § 8 keyword states it. "Frozen" is not a value of a sibling: § 4.1''s `version` row defines it as
+  the earliest of three events, one of which is a counterparty receiving the version in any representation,
+  and no keyword reads an event. So the requirement goes to the rules (type rules § 9), the rule takes
+  the statement''s ID, and the row joins its sources.
+
+
+  `frozen-from-the-payload` is what a payload can show. Two of the three ways a version freezes are in
+  the bytes: `status` having left `draft`, and an `assent[]` entry naming the current `version`. The third
+  is not, and a check that treated a `draft` proposal with no such entry as unfrozen would be reading
+  the absence of evidence as evidence; it reports nothing there instead. Reading the row''s own `negotiation_history[]`
+  as the freezing act is the one way the test may not be written: it would make the condition decide itself,
+  and every proposal would pass.
+
+
+  `every-proposal` would publish a requirement the specification does not state. § 4.1.3 lets a seller
+  edit a proposal in place while its current version is not yet frozen, so a `draft` proposal no counterparty
+  has received has no act to record, and demanding the array of it would refuse a document the text allows.
+
+
+  WHICH ELEMENT IS THE RULE, now that the row''s Required cell is a statement of its own. The cell gives
+  `rule:4.1:9c98396c`, "REQUIRED when the current `version` is frozen (§ 4.1.3)", and that is the condition
+  stated at the row; § 4.1.3''s `rule:4.1.3:03718402` is the requirement the condition points at, and
+  it says what the entry carries as well as that there is one. The rule is the latter, for two reasons
+  the text gives. Its cell defers -- "(§ 4.1.3)" -- so the cell is a pointer to the paragraph and not
+  a second statement of it, and one rule is carried once (type rules § 5). And the vectors a conformance
+  suite publishes are of the requirement: an invalid payload has to be missing the entry § 4.1.3 names,
+  not merely missing an array. The row joins this rule''s sources, so the condition is accounted to the
+  rule that states it.
+
+
+  What the cell''s own entry says is a separate question, and today it says something false. A mapping
+  rule gives every Required-cell statement `role: schema`, which claims the named type''s schema expresses
+  it; that holds for the forty-two conditions a § 8 keyword takes and not for the eighteen the schema
+  leaves to the rules, of which this row is one. This record does not settle that, and it does not rest
+  on it: the condition is accounted to this rule through the row, whatever the cell''s own entry is
+  corrected to.'
+evidence:
+- https://github.com/IABTechLab/OpenProposal

@@ -1,0 +1,422 @@
+# Rule vectors for the statements of section 5.9 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: execution
+rules:
+  # On an embedded line item, `episodes` is `new`: the ad is baked into the
+  # content, so it reaches whoever receives that content and a catalogue
+  # selection would promise copies already distributed (D-088).
+  - rule: rule:5.9:ed367af9
+    digest: 58ed8baf9c411cd155db2f060a3792996f3037942635e3499d96bc9126e6bd9f
+    decision: D-088
+    type: LineItem
+    valid:
+      - value:
+          channel: audio
+          placement: { feed: 3 }
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            included:
+            - direct_io
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          serving_mode: embedded
+          retention: { min: "P90D", max: "P1Y" }
+          episodes: new
+          pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+    invalid:
+      - value:
+          channel: audio
+          placement: { feed: 3 }
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            included:
+            - direct_io
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          serving_mode: embedded
+          retention: { min: "P90D", max: "P1Y" }
+          episodes: catalog
+          pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+  # On an embedded line item, `time_zone` is a real clock: `daypart` bounds
+  # air time, and `viewer_local` resolves only where an ad rendered, which a
+  # baked-in read has no single answer for (D-088).
+  - rule: rule:5.9:5b2d3b90
+    digest: 6aa6280c205a75d04a97dc0defde1321a716323580a28f35c8a0bdaead7b12cc
+    decision: D-088
+    type: LineItem
+    valid:
+      - value:
+          channel: audio
+          placement: { feed: 3 }
+          episodes: new
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            included:
+            - direct_io
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          serving_mode: embedded
+          retention: { min: "P90D", max: "P1Y" }
+          time_zone: America/New_York
+          pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+    invalid:
+      - value:
+          channel: audio
+          placement: { feed: 3 }
+          episodes: new
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            included:
+            - direct_io
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          serving_mode: embedded
+          retention: { min: "P90D", max: "P1Y" }
+          time_zone: viewer_local
+          pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+  # The § 5.9 table gives each mechanism the delivery types it allows: any for
+  # `direct_io`, `guaranteed` or `share_of_voice` for `programmatic_guaranteed`,
+  # and `non_guaranteed` for the two auction mechanisms. An option outside its
+  # row promises what the mechanism cannot carry (D-102).
+  - rule: rule:5.9:395d178a
+    digest: 51db8748811b5568ecf7a953d431fdc85427b96b1fce3c620ad2d15b9608eea6
+    decision: D-102
+    type: MechanismOption
+    valid:
+      - value: { id: programmatic_guaranteed, delivery_type: guaranteed }
+      - value: { id: programmatic_guaranteed, delivery_type: share_of_voice }
+      # `direct_io`'s row reads "Any", so every delivery type is in it.
+      - value: { id: direct_io, delivery_type: non_guaranteed }
+      - value: { id: private_auction, delivery_type: non_guaranteed }
+    invalid:
+      - value: { id: private_auction, delivery_type: guaranteed }
+      - value: { id: programmatic_guaranteed, delivery_type: non_guaranteed }
+      - value: { id: preferred_deal, delivery_type: share_of_voice }
+  # On an embedded line item the ad is baked into the content the seller
+  # distributes, which only an insertion order sells: a deal mechanism lands in
+  # a Deals API `Deal`, and no bid reaches a copy already distributed (D-102).
+  - rule: rule:5.9:01b1b76d
+    digest: d48ca108f96d5e2be948893a78afb9695911088a512987932f6802b25b5b74e3
+    decision: D-102
+    type: LineItem
+    valid:
+      - value:
+          channel: audio
+          placement: { feed: 3 }
+          episodes: new
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          serving_mode: embedded
+          retention: { min: "P90D", max: "P1Y" }
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+    invalid:
+      - value:
+          channel: audio
+          placement: { feed: 3 }
+          episodes: new
+          transaction_mechanism:
+            available:
+              - { id: direct_io, delivery_type: guaranteed }
+              - { id: programmatic_guaranteed, delivery_type: guaranteed }
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          serving_mode: embedded
+          retention: { min: "P90D", max: "P1Y" }
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+  # § 5.9's `deal_origin` row: REQUIRED when the line item offers a deal
+  # mechanism. § 5.9's mechanism table names which mechanisms those are
+  # in its own Deal mechanism column -- `No` for `direct_io`, `Yes` for
+  # `programmatic_guaranteed`, `preferred_deal` and `private_auction` --
+  # and § 1.1 says a deal mechanism lands in a Deals API `Deal`, whose
+  # id lives in the namespace of the system `deal_origin` names. So an
+  # offer of one with no `deal_origin` names no namespace for the id.
+  #
+  # Derived from examples/proposal-agreed.yaml at `/line_items/0`: it
+  # offers `programmatic_guaranteed`, a deal mechanism, and carries
+  # `deal_origin`. D-037's id form is applied to every id the document
+  # mints and to every reference to one, each the UUID version 5 of the
+  # document's own readable id in the DNS namespace. Every other value is
+  # that file's own bytes.
+  #
+  # The invalid half is that payload with `deal_origin` removed, and
+  # nothing else.
+  - rule: rule:5.9:cc571473
+    digest: 3eb4ace214846296e1b8a5482a12c3d9865730f4e59ea97eeb745f3fd9b9713b
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+          status: agreed
+          channel: display
+          properties:
+            available:
+              - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                domains:
+                  - business-daily.example
+                child_audience: general
+                seller_relationship: owner
+                seller_accounts:
+                  - asi: ssp-a.example
+                    sid: pub-1001
+            included:
+              - 20d41300-2fbb-579b-bc61-5b334a26a30a
+          formats:
+            available:
+              - display/300x250
+            included:
+              - display/300x250
+          format_specs:
+            display/300x250:
+              spec_ref: registry.example/display/300x250@1
+              spec:
+                w: 300
+                h: 250
+          creative_delivery:
+            method: buyer_hosted
+            other_protocols:
+              - javascript_tag
+            secure_required: true
+          materials_due:
+            at: 2026-09-28T23:59:59Z
+          pricing:
+            - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+              cost_method: CPM
+              list_rate: 24
+              agreed_rate: 24
+              min_rate: 21
+              price_valid_until: 2026-11-15T23:59:59Z
+              currency: USD
+              price_type: 3
+          commitment_bounds:
+            spend:
+              min: 10000
+              max: 500000
+            earliest_start: 2026-10-05T00:00:00Z
+            latest_end: 2026-12-31T23:59:59Z
+          controlling_measurement:
+            available:
+              - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                counted_by: seller
+                discrepancy_threshold: 0.1
+                final_after: P10D
+            included:
+              - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+            max_select: 1
+          commitment:
+            basis: spend
+            amount: 80000
+            flight:
+              start: 2026-10-06T00:00:00Z
+              end: 2026-12-21T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+            derived_units: 3333333
+          hold_terms:
+            available: true
+            duration: P7D
+          transaction_mechanism:
+            available:
+              - id: programmatic_guaranteed
+                delivery_type: guaranteed
+            included:
+              - programmatic_guaranteed
+            max_select: 1
+          deal_origin: adserver.example
+          buyer_requirements:
+            seats:
+              dsp: dsp-a.example
+              ids:
+                - seat-99812
+                - seat-99813
+          visibility: named
+          eligible_buyers:
+            - agency-a.example
+          terms_refs:
+            - url: https://examplepub.example/legal/io-terms-2026.pdf
+              digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+              version: "2026.1"
+            - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+          external_references:
+            - system: orders.examplepub.example
+              id: "345233"
+              reference_type: order
+            - system: orders.examplepub.example
+              id: "778120"
+              reference_type: line
+            - system: adserver.example
+              id: ep-agency-a-display-q4
+              reference_type: deal
+    invalid:
+      - value:
+          line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+          status: agreed
+          channel: display
+          properties:
+            available:
+              - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                domains:
+                  - business-daily.example
+                child_audience: general
+                seller_relationship: owner
+                seller_accounts:
+                  - asi: ssp-a.example
+                    sid: pub-1001
+            included:
+              - 20d41300-2fbb-579b-bc61-5b334a26a30a
+          formats:
+            available:
+              - display/300x250
+            included:
+              - display/300x250
+          format_specs:
+            display/300x250:
+              spec_ref: registry.example/display/300x250@1
+              spec:
+                w: 300
+                h: 250
+          creative_delivery:
+            method: buyer_hosted
+            other_protocols:
+              - javascript_tag
+            secure_required: true
+          materials_due:
+            at: 2026-09-28T23:59:59Z
+          pricing:
+            - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+              cost_method: CPM
+              list_rate: 24
+              agreed_rate: 24
+              min_rate: 21
+              price_valid_until: 2026-11-15T23:59:59Z
+              currency: USD
+              price_type: 3
+          commitment_bounds:
+            spend:
+              min: 10000
+              max: 500000
+            earliest_start: 2026-10-05T00:00:00Z
+            latest_end: 2026-12-31T23:59:59Z
+          controlling_measurement:
+            available:
+              - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                counted_by: seller
+                discrepancy_threshold: 0.1
+                final_after: P10D
+            included:
+              - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+            max_select: 1
+          commitment:
+            basis: spend
+            amount: 80000
+            flight:
+              start: 2026-10-06T00:00:00Z
+              end: 2026-12-21T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+            derived_units: 3333333
+          hold_terms:
+            available: true
+            duration: P7D
+          transaction_mechanism:
+            available:
+              - id: programmatic_guaranteed
+                delivery_type: guaranteed
+            included:
+              - programmatic_guaranteed
+            max_select: 1
+          buyer_requirements:
+            seats:
+              dsp: dsp-a.example
+              ids:
+                - seat-99812
+                - seat-99813
+          visibility: named
+          eligible_buyers:
+            - agency-a.example
+          terms_refs:
+            - url: https://examplepub.example/legal/io-terms-2026.pdf
+              digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+              version: "2026.1"
+            - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+          external_references:
+            - system: orders.examplepub.example
+              id: "345233"
+              reference_type: order
+            - system: orders.examplepub.example
+              id: "778120"
+              reference_type: line
+            - system: adserver.example
+              id: ep-agency-a-display-q4
+              reference_type: deal
+  - rule: rule:5.9:f8f81606
+    digest: 15c83c8342c93c68532808ba61c9faef711ed13b643e96aca5a432ee80bf62c0
+    decision: D-144
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: show-x-host-read-baked
+          status: published
+          channel: audio
+          visibility: named
+          placement: { feed: 3 }
+          episodes: new
+          serving_mode: embedded
+          retention: { min: P90D, max: P1Y }
+          pricing:
+            - { pricing_id: show-x-cpm-usd, cost_method: CPM, list_rate: 30.00, agreed_rate: 30.00,
+                price_valid_until: "2026-10-30T23:59:59Z", currency: USD, unit_bounds: { min: 100000 } }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+            max_select: 1
+    invalid:
+      - value:
+          line_item_id: show-x-host-read-baked
+          status: published
+          channel: audio
+          visibility: named
+          placement: { feed: 3 }
+          episodes: new
+          serving_mode: embedded
+          retention: { min: P90D, max: P1Y }
+          geo:
+            allowed: [ US ]
+            default: { include: [ US ] }
+            value: { include: [ US ], exclude: [ US-TX ] }
+          pricing:
+            - { pricing_id: show-x-cpm-usd, cost_method: CPM, list_rate: 30.00, agreed_rate: 30.00,
+                price_valid_until: "2026-10-30T23:59:59Z", currency: USD, unit_bounds: { min: 100000 } }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+            max_select: 1

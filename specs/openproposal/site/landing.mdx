@@ -1,0 +1,97 @@
+---
+title: OpenProposal 3.0 as JSON Schema, unofficial
+description: An unofficial JSON Schema for OpenProposal 3.0, the proposal and the line items a buyer and a seller agree on, generated from the specification text by Postindustria, an IAB Tech Lab member.
+---
+{/*
+  OpenProposal's landing page, in its own words. Moved from the predecessor's
+  `landingPage` (`src/specs/openproposal/site.ts:47-134`) with every word in
+  its place, except where a sentence is about a site this tree does not build:
+
+   - **The two switches are not ported, and neither is the table of the
+     changes we propose.** The predecessor's page describes four builds behind
+     two switches -- `main` against *with the open PRs*, *as written* against
+     *with our proposals* -- and this specification has one lock and one
+     variant. So "How to read the two switches", the two switch cards, and the
+     `switches` table that said what each proposal takes instead are a reading
+     of a build nothing here publishes. The proposals are still named: the
+     third stat tile counts them and every one has its own decision page.
+   - **The examples tile's figure is `exampleRows`, not the places the
+     examples fail.** The predecessor read a per-variant place count out of its
+     own example findings report and compared the two variants; the bundle
+     publishes neither the report nor the count, and a sentence whose subject
+     the bundle does not hold is the silent blank this repository keeps
+     meeting. So the tile states what the text ships and names what holds it.
+   - **The feedback issue is not linked.** The predecessor's two closing
+     sentences linked an implementation feedback issue and its supporting
+     page; no stage of this repository writes a feedback document, so the
+     decision records carry the ask and the paragraph links them instead.
+   - **`<Inputs />` is not used, and that is this page's one hand-written
+     reading of the bundle.** That component names a lock's label as a branch
+     -- "the text on OpenProposal's `main + open PRs` branch" -- which is
+     exactly what this lock is not: the merge is ours and the tree it produces
+     is on no branch upstream. The section reads the same `locks[0]` the
+     component reads, through `props.doc`, and says what the lock's own
+     `where` and `headsOn` say.
+   - **`<EnumDrift />` is not written here**: no artifact outside this
+     repository defines enums for this specification, so it has no drift
+     report, and that component throws rather than rendering a hole.
+   - The predecessor's first paragraph listed TypeScript, Python and Go types
+     among what the pipeline generates. No SDK tree is published for this
+     specification, so the sentence names the schemas, the rules and their
+     vectors, which is what the files page holds.
+
+  Every figure is read from the bundle through <Stat>, so a rebuild moves the
+  numbers and a key the bundle stops holding fails the build. What is written
+  down is words and names: this specification's own name, and the names of the
+  types and records the prose cites -- and <TypeLink> refuses a type the build
+  does not publish and <Decision> an id the bundle does not hold, so a stale
+  citation stops the build too.
+*/}
+<section class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">Unofficial · Not an IAB Tech Lab artifact</p>
+    <h1>OpenProposal&nbsp;<Stat of="brand.edition" />, generated as JSON&nbsp;Schema</h1>
+    <p class="lede">An unofficial JSON Schema for OpenProposal <Stat of="brand.edition" /> <Stat of="brand.release" />, generated from the specification text by Postindustria, an IAB Tech Lab member. The specification remains the reference: where this site and the text differ, the text wins.</p>
+    <p class="actions"><a class="button primary" href="map.html">Open the type map</a><a class="button" href="how-it-is-built.html">How it's built</a><a class="button" href="downloads.html">Get the schema files</a><a class="button" href="decisions/index.html">Read the decisions</a></p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What generating it took</h2>
+    <p>The schema files are generated. A pipeline reads the specification's markdown and, through a mapping of every field, key, row and statement to a type, generates the JSON Schema 2020-12 files and the rules JSON Schema can't express, each with its test vectors. The mapping and the <Stat of="decisions" /> decisions are recorded by hand, each with the lines of the text it rests on. <a href="how-it-is-built.html">How it's built</a> explains each step. Generating a schema means settling every point a schema needs, and the text doesn't settle all of them.</p>
+    <div class="stats">
+      <div class="stat gap"><span class="num"><Stat of="gaps" /></span><span class="what">open points filled</span><span class="why">Where the text leaves a point open, a decision fills it. We call these gaps: which value domain a bare <code>String</code> row is of, where a money value reads its currency, what a summary holds.</span></div>
+      <div class="stat prop"><span class="num"><Stat of="departures" /></span><span class="what"><Stat of="departures" unit="change we propose" units="changes we propose" /></span><span class="why">Where the text or its examples settle a point and we would write it differently. Each record states the change and the cost it accepts, and each has its own page.</span></div>
+      <div class="stat ex"><span class="num"><Stat of="exampleRows" /></span><span class="what">examples checked</span><span class="why">The payloads the text writes out in its own sections and the example files it names are validated against their document's schema and every rule one payload decides.</span></div>
+    </div>
+    <p>Each decision says what we ask the specification to state, so that the next revision needs no such record. Read them all in the <a href="decisions/index.html">decision records</a>.</p>
+  </div>
+</section>
+
+<section class="wrap two">
+  <div>
+    <h2>What the schemas cover</h2>
+    <p><TypeLink of="Proposal" /> and <TypeLink of="LineItem" /> are the two documents § 4 and § 5 state, and <TypeLink of="ProposalManifest" /> is the third: the whole value of a file a seller publishes at a well-known URL (<Decision of="D-136" />). <TypeLink of="ProposalSummary" />, <TypeLink of="LineItemSummary" /> and <TypeLink of="BuyerWrites" /> are profiles, the paths a block lists read at the types the full form gives them, with the keys the summary's own table adds (<Decision of="D-069" />, <Decision of="D-128" />). Every other structure the text defines is a closed object of its own, <Stat of="objects" count /> of them, and a key an object doesn't list is invalid unless the specification leaves that object to its publisher (<Decision of="D-106" />).</p>
+    <p>A line item is of one media channel, <Stat of="channels" count unit="term" /> that § 5.1 writes as a list of its own and the discriminator for how the rest of the line item is read. The text's own code lists are <Stat of="own" unit="vocabulary" units="vocabularies" />; the other <Stat of="registry" count /> are lists another specification on this site publishes, reused under the name it gives them and taken at the commit the registry pins — AdCOM's code lists (<Decision of="D-071" />), its placement's <code>ssai</code> (<Decision of="D-133" />) and the Deals API's price types (<Decision of="D-111" />).</p>
+    <p><Stat of="rules" unit="rule" /> state what a schema of one payload can't: one field read against another, an entry that must name an option in another list, which party may change a field between two versions. Each carries at least one valid and one invalid vector, and a vector's valid half is the specification's own bytes (<Decision of="D-134" />).</p>
+    <h2>What they leave out</h2>
+    <p>§ 2.8's signing profile, this specification's profile of Web Bot Auth, states its rules as prose does and defines no key, type or list, so no schema holds it (<Decision of="D-158" />, <Decision of="D-161" />). § 3's mutability markers say who may change a row, which is a fact about the row and not a value a payload carries, so no file holds the name the rules group them under (<Decision of="D-156" />), and an implementation adds none of its own (<Decision of="D-066" />). Duties no payload can show, such as what a seller must do before it answers, are <Stat of="obligations" unit="obligation" /> of the party they name rather than schema keywords (<Decision of="D-124" />).</p>
+  </div>
+  <div>
+    <h2>What a decision record is</h2>
+    <p>A decision record is a judgment we recorded wherever the specification leaves a point open, or where we propose a change. Each record has:</p>
+    <ul class="ticks">
+      <li>the question it answers, and the options we weighed;</li>
+      <li>the answer we chose, and why;</li>
+      <li>the specification lines it rests on, quoted and pinned, so the record goes stale when those lines change;</li>
+      <li>what we ask the specification to state, so that the next revision needs no such record.</li>
+    </ul>
+    <p>The type map links every type to the records that shape it, and every record to the lines it quotes.</p>
+    <h2>The one input</h2>
+    <p>Specification: <a href={props.doc.locks[0].upstream}>{props.doc.locks[0].upstream.replace("https://github.com/", "")}</a>, <code>{props.doc.locks[0].path}</code>.</p>
+    <p><strong><Stat of="locks.0.label" /></strong> is the text <Stat of="locks.0.where" />: <code>main</code> at <a href={`${props.doc.locks[0].upstream}/commit/${props.doc.locks[0].base}`}><code>{props.doc.locks[0].base.slice(0, 7)}</code></a>, with the <Stat of="locks.0.prs" count unit="pull request" /> that were open on <Stat of="locks.0.headsOn" /> merged in, each at its head that day. We merged them ourselves, so the result exists on no branch upstream. Upstream <code>main</code> as written is no lock of this specification, and nothing here is published from it.</p>
+    <p class="note">The open PRs, in the order we merged them, each with its head:</p>
+    <ul class="heads">{props.doc.locks[0].prs.map((h) => (<li><a href={`${props.doc.locks[0].upstream}/pull/${h.pr}`}>#{h.pr}</a> <a href={`${props.doc.locks[0].upstream}/commit/${h.head}`}><code>{h.head.slice(0, 7)}</code></a></li>))}</ul>
+  </div>
+</section>

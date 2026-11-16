@@ -1,0 +1,69 @@
+format: 2
+id: D-092
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Where does a money value read its currency, in a specification whose `Amount` states that it carries
+  none?
+covers:
+
+- ir: key:5.6.1:CommitmentAmount.amount
+  digest: c86da179b6125a87987ded010bdcf718b33df838acd429a72dc4c892cf9fcbae
+  quote: "`amount` | REQUIRED | The figure committed: an `Amount` when `basis` is `spend`, otherwise a whole number of the entry's units (§ 5.6.5)"
+- ir: key:5.6.6:Fee.amount
+  digest: 267e93c81bb0e721ef2c72bafb7a7444cfc8c275e1c350f922eee36ea3d9c8f8
+  quote: "`amount` | REQUIRED when `calculation` is `fixed` | The fee as money"
+- ir: key:3.1:Delta.delta_cpm
+  digest: 60e3140cbf8caa8ce10c19f0a23b13a7f0d40dc4fc36b058d8981464e4d6a48c
+  quote: "`delta_cpm` | OPTIONAL | Added to the rate of a `CPM` or `CPMV` entry (§ 5.6.5), and to no other"
+- ir: key:3.1:Delta.delta_flat
+  digest: 23ec4c9beccbcf91882b3a3777a542f6b92c6408c9f37fc9a6e3dc18d04dce51
+  quote: "`delta_flat` | OPTIONAL | A charge on any entry, outside the rate"
+- ir: key:3.1:Delta.delta_fraction
+  digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+  quote: "`delta_fraction` | OPTIONAL | Multiplies the rate of any entry by 1 plus this value. `0.20` is 20 percent more"
+- ir: key:4.1:RequestedValue.list_rate
+  digest: 5eca1c21decabc08ea2e9e9ec3e3cc55a90f2c71c4b3671d3f07de2580a813ca
+  quote: "`list_rate` | OPTIONAL | A `pricing[].list_rate`"
+- ir: def:2.2:Amount
+  digest: 7e43f7cc99e45c463678c46bb4532a1133af9e9fdff68dc37f7ec017ab97f0bb
+  quote: "`Amount` | Number within the limits of § 4.1.1 | Money. It carries no currency: § 5.6 states which one it reads in"
+options:
+- id: the-entry-states-it
+  summary: >-
+    A money value reads the currency of the `pricing[]` entry it belongs to, as section 2.2 says it does,
+    so the six rows that carry one with no sibling `currency` are listed as lacking it and the domain
+    model says why.
+- id: a-currency-beside-each
+  summary: Every object that carries a money value gains a `currency` member of its own, so each value
+    is read without reference to an entry.
+chosen: the-entry-states-it
+rationale: 'The domain model holds that a money value travels with a `currency` beside it, as OpenRTB
+  writes `bidfloor` and `bidfloorcur`, and this specification states the opposite in the row that defines
+  the type: "`Amount` | Number within the limits of § 4.1.1 | Money. It carries no currency: § 5.6 states
+  which one it reads in". So the sibling is not missing from these objects; it is somewhere else by the
+  text''s own statement, and the one place is the `pricing[]` entry, whose `currency` is "The currency
+  of the entry''s rates".
+
+
+  Six rows carry a money value with no sibling. Three are a `Delta`''s, and a delta is a change to the
+  rate of an entry -- `delta_cpm` is "Added to the rate of a `CPM` or `CPMV` entry (§ 5.6.5), and to no
+  other", `delta_flat` is "A charge on any entry, outside the rate" -- so each reads the currency of the
+  entry whose rate it changes, and `delta_fraction` is a factor and reads no currency at all. A
+  `RequestedValue.list_rate` is "A `pricing[].list_rate`", which names the entry in the row. A
+  `CommitmentAmount.amount` is "The figure committed", on the committed entry, which § 5.6.1 names by
+  `commitment.pricing_id`. And a `Fee.amount` is "The fee as money" on a cancellation option of the line
+  item whose entry the buyer commits under.
+
+
+  `a-currency-beside-each` would publish a `currency` on five objects the specification does not give
+  one, and would let a delta name a currency different from the rate it changes -- which is a document
+  no receiver could resolve.
+
+
+  So the concept keeps its requirement and the model lists what lacks it. The list is the measurement
+  this record is for: the check passes a money value without its sibling only where one of its elements
+  is listed, and fails on a listed element that no such value rests on, so neither half can drift from
+  the text without the gate saying so.'

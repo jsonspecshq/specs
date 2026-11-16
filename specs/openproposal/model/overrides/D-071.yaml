@@ -1,0 +1,82 @@
+format: 2
+id: D-071
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: Does a row that cites one of AdCOM's lists reuse that list, or state a copy of it?
+covers:
+- ir: key:5.2.2:Placement.feed
+  digest: 333168c63745e6f2a46254e2397e6759e1bca501db2eb4e6dde83ae08a9d7fc7
+  quote: '`feed` | REQUIRED when `channel` is `audio` | A value from List: Feed Types, such as Podcast
+    (3) | `AudioPlacement.feed`, `audio.feed`'
+- ir: key:5.4:CreativeDelivery.protocols[]
+  digest: 70e34a9954bb3a5aaf406bb2894b90d7c4c5fd7add912301326d845e72eb43fa
+  quote: '`protocols[]` | OPTIONAL | Values from AdCOM 1.0 List: Creative Subtypes - Audio/Video the seller
+    accepts, wrappers included, such as VAST 4.2 (13). The values OpenRTB 2.6 `video.protocols` and `audio.protocols`
+    carry'
+- ir: key:5.6.4:ImpressionMultiplier.source_type
+  digest: 9e9656697e8c68a4311e3227a7fd8afa89006e88f658c6e4d89b1284e0e6f011
+  quote: '`source_type` | REQUIRED | Who supplies the multiplier. A value from AdCOM 1.0 List: DOOH Multiplier
+    Measurement Source Types other than Unknown (`0`), such as Publisher Provided (`2`). The value OpenRTB
+    2.6 `imp.qty.sourcetype` carries'
+options:
+- id: reuse-the-registry
+  summary: The row reuses the list the registry publishes, under the name the registry gives it, with
+    the codes the registry holds. Where the row states that it takes fewer of them, it takes fewer.
+- id: copy-the-codes
+  summary: Each row states a vocabulary of its own, named after the row, whose terms are the codes copied
+    from the registry at the lock it is imported at.
+chosen: reuse-the-registry
+rationale: 'Type rules section 6 states it: a specification may reuse another''s list rather than restate
+  it, and the reuse is recorded as an import keyed by the published `$id` with the digest it was imported
+  at. The specification''s own profile already imports AdCOM at its `main` lock, and each of these six
+  rows names the list in its cell -- "A value from List: Feed Types, such as Podcast (3)", "A value from
+  List: Start Delay Modes, such as Pre-Roll (0)", and so on.
+
+
+  `copy-the-codes` would publish six vocabularies whose terms drift from the registry the moment AdCOM
+  adds a code, and a payload valid against the registry would be refused by a copy that had not been regenerated.
+  It also gives a reader two names for one list, which is what the import exists to avoid.
+
+
+  One row takes fewer codes than the registry holds, and says so. A DOOH impression multiplier''s `source_type`
+  is "a value from AdCOM 1.0 List: DOOH Multiplier Measurement Source Types other than Unknown (`0`)",
+  so the three codes above Unknown are its terms and Unknown is not. The published type refuses a code
+  the row excludes rather than admitting it because the registry does.
+
+
+  Two lists are open to vendors'' codes and two are not. A feed type and a start delay mode each carry
+  a vendor extension in the registry, so the vocabulary is open; a pod sequence, a slot position, a creative
+  subtype and a measurement source type do not.
+
+
+  Three of the lists this specification cites are not covered here. A start delay mode, a pod sequence
+  and a slot position in a pod each hold a negative code, and a term of a vocabulary is a name rather
+  than a number -- `formats/mapping.schema.json` holds a term to letters, digits and underscores -- so
+  each of those three states its terms as the registry''s titles with a `codes` map from the term to the
+  number. That is a reading of the registry''s titles and is taken with them.'
+challenge:
+- type: PlcmtSubtype
+  value: 1
+  verdict: accept
+  context: >-
+    A video line item whose placement is Instream (1), the first code of
+    AdCOM's List: Plcmt Subtypes - Video, written as the registry writes a
+    code: the number itself.
+  reason: >-
+    `reuse-the-registry` publishes the row at the list the registry defines,
+    so the codes the registry lists are the values the row takes.
+- type: PlcmtSubtype
+  value: 99
+  verdict: reject
+  context: >-
+    A seller that numbers its own placement kinds beyond the list's codes and
+    writes one of them in the row.
+  reason: >-
+    The list is closed and the registry lists nine codes, so a tenth is
+    refused. `copy-the-codes`, the option not taken, would publish the same
+    nine under a name of this specification's own and drift from the registry
+    the next time AdCOM extends the list; the refusal is the same either way,
+    which is why the reading rests on the name and the drift rather than on
+    this value.

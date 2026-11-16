@@ -1,0 +1,133 @@
+format: 2
+id: D-082
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  What does each of the eighteen normative statements of the overview module carry -- a constraint
+  the schema states, a rule a payload decides, a duty on a party, or nothing a conformance check reads?
+covers:
+
+- ir: rule:1.1:d539a004
+  digest: 14227d7685d7dcdabd0793e10572b2067955836ba5f93b8fca9ce0d76df3f408
+  quote: OPTIONAL.
+- ir: rule:2:4ae8f775
+  digest: 7b7a4e9aec10b20c71883badcb8f72e9f7fc0febc0c9bf6588ad4b590843342f
+  quote: A field on a line item MUST NOT inherit its value from the proposal or from a sibling line item.
+- ir: rule:2:ddbf85da
+  digest: 9b8cf6b2997e52990b2dcac03bf8e5a5cddc2d3855eafb9051b87e6b9feaee65
+  quote: A buyer MAY select and commit any subset of a proposal's `line_items[]`.
+- ir: rule:2.4:c17390d3
+  digest: 6c5b6adde0cea45a9b26b8b1a92dadfe424c73685c6fb4b6fe1b865c5a639c0b
+  quote: A party that rejects a request MUST return `errors[]`, one or more `ErrorObject`s.
+- ir: rule:2.4:bd6cd209
+  digest: 1cfa18b83f2bac0ab1a968a76fce993268e151e2759acbba2313ef639f7280bc
+  quote: A receiver SHOULD NOT parse it
+- ir: rule:2.5:b7667a2c
+  digest: dd3a70e21a2e8dcd7595dea466b3c94f5f404802732f745b50d830e734c3f4e6
+  quote: The proposal, each line item, and each `change_requests[]` entry (§ 4.4) MAY carry `ext`, an `Ext`.
+- ir: rule:2.5:95586079
+  digest: d761c83cb5753c150eef74407be237f1d1e0cf90f0840e49033197eb4f603f8d
+  quote: Each key MUST be a `Domain` that its owner controls, and each value is an object that the owner defines.
+- ir: rule:2.5:54a97cce
+  digest: 616b1e284dd760594568cadbfecb852bd2bc4f9e1cfb71d40413b621bc170ddc
+  quote: A seller's own entries MUST use its `seller.domain` as the key.
+- ir: rule:2.5:f02c39d6
+  digest: 25bf8839068c755195be54131b58fd02003e3f3115613e24aeb21eb350e7341e
+  quote: An `ext` entry MUST NOT change the meaning of a field this specification defines.
+- ir: rule:2.5:84b68ec7
+  digest: 9543d2a862b7d80be20ce01e08d2764a412d6b32b12c23471cd87de3f5e32e54
+  quote: A term the counterparty must understand to transact MUST NOT be an `ext` entry; it is a field or a vocabulary term.
+- ir: rule:2.5:d8749eb6
+  digest: 94f05e57f3153a4ffa209da1fec9302eeb408ddad94666ce096277fbbf89e75e
+  quote: A receiver MUST ignore an `ext` entry it does not understand, and MUST NOT reject a document because of it.
+- ir: rule:2.5:7eb6b4bc
+  digest: a69e6177dd822dbb6a4cbf9570efb0e68cb33f89eeb2c7fb3ab6c6472ce77237
+  quote: It MUST keep `ext` unchanged when it stores or forwards the document.
+- ir: rule:2.5:c97afe58
+  digest: 18979da39e00db73a55cd16e07fd6de084488f7babed97a1844e3c940be3ce29
+  quote: Apart from an unknown term (§ 2.2), a receiver MAY skip a whole line item it cannot read, without assenting to it.
+- ir: rule:2.5:7bd50d5a
+  digest: a1e738dc7ca5df24ae18ef1534586f6b13f8522889f544cea6f73cf05a22fd88
+  quote: It MUST NOT keep a line item after removing fields from it.
+- ir: rule:2.6:6f3c4fcc
+  digest: 8112fbcaae72dfa0381049a8e16859c1f7056a99b47f3154102cd0117b944797
+  quote: A key table has the columns Key, Type, Required, and Meaning, and MAY add a last column that names a source standard.
+- ir: rule:2.8:cc948a48
+  digest: b6d3be0a4508e65180a9874541b462e288bedfdd28df8693dc6eec7a8ff646f2
+  quote: "Signing is OPTIONAL in this specification: § 4.1.2 states what a signature shows, and `agreed` never depends on one."
+- ir: rule:2.8.6:0f9375d8
+  digest: 0fbf556136db6a6713a8cce3c5a4d47b59dbe02de3c1f433d74bf975d85d4b9e
+  quote: A requester that can't verify a response MAY refuse to write its own entry (§ 4.1.2).
+- ir: rule:8:14eecfaa
+  digest: 002d1b3a1d3b6980424d8115f1421874a6f3c359171f4dde0b30bb506a796e4c
+  quote: A buyer MAY refuse a sole or last `makegood`, and § 5.7.1 then points at `remedy_terms`, whose keys describe only a makegood.
+options:
+- id: by-what-decides-it
+  summary: Each statement takes the role of whatever can decide it. Where a named type's schema already
+    states it, it is that schema's. Where a check of one payload, or of two versions and the acting party,
+    can decide it, it is a rule on the smallest type that holds every field it names. Where it binds a
+    party's act and no payload shows it, it is an obligation on that party. Where it describes the document
+    itself or another standard's field, it carries no conformance content.
+- id: every-keyword-is-a-rule
+  summary: Every sentence with an RFC 2119 keyword becomes a rule, and the rules output carries all eighteen
+    with a change pair each.
+- id: leave-them-informative
+  summary: None is read, as the restarted model left them, so the obligations reach no output and nothing
+    records that the specification states them.
+chosen: by-what-decides-it
+rationale: 'The mapping has four roles for a statement because a specification states four kinds of thing,
+  and which kind a sentence is is decided by what could show it broken. That question has one answer per
+  sentence and this module''s eighteen split four ways.
+
+
+  **Fourteen are duties on a party.** Twelve of them bind a receiver or an implementation: a receiver MUST
+  ignore an `ext` entry it does not understand and MUST NOT reject a document because of it, MUST keep
+  `ext` unchanged when it stores or forwards the document, MUST NOT keep a line item after removing fields
+  from it, SHOULD NOT parse an error''s `detail`, MAY skip a whole line item it cannot read, and MUST NOT
+  read a line item''s field as inherited from the proposal or from a sibling. An `ext` entry MUST NOT change
+  the meaning of a field this specification defines, and a term the counterparty must understand to transact
+  MUST NOT be an `ext` entry. A party that rejects a request MUST return `errors[]`. Signing is OPTIONAL in this
+  specification, and a requester that can''t verify a response MAY refuse to write its own entry. Two bind a named side:
+  a buyer MAY commit any subset of a proposal''s `line_items[]` and MAY refuse a sole or last `makegood`;
+  a seller''s own `ext` entries MUST use its `seller.domain` as the key.
+
+
+  That last one is the closest call and the reason the split is about evidence and not about grammar. A
+  payload holds the seller''s domain and holds the `ext` keys, so the comparison looks mechanical -- but
+  the statement is about the seller''s *own* entries, and nothing in the document says whose an entry is.
+  A proposal whose `ext` carries the buyer''s domain breaks no rule. So no payload decides it and the duty
+  is the seller''s.
+
+
+  **Two are the schema''s.** The proposal, each line item and each `change_requests[]` entry MAY carry
+  `ext`, an `Ext`; and each key of it MUST be a `Domain` that its owner controls, with each value an object
+  the owner defines. The kernel''s `Ext` part is `Map[Domain, Object]`, so the form of the key, the form
+  of the value and the optional presence on the three objects are all published. What the schema cannot
+  state is the clause "that its owner controls", which is the same unprovable-from-the-payload shape as
+  the seller''s own entries above; it travels with the statement rather than splitting it, because one
+  element carries one role.
+
+
+  **Two carry no conformance content.** Section 2.6 states the columns this specification''s own key tables
+  have, which is about the document and not about a value in it. Section 1.1''s "OPTIONAL." is a cell of
+  the table that maps an agreed line item onto the Deals API''s `Deal.ext.baseline`, a field another standard
+  defines and this one does not.
+
+
+  **None is a rule.** No sentence of this module constrains a value or a pair of versions in a way a check
+  could run, which is why the rules output gains nothing here and no change pair is written. That is a
+  property of the module -- it states how parties behave and how the document is laid out -- and not of
+  the reading: the sections that state what a value may be are section 4 and section 5.
+
+
+  `every-keyword-is-a-rule` would put fourteen duties into a document of rules that each need a valid and
+  an invalid payload, and no payload exists for "a receiver MUST keep `ext` unchanged when it forwards
+  the document": both versions are valid documents and the difference is an act outside them. The rules
+  output would carry fourteen rules nothing can grade.
+
+
+  `leave-them-informative` is what the restarted model published, and it loses the specification''s own
+  words: a reader of the generated material would not learn that a receiver may not reject a document
+  over an extension it does not know, which is the clause that makes extensions safe to send.'

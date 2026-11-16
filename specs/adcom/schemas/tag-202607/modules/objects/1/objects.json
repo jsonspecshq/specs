@@ -2,6 +2,32 @@
   "$defs": {
     "Ad": {
       "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "audio": true
+          },
+          "required": [
+            "audio"
+          ]
+        },
+        {
+          "properties": {
+            "display": true
+          },
+          "required": [
+            "display"
+          ]
+        },
+        {
+          "properties": {
+            "video": true
+          },
+          "required": [
+            "video"
+          ]
+        }
+      ],
       "properties": {
         "adomain": {
           "description": "Advertiser domain; top two levels only (e.g., “ford.com”). This can be an array for the case of rotating creatives.",
@@ -89,6 +115,23 @@
         "id"
       ],
       "type": "object"
+    },
+    "AmpRenderingTreatment": {
+      "description": "The codes of `DisplayPlacement.ampren`, each with the label the text gives it",
+      "oneOf": [
+        {
+          "$comment": "code-name: EARLY_LOADING",
+          "const": 1,
+          "title": "early loading"
+        },
+        {
+          "$comment": "code-name: STANDARD_LOADING",
+          "const": 2,
+          "title": "standard loading"
+        }
+      ],
+      "title": "Amp Rendering Treatment",
+      "type": "integer"
     },
     "App": {
       "additionalProperties": false,
@@ -183,6 +226,48 @@
     },
     "Asset": {
       "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "data": true
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "properties": {
+            "image": true
+          },
+          "required": [
+            "image"
+          ]
+        },
+        {
+          "properties": {
+            "link": true
+          },
+          "required": [
+            "link"
+          ]
+        },
+        {
+          "properties": {
+            "title": true
+          },
+          "required": [
+            "title"
+          ]
+        },
+        {
+          "properties": {
+            "video": true
+          },
+          "required": [
+            "video"
+          ]
+        }
+      ],
       "properties": {
         "data": {
           "$ref": "#/$defs/DataAsset",
@@ -222,6 +307,40 @@
     },
     "AssetFormat": {
       "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "data": true
+          },
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "properties": {
+            "img": true
+          },
+          "required": [
+            "img"
+          ]
+        },
+        {
+          "properties": {
+            "title": true
+          },
+          "required": [
+            "title"
+          ]
+        },
+        {
+          "properties": {
+            "video": true
+          },
+          "required": [
+            "video"
+          ]
+        }
+      ],
       "properties": {
         "data": {
           "$ref": "#/$defs/DataAssetFormat",
@@ -281,7 +400,7 @@
           "description": "Optional means of retrieving markup by reference; a URL that returns audio markup (e.g., DAAST). If this ad is matched to a Placement specification, the `Placement.curlx` attribute indicates if this markup retrieval option is supported. Note that including both `adm` and `curl` is not recommended."
         },
         "dur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Duration of the audio creative in seconds."
         },
         "ext": {
@@ -353,7 +472,7 @@
           "description": "Maximum bit rate of the creative in Kbps."
         },
         "maxdur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Maximum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of maxdur and rqddurs may be in a bid request."
         },
         "maxext": {
@@ -380,7 +499,7 @@
           "description": "Minimum CPM per second. This is a price floor for the “dynamic” portion of a video ad pod, relative to the duration of bids an advertiser may submit."
         },
         "mindur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Minimum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of mindur and rqddurs may be in a bid request."
         },
         "nvol": {
@@ -406,11 +525,11 @@
           "type": "array"
         },
         "poddur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Indicates the total amount of time in seconds that advertisers may fill for a “dynamic” video ad pod, or the dynamic portion of a “hybrid” ad pod. This field is required only for the dynamic portion(s) of video ad pods. This field refers to the length of the entire ad break, whereas mindur/maxdur/rqddurs are constraints relating to the slots that make up the pod."
         },
         "podid": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerId",
           "description": "Unique identifier indicating that an impression opportunity belongs to a video ad pod. If multiple impression opportunities within a bid request share the same podid, this indicates that those impression opportunities belong to the same video ad pod."
         },
         "podseq": {
@@ -421,7 +540,7 @@
         "rqddurs": {
           "description": "Precise acceptable durations for video creatives in seconds. This field specifically targets the Live TV use case where non-exact ad durations would result in undesirable 'dead air'. This field is mutually exclusive with mindur and maxdur; if rqddurs is specified, mindur and maxdur must not be specified and vice versa.",
           "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+            "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds"
           },
           "type": "array"
         },
@@ -435,7 +554,7 @@
           "description": "Number of seconds a creative must play before the placement enables skipping; only applicable if the ad is skippable."
         },
         "skipmin": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "default": 0,
           "description": "The placement allows creatives of total duration greater than this number of seconds to be skipped; only applicable if the ad is skippable."
         },
@@ -445,9 +564,6 @@
           "description": "For video ad pods, this value indicates that the seller can guarantee delivery against the indicated slot position in the pod. Refer to List: List: Slot Position in Pod for guidance on the use of this field."
         }
       },
-      "required": [
-        "mime"
-      ],
       "type": "object"
     },
     "Audit": {
@@ -671,7 +787,7 @@
           "description": "Content language using ISO-639-1-alpha-2. Only one of `language` or `langb` should be present."
         },
         "len": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Length of content in seconds; appropriate for video or audio."
         },
         "livestream": {
@@ -726,6 +842,8 @@
       "type": "object"
     },
     "Corr": {
+      "additionalProperties": true,
+      "description": "Its content is set by the `Ad` object and its children, of which it carries the attributes the auditor states are proper, so a correction is a sparse `Ad` (Object: Audit, `corr`)",
       "type": "object"
     },
     "Data": {
@@ -768,7 +886,7 @@
           "description": "Optional vendor-specific extensions."
         },
         "len": {
-          "$ref": "../../lists/1/lists.json#/$defs/NativeDataAssetType",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
           "description": "The length of the `value` contents. This length should conform to recommendations provided in List: Native Data Asset Types"
         },
         "type": {
@@ -1033,7 +1151,7 @@
       "additionalProperties": false,
       "properties": {
         "ampren": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "#/$defs/AmpRenderingTreatment",
           "description": "AMPHTML rendering treatment for AMP ads in this placement, where 1 = early loading, 2 = standard loading."
         },
         "api": {
@@ -1145,7 +1263,7 @@
           "description": "Minimum DPI for text-based creative elements to display clearly."
         },
         "etime": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "The exposure time in seconds per view that the creative will be displayed before refreshing to the next creative."
         },
         "ext": {
@@ -1153,7 +1271,7 @@
           "description": "Optional vendor-specific extensions."
         },
         "fixed": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "#/$defs/DoohPlacementMobility",
           "description": "Indicates whether the DOOH placement is in a fixed location (e.g., kiosk, billboard, elevator) or is movable (e.g., taxi), where 1 = fixed, 2 = movable."
         },
         "id": {
@@ -1175,8 +1293,55 @@
       },
       "type": "object"
     },
+    "DoohPlacementMobility": {
+      "description": "The codes of `Dooh.fixed`, each with the label the text gives it",
+      "oneOf": [
+        {
+          "$comment": "code-name: FIXED",
+          "const": 1,
+          "title": "fixed"
+        },
+        {
+          "$comment": "code-name: MOVABLE",
+          "const": 2,
+          "title": "movable"
+        }
+      ],
+      "title": "Dooh Placement Mobility",
+      "type": "integer"
+    },
     "Event": {
       "additionalProperties": false,
+      "else": {
+        "if": {
+          "properties": {
+            "method": {
+              "const": 2
+            }
+          },
+          "required": [
+            "method"
+          ]
+        },
+        "then": {
+          "properties": {
+            "url": true
+          },
+          "required": [
+            "url"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "method": {
+            "const": 1
+          }
+        },
+        "required": [
+          "method"
+        ]
+      },
       "properties": {
         "api": {
           "description": "The APIs being used by the tracker; only relevant when the tracking method is JavaScript. Refer to List: API Frameworks.",
@@ -1210,6 +1375,14 @@
         "method",
         "type"
       ],
+      "then": {
+        "properties": {
+          "url": true
+        },
+        "required": [
+          "url"
+        ]
+      },
       "type": "object"
     },
     "EventSpec": {
@@ -1543,6 +1716,32 @@
     },
     "Placement": {
       "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "audio": true
+          },
+          "required": [
+            "audio"
+          ]
+        },
+        {
+          "properties": {
+            "display": true
+          },
+          "required": [
+            "display"
+          ]
+        },
+        {
+          "properties": {
+            "video": true
+          },
+          "required": [
+            "video"
+          ]
+        }
+      ],
       "properties": {
         "admx": {
           "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
@@ -1582,7 +1781,7 @@
           "description": "Flag to indicate if the creative is secure (i.e., uses HTTPS for all assets and markup), where 0 = no, 1 = yes. There is no default and thus if omitted, the secure state is unknown. However, as a practical matter, the safe assumption is to treat unknown as non-secure."
         },
         "ssai": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "#/$defs/ServerSideAdInsertionMode",
           "default": 0,
           "description": "Indicates if server-side ad insertion (e.g., stitching an ad into an audio or video stream) is in use and the impact of this on asset and tracker retrieval, where 0 = status unknown, 1 = all client-side (i.e., not server-side), 2 = assets stitched server-side but tracking pixels fired client-side, 3 = all server-side."
         },
@@ -1770,6 +1969,34 @@
         }
       },
       "type": "object"
+    },
+    "ServerSideAdInsertionMode": {
+      "description": "The codes of `Placement.ssai`, each with the label the text gives it",
+      "oneOf": [
+        {
+          "$comment": "code-name: STATUS_UNKNOWN",
+          "const": 0,
+          "title": "status unknown"
+        },
+        {
+          "$comment": "code-name: ALL_CLIENT_SIDE",
+          "const": 1,
+          "description": "all client-side (i.e., not server-side)",
+          "title": "all client-side"
+        },
+        {
+          "$comment": "code-name: ASSETS_STITCHED_SERVER_SIDE_BUT_TRACKING_PIXELS",
+          "const": 2,
+          "title": "assets stitched server-side but tracking pixels fired client-side"
+        },
+        {
+          "$comment": "code-name: ALL_SERVER_SIDE",
+          "const": 3,
+          "title": "all server-side"
+        }
+      ],
+      "title": "Server Side Ad Insertion Mode",
+      "type": "integer"
     },
     "Site": {
       "additionalProperties": false,
@@ -2023,7 +2250,7 @@
           "description": "Optional means of retrieving markup by reference; a URL that returns video markup (e.g., VAST). If this ad is matched to a Placement specification, the `Placement.curlx` attribute indicates if this markup retrieval option is supported. Note that including both `adm` and `curl` is not recommended."
         },
         "dur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Duration of the video creative in seconds."
         },
         "ext": {
@@ -2042,6 +2269,24 @@
     },
     "VideoAsset": {
       "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "adm": true
+          },
+          "required": [
+            "adm"
+          ]
+        },
+        {
+          "properties": {
+            "curl": true
+          },
+          "required": [
+            "curl"
+          ]
+        }
+      ],
       "properties": {
         "adm": {
           "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
@@ -2133,7 +2378,7 @@
           "description": "Maximum bit rate of the creative in Kbps."
         },
         "maxdur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Maximum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of maxdur and rqddurs may be in a bid request."
         },
         "maxext": {
@@ -2161,7 +2406,7 @@
           "description": "Minimum CPM per second. This is a price floor for the “dynamic” portion of a video ad pod, relative to the duration of bids an advertiser may submit."
         },
         "mindur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Minimum creative duration in seconds. This field is mutually exclusive with rqddurs; only one of mindur and rqddurs may be in a bid request."
         },
         "overlayexpdir": {
@@ -2183,11 +2428,11 @@
           "type": "array"
         },
         "poddur": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "description": "Indicates the total amount of time in seconds that advertisers may fill for a “dynamic” video ad pod, or the dynamic portion of a “hybrid” ad pod. This field is required only for the dynamic portion(s) of video ad pods. This field refers to the length of the entire ad break, whereas mindur/maxdur/rqddurs are constraints relating to the slots that make up the pod."
         },
         "podid": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerId",
           "description": "Unique identifier indicating that an impression opportunity belongs to a video ad pod. If multiple impression opportunities within a bid request share the same podid, this indicates that those impression opportunities belong to the same video ad pod."
         },
         "podseq": {
@@ -2206,7 +2451,7 @@
         "rqddurs": {
           "description": "Precise acceptable durations for video creatives in seconds. This field specifically targets the Live TV use case where non-exact ad durations would result in undesirable 'dead air'. This field is mutually exclusive with mindur and maxdur; if rqddurs is specified, mindur and maxdur must not be specified and vice versa.",
           "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+            "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds"
           },
           "type": "array"
         },
@@ -2220,7 +2465,7 @@
           "description": "Number of seconds a creative must play before the placement enables skipping; only applicable if the ad is skippable."
         },
         "skipmin": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
           "default": 0,
           "description": "The placement allows creatives of total duration greater than this number of seconds to be skipped; only applicable if the ad is skippable."
         },
@@ -2239,14 +2484,11 @@
           "description": "Width of the placement in units specified by `unit`."
         }
       },
-      "required": [
-        "mime"
-      ],
       "type": "object"
     }
   },
   "$id": "https://jsonspecs.com/adcom/schemas/tag-202607/modules/objects/1/objects.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "The AdCOM `objects` module: its 46 objects.",
+  "description": "The AdCOM `objects` module: its 3 vocabularies and 46 objects.",
   "title": "objects"
 }

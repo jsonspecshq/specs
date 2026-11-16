@@ -1,0 +1,162 @@
+format: 2
+id: D-126
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `LineItemSummary` lists `programs.available[].content.series` and `.title`, and `D-107` publishes
+  `Content` as an object this specification states no member of. What type does the summary give
+  those two paths?
+covers:
+- ir: code:2.1:1
+  digest: a60df1260430c44c11afd1ea911b6fa33403c406ca0dfa5034440a8af7871eea
+  quote: |-
+    line_item_id
+    channel
+    environments.available[]
+    episodes
+    programs.available[].id
+    programs.available[].content.series
+    programs.available[].content.title
+    placement.reward
+    placement.instl
+    placement.plcmt
+    placement.skip
+    placement.feed
+    break_position.available[].id
+    break_position.available[].delay
+    break_position.available[].slotinpod
+    properties.available[].id
+    properties.available[].name
+    properties.available[].domains[]
+    properties.available[].apps[].store
+    properties.available[].apps[].bundle
+    properties.available[].child_audience
+    properties.available[].seller_relationship
+    properties.available[].venue_type
+    audiences.available[].id
+    audiences.available[].name
+    formats.included[]
+    geo
+    markets
+    pricing[].pricing_id
+    pricing[].cost_method
+    pricing[].list_rate
+    pricing[].currency
+    pricing[].price_type
+    pricing[].unit_bounds
+    commitment_bounds
+    addressable_scale
+    committed_metrics[]
+    delivery_counting.impression_multiplier.impression_type
+    delivery_counting.impression_multiplier.source_type
+    delivery_counting.impression_multiplier.accreditation
+    required_credentials[]
+    buyer_requirements.allowed_dsps[]
+    transaction_mechanism.available[]
+- ir: key:5.2.9:ProgramOption.content
+  digest: 69af89fccab487593d6c5be36bf56321757213cd2e0eb5e5ad36b2a404962c10
+  quote: "`content` | OPTIONAL | An AdCOM 1.0 `Content` object, in AdCOM's keys and meanings, `series`, `title`, `network`, `channel`, `genres`, `rating`, `live`, and `realtime` included. Its `channel` is the AdCOM `Channel` object, the TV channel or station the content is on"
+options:
+- id: the-two-paths-the-summary-lists
+  summary: >-
+    `Content` gains the two members § 2.1 projects, `series` and `title`, each the `Text` AdCOM
+    publishes for the key of that name. The object stays open and keeps `set_by`, so every other
+    key of AdCOM's object is still accepted and none is restated.
+- id: every-key-the-row-names
+  summary: >-
+    `Content` gains all eight keys the `content` row lists as code spans -- `series`, `title`,
+    `network`, `channel`, `genres`, `rating`, `live` and `realtime` -- each at the type AdCOM
+    publishes for it.
+- id: the-summary-carries-content-whole
+  summary: >-
+    The projection stops at `content` and the summary carries the open object as it stands, since
+    this specification types none of its members.
+chosen: the-two-paths-the-summary-lists
+rationale: >-
+  § 2.1 states that "a listed path has the type and value it has in the Full Representation", so
+  the type of `content.series` in a summary is the type `content.series` has on a line item. § 5.2.9
+  says what that is: the object is "An AdCOM 1.0 `Content` object, in AdCOM's keys and meanings",
+  linked at a pinned commit, and AdCOM publishes `Content.series` and `Content.title` as its own
+  `Text`. So the two members are `Text`, and the reading is of § 2.1's block rather than of the
+  `content` row.
+
+
+  `D-107` IS WHAT MAKES THIS POSSIBLE, AND THIS IS NOT THE COPY IT REFUSED. That record publishes
+  the three externally-set objects open with no members of their own, and refused
+  `restate-each-shape-here` because "AdCOM's `Content` has over twenty attributes and `Channel` and
+  `Producer` below it" and a copy "drifts the moment either standard revises". Its closing paragraph
+  states the sequel in its own words: § 5.4's two prose sentences name keys a `spec` MAY hold, and
+  "naming them as members of `FormatSpecification` is the next thing this record makes possible, and
+  it is a reading of those two sentences and not of these three rows". This is that case for
+  `Content`: an element of this specification -- the summary's own list of paths -- names two keys,
+  and what names them is not the `content` row. Two members out of thirty-four is no restatement of
+  the shape, and the object stays open, so a payload AdCOM accepts and this text never names is
+  still accepted.
+
+
+  `every-key-the-row-names` is the copy `D-107` refused, at eight keys instead of thirty-four, and
+  nothing in this specification projects six of them. It would also have to reach AdCOM's `Network`
+  and `Channel` objects, which the row names as objects; a vocabulary another specification on this
+  site publishes is imported by the profile at the lock it pins (type rules § 6), and no mechanism
+  imports a published **object** across specifications. So two of the eight could not be typed at
+  all, and the option would publish six members whose only element is a row that says the members
+  are AdCOM's.
+
+
+  `the-summary-carries-content-whole` makes the summary wider than the document it projects. The
+  block lists two paths under `content` and § 2.1 says "no other path appears"; an open object
+  carried whole appears with every key AdCOM states, which is thirty-four where the summary lists
+  two. It is also the one option that contradicts the sentence this record rests on, since a path's
+  type in the summary would stop being the type it has in the Full Representation.
+
+
+  WHAT THIS LEAVES. The six keys the `content` row names and the summary does not project stay
+  AdCOM's, under `D-107`, and the published `Content` accepts them without typing them.
+  `network` and `channel` need a published object imported across specifications, which no stage
+  does; a bead names it. Nothing here touches `FormatSpecification` or `DataLabel`, the other two
+  objects `D-107` reads: no element of this specification projects a path through either.
+challenge:
+- type: LineItemSummaryContent
+  value:
+    series: The Office
+    title: Search Committee
+  verdict: accept
+  context: >-
+    A manifest entry for a CTV line item whose programs name the series and the episode, which is
+    what line-item-ctv-live-series.yaml writes under a program option's `content`.
+  reason: >-
+    The projection keeps the two members the block lists, each the `Text` AdCOM publishes for the
+    key, and a summary's member is optional because the condition that would require it binds the
+    document (`D-028`).
+- type: LineItemSummaryContent
+  value:
+    series: The Office
+    network:
+      id: nbc
+  verdict: reject
+  context: >-
+    A seller putting the network into a summary as well, because § 5.2.9's row names `network`
+    beside `series` and `title`.
+  reason: >-
+    § 2.1 says no path appears but the ones the block lists, so the projected object is closed on
+    those two: `network` is a key of AdCOM's `Content` and of the line item's own `content`, and no
+    key of the summary's.
+- type: Content
+  value:
+    series: The Office
+    network:
+      id: nbc
+  verdict: accept
+  context: >-
+    The same program option on the line item itself, where § 5.2.9 states the object is AdCOM's.
+  reason: >-
+    `D-107` keeps `Content` open and states no member of it but the two this record names, so a key
+    AdCOM states and this text does not is accepted there and refused only in the projection.
+feedback: >-
+  § 2.1's `LineItemSummary` lists two paths under `programs.available[].content`, whose type § 5.2.9
+  defers to AdCOM. A reader of this specification alone cannot type them, and a generator has to
+  fetch AdCOM at the commit the row links. Saying in § 5.2.9 which of AdCOM's keys this
+  specification relies on, with each one's type written out, would make both the row and the summary
+  readable without the other document.

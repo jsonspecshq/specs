@@ -1,0 +1,51 @@
+format: 2
+id: D-099
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Two of section 5.6's statements read the line item's pricing entries against the mechanism in effect,
+  which one payload shows. What are their change pairs?
+covers:
+
+- ir: rule:5.6:317562fb
+  digest: 2c25bfa5a1728663ef907a95018c240b10541fe27cf3d8bd4d48bc5fb5d85e05
+  quote: The buyer commits under exactly one, the committed entry, named by `commitment.pricing_id`, or
+    the only entry when that key is absent; it MUST cover the mechanism in effect.
+- ir: rule:5.6:dd547abd
+  digest: 1988f5946707a1c02962b0748c47756e495a2b9665af49ec1ba2c04497a78ae4
+  quote: Two entries MUST NOT share `cost_method`, `cost_parameters`, `currency`, and a mechanism.
+options:
+- id: write-the-two-pairs
+  summary: Each becomes a rule on the `LineItem`, which is the one type that holds the pricing entries
+    and the transaction mechanism field together, with one payload the schema accepts and one it refuses.
+- id: one-rule-for-the-section
+  summary: The two read one subject -- the entries against the mechanism in effect -- so they become
+    a single rule with one set of vectors, and a payload that breaks either is reported once.
+chosen: write-the-two-pairs
+rationale: >-
+  Two statements, two rules: each rejects a different payload, and a conformance suite that reported
+  them together would say a line item is wrong without saying which of the two it broke. The
+  `LineItem` holds both subjects, so each rule is on it.
+
+
+  **What "the mechanism in effect" is.** Section 5.6 reads `delta_cpm` on "its option in effect and not
+  in `included[]`", so what is in effect is what the seller includes and what the buyer selected --
+  `included[]` and `selected[]` of the `Selectable` field. An entry's `transaction_mechanisms[]` is
+  "the `transaction_mechanism` options this entry prices. Absent: every offered option", so an entry
+  that names none prices every `available[]` option, and both checks read it that way.
+
+
+  **What each rejects.** `317562fb`: the entries are alternatives, so the committed one has to price
+  what the buyer is buying, and an entry naming only another mechanism prices nothing the commitment
+  is under. `dd547abd`: two entries alike on `cost_method`, `cost_parameters`, `currency` and a
+  mechanism are one entry written twice, and `commitment.pricing_id` naming one of them leaves the
+  other pricing the same terms; the valid pair alike on three of the four and on no mechanism is what
+  shows the fourth is load-bearing.
+
+
+  **The checks read what the payload shows.** Each reads two fields of the line item, and a part that
+  carries one without the other returns null so the harness reads the whole line item instead. The
+  committed entry is the one `commitment.pricing_id` names, or the only entry where it names none,
+  which is what this section states and what D-098's two checks already read.

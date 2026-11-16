@@ -1,0 +1,112 @@
+format: 2
+id: D-074
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "`Geo.lat` and `Geo.lon` state a range and a hemisphere convention and name no unit. An extent in no named unit is not a measure, so what fixes the unit of a coordinate here, and what may a receiver assume about the number it reads?"
+covers:
+  - ir: key:object_geo:Geo.lat
+    digest: d357a6c70250003b5587a0655321b96d4ee4c746530a9ee7529c2340d5440f01
+    quote: "`lat` | Latitude from -90.0 to +90.0, where negative is south."
+  - ir: key:object_geo:Geo.lon
+    digest: fbf61a00e58b973d44f2d509df9904cc58dc6bf2f94beed2c3a28e1021af4083
+    quote: "`lon` | Longitude from -180.0 to +180.0, where negative is west."
+options:
+  - id: signed-decimal-degrees
+    summary: >-
+      The range and the convention fix the unit between them: ±90 and ±180 with
+      the sign giving the hemisphere are the bounds of a coordinate in degrees
+      and of no other unit the document could mean, and the appendix's own
+      payload writes a latitude and a longitude that are degrees of a named
+      city. The value is a number of degrees, and the fraction is decimal
+      rather than minutes and seconds.
+  - id: unclear-until-the-document-names-a-unit
+    summary: >-
+      A row that gives a bound and no unit states no extent, so neither row
+      publishes a coordinate concept until AdCOM writes the unit down. A reader
+      supplying degrees has supplied it from outside the text.
+  - id: a-bare-number-with-the-row-s-bounds
+    summary: >-
+      Publish the float and the two bounds and assert nothing about the unit, so
+      a consumer gets the range check the row states and no reading of what the
+      number measures.
+chosen: signed-decimal-degrees
+rationale: >-
+  **Measured on both locks, over every occurrence of the two members and of the
+  words a unit could be written in.** Neither row names a unit; no sentence
+  anywhere in the document names one for a coordinate; `degree`, `minute` and
+  `second` appear in no statement about `lat` or `lon`; and the only other
+  sentence about the pair, "The `lat` and `lon` attributes should only be passed
+  if they conform to the accuracy depicted in the `type` attribute", is about
+  precision rather than about units. Six independent readings of each row, two
+  in each of three rounds on this lock, read both as settling no kind of value,
+  every one of them quoting the missing unit as what blocks it. That is the
+  defect the record is about: the forward readings are right that the row does
+  not say.
+
+  **The second witness is the document's own payload, and it is what settles
+  it.** Appendix C's request context carries `"geo": { "type": 1, "lat":
+  42.3601, "lon": 71.0581, "country": "USA", "utcoffset": -300 }`, and the prose
+  above it says the device "is currently located in Boston MA, USA, during
+  eastern standard time". Boston is at latitude 42.36 in degrees. The same
+  number read as degrees-and-decimal-minutes would be 42 degrees 36 minutes,
+  which is 42.6 degrees and some 27 kilometres north of the city; radians the
+  row's own bound excludes, because ±90 radians is more than fourteen full
+  turns. So the document's own bytes are consistent with exactly one of the
+  readings a bare number admits, and they are the bytes of the specification
+  rather than an example authored for a test.
+
+  **`unclear-until-the-document-names-a-unit` is the honest answer to the row
+  and the wrong answer to the document.** The record's job is to read the whole
+  text, and the whole text includes the payload and the bounds. Withholding a
+  coordinate concept would publish a float where every consumer of a geolocation
+  needs to know which unit it is in, to protest a sentence the specification
+  failed to write — and the protest belongs in the feedback, where it is below.
+
+  **`a-bare-number-with-the-row-s-bounds` loses the part the document does
+  settle**, and it does not even save the reader from guessing: a consumer that
+  plots the number has assumed a unit whether the schema named one or not, so
+  the only effect is to move the assumption somewhere nobody records it.
+
+  **What the choice costs.** The published value asserts degrees, and the two
+  bounds are the coordinate's rather than the unit's, so a receiver that reads a
+  latitude of 150 gets a type error from the row's range and not from the kind.
+  A sender that writes degrees-and-minutes as a decimal — the form a GNSS
+  receiver emits before conversion — is contradicted by this reading, and the
+  specification does not contradict it: that sender is wrong by the appendix and
+  by nothing else in the text.
+
+  **What this record is for, since it moves no published byte.** Both rows are
+  derived by the domain rule from the geographic-degrees concept and stay there.
+  The concept's own description already reads these two rows as degrees; what
+  was not written down is that the row alone does not say so, and that what
+  closes the gap is the range together with the appendix payload. Three rounds
+  of readers have now reported both rows as unreadable from the row, and a
+  reading two halves of the document settle differently is a reading that moves
+  every round until it is written down.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2511"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2516"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2498"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L4712"
+feedback: >-
+  The two coordinate rows never name their unit, and the example contradicts one
+  of them.
+
+  `Geo.lat` is "Latitude from -90.0 to +90.0, where negative is south" and
+  `Geo.lon` is "Longitude from -180.0 to +180.0, where negative is west".
+  Neither says the number is in decimal degrees, and neither names a reference
+  system, so a sender converting from a device fix has nothing to convert to:
+  degrees with a decimal fraction and degrees with decimal minutes both fit the
+  stated range, and they differ by tens of kilometres. Adding "in decimal
+  degrees" to each row, and naming WGS 84 once in the object, would settle both
+  in a line.
+
+  The appendix is the only place the specification shows a coordinate, and its
+  longitude has the wrong sign: Appendix C's request context carries `"lat":
+  42.3601, "lon": 71.0581` with `"country": "USA"` and `"utcoffset": -300`,
+  described in the prose above it as a device in Boston. Boston is 71 degrees
+  **west**, which the `lon` row writes as a negative number, so the example as
+  printed places the device in Asia while the rest of the payload places it in
+  Massachusetts. The one worked example of the convention breaks it.

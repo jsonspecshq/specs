@@ -1,0 +1,931 @@
+# Change pairs for the § 3 marker rules and for the rules of § 2.2. A marker
+# rule is about two versions of a document and the party that produced the
+# second, so each vector is a pair. Regenerate a digest with `npm run cite
+# --lock specs/openproposal/input/with-open-prs.lock.yaml <marker row ID>`.
+format: 1
+module: kernel
+rules:
+# A `VersionRef` outside its proposal carries `seller_domain`. The condition is
+# settled by the object that carries the reference, so the pair is at the
+# carrier: § 3.3's `AvailabilityRead`, which a buyer sends to read a line
+# item's figures and which is no proposal (D-134).
+#
+# Every value is a byte of examples/proposal-agreed.yaml and every key a row of
+# § 3.3's table:
+#   offer                 <- /change_requests/0/baseline, a shipped `VersionRef`
+#                            carrying the `line_item_id` § 3.3's `offer` row
+#                            makes REQUIRED there
+#   offer.seller_domain   <- /seller/domain, which § 2.2's row states the member
+#                            is ("The proposal's `seller.domain`"); the offer
+#                            names /proposal_id, whose seller that is
+#   flight                <- /line_items/0/commitment/flight, which § 3.3's
+#                            `flight` row states the value is ("as
+#                            `commitment.flight`"), on the line item the offer
+#                            names
+#   pricing_id            <- /line_items/0/pricing/0/pricing_id, which § 3.3's
+#                            `pricing_id` row states the value is ("as
+#                            `commitment.pricing_id`"), on the same line item
+#
+# The invalid half is the one mutation the row forbids: the same message with
+# `seller_domain` absent from the `offer` it carries.
+- rule: rule:2.2:e46f15c4
+  digest: 842f144cbb538352e229fb3aafe5bbb71a204f09e1aeb96e1c3d14aa72935dae
+  decision: D-134
+  type: AvailabilityRead
+  valid:
+  - value:
+      offer:
+        proposal_id: examplepub-agencya-custom-q4-2026
+        version: 2
+        line_item_id: business-daily-display
+        seller_domain: examplepub.example
+      flight: { start: '2026-10-06T00:00:00Z', end: '2026-12-21T23:59:59Z' }
+      pricing_id: bd-cpm-usd
+  invalid:
+  - value:
+      offer:
+        proposal_id: examplepub-agencya-custom-q4-2026
+        version: 2
+        line_item_id: business-daily-display
+      flight: { start: '2026-10-06T00:00:00Z', end: '2026-12-21T23:59:59Z' }
+      pricing_id: bd-cpm-usd
+- rule: marker:3:immutable
+  digest: 36e4c2830d95e3c4ae4166cdaccae23edbe3bfa8a26898faea72ba1cb8e37586
+  decision: D-066
+  type: Proposal
+  valid:
+  - party: seller
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+    after:
+      description: A display package for the spring campaign, with CTV added.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 2
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+  invalid:
+  - party: seller
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+    after:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 3f1c8a90-55b2-4d61-9ab3-27e4d0c6f812
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 2
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+- rule: marker:3:derived
+  digest: b6358d1160fc01ac4b4be0f9f0ecd7ddc19b6045c1ea4392f00449af12513592
+  decision: D-066
+  type: Proposal
+  valid:
+  - party: seller
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+    after:
+      description: A display package for the spring campaign, with CTV added.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 2
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+  invalid:
+  - party: seller
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+    after:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 2
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+- rule: marker:3:seller-set
+  digest: 94e2c7f4738dab5dbf24aee02a582e7d10e43dd4f3aa76237063215e6867f186
+  decision: D-066
+  type: Proposal
+  valid:
+  - party: seller
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+    after:
+      description: A display package for the spring campaign, priced for two flights.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 2
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+  invalid:
+  - party: buyer
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+    after:
+      description: A display package the buyer rewrote.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 2
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+- rule: marker:3:selectable
+  digest: 8a003787c373122f307a428826b4ca094f064f90fc1877096d8f8232946e3a51
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: buyer
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      shortfall_remedy:
+        available: [ makegood, credit, none ]
+        included: [ makegood ]
+  invalid:
+  - party: seller
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      shortfall_remedy:
+        available: [ makegood, credit, none ]
+        included: [ makegood ]
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+- rule: marker:3:requestable
+  digest: 6848566b78555a6b35a505cd2a1f627422f6519b85d870dd3a1163f3a9756102
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: seller
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      materials_due:
+        at: '2026-01-15T00:00:00Z'
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      materials_due:
+        at: '2026-02-01T00:00:00Z'
+  invalid:
+  - party: buyer
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      materials_due:
+        at: '2026-01-15T00:00:00Z'
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      materials_due:
+        at: '2026-02-01T00:00:00Z'
+- rule: marker:3:settable
+  digest: aadea752f5c312037a97353c1e8c88c591c5b2db26ec4ae59963b9490f47507b
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: buyer
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      time_zone: America/New_York
+      frequency_cap: &id001
+        count:
+          min: 1
+          max: 6
+          default: 3
+          value: 3
+        per: device
+        period: day
+  invalid:
+  - party: seller
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      time_zone: America/New_York
+      frequency_cap: *id001
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      time_zone: America/New_York
+      frequency_cap:
+        count:
+          min: 1
+          max: 6
+          default: 3
+          value: 5
+        per: device
+        period: day
+- rule: marker:3:asserted
+  digest: adac5c0cbcb93033b5776a28f4fb27bd8ccc72bdd570f075d9626cba443664cd
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: seller
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      addressable_scale: &id002
+        quantity: 1000000
+        unit: devices
+        window:
+          start: '2026-03-01T00:00:00Z'
+          end: '2026-03-31T23:59:59Z'
+  invalid:
+  - party: buyer
+    before:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: draft
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      addressable_scale: *id002
+- rule: marker:3:recorded
+  digest: 5cb60abe2aa69153b9cf499b61dd6e5c83b2fed00f14493272d0d80f71978ea0
+  decision: D-066
+  type: Proposal
+  valid:
+  - party: buyer
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+      buyer:
+        domain: exampleagency.example
+        legal_name: Example Agency Ltd
+      assent:
+      - &id009
+        at: '2026-03-02T09:00:00Z'
+        line_item_ids:
+        - 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        record_digest: sha256:8bc1e566c463606f2971c6f29669a988ff5fa2e1cba04721e63b871133a4958b
+        role: commitment
+        idempotency_key: commit-2026-03-02-0001
+        version: 1
+    after:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+      buyer:
+        domain: exampleagency.example
+        legal_name: Example Agency Ltd
+      assent:
+      - *id009
+      - at: '2026-03-02T11:30:00Z'
+        line_item_ids:
+        - 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        record_digest: sha256:8bc1e566c463606f2971c6f29669a988ff5fa2e1cba04721e63b871133a4958b
+        role: acceptance
+        version: 1
+  invalid:
+  - party: buyer
+    before:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+      buyer:
+        domain: exampleagency.example
+        legal_name: Example Agency Ltd
+      assent:
+      - *id009
+    after:
+      description: A display package for the spring campaign.
+      spec_version: '3.0'
+      proposal_id: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      status: draft
+      type: standard
+      line_items:
+      - channel: display
+        line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        status: draft
+        visibility: public
+        transaction_mechanism: { available: [ { id: direct_io, delivery_type: guaranteed } ], included: [ direct_io ] }
+        pricing: [ { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 } ]
+      version: 1
+      seller:
+        domain: examplepub.example
+        legal_name: Example Publishing Ltd
+      buyer:
+        domain: exampleagency.example
+        legal_name: Example Agency Ltd
+      assent:
+      - at: '2026-03-02T09:00:00Z'
+        line_item_ids:
+        - 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+        record_digest: sha256:644197a08014b4a8b77075a2e3fd3bc0c69568254a8c805892559f1369dfaa47
+        role: commitment
+        idempotency_key: commit-2026-03-02-0001
+        version: 1
+- rule: marker:3:lifecycle
+  digest: 524814444ede737ab3ed5b2ece11b389b9daa7f0be9b8f98dbd2f3ebd083f218
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: seller
+    before: &id010
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+    after: &id011
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: sold_out
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+  invalid:
+  - party: buyer
+    before: *id010
+    after: *id011
+- rule: marker:3:supplied
+  digest: ef075b4b9dcb9458ccaa36725478dc9e802f29a2ecefe182844fc36f506f69c2
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: buyer
+    before: &id012
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      buyer_supplied:
+        segments_allowed: true
+    after: &id013
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      buyer_supplied:
+        segments_allowed: true
+        segments:
+        - list_id: 2d5a7f31-6c48-4b0e-9f72-18ae3c6d05b9
+          match_method: hashed_email
+          size: 2400000
+  invalid:
+  - party: seller
+    before: *id012
+    after: *id013
+- rule: marker:3:mixed
+  digest: 7c5eab99d5a8d933cf681a1e8b30c1c5840aacfb4dd49681e2ac6f563b2d2bc4
+  decision: D-066
+  type: LineItem
+  valid:
+  - party: seller
+    before: &id014
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      buyer_supplied:
+        segments_allowed: true
+        expected_match_rate: 0.6
+        segments:
+        - list_id: 2d5a7f31-6c48-4b0e-9f72-18ae3c6d05b9
+          match_method: hashed_email
+          size: 2400000
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      buyer_supplied:
+        segments_allowed: true
+        expected_match_rate: 0.45
+        segments:
+        - list_id: 2d5a7f31-6c48-4b0e-9f72-18ae3c6d05b9
+          match_method: hashed_email
+          size: 2400000
+  invalid:
+  - party: seller
+    before: *id014
+    after:
+      channel: display
+      transaction_mechanism:
+        available:
+        - id: direct_io
+          delivery_type: guaranteed
+        included:
+        - direct_io
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      pricing:
+      - cost_method: CPM
+        pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+        currency: USD
+        list_rate: 12000
+      buyer_supplied:
+        segments_allowed: true
+        expected_match_rate: 0.45
+        segments:
+        - list_id: 2d5a7f31-6c48-4b0e-9f72-18ae3c6d05b9
+          match_method: hashed_email
+          size: 1800000
+- rule: rule:3.1:bfffacdf
+  digest: 705cdabdb624bd15e1d51d39445a32e68b2d7c9c3364e2beedeca3da9ca4e77f
+  decision: D-103
+  type: LineItem
+  valid:
+  - value:
+      channel: video
+      placement: { plcmt: 1 }
+      transaction_mechanism:
+        available: [ { id: direct_io, delivery_type: guaranteed } ]
+        included: [ direct_io ]
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      break_position:
+        available:
+        - { id: 2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40, maxseq: 3 }
+        - { id: 7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74, maxseq: 6 }
+        included: [ 2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40 ]
+      pricing:
+      - { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 }
+  invalid:
+  - value:
+      channel: video
+      placement: { plcmt: 1 }
+      transaction_mechanism:
+        available: [ { id: direct_io, delivery_type: guaranteed } ]
+        included: [ direct_io ]
+      line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+      status: published
+      visibility: public
+      break_position:
+        available:
+        - { id: 2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40, maxseq: 3 }
+        - { id: 2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40, maxseq: 6 }
+        included: [ 2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40 ]
+      pricing:
+      - { pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15, cost_method: CPM, currency: USD, list_rate: 12000 }

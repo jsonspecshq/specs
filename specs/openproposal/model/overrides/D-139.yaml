@@ -1,0 +1,63 @@
+format: 2
+id: D-139
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.6.6's `fees[]` row ends "MUST be non-empty". Is that a rule a payload decides, whose object
+  is the row's own, and can its pair be derived from a payload the specification ships?
+covers:
+- ir: rule:5.6.6:527c9881
+  digest: fcf876f2537f5dcb83010a55d2b04cec414c4375695b86d12607a8a6257c3f21
+  quote: MUST be non-empty
+- ir: key:5.6.6:CancellationOption.fees[]
+  digest: 5118d3f3b11389824dd859a676945133fed16fea82b01cdee0329b9b3e0cf83d
+  quote: "`fees[]` | REQUIRED | The fee, by how long before the reference date notice arrives. MUST be non-empty"
+options:
+- id: a-rule-of-the-row-s-object
+  summary: >-
+    It is a rule of `CancellationOption`, the object whose table the row sits in, and the pair is
+    `line-item-audio.yaml`'s own cancellation option with its `fees[]` emptied and nothing else
+    changed.
+- id: an-obligation-of-the-seller
+  summary: >-
+    It is an obligation of the seller, who writes the option, so no payload decides it and it
+    needs no pair.
+- id: a-keyword-the-schema-states
+  summary: >-
+    `minItems: 1` on the member states it, so the schema carries it and the rules output does not.
+chosen: a-rule-of-the-row-s-object
+rationale: >-
+  The sentence names no party and asks nothing of anyone's behaviour: it says what a value is.
+  "MUST be non-empty" sits in the Meaning cell of `fees[]`, after the cell has said what a fee is
+  -- "The fee, by how long before the reference date notice arrives" -- so its subject is the
+  member the row types and its object is the object that table describes, `CancellationOption`.
+  One payload shows whether it holds, which is what a rule is (type rules § 9).
+
+
+  `an-obligation-of-the-seller` is how § 4.1.2's identical sentence was NOT read: `D-088` reads
+  "MUST be non-empty" there as a rule of `AssentEntry`, not an obligation, and this record reads
+  the same words the same way. Calling it an obligation would say no payload decides it, which is
+  false of a list a validator can count, and would spare it the pair that proves the reading.
+
+
+  `a-keyword-the-schema-states` is the clause that would be right if the emitter wrote it. Type
+  rules § 2a sends a MUST a keyword can state to the schema, and `minItems` is such a keyword --
+  but `src/emit.ts` writes no `minItems` from a statement, and the representable vocabulary
+  grades `minItems` only where a constructor's shell states it. Carrying it in the rules output
+  is clause 2, which is where a requirement no keyword states today belongs; the feedback below
+  is what asks for the keyword.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES. `line-item-audio.yaml` ships a `cancellation_policy` whose
+  first option is the stepped fee schedule this specification wrote, and the examples stage
+  reports every shipped example valid against the emitted schemas, so the option is a payload the
+  published `CancellationOption` already accepts. The valid half is that option, whole. The
+  invalid half is that option with `fees` emptied, and nothing else: one mutation, the one the
+  rule forbids, which is what a derived pair is.
+feedback: >-
+  § 5.6.6 writes "MUST be non-empty" in a Meaning cell, where § 4.1.2 writes the same words for
+  `line_item_ids[]`. Both are what `minItems: 1` says, and a published schema that stated it would
+  spare every consumer a rule to implement. Saying it in the Required column, or in a form the
+  emitter reads, would move both into the schema.

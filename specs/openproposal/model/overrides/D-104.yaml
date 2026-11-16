@@ -1,0 +1,94 @@
+format: 2
+id: D-104
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  An audience option's `taxonomy` names "the OpenRTB segment taxonomies list" rather than a list of the
+  registry by its title. Which list is that, and does the row reuse it?
+covers:
+- ir: key:5.3:AudienceOption.taxonomy
+  digest: b42e48e3049a702e8ade1c662cf09257fb36ee1d9579abae9525a44f2b1c6a22
+  quote: '`taxonomy` | REQUIRED | The integer from the OpenRTB segment taxonomies list for the IDs that
+    name this option: `4` (IAB Tech Lab Audience Taxonomy 1.1) for the label''s `taxonomy_id_list`, or
+    the seller''s registered vendor value (500 and up) for the label''s `audience_id`. When the seller
+    signals the segment in an OpenRTB 2.6 request, these are the `data.ext.segtax` and `segment.id` values'
+  locks:
+  - with-open-prs
+options:
+- id: the-registry-s-category-taxonomies
+  summary: >-
+    The row names AdCOM 1.0's List: Category Taxonomies, which the profile already imports, and reuses
+    it: its terms are that list's codes and a seller's own value is the vendor code the list reserves
+    from 500.
+- id: a-list-of-its-own
+  summary: >-
+    "The OpenRTB segment taxonomies list" is a list no registry of this tree keeps, so the row states
+    a vocabulary of its own whose terms are the one code it names and the vendor range.
+chosen: the-registry-s-category-taxonomies
+rationale: 'The row names the list by three facts and all three are List: Category Taxonomies''. Code
+  `4` is "IAB Tech Lab Audience Taxonomy 1.1", which is the title that list gives code 4 at the commit
+  the profile pins. The row reserves "500 and up" for the seller''s registered value, and that list is
+  the one AdCOM reserves 500 and up in. And the row says the values travel as OpenRTB 2.6
+  `data.ext.segtax`, whose codes are the AdCOM list''s: `segtax` is what OpenRTB calls a category
+  taxonomy. No other list of the registry gives code 4 that title.
+
+
+  So D-071''s reading applies unchanged: a row that cites one of AdCOM''s lists reuses the list the
+  registry publishes, under the name the registry gives it, with the codes the registry holds. The
+  vocabulary is open, because the list reserves the vendor range the row relies on, and a seller''s
+  own value is a code of that range rather than a term of this specification.
+
+
+  `a-list-of-its-own` would publish one code and a range, so a payload carrying any other taxonomy the
+  registry lists would be refused although the row names the registry''s list and not its own. It would
+  also give a reader two names for one list, which is what the import exists to avoid, and the drift
+  D-071 weighed would start at the next code AdCOM adds.
+
+
+  The row names the list by its content rather than by its title, which is why this is a reading and not
+  a rule: a check can see that the cell says "the OpenRTB segment taxonomies list" and cannot see that
+  the phrase and the registry''s title name one list.'
+evidence:
+- https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_categorytaxonomies
+- examples/line-item-display.yaml (three audience options, each writing taxonomy 4)
+- examples/proposal.yaml (the same three on its display line item)
+twins:
+- types:
+  - ApiFramework
+  - CategoryTaxonomy
+  reason: >-
+    Two lists of the registry whose codes run 1 to 9 and that both reserve 500 and up, so the published
+    pair has one structure. They are separate types because each is a reference to the list the row
+    names: an API framework is a rendering interface a placement supports, a category taxonomy is which
+    taxonomy an id comes from, and code 6 is MRAID 3.0 in one and the Content Taxonomy 2.2 in the other.
+    A receiver reads each against its own list, and merging them would give one name to two lists, which
+    is what D-071 reuses the registry to avoid.
+  locks:
+  - with-open-prs
+feedback: >-
+  Name the list as the registry titles it -- AdCOM 1.0 List: Category Taxonomies -- and link it, as
+  § 5.2.2 and § 5.6.4 do for the other lists this specification reuses.
+challenge:
+- type: CategoryTaxonomy
+  value: 4
+  verdict: accept
+  context: >-
+    A seller offering an audience whose ids come from the IAB Tech Lab
+    Audience Taxonomy 1.1, which is the code the row names and the value all
+    ten examples write.
+  reason: >-
+    `the-registry-s-category-taxonomies` publishes the row at the list the
+    registry defines, so code 4 is one of the values the row takes.
+- type: CategoryTaxonomy
+  value: 10
+  verdict: reject
+  context: >-
+    A seller that numbers its own taxonomies past the registry's codes and
+    writes the next one up, rather than registering a vendor value.
+  reason: >-
+    The list holds nine codes and reserves 500 and up for vendors, so a tenth
+    code is neither. The row's own words send a seller's value to the vendor
+    range, which this refusal is what holds it to: `a-list-of-its-own`, the
+    option not taken, would have refused every registry code but 4 instead.

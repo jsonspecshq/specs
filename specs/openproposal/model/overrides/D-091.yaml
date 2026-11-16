@@ -1,0 +1,117 @@
+format: 2
+id: D-091
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: >-
+  What does a `selectable` field hold, where the kernel's `Selectable` has no member for the buyer's
+  choice and calls the price map by a name the text does not use?
+covers:
+- ir: key:3.1:Selectable.selected[]
+  digest: c3543a69287e07596310a03ae02b51233274d1ee59a37d760eed584222c61b8b
+  quote: '`selected[]` | OPTIONAL | The buyer''s choice, by option id'
+  departs:
+  - The kernel's shell held `available`, `included`, `pricing` and `max_select`, closed, so it had no
+    member for the buyer's choice at all and named the price map `pricing` where this text names it
+    `deltas`.
+  locks:
+  - with-open-prs
+- ir: key:3.1:Selectable.deltas
+  digest: 4700416237f4a50c06b55fc36d2f452b0e233bbc1df246421eb972e901716d8b
+  quote: '`deltas` | OPTIONAL | The price of an option outside `included[]`, keyed by option id. An option
+    with no entry has no delta'
+  locks:
+  - with-open-prs
+- ir: def:3.2:SettableRange
+  digest: e5891e9f7ef2ef88027a58ad024a2f22a2da4c930be00c28692311daa036dc52
+  quote: '`SettableRange` | holds the keys of `Range[T]` (§ 2.2) and these. It is the range form.'
+  locks:
+  - with-open-prs
+- ir: key:3.2:SettableRange.default
+  digest: d97d76912df4bb5ee849fc1802f93de600b0a3abae90401672b3282d10fd998e
+  quote: '`default` | REQUIRED | In effect when `value` is absent, between the bounds'
+  locks:
+  - with-open-prs
+- ir: key:3.2:SettableRange.value
+  digest: d9a93239a54374af6e956d40481ad28395f1c29c1cd2c4efe42eb6b85e2f53cb
+  quote: '`value` | OPTIONAL | The buyer''s value, between the bounds inclusive'
+  locks:
+  - with-open-prs
+options:
+- id: the-five-keys-and-the-range-form
+  summary: >-
+    `Selectable` holds the five keys section 3.1 states, so it gains `selected[]` and renames `pricing`
+    to `deltas`; and the kernel gains `SettableRange[T]`, the form a settable field takes where its type
+    is ordered, holding a `Range`'s bounds and the `default` and `value` between them.
+- id: keep-the-kernel-s-four
+  summary: >-
+    `Selectable` keeps the four members it had, and the buyer's choice is carried outside the envelope,
+    under whatever name each field gives it.
+chosen: the-five-keys-and-the-range-form
+rationale: 'Section 3.1 states five keys and the kernel held four of them under three of the same names.
+  "`selected[]` | Array[String] | OPTIONAL | The buyer''s choice, by option id" had no member at all,
+  and the shell is closed, so every `selectable` field this specification states refused the buyer''s
+  own write. "`deltas` | Map[String, Delta]" the kernel called `pricing`, which is one member under two
+  names and the thing a shared kernel exists to remove.
+
+
+  The text says what `selected[]` means beside what it is, and that is why it is a member and not a
+  reading: "`selected[]` is the complete set in effect and replaces `included[]`. With no `selected[]`,
+  `included[]` is in effect." A field whose buyer has chosen carries both lists, and the one in effect
+  is the buyer''s.
+
+
+  `keep-the-kernel-s-four` is what the model published. It leaves each field to name the buyer''s choice
+  itself, which is the shape the kernel''s own `Selectable` exists to prevent: seventeen rows state
+  `Selectable[T]` and would state seventeen spellings of one member.
+
+
+  **`SettableRange[T]` is the second form section 3.2 states.** "A field marked `settable` declares its
+  bounds in one of two forms", and the first is the `Settable` D-090 corrected. The second "holds the keys
+  of `Range[T]` (§ 2.2) and these": a `default`, REQUIRED and between the bounds, and a `value`, the
+  buyer''s and between them inclusive. It is a constructor for the reason `Narrowing` is -- the text
+  writes it with its parameter, `SettableRange[Integer]` on a frequency cap''s `count` -- and it carries
+  the rule its rows state, that each of the two is within the bounds the seller gives, where a bound the
+  seller leaves out bounds nothing.
+
+
+  **Two shell-member descriptions go.** The kernel''s `Selectable` described `included` and `pricing` in
+  its shell, and a shell member''s description rests on no element of any specification''s text, which
+  is what the provenance stage reported the first time a `Selectable` was applied. `Range`, `List` and
+  `Map` carry none for that reason, and the rows these members rest on carry the text.
+
+
+  Nothing AdCOM or the Deals API publishes moves. Each already marks `Selectable` absent and now marks
+  `SettableRange` absent too -- measured by `map --check` and `emit` on both locks of each, every one
+  clean and byte-identical.'
+challenge:
+- type: FormatsSelection
+  value:
+    available: [display/300x250, display/970x250]
+    included: [display/300x250]
+    selected: [display/970x250]
+  verdict: accept
+  context: >-
+    A buyer that takes the larger format instead of the one in the base rate,
+    which is the whole of what `selected[]` is for: it is the complete set in
+    effect and replaces `included[]`.
+  reason: >-
+    `the-five-keys-and-the-range-form` publishes `selected[]`, so the buyer's
+    choice has a member to travel in.
+- type: FormatsSelection
+  value:
+    available: [display/300x250, display/970x250]
+    included: [display/300x250]
+    pricing:
+      display/970x250:
+        delta_cpm: 3000
+  verdict: reject
+  context: >-
+    The same field written as the kernel's earlier shell named it, with the
+    price of the option beyond those included under `pricing`.
+  reason: >-
+    `keep-the-kernel-s-four` is that form. The text names the member `deltas`,
+    and the shell is closed, so `pricing` is refused -- one member under two
+    names is the thing a shared kernel exists to remove, and the refusal is
+    what makes the rename visible on a payload rather than only in a schema.

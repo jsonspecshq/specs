@@ -1,0 +1,761 @@
+{
+  "$defs": {
+    "ApiFramework": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/ApiFramework",
+      "description": "The codes of AdCOM 1.0 List: API Frameworks (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_apiframeworks), as the AdCOM 1.0 registry defines them"
+    },
+    "App": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId",
+          "description": "Store ID. As OpenRTB 2.6 `app.bundle`"
+        },
+        "developer_domain": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Domain",
+          "description": "Developer domain, informative; the governing developer domain comes from the store listing. No OpenRTB equivalent: not `app.domain`, which is the domain of the app"
+        },
+        "store": {
+          "$ref": "#/$defs/StorePlatform",
+          "description": "The app store that issued `bundle`. Core terms: `apple_app_store` | `google_play` | `roku_channel_store` | `amazon_appstore` | `samsung_apps_tv`. A `bundle` is unique only within its store. No OpenRTB equivalent"
+        },
+        "store_url": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Url",
+          "description": "Store listing URL. As OpenRTB 2.6 `app.storeurl`"
+        }
+      },
+      "required": [
+        "bundle",
+        "store"
+      ],
+      "type": "object"
+    },
+    "AppId": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId",
+          "description": "Store ID. As OpenRTB 2.6 `app.bundle`"
+        },
+        "store": {
+          "$ref": "#/$defs/StorePlatform",
+          "description": "The app store that issued `bundle`. Core terms: `apple_app_store` | `google_play` | `roku_channel_store` | `amazon_appstore` | `samsung_apps_tv`. A `bundle` is unique only within its store. No OpenRTB equivalent"
+        }
+      },
+      "required": [
+        "bundle",
+        "store"
+      ],
+      "type": "object"
+    },
+    "BreakPositionOption": {
+      "additionalProperties": false,
+      "properties": {
+        "delay": {
+          "$ref": "#/$defs/StartDelayMode",
+          "description": "A value from List: Start Delay Modes, such as Pre-Roll (0)"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "maxseq": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "description": "Ceiling: the most ads a served pod holds"
+        },
+        "poddur": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
+          "description": "Ceiling: the most seconds of dynamic ad time a served pod holds"
+        },
+        "podseq": {
+          "$ref": "#/$defs/PodSequence",
+          "description": "A value from List: Pod Sequence"
+        },
+        "slotinpod": {
+          "$ref": "#/$defs/SlotPositionInPod",
+          "description": "A value from List: Slot Position in Pod"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "BreakPositionSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/BreakPositionOption"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "Channel": {
+      "additionalProperties": true,
+      "description": "Its content is set by AdCOM 1.0's `Channel` object, in AdCOM's keys and meanings (§ 5.2.4)",
+      "type": "object"
+    },
+    "ChildAudience": {
+      "enum": [
+        "directed",
+        "mixed",
+        "general"
+      ],
+      "type": "string"
+    },
+    "ChildTreatment": {
+      "enum": [
+        "excluded",
+        "contextual"
+      ],
+      "type": "string"
+    },
+    "Content": {
+      "additionalProperties": true,
+      "description": "Its content is set by AdCOM 1.0's `Content` object, in AdCOM's keys and meanings (§ 5.2.9)",
+      "properties": {
+        "series": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text"
+        },
+        "title": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text"
+        }
+      },
+      "type": "object"
+    },
+    "DoohVenueTaxonomy": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/DoohVenueTaxonomy",
+      "description": "The codes of AdCOM 1.0 List: DOOH Venue Taxonomies (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_doohvenuetaxonomies), as the AdCOM 1.0 registry defines them"
+    },
+    "DoohVenueTaxonomyCodes": {
+      "additionalProperties": false,
+      "description": "Codes in one taxonomy: `taxonomy` is the code of the taxonomy, from the list the field that holds the value names, and `ids[]` holds the ids in that taxonomy.",
+      "properties": {
+        "ids": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId"
+          },
+          "type": "array"
+        },
+        "taxonomy": {
+          "$ref": "#/$defs/DoohVenueTaxonomy"
+        }
+      },
+      "required": [
+        "ids",
+        "taxonomy"
+      ],
+      "type": "object"
+    },
+    "Environment": {
+      "description": "`web_desktop`: `Site`: Personal Computer (2); `web_mobile`: `Site`: The mobile device types; `app_mobile`: `App`: The mobile device types; `ctv`: `Site` or `App`: The TV device types; `dooh`: `Dooh`: Any",
+      "enum": [
+        "web_desktop",
+        "web_mobile",
+        "app_mobile",
+        "ctv",
+        "dooh"
+      ],
+      "type": "string"
+    },
+    "EnvironmentsSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/Environment"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/Environment"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "#/$defs/Environment"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "#/$defs/Environment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "EpisodeSelection": {
+      "enum": [
+        "new",
+        "catalog",
+        "all"
+      ],
+      "type": "string"
+    },
+    "EventSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "eventstatus": {
+          "$ref": "#/$defs/EventStatus",
+          "description": "`1` (scheduled) | `2` (tentative) | `3` (cancelled). Absent: `1`"
+        },
+        "flexibleend": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "Whether `scheduledend` can move, which LEAP calls flexible. Absent: `0`"
+        },
+        "scheduledend": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Instant",
+          "description": "When the event is scheduled to end"
+        },
+        "scheduledstart": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Instant",
+          "description": "When the event is scheduled to start"
+        }
+      },
+      "required": [
+        "scheduledend",
+        "scheduledstart"
+      ],
+      "type": "object"
+    },
+    "EventStatus": {
+      "description": "The codes of `EventSchedule.eventstatus`, each with the label the text gives it",
+      "oneOf": [
+        {
+          "$comment": "code-name: SCHEDULED",
+          "const": 1,
+          "title": "scheduled"
+        },
+        {
+          "$comment": "code-name: TENTATIVE",
+          "const": 2,
+          "title": "tentative"
+        },
+        {
+          "$comment": "code-name: CANCELLED",
+          "const": 3,
+          "title": "cancelled"
+        }
+      ],
+      "title": "Event Status",
+      "type": "integer"
+    },
+    "FeedType": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/FeedType",
+      "description": "The codes of AdCOM 1.0 List: Feed Types (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_feedtypes), as the AdCOM 1.0 registry defines them"
+    },
+    "Loop": {
+      "additionalProperties": false,
+      "properties": {
+        "length_s": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
+          "description": "Loop length, in seconds, counting every item the loop plays, paid or not"
+        },
+        "slot_s": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
+          "description": "Slot length, in seconds"
+        }
+      },
+      "required": [
+        "length_s",
+        "slot_s"
+      ],
+      "type": "object"
+    },
+    "Network": {
+      "additionalProperties": true,
+      "description": "Its content is set by AdCOM 1.0's `Network` object, in AdCOM's keys and meanings (§ 5.2.4)",
+      "type": "object"
+    },
+    "Placement": {
+      "additionalProperties": false,
+      "properties": {
+        "api": {
+          "description": "Values from List: API Frameworks that every impression supports, such as MRAID 3.0 (6), OMID 1.0 (7) and SIMID 1.1 (9)",
+          "items": {
+            "$ref": "#/$defs/ApiFramework"
+          },
+          "type": "array"
+        },
+        "feed": {
+          "$ref": "#/$defs/FeedType",
+          "description": "A value from List: Feed Types, such as Podcast (3)"
+        },
+        "instl": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "The ad is interstitial or full screen"
+        },
+        "playmethod": {
+          "description": "Video or audio. Values from List: Playback Methods in use, such as Initiates without any specific user interaction with Sound On (1), Initiates without any specific user interaction Sound Off by Default (2), Initiates on Click with Sound On (3) and Continuous Playback (7)",
+          "items": {
+            "$ref": "#/$defs/PlaybackMethod"
+          },
+          "type": "array"
+        },
+        "plcmt": {
+          "$ref": "#/$defs/PlcmtSubtype",
+          "description": "A value from List: Plcmt Subtypes - Video, such as Instream (1). Its presence states that the line item is video, so a `ctv` line item that sells video carries it"
+        },
+        "refresh": {
+          "$ref": "#/$defs/Refresh",
+          "description": "How often the slot refreshes"
+        },
+        "reward": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "The user receives a reward for viewing the ad"
+        },
+        "skip": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IntegerFlag",
+          "description": "Video or audio. The placement lets the user skip the ad"
+        },
+        "skipafter": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Duration",
+          "description": "When `skip` is `1`: seconds the ad plays before the placement enables skipping"
+        },
+        "ssai": {
+          "$ref": "#/$defs/ServerSideAdInsertionMode",
+          "description": "Whether server-side ad insertion is in use and what it does to asset and tracker retrieval, in the values of AdCOM 1.0 `Placement.ssai`, such as all server-side (3)"
+        }
+      },
+      "type": "object"
+    },
+    "PlaybackMethod": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PlaybackMethod",
+      "description": "The codes of AdCOM 1.0 List: Playback Methods (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_playbackmethods), as the AdCOM 1.0 registry defines them"
+    },
+    "PlcmtSubtype": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PlcmtSubtypeVideo",
+      "description": "The codes of AdCOM 1.0 List: Plcmt Subtypes - Video (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_plcmtsubtypesvideo), as the AdCOM 1.0 registry defines them"
+    },
+    "PodSequence": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/PodSequence",
+      "description": "The codes of AdCOM 1.0 List: Pod Sequence (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_podsequence), as the AdCOM 1.0 registry defines them"
+    },
+    "ProgramOption": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "$ref": "#/$defs/Content",
+          "description": "An AdCOM 1.0 `Content` object, in AdCOM's keys and meanings, `series`, `title`, `network`, `channel`, `genres`, `rating`, `live`, and `realtime` included. Its `channel` is the AdCOM `Channel` object, the TV channel or station the content is on"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1). It is not compared with delivered content"
+        },
+        "schedule": {
+          "$ref": "#/$defs/EventSchedule",
+          "description": "When the event airs. An option for a scheduled event carries it"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "ProgramsSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/ProgramOption"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "PropertiesAllocation": {
+      "enum": [
+        "all",
+        "seller_allocated"
+      ],
+      "type": "string"
+    },
+    "PropertiesSelection": {
+      "additionalProperties": false,
+      "description": "A field the buyer sets by choosing options from the set the seller declares. `included[]` names the options in the base rate, `selected[]` the buyer's own choice, and `deltas` the change in price for each option beyond those included.",
+      "properties": {
+        "available": {
+          "items": {
+            "$ref": "#/$defs/PropertyOption"
+          },
+          "type": "array"
+        },
+        "deltas": {
+          "additionalProperties": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/PriceDelta"
+          },
+          "propertyNames": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "object"
+        },
+        "included": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "max_select": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
+        },
+        "selected": {
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "available",
+        "included"
+      ],
+      "type": "object"
+    },
+    "PropertyOption": {
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "properties": {
+            "apps": true
+          },
+          "required": [
+            "apps"
+          ]
+        },
+        {
+          "properties": {
+            "domains": true
+          },
+          "required": [
+            "domains"
+          ]
+        }
+      ],
+      "if": {
+        "properties": {
+          "child_audience": {
+            "const": "mixed"
+          }
+        },
+        "required": [
+          "child_audience"
+        ]
+      },
+      "properties": {
+        "allocation": {
+          "$ref": "#/$defs/PropertiesAllocation",
+          "description": "`all` | `seller_allocated`. Absent means `all`. With `all`, the line item runs on every listed screen. With `seller_allocated`, the seller picks the screens: `screens[]`, when present, is the pool it picks from and is seller-set, and the proof-of-play log names the screens used"
+        },
+        "apps": {
+          "description": "The apps behind a property sold in `app_mobile` or `ctv` (§ 5.2.5)",
+          "items": {
+            "$ref": "#/$defs/App"
+          },
+          "type": "array"
+        },
+        "child_audience": {
+          "$ref": "#/$defs/ChildAudience",
+          "description": "`directed` | `mixed` | `general`. `directed`: children are its primary audience under the law the seller applies, or its app store lists it for children only. `mixed`: directed to children but not as its primary audience, or listed for children and older users. `general`: neither. § 5.2.7 states what follows"
+        },
+        "child_treatment": {
+          "$ref": "#/$defs/ChildTreatment",
+          "description": "`excluded` | `contextual`. `excluded`: users identified as children don't receive the line item. `contextual`: they receive it without personal data"
+        },
+        "domains": {
+          "description": "The property's domains. On a `dooh` line item, the inventory owner's domain, as OpenRTB 2.6 `dooh.domain`",
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/Domain"
+          },
+          "type": "array"
+        },
+        "id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "Option id (§ 3.1)"
+        },
+        "inventory_partner_domain": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Domain",
+          "description": "As OpenRTB 2.6 `site.inventorypartnerdomain` and `app.inventorypartnerdomain`"
+        },
+        "min_screens": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "description": "With `seller_allocated`, the fewest screens the seller allocates to the line item"
+        },
+        "name": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "The property's name, for people"
+        },
+        "screens": {
+          "description": "The property's screens (§ 5.2.8)",
+          "items": {
+            "$ref": "#/$defs/Screen"
+          },
+          "type": "array"
+        },
+        "seller_accounts": {
+          "description": "The accounts that sell the property",
+          "items": {
+            "$ref": "#/$defs/SellerAccount"
+          },
+          "type": "array"
+        },
+        "seller_relationship": {
+          "$ref": "#/$defs/SellerRelationship",
+          "description": "`owner` | `manager` | `inventory_partner` | `reseller`, checked as § 5.2.6 states"
+        },
+        "slots_per_loop": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "description": "The slots per loop the line item buys on each screen of the property that has a `loop`"
+        },
+        "sync_groups": {
+          "description": "Screens that show the same ad at the same moment, sold as one (§ 5.2.8)",
+          "items": {
+            "$ref": "#/$defs/SyncGroup"
+          },
+          "type": "array"
+        },
+        "tv_channel": {
+          "$ref": "#/$defs/Channel",
+          "description": "The TV channel or station the property carries, as an AdCOM 1.0 `Channel` object in AdCOM's keys and meanings. It SHOULD carry `domain`. Properties whose `tv_channel.domain` is the same carry the same channel, so a buyer can tell when two sellers offer it. Each seller assigns its own `id`, so `id` matches only within one seller"
+        },
+        "tv_network": {
+          "$ref": "#/$defs/Network",
+          "description": "The network that owns the property's channel, as an AdCOM 1.0 `Network` object in AdCOM's keys and meanings, matched by `domain` the same way"
+        },
+        "venue_type": {
+          "$ref": "#/$defs/DoohVenueTaxonomyCodes",
+          "description": "`taxonomy` is a value of AdCOM 1.0 List: DOOH Venue Taxonomies. `ids[]` holds exactly one id. It covers only itself, not its descendants. The values OpenRTB 2.6 `dooh.venuetypetax` and `dooh.venuetype` carry"
+        }
+      },
+      "required": [
+        "child_audience",
+        "id",
+        "seller_relationship"
+      ],
+      "then": {
+        "properties": {
+          "child_treatment": true
+        },
+        "required": [
+          "child_treatment"
+        ]
+      },
+      "type": "object"
+    },
+    "Refresh": {
+      "additionalProperties": false,
+      "properties": {
+        "min_interval_s": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/DurationSeconds",
+          "description": "Minimum seconds a creative renders before the slot refreshes"
+        }
+      },
+      "required": [
+        "min_interval_s"
+      ],
+      "type": "object"
+    },
+    "Screen": {
+      "additionalProperties": false,
+      "properties": {
+        "lat": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Degrees",
+          "description": "Latitude, as OpenRTB 2.6 `geo.lat`. Absent when `movable` is `true`"
+        },
+        "lon": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Degrees",
+          "description": "Longitude, as OpenRTB 2.6 `geo.lon`. Absent when `movable` is `true`"
+        },
+        "loop": {
+          "$ref": "#/$defs/Loop",
+          "description": "Absent when the screen schedules ads without a loop"
+        },
+        "movable": {
+          "description": "True when the screen has no fixed location, as AdCOM 1.0 `Dooh.fixed` value 2 (movable)",
+          "type": "boolean"
+        },
+        "operating_hours": {
+          "description": "`ClockWindow` entries (§ 5.5), in the screen's `time_zone`",
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/DaypartWindow"
+          },
+          "type": "array"
+        },
+        "screen_id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "The seller's id for the screen, as its proof-of-play log carries it. When the bid request's `device.ifa_type` is `ppid`, as the OpenRTB 2.6 implementation guide (§ 7.9.2.5) uses it, `device.ifa` carries the same id"
+        },
+        "time_zone": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/IanaZone",
+          "description": "The screen's time zone"
+        }
+      },
+      "required": [
+        "screen_id"
+      ],
+      "type": "object"
+    },
+    "SellerAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "asi": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Domain",
+          "description": "As ads.txt field 1, Domain name of the advertising system"
+        },
+        "sid": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId",
+          "description": "As ads.txt field 2, Publisher's Account ID"
+        }
+      },
+      "required": [
+        "asi",
+        "sid"
+      ],
+      "type": "object"
+    },
+    "SellerRelationship": {
+      "enum": [
+        "owner",
+        "manager",
+        "inventory_partner",
+        "reseller"
+      ],
+      "type": "string"
+    },
+    "ServerSideAdInsertionMode": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json#/$defs/ServerSideAdInsertionMode",
+      "description": "The codes of AdCOM 1.0 Placement.ssai (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#object_placement), as AdCOM 1.0 defines them"
+    },
+    "SlotPositionInPod": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/SlotPositionInPod",
+      "description": "The codes of AdCOM 1.0 List: Slot Position in Pod (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_slotpositioninpod), as the AdCOM 1.0 registry defines them"
+    },
+    "StartDelayMode": {
+      "$ref": "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json#/$defs/StartDelayMode",
+      "description": "The codes of AdCOM 1.0 List: Start Delay Modes (https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_startdelaymodes), as the AdCOM 1.0 registry defines them"
+    },
+    "StorePlatform": {
+      "anyOf": [
+        {
+          "enum": [
+            "apple_app_store",
+            "google_play",
+            "roku_channel_store",
+            "amazon_appstore",
+            "samsung_apps_tv"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ]
+    },
+    "SyncGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "min_screens_per_play": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "description": "The fewest of the group's screens that must show a display for it to count as one play (§ 5.6.4)"
+        },
+        "screen_ids": {
+          "description": "The `screen_id` of each screen in the group",
+          "items": {
+            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
+          },
+          "type": "array"
+        },
+        "sync_group_id": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId",
+          "description": "The group's id"
+        }
+      },
+      "required": [
+        "min_screens_per_play",
+        "screen_ids",
+        "sync_group_id"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/inventory/1/inventory.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The OpenProposal `inventory` module: the vocabularies, objects, unions, and constructor copies of § 5.2, § 5.2.1, § 5.2.2, § 5.2.3, § 5.2.4, § 5.2.5, § 5.2.6, § 5.2.7, § 5.2.8, and § 5.2.9.",
+  "title": "inventory"
+}

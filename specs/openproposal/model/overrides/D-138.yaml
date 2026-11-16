@@ -1,0 +1,84 @@
+format: 2
+id: D-138
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Four published objects are referenced by no type of OpenProposal, rooted by no document
+  or profile of it, and named by no record: `ErrorObject`, `AvailabilityRead`, `Commit`
+  and `CommitResult`. What reaches them?
+covers:
+- ir: sentence:1.2:cfd91eea
+  digest: a1c43b2838afbb42c59a88e4f7ed2b59c45d713d01a30e9046ce07e4588fb1e3
+  quote: It is also normative for the lifecycle of the object to its terminal statuses, and for what a section of this document says a request or response carries, such as `errors[]` (§ 2.4), an `AvailabilityRead` (§ 3.3), and a `Commit` and its `CommitResult` (§ 5.6.1).
+- ir: sentence:3.3:c10596ed
+  digest: 7f6c2ce16fcce5be29577740b6413b0557e1ce02bb13b52656809ae161f76783
+  quote: A buyer reads these figures by sending the seller an `AvailabilityRead`.
+- ir: sentence:5.6.1:5b645460
+  digest: 7f4a4ee4f6bd48ee8da3b12d4da646d5e2ec543a6e62c790adc07aeca6e389de
+  quote: "`CommitResult` is the result of a `commit` that wrote an entry, as it stands."
+options:
+- id: a-message-the-binding-carries
+  summary: >-
+    Each is the root of a request or a response, which the message binding of another
+    contract carries. Nothing of this model holds one, by design, and the record lists
+    each as a type a transaction specification enters the model at.
+- id: a-member-some-object-holds
+  summary: >-
+    Each belongs under a property of some object of this specification, and the four are
+    rows the mapping has not reached.
+chosen: a-message-the-binding-carries
+rationale: >-
+  § 1.2 NAMES ALL FOUR, IN ONE SENTENCE, AND SAYS WHAT CARRIES THEM. OpenProposal "is
+  also normative for ... what a section of this document says a request or response
+  carries, such as `errors[]` (§ 2.4), an `AvailabilityRead` (§ 3.3), and a `Commit` and
+  its `CommitResult` (§ 5.6.1)", and the paragraph under it gives the envelope away:
+  "OpenProposal is not normative for the envelope or binding of a message". So the
+  specification defines these four objects and states that something outside it carries
+  them. That is `D-060`'s reading on AdCOM, in this text's own words: a transaction
+  specification states where it interfaces, and the objects it interfaces at are reached
+  from outside.
+
+  `a-member-some-object-holds` is refuted by each one's own section. § 2.4's `errors[]`
+  is what "a party that rejects a request MUST return", and "the message binding that
+  carries the request carries the errors" -- a sentence that puts the carrier outside this
+  document in as many words. § 3.3's read is what "a buyer reads these figures by sending
+  the seller", and § 3.3 says "The read changes no state", so no object stores it.
+  § 5.6.1's `Commit` is what a buyer sends and its `CommitResult` "is the result of a
+  `commit` that wrote an entry, as it stands"; what the proposal keeps of a commit is the
+  `assent[]` entry, which `CommitResult.entries[]` returns rather than holds. Putting any
+  of the four under a property would publish a key no section writes.
+
+  THE LISTING CANNOT OUTLIVE ITS REASON. The `domains-used` gate holds the list in both
+  directions: an entry whose object the lock's model lacks fails, and so does one some
+  type of the model does reference or a document or profile roots. So if a later reading
+  finds the row that holds one of these four, this record's entry fails the moment it
+  does.
+
+  WHAT THIS LEAVES. Two of the six objects the gate reported are not of this kind and this
+  record does not touch them: § 3.1's `Delta`, which the kernel part `PriceDelta` already
+  cites the same three rows as its source, and § 5.6.1's `CommitmentAmount`, whose keys
+  `Commitment` and `MinCommitment` carry by naming it and whose own type nothing holds.
+  Neither is a message, so neither is entered at, and each has a cause of its own.
+roots:
+- type: ErrorObject
+  reason: >-
+    § 2.4's `errors[]` is one or more of these, and the section says "The message binding
+    that carries the request carries the errors", so the carrier is outside this
+    specification and a payload is entered at the object.
+- type: AvailabilityRead
+  reason: >-
+    § 3.3's request: "A buyer reads these figures by sending the seller an
+    `AvailabilityRead`", and "The read changes no state", so no object of the model
+    stores one and a payload is entered at it.
+- type: Commit
+  reason: >-
+    § 5.6.1's request, which a buyer sends. What the proposal keeps of it is the
+    `assent[]` entry its `entry` names, not the request, so nothing holds the object and a
+    payload is entered at it.
+- type: CommitResult
+  reason: >-
+    § 5.6.1's response: "the result of a `commit` that wrote an entry, as it stands". It
+    returns `assent[]` entries and the availability a decline states, which "are not part
+    of the entry", so nothing holds the object and a payload is entered at it.

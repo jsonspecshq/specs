@@ -1,0 +1,89 @@
+format: 2
+id: D-121
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: A Required cell's condition is true of every reference one published object carries and false
+  of every reference the others carry. Is it a rule, and what is its pair?
+covers:
+- ir: rule:2.2:e46f15c4
+  digest: 842f144cbb538352e229fb3aafe5bbb71a204f09e1aeb96e1c3d14aa72935dae
+  quote: REQUIRED when the `VersionRef` is outside its proposal
+options:
+- id: rule-on-the-carrier
+  summary: It is a rule, because a payload of the object that carries the reference shows whether the reference
+    is inside a proposal. Its pair needs a shipped payload of a carrier in which the condition is true,
+    and the source ships none.
+- id: obligation-on-a-party
+  summary: It is an obligation, because a `VersionRef` on its own cannot show whether it travels inside
+    a proposal.
+- id: presence-per-carrier
+  summary: Each carrier states the member's presence for the reference it holds, so the published type
+    splits and the schema states each presence as a keyword with no rule at all.
+chosen: rule-on-the-carrier
+rationale: 'Type rules § 9 asks whether *a* payload can show the requirement, not whether the member''s
+  own object can. Searching the whole source for where a `VersionRef` travels answers it. § 2.2''s lead-in
+  states the condition''s sense: "a `VersionRef` inside a proposal resolves against that proposal''s `seller`,
+  and one outside a proposal carries `seller_domain`". Three published members hold one, and which side
+  of the condition each sits on is fixed by the object, not by the value:
+
+
+  `AvailabilityRead.offer`, required (§ 3.3). An `AvailabilityRead` is the message a buyer sends the seller
+  to read a line item''s figures. It is not a proposal, so every reference there is outside its proposal
+  and owes `seller_domain`. `Proposal.issued_from`, optional (§ 4.1), and `ChangeRequest.baseline`, required
+  (§ 4.4), both sit inside a proposal, which is the case the member is not required in. § 1.1''s `ext.baseline`
+  row names a fourth place and says the same of it -- "The agreed baseline `VersionRef` (§ 2.2), with `seller_domain`,
+  so a DSP can join the deal to its record" -- and that one is a key of a Deals API `Deal` and not an object
+  of this specification.
+
+
+  So a payload shows the condition: an `AvailabilityRead` shows it true, and a `Proposal` or a `ChangeRequest`
+  shows it false. The rule stands, and what the source withholds is a payload of the carrier in which it
+  is true. Measured over the thirteen example files: none holds an `AvailabilityRead` -- `offer` appears
+  in no payload -- and `seller_domain` appears in no payload at all. The four references the source ships
+  are `Proposal.issued_from` once and `ChangeRequest.baseline` three times, every one inside a proposal.
+  So the valid half is in hand three times over and there is no invalid half, because no mutation of a proposal
+  or a change request puts the reference it carries outside itself. The source would have to contain an
+  `AvailabilityRead` whose `offer` names a line item and a `version`, with the `seller_domain` of the proposal''s
+  seller.
+
+
+  **The repository already answers this shape, and the answer is a rule the carrier owns.** Four statements
+  of this text say that a member of a referenced type is required at one location. Two of them, § 4.1''s
+  "`legal_name` is REQUIRED here" on the proposal''s `seller` and on its `buyer`, are mapped by `D-088`
+  as `{role: rule, object: Proposal}` -- the carrier owns the rule, not `Party` -- and both are paired
+  on `type: Proposal` with a check that reads the carrier''s member. So this row wants the same: a rule
+  owned by `AvailabilityRead`, whose check reads `offer.seller_domain`. What separates the two is a payload
+  and nothing else. The source ships proposals, so `legal_name` closed; it ships no `AvailabilityRead`,
+  so this does not. The other two, "`line_item_id` is REQUIRED here" on § 3.3''s `AvailabilityRead.offer`
+  and on § 4.4''s `ChangeRequest.baseline`, have no entry at all and `mapping-bijection` reports both.
+
+
+  **Reading § 9''s test as the member''s own object would unmake four pairs that stand.** The test is whether
+  *a* payload can show the requirement, not whether the member''s own object can, and `D-117` is four rows
+  of this specification where they differ: a change request''s `orderid` on the line item''s `external_references[]`,
+  a property option''s `seller_accounts[]` on the line item''s offer, and a pricing entry''s `agreed_rate`
+  and `price_type` on the line item''s commitment and its offer. All four are rules, all four are paired,
+  and each supplies the condition''s subject as `context`. A test that made this row an obligation because
+  a `VersionRef` alone cannot show the condition would make those four obligations too, and their pairs
+  would have to be withdrawn. That is the measure of the reading, and it is why the test stays as § 9 writes
+  it.
+
+
+  `obligation-on-a-party` was this record''s predecessor on this row, under `D-119`, and the reading it
+  rested on is too narrow: it asked whether a `VersionRef` can show the condition and concluded that silence
+  about a carrier cannot be told from a carrier that has none. That is true of a vector whose value is
+  the reference, and it was measured -- a check reading an absent `Proposal.seller` as "outside" reports
+  all four shipped references as breaking the rule, taking `examples-validate` from 41 to 45. It is not
+  true of a vector whose value is the carrier, where the object''s own name decides the condition and no
+  context is needed. `presence-per-carrier` is the third way and it is refused here: it would split one
+  published type in two over a member three objects share, and § 2.2 states one `VersionRef` whose `seller_domain`
+  is conditional, not two types. A row the text states once is published once.'
+feedback: 'A conditional member has no example in which its condition is true. `VersionRef.seller_domain`
+  is REQUIRED "when the `VersionRef` is outside its proposal", and § 3.3''s `AvailabilityRead.offer` is
+  where that happens, yet none of the thirteen examples holds an `AvailabilityRead` and `seller_domain`
+  appears in no payload. Ship an `AvailabilityRead` whose `offer` names a line item and a `version` and
+  carries the `seller_domain` of the proposal''s seller, so that an implementer has the case the row is
+  about. Its invalid counterpart is the same message without the domain, which no shipped payload can stand
+  in for.'

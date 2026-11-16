@@ -31,8 +31,25 @@ options:
       A count of seconds since the Unix epoch, written in the string the row
       types; OpenRTB 2.6 and AdCOM 1.0 count their timestamps in
       milliseconds instead.
-chosen: utc-rfc3339
+  - id: whole-seconds
+    summary: >-
+      A point in time in one written form: an RFC 3339 `date-time` in whole
+      seconds ending in `Z`. "In seconds" constrains the form, so one instant
+      has one spelling and the published type states no more than the cell does.
+chosen: whole-seconds
 rationale: >-
+  **The cells say "in seconds" and the form must say it too.** This record first
+  chose `utc-rfc3339`, which admits a fractional part and a `+00:00` offset as
+  well as `Z`, so the published type accepted `2026-01-01T00:00:00.500+00:00` —
+  a value no cell describes. The encoding family was right and the precision was
+  dropped: "in seconds" sat in this question and in all three quotes below while
+  no option expressed it, and an option set bounds what a record can conclude.
+  `whole-seconds` is that option, and it is chosen.
+
+  The three members publish at a point in time in one written form, which is
+  also what makes a digest over a payload stable: one instant then has one
+  spelling to digest.
+
   ISO 8601 writes a point in time in many forms, basic and extended,
   calendar, week, and ordinal dates, and at several precisions, and the text
   names none of them, so which form a deal writes is a point the text leaves
@@ -44,6 +61,32 @@ rationale: >-
   the precision: a date and a time to the second, which a fraction refines
   and doesn't contradict. Any ISO 8601 form would leave a receiver to parse
   every one of them; a count of seconds is no ISO 8601 value.
+challenge:
+  - type: Terms
+    value:
+      startdate: "2026-01-01T00:00:00Z"
+      enddate: "2026-03-31T23:59:59Z"
+    verdict: accept
+    context: >-
+      A seller writing a quarter-long flight the way the cell describes it, a
+      UTC timestamp in seconds, which is the form every sender can produce and
+      every receiver can compare as a string.
+    reason: >-
+      Both members are published at the chosen form, an RFC 3339 `date-time` in
+      whole seconds ending in `Z`, so its `pattern` admits both values.
+  - type: Terms
+    value:
+      startdate: "2026-01-01T00:00:00.500+00:00"
+      enddate: "2026-03-31T23:59:59Z"
+    verdict: reject
+    context: >-
+      A seller whose internal clock carries milliseconds and whose API writes
+      the offset as `+00:00`, emitting a flight start the way its own database
+      renders it rather than the way the cell describes it.
+    reason: >-
+      `startdate`'s `pattern` admits neither a fractional part nor `+00:00`.
+      This is the value `whole-seconds` rejects and the one `utc-rfc3339` would
+      have accepted, so it is where the two options differ.
 evidence:
   - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L87"
   - "https://www.rfc-editor.org/rfc/rfc3339#section-5.6"

@@ -1,0 +1,81 @@
+format: 2
+id: D-154
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.3's `combine` row ends "`included[]` MUST name exactly one option", the same words § 5.7
+  writes of `controlling_measurement` and `D-142` reads there. The field is an inline
+  `Selectable[CombineOperator]` that no type names. Which object owns the rule, and can the pair
+  be derived from a payload the specification ships?
+covers:
+- ir: rule:5.3:7cdd61de
+  digest: b2ce5726603bdeaaf2541ff2261f895ec9d571a0d22b7b1ad609f9b80dc4e337
+  quote: "`included[]` MUST name exactly one option."
+- ir: key:5.3:AudienceSelectable.combine
+  digest: e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31
+  quote: "`combine` | REQUIRED when more than one seller audience can be in effect | The operators the seller supports. `max_select: 1`. `included[]` MUST name exactly one option. It carries no `deltas`"
+options:
+- id: a-rule-of-the-object-that-holds-the-field
+  summary: >-
+    It is a rule of `AudienceSelectable`, the object whose row states it and the smallest the
+    model names that holds `combine`, and the pair is `line-item-display.yaml`'s own audience
+    offer with one shipped operator added to `combine.included[]`.
+- id: a-rule-of-the-line-item
+  summary: >-
+    It is a rule of `LineItem`, which holds `audiences` and so holds `combine` through it.
+- id: a-constructor-rule-of-selectable
+  summary: >-
+    `Selectable` gains the rule, so every applied `Selectable` with a `max_select: 1` row carries
+    it.
+chosen: a-rule-of-the-object-that-holds-the-field
+rationale: >-
+  THE SAME WORDS, READ THE SAME WAY, ON THE OBJECT THAT HOLDS THIS FIELD. `D-142` reads § 5.7's
+  "`included[]` MUST name exactly one option" as a rule of the object whose field row states it,
+  because the sentence follows "`max_select: 1`" in the same cell and so speaks of the field that
+  row types. § 5.3 writes the sentence in the same place in the same kind of cell, after the same
+  "`max_select: 1`", so it is read the same way: the subject is `combine`'s own `included[]`, and
+  the owner is the object whose row states it.
+
+
+  That object is `AudienceSelectable`. `combine`'s type is an inline `Selectable[CombineOperator]`
+  that no declaration names, so by `D-145`'s reading the owner is the smallest object the model
+  names that holds the members the sentence reads, which is the object whose keys table the row
+  sits in. One `AudienceSelectable` shows whether the rule holds.
+
+
+  `a-rule-of-the-line-item` would own it two objects up from the row, and a line item's
+  `audiences` is OPTIONAL, so every payload without one would carry a rule about a field it does
+  not have. `AudienceSelectable` is published and a payload of it decides the rule, which is what
+  type rules § 9 asks of an owner.
+
+
+  `a-constructor-rule-of-selectable` is refused by the constructor's own text: § 3.1 gives
+  `max_select` as the number the BUYER may select and says nothing that makes a seller's
+  `included[]` one option. Two fields of this specification state the sentence in their own rows,
+  § 5.3's and § 5.7's, and `shortfall_remedy`'s row does not -- its options in effect are ordered,
+  first choice first, so it names more than one on purpose. A rule on the constructor would make
+  that field's own shipped payloads invalid.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES. `line-item-display.yaml` ships the audience offer this
+  specification wrote: three options, `included: ["smb-decision-makers"]`, and
+  `combine: { available: [any, all], included: [any], max_select: 1 }`, so its seller's choice is
+  one operator. The valid half is that `audiences` value with the one option its own `included[]`
+  names, which is what `AudienceSelectable` requires of a payload, every byte the file's. The
+  invalid half adds `all` to `combine.included[]`: one addition, a value the field's own
+  `available[]` offers, and the audiences then combine both ways at once.
+
+
+  WHAT THE PAYLOAD DROPS AND WHY THAT IS A TRIM AND NOT AN EDIT: the two options the offer's own
+  `included[]` does not name, with the `deltas` and `max_select` that price and bound them. No
+  value is changed, and what remains is the offer as the file writes it for the option in effect.
+  `combine`'s row conditions the field on more than one audience being able to be in effect, so
+  a payload with one option need not carry `combine` -- and this one does, because the rule is
+  about what `combine` holds where it is present.
+feedback: >-
+  § 5.3 and § 5.7 state "`included[]` MUST name exactly one option" in two rows, one a key's and
+  one a field's, and `shortfall_remedy`'s row, which also offers a seller's choice, deliberately
+  does not. A reader learns which fields the rule binds by reading every row of § 5. Saying it once in § 3.1, as a
+  property of a field whose `max_select` is 1, would put the rule where the mechanism is.

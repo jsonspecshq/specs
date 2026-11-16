@@ -1,0 +1,563 @@
+# The places where an example the specification gives fails against OpenProposal's emitted
+# schemas, uses a key the model doesn't define, or breaks a rule that one payload decides,
+# each with the decision records the failing location rests on. The lock pins thirteen
+# example files and each of them shows a document.
+#
+# No refusal of a shipped payload is recorded here. The failures the examples stage reports
+# are the ones no record answers: keys the examples carry that the model publishes nowhere,
+# which are rows the mapping has yet to reach (ads-jz3).
+#
+# The gate fails on a recorded finding that no longer occurs, so this file cannot outlive a
+# departure. Every entry below states what the examples stage reports at 3eef2cb, each
+# checked against that tree entry by entry. Any change to what the schemas refuse stales
+# every entry that describes a refusal, so a reader comparing that commit with the one in
+# hand knows whether these are current without running the gate: the same commit means they
+# are, an earlier one means re-derive before reading them as the tree's state.
+format: 1
+findings: []
+undecided:
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6.2:3c2ac6dd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6.5:5d5c5fc3
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6.5:bdabfe4f
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6:317562fb
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6:6a84a96c
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6:dd547abd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.7.1:d9939d8b
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.9:01b1b76d
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.9:5b2d3b90
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.9:d8611936
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.9:ed367af9
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.9:f8f81606
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6.2:3c2ac6dd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6.5:5d5c5fc3
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6.5:bdabfe4f
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6:317562fb
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6:6a84a96c
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6:dd547abd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.7.1:d9939d8b
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.9:01b1b76d
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.9:5b2d3b90
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.9:d8611936
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.9:ed367af9
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.9:f8f81606
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6.2:3c2ac6dd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6.5:5d5c5fc3
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6.5:bdabfe4f
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6:317562fb
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6:6a84a96c
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6:dd547abd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.7.1:d9939d8b
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.9:01b1b76d
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.9:5b2d3b90
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.9:d8611936
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.9:ed367af9
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.9:f8f81606
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6.2:3c2ac6dd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6.5:5d5c5fc3
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6.5:bdabfe4f
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6:317562fb
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6:6a84a96c
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6:dd547abd
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.7.1:d9939d8b
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.9:01b1b76d
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.9:5b2d3b90
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.9:d8611936
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.9:ed367af9
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.9:f8f81606
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: examples/line-item-audio.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/line-item-ctv-bonus.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/line-item-ctv-bonus.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:8288302a
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `price_type` and names no `transaction_mechanisms[]`, so it prices
+      every option the line item offers, and a pricing entry does not hold that offer.
+  - example: examples/line-item-ctv-live-series.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/line-item-ctv.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/line-item-display.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/line-item-display.yaml
+    path: "/pricing/1"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/line-item-dooh.yaml
+    path: "/delivery_counting"
+    rule: rule:5.6.4:615bf228
+    decisions: [ D-120 ]
+    reason: >-
+      The object carries no `partial_play_credit`, so the verdict turns on whether a property
+      has `sync_groups[]`, and a `DeliveryCounting` does not hold the line item's `properties`.
+  - example: examples/line-item-dooh.yaml
+    path: ''
+    rule: rule:5.7.1:d9939d8b
+    decisions:
+    - D-151
+    - D-160
+    reason: The line item commits under a `CPM` entry, so the clause binds, and it counts
+      impressions on `dooh`; whether the multiplier's source is its vendor or the seller turns on
+      the proposal's `seller.domain`, which a line item does not carry. The multiplier's
+      `accreditation` states the standing of that source in the market and not whose domain
+      supplies it, so it leaves the comparison undecided (D-151, D-160).
+  - example: examples/line-item-podcast-embedded.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:8288302a
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `price_type` and names no `transaction_mechanisms[]`, so it prices
+      every option the line item offers, and a pricing entry does not hold that offer.
+  - example: examples/line-item-podcast-embedded.yaml
+    path: "/properties/available/0"
+    rule: rule:5.2.4:45d0b1fa
+    decisions: [ D-117 ]
+    reason: >-
+      The option carries no `seller_accounts[]` and is no reseller, so the verdict turns on
+      whether the line item offers a deal mechanism, and a property option does not hold that
+      offer.
+  - example: examples/line-item-rewarded-video.yaml
+    path: "/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal-agreed.yaml
+    path: "/change_requests/0/baseline"
+    rule: rule:2.2:e46f15c4
+    decisions: [ D-134 ]
+    reason: >-
+      The reference carries no `seller_domain`, so the verdict turns on whether it is outside
+      its proposal, and a `VersionRef` does not hold the object that carries it.
+  - example: examples/proposal-agreed.yaml
+    path: "/change_requests/1"
+    rule: rule:4.4:9754e43c
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `orderid`, so the verdict turns on whether the line item it is
+      against has an `order` reference, and a change request does not hold the line item's
+      `external_references[]`.
+  - example: examples/proposal-agreed.yaml
+    path: "/change_requests/1/baseline"
+    rule: rule:2.2:e46f15c4
+    decisions: [ D-134 ]
+    reason: >-
+      The reference carries no `seller_domain`, so the verdict turns on whether it is outside
+      its proposal, and a `VersionRef` does not hold the object that carries it.
+  - example: examples/proposal-issued.yaml
+    path: "/change_requests/0/baseline"
+    rule: rule:2.2:e46f15c4
+    decisions: [ D-134 ]
+    reason: >-
+      The reference carries no `seller_domain`, so the verdict turns on whether it is outside
+      its proposal, and a `VersionRef` does not hold the object that carries it.
+  - example: examples/proposal-issued.yaml
+    path: "/issued_from"
+    rule: rule:2.2:e46f15c4
+    decisions: [ D-134 ]
+    reason: >-
+      The reference carries no `seller_domain`, so the verdict turns on whether it is outside
+      its proposal, and a `VersionRef` does not hold the object that carries it.
+  - example: examples/proposal-issued.yaml
+    path: "/line_items/0/pricing/1"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal-issued.yaml
+    path: "/line_items/1/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal-package.yaml
+    path: "/packages/0/add_ons/0/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal-package.yaml
+    path: "/packages/0/add_ons/0/pricing/0"
+    rule: rule:5.6:8288302a
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `price_type` and names no `transaction_mechanisms[]`, so it prices
+      every option the line item offers, and a pricing entry does not hold that offer.
+  - example: examples/proposal-package.yaml
+    path: "/packages/0/line_items/0/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal-package.yaml
+    path: "/packages/0/line_items/1/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal.yaml
+    path: "/line_items/0/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal.yaml
+    path: "/line_items/1/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal.yaml
+    path: "/line_items/2/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal.yaml
+    path: "/line_items/3/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal.yaml
+    path: "/line_items/3/pricing/1"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: examples/proposal.yaml
+    path: "/line_items/4/pricing/0"
+    rule: rule:5.6:62e21e38
+    decisions: [ D-117 ]
+    reason: >-
+      The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
+      under it, and a pricing entry does not hold the line item's `commitment`.

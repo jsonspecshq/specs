@@ -1,0 +1,62 @@
+format: 2
+id: D-074
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What does a sentence state when it names some of a vocabulary's terms rather than all of them?
+covers:
+- ir: block:4.3.2:10/values:1
+  digest: eac907f1064376194f7d851e51f8f0805d0141dac84ae204d33a87640f7f0644
+  quote: '`published` | `under_review`'
+- ir: block:4.3.2:11/values:1
+  digest: 22eee0f1940429c81bb694a33e8fd031c7af80a2133dbcc56bfd530ab569c8b4
+  quote: '`published` | `under_review` | `sold_out`'
+- ir: block:4.3.2:13/values:1
+  digest: 8f08bfadde868fb12618423e87a98d0bed7272cae472d5cc9b52f4761c2fc31d
+  quote: '`published` | `under_review` | `sold_out`'
+- ir: block:5.6.2:6/values:1
+  digest: 1851fbb2333a7b52ae3235b3f5a2a45c32e05c3d7f92701a418b6eae6e6bb607
+  quote: '`declined` | `expired` | `released`'
+- ir: block:5.6.2:12/values:1
+  digest: 61fd0d3f35eca1e0a3f3fcf2df815f66d6b1d9efde63a2b83b10b4623ab49c9a
+  quote: '`requested` | `held`'
+- ir: block:5.6.5:2/values:1
+  digest: e00660fef89061aedaae96b661bd32026d740b008fb6f90f56639e1e774132d2
+  quote: '`impressions` | `viewable_impressions` | `clicks` | `completed_views` | `views` | `rating_points`
+    | `actions` | `plays` | `hours` | `days` | `weeks`'
+options:
+- id: a-subset-states-no-type
+  summary: A sentence naming some of a vocabulary's terms states no type of its own. The vocabulary already
+    defines the terms, and the sentence states when they apply, which is a rule about the sentence rather
+    than a type about the list.
+- id: each-subset-is-a-type
+  summary: Each subset is a vocabulary of its own, so a hold that may be released carries a different
+    type from a hold that may be held.
+chosen: a-subset-states-no-type
+rationale: 'Five sentences name some of the terms a vocabulary already defines: two name the proposal
+  statuses a line item may be published under, one adds `sold_out` to them, and two name the hold states
+  a hold ends in and rests in. Each is a sentence about when those terms apply, not about what a value
+  is.
+
+
+  `each-subset-is-a-type` would publish a type per sentence, so one member would carry several types according
+  to which sentence a reader had in mind, and a library would offer `HoldStatus` beside two narrower copies
+  of it with no member taking either. Type rules section 5 holds a named type to one definition, and a
+  subset is not a definition.
+
+
+  So each of the five restates terms the vocabulary carries, and what the sentence requires belongs to
+  the statement that holds it.
+
+
+  One further sentence does state a list of its own, and it is named for what its values are.
+  `ChargeableUnit` is what a cost method charges per -- impressions, viewable impressions, clicks,
+  completed views, views, rating points, actions, plays, hours, days or weeks -- which no other list
+  of this specification holds.
+
+
+  § 5.3''s `any` | `all` is not such a sentence. The specification names that type itself, in the
+  lead-in "**`CombineOperator`** is `any` | `all`." (§ 5.3), so the sentence restates a vocabulary the
+  text already defines, as the five above do, and a name of this repository''s own would be a second
+  name for one list.'

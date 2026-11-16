@@ -61,6 +61,130 @@
         ],
         "rule": "type-rules § 3a value domains"
       },
+      "/$defs/DurationSeconds": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "3da7e84e8964c608346470fe900e5fe79b8a9b3b47610c04c1e435ba895859ff",
+            "ir": "key:object_audio:Audio.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_audioplacement:AudioPlacement.maxdur"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_audioplacement:AudioPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_audioplacement:AudioPlacement.poddur"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_audioplacement:AudioPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_audioplacement:AudioPlacement.skipmin"
+          },
+          {
+            "digest": "734e76b9c86c187a1491d491bc4b96149e91daad7b1dbe7ec455e02da0f81de1",
+            "ir": "key:object_content:Content.len"
+          },
+          {
+            "digest": "7519a72f86e7afd5d4c0a9e6f031583a641a38f1d7a858ac06d3143c9532a294",
+            "ir": "key:object_dooh:Dooh.etime"
+          },
+          {
+            "digest": "4db0dce8a5b0b983851637a50191fcd7ef77c1acde18a3fd7037f12735187845",
+            "ir": "key:object_video:Video.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_videoplacement:VideoPlacement.maxdur"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_videoplacement:VideoPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_videoplacement:VideoPlacement.poddur"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_videoplacement:VideoPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_videoplacement:VideoPlacement.skipmin"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/DurationSeconds/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "3da7e84e8964c608346470fe900e5fe79b8a9b3b47610c04c1e435ba895859ff",
+            "ir": "key:object_audio:Audio.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_audioplacement:AudioPlacement.maxdur"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_audioplacement:AudioPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_audioplacement:AudioPlacement.poddur"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_audioplacement:AudioPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_audioplacement:AudioPlacement.skipmin"
+          },
+          {
+            "digest": "734e76b9c86c187a1491d491bc4b96149e91daad7b1dbe7ec455e02da0f81de1",
+            "ir": "key:object_content:Content.len"
+          },
+          {
+            "digest": "7519a72f86e7afd5d4c0a9e6f031583a641a38f1d7a858ac06d3143c9532a294",
+            "ir": "key:object_dooh:Dooh.etime"
+          },
+          {
+            "digest": "4db0dce8a5b0b983851637a50191fcd7ef77c1acde18a3fd7037f12735187845",
+            "ir": "key:object_video:Video.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_videoplacement:VideoPlacement.maxdur"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_videoplacement:VideoPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_videoplacement:VideoPlacement.poddur"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_videoplacement:VideoPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_videoplacement:VideoPlacement.skipmin"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
       "/$defs/EpochMilliseconds": {
         "by": "rule",
         "from": [
@@ -196,6 +320,34 @@
           }
         ],
         "rule": "type-rules § 6 extension branches"
+      },
+      "/$defs/IntegerId": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_audioplacement:AudioPlacement.podid"
+          },
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_videoplacement:VideoPlacement.podid"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/IntegerId/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_audioplacement:AudioPlacement.podid"
+          },
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_videoplacement:VideoPlacement.podid"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
       },
       "/$defs/Measure": {
         "by": "rule",
@@ -493,6 +645,38 @@
             "ir": "key:object_ad:Ad.init"
           },
           {
+            "digest": "3da7e84e8964c608346470fe900e5fe79b8a9b3b47610c04c1e435ba895859ff",
+            "ir": "key:object_audio:Audio.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_audioplacement:AudioPlacement.maxdur"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_audioplacement:AudioPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_audioplacement:AudioPlacement.poddur"
+          },
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_audioplacement:AudioPlacement.podid"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_audioplacement:AudioPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_audioplacement:AudioPlacement.skipmin"
+          },
+          {
+            "digest": "734e76b9c86c187a1491d491bc4b96149e91daad7b1dbe7ec455e02da0f81de1",
+            "ir": "key:object_content:Content.len"
+          },
+          {
             "digest": "ae0db2cf6bb9662b332b186468f64d9cf5e2389003583c47e1a336475cf34047",
             "ir": "key:object_device:Device.pxratio"
           },
@@ -503,6 +687,10 @@
           {
             "digest": "501331cae23b6eef0670063359fb7c8fdce19fed89fb21e50f736d8ab387f56d",
             "ir": "key:object_displayplacement:DisplayPlacement.instl"
+          },
+          {
+            "digest": "7519a72f86e7afd5d4c0a9e6f031583a641a38f1d7a858ac06d3143c9532a294",
+            "ir": "key:object_dooh:Dooh.etime"
           },
           {
             "digest": "e75ef4e80e694823d46b2b19e79b66b0ea60117c53ffa171e0d5880aab8d635a",
@@ -521,8 +709,36 @@
             "ir": "key:object_titleasset:TitleAsset.text"
           },
           {
+            "digest": "4db0dce8a5b0b983851637a50191fcd7ef77c1acde18a3fd7037f12735187845",
+            "ir": "key:object_video:Video.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_videoplacement:VideoPlacement.maxdur"
+          },
+          {
             "digest": "cd19f77abdf31ac4b5e1e72c91160e7d2aca303f974dcd1816c4d0f7462d45c4",
             "ir": "key:object_videoplacement:VideoPlacement.maxext"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_videoplacement:VideoPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_videoplacement:VideoPlacement.poddur"
+          },
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_videoplacement:VideoPlacement.podid"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_videoplacement:VideoPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_videoplacement:VideoPlacement.skipmin"
           },
           {
             "digest": "2cfa49df8af66463d660f62096bee94fb358d5a352444eed2680e5ba37da4d45",
@@ -615,6 +831,38 @@
             "ir": "key:object_ad:Ad.init"
           },
           {
+            "digest": "3da7e84e8964c608346470fe900e5fe79b8a9b3b47610c04c1e435ba895859ff",
+            "ir": "key:object_audio:Audio.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_audioplacement:AudioPlacement.maxdur"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_audioplacement:AudioPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_audioplacement:AudioPlacement.poddur"
+          },
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_audioplacement:AudioPlacement.podid"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_audioplacement:AudioPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_audioplacement:AudioPlacement.skipmin"
+          },
+          {
+            "digest": "734e76b9c86c187a1491d491bc4b96149e91daad7b1dbe7ec455e02da0f81de1",
+            "ir": "key:object_content:Content.len"
+          },
+          {
             "digest": "ae0db2cf6bb9662b332b186468f64d9cf5e2389003583c47e1a336475cf34047",
             "ir": "key:object_device:Device.pxratio"
           },
@@ -625,6 +873,10 @@
           {
             "digest": "501331cae23b6eef0670063359fb7c8fdce19fed89fb21e50f736d8ab387f56d",
             "ir": "key:object_displayplacement:DisplayPlacement.instl"
+          },
+          {
+            "digest": "7519a72f86e7afd5d4c0a9e6f031583a641a38f1d7a858ac06d3143c9532a294",
+            "ir": "key:object_dooh:Dooh.etime"
           },
           {
             "digest": "e75ef4e80e694823d46b2b19e79b66b0ea60117c53ffa171e0d5880aab8d635a",
@@ -643,8 +895,36 @@
             "ir": "key:object_titleasset:TitleAsset.text"
           },
           {
+            "digest": "4db0dce8a5b0b983851637a50191fcd7ef77c1acde18a3fd7037f12735187845",
+            "ir": "key:object_video:Video.dur"
+          },
+          {
+            "digest": "fe95b7973c4080c75e75025b9061dddc8b0c21b52cb212be7dc3e992eb0cc48e",
+            "ir": "key:object_videoplacement:VideoPlacement.maxdur"
+          },
+          {
             "digest": "cd19f77abdf31ac4b5e1e72c91160e7d2aca303f974dcd1816c4d0f7462d45c4",
             "ir": "key:object_videoplacement:VideoPlacement.maxext"
+          },
+          {
+            "digest": "d6fb647591a94d10dadb9ce10f3a3cf642a926fa69c7c7c38f18cdd3e3bd6f5e",
+            "ir": "key:object_videoplacement:VideoPlacement.mindur"
+          },
+          {
+            "digest": "13e961248d5a092b24ff5001b107b19be58abd2a0d55374310acf3c7e724f176",
+            "ir": "key:object_videoplacement:VideoPlacement.poddur"
+          },
+          {
+            "digest": "11088519629a6748fcb3d3655e7fb8effe9fb815914e63da6b14ca6ed613e1f3",
+            "ir": "key:object_videoplacement:VideoPlacement.podid"
+          },
+          {
+            "digest": "44bb9efd2ffd85c940f29a1e905c30a4bdef18d08759c7bec28ff00484d06f1e",
+            "ir": "key:object_videoplacement:VideoPlacement.rqddurs"
+          },
+          {
+            "digest": "c8c668f17ba73a32ff3569d5684a600f9b2a852288dcb8e268972d5b11abde8b",
+            "ir": "key:object_videoplacement:VideoPlacement.skipmin"
           },
           {
             "digest": "2cfa49df8af66463d660f62096bee94fb358d5a352444eed2680e5ba37da4d45",
@@ -9620,6 +9900,76 @@
         ],
         "rule": "type-rules § 5 property descriptions"
       },
+      "/$defs/AmpRenderingTreatment": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/AmpRenderingTreatment/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/AmpRenderingTreatment/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AmpRenderingTreatment/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AmpRenderingTreatment/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/AmpRenderingTreatment/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/AmpRenderingTreatment/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
       "/$defs/App": {
         "by": "rule",
         "from": [
@@ -10960,6 +11310,16 @@
         ],
         "rule": "type-rules § 3 named types"
       },
+      "/$defs/Corr/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "370bcdb594ec09838455f0617dc85cc5ae879472ecc67b2e039059b3c4a3bdfd",
+            "ir": "key:object_audit:Audit.corr"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
       "/$defs/Data": {
         "by": "rule",
         "from": [
@@ -11929,6 +12289,76 @@
           }
         ],
         "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/DoohPlacementMobility": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/DoohPlacementMobility/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/DoohPlacementMobility/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/DoohPlacementMobility/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/DoohPlacementMobility/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/DoohPlacementMobility/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/DoohPlacementMobility/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
       },
       "/$defs/Event": {
         "by": "rule",
@@ -13140,6 +13570,126 @@
         ],
         "rule": "type-rules § 5 property descriptions"
       },
+      "/$defs/ServerSideAdInsertionMode": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/ServerSideAdInsertionMode/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/0": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/0/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/1": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/1/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code descriptions"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/1/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/2": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/2/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/3": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "/$defs/ServerSideAdInsertionMode/oneOf/3/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code titles"
+      },
+      "/$defs/ServerSideAdInsertionMode/title": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary titles"
+      },
       "/$defs/Site": {
         "by": "rule",
         "from": [
@@ -14170,8 +14720,16 @@
             "ir": "key:object_displayformat:DisplayFormat.w"
           },
           {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          },
+          {
             "digest": "834bab4ce53f367b768a432f3daeb37740cebc3b76d25faf375c1d30122d2434",
             "ir": "key:object_displayplacement:DisplayPlacement.pos"
+          },
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
           },
           {
             "digest": "299c1c33f2a9a4eb78fc87e4fb99c9f4300fe8b3236141cdc98f89b0da10d363",
@@ -14220,6 +14778,10 @@
           {
             "digest": "59d6cc7f972a4fc16d67df929d24518768034147519ff5d91180060cf59a674c",
             "ir": "key:object_network:Network.id"
+          },
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
           },
           {
             "digest": "82940b9973e034825c226a0c21719dd37e3cec34e2506cbe309a8f3b36157963",
@@ -14360,8 +14922,16 @@
             "ir": "key:object_displayformat:DisplayFormat.w"
           },
           {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          },
+          {
             "digest": "834bab4ce53f367b768a432f3daeb37740cebc3b76d25faf375c1d30122d2434",
             "ir": "key:object_displayplacement:DisplayPlacement.pos"
+          },
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
           },
           {
             "digest": "299c1c33f2a9a4eb78fc87e4fb99c9f4300fe8b3236141cdc98f89b0da10d363",
@@ -14410,6 +14980,10 @@
           {
             "digest": "59d6cc7f972a4fc16d67df929d24518768034147519ff5d91180060cf59a674c",
             "ir": "key:object_network:Network.id"
+          },
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
           },
           {
             "digest": "82940b9973e034825c226a0c21719dd37e3cec34e2506cbe309a8f3b36157963",

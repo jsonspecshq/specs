@@ -3,32 +3,33 @@
     "blob": "aca75af65c4261239d907bfd73705555874c85b1",
     "commit": "26c59ba1b235cd8d938c9877409e506f1b8d3f0c",
     "counts": {
-      "decisions": 16,
+      "decisions": 17,
       "elements.code_block": 3,
       "elements.concept": 6,
       "elements.definition": 303,
       "elements.key": 411,
       "elements.sentence": 11,
       "elements.statement": 266,
-      "findings.conditions": 18,
+      "elements.value_list": 32,
+      "findings.conditions": 0,
       "findings.examples": 0,
-      "findings.round_trip": 1,
-      "findings.spec": 15,
-      "findings.spec_open": 15,
+      "findings.round_trip": 3,
+      "findings.spec": 19,
+      "findings.spec_open": 19,
       "properties": 419,
-      "rules": 18,
+      "rules": 0,
       "schema_files": 3,
       "statements.example": 0,
       "statements.obligation": 0,
       "statements.rule": 18,
-      "statements.schema": 16,
+      "statements.schema": 45,
       "types.constructor": 1,
       "types.object": 46,
       "types.part": 1,
-      "types.primitive": 12,
-      "types.vocabulary": 42
+      "types.primitive": 14,
+      "types.vocabulary": 45
     },
-    "ir_sha256": "2d6be34b23cdc02d6194d4edd910d021c221bc4d0e8c517ea1f141d595acb38e",
+    "ir_sha256": "4b2d43b19ac5ea976eaaaa6d2ceecaacfff575cd8336c2e715d30a77e9bae0c9",
     "lock": "main"
   },
   "changes": [
@@ -181,8 +182,8 @@
           "rule:object_content:8e235a11",
           "rule:object_content:8e235a11-2"
         ],
-        "id": "D-057",
-        "question": "The 46 object sections hold 208 RFC 2119 statements inside their attribute rows' definition cells. Which of them is a rule the published schemas carry, and what are the rest?",
+        "id": "D-064",
+        "question": "AdCOM's 46 object sections state 208 RFC 2119 requirements inside their attribute rows, and 18 of those are conditional requirements that no published schema states. For each requirement a specification states, which construct carries it: a keyword in the published JSON Schema document, or an entry in the rules document beside it?",
         "status": "proposed"
       }
     ]
@@ -198,6 +199,11 @@
         "id": "key:object_content:Content.embeddable",
         "kind": "key",
         "text": "`embeddable` | Indicator of whether the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes."
+      },
+      {
+        "id": "key:object_content:Content.embeddable#meaning/values:1",
+        "kind": "value_list",
+        "text": "`0` (no) | `1` (yes)"
       },
       {
         "id": "key:object_content:Content.language",
@@ -268,6 +274,11 @@
         "text": "`embed` | Indicator of whether the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes."
       },
       {
+        "id": "key:object_content:Content.embed#meaning/values:1",
+        "kind": "value_list",
+        "text": "`0` (no) | `1` (yes)"
+      },
+      {
         "id": "key:object_content:Content.lang",
         "kind": "key",
         "text": "`lang` | Content language using ISO-639-1-alpha-2. Only one of `lang` or `langb` should be present."
@@ -334,37 +345,50 @@
     "blob": "ec21cf8425559495261d2b9c4084ddd3d26c4802",
     "commit": "d67a6a8dedc883e0655e239d97116a91df6052ed",
     "counts": {
-      "decisions": 16,
+      "decisions": 17,
       "elements.code_block": 3,
       "elements.concept": 6,
       "elements.definition": 303,
       "elements.key": 411,
       "elements.sentence": 11,
       "elements.statement": 266,
-      "findings.conditions": 18,
+      "elements.value_list": 32,
+      "findings.conditions": 0,
       "findings.examples": 0,
-      "findings.round_trip": 1,
-      "findings.spec": 15,
-      "findings.spec_open": 15,
+      "findings.round_trip": 3,
+      "findings.spec": 19,
+      "findings.spec_open": 19,
       "properties": 419,
-      "rules": 18,
+      "rules": 0,
       "schema_files": 3,
       "statements.example": 0,
       "statements.obligation": 0,
       "statements.rule": 18,
-      "statements.schema": 16,
+      "statements.schema": 45,
       "types.constructor": 1,
       "types.object": 46,
       "types.part": 1,
-      "types.primitive": 12,
-      "types.vocabulary": 42
+      "types.primitive": 14,
+      "types.vocabulary": 45
     },
-    "ir_sha256": "d263c52884060c2e2e730ae4c1c49d06d447c67246241b2c941be4dd3d93a61c",
+    "ir_sha256": "ee85d99e9f4362730725d55de1b84afced25883d3883a7cd3b02d9c73b2ce726",
     "lock": "tag-202607"
   },
   "statements": {
-    "added": [],
+    "added": [
+      {
+        "ir": "key:object_content:Content.embeddable#meaning/values:1",
+        "placed": "schema IntegerFlag",
+        "text": "`0` (no) | `1` (yes)"
+      }
+    ],
     "moved": [],
-    "removed": []
+    "removed": [
+      {
+        "ir": "key:object_content:Content.embed#meaning/values:1",
+        "placed": "schema IntegerFlag",
+        "text": "`0` (no) | `1` (yes)"
+      }
+    ]
   }
 }

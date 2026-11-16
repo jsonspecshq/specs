@@ -1,0 +1,886 @@
+# Rule vectors for the statements of section 5.6.5 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: commercial
+rules:
+  # § 5.6.6's `fees[]` row ends "MUST be non-empty": a cancellation option
+  # whose schedule is empty states no fee for any notice, so the option
+  # promises a cancellation right and prices none of it (D-139).
+  #
+  # Derived from examples/line-item-audio.yaml's `cancellation_policy`, whose
+  # first option is the stepped fee schedule the specification writes, taken
+  # whole. The invalid half is that option with `fees` emptied, and nothing
+  # else.
+  - rule: rule:5.6.6:527c9881
+    digest: fcf876f2537f5dcb83010a55d2b04cec414c4375695b86d12607a8a6257c3f21
+    decision: D-139
+    type: CancellationOption
+    valid:
+      - value:
+          id: stepped-fee
+          notice_duration: P0D
+          max_share: 1
+          fees:
+            - before_reference: P60D
+              calculation: none
+            - before_reference: P30D
+              calculation: cancelled
+              share: 0.25
+            - before_reference: P7D
+              calculation: cancelled
+              share: 0.5
+            - before_reference: P0D
+              calculation: cancelled
+              share: 1.0
+    invalid:
+      - value:
+          id: stepped-fee
+          notice_duration: P0D
+          max_share: 1
+          fees: []
+  # A spend commitment buys units at `agreed_rate`, so a rate of zero buys an
+  # unbounded number of them. `FLAT` and `TIME` set the figures from the rate
+  # and the flight instead, and are outside the rule (D-098).
+  - rule: rule:5.6.5:bdabfe4f
+    digest: 10de311a02c1e9a84949a50a51f97f0600184cdfc36e62ac72b4330d26b9658d
+    decision: D-098
+    type: LineItem
+    valid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+          commitment:
+            basis: spend
+            amount: 80000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+      # `FLAT` sets the seller total from the rate, so a zero rate states a
+      # line item given away and not an unbounded one.
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: FLAT
+              currency: USD
+              list_rate: 0
+              agreed_rate: 0
+          commitment:
+            basis: spend
+            amount: 0
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+    invalid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 0
+          commitment:
+            basis: spend
+            amount: 80000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+  # A `FLAT` entry has no unit, so there are no units to commit: the figure is
+  # a sum of money, and the units a `units` basis would name do not exist
+  # (D-098).
+  - rule: rule:5.6.5:5d5c5fc3
+    digest: e890a847444fe4fadd7704ab0f64de38b26a5a9d8788105f1567004f0bb2e0ca
+    decision: D-098
+    type: LineItem
+    valid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: FLAT
+              currency: USD
+              list_rate: 250000
+              agreed_rate: 240000
+          commitment:
+            basis: spend
+            amount: 240000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+    invalid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: FLAT
+              currency: USD
+              list_rate: 250000
+              agreed_rate: 240000
+          commitment:
+            basis: units
+            amount: 240000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+      # The second half of the statement: a `FLAT` entry derives no units, so a
+      # written copy of them is a copy of nothing.
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: FLAT
+              currency: USD
+              list_rate: 250000
+              agreed_rate: 240000
+          commitment:
+            basis: spend
+            amount: 240000
+            derived_units: 1
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+  # An extension cost method is defined by the party whose domain namespaces
+  # it, so the document that defines it is served from that domain: a term
+  # that pointed anywhere else would let one party define another's term
+  # (D-098).
+  - rule: rule:5.6.5:9a5cd215
+    digest: 0c0dbd6064e888f0706df2299eb77e87b9660fb73b48de2d8df6d45384f0714d
+    decision: D-098
+    type: PricingEntry
+    valid:
+      - value:
+          pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+          cost_method: examplepub.example:sponsored_segments
+          currency: USD
+          list_rate: 4500
+          unit_label: sponsored segment
+          rate_per: 1
+          cost_definition:
+            url: https://rates.examplepub.example/sponsored-segments
+            digest: sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+      # The host is the term's own domain, which a subdomain of it is not
+      # required to be.
+      - value:
+          pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+          cost_method: examplepub.example:sponsored_segments
+          currency: USD
+          list_rate: 4500
+          unit_label: sponsored segment
+          rate_per: 1
+          cost_definition:
+            url: https://examplepub.example/rates/sponsored-segments
+            digest: sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+    invalid:
+      - value:
+          pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+          cost_method: examplepub.example:sponsored_segments
+          currency: USD
+          list_rate: 4500
+          unit_label: sponsored segment
+          rate_per: 1
+          cost_definition:
+            url: https://rates.other.example/sponsored-segments
+            digest: sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+      # A host that ends in the term's domain without a label boundary is
+      # another domain, which is the case a suffix test gets wrong.
+      - value:
+          pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+          cost_method: examplepub.example:sponsored_segments
+          currency: USD
+          list_rate: 4500
+          unit_label: sponsored segment
+          rate_per: 1
+          cost_definition:
+            url: https://notexamplepub.example/sponsored-segments
+            digest: sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+  # The entries are alternatives, so the committed one has to price what the
+  # buyer is buying: an entry that prices another mechanism prices nothing the
+  # commitment is under (D-099).
+  - rule: rule:5.6:317562fb
+    digest: 2c25bfa5a1728663ef907a95018c240b10541fe27cf3d8bd4d48bc5fb5d85e05
+    decision: D-099
+    type: LineItem
+    valid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available:
+              - { id: direct_io, delivery_type: guaranteed }
+              - { id: programmatic_guaranteed, delivery_type: guaranteed }
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+              transaction_mechanisms: [ direct_io, programmatic_guaranteed ]
+          commitment:
+            basis: spend
+            amount: 80000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+      # An entry that names no mechanism prices every offered option, so it
+      # covers whichever is in effect.
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available:
+              - { id: direct_io, delivery_type: guaranteed }
+              - { id: programmatic_guaranteed, delivery_type: guaranteed }
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+          commitment:
+            basis: spend
+            amount: 80000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+    invalid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available:
+              - { id: direct_io, delivery_type: guaranteed }
+              - { id: programmatic_guaranteed, delivery_type: guaranteed }
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+              transaction_mechanisms: [ programmatic_guaranteed ]
+          commitment:
+            basis: spend
+            amount: 80000
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+  # Two entries alike on all four are one entry written twice, and the buyer
+  # choosing between them chooses nothing: `commitment.pricing_id` names one of
+  # them and the other prices the same terms (D-099).
+  - rule: rule:5.6:dd547abd
+    digest: 1988f5946707a1c02962b0748c47756e495a2b9665af49ec1ba2c04497a78ae4
+    decision: D-099
+    type: LineItem
+    valid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+            - pricing_id: 3f1c8a90-55b2-4d61-9ab3-27e4d0c6f812
+              cost_method: CPC
+              currency: USD
+              list_rate: 250
+          commitment:
+            basis: spend
+            amount: 80000
+            pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+      # Alike on three of the four and on no mechanism: each prices a
+      # mechanism the other does not, so the pair states two alternatives.
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available:
+              - { id: direct_io, delivery_type: guaranteed }
+              - { id: private_auction, delivery_type: non_guaranteed }
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+              transaction_mechanisms: [ direct_io ]
+            - pricing_id: 3f1c8a90-55b2-4d61-9ab3-27e4d0c6f812
+              cost_method: CPM
+              currency: USD
+              list_rate: 9000
+              transaction_mechanisms: [ private_auction ]
+          commitment:
+            basis: spend
+            amount: 80000
+            pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+    invalid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+              agreed_rate: 11500
+            - pricing_id: 3f1c8a90-55b2-4d61-9ab3-27e4d0c6f812
+              cost_method: CPM
+              currency: USD
+              list_rate: 9000
+          commitment:
+            basis: spend
+            amount: 80000
+            pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+            flight: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            advertisers: [ { domain: brand-a.example } ]
+  # A non-guaranteed line item reserves nothing, so the seller can estimate
+  # what it can deliver and cannot say it will hold it (D-101).
+  - rule: rule:5.6:6a84a96c
+    digest: bb7149c74c353702ba295315b687b23e1fa6a777bea280cb31858716ec1ea642
+    decision: D-101
+    type: LineItem
+    valid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: private_auction, delivery_type: non_guaranteed } ]
+            included: [ private_auction ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+          availability:
+            unit: impressions
+            quantity: 4000000
+            computed_at: "2026-10-01T00:00:00Z"
+            window: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            certainty: forecast
+      # A guaranteed line item may say it will hold the quantity.
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+          availability:
+            unit: impressions
+            quantity: 4000000
+            computed_at: "2026-10-01T00:00:00Z"
+            window: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            certainty: reservable
+    invalid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: private_auction, delivery_type: non_guaranteed } ]
+            included: [ private_auction ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+          availability:
+            unit: impressions
+            quantity: 4000000
+            computed_at: "2026-10-01T00:00:00Z"
+            window: { start: "2026-10-06T00:00:00Z", end: "2026-12-21T23:59:59Z" }
+            certainty: reservable
+  # A buyer asks for a hold on a line item the seller offers one on. A seller
+  # that only honours terms sets `hold_terms.available` to `false` and uses
+  # `price_valid_until`, so an ask against it reserves nothing (D-102).
+  - rule: rule:5.6.2:3c2ac6dd
+    digest: 7386cb2f1c1651b3000b1abccd1e23592472a23f5fb57b5a8f86b8744ddb14ba
+    decision: D-102
+    type: LineItem
+    valid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          hold_terms: { available: true, duration: P7D }
+          hold: { status: requested, version: 1 }
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+      # No ask, so the rule does not fire and the seller may offer no hold.
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          hold_terms: { available: false }
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+    invalid:
+      - value:
+          channel: video
+          placement: { plcmt: 1 }
+          transaction_mechanism:
+            available: [ { id: direct_io, delivery_type: guaranteed } ]
+            included: [ direct_io ]
+          line_item_id: 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71
+          status: published
+          visibility: public
+          hold_terms: { available: false }
+          hold: { status: requested, version: 1 }
+          pricing:
+            - pricing_id: 9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15
+              cost_method: CPM
+              currency: USD
+              list_rate: 12000
+  # § 5.6's `pricing[].price_type` row: REQUIRED when the entry prices a
+  # deal mechanism. The value is the Deals API 1.0 `terms.pricetype`,
+  # which says how `agreed_rate` clears, and a `Deal` carries it, so an
+  # entry that prices a mechanism landing in a `Deal` and states no
+  # `price_type` leaves the handoff of § 1.1 with no value to send.
+  #
+  # Which mechanisms an entry prices is its own
+  # `transaction_mechanisms[]`, or every option the line item offers
+  # where it names none, and § 5.9's table says which of those are deal
+  # mechanisms. The line item's offer is not on the entry, so the vector
+  # gives it as context and the check reads it from there.
+  #
+  # Derived from examples/proposal-agreed.yaml at
+  # `/line_items/0/pricing/0`: the entry names no
+  # `transaction_mechanisms[]`, so it prices every option the line item
+  # offers, which is `programmatic_guaranteed`, a deal mechanism; and it
+  # carries `price_type`. D-037's id form is applied to every id the
+  # document mints and to every reference to one, each the UUID version 5
+  # of the document's own readable id in the DNS namespace. Every other
+  # value is that file's own bytes, the context value included.
+  #
+  # The invalid half is that entry with `price_type` removed, and nothing
+  # else.
+  - rule: rule:5.6:8288302a
+    digest: 14845c24a6584a33e2511f328e76d63744a32697970793ff90942fffd2a9da7c
+    type: PricingEntry
+    valid:
+      - value:
+          pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+          cost_method: CPM
+          list_rate: 24
+          agreed_rate: 24
+          min_rate: 21
+          price_valid_until: 2026-11-15T23:59:59Z
+          currency: USD
+          price_type: 3
+        context:
+          LineItem.transaction_mechanism:
+            available:
+              - id: programmatic_guaranteed
+                delivery_type: guaranteed
+            included:
+              - programmatic_guaranteed
+            max_select: 1
+    invalid:
+      - value:
+          pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+          cost_method: CPM
+          list_rate: 24
+          agreed_rate: 24
+          min_rate: 21
+          price_valid_until: 2026-11-15T23:59:59Z
+          currency: USD
+        context:
+          LineItem.transaction_mechanism:
+            available:
+              - id: programmatic_guaranteed
+                delivery_type: guaranteed
+            included:
+              - programmatic_guaranteed
+            max_select: 1
+  # § 5.6's `pricing[].agreed_rate` row: REQUIRED when this is the
+  # committed entry. § 5.6 names that entry -- the one
+  # `commitment.pricing_id` names, or the only entry when that key is
+  # absent -- and § 4.1.1 makes the committed entry's `agreed_rate` the
+  # derived value the binding record covers, so a commitment whose entry
+  # states no transacted rate records a commitment to no rate.
+  #
+  # The commitment is the line item's, not the entry's, so the vector
+  # gives it as context and the check reads it from there. It decides the
+  # entry only where the commitment names a `pricing_id`: how many
+  # entries the line item holds is not on an entry either, so the row's
+  # second reading, the only entry, is left undecided.
+  #
+  # Derived from examples/proposal-issued.yaml at
+  # `/line_items/0/pricing/0`, whose commitment names that entry's
+  # `pricing_id`: it carries `agreed_rate`. D-037's id form is applied to
+  # every id the document mints and to every reference to one, each the
+  # UUID version 5 of the document's own readable id in the DNS
+  # namespace. Every other value is that file's own bytes, the context
+  # value included.
+  #
+  # The invalid half is that entry with `agreed_rate` removed, and
+  # nothing else.
+  - rule: rule:5.6:62e21e38
+    digest: a5fc7801d7e0e75f77186ffcfb53329a8c87fb0c4580a2f7d3cfb3eac828a00a
+    type: PricingEntry
+    valid:
+      - value:
+          pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+          cost_method: CPM
+          list_rate: 24
+          agreed_rate: 27.54
+          price_valid_until: 2026-11-15T23:59:59Z
+          currency: USD
+          price_type: 3
+        context:
+          LineItem.commitment:
+            pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+            basis: spend
+            amount: 80000
+            flight:
+              start: 2026-10-12T00:00:00Z
+              end: 2026-12-21T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+            derived_units: 2904865
+    invalid:
+      - value:
+          pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+          cost_method: CPM
+          list_rate: 24
+          price_valid_until: 2026-11-15T23:59:59Z
+          currency: USD
+          price_type: 3
+        context:
+          LineItem.commitment:
+            pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+            basis: spend
+            amount: 80000
+            flight:
+              start: 2026-10-12T00:00:00Z
+              end: 2026-12-21T23:59:59Z
+            advertisers:
+              - domain: brand-a.example
+            derived_units: 2904865
+  # § 5.6.4's `impression_multiplier` row: REQUIRED when the line item
+  # counts impressions. § 5.6.4 makes an impression a play times the
+  # multiplier for that screen or sync group at that time, so a line item
+  # that counts impressions and states no multiplier gives no way to turn
+  # its plays into the figures it commits.
+  #
+  # § 5.6.4 puts the committed quantity in the committed entry's unit,
+  # and § 5.6.5's table gives that unit as `impressions` for `CPM`, so
+  # the committed entry says whether the line item counts impressions and
+  # § 5.6.4 makes the line item's other counts informative against it.
+  # Neither the entry nor the commitment is on a `DeliveryCounting`, so
+  # the vector gives `pricing[]` and `commitment` as context and the
+  # check reads the committed entry from them.
+  #
+  # Derived from examples/line-item-dooh.yaml at `/delivery_counting`,
+  # whose one pricing entry is `CPM` and whose commitment names no
+  # `pricing_id`, so that entry is the committed one (§ 5.6): the object
+  # carries `impression_multiplier`. D-037's id form is applied to every
+  # id the document mints and to every reference to one, each the UUID
+  # version 5 of the document's own readable id in the DNS namespace.
+  # Every other value is that file's own bytes, the context values
+  # included.
+  #
+  # The invalid half is that object with `impression_multiplier` removed,
+  # and nothing else.
+  - rule: rule:5.6.4:e58650b7
+    digest: ae43a5c3f5ade9914aaa18fc5e59aec9ee10bea1c71c4435fae9b1997bc6113a
+    type: DeliveryCounting
+    valid:
+      - value:
+          play_tolerance_ms: 500
+          proof_of_performance:
+            logged_by: seller
+            evidence:
+              - play_log
+              - photo
+          impression_multiplier:
+            impression_type: viewable
+            source_type: 1
+            vendor: audience-vendor.example
+            dataset: 2026-R2
+            settles_on: declared
+        context:
+          LineItem.pricing:
+            - pricing_id: af742680-e68f-57e0-b21f-beab3f2d04d9
+              cost_method: CPM
+              list_rate: 8
+              agreed_rate: 8
+              currency: USD
+              price_type: 3
+              price_valid_until: 2026-12-15T23:59:59Z
+          LineItem.commitment:
+            basis: spend
+            amount: 70156.8
+            flight:
+              start: 2026-11-02T00:00:00Z
+              end: 2026-11-15T23:59:59Z
+            derived_units: 8769600
+            advertisers:
+              - domain: brand-a.example
+    invalid:
+      - value:
+          play_tolerance_ms: 500
+          proof_of_performance:
+            logged_by: seller
+            evidence:
+              - play_log
+              - photo
+        context:
+          LineItem.pricing:
+            - pricing_id: af742680-e68f-57e0-b21f-beab3f2d04d9
+              cost_method: CPM
+              list_rate: 8
+              agreed_rate: 8
+              currency: USD
+              price_type: 3
+              price_valid_until: 2026-12-15T23:59:59Z
+          LineItem.commitment:
+            basis: spend
+            amount: 70156.8
+            flight:
+              start: 2026-11-02T00:00:00Z
+              end: 2026-11-15T23:59:59Z
+            derived_units: 8769600
+            advertisers:
+              - domain: brand-a.example
+  # § 5.6's `pricing[].cost_parameters` row: REQUIRED when the term
+  # requires keys. § 5.6.5's `cost_parameters` column names those terms
+  # and their keys -- `viewability_standard` for `CPMV`, `view_s` or
+  # `view_fraction` for `CPV`, `demographic` and `rating_source` for
+  # `CPP`, `action_type`, `attribution_window` and `action_source` for
+  # `CPA`, and `rate_unit` for `TIME` -- and leaves the column empty for
+  # `CPM`, `CPC`, `CPCV`, `PLAY` and `FLAT`. So the entry's own
+  # `cost_method` decides the condition and the entry decides the rule.
+  #
+  # An extension term has no row there: § 5.6 puts its keys in the
+  # document `cost_definition` points at, which the entry doesn't carry,
+  # so an entry under one leaves the rule undecided.
+  #
+  # Derived from examples/proposal-agreed.yaml at
+  # `/line_items/0/pricing/0`: its `cost_method` is `CPM`, which § 5.6.5
+  # gives no `cost_parameters` key, so the entry satisfies the rule and
+  # the valid half is that file's bytes. D-037's id form is applied to
+  # every id the document mints and to every reference to one, each the
+  # UUID version 5 of the document's own readable id in the DNS
+  # namespace. Every other value is that file's own bytes.
+  #
+  # The invalid half is that entry with `cost_method` read as `CPP`,
+  # which § 5.6.5's table requires `demographic` and `rating_source` for,
+  # and nothing else. So the pair turns on the one value the condition
+  # reads, and says that a `CPM` entry owes no `cost_parameters` and a
+  # `CPP` entry does.
+  - rule: rule:5.6:0f8d396f
+    digest: 32bc109b3441be001719afaeecfaf260d3b08279427292d7884d1e09c4d91b1d
+    type: PricingEntry
+    valid:
+      - value:
+          pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+          cost_method: CPM
+          list_rate: 24
+          agreed_rate: 24
+          min_rate: 21
+          price_valid_until: 2026-11-15T23:59:59Z
+          currency: USD
+          price_type: 3
+    invalid:
+      - value:
+          pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+          cost_method: CPP
+          list_rate: 24
+          agreed_rate: 24
+          min_rate: 21
+          price_valid_until: 2026-11-15T23:59:59Z
+          currency: USD
+          price_type: 3
+  # § 5.6's `rate_per` row: for a core term the vocabulary sets the value, and
+  # § 5.6.5's Rate per column is where it says so -- 1,000 for `CPM`, `CPMV`
+  # and `PLAY`, 1 for the rest, and nothing for `FLAT`, whose unit is the line
+  # item. `line-item-display.yaml`'s first entry is a `CPM` entry that states
+  # no `rate_per`, so nothing is present to match: that is the first valid
+  # half, whole. The second is that entry with `rate_per: 1000`, one of the two
+  # values the row's own Description lists and the figure the column gives
+  # `CPM`. The invalid half is that entry with `rate_per: 1`, the other value
+  # the row lists, which prices per impression a rate the term prices per
+  # thousand (D-155).
+  - rule: rule:5.6:6981b8a3
+    digest: 55cb86ba10bc1848795d8be4772c4f7ade556b9eb9ce73d84612220a12642d98
+    decision: D-155
+    type: PricingEntry
+    valid:
+      - value:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          min_rate: 21.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: USD
+          price_type: 3
+      - value:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          min_rate: 21.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: USD
+          price_type: 3
+          rate_per: 1000
+    invalid:
+      - value:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          min_rate: 21.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: USD
+          price_type: 3
+          rate_per: 1
+  # § 5.6's `pricing_id` row, marked `immutable`: a revision may not reuse the
+  # id for a different `cost_method`, `cost_parameters`, `currency` or
+  # `transaction_mechanisms[]`. No one payload decides that, so the vectors are
+  # a pair of versions and the party that made the second, which is the shape
+  # the format states for a mutability rule and `marker:3:immutable` already
+  # uses. The party is the seller: `pricing[]` is seller-set and a revision is
+  # the seller's act. Both halves are `line-item-display.yaml`'s own
+  # `bd-cpm-usd` entry. The valid half drops `min_rate`, which § 5.6's "Seller
+  # prices" paragraph describes and the rule does not name; the invalid half
+  # reuses the id with `currency: EUR`, the currency the sibling entry of the
+  # same file states (D-164).
+  - rule: rule:5.6:6b704eb1
+    digest: 4f87454b18fa4d4115b85f13b8f103fb915640336c6efc416785bd32ddc565f7
+    decision: D-164
+    type: PricingEntry
+    valid:
+      - party: seller
+        before:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          min_rate: 21.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: USD
+          price_type: 3
+        after:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: USD
+          price_type: 3
+    invalid:
+      - party: seller
+        before:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          min_rate: 21.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: USD
+          price_type: 3
+        after:
+          pricing_id: bd-cpm-usd
+          cost_method: CPM
+          list_rate: 24.00
+          min_rate: 21.00
+          price_valid_until: "2026-11-15T23:59:59Z"
+          currency: EUR
+          price_type: 3

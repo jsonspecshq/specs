@@ -1,0 +1,41 @@
+format: 2
+id: D-163
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.6.4's `accreditation` lists two core terms with a gloss each and says a receiver that
+  doesn't know a term reads the multiplier without it. The specification gives the list no
+  name. What is it called, and is it closed?
+covers:
+- ir: "key:5.6.4:ImpressionMultiplier.accreditation#meaning/values:1"
+  digest: 49fdae12ca383916161b7fb40e16876bef8961b3dc845c8df24bd4c6e230e09f
+  quote: "`industry_currency` (the market's joint industry currency, such as Geopath in the US or Route in the UK) | `publisher_reported` (the publisher's own figure)"
+options:
+- id: accreditation-open
+  summary: >-
+    The list is a vocabulary named `Accreditation`, after the row whose values it holds, open,
+    with the two terms the row spells and each row's gloss as its label.
+- id: accreditation-closed
+  summary: >-
+    The two terms are the whole of the set, so the vocabulary is closed and a term outside it
+    is invalid rather than unknown.
+chosen: accreditation-open
+rationale: >-
+  THE NAME IS THE ROW'S, UNDER `D-065`'s RULE. `accreditation` states one concept -- the
+  standing of a multiplier's source in the market -- and no other row of this specification
+  is named for it, so the list takes the row's name in the singular, `Accreditation`, which
+  is `concept-names`: the rule the invented names of this specification already follow.
+
+  OPEN, BECAUSE THE ROW SAYS WHAT AN UNKNOWN TERM DOES. "A receiver that doesn't know a term
+  reads the multiplier without it" is a sentence about a term the list does not hold, which a
+  closed vocabulary could not have: `accreditation-closed` would make such a term invalid,
+  and the row tells a receiver to carry on without it. The cell types the row
+  `VocabularyTerm`, whose extension half is the namespaced term (§ 2.2), so the open reading
+  is also what the cell states.
+
+  TWO TERMS AND TWO LABELS, BOTH THE ROW'S OWN. `industry_currency` is "the market's joint
+  industry currency, such as Geopath in the US or Route in the UK" and `publisher_reported`
+  is "the publisher's own figure". The reading invents the name and nothing else: no term is
+  added, none is forbidden, and the presence the row states is untouched.

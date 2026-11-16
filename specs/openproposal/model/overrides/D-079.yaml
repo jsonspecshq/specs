@@ -1,0 +1,85 @@
+format: 2
+id: D-079
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: Which schemes does a URL carry, where section 2.2 states one type for `http` or `https` and
+  another for `https` alone?
+covers:
+- ir: def:2.2:Url
+  digest: ac1d3962a8fd84f62e1061d42d1e6d0741182bbc4679acf12ea6fa5e99c38ad3
+  quote: '`Url` | String: an absolute `http` or `https` URL (RFC 3986) | A location a client can fetch'
+  departs:
+  - The kernel stated one URL type, https only, described as an absolute `https` URL that a receiver may
+    fetch, with `http://examplepub.example/terms` among its invalid vectors.
+- ir: def:2.2:HttpsUrl
+  digest: c96e41b2cdd45c793be7b6e4b549806b234be39bba19fe5fd8ba60dabb141706
+  quote: '`HttpsUrl` | A `Url` whose scheme is `https` | A location fetched over TLS'
+- ir: key:2.2:DocumentRef.url
+  digest: d7babd0940ebfef149fe9e3d3001d5742d4457b353d55ca48d7cff0b15c8761f
+  quote: '`url` | REQUIRED | The document. It MAY need authentication'
+options:
+- id: two-types-as-the-text-states
+  summary: '`Url` carries `http` or `https`, as section 2.2 states, and `HttpsUrl` carries `https` alone.
+    The kernel states both and a row takes the one its cell names.'
+- id: https-only
+  summary: Every URL is https, as the kernel stated, and a row naming section 2.2's `Url` publishes the
+    narrower form.
+chosen: two-types-as-the-text-states
+rationale: 'Section 2.2 states two types and means both. `Url` is "String: an absolute `http` or `https`
+  URL (RFC 3986)", "A location a client can fetch"; `HttpsUrl` is "A `Url` whose scheme is `https`", "A
+  location fetched over TLS". The rows bear it out: a manifest entry''s `full_url` is "where the second
+  phase fetches the Full Representation", an app''s `store_url` is "Store listing URL. As OpenRTB 2.6
+  `app.storeurl`", which admits `http`, and a creative delivery''s `endpoint` is "where the buyer sends
+  creative" -- none states a scheme. The one row naming `HttpsUrl` is a document reference''s `url`, which
+  is the TLS case.
+
+
+  `https-only` was what the model published, and it refused what those three rows admit. A published type
+  may be wider than the document and never narrower, so the kernel''s one type was narrower than this
+  text for three rows and right for one.
+
+
+  So the kernel states both, under the names section 2.2 uses, and the scheme is part of the requirement
+  where the text makes it one. That is a departure from the kernel''s own earlier form, which the cover
+  names.
+
+
+  Nothing else moves. AdCOM and the Deals API each mark `Url` absent and now mark `HttpsUrl` absent too,
+  so neither publishes either and no output of either changes -- measured by `map --check` and `emit`
+  on both.'
+challenge:
+- type: Url
+  value: http://examplepub.example/terms/io-2026.pdf
+  verdict: accept
+  context: >-
+    A publisher whose media kit is served over plain HTTP, named by a manifest
+    entry's `full_url`, an app's `store_url` or a creative delivery's
+    `endpoint` -- none of which states a scheme.
+  reason: >-
+    `two-types-as-the-text-states` publishes section 2.2's own form, "an
+    absolute `http` or `https` URL (RFC 3986)", so the scheme is the sender's
+    where the row leaves it so.
+- type: Url
+  value: examplepub.example/terms/io-2026.pdf
+  verdict: reject
+  context: >-
+    The same publisher writing the location without a scheme, as a domain and
+    a path.
+  reason: >-
+    The row states an absolute URL, so a value a client cannot fetch without
+    guessing a scheme is refused. Widening to both schemes is not widening to
+    none.
+- type: HttpsUrl
+  value: http://examplepub.example/terms/io-2026.pdf
+  verdict: reject
+  context: >-
+    A binding document a counterparty fetches and stores, named by a document
+    reference's `url` and served over plain HTTP.
+  reason: >-
+    `https-only` is what the model published for every URL, and this is the
+    one row it was right for: section 2.2's `HttpsUrl` is "A `Url` whose
+    scheme is `https`", "A location fetched over TLS", so the scheme is part
+    of the requirement here and not the sender's. The two types differ on
+    exactly this value, which is why the kernel states both.

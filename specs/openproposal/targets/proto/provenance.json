@@ -1,0 +1,146 @@
+{
+  "format": 1,
+  "lock": "with-open-prs",
+  "values": [
+    {
+      "attribute": "code-name",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8309d878f156730cdf96d13cae2153a7e6fe656dee261e90aca747f332f1d996",
+            "ir": "key:5.2.9:EventSchedule.eventstatus#meaning/values:1"
+          }
+        ],
+        "rule": "target-rules § 2 zero sentinels"
+      },
+      "type": "EventStatus",
+      "value": "UNSPECIFIED"
+    },
+    {
+      "attribute": "code-name",
+      "member": "1",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8309d878f156730cdf96d13cae2153a7e6fe656dee261e90aca747f332f1d996",
+            "ir": "key:5.2.9:EventSchedule.eventstatus#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "EventStatus",
+      "value": "SCHEDULED"
+    },
+    {
+      "attribute": "code-name",
+      "member": "2",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8309d878f156730cdf96d13cae2153a7e6fe656dee261e90aca747f332f1d996",
+            "ir": "key:5.2.9:EventSchedule.eventstatus#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "EventStatus",
+      "value": "TENTATIVE"
+    },
+    {
+      "attribute": "code-name",
+      "member": "3",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8309d878f156730cdf96d13cae2153a7e6fe656dee261e90aca747f332f1d996",
+            "ir": "key:5.2.9:EventSchedule.eventstatus#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "EventStatus",
+      "value": "CANCELLED"
+    },
+    {
+      "attribute": "code-name",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5e275c5138790ae29e6a68805d1969ce9040f0701a60379e51fdc5886d8e8ce1",
+            "ir": "field:5.6:pricing[].rate_per#description/values:1"
+          }
+        ],
+        "rule": "target-rules § 2 zero sentinels"
+      },
+      "type": "RatePer",
+      "value": "UNSPECIFIED"
+    },
+    {
+      "attribute": "code-name",
+      "member": "1",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5e275c5138790ae29e6a68805d1969ce9040f0701a60379e51fdc5886d8e8ce1",
+            "ir": "field:5.6:pricing[].rate_per#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "RatePer",
+      "value": "CODE_1"
+    },
+    {
+      "attribute": "code-name",
+      "member": "1000",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5e275c5138790ae29e6a68805d1969ce9040f0701a60379e51fdc5886d8e8ce1",
+            "ir": "field:5.6:pricing[].rate_per#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "RatePer",
+      "value": "CODE_1000"
+    },
+    {
+      "attribute": "defs-key",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8309d878f156730cdf96d13cae2153a7e6fe656dee261e90aca747f332f1d996",
+            "ir": "key:5.2.9:EventSchedule.eventstatus#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "type": "EventStatus",
+      "value": "EventStatus"
+    },
+    {
+      "attribute": "defs-key",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "5e275c5138790ae29e6a68805d1969ce9040f0701a60379e51fdc5886d8e8ce1",
+            "ir": "field:5.6:pricing[].rate_per#description/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "type": "RatePer",
+      "value": "RatePer"
+    }
+  ]
+}

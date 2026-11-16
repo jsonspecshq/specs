@@ -1,0 +1,97 @@
+format: 2
+id: D-034
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Four statements place a duty in the passive voice and name nobody who holds it. Which party does each bind?"
+covers:
+  - ir: rule:considerations:0177440b
+    digest: a6ccc6f26a8d7ce4341228dcb98aed29f0b8ae9a0800db9140abc3f2493f9a96
+    quote: The information contained in this API should be used as a guide of what the terms that were agreed to, but they should never be used to bid without validating that information coming from the OpenRTB Bid Request is in line with the terms laid out in this API.
+  - ir: rule:considerations:5f88e3d1
+    digest: 1c8c2b407bae83b31f6ce4a1b84ea589923343f9719ae22c14e62042e21cdeed
+    quote: Deal IDs receiving requests without that information should be used rarely and closely monitored.
+  - ir: rule:authorization:6c7eb7db
+    digest: abe6e1f6553aaac90360d43c32f74dab08cb38d42b31284fff7ced00ac3537cb
+    quote: "Supply Chain validation should always be done using Object: Supply Chain from OpenRTB."
+  - ir: rule:publisher-count:734470bd
+    digest: 48fdd24a313b7ff1e24d711c0da61cfa54cc7945569972aeeb8885b248187b80
+    quote: Intermediaries should be identified using Supply Chain Validation from OpenRTB requests.
+options:
+  - id: infer-from-the-act
+    summary: >-
+      Read the party from the act the sentence describes and bind each to
+      the buyer: validating a bid request before bidding, monitoring a Deal
+      ID one bids on, and reading a Supply Chain object out of a request
+      are all done by the side that bids.
+  - id: unnamed-party
+    summary: >-
+      The duty stands and the party does not. Each is an obligation whose
+      party the document does not state, carried with no party, and raised
+      with the specification's owners as a gap in the text.
+  - id: informative
+    summary: >-
+      A duty nobody holds binds nobody, so each states no requirement and
+      is carried as guidance with no conformance content.
+chosen: unnamed-party
+rationale: >-
+  Measured on both locks, `main` and `tag-1.0-202602`, by reading every one
+  of the 24 obligation claims' sentences for a grammatical subject that
+  names a person or a system: 20 name one — "buyers", "implementers",
+  "bidders and the exchange", "the bidder", "the person inputting the deal
+  into the `origin` system", "both the sender and receiver", "the buyer and
+  seller" — and these four name none. Each of the four writes its duty in
+  the passive voice, so the holder is exactly the word the sentence leaves
+  out: "should be used", "should be done", "should be identified", "should
+  be used rarely and closely monitored".
+
+  `infer-from-the-act` is the reading the pipeline carries today, and it is
+  defensible for three of the four: the side that bids is the side that
+  validates a request before bidding. It is not defensible for
+  `rule:publisher-count:734470bd`, which asks that intermediaries be
+  identified in a deal whose publisher count the seller sets, and the act
+  it describes belongs to whoever reads the supply chain, which the section
+  it sits in never says. Taking the party from the act also makes the
+  reading a guess wherever the act has two plausible performers, and a
+  guess written as a party reads downstream exactly like a party the
+  document stated.
+
+  `informative` costs the duty itself. Each of the four sentences carries a
+  conformance keyword — three SHOULD and one "should never" — and dropping
+  them to guidance loses a requirement the text plainly makes, which is a
+  larger error than carrying a requirement whose holder is blank.
+
+  What `unnamed-party` costs: the model's obligations are grouped by party,
+  so four of them group under nothing, and any consumer that asks "what
+  must the buyer do" gets four fewer answers than the pipeline gives today.
+  That is the honest shape of the text and the reason the feedback below
+  exists.
+
+  This record settles the reading and settles nothing about the value. An
+  obligation's party is not derived by any mapping rule and is not one of
+  the attributes a `name` record may set — `title`, `description`,
+  `defs-key`, `code-name`, `type`, `presence`, `open` — so it is held in
+  the hand-written `as` of `specs/dealsapi/model/mapping/`, which
+  `npm run map` preserves for every entry that cites a decision. Nothing
+  this record says moves it. Until the authority that owns those `as`
+  fields rewrites them, the four claims keep `party: buyer`, and that is
+  the honest state of it rather than a value this record pretends to set.
+  The reading this record is least sure of is
+  `rule:considerations:0177440b`, whose second clause, "they should never
+  be used to bid without validating", is as close to naming the bidder as
+  a passive sentence gets.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L69"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L72"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L196"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L222"
+feedback: >-
+  Four duties in the specification are written in the passive voice and
+  name nobody who holds them: that the API's information should never be
+  used to bid without validating it, that Deal IDs receiving requests
+  without authorization information should be used rarely and closely
+  monitored, that Supply Chain validation should always be done using
+  OpenRTB's Supply Chain object, and that intermediaries should be
+  identified using it. Each would be clearer written with its subject in
+  front: say whether it binds the buyer, the seller, or both.

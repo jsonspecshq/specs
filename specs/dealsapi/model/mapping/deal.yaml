@@ -57,7 +57,7 @@ entries:
   - ir: field:object-deal:created
     digest: edccdff06879d2e97652451b19dc5a523065afac87cdadf68497a78d1d010aed
     source: { rule: domain-row }
-    as: { role: property, object: Deal, type: { kind: named, name: UtcTimestamp }, presence: optional }
+    as: { role: property, object: Deal, type: { kind: named, name: Instant }, presence: optional }
   - ir: field:object-deal:sellerstatus
     digest: 0c8cf640c2946620c962742b4ddebacad40140806db8b1e55a56ac71589d4d9f
     locks: [ main ]
@@ -193,11 +193,11 @@ entries:
   - ir: field:object-terms:startdate
     digest: 85cee5c323064ae0d44601eb24a57193a06b0a3879007fb20de0438a49bc431a
     source: { rule: domain-row }
-    as: { role: property, object: Terms, type: { kind: named, name: UtcTimestamp }, presence: optional }
+    as: { role: property, object: Terms, type: { kind: named, name: Instant }, presence: optional }
   - ir: field:object-terms:enddate
     digest: 387ca29773be1a3d68d1bcb46828acd2358f734e8fdef410b3cdef98fb144af4
     source: { rule: domain-row }
-    as: { role: property, object: Terms, type: { kind: named, name: UtcTimestamp }, presence: optional }
+    as: { role: property, object: Terms, type: { kind: named, name: Instant }, presence: optional }
   - ir: rule:object-terms:5c3134f5
     digest: 0c525e45c48b0b9a60f1058a01f98288229799f362e3c50da10f6bfcbbf6b82a
     source: { decision: D-003 }

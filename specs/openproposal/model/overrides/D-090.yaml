@@ -1,0 +1,114 @@
+format: 2
+id: D-090
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: >-
+  What does a `settable` field hold, where the kernel's `Settable` holds `allowed[]` alone and section
+  3.2 states three keys and a second shape for what the buyer writes?
+covers:
+- ir: def:3.2:Narrowing
+  digest: 1086155ed777d8e06ae6457421070afb999d168277e4805f32c5ed71f1572d3f
+  quote: '`Narrowing` | keys. Exclusion wins.'
+  departs:
+  - The kernel stated no such shape. `Settable` held `allowed[]` and nothing else, closed, so a payload
+    carrying what the buyer writes was refused.
+  locks:
+  - with-open-prs
+- ir: "key:3.2:Narrowing.include[]"
+  digest: bd426b77c0a4b508cd2dce247b84c7f79964c97482716ac06927372d5cedc327
+  quote: '`include[]` | REQUIRED | Each entry MUST be covered by an `allowed[]` entry'
+  locks:
+  - with-open-prs
+- ir: "key:3.2:Narrowing.exclude[]"
+  digest: e92c11d0f82da1d2b48ba4da84d21be5d1ff567027eb2c2cc432c3cce03c5596
+  quote: '`exclude[]` | OPTIONAL | Each entry MUST be covered by an `include[]` entry'
+  locks:
+  - with-open-prs
+- ir: key:3.2:Settable.default
+  digest: b03e032bcc72363f6c1aa4ecfb0dc143a22d48f5c11fee45938de7f412ffb7ed
+  quote: '`default` | REQUIRED | In effect when `value` is absent'
+  locks:
+  - with-open-prs
+- ir: key:3.2:Settable.value
+  digest: 02e92c8959877a3c31fe8d7b3795cbfde20d441255c4008e1d5db2907a52d1da
+  quote: '`value` | OPTIONAL | The buyer''s value'
+  locks:
+  - with-open-prs
+options:
+- id: the-three-keys-and-the-narrowing
+  summary: >-
+    `Settable` holds the three keys section 3.2 states -- `allowed[]` and `default` required, `value`
+    optional -- and the kernel gains `Narrowing[T]`, the shape `default` and `value` take, with
+    `include[]` required and `exclude[]` optional.
+- id: allowed-alone
+  summary: '`Settable` holds `allowed[]` alone, as the kernel stated it, and what the buyer writes is
+    carried outside the envelope.'
+chosen: the-three-keys-and-the-narrowing
+rationale: 'Section 3.2 states the envelope in three rows and the kernel held one of them. "`allowed[]`
+  | Array[T] | REQUIRED | The entries the buyer narrows within", "`default` | Narrowing[T] | REQUIRED
+  | In effect when `value` is absent", "`value` | Narrowing[T] | OPTIONAL | The buyer''s value". The shell
+  was `{ allowed }`, closed, so it refused a payload carrying `default` -- which the text makes REQUIRED
+  -- and refused the buyer''s own write. Every `settable` field this specification states was refused by
+  the type published for it, which is the departure this record''s cover names.
+
+
+  `allowed-alone` is that form. It is not a narrower reading of the same shape but a different document:
+  a `daypart` whose `default` says which hours are in effect, and whose `value` is the buyer''s narrowing
+  of them, has nowhere to put either.
+
+
+  **`Narrowing[T]` is a constructor and not an object**, because the text writes it with its parameter:
+  `default` and `value` are each a `Narrowing[T]` for the same `T` the `allowed[]` beside them holds. The
+  model declared it as an object, which cannot take that `T`, and the consequence was visible in the
+  gate output: `domains-used` reported "object `Narrowing`: no type of the model references it", because
+  no row could.
+
+
+  It carries the rule the text states in its own lead-in. "Exclusion wins", so an entry named by both
+  `include[]` and `exclude[]` is dropped, and a narrowing that excludes everything it includes takes
+  nothing -- which is a narrowing and not a contradiction, so the rule''s vectors take that pair as valid
+  and refuse only an `exclude[]` beside an empty `include[]`.
+
+
+  Nothing AdCOM or the Deals API publishes moves. Each already marks `Settable` absent and now marks
+  `Narrowing` absent too, so neither publishes either -- measured by `map --check` and `emit` on both
+  locks of each, every one clean and byte-identical.'
+challenge:
+- type: DaypartBounds
+  value:
+    allowed:
+    - days: [monday]
+      start: '23:00'
+      before: '24:00'
+    default:
+      include:
+      - days: [monday]
+        start: '23:00'
+        before: '24:00'
+  verdict: accept
+  context: >-
+    A late-fringe daypart whose seller allows the hours from 23:00 on Monday
+    and whose `default` says those hours are in effect until the buyer
+    narrows them.
+  reason: >-
+    `the-three-keys-and-the-narrowing` publishes the three keys section 3.2
+    states, so an envelope carrying the required `default` as a narrowing of
+    `allowed[]` is taken.
+- type: DaypartBounds
+  value:
+    allowed:
+    - days: [monday]
+      start: '23:00'
+      before: '24:00'
+  verdict: reject
+  context: >-
+    The same daypart written as the kernel's earlier shell allowed it: the
+    seller's hours and nothing else.
+  reason: >-
+    `allowed-alone` is that form, and it is the departure this record names.
+    Section 3.2 makes `default` REQUIRED, so an envelope that declares the
+    hours and says which are in effect for nobody is refused -- which is the
+    direction a published type may move, because the text requires the member
+    and the type now asks for it.

@@ -1,0 +1,58 @@
+format: 2
+id: D-098
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three of section 5.6.5's statements read the commitment's basis and the entry it is under, which the
+  lead-in composition made readable from one payload. What are their change pairs?
+covers:
+
+- ir: rule:5.6.5:bdabfe4f
+  digest: 10de311a02c1e9a84949a50a51f97f0600184cdfc36e62ac72b4330d26b9658d
+  quote: When `commitment.basis` is `spend`, on an entry other than `FLAT` or `TIME`, `agreed_rate` MUST
+    be greater than 0.
+- ir: rule:5.6.5:5d5c5fc3
+  digest: e890a847444fe4fadd7704ab0f64de38b26a5a9d8788105f1567004f0bb2e0ca
+  quote: "`commitment.basis` MUST be `spend`, and `derived_units` is absent."
+- ir: rule:5.6.5:9a5cd215
+  digest: 0c0dbd6064e888f0706df2299eb77e87b9660fb73b48de2d8df6d45384f0714d
+  quote: The host of `cost_definition.url` MUST be the term's `<domain>` or a subdomain of it.
+options:
+- id: write-the-three-pairs
+  summary: Each becomes a rule on the type that holds every field it names, with one payload the schema
+    accepts and one it refuses, and a deterministic check beside it.
+- id: wait-for-the-section
+  summary: No pair is written until every statement of section 5.6.5 has one, so the four that read the
+    charges in effect across the whole line item are written first and these three wait on them.
+chosen: write-the-three-pairs
+rationale: >-
+  Two of the three were unwritable until `Commitment` carried the keys of `CommitmentAmount`: each reads
+  `commitment.basis`, and the published `Commitment` held `advertisers`, `derived_units`, `flight` and
+  `pricing_id` alone. The lead-in composition is what made them readable from one payload, which is the
+  test a pair rests on -- a statement is a rule a payload decides when every field it names is a
+  property of the type the payload is an instance of.
+
+
+  **The holder.** `bdabfe4f` and `5d5c5fc3` read the commitment and the entry it is under, and the
+  `LineItem` is the one type that holds both. `9a5cd215` reads a `cost_method` and the
+  `cost_definition` beside it, which is a `PricingEntry` on its own.
+
+
+  **What each rejects.** `bdabfe4f`: a spend commitment buys units at `agreed_rate`, so a rate of zero
+  buys an unbounded number of them. `FLAT` and `TIME` set the figures from the rate and the flight
+  instead, which is why they are outside it, and a `FLAT` entry at a rate of zero is a valid vector
+  here -- it states a line item given away and not an unbounded one. `5d5c5fc3`: a `FLAT` entry has no
+  unit, so there are no units to commit, and the two halves of the statement are the two invalid
+  vectors -- a `units` basis, and a written `derived_units`. `9a5cd215`: an extension cost method is
+  defined by the party whose domain namespaces it, so a term pointing at a document on another domain
+  would let one party define another's term. Its second invalid vector is a host ending in the term's
+  domain without a label boundary, which is the case a suffix test gets wrong.
+
+
+  **The checks read what the payload shows.** A line item travels without its commitment on a shared
+  proposal, and a line item's writes carry the commitment without the seller's `pricing[]`, so a check
+  on the committed entry returns null for a part of the object and the harness reads the whole line
+  item instead. The entry is the one `commitment.pricing_id` names, or the only entry where it names
+  none, which is what section 5.6 states.

@@ -1,0 +1,54 @@
+format: 2
+id: D-102
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three more statements name only fields a single published type holds, which the holder-aware
+  writability test identifies. What are their change pairs?
+covers:
+
+- ir: rule:5.9:395d178a
+  digest: 51db8748811b5568ecf7a953d431fdc85427b96b1fce3c620ad2d15b9608eea6
+  quote: An option's `delivery_type` MUST be one its row allows.
+- ir: rule:5.9:01b1b76d
+  digest: d48ca108f96d5e2be948893a78afb9695911088a512987932f6802b25b5b74e3
+  quote: "`transaction_mechanism.available[]` MUST hold only the `direct_io` option."
+- ir: rule:5.6.2:3c2ac6dd
+  digest: 7386cb2f1c1651b3000b1abccd1e23592472a23f5fb57b5a8f86b8744ddb14ba
+  quote: "`hold_terms.available` MUST be `true`."
+options:
+- id: write-the-three-pairs
+  summary: Each becomes a rule on the type that resolves every path it names, with payloads the schema
+    accepts and the rule decides.
+- id: leave-the-table-to-the-schema
+  summary: Section 5.9's mechanism table becomes a conditional on `MechanismOption`, so the schema states
+    which delivery types each mechanism allows and the other two alone become rules.
+chosen: write-the-three-pairs
+rationale: >-
+  The table states four conditions on one property, one per mechanism, and three of the four name a set
+  of two or one value. A schema could carry them as nested `if`/`then`, and the type rules keep a
+  condition in the schema only where it names one sibling and one value (§ 9); this names a sibling and
+  four values with a set each, and `direct_io`'s row reads "Any", which is a condition on nothing. So
+  the table is a rule, and the rule is on `MechanismOption`, which holds both the mechanism and the
+  delivery type.
+
+
+  **What each rejects.** `395d178a`: `programmatic_guaranteed` carries a promise -- `guaranteed` or
+  `share_of_voice` -- and the two auction mechanisms carry none, so an option outside its row promises
+  what the mechanism cannot deliver. `direct_io`'s row reads "Any", and a `direct_io` option at
+  `non_guaranteed` is a valid vector that says so. `01b1b76d`: on an embedded line item the ad is baked
+  into the content the seller distributes, which only an insertion order sells -- a deal mechanism lands
+  in a Deals API `Deal`, and no bid reaches a copy already distributed. It joins the two rules D-088
+  wrote from the same bullet list, and reads `serving_mode` through the same `ctx.part`. `3c2ac6dd`: a
+  seller that only honours terms sets `hold_terms.available` to `false` and uses `price_valid_until`,
+  so an ask against it reserves nothing; a line item with no `hold` is a valid vector with
+  `available: false`, because the rule fires on the ask.
+
+
+  **How the three were found.** The writability test now resolves each identifier as a path from a
+  candidate holder down, through named types, lists, maps and constructor shells, rather than asking
+  whether any type anywhere publishes the name. That is what distinguishes a statement one payload
+  decides from one whose fields are spread over two types: of the thirty-nine statements still unmapped,
+  twenty name paths a single published type resolves and nineteen do not.

@@ -1,0 +1,20 @@
+format: 2
+id: D-070
+status: proposed
+kind: name
+author: agent
+attribute: presence
+element: key:object_videoplacement:VideoPlacement.mime
+value: optional
+reading: D-068
+rule_would_give: required
+reason: >-
+  The row's own definition ends "If omitted, all types are assumed", which
+  describes a payload carrying no `mime` and says what a receiver does with it,
+  so the `required` in the same cell cannot stand beside it; D-068 reads the
+  sentence, because the two sibling rows carrying it declare no `required` and
+  publishing one narrows the schema below what the document accepts.
+covers:
+  - ir: key:object_videoplacement:VideoPlacement.mime
+    digest: b14743c48f99311f3a1ecf2eac08bb27c25bc635768e3429822c907131e440fc
+    quote: "`mime` | Array of supported mime types (e.g., “video/mp4”). If omitted, all types are assumed."

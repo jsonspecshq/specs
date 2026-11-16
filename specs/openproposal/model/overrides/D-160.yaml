@@ -1,0 +1,94 @@
+format: 2
+id: D-160
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.7.1's `counted_by` clause turns on "the source of the line item's
+  `delivery_counting.impression_multiplier`", and § 5.6.4 names that source `seller` where
+  `source_type` is Publisher Provided (`2`) or the `vendor` is the proposal's `seller.domain`, and
+  the `vendor` otherwise. A line item carries no proposal. The multiplier now also states the
+  standing of its source in the market. Does `accreditation` decide which of the two sources a
+  line item states?
+covers:
+- ir: key:5.6.4:ImpressionMultiplier.accreditation
+  digest: 550ae66d3a1bab501697e9224004fc29b7c5027efc1cb01c1b16667f33a4087b
+  quote: "`accreditation` | OPTIONAL | The standing of the multiplier's source in the market. Core terms: `industry_currency` (the market's joint industry currency, such as Geopath in the US or Route in the UK) | `publisher_reported` (the publisher's own figure). A receiver that doesn't know a term reads the multiplier without it"
+- ir: sentence:5.6.4:6475cdc3
+  digest: 6154498eeb924234f68e7b9fe279ae3d6763760121c3d13d91b905ac1e36fd13
+  quote: "The multiplier's source controls the count of impressions: `seller` when `source_type` is Publisher Provided (`2`) or `vendor` is the proposal's `seller.domain`, and `vendor` otherwise."
+- ir: key:5.6.4:ImpressionMultiplier.source_type
+  digest: 9e9656697e8c68a4311e3227a7fd8afa89006e88f658c6e4d89b1284e0e6f011
+  quote: "`source_type` | REQUIRED | Who supplies the multiplier. A value from AdCOM 1.0 List: DOOH Multiplier Measurement Source Types other than Unknown (`0`), such as Publisher Provided (`2`). The value OpenRTB 2.6 `imp.qty.sourcetype` carries"
+- ir: key:5.6.4:ImpressionMultiplier.vendor
+  digest: 053bd0fa2450bf0b795fb29af8f3e771c2037ded36a7b3f25a96795cdb733710
+  quote: "`vendor` | REQUIRED when `source_type` is not Publisher Provided (`2`) | The domain of the vendor or exchange that supplies the multipliers, as OpenRTB 2.6 `imp.qty.vendor` names a vendor"
+- ir: rule:5.7.1:d9939d8b
+  digest: 43183329b1994ca4030c14cff27b1b5ca451dc81b3cecf4d804bfa35cf2f60a3
+  quote: Otherwise, when `channel` is `dooh` and the line item counts impressions, `counted_by` MUST be the source of the line item's `delivery_counting.impression_multiplier`
+- ir: def:2.2:Measurer
+  digest: 8803264dc804871c16d2837330a0f52398e88a9494eca43226ae1e19bd5b445a
+  quote: "`Measurer` | A `Side`, or a `RegistrableDomain` | Who counts or measures. A seller writes `seller`, never its own domain. Two values name one party only when they are equal byte for byte. A `qualifier` beside a value names a product or method of that party and is not compared"
+options:
+- id: the-standing-does-not-state-the-domain
+  summary: >-
+    It does not. § 5.6.4's second branch is an identity test between the `vendor` and the
+    proposal's `seller.domain`, and `accreditation` states whose figure the multiplier is
+    accredited as in the market, not whose domain supplies it. A line item alone leaves the source
+    undecided wherever `source_type` is not `2`, whatever `accreditation` says.
+- id: industry-currency-excludes-the-seller
+  summary: >-
+    It does. `publisher_reported` is "the publisher's own figure", so the source is the `seller`,
+    and `industry_currency` is the market's joint currency, so the source is the `vendor`. A
+    multiplier that states either core term settles the source with no proposal.
+- id: the-source-type-alone-decides
+  summary: >-
+    `source_type` states who supplies the multiplier, so Publisher Provided (`2`) is the `seller`
+    and any other code is the `vendor`, and the sentence's second branch is read as a case no line
+    item can show.
+chosen: the-standing-does-not-state-the-domain
+rationale: >-
+  THE TWO SENTENCES ASK DIFFERENT QUESTIONS, AND ONLY ONE OF THEM IS ABOUT A DOMAIN. § 5.6.4's
+  second branch is satisfied when "`vendor` is the proposal's `seller.domain`" -- a comparison of
+  two domains, which § 2.2 makes exact: "Two values name one party only when they are equal byte
+  for byte". `accreditation` states "the standing of the multiplier's source in the market", and
+  neither of its core terms names a domain. So a payload that states `industry_currency` has said
+  what the figure counts as in its market and has not said whose domain supplies it.
+
+
+  `industry-currency-excludes-the-seller` reads the two terms as a partition of whose figure it is,
+  which is close enough to be worth writing down and refusing. It mis-decides one payload the
+  document permits: a seller that is itself the market's measurement body, or that republishes the
+  joint currency's values under its own domain, states `industry_currency` with a `vendor` that IS
+  the proposal's `seller.domain`, and § 5.6.4 then names the source `seller` while this option
+  names it the `vendor`. The cost of being wrong there is the whole of the clause: `counted_by`
+  would be held to a domain where the text holds it to `seller`, and § 2.2's "A seller writes
+  `seller`, never its own domain" makes those two values different parties by construction. A
+  reading that turns an undecided check into a wrong verdict on a payload the text allows is worse
+  than one that leaves the check undecided.
+
+
+  `the-source-type-alone-decides` drops a branch the sentence states. `source_type` does say who
+  supplies the multiplier, and the codes other than Publisher Provided (`2`) do name somebody other
+  than the publisher -- which is exactly why the sentence adds a second branch: it catches the
+  seller that appears under one of those codes as its own vendor, such as a publisher that is also
+  the exchange. Reading the branch away would publish a rule the text does not state.
+
+
+  WHAT THIS COSTS, counted rather than described: one undecided check that stays undecided.
+  `line-item-dooh.yaml` is the only `dooh` line item this specification ships; it states
+  `source_type` 1, a `vendor`, and now `accreditation: industry_currency`, and no byte of it names
+  the proposal's `seller.domain`. So § 5.7.1's clause reads a value the payload does not carry, the
+  check reports nothing either way, and the entry stays in the undecided record under this record
+  and `D-151`. The vector pair decides it, because a vector gives the proposal's `seller` as
+  context, so the rule is checked where a payload can be made to carry what it reads.
+feedback: >-
+  § 5.6.4 decides the multiplier's source partly by comparing the `vendor` against the proposal's
+  `seller.domain`, and a line item travels without its proposal (§ 4.3), so a receiver holding one
+  line item cannot tell which source § 5.7.1 then requires of `counted_by`. The new
+  `accreditation` row is close to an answer and is not one: it states the standing of the figure in
+  the market rather than whose domain supplies it. Saying the source on the multiplier itself --
+  that the source is the `vendor` unless `accreditation` is `publisher_reported`, or a `seller`
+  marker in the multiplier where the publisher supplies it -- would let a line item state who
+  counts without the proposal beside it.

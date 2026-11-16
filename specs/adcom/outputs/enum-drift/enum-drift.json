@@ -2315,7 +2315,8 @@
   ],
   "target": {
     "files": [
-      "com/jsonspecshq/adcom/v1/lists.proto"
+      "com/jsonspecshq/adcom/v1/lists.proto",
+      "com/jsonspecshq/adcom/v1/objects.proto"
     ],
     "lists": [
       {
@@ -6298,7 +6299,7 @@
       "extra": 0,
       "missing": 0,
       "noEnum": 0,
-      "values": 316
+      "values": 326
     },
     "unpaired": []
   },

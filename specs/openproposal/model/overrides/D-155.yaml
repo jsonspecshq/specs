@@ -1,0 +1,83 @@
+format: 2
+id: D-155
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.6's `rate_per` row ends "For a core term, the vocabulary sets it, and a present value MUST
+  match". The published type already admits only `1` and `1000`. Which of the two a term sets is
+  in § 5.6.5's Rate per column, and no shipped payload writes the key at all. Is this a rule a
+  payload decides, and what is its pair?
+covers:
+- ir: rule:5.6:6981b8a3
+  digest: 55cb86ba10bc1848795d8be4772c4f7ade556b9eb9ce73d84612220a12642d98
+  quote: For a core term, the vocabulary sets it, and a present value MUST match
+- ir: field:5.6:pricing[].rate_per
+  digest: 7e4207e926c3bc3ad125e4fb90e60d39c2da7f4932b255e95a32ce1b030f906f
+  quote: "`pricing[].rate_per` | Integer | seller-set | `1` | `1000`. Units per rate. For a core term, the vocabulary sets it, and a present value MUST match"
+options:
+- id: a-rule-of-the-entry-read-against-the-rate-per-column
+  summary: >-
+    It is a rule of `PricingEntry`: the entry's own `cost_method` names the term, § 5.6.5's Rate
+    per column states what that term sets, and the check compares the two members the entry
+    carries. The pair is a shipped `CPM` entry, with and without the value the column gives it.
+- id: a-vocabulary-the-schema-should-narrow-per-term
+  summary: >-
+    The emitter states it as a conditional on `cost_method`, so the schema carries it and the
+    rules output does not.
+- id: informative-because-the-schema-already-lists-both-values
+  summary: >-
+    `RatePer` admits `1` and `1000` and nothing more, so the row's sentence adds nothing a
+    consumer can check.
+chosen: a-rule-of-the-entry-read-against-the-rate-per-column
+rationale: >-
+  ONE ENTRY DECIDES IT. The sentence reads two members of a `PricingEntry`: the `cost_method` that
+  names the term and the `rate_per` that must match what the term sets. Nothing outside the entry
+  is read, so the entry is the owner (type rules § 9), which is where the row's other statements
+  already sit.
+
+
+  WHAT THE TERM SETS IS A COLUMN, AND THE CHECK READS IT AS ONE. § 5.6.5's table gives each core
+  term a Rate per: `1,000` for `CPM`, `CPMV` and `PLAY`, and `1` for `CPC`, `CPCV`, `CPV`, `CPP`,
+  `CPA` and `TIME`. That is the same form `rule:5.6:0f8d396f` already reads of the
+  `cost_parameters` column, so the check carries the column as a table of core terms, as that one
+  carries its own.
+
+
+  TWO TERMS THE COLUMN SETS NOTHING FOR, STATED RATHER THAN GUESSED. `FLAT`'s Rate per cell is
+  empty -- its One unit cell is "The line item", so it has no unit to count and no rate per one --
+  and an extension term has no row at all, its `unit_label` naming its unit. The sentence binds
+  "a core term", so an extension term is outside it; and for `FLAT` the vocabulary sets nothing,
+  so there is nothing a present value could fail to match. The check reports neither, and the
+  feedback below asks for the `FLAT` cell to say so.
+
+
+  `informative-because-the-schema-already-lists-both-values` reads the published type for the
+  requirement. `RatePer` admits `1` and `1000` whatever the term, so the schema accepts a `CPM`
+  entry priced per unit, which the sentence forbids. A requirement the schema does not state is
+  the rules output's (type rules § 2a, clause 2).
+
+
+  `a-vocabulary-the-schema-should-narrow-per-term` is the clause that would be right if the
+  emitter wrote it. The condition is a value-to-value narrowing of one member by a sibling, which
+  the emitter expresses for a presence and not for a value, so nothing in the published tree
+  states it today. Carrying it as a rule is what clause 2 is for, and the feedback asks for the
+  keyword.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES AND THE ROW'S OWN TWO VALUES. `line-item-display.yaml`'s
+  first pricing entry is a `CPM` entry in USD that states no `rate_per`, so nothing is present to
+  match and the entry keeps the rule: that is the first valid half, whole. The second valid half
+  is that entry with `rate_per: 1000`, which is one of the two values the row's own Description
+  column lists and the figure § 5.6.5's Rate per column gives `CPM`, so it is the matching case
+  written in the document's own numbers. The invalid half is that entry with `rate_per: 1`, the
+  other value the row lists: one value changed, both values the row's, and the entry then prices
+  per impression a rate the term prices per thousand.
+feedback: >-
+  § 5.6's `rate_per` row says the vocabulary sets the value for a core term without saying where,
+  and the answer is a column of § 5.6.5's table two subsections away. Naming that column in the
+  row, or giving each term's Rate per in the row itself, would let a reader check an entry from
+  one place. § 5.6.5's `FLAT` row leaves Rate per empty, which this reading takes as nothing to
+  match; saying so -- that a `FLAT` entry states no `rate_per` -- would close the one case where
+  the sentence's "the vocabulary sets it" sets nothing.

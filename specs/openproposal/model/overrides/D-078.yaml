@@ -1,0 +1,43 @@
+format: 2
+id: D-078
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What does a row typed `VocabularyTerm` accept, where section 2.2 states it as a bare core term
+  or a namespaced one?
+covers:
+- ir: def:2.2:VocabularyTerm
+  digest: 230b1f4131ea57db381354fb49edff8e0692b28a6969ba4ddf93a1288ce198b9
+  quote: '`VocabularyTerm` | String: a bare core term, or `<domain>:<term>` with `<domain>` a `Domain`
+    the definer controls. A term is ASCII letters, digits, `_`, and `-` | See below'
+options:
+- id: the-union-is-the-type
+  summary: 'The type is the union the row states: a bare core term the vocabulary lists, or `<domain>:<term>`
+    for one outside it. The kernel states it under the name section 2.2 gives it, and `NamespacedTerm`
+    keeps the extension half it names.'
+- id: namespaced-only
+  summary: The type is the kernel's `NamespacedTerm`, the namespaced form, since the two state one idea
+    and a core term belongs to whichever vocabulary lists it.
+chosen: the-union-is-the-type
+rationale: 'Section 2.2 states both halves in one sentence -- "a bare core term, or `<domain>:<term>`"
+  -- and the kernel''s `NamespacedTerm` is the second alone, as its own description says: "a term outside
+  a vocabulary''s core list". Its pattern requires the domain prefix.
+
+
+  `namespaced-only` was taken and is wrong, on a measurement rather than on taste. Thirty-two rows name
+  this type, and under that reading each published a form refusing every core term the specification lists:
+  a pricing entry''s `cost_method` refused `CPM`, `CPC` and `FLAT`, and a line item''s `channel` refused
+  `display` and `dooh`. A published type may be wider than the document and never narrower, and that is
+  the direction it took.
+
+
+  It surfaced from writing a marker change pair. A minimal line item needs a pricing entry, whose `cost_method`
+  the schema refused at `CPM`, so no payload carrying a term the text lists could pass -- which is a vector
+  doing what a vector is for.
+
+
+  So the kernel states the union under the name section 2.2 uses, and `NamespacedTerm` keeps its name,
+  its form and its use as the `extension` an open vocabulary names: `CostMethod` and `MediaChannel` each
+  reference it for a term beyond their core list, which is correct and unchanged. No alias reads one name
+  as the other, because the two names are now the same word.'

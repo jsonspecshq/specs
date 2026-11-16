@@ -1,0 +1,55 @@
+format: 2
+id: D-118
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: A Required cell states a condition on an object the specification ships no payload of. What is
+  the pair of such a rule?
+covers:
+- ir: rule:5.6.1:94be9998
+  digest: 38ff50f3f0dfa34548278f8ba4e33081dcfe7d8c801d8bac6bae715f7986be66
+  quote: REQUIRED when `entries[]` holds a `decline` for lack of availability
+options:
+- id: no-pair-until-the-source-has-one
+  summary: The rule stays a rule and stays unpaired. `rules-emit` reports it, and this record says what
+    the source would have to contain for the pair to be derived.
+- id: author-the-valid-half
+  summary: Write a payload in which the condition holds, from the row's own values, and cite this record
+    behind it.
+- id: decline-the-row
+  summary: The mapping declines a Required cell whose trigger no shipped payload holds, so the condition
+    is left unnamed.
+chosen: no-pair-until-the-source-has-one
+rationale: '`CommitResult.availability` states a condition a payload of the row''s own object can show,
+  so it is a rule and not an obligation (type rules § 9). What is missing is not the reading: it is a payload
+  of the object. Measured over the whole pinned source -- the thirteen example files and the eleven code
+  blocks the model lists as examples, which are field lists, an `ext` fragment, two § 5.5 targeting fragments,
+  a daypart, and the `agreed_rate` formula:
+
+
+  No payload holds a `CommitResult` at all, and none holds an `AssentEntry` whose `role` is `decline`:
+  all four entries across proposal-agreed.yaml and proposal-issued.yaml are `commitment` or `acceptance`.
+  So the source furnishes neither half: not the valid one, which needs a `CommitResult` whose `entries[]`
+  holds a `decline` for lack of availability beside the `availability` map keyed by `line_item_id`, and
+  not the invalid one, which needs the same without the map. The source would have to contain a `CommitResult`
+  of a declined commit.
+
+
+  This is the one shape a pair cannot be derived from. Where the source ships a payload of the rule''s
+  type, a payload the rule accepts is a valid half whether or not its condition is true of it, and one
+  mutation gives the invalid half: `D-120` reads the three other Required cells that way, and `D-098` already
+  rested on it. Here there is no payload of the type to accept the rule or to mutate.
+
+
+  Authoring the valid half was the alternative and it is refused: a pair''s valid half is the source''s
+  own bytes, and a payload written here would be this repository asserting what the specification''s own
+  examples do not show. Declining the row was the other, and it is worse: it would leave the condition
+  unnamed, which is the state `rules-emit` existed to report, and it would hide a gap in the examples behind
+  a gap in the mapping. So the rule stands, unpaired, and `rules-emit` keeps reporting it until the source
+  carries a payload the pair can be derived from. The gate failing is the finding.'
+feedback: 'A `CommitResult` has a conditional member and the specification ships no `CommitResult`, so
+  no conformance vector can be derived for it and an implementer has nothing to test against. Ship a `CommitResult`
+  of a commit declined for lack of availability, with the `availability` map keyed by `line_item_id`. None
+  of the thirteen examples holds an `assent[]` entry whose `role` is `decline` either, so the declined
+  commit is a case the examples cannot show at all today.'

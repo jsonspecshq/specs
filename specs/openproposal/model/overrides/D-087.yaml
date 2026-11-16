@@ -1,0 +1,138 @@
+format: 2
+id: D-087
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Of the thirty-one normative statements the eight remaining modules hold, which bind a party and which
+  carry nothing a conformance check reads?
+covers:
+
+- ir: rule:5.5:45e820f6
+  digest: d149719233313df7393d8beb32e9550de37a3157d22a568353d705a61b561712
+  quote: A seller MUST reject an entry whose `store` it doesn't know, rather than apply it across stores, with `validation`
+- ir: rule:5.5:b03a5d5e
+  digest: 9654d32215f09dc064e96e19cf1242531f774a31d1dd9702c29275e53a093c20
+  quote: A seller MUST reject it deterministically rather than ignore it, with `not_offered`.
+- ir: rule:5.5:7fdb152c
+  digest: e39f13885f79f944e556bb455fb0ff4b0976154fc7500742092a95171cae655b
+  quote: A seller MUST NOT present `best_effort` enforcement as a guarantee.
+- ir: rule:5.5:b8445d68
+  digest: f47870ffdb275b3a95e4ef6ba15f13a3be44fe72a8b5ab88f1d16c5980e8cecb
+  quote: A seller MUST NOT disclose them to anyone but that buyer and the systems and vendors that enforce or verify them for this line item.
+- ir: rule:5.9:5bfed285
+  digest: edf1f2056849891ffc277f4e8c785814d60417f2eae3e8623a2c6eee18f11de8
+  quote: A seller MAY offer the same inventory through more than one.
+- ir: rule:2.3:8d420e7d
+  digest: 47897a6abedcfb890595b29a22e9e493aae6f29de22f82cae19b4cd25b36e979
+  quote: A seller MAY publish `https://<seller.domain>/.well-known/openproposal.json`, a `ProposalManifest`.
+- ir: rule:2.3:9c46c162
+  digest: 834639f14da3b21efc5611ee043e48477db2530a86c2af6ef18f0cbb6a04e286
+  quote: At least one of `ETag` and `Last-Modified` is REQUIRED, so buyers can poll cheaply.
+- ir: rule:2.3:59a4ca91
+  digest: 2b3e46e91c56afcfd2d7706ed0b92fd09dacb18ff6e94be7876ed6fd315a55e0
+  quote: Manifest entries MUST match the current version of each proposal.
+- ir: rule:2.3:86c05e36
+  digest: bbec4c1a9e7e8771e928e27ce0af5a704c2072ba0f2b6e67b43481ea09005dbf
+  quote: A seller that limits concurrent holds SHOULD declare the limit in `hold_limits`.
+- ir: rule:2.3:cad085e3
+  digest: 3879afc4af120ba21e40feac98e707c5afc332be6667f6320b305773da099d1d
+  quote: A seller that declares `per_advertiser` MAY decline a hold request whose `requested_terms` names no advertiser.
+- ir: rule:3.3:1c0f3417
+  digest: 0a37d096bbbb2bb303ba890d28c9cdb3d17461a180bb3924d15f1c8c9f355e1a
+  quote: Because audiences, properties, formats, and `markets` are `selectable`, and a `settable` targeting `value` and buyer `exclusions` (§ 5.5) narrow delivery, `addressable_scale` and `availability` MUST be recomputed against the buyer's actual selection, values, and exclusions.
+- ir: rule:3.3:810028b3
+  digest: 168d930b407ed6f72e5e840950bb2604f118be892ae634454b7f76d786c4f27a
+  quote: "`availability` MUST also be recomputed against the `break_position` and `programs` options in effect."
+- ir: rule:5.1.1:4c696214
+  digest: ab88ec95de375dc5ecf7232ba94151304d31d147589c8c6f900f8dc38d42c9e3
+  quote: The seller MUST serve a line item only on impressions of its `channel`.
+- ir: rule:5.8:dc23a761
+  digest: 53937fa677abddc66fce58d6c65d03656882adb1ef7f8875ffc3eb4ddfd870cd
+  quote: A consumer that does not know a `credential_type` MUST NOT treat the proposal or line item as invalid for that reason.
+- ir: rule:5.8:0bdd8354
+  digest: bd58ed71509dc01bf64959a404b5569327e41cfd173a2d0422f6d0f5e89e5258
+  quote: It MUST treat that entry as unsatisfiable.
+- ir: rule:2.1:568d4699
+  digest: 1d0a1e4074849669561e9040826a916395cfaea0b2c0a0fc964417e7145bbdd0
+  quote: A full fetch MUST return it, except for line items and packages the requester may not read (§ 5.8).
+- ir: rule:2.1:5072813c
+  digest: 832ce0230a46b8eb8419bc867ed657b68fbff5dbedd926bd3030ef609efbc253
+  quote: A manifest entry holds it (§ 2.3), and a response over the message binding (§ 1.2) MAY carry it.
+- ir: rule:5.3:7dce4112
+  digest: 2d24ca21abb2c207b9a63deca0fa6d3907a43da7147beb1576b58836d2fbea6f
+  quote: "`addressable_scale` and `availability` (§ 3.3) MUST be recomputed against conditions 1 and 3."
+- ir: rule:5.10:24d8a5b3
+  digest: 9ee8a06ecca322e22d0723909fc03b1a2d36b4f49e6f85d06347dabf997c0999
+  quote: Once the deal exists in `deal_origin`, the seller MUST record its ID as one `deal` entry on the line item.
+- ir: rule:5.10:57a4349f
+  digest: 9011e2cdbfcf10682e6c9a5c6eba736fbec4fb2d087e5aa3a9bf42ae9e288d86
+  quote: An entry is not a term and MAY be added after `agreed`
+options:
+- id: by-what-decides-it
+  summary: Each statement takes the role of whatever can decide it, as D-082 through D-086 read the other
+    modules. Twenty are read here and the eleven a payload decides are named and left.
+- id: all-thirty-one-now
+  summary: Every statement is read in one record, with eleven change pairs written in the same step.
+chosen: by-what-decides-it
+rationale: 'Nineteen of the twenty are duties and one carries nothing a check reads, which makes these
+  eight modules the opposite of section 5.9''s: every sentence here is about an act, and five of section
+  5.9''s six are about a value.
+
+
+  **Five bind the seller over publication.** It may publish a `ProposalManifest` at
+  `https://<seller.domain>/.well-known/openproposal.json`; at least one of `ETag` and `Last-Modified`
+  is required so buyers can poll cheaply, which is a header of the response and not a field of the document;
+  manifest entries match the current version of each proposal; a seller that limits concurrent holds
+  declares the limit in `hold_limits`; and one that declares `per_advertiser` may decline a hold request
+  naming no advertiser.
+
+
+  **Four bind the seller over exclusions.** It rejects an entry whose `store` it does not know with
+  `validation` rather than applying it across stores; it rejects an unaccepted exclusion type
+  deterministically with `not_offered` rather than ignoring it; it presents `best_effort` enforcement as
+  what it is and not as a guarantee; and it discloses a buyer''s exclusion lists to nobody but that buyer
+  and the systems that enforce or verify them for the line item. The last is the only confidentiality
+  duty in the specification.
+
+
+  **Three are recomputations and one is delivery.** `addressable_scale` and `availability` are recomputed
+  against the buyer''s actual selection, values and exclusions, and against the `break_position` and
+  `programs` options in effect, and against the audience conditions of section 5.3. The seller serves a
+  line item only on impressions of its `channel`. A recomputation is an act on figures the seller asserts,
+  so no payload shows it undone: two documents with different figures are both valid.
+
+
+  **Two bind a consumer, and they are the pair that makes a credential type safe to add.** A consumer that
+  does not know a `credential_type` does not treat the proposal or line item as invalid for that reason,
+  and treats that entry as unsatisfiable. Without the second the first would make an unknown credential
+  a thing to ignore rather than a thing to fail on.
+
+
+  **Two bind the seller over representation and one over settlement.** A full fetch returns the full
+  representation, except for line items and packages the requester may not read; a manifest entry holds
+  the summary and a response over the message binding may carry it; and once the deal exists in
+  `deal_origin` the seller records its id as one `deal` entry on the line item.
+
+
+  **One carries nothing a check reads.** "An entry is not a term and MAY be added after `agreed`" is an
+  external reference, and both halves are stated where they are graded: section 4.1.3 lists
+  `external_references[]` among the fields that are not offered terms, and `marker:3:recorded` holds the
+  rule that an entry is appended and never edited.
+
+
+  **Eleven are rules a payload decides, and they are not read here.** A line item declares `geo` or
+  `markets` and not both, and a buyer supplies no exclusion type absent from `accepted_exclusions.types`
+  (§ 5.5); a mechanism option''s `delivery_type` is one its row allows, `episodes` where present is `new`,
+  `geo`, `markets`, `device` and `frequency_cap` are absent, `time_zone` is not `viewer_local` because
+  `daypart` bounds air time, and `transaction_mechanism.available[]` holds only `direct_io` -- five of
+  section 5.9''s six; a section 3.3 summary''s `line_item_id` is required; `buyer.domain` is in
+  `eligible_buyers[]` or `buyer_requirements.seats` names a seat in an `eligible_seats[]` entry for its
+  `dsp`, and that `dsp` is in `allowed_dsps[]` (§ 5.8); and an audience `included[]` names exactly one
+  option (§ 5.3).
+
+
+  Section 5.9''s five are one group and they are the clearest case in the specification for writing the
+  pairs together: each is a clause of the same paragraph, each constrains a line item that offers one
+  mechanism, and one payload shape serves all five.'

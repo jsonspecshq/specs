@@ -1,0 +1,109 @@
+format: 2
+id: D-083
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  What does each normative statement of the kernel module carry, where section 3's marker table states
+  the same words a marker rule already grades?
+covers:
+
+- ir: rule:2.2:ef4efcb1
+  digest: e36dd7069ba76486f483ec13fe1ec89a5d12675e8da01dee33df55611e04e497
+  quote: Its row MAY narrow the type for that field, by requiring a key the type leaves OPTIONAL or by limiting the values or count the type allows, and says so.
+- ir: rule:2.2:df0340d2
+  digest: ec6dc16d2d8357e94f96a381873955f7251c1a29a92ab5342d9ad440a8ffc4e3
+  quote: Producers MUST write this form.
+- ir: rule:2.2:1e8acd47
+  digest: 4f57a2a0fa77f16f43eceb142f8cc63de4abd44a33ea2fcf4cf58baa977317a1
+  quote: Consumers MUST compare byte for byte and MUST NOT normalize a value before comparing it.
+- ir: rule:2.2:32c53f84
+  digest: 46ddd5951d89aaa54a6a5e8eaee4b2ba3055f080cbaac43b113d8bf5de1f632b
+  quote: Anyone MAY define an extension term.
+- ir: rule:2.2:c3db85f7
+  digest: 1d21fef93239ef46c0b52aa0a6cd169c281c285f60d9dbe8ac679367da5c0aa2
+  quote: For a `channel` (§ 5.1.1) or `cost_method` (§ 5.6.5) term, these effects are a MUST.
+- ir: rule:2.2:9c143862
+  digest: 3867dbbd0a70b305c0542a0c7d64cb22d066f524eb4bf22a0df5b513d0d0bacf
+  quote: A field MAY state another effect.
+- ir: rule:2.2:b0cdbdd1
+  digest: 7c133fe8cd0dcfed95651cf884957240971a08f6e34f2d822d6261ad75bef680
+  quote: It MAY need authentication
+- ir: rule:2.2:3d1eff57
+  digest: 1b351bcf86ecbebae10b8fdb70e974a67c0d217786376269343860ecd7e39a19
+  quote: An absent or unresolvable `registry_id` MUST NOT make a document malformed, and a consumer MUST ignore a resolved entry whose verified domain is not `domain`.
+- ir: rule:3:e5ff81ed
+  digest: c13252b8934b84a3fe7175a9c96a970a5223e3b7aed4f26ab7df606162db9035
+  quote: The seller sets it and MAY revise it while the `status` of the object that carries it is `draft`, `published` or `under_review`.
+- ir: rule:3:d5ed9b66
+  digest: 8ee5c176f11c87b1a19b1e7d35fdd893497044ef77aec2ec4063f1e9b242d0de
+  quote: Each option MAY carry a price delta.
+- ir: rule:3:82c2f1b0
+  digest: c93849d9b729272b79ae20197ca3fb6b85ee5d953534963626ab24f32b6bd245
+  quote: The buyer MAY ask for a value outside the declared space.
+- ir: rule:3:07a16404
+  digest: ed8ad42a32962db5a2597a6f2336258629c6a0c2e6c66cfac526a78cc6fa5cb1
+  quote: "`selectable`, `settable` and `supplied` fields MUST resolve without a round trip — everything needed to validate and price them is declared in the proposal."
+- ir: rule:3:e1b586de
+  digest: 25cac71ef0c5a520424bc5ec06b73dbd1d1671706c2280f07ef6dc90c84877b3
+  quote: The buyer MUST NOT alter the keys the seller declares beside them.
+- ir: rule:3.4:8a37931e
+  digest: 137180560e78c77933e2313616c5d475a7b87798cbd80b7bfd9b07992a640c1c
+  quote: Every path is OPTIONAL.
+options:
+- id: by-what-decides-it
+  summary: Each statement takes the role of whatever can decide it, as D-082 reads the overview module's.
+    A sentence whose content a marker rule already grades carries no conformance content of its own,
+    because the rule and the sentence are the same words and one of them is where the change pair sits.
+- id: a-second-rule-per-marker-sentence
+  summary: Each of section 3's sentences becomes a rule of its own beside the marker row it was extracted
+    from, so the rules output holds both and each needs its own change pair.
+chosen: by-what-decides-it
+rationale: 'Four of the fourteen are the sentences section 3''s marker table states inside its own cells:
+  the seller sets a `seller-set` field and may revise it while the status allows, each `selectable` option
+  may carry a price delta, the buyer may ask for a value outside the declared space, and every path of
+  section 3.4 is OPTIONAL. The first three are the Meaning cells of `marker:3:seller-set`,
+  `marker:3:selectable` and `marker:3:requestable`, which are rules the model already holds and which
+  carry a change pair each. The sentence and the rule are the same words read twice, so the rule is where
+  the statement is graded and the sentence carries nothing of its own. Section 3.4''s is the same shape
+  against the presence each path''s row already states.
+
+
+  `a-second-rule-per-marker-sentence` is what the other reading costs: eleven marker rules become fifteen,
+  four of them needing a change pair that would be a copy of a pair already written, and a reader of the
+  rules output would see one statement twice with no way to tell which is the specification''s.
+
+
+  **Two are a published type''s.** A `Domain` is "String: lowercase ASCII, internationalized labels in
+  A-label form (RFC 5890), with no scheme, port, path, or trailing dot", and "Producers MUST write this
+  form" is that pattern. "Consumers MUST compare byte for byte and MUST NOT normalize a value before comparing
+  it" is not: it binds what a consumer does after reading a valid value, so it is the consumer''s duty.
+  The two clauses sit in one cell and are two statements, which is why one is the schema''s and the other
+  an obligation.
+
+
+  **Six are duties.** A consumer compares domains byte for byte and normalizes nothing; a consumer ignores
+  a resolved `registry_id` entry whose verified domain is not the `domain` beside it, and an absent or
+  unresolvable one never makes a document malformed. Anyone may define an extension term, and for a `channel`
+  or a `cost_method` term the effects its definition states are a MUST. A binding document''s URL may
+  need authentication. The seller declares everything a `selectable`, `settable` or `supplied` field needs
+  to be validated and priced, so those fields resolve without a round trip. And the buyer does not alter
+  the keys the seller declares beside its own write -- the `allowed[]`, `max_select` and `deltas` that
+  section 3 marks `seller-set`, whose change `marker:3:seller-set` grades from the seller''s side; this
+  is the same bound stated as the buyer''s duty.
+
+
+  **Two carry no conformance content.** Section 2.2 states that a field''s row may narrow a shared type
+  and says so, and that a field may state another effect of an extension term. Both are about how this
+  document is written rather than about a value in it, which is the same reading D-082 made of section
+  2.6''s columns.
+
+
+  **Four of the module''s eighteen are not read here**, and they are the four that rest on types the kernel
+  does not yet hold: section 3.1''s "An object option''s id is its REQUIRED `id`, unique in the field"
+  and "An option priced only by `delta_cpm` MUST NOT resolve against any other entry", and section 3.2''s
+  two "Each entry MUST be covered by an `allowed[]` entry" and "... by an `include[]` entry". Each is a
+  rule a payload decides and each is about the shape a `Selectable` or a narrowing takes, which is
+  the parameterised form section 3.2''s nine rows are waiting on. Reading them before that shape exists
+  would name an owner the model has not got.'

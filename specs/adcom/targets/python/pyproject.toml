@@ -1,0 +1,24 @@
+# Generated from a published JSON Schema tree; don't edit it by hand.
+#
+# The distribution carries the published documents as package data, because the verdict
+# is taken against the published bytes and not against a transcription of them. Its two
+# dependencies are the validator the verdict is the schema's through, and the data
+# model's own runtime.
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jsonspecs-adcom"
+version = "1.0.0"
+requires-python = ">=3.14"
+dependencies = [
+    "pydantic==2.14.3",
+    "jsonschema-rs==0.60.3",
+]
+
+[tool.setuptools.packages.find]
+include = ["jsonspecs_adcom*"]
+
+[tool.setuptools.package-data]
+"jsonspecs_adcom" = ["py.typed", "schemas/**/*.json"]

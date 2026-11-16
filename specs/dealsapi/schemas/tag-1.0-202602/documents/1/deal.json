@@ -23,7 +23,7 @@
       "type": "array"
     },
     "created": {
-      "$ref": "../../kernel/1/kernel.json#/$defs/UtcTimestamp",
+      "$ref": "../../kernel/1/kernel.json#/$defs/Instant",
       "description": "UTC timestamp in seconds in ISO-8601 of when the deal was created in the Origin system"
     },
     "curation": {

@@ -1,0 +1,144 @@
+format: 2
+id: D-143
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  A Required cell whose subject is indefinite — "when an option's
+  `delivery_type` is `share_of_voice`", "when a property has `sync_groups[]`" —
+  denotes which of the things its list holds, and what does "has" assert of an
+  array?
+covers:
+  - ir: field:5.9:sov_basis
+    digest: 9f16571bb67e5a47d6e4deed1768aade229b08ba0d210d12528180f88f77aba2
+    quote: "`sov_basis` | Enum | seller-set | `impressions` | `loop_time`. `impressions`: a share of the line item's eligible impressions (digital placements, pooled DOOH products). `loop_time`: a share of each named screen's loop time (fixed-loop DOOH spots)"
+  - ir: sentence:3.1:90082c7b
+    digest: 161403bb46925eb4e041434df413505993c8c5e260906a4978cb562453fb61e0
+    quote: "`selected[]` is the complete set in effect and replaces `included[]`."
+  - ir: sentence:5.9:3e43b1df
+    digest: 575064a27f216240caf391094d98eedf3a585061c22044dcf1af7c2f4e28eda8
+    quote: "`share_of_voice`: the seller reserves a fixed share of the inventory, up to all of it, for the flight."
+  - ir: key:5.6.4:DeliveryCounting.partial_play_credit
+    digest: 175b6a72505afc647dbb7a39c1f9942d4226232bf5273beeb1b3a99b57363c97
+    quote: "`partial_play_credit` | REQUIRED when a property has `sync_groups[]` | What a display on fewer than `min_screens_per_play` screens counts. Core terms: `none` (no play) | `pro_rata` (screens played ÷ `min_screens_per_play`)"
+  - ir: key:5.2.8:SyncGroup.min_screens_per_play
+    digest: 34b819fe3becdcaafce433f66f1e7b47dab3de59bc35683dff262a57d771831b
+    quote: "`min_screens_per_play` | REQUIRED | The fewest of the group's screens that must show a display for it to count as one play (§ 5.6.4)"
+options:
+  - id: any-the-field-offers
+    summary: >-
+      An indefinite subject denotes any entry the field offers, so the
+      condition holds where the list holds one such entry, and "has" asserts
+      the key is present and the array holds an entry.
+  - id: the-one-in-effect
+    summary: >-
+      An indefinite subject denotes the entry in effect, so the condition holds
+      only of the option `selected[]` or `included[]` puts in effect.
+chosen: any-the-field-offers
+rationale: >-
+  **The document has a phrase for the one in effect, defines it, and uses it of this very field.**
+  § 3.1 states it: "`selected[]` is the complete set in effect and replaces `included[]`. With no
+  `selected[]`, `included[]` is in effect." And § 1.1's mapping table writes it of the
+  `transaction_mechanism` the `sov_basis` condition reads — "`1` when the mechanism **in effect** is
+  `programmatic_guaranteed`, `0` otherwise". So when this specification means the entry in effect it
+  says so, about this field, in those words. § 5.9's `sov_basis` row says "an option's
+  `delivery_type`" and not "the option in effect", and the difference between the two spellings is
+  the document's own.
+
+
+  **§ 5.9 gives the reason the requirement binds on the offer and not on the choice.**
+  "`share_of_voice`: the seller reserves a fixed share of the inventory, up to all of it, for the
+  flight", and `sov_basis` is the only statement of what that share is a share of — impressions, or
+  each named screen's loop time. A seller that offers `share_of_voice` among its options and states
+  no `sov_basis` has offered a share of nothing, and the buyer is asked to select it without being
+  told what it is. The requirement is on what the seller publishes, which is before any `selected[]`
+  exists, so the entry it reads is any the field offers.
+
+
+  **And `the-one-in-effect` cannot be stated by a keyword at all.** `selected[]` and `included[]`
+  hold option ids and `available[]` holds the options, so finding the option in effect is a join from
+  an id to an entry, which JSON Schema states nowhere. Under that reading the condition returns to
+  the rules output, which is where it was, so the reading is not only unsupported by the text but
+  would undo what stating it buys.
+
+
+  **"Has" asserts an entry, not a key.** § 5.6.4's row says what `partial_play_credit` is for: "What
+  a display on fewer than `min_screens_per_play` screens counts", and `min_screens_per_play` is a
+  REQUIRED member of a `SyncGroup` — one per group. A property whose `sync_groups[]` holds no group
+  has no `min_screens_per_play` anywhere, so a `partial_play_credit` stated of it would say what a
+  display on fewer than nothing counts, which says nothing. So the condition fires where the array
+  holds an entry, and the schema states that floor as `minItems: 1` beside the member's presence.
+
+
+  **§ 5.2.8 states no other floor**, and the document's own idiom confirms the reading is not about
+  the array's validity: where it requires an array to be non-empty it says so, at
+  `AssentEntry.line_item_ids[]` — "MUST be non-empty" — and at § 5.6.7's `fees[]`. `sync_groups[]` is
+  "Array[SyncGroup] | OPTIONAL" with no such clause, so an empty array is a valid value of the row
+  and simply carries no group for the condition to read. The floor is the condition's and not the
+  row's, which is why it is stated in the `if` and not in the array's own schema.
+evidence:
+- '§ 1.1 writes "the mechanism in effect" of the `transaction_mechanism` this condition reads, so the
+  phrase for the one in effect exists and is used of this field'
+- '"MUST be non-empty" occurs twice in the pinned text, at `AssentEntry.line_item_ids[]` and § 5.6.7''s
+  `fees[]`, and at neither `sync_groups[]` nor any row this record reads'
+challenge:
+- type: LineItem
+  value:
+    line_item_id: business-daily-display
+    status: published
+    channel: display
+    visibility: public
+    transaction_mechanism:
+      available:
+      - id: programmatic_guaranteed
+        delivery_type: share_of_voice
+      included: [ programmatic_guaranteed ]
+    pricing:
+    - pricing_id: entry-one
+      cost_method: CPM
+      currency: USD
+      list_rate: 12000
+  verdict: reject
+  context: >-
+    A line item offering one option at `share_of_voice` and stating no
+    `sov_basis`, which is a share of nothing.
+  reason: >-
+    The option the field offers carries `delivery_type: share_of_voice`, so the
+    condition holds and `sov_basis` is required. `the-one-in-effect`, the
+    option not taken, would accept this wherever the option is offered and not
+    selected, which is every published proposal before a buyer answers.
+- type: LineItem
+  value:
+    line_item_id: business-daily-display
+    status: published
+    channel: display
+    visibility: public
+    sov_basis: impressions
+    sov_share: 0.25
+    transaction_mechanism:
+      available:
+      - id: programmatic_guaranteed
+        delivery_type: share_of_voice
+      included: [ programmatic_guaranteed ]
+    pricing:
+    - pricing_id: entry-one
+      cost_method: CPM
+      currency: USD
+      list_rate: 12000
+  verdict: accept
+  context: >-
+    The same line item stating what the share is a share of, with the share
+    § 5.9's own `sov_share` row then asks for.
+  reason: >-
+    The condition holds of the offered option and the member it requires is
+    there, so the pair turns on that one value: a `share_of_voice` offer with
+    `sov_basis` is accepted and the same offer without it is not.
+feedback: >-
+  § 5.9's `sov_basis` row reads "REQUIRED when an option's `delivery_type` is `share_of_voice`", and
+  § 3.1 defines "in effect" for the entry a buyer puts in effect. Saying "when an option the field
+  offers has `delivery_type` `share_of_voice`" would put the quantifier on the page, where a reader
+  now takes it from the article against § 3.1's definition. § 5.6.4's `partial_play_credit` row reads
+  "REQUIRED when a property has `sync_groups[]`"; saying "has at least one `sync_groups[]` entry"
+  would state the floor the row's own purpose implies, since `min_screens_per_play` lives on a group
+  and a property with no group has none.

@@ -4,81 +4,278 @@ format: 1
 module: audience
 sections: [ "5.3" ]
 types:
-  - name: Provenance
-    kind: vocabulary
-    ir: field:5.3:audiences#description/object:1
-    source: { decision: D-041 }
-    open: true
-  - name: SuppressionList
+  - name: AudienceOption
     kind: object
-    ir: field:5.3:buyer_supplied#description/object:1
-    source: { decision: D-016 }
+    ir: key:5.3:AudienceOption.id
+    source: { rule: key-table-object }
+    open: false
+  - name: CategoryTaxonomy
+    kind: vocabulary
+    ir: key:5.3:AudienceOption.taxonomy
+    source: { decision: D-104 }
     open: true
-    description: "The buyer's suppression list. The specification states no members, so the object accepts any."
+    terms: [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+    list: { name: "List: Category Taxonomies" }
+  - name: DataLabel
+    kind: object
+    ir: key:5.3:AudienceOption.data_label
+    source: { decision: D-107 }
+    open: true
+    set_by: "the IAB Tech Lab Data Transparency Standard 1.1 Minimum Segment Disclosures table, keyed by its API flat file key (§ 5.3)"
+  - name: AudienceSelectable
+    kind: object
+    ir: key:5.3:AudienceSelectable.combine
+    source: { rule: key-table-object }
+    open: false
+    includes: { kind: apply, constructor: Selectable, arguments: { T: { kind: named, name: AudienceOption } } }
+  - name: CombineOperator
+    kind: vocabulary
+    ir: def:5.3:CombineOperator
+    source: { rule: lead-in-vocabulary }
+    open: false
+    terms: [ any, all ]
+  - name: BuyerSupplied
+    kind: object
+    ir: key:5.3:BuyerSupplied.segments_allowed
+    source: { rule: key-table-object }
+    open: false
+  - name: BuyerList
+    kind: object
+    ir: key:5.3:BuyerList.list_id
+    source: { rule: key-table-object }
+    open: false
+  - name: AddressableScale
+    kind: object
+    ir: key:5.3:AddressableScale.quantity
+    source: { rule: key-table-object }
+    open: false
 entries:
   - ir: field:5.3:audiences
-    digest: 273649330d46a8fb5e90121fdad4864fa49d29ce6c34dce7c90fc37282e40b96
-    source: { decisions: [ D-018, D-020 ] }
-    as:
-      role: property
-      object: LineItem
-      type:
-        kind: apply
-        constructor: Selectable
-        arguments:
-          T: { kind: apply, constructor: CatalogRefOr, arguments: { T: { kind: named, name: AudiencesOption } } }
-          K: { kind: named, name: Uuid }
-      presence: optional
-  - ir: field:5.3:audiences#description/object:1
-    digest: 0a7d355ab5dcb787717d01988764dcca8895bdc0b1252de9e8269ad516e7ac6b
-    source: { decision: D-024 }
-    as:
-      role: type
-      name: AudiencesOption
-      layer: object
-      open: false
-      members:
-        id: { type: { kind: named, name: Uuid }, presence: optional }
-        name: { type: { kind: named, name: Text }, presence: optional }
-        taxonomy_ref: { type: { kind: named, name: ExternalId }, presence: optional }
-        provenance: { type: { kind: named, name: Provenance }, presence: optional }
-        addressable_scale: { type: { kind: named, name: Count }, presence: optional }
+    digest: a0b120d54324830aacfcbf094c51a542138af32594d125cd7ac5cb2f199a0a9a
+    source: { rule: named-object-row }
+    as: { role: property, object: LineItem, type: { kind: named, name: AudienceSelectable }, presence: optional }
   - ir: field:5.3:addressable_scale
-    digest: 1289f106e9861b03225c1fc7056b164eac34f82d73fc327c7009b0c8b9111e24
-    source: { rule: domain-row }
-    as: { role: property, object: LineItem, type: { kind: named, name: Count }, presence: optional }
+    digest: 646b6c2843fd5b8eddfcd9f52b9f12c2321e34e9c789dff0def1eed33c060a49
+    source: { rule: named-object-row }
+    as: { role: property, object: LineItem, type: { kind: named, name: AddressableScale }, presence: optional }
   - ir: field:5.3:activation_route
-    digest: 186f13498c109878a31ce2cc5a9d3337f48d7c0ddc6c4190d24e20a4bf1255a9
-    source: { decision: D-018 }
+    digest: e6431658bf2d8b13036ecbee1c1e4a92f59839c61a93fd442a83aaac9efe68cd
+    source: { rule: applied-constructor-row }
     as:
       role: property
       object: LineItem
       type:
         kind: apply
         constructor: Selectable
-        arguments: { T: { kind: named, name: ActivationRoute }, K: { kind: named, name: ActivationRoute } }
+        arguments: { T: &a1 { kind: named, name: ActivationRoute }, K: *a1 }
       presence: optional
   - ir: field:5.3:activation_route#description/values:1
-    digest: b19f23d4d3563709d77fea2dd16730af81a0db7329013cf764a663b2ef37d3e6
-    source: { decisions: [ D-013, D-014 ] }
+    digest: 0672270fd9a485e9bbeec01539189d0a27c6fe6aae7251cec8a9d190c400c619
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-130 ] }
     as: { role: type, name: ActivationRoute, layer: vocabulary, open: true }
   - ir: field:5.3:buyer_supplied
-    digest: 18d87a0de58116db76d7152a7f96bc722dc700b91f053406b32e4299e7910504
-    source: { rule: inline-object-row }
+    digest: 156e80a7f77bb45b68c65982db7885275ff1b89a00fc1c4127465ce94d6e9889
+    source: { rule: named-object-row }
     as: { role: property, object: LineItem, type: { kind: named, name: BuyerSupplied }, presence: optional }
-  - ir: field:5.3:buyer_supplied#description/object:1
-    digest: d5cdd605af129db6ef8a658446a915a300cb4b1abe0f7ff6a2ae97f9fbb99f8f
-    source: { decision: D-024 }
+  - ir: def:5.3:AudienceOption
+    digest: 3093e35112966510e94de0f687eae6d54cd6887bb73d175f302315064f59574b
+    source: { rule: lead-in-restates }
+    as: { role: same, name: AudienceOption }
+  - ir: sentence:5.3:a4571acc
+    digest: 130de58ae785119a06941a9b138cec2b961eaea505bce3c8257356d7a221648d
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.3:AudienceOption.id
+    digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+    source: { rule: domain-row }
+    as: { role: property, object: AudienceOption, type: { kind: named, name: MintedId }, presence: required }
+  - ir: key:5.3:AudienceOption.name
+    digest: b66f074736cda06db588f104f15b79c549332a164e83be9388338734a8ea1add
+    source: { rule: domain-row }
+    as: { role: property, object: AudienceOption, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:5.3:AudienceOption.taxonomy
+    digest: b42e48e3049a702e8ade1c662cf09257fb36ee1d9579abae9525a44f2b1c6a22
+    source: { decision: D-104 }
+    as: { role: property, object: AudienceOption, type: { kind: named, name: CategoryTaxonomy }, presence: required }
+  - ir: key:5.3:AudienceOption.data_label
+    digest: 74daab120c18c4ad88c9f38c309986a79442cf7d53b8db3eb3fa869e20b8abe5
+    source: { decision: D-107 }
+    as: { role: property, object: AudienceOption, type: { kind: named, name: DataLabel }, presence: required }
+  - ir: "key:5.3:AudienceOption.sensitive_categories[]"
+    digest: b9f471bc055ee077c8e536776e114b21744b0ce5824ac0e381e621ee21a0c1f0
+    source: { rule: named-type-row }
     as:
-      role: type
-      name: BuyerSupplied
-      layer: object
-      open: false
-      members:
-        segments_allowed: { type: { kind: boolean }, presence: optional }
-        suppression_allowed: { type: { kind: boolean }, presence: optional }
-        match_rate_expected: { type: { kind: named, name: Fraction }, presence: optional }
-        segments:
-          type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalId } } }
-          presence: optional
-        suppression_list: { type: { kind: named, name: SuppressionList }, presence: optional }
+      role: property
+      object: AudienceOption
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: SensitiveCategory } } }
+      presence: required
+  - ir: "key:5.3:AudienceOption.sensitive_categories[]#meaning/values:1"
+    digest: 85f8e35494fb11501fb69b1d4c76190a9ac001b00d9eb800693514f1e07a8379
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: SensitiveCategory, layer: vocabulary, open: true }
+  - ir: key:5.3:AudienceOption.excludable
+    digest: e25857225a1e17b773da6f7987dbc42e39381ee3e441366e510fc86451f12151
+    source: { rule: domain-row }
+    as: { role: property, object: AudienceOption, type: { kind: boolean }, presence: optional }
+  - ir: def:5.3:AudienceSelectable
+    digest: a6081cebdf68f7e5812a8384537f4a430ccb7fa6bab74df144f36c71195e07ef
+    source: { rule: lead-in-restates }
+    as: { role: same, name: AudienceSelectable }
+  - ir: sentence:5.3:bfc01b13
+    digest: 2238b1bee7fd5526fc2c30be23a9e59eee2b309cbf4bf94adbe2d92cb99c965f
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.3:AudienceSelectable.combine
+    digest: e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31
+    source: { rule: applied-constructor-row }
+    as:
+      role: property
+      object: AudienceSelectable
+      type:
+        kind: apply
+        constructor: Selectable
+        arguments: { T: &a1 { kind: named, name: CombineOperator }, K: *a1 }
+      presence: conditional
+  - ir: rule:5.3:153027ca
+    digest: a76948674f927c0bedf5eed46ac78e5c66f5f384d74e1d1206fa63f15bf3d21d
+    source: { rule: presence-statement }
+    as: { role: rule, object: AudienceSelectable }
+  - ir: rule:5.3:7cdd61de
+    digest: b2ce5726603bdeaaf2541ff2261f895ec9d571a0d22b7b1ad609f9b80dc4e337
+    source: { decision: D-154 }
+    as: { role: rule, object: AudienceSelectable }
+  - ir: "key:5.3:AudienceSelectable.excluded[]"
+    digest: f227f89396c61a37d741c715b7d46708d23cd545455550c409299ef69224cbfb
+    source: { rule: domain-row }
+    as:
+      role: property
+      object: AudienceSelectable
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: MintedId } } }
+      presence: optional
+  - ir: block:5.3:3/values:1
+    digest: 64a9ead90c53872934c97421e65444a99cac6e09d4dca25c1af6a5126248474b
+    source: { rule: restated-value-list }
+    as: { role: same, name: CombineOperator }
+  - ir: def:5.3:CombineOperator
+    digest: 8b06361a7e2f85425d23ff428883f5452f75d43ff7733ed6fbe2a0fae0e8da40
+    source: { rule: lead-in-restates }
+    as: { role: same, name: CombineOperator }
+  - ir: sentence:5.3:d7819ead
+    digest: f36117b4a3a0ef3b794bd162e502fd4e2394d023b692112c0b43d1e191bd9334
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:1b70217c
+    digest: bc43c7d8b0b4852122597d5879b72df9b7cdd0d3562f85dfdc9fac7fc4da2ad1
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:dc249217
+    digest: e562ad99bcb9980e270bfd693559dfb75ea5763492683f461c2d398ac0f343ab
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:2cc1bd2a
+    digest: 4135c06ac87f34e3141d2e4f8943bff715483e7a22f83497cb77d01dcaa72004
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:b8e5ad97
+    digest: e86f43457be4da05bdf116708547d9c7747d7b4533a1db2d24fba74a7ef3a269
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:241f87a3
+    digest: 55166fa670325137a8ec468fc8e10f9a819d04b3a2f65ae74ccaf8acd88a1273
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:4d4b8367
+    digest: 0981c99f2d79b0486cb3a781df0e25a3fc6e24a94bed2626720e5605690a2d51
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:5.3:147681be
+    digest: fcde80beb7f60dd236045385221ad0cc1dbca3c7a8c594ddea384683041e1340
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:5.3:7dce4112
+    digest: 2d24ca21abb2c207b9a63deca0fa6d3907a43da7147beb1576b58836d2fbea6f
+    source: { decision: D-087 }
+    as: { role: obligation, party: seller }
+  - ir: def:5.3:BuyerSupplied
+    digest: c3d4643cfeef5be4a305a9ddc7609416de96dffb4e6a3330a26861c8e30056d8
+    source: { rule: lead-in-restates }
+    as: { role: same, name: BuyerSupplied }
+  - ir: sentence:5.3:d87de53a
+    digest: d4ee1542ed1a6de0469afbbcb33303c422512e929e5e552da314d33cf009e187
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.3:BuyerSupplied.segments_allowed
+    digest: 089a3de87412c7dc2f4616ead51247449c2462169e84b30afa2e50f0736b1c20
+    source: { rule: domain-row }
+    as: { role: property, object: BuyerSupplied, type: { kind: boolean }, presence: optional }
+  - ir: key:5.3:BuyerSupplied.suppression_allowed
+    digest: 2150ca7ac182f5cb004e18cb97a13789283eeece420765766f755875f38b02a6
+    source: { rule: domain-row }
+    as: { role: property, object: BuyerSupplied, type: { kind: boolean }, presence: optional }
+  - ir: key:5.3:BuyerSupplied.expected_match_rate
+    digest: 08caaf60619fbd81aef952f59c042292df743cc43ccfe74104dda762727dbbc0
+    source: { rule: named-type-row }
+    as: { role: property, object: BuyerSupplied, type: { kind: named, name: Fraction }, presence: optional }
+  - ir: "key:5.3:BuyerSupplied.segments[]"
+    digest: 863cb46ad187f30f808ce4d0f7e1eeb1a3f6d6dad62cef3efb4d6b376eb70016
+    source: { rule: named-object-row }
+    as:
+      role: property
+      object: BuyerSupplied
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: BuyerList } } }
+      presence: optional
+  - ir: key:5.3:BuyerSupplied.suppression_list
+    digest: 55b1f097526ab46b25238a91ad303b9a7fa47ca724eccf229948c2bebd5f5876
+    source: { rule: named-object-row }
+    as: { role: property, object: BuyerSupplied, type: { kind: named, name: BuyerList }, presence: optional }
+  - ir: def:5.3:BuyerList
+    digest: 60f2d6413704f6ff9f73d22e1291a5098f21191180a36b28e85a545a82a51827
+    source: { rule: lead-in-restates }
+    as: { role: same, name: BuyerList }
+  - ir: sentence:5.3:7e711942
+    digest: 85f72d3213242654a9b20bc1cbd00f4f6ba11c120001e97aaf3524f7818ad8e0
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.3:BuyerList.list_id
+    digest: aec6162a5dd57d18a7afcc2631816acb9678ae845abd338acda0f7bed90afdcf
+    source: { rule: domain-row }
+    as: { role: property, object: BuyerList, type: { kind: named, name: MintedId }, presence: required }
+  - ir: key:5.3:BuyerList.source
+    digest: fff3e26ee551c54a3aeba51dc8cb8992867b5b4eb49b0d22ef023ccd362bf98e
+    source: { decision: D-094 }
+    as: { role: property, object: BuyerList, type: { kind: named, name: ExternalId }, presence: optional }
+  - ir: key:5.3:BuyerList.size
+    digest: f0a72a68121097bc48004f061d2c3da1312a2156a657d9c3c85ae3e6911e2def
+    source: { rule: domain-row }
+    as: { role: property, object: BuyerList, type: { kind: named, name: Count }, presence: optional }
+  - ir: key:5.3:BuyerList.match_method
+    digest: d624f1487df044d9f3c49bbfd2fab9b05e1161cda410e7d35158b6def09ffc5a
+    source: { rule: named-type-row }
+    as: { role: property, object: BuyerList, type: { kind: named, name: MatchMethod }, presence: optional }
+  - ir: key:5.3:BuyerList.match_method#meaning/values:1
+    digest: 5b378a5146742256ed1baf3515dd25a6712816c0eaa67b78934aba74f3ae653a
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: MatchMethod, layer: vocabulary, open: true }
+  - ir: def:5.3:AddressableScale
+    digest: eb8273ce54692e6fb728d8bf915ac7dd2897971ca36114c40ac7d49c9ad99fcd
+    source: { rule: lead-in-restates }
+    as: { role: same, name: AddressableScale }
+  - ir: sentence:5.3:87a16af4
+    digest: 63dc87947a46ffb8d30be00592b317da1e89a44143c2982984bb37ed75c84c98
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:5.3:AddressableScale.quantity
+    digest: 97bf7301c757d616f4535d83357efab46ba49281508a20f633fe3b4ab8672552
+    source: { rule: domain-row }
+    as: { role: property, object: AddressableScale, type: { kind: named, name: Count }, presence: required }
+  - ir: key:5.3:AddressableScale.unit
+    digest: fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db
+    source: { rule: named-type-row }
+    as: { role: property, object: AddressableScale, type: { kind: named, name: VocabularyTerm }, presence: required }
+  - ir: key:5.3:AddressableScale.window
+    digest: 861130084de21301d1711711714a78c7b499b4afb18400f7bb6b4cfac2cf4264
+    source: { rule: named-object-row }
+    as: { role: property, object: AddressableScale, type: { kind: named, name: Interval }, presence: required }

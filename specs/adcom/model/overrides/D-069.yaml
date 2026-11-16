@@ -1,0 +1,92 @@
+format: 2
+id: D-069
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Three attributes default to a taxonomy code that the list they cite marks deprecated and recommends against. Does the schema publish the default the type cell states, or depart from it?"
+covers:
+  - ir: key:object_ad:Ad.cattax
+    digest: de90f047dd0254fea06e48ad2883bf41add7eb3adaf037b22c0832c4e55f4235
+    quote: "`cattax` | The taxonomy in use for the `cat` attribute. Refer to List: Category Taxonomies."
+  - ir: key:object_content:Content.cattax
+    digest: 46d3fb6945d775ccd63e38ac2fccab3b0de153c3ba1b36e87de20969b7a94f0b
+    quote: "`cattax` | The taxonomy in use. Refer to list List: Category Taxonomies in AdCOM 1.0 for values."
+  - ir: key:object_restrictions:Restrictions.cattax
+    digest: aff74435ae461ecd1ad7624e5279da1f95cfe603c32bfc41574744076c71bc31
+    quote: "`cattax` | The taxonomy in use for the `bcat` attribute. Refer to List: Category Taxonomies."
+options:
+  - id: publish-the-default-and-report-the-contradiction
+    summary: >-
+      Publish the default the type cell states. The cited list's own branch
+      already carries the deprecation, so a consumer reads both facts from the
+      published bytes, and the contradiction between them is the
+      specification's to resolve.
+  - id: publish-no-default-where-its-value-is-deprecated
+    summary: >-
+      Omit the default on these three attributes, so a consumer must choose a
+      taxonomy rather than be given a deprecated one. The schema then states
+      less than the text does.
+  - id: default-to-a-taxonomy-the-list-does-not-deprecate
+    summary: >-
+      Publish a different code as the default — one the list does not
+      deprecate — so an omitted attribute yields a taxonomy the specification
+      still recommends.
+chosen: publish-the-default-and-report-the-contradiction
+rationale: >-
+  Measured before choosing. Three attributes carry a default whose value the
+  list they cite deprecates: `Ad.cattax` and `Restrictions.cattax` default to
+  `2` and `Content.cattax` to `1`, and `CategoryTaxonomy` describes both as
+  "Deprecated, and recommend NOT be used since it does not have SCD flags". The
+  class is these three and no others — no published default in the Deals API or
+  OpenProposal names a value its cited list deprecates — and it holds on both
+  AdCOM locks.
+
+  **The published schema already states both facts, which is what decides
+  this.** The default is on the attribute because the type cell says so, and
+  the deprecation is on the vocabulary branch's own `description` because the
+  list says so. A consumer holding the schema can read that omitting `cattax`
+  yields taxonomy 1.0 and that taxonomy 1.0 is deprecated, and a generator
+  rendering the vocabulary carries the sentence into whatever it emits. Nothing
+  is hidden and nothing needs adding for the fact to reach a reader.
+
+  So the departures are not improvements. `publish-no-default-where-its-value-
+  is-deprecated` removes a fact the text states and changes what an omitted
+  attribute means, which is a wider change than a contradiction in an
+  annotation warrants — and it leaves a consumer with less than the
+  specification gives. `default-to-a-taxonomy-the-list-does-not-deprecate`
+  invents a value no cell states; which taxonomy a seller means by silence is
+  the specification's to say and not this repository's, and guessing it would
+  put a number in the published bytes that no text supports.
+
+  What this reading costs, stated rather than hidden. Every generated package
+  will carry a default naming a taxonomy its own specification recommends
+  against, and a developer who omits the attribute gets it without being
+  stopped. That cost is the text's, it is visible in the published bytes beside
+  the default, and the feedback is where it goes to be fixed at the source.
+
+  This record changes no published value. The three defaults stay `2`, `1` and
+  `2`, and it moves only the origin of the three attributes it covers, from the
+  rule that read their type cells to this reviewed reading — which is what a
+  record confirming a rule is for. It exists because a rule chose these three
+  defaults by reading three type cells, and nothing until now had looked at
+  what the cited list says about the values those cells name. The reading is
+  that the rule was right; what was missing was somebody having checked.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2970"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L2974"
+feedback: >-
+  Three attributes default to a taxonomy the specification recommends against.
+
+  `Ad.cattax` and `Restrictions.cattax` state `default 2`, `Content.cattax`
+  states `default 1`, and List: Category Taxonomies describes code 1 as "IAB
+  Tech Lab Content Category Taxonomy 1.0: Deprecated, and recommend NOT be used
+  since it does not have SCD flags" and code 2 as the same of Taxonomy 2.0. So
+  an implementation that omits the attribute, as the default invites, selects a
+  taxonomy the same document tells it not to use — and every library generated
+  from the specification carries that default.
+
+  Either the defaults should name a taxonomy that is not deprecated, or the
+  attribute should have no default so that a sender chooses one. The question
+  the text does not answer is which taxonomy a sender means by silence, and
+  that is the one an implementer needs settled.

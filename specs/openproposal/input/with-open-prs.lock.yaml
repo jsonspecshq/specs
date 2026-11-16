@@ -1,54 +1,106 @@
 # Optional extractor input: upstream `main` plus the open PRs, merged in the
-# order below. Built by the integration run of 2026-10-25 and rebuilt
-# 2026-10-26 with #117 at e51ee17 and #118 at 395ca83. The integration branch
-# exists only in a local clone, so the lock carries a snapshot of the
-# specification and examples/ at `commit`, which
+# order below. Rebuilt by the integration run of 2026-11-13, which replaced the
+# run of 2026-11-07: 17 of the 31 heads had moved in the six days between them,
+# #137 through #152 and #154. #137 rewrites the whole specification, and #138 to
+# #154 stack on it, each re-applying onto the rewrite the older PRs it names. So
+# the fourteen PRs the first run merged by hand are merged here through that
+# stack, and the order below merges every PR after the PRs it already carries.
+# Measured on this run: 15 of the 31 merges changed the tree and 16 changed
+# nothing, which is the signal that the order still holds, and none conflicted.
+# The result is #154's own head, and `base` is an ancestor of it, so that one
+# branch now carries upstream `main` and every other open PR's content.
+# The integration branch exists only in a local clone, so the lock carries a
+# snapshot of the specification and examples/ at `commit`, which
 # `npm run fetch -- --lock specs/openproposal/input/with-open-prs.lock.yaml
 # --snapshot` writes from the clone; CI runs every gate from the snapshot. With
 # no source reachable (`required: false`), CI checks the committed IR instead.
 name: with-open-prs
 upstream: https://github.com/IABTechLab/OpenProposal
-base: 44dfaaf618736219426c311ec997b6d37e94b950
-commit: 292bb51e654c2eef563d721eb6af8317371c906a
+base: ebb9fb88841ae0b5eda38b017c609fb26b0da3ec
+commit: 711b34cf2fdc209d46b832013bfb1f1cc8727ba5
 path: spec/openproposal-3.0.md
-blob: fdb303f07c669c21c0c1196e1c8e441790a62d3c
+blob: c395ca84688d49807e5d3318445da4b4c4b79e29
 ir_dir: ir/with-open-prs
+# The variant this specification is read from: upstream main with every open
+# pull request applied, which is the text the model, the schemas and the
+# outputs are built from. It is the only lock, so it is the default.
+edition: "3.0"
+release: main-with-open-prs
+kind: branch
+order: 1
+default: true
 required: false
 # The example files at `commit`, by path, with their git blob SHAs.
 examples:
-  examples/line-item-audio.yaml: da55e14e987b7f37779bc236705bae2d7033f6ac
-  examples/line-item-ctv-bonus.yaml: 600dc0c9308e8d81f08b399a0d0ee716f0ed5bc5
-  examples/line-item-ctv.yaml: 27e2bee56c31fdb0636e8f617ca9574c45fd754a
-  examples/line-item-display.yaml: 55f21b419d8ae1e7d85ff4e8341805ade05317d8
-  examples/line-item-rewarded-video.yaml: 37bd7fbbc773bc01288e1cf13a82f98e71571fcd
-  examples/manifest.json: 7652e1fbe006d2e449a3223dc5a011f4e9488e04
-  examples/proposal.yaml: a40bd3b923dc4517eb20eb584d551170c8765d36
+  examples/line-item-audio.yaml: 6ee444617dbcca19d8288c206e0d2d7fffa84c73
+  examples/line-item-ctv-bonus.yaml: c565027206afb0582d7eab75bf96490cedd96a29
+  examples/line-item-ctv-live-series.yaml: faef09f597423d4abae306d28d3c2647a5583d8a
+  examples/line-item-ctv.yaml: 09b2a204233843cacfce358975c5eb3b81d397c9
+  examples/line-item-display.yaml: d217632790bf1e35196c8837876d9c60a204640c
+  examples/line-item-dooh.yaml: c3adc2506456d7aa372c5f9ceeabe812ff620107
+  examples/line-item-podcast-embedded.yaml: 6b0a76a7dbb161b67ca33dbfd4bef7cbceb877e2
+  examples/line-item-rewarded-video.yaml: 8213c7d01d7f7f31963d68963d7746ccc7479cd6
+  examples/manifest.json: 55639c287c87705a5cebc725b5820f57dfaf6084
+  examples/proposal-agreed.yaml: f5ff285341da125cc94b86feb701e171a459d5c3
+  examples/proposal-issued.yaml: 2f2ba4fb085757cfefc1319399e848d81c249aaa
+  examples/proposal-package.yaml: 69e2c1c52227cfd63ae1cd21906d2cb3a5754bb1
+  examples/proposal.yaml: fd37b713ec4afece07a84fcaa59cbdc932a6e982
 # The git tree SHA of examples/ at `commit`, which pins the directory's listing.
-examples_tree: 37144b6616e5dc83a7aad9ecd03a205caf0ce5dc
+examples_tree: d44395f01494ecae8e273324047ccef664913ab2
 # The day on which each head below was its PR's live head, checked with
 # `gh pr view N -R IABTechLab/OpenProposal --json headRefOid`.
-heads_on: "2026-10-26"
+heads_on: "2026-11-13"
+# Every open PR that changes spec/ or examples/, plus #117, which #146 carries.
+# A PR is merged after every PR whose content it already holds, so each merge
+# of a carried PR reports that the branch is already up to date and the whole
+# order replays with no conflict. #136 is not merged: it changes CONTRIBUTING,
+# the pull-request template and README, and no specification source; checked
+# again on 2026-11-13, when its files are still those three.
+# #117 stays in the order and stays open: the API reports it `open`, unmerged,
+# at the head below, which has not moved since the first run. #146 carries its
+# content, so its merge is one of the sixteen that change nothing.
 merge_order:
-  - { pr: 17, head: dc0e37c8890b1ad6f197fd4a9418b7b231fab454 }
-  - { pr: 18, head: ff53dc5a7d436ac42995f9842394369901e9eb70 }
-  - { pr: 70, head: ecec3d74f484dbb4ea4404fb7fe847cbbd94aafe }
-  - { pr: 73, head: 74a25448baf9e38048a5bd417b4372d46faaa77f }
-  - { pr: 117, head: e51ee17d2c74d166dd75c3da29698de4e8a998fa }
-  - { pr: 71, head: 63712c0683b1f67e032450f7400979be60b5cde4 }
-  - { pr: 72, head: 208f0c2c2aa1fe7551b2adbcc2489ed649ca70b7 }
-  - { pr: 74, head: 7a8938579c6339b3c397ab6e40d2b47e1860e195 }
-  - { pr: 75, head: b88e9a0719180303917efdf59d20ba1769172d27 }
+  - { pr: 137, head: e25dc09775d676e9bbf2476981578aa57ac5a2eb }
+  - { pr: 70, head: 10a3780a91a21251567a9fac579695efc3fee088 }
   - { pr: 76, head: 8e1f614a5c0546e88d993ed239ffcdc71b395a78 }
   - { pr: 118, head: 395ca8357533843450083d1676b6cc6cab2c87c0 }
   - { pr: 119, head: 0125d5549c4cc1790bd3ab847e8d5826b66de82d }
-  - { pr: 120, head: 81de4d827440cc42d8e027d5f88843e8da109bdd }
+  - { pr: 138, head: f9e6db90e7e61add81bf8cf6a180667966647227 }
+  - { pr: 71, head: 63712c0683b1f67e032450f7400979be60b5cde4 }
+  - { pr: 73, head: 0b90fd4359628e6bb761ef1b92b2639d1f8337a3 }
+  - { pr: 139, head: 5b754cca54225e163cc3e23d4a250ea8d3a0cbb8 }
+  - { pr: 75, head: b88e9a0719180303917efdf59d20ba1769172d27 }
+  - { pr: 140, head: e6b100cf43f1f0ce8a0bfcee3e668ebcff58ac5d }
+  - { pr: 74, head: 7a8938579c6339b3c397ab6e40d2b47e1860e195 }
+  - { pr: 141, head: e793435a80082bd0fab9bad78143ad27de9fb4c6 }
+  - { pr: 18, head: e3cbe66c1ec17d4685113ae87eb37ef26206ef7f }
+  - { pr: 72, head: 208f0c2c2aa1fe7551b2adbcc2489ed649ca70b7 }
   - { pr: 123, head: 9783ec87d102ccb60c106f4b6782650aa1f0a249 }
+  - { pr: 142, head: 79601cea368cbee7206bbbc39d1b1f54ea6ad478 }
+  - { pr: 144, head: dad072c08c1a4138b688470d02a7c8377a4e1c23 }
+  - { pr: 145, head: 579e31542277967f20953f9ece6180268caf1395 }
+  - { pr: 146, head: 73d465dd7f66c5a2442437e602f2dd96177257e6 }
+  - { pr: 143, head: 6b08faf49565ba0d6b442dc715ddb160efaed7f2 }
+  - { pr: 117, head: e51ee17d2c74d166dd75c3da29698de4e8a998fa }
+  - { pr: 147, head: 6972a772a2009ffda51fcd00fe793b2cebeae7f8 }
+  - { pr: 148, head: f0509a08a2d67fd89dc05afac4486681f74543e2 }
+  - { pr: 149, head: 2e9fd38a820a4706af5470f2e7d9491a61dd7380 }
+  - { pr: 17, head: 63d86c097c930395545ad5423292953609d81e37 }
+  - { pr: 151, head: 17d5e48619e72c5c17133d440524a554c8ec162e }
+  - { pr: 152, head: 55ce0f6e2b464a93e96db21ef29dee6d1c8d7413 }
+  - { pr: 150, head: ab76c8038d8771efdb7c588588691c3d7dcbb0bb }
+  - { pr: 120, head: 81de4d827440cc42d8e027d5f88843e8da109bdd }
+  - { pr: 154, head: 711b34cf2fdc209d46b832013bfb1f1cc8727ba5 }
 # What the integration changed outside the PRs, beside resolving their
-# conflicts, as clauses the feedback's inputs paragraph quotes.
-edits:
-  - "moved #17's App identity block back above the § 5.2.1 that #119 adds"
-  - "set the header of #120's rewarded-video example to § 6.7"
-  - "added `time_zone: viewer_local` to the examples of #70 and #120, as #123's description asks"
+# conflicts, as clauses the feedback's inputs paragraph quotes. The order above
+# raises no conflict, and the three clauses the run of 2026-10-26 carried are
+# now upstream's own text: #149 gives the app identity block its own section,
+# #154 heads the rewarded-video example § 6.7, and #154 carries
+# `time_zone: viewer_local` in the bonus and rewarded-video examples. Upstream
+# `main` moved from 44dfaaf to the `base` below between the two runs and none of
+# its commits touches spec/ or examples/, so every change to the text this lock
+# pins comes from the PRs.
+edits: []
 sources:
   - git: ../../vendor/OpenProposal-integration
   - snapshot: input/snapshots/with-open-prs

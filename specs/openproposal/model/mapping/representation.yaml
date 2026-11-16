@@ -3,108 +3,119 @@
 format: 1
 module: representation
 sections: [ "2.1" ]
-depends: [ commercial, execution, guarantees, inventory, line-item, proposal ]
-types: []
+depends: [ audience, commercial, eligibility, execution, guarantees, inventory, line-item, proposal, targeting ]
+types:
+  - name: PackageSummary
+    kind: object
+    ir: key:2.1:PackageSummary.package_id
+    source: { rule: key-table-object }
+    open: false
 entries:
-  - ir: rule:2.1:2e481f6f
-    digest: 8e7174a9f45f226290f9d5125760d9e151c9d2301aa8b702e0e2758775ef543d
-    source: { decision: D-028 }
-    as: { role: profile, profile: Summary, document: LineItem }
-  - ir: rule:2.1:948e2b02
-    digest: d73007c4f00ee65f89f1ffebba4a24a699310dd4992410d26e3576b54575f9e0
-    source: { decision: D-029 }
+  - ir: rule:2.1:568d4699
+    digest: 1d0a1e4074849669561e9040826a916395cfaea0b2c0a0fc964417e7145bbdd0
+    source: { decision: D-087 }
     as: { role: obligation, party: seller }
-  - ir: sentence:2.1:5e6cb5f0
-    digest: c3d6b26feae94fc61ee3037803cc382fa0f3481fb664eafb9546bdf254ce381a
-    locks: [ main ]
+  - ir: rule:2.1:5072813c
+    digest: 832ce0230a46b8eb8419bc867ed657b68fbff5dbedd926bd3030ef609efbc253
+    source: { decision: D-087 }
+    as: { role: obligation, party: seller }
+  - ir: sentence:2.1:b90d9a93
+    digest: 4124525477f94033397a33f1a30be02b2716349763b714153916f1974e2977b7
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: block:2.1:3/identifiers:1
-    digest: cbcaa410cbcd800b1bf4167c9ae823a6814a7b474f7c95857205fae9160ae94e
-    locks: [ main ]
-    source: { decision: D-028 }
+  - ir: def:2.1:LineItemSummary
+    digest: e95d7a9ee5dc3490cb45c86c20e81343da34e900c975fc98219f48eb84e621ae
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:2.1:7ecd963f
+    digest: afa8dece4c268c0e7b9dc3d7d11946d48f39c22016ac079b8715da0d151737eb
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: code:2.1:1
+    digest: a60df1260430c44c11afd1ea911b6fa33403c406ca0dfa5034440a8af7871eea
+    source: { decision: D-069 }
+    as: { role: profile, profile: Summary, document: LineItem }
+  - ir: sentence:2.1:bd68c3df
+    digest: a0be3b8926c4fd4494681fefcbcc61ef5fd47b44bebd0b59d841d0ea490bc2b8
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: code:2.1:2
+    digest: d70a5fe3c0c1773d24f7c2ff4297826e2678c0a3cb1876b8227bba04f8733c8e
+    source: { decision: D-069 }
     as:
       role: profile
       profile: Summary
-      document: LineItem
-      reads: [ { item: property names, paths: [ "properties.available[].name" ] } ]
-  - ir: block:2.1:3/identifiers:1
-    digest: 404539a2c4ac9f44b47fd286a6466aa8e85b5fdd9106382b8d2adc4d461edff4
-    locks: [ with-open-prs ]
-    source: { decision: D-028 }
+      document: Proposal
+      members:
+        line_items:
+          type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: LineItemSummary } } }
+          presence: conditional
+        packages:
+          type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: PackageSummary } } }
+          presence: conditional
+  - ir: def:2.1:ProposalSummary
+    digest: 85525f4e24fe81823f8c560308226a4dd0a0ebd30de3a4918005fca4b0686fbe
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:2.1:5ed82d3e
+    digest: 963f475b6c9b5f34b855575fffd80a0ffd8e7b186248fe6e5b39ea12b4510e81
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: "key:2.1:ProposalSummary.line_items[]"
+    digest: be252856b07cfe7830aa9bfc770b1630ec42de2814fe25a17a9e77b391670857
+    source: { decision: D-069 }
     as:
-      role: profile
-      profile: Summary
-      document: LineItem
-      members: { has_requires: { type: { kind: boolean }, presence: required } }
-      reads: [ { item: property names, paths: [ "properties.available[].name" ] } ]
-  - ir: sentence:2.1:f23277b4
-    digest: cbb9d2ea718529c793bbe4edaf6d092935092d38090f370d9538d9e9b914d0ca
-    locks: [ with-open-prs ]
+      role: rule
+      object: ProposalSummary
+      keyword: { construct: at-least-one-of, members: [ line_items, packages ] }
+  - ir: rule:2.1:57273714
+    digest: adf0d7497e860e482d85ebc00e688b4b653e03ccf004514ea96ffc82dd9e6621
+    source: { rule: presence-statement }
+    as: { role: schema, in: ProposalSummary }
+  - ir: "key:2.1:ProposalSummary.packages[]"
+    digest: 81ee1102e3e8b5968f1df00fa68ffd4a5eb2864e54e91b09f3bc93eba73b1307
+    source: { decision: D-069 }
+    as:
+      role: rule
+      object: ProposalSummary
+      keyword: { construct: at-least-one-of, members: [ line_items, packages ] }
+  - ir: rule:2.1:c0741f43
+    digest: 95240fb8eb776e2ee6920d6729ab5e631f48a1c2998fd503b11d56779c78357c
+    source: { rule: presence-statement }
+    as: { role: schema, in: ProposalSummary }
+  - ir: def:2.1:PackageSummary
+    digest: 51972f3071630d72e9ca63764cfe73c9f4542108ea6a7b403cd1dc2585ac78e0
+    source: { rule: lead-in-restates }
+    as: { role: same, name: PackageSummary }
+  - ir: sentence:2.1:26c8e267
+    digest: 7992392a32e176e374dd91d05020743cecd2ecd20f80186d83ab912b22c91e32
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: sentence:2.1:1f55a1be
-    digest: f42ace24c81efdda71dbc2e79fcc491a562668dbf1456b3c6a3f4c5e5b90d252
-    locks: [ main ]
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: block:2.1:4/identifiers:1
-    digest: 2f58041e29b322b5d1cd351d86ff76d053160c7b1454e906e7dec7d7f2fd46f7
-    locks: [ main ]
-    source: { decision: D-028 }
-    as: { role: profile, profile: Summary, document: Proposal }
-  - ir: block:2.1:4/identifiers:1
-    digest: def19a83d055b1d619c296e617dde93ff70844726ad73a39735a2756fd90ec6e
-    locks: [ with-open-prs ]
-    source: { decision: D-028 }
-    as: { role: profile, profile: Summary, document: Proposal }
-  - ir: sentence:2.1:80ac0822
-    digest: 0097daf002a8e88c8498bc7593551687535fdc689b0d61f67d736cb94a25ede1
-    locks: [ with-open-prs ]
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: sentence:2.1:ba90b505
-    digest: 86d0d29da5fe9e02ce1649d2879715baba3eb7112c09969a7617bf41cc3ad119
-    locks: [ with-open-prs ]
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: rule:2.1:8d97860b
-    digest: 632004985ab089736510115823dea396e4e684cbde12b5634dca30006721708d
-    locks: [ main ]
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
-  - ir: rule:2.1:8d97860b
-    digest: 4c7d43fb094edc1ab170b38a76d00b2d2908a705c5a31ffd9b073bf97bdfdf56
-    locks: [ with-open-prs ]
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
-  - ir: rule:2.1:5d7284d5
-    digest: 39bd1ad54c175c544257384cd7ef04fe8af1570a098675981d3083cfe575ba2b
-    locks: [ with-open-prs ]
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
-  - ir: block:2.1:7/identifiers:1
-    digest: ae5f5e049601e16f6ba06ff8ab8e21d2c4bcc1ce1a86c48bb6d0ed0f2ce5d985
-    locks: [ with-open-prs ]
-    source: { decision: D-028 }
-    as: { role: profile, profile: Summary, document: LineItem }
-  - ir: sentence:2.1:0fb18f29
-    digest: 9e392502dedcc34644c81de2f9dc8060d1d9b28b470b6f82713955b20778ab56
-    locks: [ main ]
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: sentence:2.1:0fb18f29
-    digest: e8d691b8160b4b5f2e0ac7671897d2870dcb5d3958cfc3a1ee3a2b456f9ae341
-    locks: [ with-open-prs ]
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: rule:2.1:2f9d603c
-    digest: db005f7abf6e0f64795c6486f2bf4f4b97cc14aa54b848cf17a9fbdf3f14ddae
-    locks: [ main ]
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
-  - ir: rule:2.1:2f9d603c
-    digest: bba0337e051de46b3c9dc214a297bdb5908767e804407b5be5ba8840511bc40d
-    locks: [ with-open-prs ]
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
+  - ir: key:2.1:PackageSummary.package_id
+    digest: 058b1cd4911479235cae91532329437a7c0d71171c11d2ef4a2a4051d4796680
+    source: { rule: domain-row }
+    as: { role: property, object: PackageSummary, type: { kind: named, name: MintedId }, presence: required }
+  - ir: "key:2.1:PackageSummary.line_items[]"
+    digest: 1d6c0116126c75e532725f95415fefb73ce556354e03271ac9b9e4e31a498f51
+    source: { rule: named-object-row }
+    as:
+      role: property
+      object: PackageSummary
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: LineItemSummary } } }
+      presence: required
+  - ir: "key:2.1:PackageSummary.add_ons[]"
+    digest: 31d867a8cc9519b75f23a6ca083705b08bde85a2ec2f2d5f5e2f9e7c28e63a29
+    source: { rule: named-object-row }
+    as:
+      role: property
+      object: PackageSummary
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: LineItemSummary } } }
+      presence: optional
+  - ir: "key:2.1:PackageSummary.min_commitments[]"
+    digest: 8275671f8f527af78f4141b16ac57a36b2e34a63407d776a28d4a2a79fd91a59
+    source: { rule: named-object-row }
+    as:
+      role: property
+      object: PackageSummary
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: MinCommitment } } }
+      presence: optional

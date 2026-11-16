@@ -1,0 +1,119 @@
+format: 2
+id: D-035
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Nine statements name their actor with the word implementers, and the pipeline reads that word three different ways. Which does it name?"
+covers:
+  - ir: rule:what-it-isnt:6dd81df9
+    digest: 43f9ab2fd8f6d7471b80436e1ebfb91e6a2cada1bb77d3aceaefc8e73c372ab1
+    quote: Implementers are strongly encouraged to validate the conditions laid out in this deal with OpenRTB requests to ensure their expectations are being met.
+  - ir: rule:matching-bid-requests-to-deals:c25bb816
+    digest: 26c2c056477f225ec1e82febee9f74e984448d723cdd9d046e4368121b0ff571
+    quote: Conversations between implementers should be had around what attributes, if any, may be subject to change after the deal has gone live.
+  - ir: rule:matching-bid-requests-to-deals:a48a0c62
+    digest: 0de510d9aad2941927da4b834faa765b6a1a47e7b10d52e57b51245d8531ebbf
+    quote: Implementers should use the Deal ID from the Origin system that did the PUSH.
+  - ir: rule:matching-bid-requests-to-deals:30bd062c
+    digest: e1086ddd22f051e03b6532000277cf3fc11b5d3bf196505790182d5ae5516260
+    quote: In instances where additional targeting will be applied in the receiving system, implementers should discuss potential implicaitons to delivery if sources of targeting may differ.
+  - ir: rule:matching-bid-requests-to-deals:8cd01d0a
+    digest: 9c4b2f4b4fbfd28640c66a97d0a5759fea1b89cc058e30fa03c434ca0084cdbd
+    quote: Implementers are strongly encouraged to discuss where targeting criteria will be set.
+  - ir: rule:authorization:bb5fb360
+    digest: 47d4d816eca7615f544986911c80a79682f58302442992eab19a5db3a78cfacf
+    quote: If this information is unavailable, implementers should proceed with extreme caution with the understanding that there is no mechanism to know if a given path is authorized to sell the inventory.
+  - ir: rule:dynamic-inventory:0af8b640
+    digest: 901e9a716b59e2c89b45a5fcd43872e6cbf24408323b70e9410671a3a66f46f6
+    quote: Implementers are strongly encouraged to communicate and discuss the specifics of any and all inventory updates to ensure expectations are met.
+  - ir: rule:sending-and-receiving-information:a8824341
+    digest: 1adaf16b178fa3de326213d98b4cb71c0092a83f708cdf68e46f8c3244f90af1
+    quote: Implementers may choose to accept incoming webhooks to their API endpoints for events.
+  - ir: rule:included-inventory:c5adb5e0
+    digest: 7609c5bf58cf7fd60af3c3d357b16de1982a624588f5ece58908b4fad829e115
+    quote: Implementers should expect to see ORTB bid requests using either `imp.banner` or `imp.video` once the deal is in flight.
+options:
+  - id: one-party-per-word
+    summary: >-
+      "Implementers" names both sides of the deal, so every statement whose
+      actor is that word is an obligation on `implementation`, whatever the
+      act is and whichever section it sits in.
+  - id: party-per-act
+    summary: >-
+      "Implementers" names whoever performs the act in that sentence, so
+      the same word gives `implementation` where the act is a conversation
+      between the sides and `buyer` where the act is validating a bid
+      request.
+  - id: keyword-decides-the-role
+    summary: >-
+      The conformance keyword decides the role before the party does: a
+      SHOULD or a RECOMMENDED on implementers is an obligation, and a MAY
+      is a permission the model carries as informative.
+chosen: one-party-per-word
+rationale: >-
+  Measured on both locks, `main` and `tag-1.0-202602`, by taking every
+  mapping claim whose statement text contains "implementer" and reading
+  what the pipeline made of it: 9 claims, carried three ways —
+  5 as `obligation` with `party: implementation`
+  (`rule:matching-bid-requests-to-deals:c25bb816`, `:a48a0c62`,
+  `:30bd062c`, `:8cd01d0a`, and `rule:dynamic-inventory:0af8b640`),
+  2 as `obligation` with `party: buyer` (`rule:what-it-isnt:6dd81df9` and
+  `rule:authorization:bb5fb360`), and 2 as `informative`
+  (`rule:sending-and-receiving-information:a8824341` and
+  `rule:included-inventory:c5adb5e0`). One word, nine sentences, three
+  dispositions.
+
+  The document itself says which the word means. "Conversations between
+  implementers should be had" and "a conversation should be had between the
+  buyer and seller" are the same instruction written twice, in two
+  sections, and the second names the two sides; so "implementers" is both
+  sides. D-032 already wrote that rule — "where both are meant, each
+  implementation" — and then departed from it twice without saying so,
+  which is the whole defect here: the record states the rule and two of
+  the claims it covers do not follow it.
+
+  `party-per-act` is what the tree carries today. It costs the only
+  machine-checkable thing the word gives: if the party is read off the act
+  rather than the subject, no two readers get the same answer for "proceed
+  with extreme caution", and the two claims that went to `buyer` are
+  exactly the two whose act happens to involve a bid request. The act is
+  not the subject. Reading the subject is reproducible; reading the act is
+  not.
+
+  `keyword-decides-the-role` would move the two `informative` claims to
+  obligations and is right that a MAY addressed to a party is still
+  addressed to a party. It is rejected here only because the role boundary
+  is a second question with a wider class than this record's nine, and it
+  is D-036 and D-037's. This record says what "implementers" names and
+  stops.
+
+  What the choice costs: `rule:included-inventory:c5adb5e0` tells
+  implementers to expect `imp.banner` or `imp.video` in bid requests, which
+  is as much a statement about OpenRTB as an obligation under this
+  specification, and binding it to both sides asserts a duty about a
+  document this specification does not define. That is the reading of the
+  nine this record is least sure of.
+
+  This record settles the reading and settles nothing about the value. An
+  obligation's party and a statement's role are not derived by any mapping
+  rule and are not among the attributes a `name` record may set, so they
+  live in the hand-written `as` of `specs/dealsapi/model/mapping/`, which
+  `npm run map` preserves for every entry citing a decision. The two
+  claims reading `party: buyer` keep it until the authority that owns those
+  fields rewrites them.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L62"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L71"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L187"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L196"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L227"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L249"
+feedback: >-
+  Nine statements address "implementers", and the word does not say which
+  side is meant. In one place the same instruction is written both ways —
+  "Conversations between implementers should be had" in Matching Bid
+  Requests to Deals, and "a conversation should be had between the buyer
+  and seller" in Considerations. Define the term once, or replace it in
+  each sentence with the side it binds: the deal's buyer, its seller, or
+  both.

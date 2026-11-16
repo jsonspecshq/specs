@@ -1,0 +1,95 @@
+format: 2
+id: D-072
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Four rows state a length of a string's contents and name no unit for it. A length is an extent, and an extent is a measure in a unit the text names; these name none. Is the value a measure whose unit the document failed to write, or a count of things?"
+covers:
+  - ir: key:object_dataasset:DataAsset.len
+    digest: 666803ea48fce00374f02b1c473fa7692d6bf97c41723d834921177aeec2303e
+    quote: "`len` | The length of the `value` contents. This length should conform to recommendations provided in List: Native Data Asset Types"
+  - ir: key:object_dataassetformat:DataAssetFormat.len
+    digest: 45087684060c19e182d43d0ede5c29b3e7da3d07c234bcc6e0d3e96c3630f881
+    quote: "`len` | The maximum allowed length of the data value."
+  - ir: key:object_titleasset:TitleAsset.len
+    digest: 084d13af672bbef554edf23a7c34a1cdddc7bd05c562f00b21bb7da58ccb6dd6
+    quote: "`len` | The length of the contents of the `text` attribute."
+  - ir: key:object_titleassetformat:TitleAssetFormat.len
+    digest: 610fd4cf48c7857b7eb00ecf650680da838e5ea33946bcf88482a946c44d7acf
+    quote: "`len` | The maximum allowed length of the title value. Recommended lengths are 25, 90, or 140."
+options:
+  - id: count-of-characters
+    summary: >-
+      The value is a count. A string's length is the number of the things the
+      string is made of, so the kernel's count concept states it exactly and
+      the four rows keep the type the domain rule already gives them. The
+      record chooses the kind of value and not the primitive: which type
+      expresses a count of things is the kernel's to say, and the rows at it
+      are the rule's.
+  - id: measure-in-characters
+    summary: >-
+      The value is an extent whose unit is the character, which the kernel has
+      no concept for. The four rows wait on one, and a reading that calls a
+      length a count puts an extent at a cardinality.
+  - id: unclear-until-the-document-names-a-unit
+    summary: >-
+      Neither reading is the document's: a length with no unit settles nothing,
+      so the rows publish no concept until AdCOM says whether it counts
+      characters, bytes, or code points.
+chosen: count-of-characters
+rationale: >-
+  A length in characters is a count of the things a string holds, and the
+  kernel's count concept is a whole number of things. Nothing is added to a
+  character and nothing is measured in one: the arithmetic a unit exists to
+  license — adding two extents, converting one unit to another — is meaningless
+  here, and the arithmetic that is meaningful on this value is the arithmetic of
+  a cardinality. That is the distinction the value vocabulary is built on, so
+  the two readings are not equally defensible and the second loses on it.
+
+  The same argument settles a row these four are often confused with and which
+  is not in this class. A length in **seconds** is an extent: seconds add,
+  convert and subtract, and `Content.len`, `VideoPlacement.poddur` and
+  `AudioPlacement.poddur` each say "in seconds" and are published at the
+  seconds-duration concept. Three rows say "length" and mean an extent; these
+  four say "length" and mean a cardinality. The word is the same and the value
+  is not, which is why a rule reading the word would get one of the two groups
+  wrong whichever way it read it.
+
+  `unclear-until-the-document-names-a-unit` is the honest answer to a different
+  question. Which unit a length counts in — characters, bytes, UTF-16 code
+  units — is genuinely unstated, and two implementations can disagree about
+  whether an emoji is one or two. But that is a question about the **bound** on
+  the value and not about what kind of value it is, and publishing no concept
+  withholds the part the document does settle in order to protest the part it
+  does not. The feedback below carries the protest instead.
+
+  What this record is for, since it moves no published byte. The four rows are
+  derived by the domain rule and stay there; `DataAsset.len` reaches it because
+  its citation of List: Native Data Asset Types is led in with no reference cue,
+  so the list is not its vocabulary. Two independent readers of these rows split
+  between a count and a measure in characters, and a reading two readers can
+  each defend is a reading that moves every time the loop runs until it is
+  written down. This writes it down.
+evidence:
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L671"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1222"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L617"
+  - "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#L1169"
+feedback: >-
+  Four `len` rows state a length and never say what it counts.
+
+  `TitleAsset.len`, `TitleAssetFormat.len`, `DataAsset.len` and
+  `DataAssetFormat.len` each bound the length of a string and name no unit for
+  it. A sender counting characters and a receiver counting UTF-8 bytes
+  disagree about whether a 90-character title with an emoji in it fits a
+  `TitleAssetFormat.len` of 90, and both are reading the specification
+  correctly. Naming the unit — characters, Unicode code points, or bytes in a
+  stated encoding — would settle it in one sentence per row.
+
+  `DataAsset.len` has a second point. Its definition sends the reader to List:
+  Native Data Asset Types for recommended lengths, which is a statement about
+  what the number should be. The same link on another row would be a statement
+  about which values the field may take, and a reader cannot tell the two uses
+  apart from the link. Writing the recommendation as a sentence that does not
+  cite the list as the field's own values would remove the ambiguity.

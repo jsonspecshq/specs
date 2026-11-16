@@ -4,66 +4,408 @@ format: 1
 module: kernel
 sections: [ "2.2", "3", "3.1", "3.2" ]
 types:
+  - name: Side
+    kind: vocabulary
+    ir: def:2.2:Side
+    source: { rule: shared-type-vocabulary }
+    open: false
+    terms: [ buyer, seller ]
+  - name: ProposalStatus
+    kind: vocabulary
+    ir: def:2.2:ProposalStatus
+    source: { rule: shared-type-vocabulary }
+    open: false
+    terms: [ draft, published, under_review, agreed, withdrawn, expired ]
+  - name: LineItemStatus
+    kind: vocabulary
+    ir: def:2.2:LineItemStatus
+    source: { decision: D-064 }
+    open: false
+    terms: [ draft, published, under_review, agreed, withdrawn, expired, sold_out ]
+  - name: ApprovalStatus
+    kind: vocabulary
+    ir: def:2.2:ApprovalStatus
+    source: { rule: shared-type-vocabulary }
+    open: false
+    terms: [ PENDING, APPROVED, REJECTED ]
+  - name: Measurer
+    kind: union
+    ir: def:2.2:Measurer
+    source: { decision: D-064 }
+    any_of: [ { kind: named, name: Side }, { kind: named, name: RegistrableDomain } ]
+  - name: CalendarUnit
+    kind: vocabulary
+    ir: def:2.2:CalendarUnit
+    source: { rule: shared-type-vocabulary }
+    open: false
+    terms: [ hour, day, week, month ]
+  - name: TimeUnit
+    kind: vocabulary
+    ir: def:2.2:TimeUnit
+    source: { decision: D-064 }
+    open: false
+    terms: [ hour, day, week, month, flight ]
+  - name: DocumentRef
+    kind: object
+    ir: key:2.2:DocumentRef.url
+    source: { decision: D-106 }
+    open: true
+  - name: VersionRef
+    kind: object
+    ir: key:2.2:VersionRef.proposal_id
+    source: { rule: key-table-object }
+    open: false
+  - name: Party
+    kind: object
+    ir: key:2.2:Party.domain
+    source: { rule: key-table-object }
+    open: false
+  - name: SeatRef
+    kind: object
+    ir: key:2.2:SeatRef.dsp
+    source: { rule: key-table-object }
+    open: false
+  - name: Interval
+    kind: object
+    ir: key:2.2:Interval.start
+    source: { rule: key-table-object }
+    open: false
   - name: Marker
     kind: vocabulary
     ir: marker:3:immutable
-    source: { decision: D-012 }
+    source: { decision: D-066 }
     open: false
 entries:
-  - ir: rule:2.2:c610e803
-    digest: d92a309b641f5804a63417966289d0dd289ae5243884b49fab292652386ab7b0
-    source: { rule: kernel-source }
-    as: { role: schema, in: CatalogRefOr }
-  - ir: code:2.2:1
-    digest: 5b0b87b43dbc9c1a24ed8f3e2bd71d22c5d790a6f786b980bd554f64a71436a0
-    source: { decisions: [ D-009, D-023 ] }
-    as: { role: schema, in: CatalogRef }
-  - ir: rule:2.2:696ee27b
-    digest: 9b517ad2b69750533a5be0079e02aaf389a5e013eceb9c55d4f37b9bb2c67388
-    source: { decision: D-023 }
-    as: { role: schema, in: CatalogRefOr }
-  - ir: sentence:2.2:77e63626
-    digest: 3431249888a0cf023d399d15bf2f9e6ff4e244c42c9a51fc1a2d71a240a0d751
+  - ir: rule:2.2:ef4efcb1
+    digest: e36dd7069ba76486f483ec13fe1ec89a5d12675e8da01dee33df55611e04e497
+    source: { decision: D-083 }
+    as: { role: informative }
+  - ir: def:2.2:Digest
+    digest: 3d8eea53cc986aa9993abb94385caee4c6baba8fdf1ff4c7f9a027f7c2202e58
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Domain
+    digest: d671964da3ca199ac23b95c300f4348400e9cb5e63f6fb483f6fac0c98679265
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: rule:2.2:1e8acd47
+    digest: 4f57a2a0fa77f16f43eceb142f8cc63de4abd44a33ea2fcf4cf58baa977317a1
+    source: { decision: D-083 }
+    as: { role: obligation, party: consumer }
+  - ir: rule:2.2:df0340d2
+    digest: ec6dc16d2d8357e94f96a381873955f7251c1a29a92ab5342d9ad440a8ffc4e3
+    source: { decision: D-083 }
+    as: { role: schema, in: Domain }
+  - ir: def:2.2:RegistrableDomain
+    digest: 996140da167fae546cefbbdb984df61f7cf0780a2eca6d4d5aa48a5bed5e2666
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Side
+    digest: 35df06335d0d9fc85badd131e1875337d07d91b0f1bf8fb7fdb068349fefb7d2
+    source: { rule: shared-type-restates }
+    as: { role: same, name: Side }
+  - ir: def:2.2:Side#form/values:1
+    digest: db7f956e3731f7e83fa665f03a2f49e2405d5c25e102e1a68acfacaac9da2eaa
+    source: { rule: restated-value-list }
+    as: { role: same, name: Side }
+  - ir: def:2.2:ProposalStatus
+    digest: b171ff0b93042012b4c8d72a4b5a30550166203bb1cef451ff7068a7ad66a777
+    source: { rule: shared-type-restates }
+    as: { role: same, name: ProposalStatus }
+  - ir: def:2.2:ProposalStatus#form/values:1
+    digest: c38c42958062053c640d849423aa31a23b0e6957f77553ec24a10a7e76173e49
+    source: { rule: restated-value-list }
+    as: { role: same, name: ProposalStatus }
+  - ir: def:2.2:LineItemStatus
+    digest: 62873d0eb36415ad42149f8e55c9f4a4a6166e29494fe5a70860213904b9dbcb
+    source: { rule: shared-type-restates }
+    as: { role: same, name: LineItemStatus }
+  - ir: def:2.2:ApprovalStatus
+    digest: 38bba06616bfd54dc4e52f369823131cf820f74e5da56d165ef1006bc2824605
+    source: { rule: shared-type-restates }
+    as: { role: same, name: ApprovalStatus }
+  - ir: def:2.2:ApprovalStatus#form/values:1
+    digest: e60b10cec482a18b210de9461c83fa0b9985834ea73597cd45ca1cbdc6276268
+    source: { rule: restated-value-list }
+    as: { role: same, name: ApprovalStatus }
+  - ir: def:2.2:Measurer
+    digest: 8803264dc804871c16d2837330a0f52398e88a9494eca43226ae1e19bd5b445a
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:EntryRef
+    digest: f44558203adf4d0fe42abce8cd25edef3fdd370ff34a525e10a270d438c8235a
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:VocabularyTerm
+    digest: 230b1f4131ea57db381354fb49edff8e0692b28a6969ba4ddf93a1288ce198b9
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:CalendarUnit
+    digest: 0dfca66cd38db96e5c4b0772df8e6c6e831c5f5ececf8c10e275dc6871a3545c
+    source: { rule: shared-type-restates }
+    as: { role: same, name: CalendarUnit }
+  - ir: def:2.2:CalendarUnit#form/values:1
+    digest: c56def0779ff065afa3ccaebd068369b8ca6f8d9dd2e718319cb5424a33b7a82
+    source: { rule: restated-value-list }
+    as: { role: same, name: CalendarUnit }
+  - ir: def:2.2:TimeUnit
+    digest: 7b83133f5ed981b823af1ff9c73b1769d3549b12de14863b0ae1959883133524
+    source: { rule: shared-type-restates }
+    as: { role: same, name: TimeUnit }
+  - ir: def:2.2:IntegerFlag
+    digest: 8ccd938cec80d303890604d05b8fb931e7aa132dfca500cd59b2d3b9db29c5a4
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:IntegerFlag#form/values:1
+    digest: a4ad70435a7b6a125033baf4908ead3a2aa7ffba1e317187ec54a881920e3008
+    source: { rule: restated-value-list }
+    as: { role: schema, in: IntegerFlag }
+  - ir: def:2.2:Amount
+    digest: 7e43f7cc99e45c463678c46bb4532a1133af9e9fdff68dc37f7ec017ab97f0bb
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Fraction
+    digest: 9024cdd485d132f1f11c353db7f2e211da12588fb6a049f230207d08d2e8fe1c
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:FractionDelta
+    digest: d1df316a19e8a8701b794b94dd6737989aab1ed8e0fadfb55b30d418c261123d
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Instant
+    digest: df8f4931a29cab49ac4f7be005c0e543329982c6dd42ad24f6ca266927fde0bc
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Duration
+    digest: b8964f62205468b2e358f311497bf7bac3b639dddf0eeead1ce15f5526490b06
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:IanaZone
+    digest: a155797aac910548f8d5856f94bb63c7d3737a3a343dfac0a13179481951f330
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:ZoneName
+    digest: cec6f43072d265cffcfbc633af33a3754a3aca0edd981f46aba57fd9d17018b4
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Url
+    digest: ac1d3962a8fd84f62e1061d42d1e6d0741182bbc4679acf12ea6fa5e99c38ad3
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:HttpsUrl
+    digest: c96e41b2cdd45c793be7b6e4b549806b234be39bba19fe5fd8ba60dabb141706
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:FieldPointer
+    digest: 81c9fe24955719224a5619829da66cd27e74ea53e642be90bb605fb6fcf9f39a
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: def:2.2:Ext
+    digest: dd56e75c1da896153df232a9ce59a6208c8d41fb3c7022fe5383b6c4122ab886
+    source: { rule: shared-type-restates }
+    as: { role: informative }
+  - ir: sentence:2.2:a2848c31
+    digest: 8a4439771d9b33dbef13946355bf4e3e872dfd2e5d827a47daf3b3fe78cb618f
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: rule:2.2:3916a8f2
-    digest: 511cade5dc52dec990f091f7293a343392bae81a91404e3a81983b040edf9315
-    source: { rule: kernel-source }
-    as: { role: schema, in: CatalogRef }
-  - ir: rule:2.2:fd522468
-    digest: be340321c44102c82f5f20b58407e1e9ed924e72d7f55f3319260254a3ce77e7
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
-  - ir: rule:2.2:bee40541
-    digest: 627150415ce7304bf760287e305b8acb2e3f5bea80e39915a21e894c93cf8356
-    source: { decision: D-029 }
-    as: { role: obligation, party: seller }
-  - ir: rule:2.2:06ccee9f
-    digest: 88f6179c8487ecb60b3f98de8b1ecbbec92e618a36e441133f4f4447957c23b7
-    source: { decision: D-029 }
-    as: { role: rule, object: LineItem }
+  - ir: sentence:2.2:f68cc64e
+    digest: b347d5d5ff78a019befd5716875b8d40f93229efb23b79ccef54269ca4a060a6
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:2.2:32c53f84
+    digest: 46ddd5951d89aaa54a6a5e8eaee4b2ba3055f080cbaac43b113d8bf5de1f632b
+    source: { decision: D-083 }
+    as: { role: obligation, party: implementation }
+  - ir: sentence:2.2:64220787
+    digest: 52912a003f375b477da21e79f13b9734c20557d4eb416e7f5f12deaee89a704b
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:2.2:c3db85f7
+    digest: 1d21fef93239ef46c0b52aa0a6cd169c281c285f60d9dbe8ac679367da5c0aa2
+    source: { decision: D-083 }
+    as: { role: obligation, party: implementation }
+  - ir: rule:2.2:9c143862
+    digest: 3867dbbd0a70b305c0542a0c7d64cb22d066f524eb4bf22a0df5b513d0d0bacf
+    source: { decision: D-083 }
+    as: { role: informative }
+  - ir: def:2.2:DocumentRef
+    digest: 66a5741c178cb36ff93d5c0bbe46c2d69b800b8ae16c2881e1017122dd6253c8
+    source: { rule: lead-in-restates }
+    as: { role: same, name: DocumentRef }
+  - ir: sentence:2.2:842d76f9
+    digest: c67ef2d02a9c15c1a24bb7eb222af1961fd0a5f1e850440e310e406038dcf099
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:2.2:DocumentRef.url
+    digest: d7babd0940ebfef149fe9e3d3001d5742d4457b353d55ca48d7cff0b15c8761f
+    source: { rule: named-type-row }
+    as: { role: property, object: DocumentRef, type: { kind: named, name: HttpsUrl }, presence: required }
+  - ir: rule:2.2:b0cdbdd1
+    digest: 7c133fe8cd0dcfed95651cf884957240971a08f6e34f2d822d6261ad75bef680
+    source: { decision: D-083 }
+    as: { role: obligation, party: implementation }
+  - ir: key:2.2:DocumentRef.digest
+    digest: 46a5bd414000136114ff38f74368009f644e074d5b755abf46d07191664d8266
+    source: { rule: named-type-row }
+    as: { role: property, object: DocumentRef, type: { kind: named, name: QualifiedDigest }, presence: required }
+  - ir: def:2.2:VersionRef
+    digest: e1e932e636dea2388439a97818b46c920e7338780abfc15c61adb858c8e0edba
+    source: { rule: lead-in-restates }
+    as: { role: same, name: VersionRef }
+  - ir: sentence:2.2:3efb5d1c
+    digest: c45ca086141294cf9630b7589bc5a601e4c252b17f49e83b8cfc78d661c1ebae
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:2.2:d3643f2d
+    digest: 5e3219f08b4dd2fe221c62ac093d51269d6869f5506998d3ea9f6ac3017c5708
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:2.2:VersionRef.proposal_id
+    digest: 2c604ed9eb08d9c9d3b54050195ec352e95173d1d6fe7e36c4be507b3e86651a
+    source: { rule: domain-row }
+    as: { role: property, object: VersionRef, type: { kind: named, name: MintedId }, presence: required }
+  - ir: key:2.2:VersionRef.version
+    digest: ba0312da840ff7fdd6178f88b915801a6f77e3b101b2010668bd413544114b48
+    source: { rule: domain-row }
+    as: { role: property, object: VersionRef, type: { kind: named, name: Count }, presence: required }
+  - ir: key:2.2:VersionRef.line_item_id
+    digest: 8828a6d382ee339a95341e0ebed2a9a78c7a7ef1c5b0204bb770fe15dd20395c
+    source: { rule: domain-row }
+    as: { role: property, object: VersionRef, type: { kind: named, name: MintedId }, presence: optional }
+  - ir: key:2.2:VersionRef.seller_domain
+    digest: ec8fb461339f3b87060c0c03b4969284400815d632384455d3a9aa69e78fe3c8
+    source: { rule: named-type-row }
+    as: { role: property, object: VersionRef, type: { kind: named, name: RegistrableDomain }, presence: conditional }
+  - ir: rule:2.2:e46f15c4
+    digest: 842f144cbb538352e229fb3aafe5bbb71a204f09e1aeb96e1c3d14aa72935dae
+    source: { rule: presence-statement }
+    as: { role: rule, object: VersionRef }
+  - ir: def:2.2:Party
+    digest: 312b53ee6f2fd5def89cad7579f5caf03c8f953b883fdddd6bf156cf32a6d220
+    source: { rule: lead-in-restates }
+    as: { role: same, name: Party }
+  - ir: sentence:2.2:b76a4e3f
+    digest: 14bfd1bf547c1f20fb23b750d7c2f7a0280647899c2d9b611e00fc1a0dd5e68f
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:2.2:d8d6aa35
+    digest: 028e63e664aaf0df3f9459fa1d399ddda3d088a4d6613d3973d8663b63f41223
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:2.2:3d1eff57
+    digest: 1b351bcf86ecbebae10b8fdb70e974a67c0d217786376269343860ecd7e39a19
+    source: { decision: D-083 }
+    as: { role: obligation, party: consumer }
+  - ir: key:2.2:Party.domain
+    digest: 4f993cad977cd8f3893ae6f792ea716454b17eebcd62dd765320bf7056eca545
+    source: { rule: named-type-row }
+    as: { role: property, object: Party, type: { kind: named, name: RegistrableDomain }, presence: required }
+  - ir: key:2.2:Party.legal_name
+    digest: 69c5ec396551158b05dad14d3d0109d896ffd12d53542bbe2926a82f4a070542
+    source: { rule: domain-row }
+    as: { role: property, object: Party, type: { kind: named, name: Text }, presence: optional }
+  - ir: key:2.2:Party.registry_id
+    digest: d0622481dfb5f9c25674de9bc63384069e4b23fd6cf25732c7ca675956648e33
+    source: { rule: domain-row }
+    as: { role: property, object: Party, type: { kind: named, name: ExternalId }, presence: optional }
+  - ir: def:2.2:SeatRef
+    digest: 313fdb21033a36756b3aa479a07f1f668851aee2e698f5427e92fae1fbb9e378
+    source: { rule: lead-in-restates }
+    as: { role: same, name: SeatRef }
+  - ir: sentence:2.2:d6dc8d5f
+    digest: 8e6b318f19e5cb22217b5be73a763cbdff26f3e2cf99c870d83f6b5be3a1b8ec
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:2.2:SeatRef.dsp
+    digest: a7e019396f0b10d9ccd414c756e345fae410c3538d9504d4219d3b1e4b1c72ba
+    source: { rule: named-type-row }
+    as: { role: property, object: SeatRef, type: { kind: named, name: RegistrableDomain }, presence: required }
+  - ir: "key:2.2:SeatRef.ids[]"
+    digest: 97e772988addf758f659b2f63aa0ce4f884d4381d27cb00c50b3f12c75fcb202
+    source: { rule: domain-row }
+    as:
+      role: property
+      object: SeatRef
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ExternalId } } }
+      presence: optional
+  - ir: def:2.2:TaxonomyCodes
+    digest: 2ee8d6885b0983b6f0dc485033f2421fd544ee31e06f4680eb4ecec8a308db30
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:2.2:2e03f10f
+    digest: 13dd99c77eaf958d32210649ecb276b2a156e9f69ee489704296dbd13fb5b6b8
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:2.2:8ee95e46
+    digest: 793be341981914b2a60d946fe383b9a19099369e8322118369b0e072192078fe
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:2.2:TaxonomyCodes.taxonomy
+    digest: 08b4c3a14093b12b45241e0006344bdb90dfa33f9555fe9d9f7fdcef7c070349
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: TaxonomyCodes }
+  - ir: "key:2.2:TaxonomyCodes.ids[]"
+    digest: 21bca4d5b1171d6fe0be84cc1f4fe0494d237447567fad1f68e7aa8bf0a9310d
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: TaxonomyCodes }
+  - ir: def:2.2:Interval
+    digest: 649e49461bd380f03342283a55f7d1c470905e9d60269ce6eaf8433709765470
+    source: { rule: lead-in-restates }
+    as: { role: same, name: Interval }
+  - ir: sentence:2.2:ba9af762
+    digest: 45d377eec392d05e42585e8acb4c91258a4bb2d3c7b04fb85c75908abfa751bc
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:2.2:Interval.start
+    digest: eef6d2a736303d5d5081c1f1eb92b6d60df3fdb9d545f6071aea012805ee4d16
+    source: { rule: named-type-row }
+    as: { role: property, object: Interval, type: { kind: named, name: Instant }, presence: required }
+  - ir: key:2.2:Interval.end
+    digest: f807fe263508621a9b514c6f0646579bcca85288b3ef439a498ff44da81e9b67
+    source: { rule: named-type-row }
+    as: { role: property, object: Interval, type: { kind: named, name: Instant }, presence: required }
+  - ir: def:2.2:Range
+    digest: a5f2fef3bebd5d423fa2851e2932f39cd399076f17968466789fa94ff4895d96
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:2.2:929b2417
+    digest: 10631b5fbb9321a304b02d83f2e0c412ea741f003ec233ad87aef5b8b20ed344
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:2.2:db4f2290
+    digest: 367211ca085a9ad45007a3f4c92665c6162325353d6f101cad75d068f329c731
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:2.2:Range.min
+    digest: 53f742f85601f1a10180c8f8eacaccd23af9e90035e2a652a90a102a59f51b34
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: Range }
+  - ir: key:2.2:Range.max
+    digest: c77298c86565bb872ae64853f321a6653cbab99a5d367b2e3e14b904654d071b
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: Range }
   - ir: marker:3:immutable
     digest: 36e4c2830d95e3c4ae4166cdaccae23edbe3bfa8a26898faea72ba1cb8e37586
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
   - ir: marker:3:seller-set
-    digest: 143411b52aa9e85874cc5f79024d330988c510ddf7f2981d59408e54a8730a60
+    digest: 94e2c7f4738dab5dbf24aee02a582e7d10e43dd4f3aa76237063215e6867f186
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
-  - ir: rule:3:e768cdf1
-    digest: 3c544b90b62de71cdd52f67dddf236c12013bbd57b12c1df08fa2c6d157d2a11
-    source: { decision: D-029 }
-    as: { role: rule, object: Marker }
+  - ir: rule:3:e5ff81ed
+    digest: c13252b8934b84a3fe7175a9c96a970a5223e3b7aed4f26ab7df606162db9035
+    source: { decision: D-083 }
+    as: { role: informative }
   - ir: marker:3:selectable
-    digest: 9d4920aaf4e7581b9e328b70600205e70277c7ca1a1f6275a8736c157cd1999d
+    digest: 8a003787c373122f307a428826b4ca094f064f90fc1877096d8f8232946e3a51
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
   - ir: rule:3:d5ed9b66
     digest: 8ee5c176f11c87b1a19b1e7d35fdd893497044ef77aec2ec4063f1e9b242d0de
-    source: { decision: D-023 }
-    as: { role: schema, in: Selectable }
+    source: { decision: D-083 }
+    as: { role: informative }
   - ir: marker:3:settable
-    digest: 66671c35883697ab396f64f940b5566cca0b389bef1aa9fcaed09f2b8c20d961
+    digest: aadea752f5c312037a97353c1e8c88c591c5b2db26ec4ae59963b9490f47507b
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
   - ir: marker:3:supplied
@@ -71,74 +413,206 @@ entries:
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
   - ir: marker:3:requestable
-    digest: 0b447aa32ebfda424aa6e3d5c1f9e47d6189e495400007b71e0caba46fd695f5
+    digest: 6848566b78555a6b35a505cd2a1f627422f6519b85d870dd3a1163f3a9756102
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
   - ir: rule:3:82c2f1b0
     digest: c93849d9b729272b79ae20197ca3fb6b85ee5d953534963626ab24f32b6bd245
-    source: { decision: D-029 }
-    as: { role: rule, object: Marker }
+    source: { decision: D-083 }
+    as: { role: informative }
   - ir: marker:3:derived
-    digest: 7780967a402373bc1adc17783a9a589c88cb96424ef5908103565641580781df
+    digest: b6358d1160fc01ac4b4be0f9f0ecd7ddc19b6045c1ea4392f00449af12513592
     source: { rule: marker-term }
     as: { role: term, vocabulary: Marker }
+  - ir: marker:3:lifecycle
+    digest: 524814444ede737ab3ed5b2ece11b389b9daa7f0be9b8f98dbd2f3ebd083f218
+    source: { rule: marker-term }
+    as: { role: term, vocabulary: Marker }
+  - ir: marker:3:recorded
+    digest: 5cb60abe2aa69153b9cf499b61dd6e5c83b2fed00f14493272d0d80f71978ea0
+    source: { rule: marker-term }
+    as: { role: term, vocabulary: Marker }
+  - ir: marker:3:asserted
+    digest: adac5c0cbcb93033b5776a28f4fb27bd8ccc72bdd570f075d9626cba443664cd
+    source: { rule: marker-term }
+    as: { role: term, vocabulary: Marker }
+  - ir: marker:3:mixed
+    digest: 7c5eab99d5a8d933cf681a1e8b30c1c5840aacfb4dd49681e2ac6f563b2d2bc4
+    source: { rule: marker-term }
+    as: { role: term, vocabulary: Marker }
+  - ir: sentence:3:8bce3258
+    digest: eb7e76ece63042b04985bcb9800df4e1bdf2bf62884a26a5dc3c64b9f47e2263
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3:d1ec9803
+    digest: 8a53a7540d6c7672112eb71bbc2b507a1bdb9f8fc7bb56ab6e6fd8e97a83507c
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3:786275c2
+    digest: ce9375ce388fb5b5fa0316773fd84028d70a97bff2ec29336b2196aa355fddf1
+    source: { rule: prose-sentence }
+    as: { role: informative }
   - ir: rule:3:07a16404
-    digest: b1a02508bff5df25c2d1cb2f135aafe1a1ad791e70b4fa4d1e4f55af5adbdde0
-    source: { decision: D-029 }
+    digest: ed8ad42a32962db5a2597a6f2336258629c6a0c2e6c66cfac526a78cc6fa5cb1
+    source: { decision: D-083 }
     as: { role: obligation, party: seller }
   - ir: sentence:3:cb1810ae
-    digest: 3be88b889ca4ddf59dcdb9790efad1fc3ab08ec87d7acfb284f3305686727375
+    digest: 707d13ab9d852db95ad1f53e135dc9df379b0e1190427d58df42c6fd1b056592
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: rule:3:b51cedb6
-    digest: fde9bc5c8e7d5ea0efdf20ad2cda4220d910e865daeb0d98f67288ec2f1493f9
-    source: { decisions: [ D-008, D-029 ] }
-    as: { role: obligation, party: seller }
-  - ir: rule:3.1:f3c3cab7
-    digest: d228e1dfba5ae266474b8184f4d55612ea607481e33f1a1eeb8da4102ef906ae
-    source: { rule: kernel-source }
+  - ir: sentence:3:acf8d54a
+    digest: c1e115d1d5ee3c62175fae2c03831c9c63d1bdca7f231b3409598ca47c296371
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3:9cae6039
+    digest: bdb534108ba9b7569ebe6bcf0d6053be1b4e4e0890bc9d7ac55e74d785f8c259
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:3:e1b586de
+    digest: 25cac71ef0c5a520424bc5ec06b73dbd1d1671706c2280f07ef6dc90c84877b3
+    source: { decision: D-083 }
+    as: { role: obligation, party: buyer }
+  - ir: sentence:3.1:0a88d171
+    digest: d240277ff38d441f3857a947a9acac5af9b28c25c4a084f2c5ed346d4a3188ce
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:3.1:Selectable
+    digest: d5a7337f016e706b560e2ff8dd2008c33a77144baf9e87e4bc53895d6cba6d82
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:3.1:85278b83
+    digest: 3a3daceb63b9d71bf9047b6ce38ed0ad65824b7144bbba41c29f59e8b48daa03
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: "key:3.1:Selectable.available[]"
+    digest: 8bb943f22b2dcee8eb56a3baa8e9f0fb609852ba69d7f30e73bb0d47ba30bf4c
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: Selectable }
-  - ir: "key:3.1:available[]"
-    digest: e56c463d4043e1f551eae09af84db75ecf3185079f60194536361b619af55af5
-    source: { decision: D-023 }
+  - ir: "key:3.1:Selectable.included[]"
+    digest: 659488665861929f507b596c583a50b4c0791fbad4a7507e4ba39c31d939e769
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: Selectable }
-  - ir: "key:3.1:included[]"
-    digest: 8ec666d51bf96c60f03793156f832384d83126b7e98f3112259b423bc624b78b
-    source: { rule: kernel-source }
+  - ir: "key:3.1:Selectable.selected[]"
+    digest: c3543a69287e07596310a03ae02b51233274d1ee59a37d760eed584222c61b8b
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: Selectable }
-  - ir: rule:3.1:ff8838af
-    digest: 36e4b0c48894abc60ddd2f7ebc3e9bda8f6e95efc4b28e17162a36e093a3143a
-    source: { rule: kernel-source }
+  - ir: key:3.1:Selectable.deltas
+    digest: 4700416237f4a50c06b55fc36d2f452b0e233bbc1df246421eb972e901716d8b
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: Selectable }
-  - ir: key:3.1:pricing
-    digest: 539b0422b84a2eec4d1a6247ff1c0e887e86cb8cb997396fdca33c03477a03ce
-    source: { rule: kernel-source }
+  - ir: key:3.1:Selectable.max_select
+    digest: 7c7ed88aab50f16fffbf63f809249a72f12304044dc8232a8bf91ede30f5d7e0
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: Selectable }
-  - ir: key:3.1:pricing#meaning/object:1
-    digest: 1d2ea6996d7c3bbf4808776d7399e4719b79687764674d92f08a885763ad61fe
-    source: { decision: D-023 }
+  - ir: rule:3.1:bfffacdf
+    digest: 705cdabdb624bd15e1d51d39445a32e68b2d7c9c3364e2beedeca3da9ca4e77f
+    source: { decision: D-103 }
+    as: { role: rule, object: LineItem }
+  - ir: sentence:3.1:90082c7b
+    digest: 161403bb46925eb4e041434df413505993c8c5e260906a4978cb562453fb61e0
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3.1:2da94e5e
+    digest: bda50189f66f13318063d135d4f75bf56afa8e3bab99c5a9c6e115ea388dbc86
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3.1:4235f893
+    digest: 81fdfc9e5c660a26f6c4cd11e617556ae9ff271ee4c9178a27ab27971839aea2
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3.1:ec0ebc8d
+    digest: efa85c7e688fba79fd18dced6be5fdbf3bc1547cd3f982657da6e918e1e8cc2e
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:3.1:Delta
+    digest: dc2a753d308437731f469e171a0d7d0c41a0d9d632a7a81346f413920fcb2c2b
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:3.1:1355e230
+    digest: 3b4f4183e94abcf42e8c51a1881b0b961847d439faf9cc7f77c45d0ac0cd04d7
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3.1:167f85d2
+    digest: abc38d207b3ba8cb0e9f49943d67fa0da3f34bfb0fc8e840ee5fe5b3c371c46f
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:3.1:Delta.delta_cpm
+    digest: 60e3140cbf8caa8ce10c19f0a23b13a7f0d40dc4fc36b058d8981464e4d6a48c
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: PriceDelta }
-  - ir: key:3.1:max_select
-    digest: 199cab600b78dcd9dc40358fa8a94ec4d323f2bcf2fd7922a62b008af465d820
-    source: { rule: kernel-source }
-    as: { role: schema, in: Selectable }
-  - ir: rule:3.1:f8b0c287
-    digest: d60c77636afc33649141f8de560cbf2e0f599b124779ea89b069f9b08a9181cd
-    source: { rule: kernel-source }
-    as: { role: schema, in: Selectable }
-  - ir: sentence:3.1:817b18c0
-    digest: e926d376fac8a813c9681f592e5ea256d0faecde87529279c94f0cffde006b88
+  - ir: key:3.1:Delta.delta_fraction
+    digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: PriceDelta }
+  - ir: key:3.1:Delta.delta_flat
+    digest: 23ec4c9beccbcf91882b3a3777a542f6b92c6408c9f37fc9a6e3dc18d04dce51
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: PriceDelta }
+  - ir: sentence:3.2:f5da1fc4
+    digest: d7261d9e23038123e25f0b19bd4997d3c117b174efd03c3dfa67d79f39863ecd
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: sentence:3.1:49d63f3e
-    digest: 4586623df0582247a8a3b16afcc65c02e8b09e2f36582836e015e95fc9527eef
+  - ir: sentence:3.2:7d7b28fc
+    digest: 49ac1c1ee1a09c36d76807b23afe84561ccbfc503c5f16f40041c2b749b56261
     source: { rule: prose-sentence }
     as: { role: informative }
-  - ir: rule:3.2:ee009430
-    digest: b70f59e2c68b16af32a8ad7ee513de31c1f1bd7a3c1540f17ba556688780a7cf
-    source: { decisions: [ D-011, D-023 ] }
-    as: { role: schema, in: Range }
-  - ir: rule:3.2:4f3b0a9c
-    digest: 07c583d4952414b695fe884dd3b8b2257e046904bec68931d240feef4ad28988
-    source: { rule: kernel-source }
+  - ir: sentence:3.2:9509efd3
+    digest: e0e84ee7bb772578c4f9e5c18517b964334b57e02b8d7e85af6873f7d4d2db9b
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:3.2:Settable
+    digest: 51ebf2eb65c2db3b997e53e6d8b1acb95828055cc307ca0d96c0ad375808e841
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:3.2:5abfeb9e
+    digest: 56a953b0dabf693131e38a82708b4754f63873478d922932012dce5f9f38be40
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3.2:688cf2cf
+    digest: 180d42fd7f9dc1f9de87971c273eaf6e0a927af4ffb6a783aa71640b842886dc
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: "key:3.2:Settable.allowed[]"
+    digest: 99ac313dd4d11c45da6436074c10216089ec6c6388cec4f9b25e1849ebe94a66
+    source: { rule: constructor-shell-row }
     as: { role: schema, in: Settable }
+  - ir: key:3.2:Settable.default
+    digest: b03e032bcc72363f6c1aa4ecfb0dc143a22d48f5c11fee45938de7f412ffb7ed
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: Settable }
+  - ir: key:3.2:Settable.value
+    digest: 02e92c8959877a3c31fe8d7b3795cbfde20d441255c4008e1d5db2907a52d1da
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: Settable }
+  - ir: def:3.2:Narrowing
+    digest: 1086155ed777d8e06ae6457421070afb999d168277e4805f32c5ed71f1572d3f
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:3.2:f07ea411
+    digest: d093012fe855c01ceb1635768ba1c967a51ce35fbd1a31ed841c87087fe7d794
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: "key:3.2:Narrowing.include[]"
+    digest: bd426b77c0a4b508cd2dce247b84c7f79964c97482716ac06927372d5cedc327
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: Narrowing }
+  - ir: "key:3.2:Narrowing.exclude[]"
+    digest: e92c11d0f82da1d2b48ba4da84d21be5d1ff567027eb2c2cc432c3cce03c5596
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: Narrowing }
+  - ir: def:3.2:SettableRange
+    digest: e5891e9f7ef2ef88027a58ad024a2f22a2da4c930be00c28692311daa036dc52
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:3.2:a0327ab0
+    digest: 07c3569c2f1a19c4ec8aa25010badf49d40dba9935676c3c067aa32a59b2dc52
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:3.2:SettableRange.default
+    digest: d97d76912df4bb5ee849fc1802f93de600b0a3abae90401672b3282d10fd998e
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: SettableRange }
+  - ir: key:3.2:SettableRange.value
+    digest: d9a93239a54374af6e956d40481ad28395f1c29c1cd2c4efe42eb6b85e2f53cb
+    source: { rule: constructor-shell-row }
+    as: { role: schema, in: SettableRange }

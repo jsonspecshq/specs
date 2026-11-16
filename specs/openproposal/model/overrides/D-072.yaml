@@ -1,0 +1,39 @@
+format: 2
+id: D-072
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What are the states of a hold, where section 5.6.2 lists them in a sentence rather than in a
+  table?
+covers:
+- ir: block:5.6.2:4/values:1
+  digest: 69a6da34777893e557e8b512a885f085844a3f365d0b6c1851f6880db9ef64da
+  quote: '`requested` | `held` | `declined` | `expired` | `released` | `converted`'
+- ir: key:5.6.2:Hold.status
+  digest: 71646db1b36eefd0cad809a087e931217051f2759c12ad64c9131b132ff5efa1
+  quote: '`status` | REQUIRED | Moved by the transitions below'
+options:
+- id: the-sentence-is-the-list
+  summary: The six values the sentence lists are the vocabulary `HoldStatus`, which the hold's `status`
+    carries. The sentence states the list because the specification has no table for it, and a list in
+    a sentence is as closed as a list in a table.
+- id: open-to-more
+  summary: The sentence gives examples and a hold may carry a state it does not list, so the vocabulary
+    is open.
+chosen: the-sentence-is-the-list
+rationale: 'The hold''s `status` row names the type `HoldStatus` and the specification defines it nowhere
+  else, so the sentence that lists the six states is where it is defined. Two further sentences name subsets
+  of the same six -- the three a hold ends in, and the two it rests in -- which only reads if the six
+  are the whole list.
+
+
+  `open-to-more` would publish a string where the text gives an enumeration, so a hold carrying a state
+  no party implements would be accepted and the buyer told nothing. A hold''s state decides whether inventory
+  is reserved, and a receiver that cannot tell `held` from a word it has never seen cannot hold inventory
+  correctly.
+
+
+  The condition on a hold''s `expires_at` reads "REQUIRED when `status` is `held`", and until the `status`
+  row has a type the schema cannot state that condition as a keyword and leaves it to the rules. So naming
+  this vocabulary is what lets the requirement be enforced rather than described.'

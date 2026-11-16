@@ -1,0 +1,20 @@
+{
+  "name": "@jsonspecshq/adcom-types",
+  "version": "1.0.0",
+  "description": "Static TypeScript types generated from a published JSON Schema tree. Depends on nothing.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "private": true
+}

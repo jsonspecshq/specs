@@ -1,0 +1,90 @@
+format: 2
+id: D-161
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Section 2.8's seven subsections are the OpenProposal profile of Web Bot Auth, and `D-158`
+  read their two table layouts off the headers so extraction could run, saying in its own
+  words that the rows arrive unclaimed, which is the honest state for a requirement nobody
+  has read. Four of the section's statements carry an RFC 2119 keyword and are extracted as
+  rules. What do those four carry -- a constraint the schema states, a rule a payload
+  decides, or a duty on a party?
+options:
+  - id: by-what-decides-it
+    summary: >-
+      Apply type rules section 9's test: a keyword where a member of a published object holds
+      what the statement constrains, a rule where a payload of a published type can show it,
+      an obligation with its party otherwise.
+  - id: leave-them-unclaimed
+    summary: >-
+      Leave them unmapped. The profile selects another standard's options, so its requirements
+      belong to that standard's conformance suite and not to this one's.
+chosen: by-what-decides-it
+rationale: >-
+  **Neither of the first two destinations is open to any statement of section 2.8, and the
+  reason is one sentence of its own lead-in.** The profile "selects options those documents
+  define and adds no header, tag, key field, or error code". Everything it constrains is an
+  HTTP header, a signature parameter, a key directory served at a well-known URL, or an HTTP
+  status. No member of any published object holds one: `D-158` measured that for the status
+  codes, and the same follows for the rest from the lead-in, because the profile adds no key.
+  So no keyword can state any of it, which type rules section 2a clause 1 requires of a
+  keyword.
+
+  **And no vector can be derived, which is what rules out a rule.** Type rules section 9
+  requires a valid and an invalid vector per rule and holds the schema to accepting every
+  one: "Each payload of a valid or an invalid vector is an instance of the schema of the
+  vector's type". No published type's schema admits an HTTP header, so no payload of this
+  specification can show any of these statements. Section 9's own test then names the
+  destination: "A requirement that no payload can show is an obligation, not a rule". Section
+  2.8.7's conformance vectors are real, but they are the reference implementation's, published
+  in another repository; a vector's valid half is the source's own bytes, so authoring one
+  here would be inventing the payload a conformance suite then enforces.
+
+  **The party is `implementation` for all four.** The actors section 2.8 names are a signer, a
+  verifier, a requester, a responder, a publisher, a directory server and "a party". None is a
+  seller, a buyer or a consumer as such: the lead-in says "A party that signs an OpenProposal
+  request or response signs it under this profile", so either commercial side may be any of
+  them, and what fixes the duty is the role the actor plays in the transport. `implementation`
+  is the one value of the four that names an actor that way, and section 9 already glosses the
+  shape so ("an inspecting implementation not firing an event URL").
+
+  **What this record does not reach, and it is the larger half.** Section 2.8 states 38
+  requirements and only these four carry an RFC 2119 keyword. The other 34 are written in the
+  declarative present -- "A verifier accepts a member value only when it is exactly that URL
+  for some host", "It compares the value as a string, without normalizing it, and refuses any
+  other value with `403`" -- so the extractor records them as prose sentences, not rules, and
+  the `prose-sentence` mapping rule claims every one of them as informative. Measured: of the
+  43 sentence elements of section 2.8, 0 carry MUST, SHOULD, MAY or RECOMMENDED. Mapping them
+  by a record is refused, and rightly: `mapping-rules` holds an entry to citing the rule that
+  derives it where one applies, and `map-drift` holds the mapping file to what `npm run map`
+  writes. So whether this specification's reader should recognise the declarative present as a
+  normative form is a question about the reader, not about this section, and it is the one
+  this record leaves open rather than answering by hand.
+
+  **This publishes nothing.** An obligation takes no schema keyword and no vector, so the
+  emitted documents do not move, and the separate finding that an obligation's statement is
+  published nowhere a consumer reads stands apart from this reading. Signing stays OPTIONAL:
+  section 4.1.2 states what a signature shows and `agreed` never depends on one.
+feedback: >-
+  Ask the working group whether section 2.8's requirements should be conformance-tested by
+  this specification's suite at all, or left to the Web Bot Auth suite with section 2.8
+  stating only the profile's selections. The reference implementation already publishes
+  vectors for them (section 2.8.7), which is evidence for the second, and this specification
+  has no mechanism that can run an HTTP-level vector. Ask also whether the section's
+  declarative present is intended as normative: 34 of its 38 requirements are written that
+  way, and a reader that takes only RFC 2119 keywords records them as prose.
+covers:
+  - ir: rule:2.8:909151f9
+    digest: d001429e07f16a95de754111900eb9e5d2e889e29b6c15a6071244c233d02f14
+    quote: A party MAY require a signature on the routes it serves.
+  - ir: rule:2.8.5:d717d522
+    digest: fd5ccb063f131e740344652c34bde26b8fff8d90d32c09c5388d18073f8e93ea
+    quote: A verifier MUST reject a `nonce` it has already seen from the same origin within the signature's lifetime, with `429`.
+  - ir: rule:2.8.6:60100c34
+    digest: acc352fde7446e98773dc9952b72f06a3f183905cace6ad894afd78818dc5c57
+    quote: On a `403` or `429`, a party SHOULD send `Accept-Signature` (RFC 9421 § 5.1) naming the components and parameters of § 2.8.2, and on a `503` it sends `Retry-After` instead.
+  - ir: rule:2.8.7:bb44896e
+    digest: dc402f006842598bfd7f33c2eea58c7495b050fea4d39aa9256e59c0356a062f
+    quote: 'The private keys in its `keys.json` are public test keys: section 6.8 says they "MUST NOT be used in production", and a verifier SHOULD reject them.'

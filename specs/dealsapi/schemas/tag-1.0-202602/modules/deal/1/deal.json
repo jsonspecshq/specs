@@ -322,6 +322,16 @@
     },
     "Terms": {
       "additionalProperties": false,
+      "if": {
+        "properties": {
+          "pricetype": {
+            "const": 3
+          }
+        },
+        "required": [
+          "pricetype"
+        ]
+      },
       "properties": {
         "countries": {
           "description": "An array of country codes in which the deal is available, where country code is a string using ISO-3166-3. If this is empty or missing, the deal is assumed to apply to all countries.",
@@ -340,7 +350,7 @@
           "description": "Minimum bid for impressions for this deal expressed in CPM. Unless `pricetype` is Fixed, this should be used as guidance to buyers. See Implementation Guidance for additional detail"
         },
         "enddate": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/UtcTimestamp",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Instant",
           "description": "UTC timestamp in seconds in ISO-8601 of when the deal ends. Evergreen or always on deals should leave this field blank."
         },
         "ext": {
@@ -357,7 +367,7 @@
           "description": "Deal Price Type where: `0` = Dynamic (ie. auction type will be provided by `request.at` attribute in OpenRTB Bid Request) `1` = First Price `2` = Second Price Plus `3` = Fixed Price Exchange-specific auction types can be defined using values 500 and greater."
         },
         "startdate": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/UtcTimestamp",
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Instant",
           "description": "UTC timestamp in seconds in ISO-8601 of when the deal starts"
         },
         "totalcost": {
@@ -368,6 +378,14 @@
           "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
           "description": "Number of units (impressions) over the specified start and end date of the deal. If the deal is guaranteed, this number should be provided. If the deal is not guaranteed this may be omitted."
         }
+      },
+      "then": {
+        "properties": {
+          "dealfloor": true
+        },
+        "required": [
+          "dealfloor"
+        ]
       },
       "type": "object"
     }

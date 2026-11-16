@@ -1,0 +1,111 @@
+format: 2
+id: D-106
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 2.5 says a key an object does not list is invalid, and then names two kinds of object the rule leaves
+  alone: an object whose content another definition sets, and an open object. Are those one state or two?
+covers:
+- ir: sentence:2.5:7b67929e
+  digest: ab1ab6e188544693244f4aba8b35c9457eb3d5275cbe27af4410ffa8eebec238
+  quote: An object whose content another definition sets, such as a `FormatSpec`'s `spec` (§ 5.4), is
+    unaffected, and so are the open objects `DocumentRef` (§ 2.2), `ErrorObject` (§ 2.4), and `CostParameters`
+    (§ 5.6.5).
+  locks:
+  - with-open-prs
+- ir: def:2.2:DocumentRef
+  digest: 66a5741c178cb36ff93d5c0bbe46c2d69b800b8ae16c2881e1017122dd6253c8
+  quote: '`DocumentRef` | pins a binding document. The object is open, so its publisher can add a version
+    or a date. It is never inlined. The publisher keeps every version retrievable, and the counterparty
+    stores a copy.'
+  locks:
+  - with-open-prs
+- ir: key:2.2:DocumentRef.url
+  digest: d7babd0940ebfef149fe9e3d3001d5742d4457b353d55ca48d7cff0b15c8761f
+  quote: '`url` | REQUIRED | The document. It MAY need authentication'
+  locks:
+  - with-open-prs
+- ir: key:2.4:ErrorObject.code
+  digest: f02f2830fe2f27d6494b17eae053f9e3a699aa51be2baf902c4d1373d5613c85
+  quote: '`code` | REQUIRED | A core code (below) or an extension code'
+  locks:
+  - with-open-prs
+- ir: key:5.6.5:CostParameters.viewability_standard
+  digest: d213f91f3a635104e410c38f8b7a3a30e570fc1ba329d6b54df2766a43926bcc
+  quote: '`viewability_standard` | REQUIRED when `cost_method` is `CPMV` | The viewability standard that
+    counts a unit. Core term: `mrc`, the MRC guidelines that `viewable_rate` cites (§ 5.7.1)'
+  locks:
+  - with-open-prs
+options:
+- id: two-states-one-schema
+  summary: >-
+    Two states, and both are an object of any members in the schema. An open object lists its own keys
+    and accepts more, which the specification leaves to its publisher: `DocumentRef`, declared at its
+    `url` row, `ErrorObject`, declared at its `code` row, and `CostParameters`, declared at its
+    `viewability_standard` row, are open objects of any members beyond the ones their own tables state.
+    An object whose content another definition sets lists none of its own, and the model names the
+    definition that lists them. The model carries the openness and, where another definition sets the
+    content, which definition it is.
+- id: one-open-state
+  summary: >-
+    One state. Both accept a member the specification does not name, so both are open and the model says
+    nothing further; which definition sets the content is prose for the row's description.
+chosen: two-states-one-schema
+rationale: 'The sentence names the two separately and gives each its own reason. `DocumentRef`,
+  `ErrorObject` and `CostParameters` are "the open objects": each states its own keys, and § 2.2 says
+  of the first why a further key arrives -- "The object is open, so its publisher can add a version or
+  a date", which the examples do, writing `version: "2026.1"` beside the `url` and the `digest`. A
+  `FormatSpec`''s `spec` is not in that list and is named before it, as the other kind: it states no
+  keys of its own at all, and what it holds is the content of the registry version `spec_ref` names, or
+  what the seller defines where there is none.
+
+
+  So the schema is the same for both -- an object that accepts a member it does not name -- and what the
+  model knows about them is not. An open object''s further keys are its publisher''s and nobody has
+  listed them. A set-elsewhere object''s keys are listed, in a document this specification names and does
+  not restate, and a reader who has that document knows exactly what the object holds. Recording which
+  definition it is, is the difference between "any object" and "that object", and it is the only thing
+  a consumer of the schema can act on.
+
+
+  `one-open-state` publishes the same bytes and loses the name of the definition. It also loses the check
+  the distinction buys: an object with no members of its own and no definition named is indistinguishable
+  from a row the mapping has not finished, which is the state `src/examples.ts` reports and the one this
+  record exists to keep reportable. Collapsing the two would make every unfinished object look decided.
+
+
+  Both states publish `additionalProperties: true`, which is how the emitter states openness, so neither
+  is read off a keyword''s absence.'
+evidence:
+- examples/line-item-podcast-embedded.yaml (a terms_refs entry with url, digest and version)
+- examples/proposal.yaml (the same entry on its line items)
+feedback: >-
+  § 2.5 reads as one sentence about two things. Say which objects state no keys of their own and name,
+  for each, the definition that states them -- a format registry entry for a `FormatSpec`'s `spec`, AdCOM
+  1.0's `Content` for a program option's `content`, the IAB Tech Lab Data Transparency Standard 1.1 label
+  for an audience option's `data_label` -- so that a reader of the schema reaches that document.
+challenge:
+- type: DocumentRef
+  value: { url: "https://seller.example/terms/2026.1.pdf", digest: "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06", version: "2026.1" }
+  verdict: accept
+  context: >-
+    A seller pinning the terms its line item is sold under and naming the
+    version it published them as, which is the key § 2.2 says its publisher
+    may add and which the embedded podcast line item writes.
+  reason: >-
+    `two-states-one-schema` opens the object, so a key beyond `url` and
+    `digest` is one the publisher added and the schema takes it.
+- type: DocumentRef
+  value: { version: "2026.1" }
+  verdict: reject
+  context: >-
+    A seller that names the version of its terms and leaves out the document
+    and its digest, as if an open object were a free-form one.
+  reason: >-
+    Open is not shapeless: both keys the object states are REQUIRED, and a
+    reference with no document to fetch and no bytes to pin is the one thing
+    a `DocumentRef` exists to refuse. `one-open-state`, the option not taken,
+    would refuse this too -- the pair differ on what the model records, not
+    on what either accepts.

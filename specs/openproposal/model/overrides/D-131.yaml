@@ -1,0 +1,133 @@
+format: 2
+id: D-131
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `VersionRef.seller_domain` is REQUIRED when the reference is outside its
+  proposal, and which case a carrier is in is a fact per carrier. Is the
+  condition a property of each carrier, statable in the carrier's own schema
+  under type rules § 2a clause 1, rather than one rule about the value?
+covers:
+  - ir: rule:2.2:e46f15c4
+    digest: 842f144cbb538352e229fb3aafe5bbb71a204f09e1aeb96e1c3d14aa72935dae
+    quote: REQUIRED when the `VersionRef` is outside its proposal
+  - ir: sentence:2.2:d3643f2d
+    digest: 5e3219f08b4dd2fe221c62ac093d51269d6869f5506998d3ea9f6ac3017c5708
+    quote: "A `proposal_id` is unique only within a `seller.domain` (§ 4.1): a `VersionRef` inside a proposal resolves against that proposal's `seller`, and one outside a proposal carries `seller_domain`."
+  - ir: key:3.3:AvailabilityRead.offer
+    digest: 78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268
+    quote: "`offer` | REQUIRED | The line item and the `version` whose options the figures are computed against. `line_item_id` is REQUIRED here"
+  - ir: concept:1.1:17
+    digest: 7d90c059465860f93c94b2345716b1bbba37954541fc304767f1dd54ed09bf46
+    quote: "`ext.baseline` | The agreed baseline `VersionRef` (§ 2.2), with `seller_domain`, so a DSP can join the deal to its record. OPTIONAL. The Deals API 1.0 doesn't define this key"
+options:
+  - id: stated-by-each-carrier
+    summary: >-
+      Each carrier's schema requires `seller_domain` inside the reference it
+      holds, so § 2a's clause 1 carries the condition, it leaves the rules
+      stage as `expressed`, the rule needs no vector, and `rules.json` writes.
+  - id: one-rule-for-every-carrier
+    summary: >-
+      It stays one rule, owned by `VersionRef` and paired at a carrier, because
+      the text states the requirement of the reference and not of any carrier.
+      The clause stays blocked until the source ships a payload of a carrier in
+      which the condition is true.
+  - id: both-constructs
+    summary: >-
+      The carriers' schemas state it and the rule stays, so the requirement is
+      published twice.
+chosen: one-rule-for-every-carrier
+rationale: >-
+  **The text has a per-carrier form for exactly this and does not use it for this member.**
+  "`X` is REQUIRED here" occurs four times in the pinned text, and § 3.3's `offer` row is one
+  of them: "The line item and the `version` whose options the figures are computed against.
+  `line_item_id` is REQUIRED here". The same cell that would have said `seller_domain` is
+  REQUIRED here says it of `line_item_id` instead, and § 4.4's `baseline` row says the same
+  one thing. So the only statement of this member's presence is § 2.2's Required cell, whose
+  subject is the `VersionRef`, and § 2.2's lead-in, whose subject is a `VersionRef`. Reading
+  the condition as a property of each carrier is a reading the text declines to state in the
+  form it keeps for that purpose.
+
+
+  **One carrier the text names publishes nothing.** § 1.1's row states the requirement for a
+  Deals API `Deal` key -- "The agreed baseline `VersionRef` (§ 2.2), with `seller_domain`" --
+  and `concept:1.1:17` is mapped `role: informative`, so no schema of this specification states
+  anything of that carrier. A per-carrier statement reaches the three carriers this
+  specification defines and leaves that one's reader nothing, while § 2.2's row reaches it.
+  A `VersionRef` is a shared type of § 2.2 and the requirement follows the type wherever it
+  travels: a keyword has to be restated at every carrier, and a carrier that omits it publishes
+  a reference that requires nothing. The rule states it once, for carriers this specification
+  has not got.
+
+
+  **Clause 1 asks whether a keyword states the rule, and at a carrier it states a consequence.**
+  The rule is that a `VersionRef` outside its proposal carries `seller_domain`. "Outside its
+  proposal" is no predicate over the reference's own value, and § 2a's table of conditional
+  constructs has no row for a condition about which object carries the value -- every row there
+  reads a sibling, or a sibling's list, of the object the condition is on. `required` inside
+  `AvailabilityRead.offer` would state what follows at one location for a reader who already
+  knows that location is outside its proposal. That is the rule's consequence, not the rule.
+
+
+  **The emitter cannot read it, and the mechanism that looks closest reads a different form.**
+  `heldConditions` matches a condition naming a sibling member the held object does not carry
+  and the holder does, with a value of it, which is how all seven `CostParameters` rows and
+  `Placement.feed` and `Placement.plcmt` are expressed. This condition names no sibling and no
+  value. An extension would have to classify each carrier as inside or outside its proposal,
+  which is the meaning of a sentence and not the form of a cell, so the classification would
+  come from a record per carrier and the schema would publish a reading rather than derive one.
+
+
+  **The one landed treatment of this shape runs the other way, measured.** § 4.1's
+  "`legal_name` is REQUIRED here" is the same shape with the per-carrier form present, and it
+  is carried as a rule: `key:2.2:Party.legal_name` stays `presence: optional` on the shared
+  type, `D-088` maps the statement `{role: rule, object: Proposal}` with its vectors at
+  `type: Proposal`, and no published schema of this specification carries `required` naming
+  `legal_name` or `seller_domain` at any location, measured over every file under
+  `schemas/with-open-prs/`. The weaker case, whose per-carrier statement the text does not
+  make, cannot take a treatment the stronger case is denied.
+
+
+  **What the published bytes show.** `AvailabilityRead.offer` is a bare `$ref` to the kernel's
+  `VersionRef`, and its description carries "`line_item_id` is REQUIRED here" while the schema
+  states none of it. Both `rule:3.3:de17ca68` and `rule:4.4:de17ca68` are unmapped. So the
+  carrier-states-it mechanism does have an input the text supplies and the mapping has not
+  taken: `line_item_id` at two carriers, readable as form from the carrier's own row. That is a
+  different row -- mapping the two "`line_item_id` is REQUIRED here" statements on a held
+  `VersionRef` -- and expressing it moves nothing about `seller_domain`.
+
+
+  `both-constructs` is refused on its own terms: the rule would still need a pair, so
+  `rules.json` would still not write, and the requirement would be published by two constructs
+  with no statement of which governs where they disagree.
+
+
+  **So the clause stays blocked and this record says what unblocks it.** `D-124` chose the same
+  construct from the other side of the question -- whether the value can show the condition --
+  and this record does not supersede it: it answers whether the carrier's schema can state it,
+  and the answer is that it can state three carriers' consequences and not the rule. What the
+  source has to ship is one `AvailabilityRead`, which `D-124`'s feedback asks for. Measured at
+  this commit: `npm run rules -- --spec openproposal` reports 2 problems over the one rule and
+  writes no `rules.json`; the emitter expresses 45 conditions and leaves 17 to the rules; AdCOM
+  and the Deals API leave 0 on every lock.
+feedback: >-
+  § 2.2 states that a `VersionRef` outside its proposal carries `seller_domain`, and a reader
+  of any carrier's row cannot tell which case that carrier is in. § 3.3's `offer` row already
+  uses the form that would say it -- "`line_item_id` is REQUIRED here" -- so either say
+  "`seller_domain` is REQUIRED here" in § 3.3's `offer` row and say in § 4.1's `issued_from`
+  and § 4.4's `baseline` rows that it is not required there, or say in § 2.2 that the
+  requirement travels with the type and that every carrier of a reference outside a proposal
+  owes the member. The first makes each carrier's schema able to state it; the second keeps one
+  rule and tells an implementer where to look. Naming the carriers in § 2.2's row would do
+  either way, since the three that are objects of this specification sit in three other
+  sections and the fourth is a Deals API key.
+
+
+  Separately, and this is what `D-124` also asks: no example holds a payload in which the
+  condition is true. `seller_domain` appears in no shipped payload, and the four references the
+  source ships are one `Proposal.issued_from` and three `ChangeRequest.baseline`, every one
+  inside a proposal. Ship an `AvailabilityRead` whose `offer` carries the `seller_domain` of the
+  proposal's seller beside its REQUIRED `flight`; its invalid counterpart is the same message
+  without the domain.

@@ -1,0 +1,83 @@
+format: 2
+id: D-057
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: '`D-050` reads § 2.2''s glossary against the kernel and refuses `one-primitive-per-spelling`,
+  on the ground that fourteen of the 24 spellings are concepts the kernel already represents, so minting
+  a primitive per spelling would put two types on one concept. Where a spelling names not the kernel''s
+  concept but a *narrowing* of it, which of the two does the row take?'
+covers:
+- ir: def:2.2:Instant
+  digest: df8f4931a29cab49ac4f7be005c0e543329982c6dd42ad24f6ca266927fde0bc
+  quote: '`Instant` | String: an RFC 3339 `date-time` in whole seconds, ending in `Z` | A point in time.
+    One written form, so one instant has one digest input'
+- ir: key:2.2:Interval.start
+  digest: eef6d2a736303d5d5081c1f1eb92b6d60df3fdb9d545f6071aea012805ee4d16
+  quote: '`start` | REQUIRED | The first second'
+- ir: key:4.1:HistoryEntry.at
+  digest: b68b117ee8bbf9f32b984acac735be1ba894a9cd73c74e6aaec95b80c7380e3e
+  quote: '`at` | REQUIRED | When the side acted'
+options:
+- id: narrowing-mints-a-type
+  summary: Where a § 2.2 spelling names a concept the kernel already represents, the row binds to the
+    kernel type, which is `D-050`'s reading unchanged. Where it names a **narrowing** of a kernel type,
+    the narrower primitive is minted under its own concept, because binding to the wider one widens the
+    row past what the text admits.
+- id: bind-every-spelling
+  summary: Every spelling binds to the nearest kernel type, narrowing included, and the extra constraint
+    lives in prose beside the schema.
+- id: narrow-the-kernel-type
+  summary: The kernel type is narrowed to the spelling, so one type serves both, and the specifications
+    that bound the wider form carry the narrower one.
+chosen: narrowing-mints-a-type
+rationale: '**This narrows `D-050` and does not supersede it.** `D-050`''s question and its chosen option,
+  `bind-the-spelling-to-the-kernel-type`, stand for every spelling whose concept the kernel represents,
+  which is the large majority of its 24. What this record decides is the case `D-050`''s rationale ruled
+  on without separating: it names `Instant` beside `UtcTimestamp` and `VocabularyTerm` beside `NamespacedTerm`
+  as pairs the duplication gate would refuse for putting two types on one concept. **That argument is
+  right where the concepts coincide and wrong where one narrows the other**, and those two are the second
+  case.
+
+  **The rule, stated so a later spelling follows from it rather than from an exception.** Where a § 2.2
+  spelling names a concept the kernel already represents, bind to the kernel type. Where it names a narrowing
+  of a kernel type, mint the narrower primitive under its own concept, because binding to the wider one
+  **widens the row past what the text admits** — and the directional floor permits a published type wider
+  than the document only where the document leaves the point open, never where it states the narrower
+  form.
+
+  **The measurement, for `Instant`.** `UtcTimestamp`''s pattern is `^[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(\.[0-9]+)?([Zz]|[+-]00:00)$`
+  and `Instant`''s is `^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$`. Three payload classes
+  the wider type accepts and the text refuses: `"2026-10-06T12:00:00.500Z"`, a fractional second; `"2026-10-06T12:00:00+00:00"`,
+  the zero-offset spelling; and `"2026-10-06t12:00:00z"`, the lower-case form. Each is a second written
+  form of one instant, which is exactly what the row''s own reason forbids — "One written form, so one
+  instant has one digest input" — because a record whose instant has two spellings has two digests.
+
+  **The same shape was already measured once and the duplication gate did not refuse it.** `D-055` added
+  `IanaZone` beside `TimeZone` for this reason: `TimeZone` admitted `viewer_local` and typing an `IanaZone`
+  row at it would have accepted a value the text rules out. The gate accepted the pair because their patterns
+  differ, which is the answer to `D-050`''s prediction — the duplication gate refuses two types of one
+  *structure*, and a narrowing has a different structure by construction.
+
+  **Why `narrow-the-kernel-type` is refused, and it is the cross-specification case.** The Deals API **binds**
+  `UtcTimestamp` through `D-002` and OpenProposal marks it `absent`, so narrowing it moves the published
+  bytes of a specification that is the type''s only present consumer. As an addition, `Instant` needs
+  only an `absent` entry in the two specifications that do not want it — binding files, no published byte
+  — which is the radius every kernel change of this session was authorised against.
+
+  **Five member names become cross-lock homonyms**, listed with this record: `at`, `generated_at`, `price_valid_until`,
+  `submitted_at` and `valid_until` each read as an instant on `main`, where the predecessor wrote `Timestamp`
+  and admitted any RFC 3339 spelling, and as a canonical instant on `with-open-prs`, where the rewrite
+  states one written form. The member did not change its meaning; the specification narrowed how it is
+  written, and the two locks therefore carry two concepts for it.'
+evidence:
+- '`D-050`''s rationale: fourteen of the 24 spellings are concepts the kernel already represents, naming
+  `Instant` beside `UtcTimestamp` and `VocabularyTerm` beside `NamespacedTerm`.'
+- 'docs/reports/reading-runs/openproposal-d050-binding-2026-11-08.md § 10: omission is publication, so
+  an addition''s radius is three binding files and no published byte of another specification.'
+- '`specs/dealsapi/kernel-binding.yaml` binds `UtcTimestamp`; `specs/adcom/kernel-binding.yaml` and `specs/openproposal/kernel-binding.yaml`
+  both mark it `absent`.'
+feedback: § 2.2 states `Instant` as one written form and gives the reason — a stable digest input. Say
+  the same where a digest is defined, because a reader who meets `Digest` without `Instant` beside it
+  cannot tell that the spelling of a timestamp is load-bearing for it.

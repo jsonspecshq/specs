@@ -1,0 +1,93 @@
+format: 2
+id: D-068
+status: proposed
+kind: reading
+basis: departure
+author: agent
+question: How is the change in price written when a buyer selects an option beyond those included?
+covers:
+- ir: key:3.1:Delta.delta_cpm
+  digest: 60e3140cbf8caa8ce10c19f0a23b13a7f0d40dc4fc36b058d8981464e4d6a48c
+  quote: '`delta_cpm` | OPTIONAL | Added to the rate of a `CPM` or `CPMV` entry (§ 5.6.5), and to no other'
+  departs:
+  - The kernel stated this part as a change to the CPM, a flat change, or a change in percent, with the
+    two money members as a signed price adjustment and the third as a percentage.
+- ir: key:3.1:Delta.delta_flat
+  digest: 23ec4c9beccbcf91882b3a3777a542f6b92c6408c9f37fc9a6e3dc18d04dce51
+  quote: '`delta_flat` | OPTIONAL | A charge on any entry, outside the rate'
+  departs:
+  - The kernel stated this part as a change to the CPM, a flat change, or a change in percent, with the
+    two money members as a signed price adjustment and the third as a percentage.
+- ir: key:3.1:Delta.delta_fraction
+  digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+  quote: '`delta_fraction` | OPTIONAL | Multiplies the rate of any entry by 1 plus this value. `0.20`
+    is 20 percent more'
+  departs:
+  - The kernel stated this part as a change to the CPM, a flat change, or a change in percent, with the
+    two money members as a signed price adjustment and the third as a percentage.
+options:
+- id: as-the-text-states
+  summary: Exactly one of `delta_cpm`, `delta_flat` or `delta_fraction`. The first two are amounts of
+    money; the third is a factor on the rate, greater than -1, so `0.20` is twenty percent more.
+- id: keep-percent
+  summary: Keep a percentage member beside the two money members, and read `delta_fraction` as a percentage
+    divided by one hundred.
+- id: spec-defines-its-own
+  summary: The specification's own `Delta` object stands alone and the kernel states no part for the concept.
+chosen: as-the-text-states
+rationale: 'Section 3.1 states the three members and what each does: `delta_cpm` is added to the rate
+  of a CPM or CPMV entry, `delta_flat` is a charge outside the rate, and `delta_fraction` multiplies the
+  rate by one plus its value. The first two are sums of money and the third is a factor, which is the
+  `FractionDelta` section 2.2 defines as a number greater than -1.
+
+
+  `keep-percent` would publish a member the text does not write and read the member it does write on a
+  scale it does not use, so a sender of `0.20` would be charged twenty percent of what it meant. `spec-defines-its-own`
+  would leave the concept unnamed in the kernel, and the next specification to state a price delta would
+  have nothing to reuse.
+
+
+  This specification is the only one that states the concept -- AdCOM and the Deals API each mark the
+  part absent -- so the kernel states it as this text does rather than keeping a form no text writes.
+  That is the departure the covers name.
+
+
+  The `Delta` object carries no currency member, so the rows that carry a sum of money without one are
+  listed as lacking it: a factor needs no currency, and the two amounts take the currency of the entry
+  whose rate they change.'
+challenge:
+- type: PriceDelta
+  value:
+    delta_fraction: 0.03
+  verdict: accept
+  context: >-
+    The three-percent uplift `line-item-ctv.yaml` prices the `notice-14d` cancellation option
+    at, which is what a seller writes when an option costs a share of the rate rather than a
+    sum of money.
+  reason: >-
+    `delta_fraction` is `FractionDelta`, which § 2.2 states as a number greater than -1, so
+    the factor the text describes is the value the member takes.
+- type: PriceDelta
+  value:
+    delta_percent: 3
+  verdict: reject
+  context: >-
+    The same three-percent uplift written as a percentage beside the two money members,
+    which is how `keep-percent` would have a seller write it.
+  reason: >-
+    `additionalProperties` is false and the part names `delta_cpm`, `delta_flat` and
+    `delta_fraction`, so a percentage member is no member of it. This is what choosing
+    `as-the-text-states` costs a sender who writes the rival form.
+- type: PriceDelta
+  value:
+    delta_cpm: 9.0
+    delta_flat: 12000.0
+  verdict: reject
+  context: >-
+    The CPM uplift `line-item-audio.yaml` prices its host-read format at and the flat charge
+    it prices seller-built production at, written on one option as though an option could
+    cost both.
+  reason: >-
+    `maxProperties` is 1, which is the "exactly one of" half of `as-the-text-states`: § 3.1
+    says "At least one key is present" and the three members are three ways of pricing one
+    option, not three charges that add up.

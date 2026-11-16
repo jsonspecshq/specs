@@ -1,0 +1,112 @@
+format: 2
+id: D-107
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three rows hold an object this specification states no member of. Which definition states each one's
+  members, and what are the objects called?
+covers:
+- ir: key:5.4:FormatSpec.spec
+  digest: d8784a32abebd527ce8396f0a800d576fc43f78ea95088e6e58be7c67414abd6
+  quote: '`spec` | REQUIRED | The full specification. OpenProposal does not hardcode a shape per channel'
+  locks:
+  - with-open-prs
+- ir: key:5.2.9:ProgramOption.content
+  digest: 69af89fccab487593d6c5be36bf56321757213cd2e0eb5e5ad36b2a404962c10
+  quote: '`content` | OPTIONAL | An AdCOM 1.0 `Content` object, in AdCOM''s keys and meanings, `series`,
+    `title`, `network`, `channel`, `genres`, `rating`, `live`, and `realtime` included. Its `channel`
+    is the AdCOM `Channel` object, the TV channel or station the content is on'
+  locks:
+  - with-open-prs
+- ir: key:5.3:AudienceOption.data_label
+  digest: 74daab120c18c4ad88c9f38c309986a79442cf7d53b8db3eb3fa869e20b8abe5
+  quote: '`data_label` | REQUIRED | The option''s IAB Tech Lab Data Transparency Standard 1.1 label: every
+    field in its "Minimum Segment Disclosures: Required Fields" table, keyed by its API flat file key,
+    with values exactly as the standard publishes them, such as `Observed/Known` or `TCF (Europe)`. A
+    multi-select field the standard gives no separator for is an array of those values. The standard''s
+    conditional rules apply: offline data sources require the Onboarder Details fields, which otherwise
+    take the standard''s `N/A` option; `Modeled` requires `audience_expansion: Yes`; and `Single domain
+    / App` scope requires a domain or app store URL in `originating_domain`'
+  locks:
+  - with-open-prs
+options:
+- id: the-definition-each-row-names
+  summary: >-
+    Each row holds an object of any members, under the name the row's own prose gives it, and the model
+    names the definition that states them: `spec` is a `FormatSpecification`, whose content is the format
+    registry entry a `spec_ref` names, at the version it names, or the seller's where it is absent;
+    `content` is a `Content`, which is AdCOM 1.0's object of that name; and `data_label` is a `DataLabel`,
+    which is the IAB Tech Lab Data Transparency Standard 1.1's Minimum Segment Disclosures table. This
+    specification states no member of any of the three, so each is open.
+- id: restate-each-shape-here
+  summary: >-
+    Each object's members are restated in this specification's mapping, read off the standard that
+    defines them, so that the published schema types every key.
+chosen: the-definition-each-row-names
+rationale: 'All three rows say that the members are somewhere else, and two of them say exactly where.
+  A program option''s `content` is "An AdCOM 1.0 `Content` object, in AdCOM''s keys and meanings". An
+  audience option''s `data_label` is "every field in its ''Minimum Segment Disclosures: Required Fields''
+  table, keyed by its API flat file key, with values exactly as the standard publishes them". And a
+  `FormatSpec`''s `spec` is "The full specification", of which § 5.4 says "OpenProposal does not hardcode
+  a shape per channel" and "When `spec_ref` is present, `spec` MUST equal the content of the version it
+  names" -- so the registry entry sets it, and the seller sets it where there is no entry.
+
+
+  § 2.5 has the category and names this very row as its example: "An object whose content another
+  definition sets, such as a `FormatSpec`''s `spec` (§ 5.4), is unaffected". D-106 reads that sentence
+  and separates the state from an open object''s. This record is which definition, for each of the three.
+
+
+  `restate-each-shape-here` is the copy D-071 refused for a code list, and worse. AdCOM''s `Content` has
+  over twenty attributes and `Channel` and `Producer` below it; the Data Transparency label''s table has
+  twenty-two fields with conditional rules between them. A copy drifts the moment either standard
+  revises, and a payload valid against the standard would be refused by a copy that had not been
+  regenerated -- which is the failure this specification''s own `spec` row exists to avoid, since it
+  refuses to hardcode a shape per channel. It would also publish three objects whose members no row of
+  this text states, so the provenance of every one of them would be a reading of another document.
+
+
+  The names are the ones the rows give. `Content` is AdCOM''s own name for the object, written in the
+  row. `DataLabel` is the label the row calls it. `FormatSpecification` is "The full specification",
+  spelled out because `FormatSpec` is already the pair of `spec_ref` and `spec` that holds it.
+
+
+  What this costs is stated rather than hidden: the published schema takes any member of each of the
+  three, so it checks that the value is an object and nothing more. § 5.4 states two keys a `spec` MAY
+  hold -- `asset` and `voice`, each a `VocabularyTerm` with core terms -- in prose rather than in a
+  table, and those two sentences are still unmapped, so the schema does not yet narrow them. Naming them
+  as members of `FormatSpecification` is the next thing this record makes possible, and it is a reading
+  of those two sentences and not of these three rows.'
+evidence:
+- examples/line-item-ctv-live-series.yaml (a program option whose content holds series, title and network)
+- examples/line-item-display.yaml (three audience options, each with a twenty-two-field data_label)
+- examples/proposal.yaml (nine format specs across five line items)
+feedback: >-
+  Say in § 5.4 which definition sets a `spec` where `spec_ref` is absent, and whether the seller's own
+  shape is published anywhere a buyer can read it. § 2.5's sentence would also read better as two: the
+  objects that state no members of their own, each with the definition that states them, and the open
+  objects that state their own and accept more.
+challenge:
+- type: FormatSpecification
+  value: { w: 300, h: 250 }
+  verdict: accept
+  context: >-
+    A display format whose registry entry states a width and a height, which
+    is what every display `format_specs` entry of the examples writes.
+  reason: >-
+    `the-definition-each-row-names` publishes the object as one whose content
+    the registry entry sets, so a member this specification never names is
+    the entry's and the schema takes it.
+- type: FormatSpecification
+  value: "display/300x250"
+  verdict: reject
+  context: >-
+    A seller that writes the format id where the specification asks for the
+    specification, as if `spec` were a second `spec_ref`.
+  reason: >-
+    The row's type cell says `Object`, and an object whose content another
+    definition sets is still an object: a string is refused however plainly
+    it names the entry. That is the whole of what this type checks, and the
+    reason it is worth publishing at all.

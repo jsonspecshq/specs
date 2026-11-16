@@ -9,22 +9,22 @@ writes this file from the model and the emitted schemas; don't edit it.
 
 | Attribute | By rule | By override | Total |
 |---|---|---|---|
-| `code-name` | 276 | 11 | 287 |
-| `defs-key` | 101 | 0 | 101 |
-| `description` | 599 | 0 | 599 |
-| `title` | 338 | 12 | 350 |
-| **all** | **1314** | **23** | **1337** |
+| `code-name` | 284 | 11 | 295 |
+| `defs-key` | 106 | 0 | 106 |
+| `description` | 606 | 0 | 606 |
+| `title` | 349 | 12 | 361 |
+| **all** | **1345** | **23** | **1368** |
 
 ### Within those
 
 | | By rule | By override | Total |
 |---|---|---|---|
-| vocabulary names | 42 | 0 | 42 |
+| vocabulary names | 45 | 0 | 45 |
 | object names | 46 | 0 | 46 |
-| kernel type names | 13 | 0 | 13 |
-| branch titles | 293 | 12 | 305 |
-| type and file titles | 45 | 0 | 45 |
-| code names | 276 | 11 | 287 |
+| kernel type names | 15 | 0 | 15 |
+| branch titles | 301 | 12 | 313 |
+| type and file titles | 48 | 0 | 48 |
+| code names | 284 | 11 | 295 |
 
 ## Overridden values
 

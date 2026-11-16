@@ -1,0 +1,121 @@
+format: 2
+id: D-120
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: A Required cell states a condition no shipped payload triggers. Is a payload the rule accepts
+  but does not decide a valid half, and what is the pair of such a rule?
+covers:
+- ir: rule:5.6:0f8d396f
+  digest: 32bc109b3441be001719afaeecfaf260d3b08279427292d7884d1e09c4d91b1d
+  quote: REQUIRED when the term requires keys
+- ir: rule:5.9:c0f7b8ce
+  digest: 90913c40f1240deeed5765732a715a8f4bceb8b53323a5d4cce7e1e0bf429160
+  quote: REQUIRED when an option's `delivery_type` is `share_of_voice`
+- ir: rule:5.6.4:615bf228
+  digest: 919b9bf1f25088f695ee7d6a8be5b52f8c590af183570a1e9d4724b9e0a3bd5b
+  quote: REQUIRED when a property has `sync_groups[]`
+options:
+- id: outside-the-condition-is-valid
+  summary: A payload the rule accepts is a valid half, whether or not its condition is true of it, and
+    the invalid half is that payload with the one mutation that brings it inside the condition and breaks
+    it.
+- id: trigger-or-nothing
+  summary: A valid half must be a payload in which the condition is true and the member is present, so
+    a rule the source never triggers has no pair until the source carries one.
+chosen: outside-the-condition-is-valid
+rationale: 'Type rules § 9 asks of a rule a payload the rule holds of and a payload it does not, and the
+  gates ask no more: `src/rules.ts` requires one of each, `checkRuleVectors` requires the type''s schema
+  to accept every payload so the rule alone decides it, and `checkProblems` requires the rule''s check
+  to find nothing in the valid half, something in the invalid half, and the question answerable in both.
+  None of the three reads whether the condition is true. So a payload outside the condition is decided
+  by the rule -- it passes -- and it is a valid half.
+
+
+  This repository already rests on that. `D-098`''s vectors for `rule:5.6.5:bdabfe4f` include a `FLAT`
+  entry at a rate of zero, and that record says in its own words that `FLAT` and `TIME` "are outside it,
+  and a `FLAT` entry at a rate of zero is a valid vector here". What such a half demonstrates is the condition''s
+  boundary: paired with an invalid half that differs in the one value the condition reads, it says what
+  a conformance suite must not require as well as what it must.
+
+
+  **So a pair needs three things of the source, and whether a shipped payload triggers the condition is
+  none of them.** First, a payload of the type the vector is an instance of, which the rule accepts: that
+  is the type the vectors entry names, defaulting to the rule''s owner, and it is the object the Required
+  cell''s row sits on, because that is where the member is. Second, one mutation -- of that payload, or
+  of the value its condition reads where a sibling object holds it (`D-117`) -- that brings it inside the
+  condition and breaks it. Third, a condition some payload can show at all, which is type rules § 9''s
+  own test for a rule against an obligation. A row that fails the first needs the specification to ship
+  a payload of its object; a row that fails the third needs nothing shipped, because no example could carry
+  the fact. The two are different answers to "what would close this" and reading the first for the third
+  is how a closure comes to be stated too broadly.
+
+
+  **`PricingEntry.cost_parameters`.** § 5.6.5''s `cost_parameters` column names the terms that require
+  keys -- `CPMV`, `CPV`, `CPP`, `CPA` and `TIME` -- and leaves the column empty for `CPM`, `CPC`, `CPCV`,
+  `PLAY` and `FLAT`, so the entry''s own `cost_method` decides the condition. Every `cost_method` the source
+  writes is `CPM` or `FLAT`, so every shipped entry satisfies the rule. The valid half is proposal-agreed.yaml''s
+  `/line_items/0/pricing/0`, a `CPM` entry that owes no keys; the invalid half is that entry read as `CPP`,
+  which the table requires `demographic` and `rating_source` for. An extension term has no row there: §
+  5.6 puts its keys in the document `cost_definition` points at, which the entry does not carry, so the
+  check leaves an entry under one undecided.
+
+
+  **`LineItem.sov_basis`.** § 5.9 says `share_of_voice` reserves a fixed share of the inventory for the
+  flight, and `sov_basis` is the only statement of what the share is a share of, so an offer of one with
+  no `sov_basis` promises a share of nothing. The condition reads an option''s `delivery_type`, which every
+  option of `transaction_mechanism.available[]` carries, so the line item holds every value the condition
+  reads. It is an option''s and not the one in effect: the row says "an option''s", and a buyer selecting
+  another offered option would not retract the share the seller offered. All 23 shipped options are `guaranteed`
+  or `non_guaranteed`, so every shipped line item satisfies the rule. The valid half is proposal-agreed.yaml''s
+  `/line_items/0`, whose one option is `programmatic_guaranteed` at `guaranteed`; the invalid half is that
+  line item with the option read as `share_of_voice`, which § 5.9''s table allows of `programmatic_guaranteed`.
+
+
+  **`DeliveryCounting.partial_play_credit`** derives the same way and the published schema refuses it.
+  The condition reads the line item''s `properties`, which a `DeliveryCounting` does not hold, so `D-117`''s
+  reading applies and a vector gives the value as `context` keyed by `LineItem.properties`. line-item-dooh.yaml
+  furnishes both: its `delivery_counting` and its one property, which has no `sync_groups[]`, are the valid
+  half, and the invalid half is that property given the `sync_groups[]` the condition names. `src/rules.ts`
+  validates a context value against the member''s own schema, and the published `TaxonomyCodes` states
+  no `taxonomy` key, so it refuses the property''s own `venue_type` -- the same refusal the examples gate
+  reports against line-item-dooh.yaml at `/properties/available/0/venue_type/taxonomy`, and `key:2.2:TaxonomyCodes.taxonomy`
+  has no mapping entry. Editing the context to drop the key would be editing a payload to make a check
+  pass, which is refused, so this pair waits on that row and `rules-emit` keeps reporting the rule. What
+  has changed is the reason: the source holds the payload, and the published type refuses part of it.
+
+
+  That row waits on neither a list nor an import, which `D-094` now states with the figures: both AdCOM
+  lists the three holder fields name are published in its committed lists module and both reach this specification
+  through the registry import the profile already holds. The row itself names no list -- its cell is "A
+  value from the list the field names" -- and one entry on one row cannot carry the two the fields name,
+  so closing it is a reading about a type shape and not about this rule. Until it is read, `partial_play_credit`
+  is the one unpaired rule of the four that waits on the mapping rather than on the source.
+
+
+  `trigger-or-nothing` is what `D-118` chose for all four of its rows, and it is too broad for these three.
+  It conflates two questions -- whether the source furnishes a payload of the rule''s type, and whether
+  the source furnishes one in which the condition is true -- and only the first bears on whether a pair
+  can be derived. `D-118`''s fourth row, `CommitResult.availability`, fails the first: no payload holds
+  a `CommitResult` at all, so there is nothing to mutate, and that record''s reading of it stands.
+
+
+  **The test applied to all four rules that are still unpaired**, which is what says of each whether a
+  payload would close it. `rule:5.6.4:615bf228` `DeliveryCounting.partial_play_credit` passes all three
+  and the published `TaxonomyCodes` refuses its context, so it waits on a mapping row and on nothing the
+  specification could ship. `rule:5.6.1:94be9998` `CommitResult.availability` fails the first and its condition
+  reads its own `entries[]`, so a shipped `CommitResult` would close it (`D-118`). `rule:2.4:3b0456cb`
+  `ErrorObject.version` fails the first and the third: no payload holds an `ErrorObject`, and its condition
+  reads the request. `rule:2.2:e46f15c4` `VersionRef.seller_domain` passes the first -- four references
+  ship, all inside a proposal, each a payload the rule accepts -- and fails the second and the third, because
+  the condition reads whether a carrier exists and absence cannot be supplied as context. So two of the
+  four would close on a payload, one on a mapping row, and one on neither (`D-119`).'
+feedback: 'Three conditional members have no example in which their condition is true, so an implementer
+  reading the examples sees only the case in which each is absent. Ship a payload for each: a pricing entry
+  whose `cost_method` is `CPMV`, `CPV`, `CPP`, `CPA` or `TIME`, with the `cost_parameters` keys § 5.6.5
+  requires of that term; a line item offering `programmatic_guaranteed` at `share_of_voice`, with `sov_basis`
+  and, where that is `impressions`, `sov_share`; and a `dooh` property with `sync_groups[]` beside a `delivery_counting`
+  that states `partial_play_credit`. Conformance vectors for all three can be derived without them, because
+  a shipped payload of each type satisfies the rule and one mutation breaks it, but an implementer has
+  no worked example of the satisfied case.'

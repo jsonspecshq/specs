@@ -71,6 +71,53 @@
         "by": "rule",
         "from": [
           {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "target-rules § 2 zero sentinels"
+      },
+      "type": "AmpRenderingTreatment",
+      "value": "UNSPECIFIED"
+    },
+    {
+      "attribute": "code-name",
+      "member": "1",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "AmpRenderingTreatment",
+      "value": "EARLY_LOADING"
+    },
+    {
+      "attribute": "code-name",
+      "member": "2",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "AmpRenderingTreatment",
+      "value": "STANDARD_LOADING"
+    },
+    {
+      "attribute": "code-name",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
             "digest": "e6edeb9af37e68366b8daea0269a8c94c279d232f8498e912cb663838a331dee",
             "ir": "def:list_apiframeworks:1"
           }
@@ -2229,6 +2276,53 @@
       },
       "type": "DoohMultiplierMeasurementSourceType",
       "value": "EXCHANGE_PROVIDED"
+    },
+    {
+      "attribute": "code-name",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "target-rules § 2 zero sentinels"
+      },
+      "type": "DoohPlacementMobility",
+      "value": "UNSPECIFIED"
+    },
+    {
+      "attribute": "code-name",
+      "member": "1",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "DoohPlacementMobility",
+      "value": "FIXED"
+    },
+    {
+      "attribute": "code-name",
+      "member": "2",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "DoohPlacementMobility",
+      "value": "MOVABLE"
     },
     {
       "attribute": "code-name",
@@ -4723,6 +4817,70 @@
     },
     {
       "attribute": "code-name",
+      "member": "0",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "ServerSideAdInsertionMode",
+      "value": "STATUS_UNKNOWN"
+    },
+    {
+      "attribute": "code-name",
+      "member": "1",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "ServerSideAdInsertionMode",
+      "value": "ALL_CLIENT_SIDE"
+    },
+    {
+      "attribute": "code-name",
+      "member": "2",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "ServerSideAdInsertionMode",
+      "value": "ASSETS_STITCHED_SERVER_SIDE_BUT_TRACKING_PIXELS"
+    },
+    {
+      "attribute": "code-name",
+      "member": "3",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 code names"
+      },
+      "type": "ServerSideAdInsertionMode",
+      "value": "ALL_SERVER_SIDE"
+    },
+    {
+      "attribute": "code-name",
       "origin": {
         "by": "rule",
         "from": [
@@ -5061,6 +5219,21 @@
         "by": "rule",
         "from": [
           {
+            "digest": "79fd887cbb80c0b7dd271ce7dedf5e3aabe7458adbde81012eaf7b9de4c876fa",
+            "ir": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "type": "AmpRenderingTreatment",
+      "value": "AmpRenderingTreatment"
+    },
+    {
+      "attribute": "defs-key",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
             "digest": "e6edeb9af37e68366b8daea0269a8c94c279d232f8498e912cb663838a331dee",
             "ir": "def:list_apiframeworks:1"
           }
@@ -5294,6 +5467,21 @@
       },
       "type": "DoohMultiplierMeasurementSourceType",
       "value": "DoohMultiplierMeasurementSourceType"
+    },
+    {
+      "attribute": "defs-key",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "b4203d482cd50b3822af11aa4b1d13c8bdaee57e6df645255b24d9ffaac65355",
+            "ir": "key:object_dooh:Dooh.fixed#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "type": "DoohPlacementMobility",
+      "value": "DoohPlacementMobility"
     },
     {
       "attribute": "defs-key",
@@ -5594,6 +5782,21 @@
       },
       "type": "ProductionQuality",
       "value": "ProductionQuality"
+    },
+    {
+      "attribute": "defs-key",
+      "origin": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "7838f17028d0e38f6dc01fa085bc461b6df4ec109734fbf8b764cdaa6fd20074",
+            "ir": "key:object_placement:Placement.ssai#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "type": "ServerSideAdInsertionMode",
+      "value": "ServerSideAdInsertionMode"
     },
     {
       "attribute": "defs-key",

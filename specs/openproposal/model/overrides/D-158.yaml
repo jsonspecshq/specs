@@ -1,0 +1,84 @@
+format: 2
+id: D-158
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 2.8's signing profile writes two table headers the extractor has no layout for,
+  `| Rule | Requests | Responses |` and `| Status | Meaning | Basis |`. What does a row of
+  each claim: a field, a key, a term of a list, or nothing the model carries?
+covers:
+  - ir: concept:2.8.2:1
+    digest: ae2c857fc6416abacfd9eac824531514f0b875377185d900b39a030fbe9f72d0
+    quote: Tag | `tag="web-bot-auth"` | `tag="web-bot-auth"`
+  - ir: concept:2.8.2:3
+    digest: f7ea680fe3df282a9d86d6c9e296b39439f945f78b3f8d934e54b8212ab142f8
+    quote: "Components | `@method`, `@target-uri`, `@authority`, `\"signature-agent\";key=<label>` | `@status`, `\"@method\";req`, `\"@target-uri\";req`, `\"signature-agent\";key=<label>`, and, when the request carried a `web-bot-auth` signature, `\"signature\";req;key=<request label>`"
+  - ir: concept:2.8.6:1
+    digest: 23a4eb81234d636ddac771bfc25253a6eb9900b609a348fc70b480ef1d1c5767
+    quote: "`400` | The signature fields don't parse | Section 5.4"
+options:
+  - id: neither-defines-a-list-so-both-are-concept-tables
+    summary: >-
+      Each is "any other table" by § 2.6's own test: a value table's first header cell is the
+      code name of the key that holds the list, and neither header's is. So each states rules
+      as prose does, defines no key, type or list, and its rows are kept column by column.
+  - id: the-failures-table-is-a-value-table-of-status-codes
+    summary: >-
+      § 2.8.6's rows are backticked codes with a meaning, so the table is a list of HTTP
+      statuses and its rows are terms of a vocabulary the model publishes.
+  - id: the-signature-rules-are-normative-statements
+    summary: >-
+      Each row of § 2.8.2 states two requirements, one per column, so each cell is a
+      normative statement the mapping must place rather than a rendered cell.
+chosen: neither-defines-a-list-so-both-are-concept-tables
+rationale: >-
+  **§ 2.6 states the test and it reads the header.** It gives a field table its five columns,
+  a key table its four with an optional fifth, the § 2.2 table one row per shared type, the
+  § 3 table one row per marker, and a value table "one row per value of a list. Its first
+  header cell is the code name of the key that holds the list". Then: "Any other table states
+  rules as prose does, and defines no key, type, or list." Both new headers begin with a plain
+  word -- `Rule` and `Status` -- and not with the code name of a key, so neither is a value
+  table, and neither matches any of the four named shapes. The catch-all is the answer the
+  document itself gives.
+
+  That the test is on the **header** is what keeps this a reading of form. § 2.8.6's rows do
+  carry backticked first cells, `400` through `503`, and reading those as a list would be
+  reading the rows' content to decide what the table is. § 2.6 does not: it asks what the
+  first *header* cell is, and `Status` is not a key of any object this specification defines.
+
+  **No key holds either table's values, which is the same answer from the other side.** A
+  value table's rows are the values of a list a key holds, and the mapping places them under
+  that key. There is no member of any published object whose value is an HTTP status, and none
+  whose value is `Tag`, `Count`, `Components`, `Body`, `Parameters` or `Clock`. § 2.8.6's own
+  prose says the statuses "answer the transport, before the request is read, so they carry no
+  `errors[]` (§ 2.4)" -- the specification distinguishing them from the error codes § 2.4 does
+  publish as a list.
+
+  `the-failures-table-is-a-value-table-of-status-codes` is refused on both of those: the
+  header fails § 2.6's test, and publishing the four statuses as a vocabulary would give the
+  model a type no member of any object refers to.
+
+  `the-signature-rules-are-normative-statements` is the one that is arguable, and it is
+  refused here rather than denied. Each cell of § 2.8.2 plainly states a requirement, and the
+  prose under the table states more. But a `concept` row keeps the cells column by column, so
+  nothing is lost: the bytes are extracted, counted and rendered, and a later reading may
+  claim them as statements if that is what they are. What this record settles is the layout's
+  kind -- which is what extraction needs to run at all -- and not the role of each cell. The
+  rows arrive unclaimed, which `mapping-bijection` reports, and that is the honest state for a
+  requirement nobody has read yet.
+
+  **Scoped to § 2.8.x and to this specification.** The layouts sit in this text's own plugin,
+  where a header signature cannot reach another specification's build, and each is allowed
+  only in § 2.8.x rather than anywhere in the body, so a second section writing the same
+  header fails extraction rather than being read as the profile's. Measured: both
+  `--spec adcom --check` and `--spec dealsapi --check` exit 0, and neither text writes either
+  header.
+feedback: >-
+  § 2.6 lists the table shapes the document uses and § 2.8 then writes two it does not list.
+  A reader following § 2.6 has no way to tell what a row of `| Rule | Requests | Responses |`
+  or `| Status | Meaning | Basis |` defines, and both fall to the catch-all. Naming the two
+  shapes in § 2.6, and saying that a profile's rule table and its failure table define no key,
+  type or list, would state on the page what is now inferred from the absence of a code name
+  in the header.

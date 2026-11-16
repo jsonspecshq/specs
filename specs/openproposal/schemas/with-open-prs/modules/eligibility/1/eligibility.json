@@ -1,0 +1,47 @@
+{
+  "$defs": {
+    "CredentialType": {
+      "anyOf": [
+        {
+          "enum": [
+            "iab_registry"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ]
+    },
+    "RequiredCredential": {
+      "additionalProperties": false,
+      "properties": {
+        "credential_type": {
+          "$ref": "#/$defs/CredentialType",
+          "description": "What the buyer holds. Core term: `iab_registry`, an entry in the IAB Tech Lab Agent Registry"
+        },
+        "issuer": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Domain",
+          "description": "Who issues it"
+        }
+      },
+      "required": [
+        "credential_type",
+        "issuer"
+      ],
+      "type": "object"
+    },
+    "Visibility": {
+      "enum": [
+        "public",
+        "registry_gated",
+        "named"
+      ],
+      "type": "string"
+    }
+  },
+  "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/eligibility/1/eligibility.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The OpenProposal `eligibility` module: the vocabularies, objects, unions, and constructor copies of § 5.8.",
+  "title": "eligibility"
+}

@@ -1,0 +1,1844 @@
+# Rule vectors for the statements of section 4 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: proposal
+rules:
+  # An assent entry names at least one line item (D-088).
+  - rule: rule:4.1.2:527c9881
+    digest: 451abbcc3afc2a441dce3577af85a734a2f688a513087ccca80fec5d0d07afaf
+    decision: D-088
+    type: AssentEntry
+    valid:
+      - value:
+          at: '2026-03-02T09:00:00Z'
+          line_item_ids: [ 5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71 ]
+          record_digest: sha256:8bc1e566c463606f2971c6f29669a988ff5fa2e1cba04721e63b871133a4958b
+          role: commitment
+          idempotency_key: commit-2026-03-02-0001
+          version: 1
+    invalid:
+      - value:
+          at: '2026-03-02T09:00:00Z'
+          line_item_ids: []
+          record_digest: sha256:8bc1e566c463606f2971c6f29669a988ff5fa2e1cba04721e63b871133a4958b
+          role: commitment
+          idempotency_key: commit-2026-03-02-0001
+          version: 1
+  # A frozen version's proposal carries the act that created it. § 4.1's row
+  # states the condition -- "REQUIRED when the current `version` is frozen
+  # (§ 4.1.3)" -- and § 4.1.3's Versions paragraph is the requirement: each
+  # change to a frozen version's offered terms appends exactly one entry
+  # carrying the version it creates, and `published` is appended no later than
+  # the moment version 1 freezes. No § 8 keyword states it, because "frozen" is
+  # the earliest of three events and one of them is outside the payload
+  # (D-116).
+  #
+  # Derived from examples/proposal-agreed.yaml, whole: a proposal at version 2
+  # whose `status` is `agreed` and whose `assent[]` names that version, so it
+  # is frozen two ways over. D-037's id form is applied to every id the
+  # document mints and to every reference to one, each the UUID version 5 of
+  # the document's own readable id in the DNS namespace, so one entity keeps
+  # one id wherever it appears. Every other value is that file's own bytes.
+  #
+  # The invalid half is that payload with `negotiation_history` removed, and
+  # nothing else.
+  - rule: rule:4.1.3:03718402
+    digest: 092cc55c0ada2fda38f021420c13e82af3269b0c45e7623e6f71579d27b5ea0c
+    decision: D-116
+    sources: [ "field:4.1:negotiation_history[]", field:4.1:version ]
+    type: Proposal
+    valid:
+      - value:
+          assent:
+            - at: 2026-09-22T10:14:03Z
+              idempotency_key: agency-a-camp1-q4-2026-5d10e2c7
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              role: commitment
+              version: 2
+            - at: 2026-09-22T10:31:47Z
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              role: acceptance
+              version: 2
+          brief_id: agency-a-brief-q4-2026
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          change_requests:
+            - accountid: "23873345"
+              actor: buyer
+              at: 2026-11-02T15:20:00Z
+              baseline:
+                line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+              comments: Shorten the flight to end on 2026-12-07.
+              id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+              lineid: "778120"
+              orderid: "345233"
+              requesterid: "7987654"
+              status: PENDING
+            - actor: buyer
+              at: 2026-11-03T09:05:00Z
+              baseline:
+                line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+              comments: Shorten the flight to end on 2026-12-14.
+              id: 05aebc23-fa41-5244-836e-a7a21ee53508
+          description: |
+            Display and CTV package for Agency A, built from its brief.
+          line_items:
+            - buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              channel: display
+              commitment:
+                advertisers:
+                  - domain: brand-a.example
+                amount: 80000
+                basis: spend
+                derived_units: 3333333
+                flight:
+                  end: 2026-12-21T23:59:59Z
+                  start: 2026-10-06T00:00:00Z
+              commitment_bounds:
+                earliest_start: 2026-10-05T00:00:00Z
+                latest_end: 2026-12-31T23:59:59Z
+                spend:
+                  max: 500000
+                  min: 10000
+              controlling_measurement:
+                available:
+                  - counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                    id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              creative_delivery:
+                method: buyer_hosted
+                other_protocols:
+                  - javascript_tag
+                secure_required: true
+              deal_origin: adserver.example
+              eligible_buyers:
+                - agency-a.example
+              external_references:
+                - id: "345233"
+                  reference_type: order
+                  system: orders.examplepub.example
+                - id: "778120"
+                  reference_type: line
+                  system: orders.examplepub.example
+                - id: ep-agency-a-display-q4
+                  reference_type: deal
+                  system: adserver.example
+              format_specs:
+                display/300x250:
+                  spec:
+                    h: 250
+                    w: 300
+                  spec_ref: registry.example/display/300x250@1
+              formats:
+                available:
+                  - display/300x250
+                included:
+                  - display/300x250
+              hold_terms:
+                available: true
+                duration: P7D
+              line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              materials_due:
+                at: 2026-09-28T23:59:59Z
+              pricing:
+                - agreed_rate: 24
+                  cost_method: CPM
+                  currency: USD
+                  list_rate: 24
+                  min_rate: 21
+                  price_type: 3
+                  price_valid_until: 2026-11-15T23:59:59Z
+                  pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+              properties:
+                available:
+                  - child_audience: general
+                    domains:
+                      - business-daily.example
+                    id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                    seller_relationship: owner
+                included:
+                  - 20d41300-2fbb-579b-bc61-5b334a26a30a
+              status: agreed
+              terms_refs:
+                - digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  url: https://examplepub.example/legal/io-terms-2026.pdf
+                  version: "2026.1"
+                - digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+                  url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              transaction_mechanism:
+                available:
+                  - delivery_type: guaranteed
+                    id: programmatic_guaranteed
+                included:
+                  - programmatic_guaranteed
+                max_select: 1
+              visibility: named
+            - buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              channel: ctv
+              commitment:
+                advertisers:
+                  - domain: brand-a.example
+                amount: 160000
+                basis: spend
+                flight:
+                  end: 2026-12-21T23:59:59Z
+                  start: 2026-10-06T00:00:00Z
+              commitment_bounds:
+                spend:
+                  min: 25000
+              controlling_measurement:
+                available:
+                  - counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                    id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              creative_delivery:
+                method: seller_hosted
+                protocols:
+                  - 13
+                secure_required: true
+              deal_origin: ssp-a.example
+              eligible_buyers:
+                - agency-a.example
+              external_references:
+                - id: ep-agency-a-ctv-q4
+                  reference_type: deal
+                  system: ssp-a.example
+              format_specs:
+                ctv/instream-15s:
+                  spec:
+                    creative_id:
+                      universal_ad_id: required
+                    duration:
+                      nominal_s: 15
+                      tolerance_ms: 500
+                    loudness:
+                      standard: atsc_a85
+                      target: -24
+                      tolerance_db: 2
+                    mezzanine:
+                      min_resolution: 1920x1080
+                      required_for:
+                        - ssai
+                    source: vast_mezzanine
+                  spec_ref: registry.example/ctv/instream-15s@1
+              formats:
+                available:
+                  - ctv/instream-15s
+                included:
+                  - ctv/instream-15s
+              hold_terms:
+                available: false
+              line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              placement:
+                plcmt: 1
+              pricing:
+                - agreed_rate: 45
+                  cost_method: CPM
+                  currency: USD
+                  list_rate: 45
+                  min_rate: 39.6
+                  price_type: 1
+                  price_valid_until: 2026-12-01T23:59:59Z
+                  pricing_id: 3117acff-53ee-5120-9fbe-7e3e04d437bb
+              properties:
+                available:
+                  - apps:
+                      - bundle: "000000"
+                        developer_domain: weather-app.example
+                        store: roku_channel_store
+                    child_audience: general
+                    id: 97220a37-f11f-5846-9728-b3301b01bfb3
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                    seller_relationship: owner
+                included:
+                  - 97220a37-f11f-5846-9728-b3301b01bfb3
+              status: agreed
+              terms_refs:
+                - digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  url: https://examplepub.example/legal/io-terms-2026.pdf
+                  version: "2026.1"
+                - digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+                  url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              transaction_mechanism:
+                available:
+                  - delivery_type: non_guaranteed
+                    id: private_auction
+                included:
+                  - private_auction
+                max_select: 1
+              visibility: named
+          negotiation_history:
+            - action: published
+              actor: seller
+              at: 2026-09-14T09:00:00Z
+              paths: []
+              version: 1
+            - action: requested
+              actor: buyer
+              at: 2026-09-14T09:02:11Z
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+                  requested_value:
+                    materials_due:
+                      at: 2026-10-01T23:59:59Z
+              version: 1
+            - action: countered
+              actor: seller
+              at: 2026-09-14T09:40:05Z
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+              version: 2
+          offer_window:
+            end: 2026-12-31T23:59:59Z
+            start: 2026-09-14T00:00:00Z
+          proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          spec_version: "3.0"
+          status: agreed
+          type: custom
+          version: 2
+    invalid:
+      - value:
+          assent:
+            - at: 2026-09-22T10:14:03Z
+              idempotency_key: agency-a-camp1-q4-2026-5d10e2c7
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              role: commitment
+              version: 2
+            - at: 2026-09-22T10:31:47Z
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              role: acceptance
+              version: 2
+          brief_id: agency-a-brief-q4-2026
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          change_requests:
+            - accountid: "23873345"
+              actor: buyer
+              at: 2026-11-02T15:20:00Z
+              baseline:
+                line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+              comments: Shorten the flight to end on 2026-12-07.
+              id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+              lineid: "778120"
+              orderid: "345233"
+              requesterid: "7987654"
+              status: PENDING
+            - actor: buyer
+              at: 2026-11-03T09:05:00Z
+              baseline:
+                line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+              comments: Shorten the flight to end on 2026-12-14.
+              id: 05aebc23-fa41-5244-836e-a7a21ee53508
+          description: |
+            Display and CTV package for Agency A, built from its brief.
+          line_items:
+            - buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              channel: display
+              commitment:
+                advertisers:
+                  - domain: brand-a.example
+                amount: 80000
+                basis: spend
+                derived_units: 3333333
+                flight:
+                  end: 2026-12-21T23:59:59Z
+                  start: 2026-10-06T00:00:00Z
+              commitment_bounds:
+                earliest_start: 2026-10-05T00:00:00Z
+                latest_end: 2026-12-31T23:59:59Z
+                spend:
+                  max: 500000
+                  min: 10000
+              controlling_measurement:
+                available:
+                  - counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                    id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              creative_delivery:
+                method: buyer_hosted
+                other_protocols:
+                  - javascript_tag
+                secure_required: true
+              deal_origin: adserver.example
+              eligible_buyers:
+                - agency-a.example
+              external_references:
+                - id: "345233"
+                  reference_type: order
+                  system: orders.examplepub.example
+                - id: "778120"
+                  reference_type: line
+                  system: orders.examplepub.example
+                - id: ep-agency-a-display-q4
+                  reference_type: deal
+                  system: adserver.example
+              format_specs:
+                display/300x250:
+                  spec:
+                    h: 250
+                    w: 300
+                  spec_ref: registry.example/display/300x250@1
+              formats:
+                available:
+                  - display/300x250
+                included:
+                  - display/300x250
+              hold_terms:
+                available: true
+                duration: P7D
+              line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              materials_due:
+                at: 2026-09-28T23:59:59Z
+              pricing:
+                - agreed_rate: 24
+                  cost_method: CPM
+                  currency: USD
+                  list_rate: 24
+                  min_rate: 21
+                  price_type: 3
+                  price_valid_until: 2026-11-15T23:59:59Z
+                  pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+              properties:
+                available:
+                  - child_audience: general
+                    domains:
+                      - business-daily.example
+                    id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                    seller_relationship: owner
+                included:
+                  - 20d41300-2fbb-579b-bc61-5b334a26a30a
+              status: agreed
+              terms_refs:
+                - digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  url: https://examplepub.example/legal/io-terms-2026.pdf
+                  version: "2026.1"
+                - digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+                  url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              transaction_mechanism:
+                available:
+                  - delivery_type: guaranteed
+                    id: programmatic_guaranteed
+                included:
+                  - programmatic_guaranteed
+                max_select: 1
+              visibility: named
+            - buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              channel: ctv
+              commitment:
+                advertisers:
+                  - domain: brand-a.example
+                amount: 160000
+                basis: spend
+                flight:
+                  end: 2026-12-21T23:59:59Z
+                  start: 2026-10-06T00:00:00Z
+              commitment_bounds:
+                spend:
+                  min: 25000
+              controlling_measurement:
+                available:
+                  - counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                    id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              creative_delivery:
+                method: seller_hosted
+                protocols:
+                  - 13
+                secure_required: true
+              deal_origin: ssp-a.example
+              eligible_buyers:
+                - agency-a.example
+              external_references:
+                - id: ep-agency-a-ctv-q4
+                  reference_type: deal
+                  system: ssp-a.example
+              format_specs:
+                ctv/instream-15s:
+                  spec:
+                    creative_id:
+                      universal_ad_id: required
+                    duration:
+                      nominal_s: 15
+                      tolerance_ms: 500
+                    loudness:
+                      standard: atsc_a85
+                      target: -24
+                      tolerance_db: 2
+                    mezzanine:
+                      min_resolution: 1920x1080
+                      required_for:
+                        - ssai
+                    source: vast_mezzanine
+                  spec_ref: registry.example/ctv/instream-15s@1
+              formats:
+                available:
+                  - ctv/instream-15s
+                included:
+                  - ctv/instream-15s
+              hold_terms:
+                available: false
+              line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              placement:
+                plcmt: 1
+              pricing:
+                - agreed_rate: 45
+                  cost_method: CPM
+                  currency: USD
+                  list_rate: 45
+                  min_rate: 39.6
+                  price_type: 1
+                  price_valid_until: 2026-12-01T23:59:59Z
+                  pricing_id: 3117acff-53ee-5120-9fbe-7e3e04d437bb
+              properties:
+                available:
+                  - apps:
+                      - bundle: "000000"
+                        developer_domain: weather-app.example
+                        store: roku_channel_store
+                    child_audience: general
+                    id: 97220a37-f11f-5846-9728-b3301b01bfb3
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                    seller_relationship: owner
+                included:
+                  - 97220a37-f11f-5846-9728-b3301b01bfb3
+              status: agreed
+              terms_refs:
+                - digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  url: https://examplepub.example/legal/io-terms-2026.pdf
+                  version: "2026.1"
+                - digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+                  url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+              transaction_mechanism:
+                available:
+                  - delivery_type: non_guaranteed
+                    id: private_auction
+                included:
+                  - private_auction
+                max_select: 1
+              visibility: named
+          offer_window:
+            end: 2026-12-31T23:59:59Z
+            start: 2026-09-14T00:00:00Z
+          proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          spec_version: "3.0"
+          status: agreed
+          type: custom
+          version: 2
+  # § 4.1's `buyer` row: REQUIRED when `type` is `custom` or `assent[]` is
+  # present. A `custom` proposal is built for one buyer, and an assent
+  # entry is that buyer's act, so either one names the party the proposal
+  # is with and the proposal states who it is.
+  #
+  # Derived from examples/proposal-agreed.yaml, whole: its `type` is
+  # `custom` and its `assent[]` holds two entries, so both clauses of the
+  # cell hold at once. D-037's id form is applied to every id the
+  # document mints and to every reference to one, each the UUID version 5
+  # of the document's own readable id in the DNS namespace, so one entity
+  # keeps one id wherever it appears. Every other value is that file's
+  # own bytes.
+  #
+  # The invalid half is that payload with `buyer` removed, and nothing
+  # else.
+  - rule: rule:4.1:1ef7cbec
+    digest: b3312a566921f0ae7901dde16941c24ec1de8da774eb311807666a6cbd75915f
+    type: Proposal
+    valid:
+      - value:
+          proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+          version: 2
+          spec_version: "3.0"
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          type: custom
+          brief_id: agency-a-brief-q4-2026
+          status: agreed
+          offer_window:
+            start: 2026-09-14T00:00:00Z
+            end: 2026-12-31T23:59:59Z
+          description: |
+            Display and CTV package for Agency A, built from its brief.
+          assent:
+            - role: commitment
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:14:03Z
+              idempotency_key: agency-a-camp1-q4-2026-5d10e2c7
+            - role: acceptance
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:31:47Z
+          negotiation_history:
+            - version: 1
+              actor: seller
+              action: published
+              paths: []
+              at: 2026-09-14T09:00:00Z
+            - version: 1
+              actor: buyer
+              action: requested
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+                  requested_value:
+                    materials_due:
+                      at: 2026-10-01T23:59:59Z
+              at: 2026-09-14T09:02:11Z
+            - version: 2
+              actor: seller
+              action: countered
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+              at: 2026-09-14T09:40:05Z
+          change_requests:
+            - id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              actor: buyer
+              at: 2026-11-02T15:20:00Z
+              accountid: "23873345"
+              orderid: "345233"
+              lineid: "778120"
+              requesterid: "7987654"
+              status: PENDING
+              comments: Shorten the flight to end on 2026-12-07.
+            - id: 05aebc23-fa41-5244-836e-a7a21ee53508
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              actor: buyer
+              at: 2026-11-03T09:05:00Z
+              comments: Shorten the flight to end on 2026-12-14.
+          line_items:
+            - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              status: agreed
+              channel: display
+              properties:
+                available:
+                  - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                    domains:
+                      - business-daily.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 20d41300-2fbb-579b-bc61-5b334a26a30a
+              formats:
+                available:
+                  - display/300x250
+                included:
+                  - display/300x250
+              format_specs:
+                display/300x250:
+                  spec_ref: registry.example/display/300x250@1
+                  spec:
+                    w: 300
+                    h: 250
+              creative_delivery:
+                method: buyer_hosted
+                other_protocols:
+                  - javascript_tag
+                secure_required: true
+              materials_due:
+                at: 2026-09-28T23:59:59Z
+              pricing:
+                - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+                  cost_method: CPM
+                  list_rate: 24
+                  agreed_rate: 24
+                  min_rate: 21
+                  price_valid_until: 2026-11-15T23:59:59Z
+                  currency: USD
+                  price_type: 3
+              commitment_bounds:
+                spend:
+                  min: 10000
+                  max: 500000
+                earliest_start: 2026-10-05T00:00:00Z
+                latest_end: 2026-12-31T23:59:59Z
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 80000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+                derived_units: 3333333
+              hold_terms:
+                available: true
+                duration: P7D
+              transaction_mechanism:
+                available:
+                  - id: programmatic_guaranteed
+                    delivery_type: guaranteed
+                included:
+                  - programmatic_guaranteed
+                max_select: 1
+              deal_origin: adserver.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: orders.examplepub.example
+                  id: "345233"
+                  reference_type: order
+                - system: orders.examplepub.example
+                  id: "778120"
+                  reference_type: line
+                - system: adserver.example
+                  id: ep-agency-a-display-q4
+                  reference_type: deal
+            - line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              status: agreed
+              channel: ctv
+              properties:
+                available:
+                  - id: 97220a37-f11f-5846-9728-b3301b01bfb3
+                    apps:
+                      - store: roku_channel_store
+                        bundle: "000000"
+                        developer_domain: weather-app.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 97220a37-f11f-5846-9728-b3301b01bfb3
+              placement:
+                plcmt: 1
+              formats:
+                available:
+                  - ctv/instream-15s
+                included:
+                  - ctv/instream-15s
+              format_specs:
+                ctv/instream-15s:
+                  spec_ref: registry.example/ctv/instream-15s@1
+                  spec:
+                    duration:
+                      nominal_s: 15
+                      tolerance_ms: 500
+                    source: vast_mezzanine
+                    mezzanine:
+                      required_for:
+                        - ssai
+                      min_resolution: 1920x1080
+                    loudness:
+                      standard: atsc_a85
+                      target: -24
+                      tolerance_db: 2
+                    creative_id:
+                      universal_ad_id: required
+              creative_delivery:
+                method: seller_hosted
+                protocols:
+                  - 13
+                secure_required: true
+              pricing:
+                - pricing_id: 3117acff-53ee-5120-9fbe-7e3e04d437bb
+                  cost_method: CPM
+                  list_rate: 45
+                  agreed_rate: 45
+                  min_rate: 39.6
+                  price_valid_until: 2026-12-01T23:59:59Z
+                  currency: USD
+                  price_type: 1
+              commitment_bounds:
+                spend:
+                  min: 25000
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 160000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+              hold_terms:
+                available: false
+              transaction_mechanism:
+                available:
+                  - id: private_auction
+                    delivery_type: non_guaranteed
+                included:
+                  - private_auction
+                max_select: 1
+              deal_origin: ssp-a.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: ssp-a.example
+                  id: ep-agency-a-ctv-q4
+                  reference_type: deal
+    invalid:
+      - value:
+          proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+          version: 2
+          spec_version: "3.0"
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          type: custom
+          brief_id: agency-a-brief-q4-2026
+          status: agreed
+          offer_window:
+            start: 2026-09-14T00:00:00Z
+            end: 2026-12-31T23:59:59Z
+          description: |
+            Display and CTV package for Agency A, built from its brief.
+          assent:
+            - role: commitment
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:14:03Z
+              idempotency_key: agency-a-camp1-q4-2026-5d10e2c7
+            - role: acceptance
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:31:47Z
+          negotiation_history:
+            - version: 1
+              actor: seller
+              action: published
+              paths: []
+              at: 2026-09-14T09:00:00Z
+            - version: 1
+              actor: buyer
+              action: requested
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+                  requested_value:
+                    materials_due:
+                      at: 2026-10-01T23:59:59Z
+              at: 2026-09-14T09:02:11Z
+            - version: 2
+              actor: seller
+              action: countered
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+              at: 2026-09-14T09:40:05Z
+          change_requests:
+            - id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              actor: buyer
+              at: 2026-11-02T15:20:00Z
+              accountid: "23873345"
+              orderid: "345233"
+              lineid: "778120"
+              requesterid: "7987654"
+              status: PENDING
+              comments: Shorten the flight to end on 2026-12-07.
+            - id: 05aebc23-fa41-5244-836e-a7a21ee53508
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              actor: buyer
+              at: 2026-11-03T09:05:00Z
+              comments: Shorten the flight to end on 2026-12-14.
+          line_items:
+            - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              status: agreed
+              channel: display
+              properties:
+                available:
+                  - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                    domains:
+                      - business-daily.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 20d41300-2fbb-579b-bc61-5b334a26a30a
+              formats:
+                available:
+                  - display/300x250
+                included:
+                  - display/300x250
+              format_specs:
+                display/300x250:
+                  spec_ref: registry.example/display/300x250@1
+                  spec:
+                    w: 300
+                    h: 250
+              creative_delivery:
+                method: buyer_hosted
+                other_protocols:
+                  - javascript_tag
+                secure_required: true
+              materials_due:
+                at: 2026-09-28T23:59:59Z
+              pricing:
+                - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+                  cost_method: CPM
+                  list_rate: 24
+                  agreed_rate: 24
+                  min_rate: 21
+                  price_valid_until: 2026-11-15T23:59:59Z
+                  currency: USD
+                  price_type: 3
+              commitment_bounds:
+                spend:
+                  min: 10000
+                  max: 500000
+                earliest_start: 2026-10-05T00:00:00Z
+                latest_end: 2026-12-31T23:59:59Z
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 80000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+                derived_units: 3333333
+              hold_terms:
+                available: true
+                duration: P7D
+              transaction_mechanism:
+                available:
+                  - id: programmatic_guaranteed
+                    delivery_type: guaranteed
+                included:
+                  - programmatic_guaranteed
+                max_select: 1
+              deal_origin: adserver.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: orders.examplepub.example
+                  id: "345233"
+                  reference_type: order
+                - system: orders.examplepub.example
+                  id: "778120"
+                  reference_type: line
+                - system: adserver.example
+                  id: ep-agency-a-display-q4
+                  reference_type: deal
+            - line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              status: agreed
+              channel: ctv
+              properties:
+                available:
+                  - id: 97220a37-f11f-5846-9728-b3301b01bfb3
+                    apps:
+                      - store: roku_channel_store
+                        bundle: "000000"
+                        developer_domain: weather-app.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 97220a37-f11f-5846-9728-b3301b01bfb3
+              placement:
+                plcmt: 1
+              formats:
+                available:
+                  - ctv/instream-15s
+                included:
+                  - ctv/instream-15s
+              format_specs:
+                ctv/instream-15s:
+                  spec_ref: registry.example/ctv/instream-15s@1
+                  spec:
+                    duration:
+                      nominal_s: 15
+                      tolerance_ms: 500
+                    source: vast_mezzanine
+                    mezzanine:
+                      required_for:
+                        - ssai
+                      min_resolution: 1920x1080
+                    loudness:
+                      standard: atsc_a85
+                      target: -24
+                      tolerance_db: 2
+                    creative_id:
+                      universal_ad_id: required
+              creative_delivery:
+                method: seller_hosted
+                protocols:
+                  - 13
+                secure_required: true
+              pricing:
+                - pricing_id: 3117acff-53ee-5120-9fbe-7e3e04d437bb
+                  cost_method: CPM
+                  list_rate: 45
+                  agreed_rate: 45
+                  min_rate: 39.6
+                  price_valid_until: 2026-12-01T23:59:59Z
+                  currency: USD
+                  price_type: 1
+              commitment_bounds:
+                spend:
+                  min: 25000
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 160000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+              hold_terms:
+                available: false
+              transaction_mechanism:
+                available:
+                  - id: private_auction
+                    delivery_type: non_guaranteed
+                included:
+                  - private_auction
+                max_select: 1
+              deal_origin: ssp-a.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: ssp-a.example
+                  id: ep-agency-a-ctv-q4
+                  reference_type: deal
+  # § 4.1's `negotiation_history[]` row states the condition -- REQUIRED
+  # when the current `version` is frozen (§ 4.1.3) -- and § 4.1.3's
+  # Versions paragraph states the requirement the condition carries, so
+  # one reading decides both and `rule:4.1.3:03718402` shares this rule's
+  # check.
+  #
+  # Derived from examples/proposal-agreed.yaml, whole, under the id form
+  # above: a proposal at version 2 whose `status` is `agreed` and whose
+  # `assent[]` names that version, so it is frozen two ways over.
+  #
+  # The invalid half is that payload with `negotiation_history` removed,
+  # and nothing else.
+  - rule: rule:4.1:9c98396c
+    digest: a18081c73c446929c4031b83f55703713fb01fbdb5bb6b73221128def0c992ca
+    type: Proposal
+    valid:
+      - value:
+          proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+          version: 2
+          spec_version: "3.0"
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          type: custom
+          brief_id: agency-a-brief-q4-2026
+          status: agreed
+          offer_window:
+            start: 2026-09-14T00:00:00Z
+            end: 2026-12-31T23:59:59Z
+          description: |
+            Display and CTV package for Agency A, built from its brief.
+          assent:
+            - role: commitment
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:14:03Z
+              idempotency_key: agency-a-camp1-q4-2026-5d10e2c7
+            - role: acceptance
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:31:47Z
+          negotiation_history:
+            - version: 1
+              actor: seller
+              action: published
+              paths: []
+              at: 2026-09-14T09:00:00Z
+            - version: 1
+              actor: buyer
+              action: requested
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+                  requested_value:
+                    materials_due:
+                      at: 2026-10-01T23:59:59Z
+              at: 2026-09-14T09:02:11Z
+            - version: 2
+              actor: seller
+              action: countered
+              paths:
+                - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+                  pointer: /materials_due
+              at: 2026-09-14T09:40:05Z
+          change_requests:
+            - id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              actor: buyer
+              at: 2026-11-02T15:20:00Z
+              accountid: "23873345"
+              orderid: "345233"
+              lineid: "778120"
+              requesterid: "7987654"
+              status: PENDING
+              comments: Shorten the flight to end on 2026-12-07.
+            - id: 05aebc23-fa41-5244-836e-a7a21ee53508
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              actor: buyer
+              at: 2026-11-03T09:05:00Z
+              comments: Shorten the flight to end on 2026-12-14.
+          line_items:
+            - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              status: agreed
+              channel: display
+              properties:
+                available:
+                  - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                    domains:
+                      - business-daily.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 20d41300-2fbb-579b-bc61-5b334a26a30a
+              formats:
+                available:
+                  - display/300x250
+                included:
+                  - display/300x250
+              format_specs:
+                display/300x250:
+                  spec_ref: registry.example/display/300x250@1
+                  spec:
+                    w: 300
+                    h: 250
+              creative_delivery:
+                method: buyer_hosted
+                other_protocols:
+                  - javascript_tag
+                secure_required: true
+              materials_due:
+                at: 2026-09-28T23:59:59Z
+              pricing:
+                - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+                  cost_method: CPM
+                  list_rate: 24
+                  agreed_rate: 24
+                  min_rate: 21
+                  price_valid_until: 2026-11-15T23:59:59Z
+                  currency: USD
+                  price_type: 3
+              commitment_bounds:
+                spend:
+                  min: 10000
+                  max: 500000
+                earliest_start: 2026-10-05T00:00:00Z
+                latest_end: 2026-12-31T23:59:59Z
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 80000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+                derived_units: 3333333
+              hold_terms:
+                available: true
+                duration: P7D
+              transaction_mechanism:
+                available:
+                  - id: programmatic_guaranteed
+                    delivery_type: guaranteed
+                included:
+                  - programmatic_guaranteed
+                max_select: 1
+              deal_origin: adserver.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: orders.examplepub.example
+                  id: "345233"
+                  reference_type: order
+                - system: orders.examplepub.example
+                  id: "778120"
+                  reference_type: line
+                - system: adserver.example
+                  id: ep-agency-a-display-q4
+                  reference_type: deal
+            - line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              status: agreed
+              channel: ctv
+              properties:
+                available:
+                  - id: 97220a37-f11f-5846-9728-b3301b01bfb3
+                    apps:
+                      - store: roku_channel_store
+                        bundle: "000000"
+                        developer_domain: weather-app.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 97220a37-f11f-5846-9728-b3301b01bfb3
+              placement:
+                plcmt: 1
+              formats:
+                available:
+                  - ctv/instream-15s
+                included:
+                  - ctv/instream-15s
+              format_specs:
+                ctv/instream-15s:
+                  spec_ref: registry.example/ctv/instream-15s@1
+                  spec:
+                    duration:
+                      nominal_s: 15
+                      tolerance_ms: 500
+                    source: vast_mezzanine
+                    mezzanine:
+                      required_for:
+                        - ssai
+                      min_resolution: 1920x1080
+                    loudness:
+                      standard: atsc_a85
+                      target: -24
+                      tolerance_db: 2
+                    creative_id:
+                      universal_ad_id: required
+              creative_delivery:
+                method: seller_hosted
+                protocols:
+                  - 13
+                secure_required: true
+              pricing:
+                - pricing_id: 3117acff-53ee-5120-9fbe-7e3e04d437bb
+                  cost_method: CPM
+                  list_rate: 45
+                  agreed_rate: 45
+                  min_rate: 39.6
+                  price_valid_until: 2026-12-01T23:59:59Z
+                  currency: USD
+                  price_type: 1
+              commitment_bounds:
+                spend:
+                  min: 25000
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 160000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+              hold_terms:
+                available: false
+              transaction_mechanism:
+                available:
+                  - id: private_auction
+                    delivery_type: non_guaranteed
+                included:
+                  - private_auction
+                max_select: 1
+              deal_origin: ssp-a.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: ssp-a.example
+                  id: ep-agency-a-ctv-q4
+                  reference_type: deal
+    invalid:
+      - value:
+          proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+          version: 2
+          spec_version: "3.0"
+          seller:
+            domain: examplepub.example
+            legal_name: Example Publisher US
+            registry_id: reg:examplepub-digital
+          buyer:
+            domain: agency-a.example
+            legal_name: Agency A LLC
+          type: custom
+          brief_id: agency-a-brief-q4-2026
+          status: agreed
+          offer_window:
+            start: 2026-09-14T00:00:00Z
+            end: 2026-12-31T23:59:59Z
+          description: |
+            Display and CTV package for Agency A, built from its brief.
+          assent:
+            - role: commitment
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:14:03Z
+              idempotency_key: agency-a-camp1-q4-2026-5d10e2c7
+            - role: acceptance
+              version: 2
+              record_digest: sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a
+              line_item_ids:
+                - 83b9253d-2076-59d8-8672-341b973eac5b
+                - f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              at: 2026-09-22T10:31:47Z
+          change_requests:
+            - id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              actor: buyer
+              at: 2026-11-02T15:20:00Z
+              accountid: "23873345"
+              orderid: "345233"
+              lineid: "778120"
+              requesterid: "7987654"
+              status: PENDING
+              comments: Shorten the flight to end on 2026-12-07.
+            - id: 05aebc23-fa41-5244-836e-a7a21ee53508
+              baseline:
+                proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+                version: 2
+                line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              actor: buyer
+              at: 2026-11-03T09:05:00Z
+              comments: Shorten the flight to end on 2026-12-14.
+          line_items:
+            - line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+              status: agreed
+              channel: display
+              properties:
+                available:
+                  - id: 20d41300-2fbb-579b-bc61-5b334a26a30a
+                    domains:
+                      - business-daily.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 20d41300-2fbb-579b-bc61-5b334a26a30a
+              formats:
+                available:
+                  - display/300x250
+                included:
+                  - display/300x250
+              format_specs:
+                display/300x250:
+                  spec_ref: registry.example/display/300x250@1
+                  spec:
+                    w: 300
+                    h: 250
+              creative_delivery:
+                method: buyer_hosted
+                other_protocols:
+                  - javascript_tag
+                secure_required: true
+              materials_due:
+                at: 2026-09-28T23:59:59Z
+              pricing:
+                - pricing_id: 781b2e4a-fa07-5ca2-be24-61bdf2d595d2
+                  cost_method: CPM
+                  list_rate: 24
+                  agreed_rate: 24
+                  min_rate: 21
+                  price_valid_until: 2026-11-15T23:59:59Z
+                  currency: USD
+                  price_type: 3
+              commitment_bounds:
+                spend:
+                  min: 10000
+                  max: 500000
+                earliest_start: 2026-10-05T00:00:00Z
+                latest_end: 2026-12-31T23:59:59Z
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 80000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+                derived_units: 3333333
+              hold_terms:
+                available: true
+                duration: P7D
+              transaction_mechanism:
+                available:
+                  - id: programmatic_guaranteed
+                    delivery_type: guaranteed
+                included:
+                  - programmatic_guaranteed
+                max_select: 1
+              deal_origin: adserver.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: orders.examplepub.example
+                  id: "345233"
+                  reference_type: order
+                - system: orders.examplepub.example
+                  id: "778120"
+                  reference_type: line
+                - system: adserver.example
+                  id: ep-agency-a-display-q4
+                  reference_type: deal
+            - line_item_id: f8f2ba30-0b43-5d9b-bd89-e88a84800b08
+              status: agreed
+              channel: ctv
+              properties:
+                available:
+                  - id: 97220a37-f11f-5846-9728-b3301b01bfb3
+                    apps:
+                      - store: roku_channel_store
+                        bundle: "000000"
+                        developer_domain: weather-app.example
+                    child_audience: general
+                    seller_relationship: owner
+                    seller_accounts:
+                      - asi: ssp-a.example
+                        sid: pub-1001
+                included:
+                  - 97220a37-f11f-5846-9728-b3301b01bfb3
+              placement:
+                plcmt: 1
+              formats:
+                available:
+                  - ctv/instream-15s
+                included:
+                  - ctv/instream-15s
+              format_specs:
+                ctv/instream-15s:
+                  spec_ref: registry.example/ctv/instream-15s@1
+                  spec:
+                    duration:
+                      nominal_s: 15
+                      tolerance_ms: 500
+                    source: vast_mezzanine
+                    mezzanine:
+                      required_for:
+                        - ssai
+                      min_resolution: 1920x1080
+                    loudness:
+                      standard: atsc_a85
+                      target: -24
+                      tolerance_db: 2
+                    creative_id:
+                      universal_ad_id: required
+              creative_delivery:
+                method: seller_hosted
+                protocols:
+                  - 13
+                secure_required: true
+              pricing:
+                - pricing_id: 3117acff-53ee-5120-9fbe-7e3e04d437bb
+                  cost_method: CPM
+                  list_rate: 45
+                  agreed_rate: 45
+                  min_rate: 39.6
+                  price_valid_until: 2026-12-01T23:59:59Z
+                  currency: USD
+                  price_type: 1
+              commitment_bounds:
+                spend:
+                  min: 25000
+              controlling_measurement:
+                available:
+                  - id: 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                    counted_by: seller
+                    discrepancy_threshold: 0.1
+                    final_after: P10D
+                included:
+                  - 3ff26d37-03d0-54d5-a154-62235a9a75f8
+                max_select: 1
+              commitment:
+                basis: spend
+                amount: 160000
+                flight:
+                  start: 2026-10-06T00:00:00Z
+                  end: 2026-12-21T23:59:59Z
+                advertisers:
+                  - domain: brand-a.example
+              hold_terms:
+                available: false
+              transaction_mechanism:
+                available:
+                  - id: private_auction
+                    delivery_type: non_guaranteed
+                included:
+                  - private_auction
+                max_select: 1
+              deal_origin: ssp-a.example
+              buyer_requirements:
+                seats:
+                  dsp: dsp-a.example
+                  ids:
+                    - seat-99812
+                    - seat-99813
+              visibility: named
+              eligible_buyers:
+                - agency-a.example
+              terms_refs:
+                - url: https://examplepub.example/legal/io-terms-2026.pdf
+                  digest: sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e
+                  version: "2026.1"
+                - url: https://examplepub.example/legal/agency-a-q4-addendum.pdf
+                  digest: sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca
+              external_references:
+                - system: ssp-a.example
+                  id: ep-agency-a-ctv-q4
+                  reference_type: deal
+  # § 4.4's `orderid` row: REQUIRED when the line item has an `order`
+  # reference (§ 5.10). The value is "the id in the `order` entry", so an
+  # entry against a line item that has one and names no order leaves the
+  # change with no Order to apply to.
+  #
+  # The references are the line item's, which a change request does not
+  # hold, so the vector gives them as context and the check reads them
+  # from there.
+  #
+  # Derived from examples/proposal-agreed.yaml at `/change_requests/0`,
+  # whose `baseline.line_item_id` is `/line_items/0`, whose
+  # `external_references[]` holds a `reference_type` of `order`: the
+  # entry carries `orderid`. The file states the other side too --
+  # `/change_requests/1` is against a line item holding only a `deal`
+  # reference and carries no `orderid`. D-037's id form is applied to
+  # every id the document mints and to every reference to one, each the
+  # UUID version 5 of the document's own readable id in the DNS
+  # namespace. Every other value is that file's own bytes, the context
+  # value included.
+  #
+  # The invalid half is that entry with `orderid` removed, and nothing
+  # else.
+  - rule: rule:4.4:9754e43c
+    digest: 0d7152995f7b35be29f0c40654ff3d42d787cf1aa62453b9d62527cf0dfc3d6d
+    type: ChangeRequest
+    valid:
+      - value:
+          id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+          baseline:
+            proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+            version: 2
+            line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+          actor: buyer
+          at: 2026-11-02T15:20:00Z
+          accountid: "23873345"
+          orderid: "345233"
+          lineid: "778120"
+          requesterid: "7987654"
+          status: PENDING
+          comments: Shorten the flight to end on 2026-12-07.
+        context:
+          LineItem.external_references:
+            - system: orders.examplepub.example
+              id: "345233"
+              reference_type: order
+            - system: orders.examplepub.example
+              id: "778120"
+              reference_type: line
+            - system: adserver.example
+              id: ep-agency-a-display-q4
+              reference_type: deal
+    invalid:
+      - value:
+          id: 9a3d8dda-e91c-5bf2-ab8c-595d18487470
+          baseline:
+            proposal_id: 2867eb46-e66a-58a7-acd0-e295ab465182
+            version: 2
+            line_item_id: 83b9253d-2076-59d8-8672-341b973eac5b
+          actor: buyer
+          at: 2026-11-02T15:20:00Z
+          accountid: "23873345"
+          lineid: "778120"
+          requesterid: "7987654"
+          status: PENDING
+          comments: Shorten the flight to end on 2026-12-07.
+        context:
+          LineItem.external_references:
+            - system: orders.examplepub.example
+              id: "345233"
+              reference_type: order
+            - system: orders.examplepub.example
+              id: "778120"
+              reference_type: line
+            - system: adserver.example
+              id: ep-agency-a-display-q4
+              reference_type: deal

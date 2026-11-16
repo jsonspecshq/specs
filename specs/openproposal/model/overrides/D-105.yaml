@@ -1,0 +1,94 @@
+format: 2
+id: D-105
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three rows cite a registry list that holds a negative code, and a term of a vocabulary is a name
+  rather than a number. How are those codes spelled?
+covers:
+- ir: key:5.2.3:BreakPositionOption.delay
+  digest: d63561085e0c0ccde432d5879c3aeb5cda949edaec2f04fb1cf59450d0635c28
+  quote: '`delay` | OPTIONAL | A value from List: Start Delay Modes, such as Pre-Roll (0) | `delay`,
+    `video.startdelay` / `audio.startdelay`'
+  locks:
+  - with-open-prs
+- ir: key:5.2.3:BreakPositionOption.podseq
+  digest: ae0ce09fe21092d7a7d0b27488286827932824167b0ded710ade27fffe26700d
+  quote: '`podseq` | OPTIONAL | A value from List: Pod Sequence | `podseq`, `podseq`'
+  locks:
+  - with-open-prs
+- ir: key:5.2.3:BreakPositionOption.slotinpod
+  digest: 70660d55ea0099ed60b1cb0f8b24ef3436293d3c92f4bd2fc1979d1b7e9ca877
+  quote: '`slotinpod` | OPTIONAL | A value from List: Slot Position in Pod | `slotinpod`, `slotinpod`'
+  locks:
+  - with-open-prs
+options:
+- id: the-registry-s-titles
+  summary: >-
+    Each row reuses the registry's list, and its terms are the registry's own titles for the codes,
+    written as terms, with a map from each term to the code it stands for. A negative code is the
+    integer that map gives.
+- id: leave-the-three-unmapped
+  summary: >-
+    A vocabulary's terms cannot spell a negative code, so the three rows stay untyped until the term
+    grammar admits one.
+chosen: the-registry-s-titles
+rationale: 'D-071 chose to reuse the registry rather than copy its codes, and set these three aside in
+  its own words: "A start delay mode, a pod sequence and a slot position in a pod each hold a negative
+  code, and a term of a vocabulary is a name rather than a number ... so each of those three states its
+  terms as the registry''s titles with a `codes` map from the term to the number." This record is that
+  reading taken, and the terms are the titles AdCOM''s own schema gives each code at the commit the
+  profile pins: `pre_roll` for 0, `generic_mid_roll` for −1 and `generic_post_roll` for −2; the three
+  pod-sequence titles; and the four slot positions, `first_or_last_ad_in_the_pod` among them.
+
+
+  The map is what carries the sign. A term is letters, digits and underscores, so `-1` is a code no term
+  can spell, and the mapping format''s `codes` admitted only letters and digits on the other side of the
+  map as well. It now admits a signed decimal, which is read as the integer code, so the one thing a
+  term could not say is said by the map and not by the term.
+
+
+  None of the three lists reserves codes for vendors, so each vocabulary is closed. Start Delay Modes
+  holds one row that is no code, `>0`, which the registry publishes as a media offset -- the delay in
+  seconds of a mid-roll at a given second -- and the kernel''s `media-offset` concept cites that row.
+  The published type is a reference to the registry''s own vocabulary, so that branch arrives with it
+  and this specification states it no second time.
+
+
+  `leave-the-three-unmapped` is what the model published, and it costs three rows of a table the
+  examples fill: the CTV line item declares three break positions and every one of them writes a
+  `delay` and a `slotinpod`, so twelve values of the ten examples were keys the model defined nowhere.
+  The grammar it waits on is this repository''s, not the specification''s, which makes it a thing to
+  change rather than a thing to wait for.'
+evidence:
+- https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_startdelaymodes
+- https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_podsequence
+- https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_slotpositioninpod
+- examples/line-item-ctv.yaml (three break positions, each with a delay and a slotinpod)
+feedback: >-
+  Link List: Pod Sequence and List: Slot Position in Pod from § 5.2.3 as the other rows link their
+  lists, and say that a `delay` above 0 is the mid-roll's offset in seconds, which the list's own `>0`
+  row states and the row's cell does not.
+challenge:
+- type: StartDelayMode
+  value: -1
+  verdict: accept
+  context: >-
+    A CTV seller offering a generic mid-roll break, which is the code AdCOM
+    gives that position and the value the CTV line item writes twice.
+  reason: >-
+    `the-registry-s-titles` publishes the row at the registry's own
+    vocabulary, so −1 is one of the values the row takes; the map is what
+    lets a term stand for it, and the published type is the registry's.
+- type: StartDelayMode
+  value: -3
+  verdict: reject
+  context: >-
+    A seller numbering its own generic positions past the three the list
+    holds, as if the negative codes ran on.
+  reason: >-
+    The list holds three codes and one branch for a delay in seconds above 0,
+    so a fourth negative code is neither. `leave-the-three-unmapped`, the
+    option not taken, would have refused −1 along with it.

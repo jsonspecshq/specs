@@ -1,0 +1,129 @@
+format: 2
+id: D-124
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Type rules § 9 makes a requirement no payload can show an obligation on a party.
+  `VersionRef.seller_domain` is REQUIRED when the reference is outside its proposal, which the
+  reference on its own cannot show and which `context` cannot supply. Is it an obligation?
+covers:
+  - ir: rule:2.2:e46f15c4
+    digest: 842f144cbb538352e229fb3aafe5bbb71a204f09e1aeb96e1c3d14aa72935dae
+    quote: REQUIRED when the `VersionRef` is outside its proposal
+  - ir: sentence:2.2:d3643f2d
+    digest: 5e3219f08b4dd2fe221c62ac093d51269d6869f5506998d3ea9f6ac3017c5708
+    quote: "A `proposal_id` is unique only within a `seller.domain` (§ 4.1): a `VersionRef` inside a proposal resolves against that proposal's `seller`, and one outside a proposal carries `seller_domain`."
+  - ir: key:3.3:AvailabilityRead.offer
+    digest: 78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268
+    quote: "`offer` | REQUIRED | The line item and the `version` whose options the figures are computed against. `line_item_id` is REQUIRED here"
+  - ir: sentence:3.3:c10596ed
+    digest: 7f6c2ce16fcce5be29577740b6413b0557e1ce02bb13b52656809ae161f76783
+    quote: A buyer reads these figures by sending the seller an `AvailabilityRead`.
+  - ir: field:4.1:issued_from
+    digest: fc316d45cec766d4745c5fa072c538a147d0ca92a5f846b9257239b368c349bc
+    quote: "`issued_from` | VersionRef | immutable | The shared proposal and version an issued proposal was made from (§ 4.3). A pointer: nothing is inherited through it"
+  - ir: key:4.4:ChangeRequest.baseline
+    digest: a21c367e18159a52d25f88609851c31e21320ad7c847e1412e7fa4ed1652b05c
+    quote: "`baseline` | REQUIRED | The agreed line item the request is against, at the `version` of its agreed record (§ 4.1.2). `line_item_id` is REQUIRED here"
+  - ir: concept:1.1:17
+    digest: 7d90c059465860f93c94b2345716b1bbba37954541fc304767f1dd54ed09bf46
+    quote: "`ext.baseline` | The agreed baseline `VersionRef` (§ 2.2), with `seller_domain`, so a DSP can join the deal to its record. OPTIONAL. The Deals API 1.0 doesn't define this key"
+options:
+  - id: rule-paired-at-the-carrier
+    summary: >-
+      It is a rule. A payload of the object that carries the reference shows the condition, because
+      the carrier's own identity decides it, and a vectors entry names that carrier as its `type`.
+      Its pair waits on a shipped carrier in which the condition is true.
+  - id: obligation-on-a-party
+    summary: >-
+      It is an obligation. No payload shows it, so it names its party and goes to the obligations
+      list, with no schema keyword and no vector.
+  - id: presence-stated-by-each-carrier
+    summary: >-
+      Each carrier's schema requires the member inside the reference it holds, so § 2a's clause 1
+      carries it and neither a rule nor an obligation does.
+chosen: rule-paired-at-the-carrier
+rationale: >-
+  **The condition reads what the carrier is, not whether one exists.** § 2.2's lead-in states its
+  sense -- a reference inside a proposal resolves against that proposal's `seller`, and one outside
+  a proposal carries `seller_domain` -- and § 1.2 makes this specification normative for "what a
+  section of this document says a request or response carries, such as ... an `AvailabilityRead`
+  (§ 3.3)", so a payload of one is a payload this specification decides. § 3.3's `offer` is a
+  REQUIRED `VersionRef`, and § 3.3 says a buyer sends the message to read a line item's figures, so
+  an `AvailabilityRead` is not a proposal and every reference it carries is outside its proposal. A
+  reader holding that payload decides the requirement from it alone: nothing is keyed by a property,
+  and no absence has to be supplied. § 4.1's `issued_from` and § 4.4's `baseline` show the condition
+  false, both sitting inside a proposal. So payloads show it on both sides and § 9's test does not
+  reach the row.
+
+
+  What `D-120` observed is true of a different vector. A vector whose value is the reference cannot
+  carry its carrier, because § 9 keys `context` by "the property that holds it elsewhere" and no
+  property holds which object carries a reference. The step that does not follow is from there to
+  "no payload can show it", because a vector's value need not be the member's own object.
+
+
+  **The mechanism the pair needs already exists, and this repository already rests on it twice.**
+  `src/rules.ts` reads a vectors entry's type as `v.type ?? r.owner`, so the entry names the type
+  its payloads are instances of and the rule's owner need not be it. § 4.1's two "`legal_name` is
+  REQUIRED here" statements are requirements on a member of `Party`, a referenced type whose own
+  object cannot show them, and `D-088` maps both as `{role: rule, object: Proposal}` with vectors at
+  `type: Proposal`: the carrier is the payload. Measured over the eight vectors files: 43 entries,
+  0 paired at a type other than the rule's owner, and 7 paired with a `context` their own payload
+  does not hold, carrying 14 vectors between them. A test that asked the member's own object to show
+  the condition would withdraw those 7 pairs and their 14 vectors.
+
+
+  So the pair wants a vectors entry whose `type` is the carrier, and nothing in the mapping has to
+  change: the rule's owner stays `VersionRef`, which `presence-statement` derives. The rule's check
+  leaves a bare `VersionRef` undecided, which is what § 11 asks of a check that turns on what a
+  payload leaves out, and the alternative was measured: a check reading an absent carrier as
+  "outside" reports all four shipped references as breaking the rule, taking `examples-validate`
+  from 41 to 45 (`D-119` carries that figure).
+
+
+  **An obligation would publish the requirement nowhere.** `RulesDoc` holds `format`, `input`,
+  `rules` and `expressed`, and no obligations list, so `rules.json` carries no obligation.
+  `model.obligations` reaches two places and neither is an artifact a consumer installs: a count in
+  a gate's note, and a count and a comparison line in `src/compare.ts`. The site publishes a count
+  and no statement -- `site/data/dealsapi/spec.json` holds `obligations` under `counts` and holds no
+  obligations list. So moving the role takes the requirement out of the schema's keywords, out of
+  the rules output and out of the conformance vectors, and puts it in no published byte. The report
+  would stop too rather than fail, because `src/rules.ts` passes a condition the schema leaves where
+  an obligation is stated in its row.
+
+
+  **And the party cannot be named.** § 9 asks each obligation to name one of `seller`, `buyer`,
+  `consumer` or `implementation`. Two carriers hold a reference outside its proposal and different
+  parties write them: § 3.3 gives the `AvailabilityRead` to the buyer, and § 1.1's `ext.baseline`
+  sits on a Deals API `Deal` that the system named by `deal_origin` pushes, which § 5.9 gives as
+  "the advertising system domain whose namespace holds the deal ID and that pushes the deal:
+  typically an SSP, or the ad server for a deal it books itself" -- none of § 9's four parties. An
+  obligation naming the buyer would state the requirement for one carrier and deny it for the other,
+  which is narrower than what § 2.2's row states.
+
+
+  `presence-stated-by-each-carrier` is refused on the row's subject. A keyword could state one
+  carrier's share -- `AvailabilityRead` requiring `seller_domain` inside `offer` -- and that is not
+  the rule. § 2.2 states a property of the `VersionRef`, which § 1.1's `ext.baseline` row states of
+  a Deals API `Deal` as well, so a schema stating only `AvailabilityRead`'s share would publish the
+  requirement for the one carrier this specification defines and leave every other carrier's reader
+  nothing. The rule carries it once, for every carrier.
+feedback: >-
+  A conditional member has no example in which its condition is true. `VersionRef.seller_domain` is
+  REQUIRED "when the `VersionRef` is outside its proposal", and § 3.3's `AvailabilityRead.offer` is
+  where that happens, yet none of the thirteen examples holds an `AvailabilityRead` and
+  `seller_domain` appears in no payload. Ship an `AvailabilityRead` whose `offer` names a line item
+  and a `version` and carries the `seller_domain` of the proposal's seller, beside its REQUIRED
+  `flight` (§ 3.3); its invalid counterpart is the same message without the domain. No shipped
+  payload can stand in for it, because the four references the source ships are one
+  `Proposal.issued_from` and three `ChangeRequest.baseline`, every one inside a proposal, and no
+  mutation of a proposal or a change request puts the reference it carries outside itself.
+
+
+  Separately, the row's condition names no sibling, so a reader of the row alone cannot tell which
+  carriers owe the member: § 2.2's lead-in says it in prose and the three carriers sit in three other
+  sections. Naming the carriers in the row, or stating the member's presence per carrier, would put
+  on the page what a reader now assembles from four places.

@@ -1,0 +1,72 @@
+format: 2
+id: D-112
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  A `device` is a `Settable[Integer]` whose row names AdCOM 1.0 List: Device
+  Types. Which vocabulary are its codes of, and which of the list's codes does
+  it take?
+covers:
+- ir: field:5.5:device
+  digest: fe1f4bd919cf85dd10844e816eb7915d4aac754524377e73eff9543bed5123a2
+  quote: "`device` | Settable[Integer] | settable | `allowed[]` of AdCOM 1.0 List: Device Types codes,\
+    \ the values of OpenRTB 2.6 `device.devicetype`. It narrows `environments` (§ 5.2.1). Mobile/Tablet\
+    \ - General (1) covers Phone (4) and Tablet (5)"
+options:
+- id: the-registry-s-list
+  summary: >-
+    The codes are the registry's List: Device Types, so the row's `allowed[]`
+    is a settable of `DeviceType`, the vocabulary of that list, with the eight
+    codes the registry holds.
+- id: any-integer
+  summary: The cell says `Integer`, so the row takes any integer and the list it names is guidance.
+chosen: the-registry-s-list
+rationale: '`D-071` settled the question this row asks: a row that cites one of AdCOM''s lists reuses
+  the list the registry publishes, under the name the registry gives it, with the codes the registry
+  holds. This row cites one -- "`allowed[]` of AdCOM 1.0 List: Device Types codes" -- and links it at
+  the commit the profile pins, so its codes are that list''s eight and `DeviceType` is the name, as the
+  registry names it and as the Deals API names it for the same list.
+
+
+  `any-integer` publishes a type that accepts every integer, which is what the cell''s shape says and
+  not what the row says. The row names the list for its own values, not as guidance: "`allowed[]` of
+  ... codes, the values of OpenRTB 2.6 `device.devicetype`", and its last sentence reads two of the
+  list''s codes as covered by a third, which only a row whose values are those codes can say.
+
+
+  The list is closed. AdCOM reserves no codes for vendors in List: Device Types, so the vocabulary takes
+  the eight codes and nothing else, and a seller with a device kind of its own has no code to write --
+  which is the registry''s decision and not this specification''s to widen.
+
+
+  The row''s `Integer` is why a rule cannot reach this on its own. A scalar names no declaration, so
+  what resolves it is the list the row''s own text names, and `src/mapping-rules.ts` reads that form
+  to fill the parameter. What it cannot read is which codes the vocabulary holds and whether it is open,
+  so the declaration rests on this record and the entry on the rule.'
+evidence:
+- '`D-071` chose `reuse-the-registry` for the six rows that cite AdCOM''s lists, on the same grounds.'
+- "https://github.com/InteractiveAdvertisingBureau/AdCOM/blob/26c59ba1b235cd8d938c9877409e506f1b8d3f0c/AdCOM%20v1.0%20FINAL.md#list_devicetypes"
+- examples/proposal.yaml (device.allowed[] 1, 2, 4, 5, with the comment "AdCOM 1.0 Device Types; 1 covers
+  4 and 5")
+challenge:
+- type: DeviceType
+  value: 3
+  verdict: accept
+  context: >-
+    A line item a seller confines to connected TV, which is Connected TV (3)
+    of the registry's List: Device Types.
+  reason: >-
+    `the-registry-s-list` publishes the row at the registry's vocabulary, so
+    each of the eight codes the registry lists is a value of `allowed[]`.
+- type: DeviceType
+  value: 9
+  verdict: reject
+  context: >-
+    A seller that numbers a ninth device kind of its own and writes it where
+    AdCOM reserves nothing past OOH Device (8).
+  reason: >-
+    The list is closed and the registry lists eight codes, so a ninth is
+    refused. `any-integer`, the option not taken, accepts it and every other
+    integer, which is how the two readings tell apart on a payload.

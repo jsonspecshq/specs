@@ -1,0 +1,75 @@
+format: 2
+id: D-157
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  The published schema states § 2.1's `at-least-one-of` on both `ProposalSummary` and
+  `ManifestEntry`, and only one statement of it exists. Is the requirement carried twice, or
+  once by one statement in both objects that hold the keys?
+covers:
+  - ir: def:2.3:ManifestEntry
+    digest: 83b14eb620c120f214ab45589ae80610b43cda97407fdb7783afaceff837b0db
+    quote: "`ManifestEntry` | holds the keys of `ProposalSummary` (§ 2.1) and this one:"
+  - ir: key:2.1:ProposalSummary.line_items[]
+    digest: be252856b07cfe7830aa9bfc770b1630ec42de2814fe25a17a9e77b391670857
+    quote: "`line_items[]` | REQUIRED when the full form holds `line_items[]` | The full form's line items, each as a summary. In a manifest entry, only those § 2.3 lists"
+options:
+  - id: once-by-composition
+    summary: >-
+      Once. § 2.3 gives `ManifestEntry` the keys of `ProposalSummary`, so the requirement
+      § 2.1 states of those keys travels with them, and the schema states it on every object
+      that holds them. One statement, one half, two objects.
+  - id: a-statement-of-its-own-for-the-manifest-entry
+    summary: >-
+      § 2.3's object needs its own statement claimed in the mapping, so each object that
+      states the requirement has a statement of its own behind it.
+  - id: state-it-only-on-the-summary
+    summary: >-
+      The schema states it on `ProposalSummary` alone and a manifest entry inherits nothing,
+      so a reader validating a manifest entry is not held to it.
+chosen: once-by-composition
+rationale: >-
+  **§ 2.3 states the composition and the keys come with what § 2.1 says of them.**
+  "`ManifestEntry` holds the keys of `ProposalSummary` (§ 2.1) and this one" is the whole of
+  what § 2.3 says about those keys, and § 2.1 is where their requirement is stated: a
+  summary's own table "adds keys beside these paths: the `line_items[]` and `packages[]` of
+  `ProposalSummary`, whose entries are summaries". A key carried into another object carries
+  its own Required cell; nothing in § 2.3 narrows or releases it.
+
+  **So one statement reaches the schema, and the schema states it wherever the keys are.**
+  Measured on the published tree: `ProposalSummary` and `ManifestEntry` each carry the same
+  `anyOf` of two `required` branches, and the mapping holds exactly two entries for it, both
+  on `key:2.1:ProposalSummary.line_items[]` and `key:2.1:ProposalSummary.packages[]`, each
+  declaring `at-least-one-of`. There is no second statement and no entry of the rules output,
+  so there is nothing for a consumer to find the requirement in twice.
+
+  **"Carried by both halves" is about two artifacts, and this is one artifact twice.** The
+  halves a consumer reads are the published schema and the rules output. A requirement in
+  both can have them disagree, which is what `rule:5.6:6981b8a3` still is: an entry claiming
+  a rule while the emitter expresses the same condition in the schema. This requirement is in the schema only; that it appears in two objects of the
+  schema is the composition § 2.3 states, and two objects stating the same condition over the
+  same keys cannot disagree about it -- they are the same keyword over the same members,
+  emitted from the same entry.
+
+  `a-statement-of-its-own-for-the-manifest-entry` is refused because the document states none
+  and writing one would be a second statement of one requirement, which is the defect this
+  record is distinguishing itself from. `state-it-only-on-the-summary` is refused on § 2.3's
+  own sentence: a manifest entry holds the keys, so a manifest entry that held neither
+  `line_items[]` nor `packages[]` would satisfy the schema while § 2.1 says a summary of a
+  proposal lists one or the other.
+
+  **What follows for the per-type accounting.** The site's partition compares, per owner, the
+  model rules the rules output does not carry against the conditions the schema states, and
+  requires the two counts to match. An object that composes another's keys has conditions with
+  no statement of its own behind them, so the second direction of that comparison is not an
+  invariant and its conclusion does not follow. The direction that is an invariant -- that no
+  model rule is left without a carrier -- is kept.
+feedback: >-
+  § 2.3 gives `ManifestEntry` the keys of `ProposalSummary` in one clause and then lists the
+  keys it adds, and § 2.1 states a requirement over two of the inherited keys. A reader of
+  § 2.3 alone cannot tell that a manifest entry owes one of `line_items[]` and `packages[]`,
+  because the clause that says so is a Required cell two sections away. Saying in § 2.3 that
+  the inherited keys keep their own Required cells, or restating the one requirement that
+  spans two of them, would put it where a reader of the manifest looks.

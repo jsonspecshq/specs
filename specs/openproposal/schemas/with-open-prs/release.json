@@ -1,0 +1,108 @@
+{
+  "changes": [],
+  "digest": "d8efae91f1b759668a65b373160a33d99e2c4c3cc5b1ce467c06a7eae5497d94",
+  "files": {
+    "documents/1/buyer-writes.json": {
+      "digest": "11d02d8409edf3b0370b89066284914dae7c302a38be759beaf680ec998abea1",
+      "version": "1.0.0"
+    },
+    "documents/1/line-item-summary.json": {
+      "digest": "abfc9896809d988ab9759241beeac84bdb5cf02b1d324fc1182f570755e028d8",
+      "version": "1.0.0"
+    },
+    "documents/1/line-item.json": {
+      "digest": "8426d511eeb3dcf3dc7a895cebc85bed63a71b2586625335d2243ff3382128c7",
+      "version": "1.0.0"
+    },
+    "documents/1/proposal-manifest.json": {
+      "digest": "1e56d3f719cb8e1540fc252f5c78ffb7e2da5aa78f479693dde848d8882d9c72",
+      "version": "1.0.0"
+    },
+    "documents/1/proposal-summary.json": {
+      "digest": "d32c1feaaee78cf19bf8913f2e8d860ac66b6a6cfaee0790135d52d071907302",
+      "version": "1.0.0"
+    },
+    "documents/1/proposal.json": {
+      "digest": "07e235717d389c18992a81cab4367a86ba3ae5472224d9d1671e547abde75d6b",
+      "version": "1.0.0"
+    },
+    "kernel/1/kernel.json": {
+      "digest": "6a61d3828701bd3776a334ee9936aedee81faa1ce158d3b48f99722fd17d88f7",
+      "version": "1.0.0"
+    },
+    "modules/audience/1/audience.json": {
+      "digest": "1642f27b285caa26ac94c2b0ddeb6597648a6d965ebaed2fb8e5217c44ea9314",
+      "version": "1.0.0"
+    },
+    "modules/commercial/1/commercial.json": {
+      "digest": "8f055f7530a19fd94866cae5b4a6bdda37c0a4f69f9290887e623c6333ceb40b",
+      "version": "1.0.0"
+    },
+    "modules/creative/1/creative.json": {
+      "digest": "746838396da913ad0ca3e8e48e8832cac7d98e4ebe3ebd6f929ad76a9f21f017",
+      "version": "1.0.0"
+    },
+    "modules/eligibility/1/eligibility.json": {
+      "digest": "728d07811d973be7255fc55137437566b9200c0477715a18345d18f4355990c4",
+      "version": "1.0.0"
+    },
+    "modules/execution/1/execution.json": {
+      "digest": "5bb3ad1d7b38468108d4775b214a0110987f813836fa4f084932b63accede031",
+      "version": "1.0.0"
+    },
+    "modules/guarantees/1/guarantees.json": {
+      "digest": "e5e7c1b850eab65790472ed8b76ef2e56f9a2b2183e8b51ed854d3b75479267b",
+      "version": "1.0.0"
+    },
+    "modules/inventory/1/inventory.json": {
+      "digest": "60a40245709256087b8612c323e5801de3fe6056bdd6b1e6e6cb5a92fe31a9d0",
+      "version": "1.0.0"
+    },
+    "modules/line-item/1/line-item.json": {
+      "digest": "b903d1e7d27fc36942cb84885866d2b7631d04b029ee1b045c980373aa8b192b",
+      "version": "1.0.0"
+    },
+    "modules/overview/1/overview.json": {
+      "digest": "7418c44b4b6930dbae20cb3ab28d87165019b1b34add5ccf166a9e9d4e8bbd00",
+      "version": "1.0.0"
+    },
+    "modules/proposal/1/proposal.json": {
+      "digest": "57e5a4697b17875cfb333661d7ff432536de71c396dbb136ecf5d02f2340259d",
+      "version": "1.0.0"
+    },
+    "modules/publication/1/publication.json": {
+      "digest": "84dd1cabfb6bc39b88823d9979641dcbacee84a3d31c55c4449a32d449564096",
+      "version": "1.0.0"
+    },
+    "modules/representation/1/representation.json": {
+      "digest": "9a76440b731c5569406b928d9dd4003e034a3b33c63daaca22c765827d35e691",
+      "version": "1.0.0"
+    },
+    "modules/settlement/1/settlement.json": {
+      "digest": "30548923b7eda7757e8a8b2f34f67ae5f457a22edc9affc5eba256ae5b6b186f",
+      "version": "1.0.0"
+    },
+    "modules/targeting/1/targeting.json": {
+      "digest": "252b3f1414d8c90d97ab6b3464602223005953e07b29e4834a0c0aaabfe107ca",
+      "version": "1.0.0"
+    }
+  },
+  "format": 1,
+  "imports": {
+    "https://jsonspecs.com/adcom/schemas/kernel/1/kernel.json": "92721013214e6a3849013913a5db1f27ee10a5a04ca23aeb534b889dd8a4e397",
+    "https://jsonspecs.com/adcom/schemas/modules/lists/1/lists.json": "644b49278e0d3a5e2c9772d006672854bc9c1b8f5a099e9d29c0c50ebf53341d",
+    "https://jsonspecs.com/adcom/schemas/modules/objects/1/objects.json": "3d833f950193bf99267aef980a97f1ea9a9393e11b4761076d45b9ea7bba4c1a",
+    "https://jsonspecs.com/dealsapi/schemas/kernel/1/kernel.json": "d7729213d02074f17ae53d3c7e0c5ec7242b2025d080743f28cb87ca106f83d8",
+    "https://jsonspecs.com/dealsapi/schemas/modules/deal/1/deal.json": "e446e95ae5d70f59768d01cb3f98d13aa48b71be5c7f5178cab8c4e2f738fe02"
+  },
+  "input": {
+    "blob": "c395ca84688d49807e5d3318445da4b4c4b79e29",
+    "commit": "711b34cf2fdc209d46b832013bfb1f1cc8727ba5",
+    "ir_sha256": "a86cf4977afc133d22fe4852015c573e34654eaec92487b57f552802493a0087"
+  },
+  "lock": "with-open-prs",
+  "model": "c75512109fe3e317633d9b2fc163d793b9e489b41be6d52bd424126e747e28d0",
+  "previous": null,
+  "release": "1.0.0",
+  "rules": "ff6e2ccbb75cd22869ed21914e6e8c39c741e040a0cb3c00e408f3a886b40af7"
+}

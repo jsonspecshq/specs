@@ -1,0 +1,198 @@
+format: 2
+id: D-086
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Of the thirty-six normative statements of the inventory, creative and guarantees modules, which bind
+  a party, which carry nothing a conformance check reads, and which does one payload decide?
+covers:
+
+- ir: rule:5.2.1:cc42a1f8
+  digest: e997800cb64e5db5c061617420685bd24d85ac97cc51c170f34d36526154e37d
+  quote: Each `environments.available[]` value MUST match at least one impression to which 5.1.1 gives the line item's `channel`.
+- ir: rule:5.2.2:6f05ff6d
+  digest: 31d2e287d2e57e3c6c2b5aef3c3d4ff9d28cf0abb7ad31708c7a1a990fda7b39
+  quote: The seller MUST NOT deliver the line item to an impression that does not match a key that is present.
+- ir: rule:5.2.3:b5b384f4
+  digest: f0a0485ed927c79a3e7369ada0bca1c72749991e633eca1ace28a3029a57dcae
+  quote: "A declared option is a delivery term: with an option in effect, the seller MUST serve the line item only into impressions that match one, and when the line item executes over OpenRTB 2.6, a bid request that offers its deal MUST carry `imp.video` or `imp.audio` values that match one."
+- ir: rule:5.2.3:eb0e5f3b
+  digest: 3efec115b69253f5bcfadf499e784de9fdf7140f1347524fcb5d7726cfd24113
+  quote: A seller MUST NOT declare `slotinpod` 1, 2, or -1 unless it can guarantee that slot.
+- ir: rule:5.2.6:b4fc58b5
+  digest: 3deed6fd0563e1c2000b4f4f7c0dd20a127dd6e0ee1b77803fcb165a8c977105
+  quote: Each `seller_accounts[]` entry MUST be a record in the governing file.
+- ir: rule:5.2.6:a1d575ff
+  digest: d5bd6abecc7e932113ffa3d0c2735ed0a554992f5a14b6e732d8e2ffab7a60b9
+  quote: A seller MUST NOT state a relationship its governing file, where one exists, does not support.
+- ir: rule:5.2.6:0cb2d370
+  digest: f64dc327698595f0c97a57b1d07bbfba632893a56a1e55d9191ebce8f7065fc7
+  quote: A consumer that checks MUST use this table, and confirms that sellers.json at `asi` lists `sid` as a `seller_id`, with `domain` equal to `seller.domain` where the entry carries `domain`.
+- ir: rule:5.2.7:166e9f13
+  digest: 2d207bea886a3f042fe1ddc2892a363320ad2caf32ef23c3ed8568d80b717a13
+  quote: Where that property's app store bars behavioral advertising (Apple's Kids Category, Google Play's Families policies), the line item MUST NOT carry `audiences`, and both flags MUST be false.
+- ir: rule:5.2.8:66d19e2d
+  digest: 2d5bac8aee7212c4387915c87c3ac7e326a0d1e67a9344e41401cd26c47df625
+  quote: With `seller_allocated`, a buyer value MUST NOT name or exclude individual screens.
+- ir: rule:5.2.9:28e8ca66
+  digest: 323e729f573c67f12cc4a1ebc66e7fbb1e6c2b4b0f40ab0d003c22e182122ecf
+  quote: With an option in effect, the seller MUST serve the line item only into impressions that match one.
+- ir: rule:5.2.9:962abfb9
+  digest: 9fe9888d371a4da2fac6c392a2bb9fdfec1bc84510879ee7a26a2136646b4ce6
+  quote: When the line item executes over OpenRTB 2.6, the seller MUST send the matched option's `content` values in `site.content` or `app.content`, under OpenRTB 2.6's key names, such as `livestream` for `live` and `contentrating` for `rating`.
+- ir: rule:5.4:2eaa294f
+  digest: 61f09f4e064e43f2fa580ac4cbf4d7d5c34bd64f2539c58b40351900d38338fd
+  quote: A buyer MAY request a later date
+- ir: rule:5.4:d81bbf40
+  digest: 1958b55e03198e024b5daac389b5fa6659c2b61f619a98bd612e9db18fabe06b
+  quote: A `spec` MAY hold `asset`, a `VocabularyTerm` (§ 2.2) that says what the buyer supplies for the format.
+- ir: rule:5.4:28521712
+  digest: 787eee3e0919999fbb86c081e774aaca223380f8de57df03acedc8c21f58374e
+  quote: A `spec` MAY also hold `voice`, a `VocabularyTerm` that says whether a synthesized voice may read the ad.
+- ir: rule:5.4:7f775a7d
+  digest: 74bc12f7b3c11a35dd2a39157c3b02e67bd997dcc65fdc45d052d9b7ca3da900
+  quote: When `spec_ref` is present, `spec` MUST equal the content of the version it names, and the format id SHOULD equal the `<collection>/<entry_id>` part of `spec_ref`.
+- ir: rule:5.4.1:7adf48a7
+  digest: 486cba5a65bc0a2494820d6b65ec2747235c264b7522ed61e0fad3736b30193c
+  quote: An implementation performing inspection MUST NOT send any production notification.
+- ir: rule:5.4.1:ef1a453e
+  digest: 702d93033d23514221f5798da4ee7b4e54dbc0908d10c8531ddf1197cffa7e04
+  quote: An implementation MAY retrieve creative documents, follow VAST wrappers and inspect referenced media as needed for its checks.
+- ir: rule:5.4.1:52bc805d
+  digest: cfe16d22ffd2d0f2e3d49f049a28c178ca94159b3e8a0c1ebdd52c94fce755d2
+  quote: The inspector MUST NOT request a destination or redirect that sends a production notification; it MAY use a separate inspection URL or the receiving service's documented test mode under the conditions below.
+- ir: rule:5.4.1:f25ad098
+  digest: d8b09c7544db3a170a7bf58a899ccad878888532880d67fcaff964de1df7a1fd
+  quote: A preview that executes creative or verification code MUST prevent that code from sending production notifications.
+- ir: rule:5.4.1:11d3ac1e
+  digest: 7e3b3907d31559ccc90897194631f46013b0ec3b728f9a696294c52ebe81d7f3
+  quote: Synthetic events MAY be sent to test endpoints, or through a test mode that the receiving service documents as excluding those events from production measurement and delivery diagnostics.
+- ir: rule:5.4.1:9a1bf7bd
+  digest: e9ff92a09a50feb9cc3f16cdfa50d0a93aeb2749ac812c5eb89ff2d539a8572e
+  quote: A preview served through server-side ad insertion MUST use a session in which the insertion service sends no production notifications.
+- ir: rule:5.4.1:725c4a7c
+  digest: 4e2a13f0aaedca6bfad34b0a0fc0d68333db667543034768ce861497f925c155
+  quote: If the service cannot provide such a session, the creative MUST be inspected outside the stitched stream.
+- ir: rule:5.4.1:fbc60b60
+  digest: 0d5de1d4c83484fda64cf5e84d308dbed6b8a21f135de467c80c77c205c36f02
+  quote: Inspection failures MUST be reported through diagnostics, without firing a production VAST `<Error>` or `verificationNotExecuted` URL.
+- ir: rule:5.4.1:3a29e732
+  digest: fd52a5b573a4af1d650c39a96cc29eb4b5b3e00f6c9a0eda125e7c768ae123ee
+  quote: An implementation MUST NOT report a check that was skipped or could not finish as passed.
+- ir: rule:5.7:44693ff4
+  digest: 4fdac13f794b951768e50393483bc99afefb7162f42a2b025e754d038d6ad022
+  quote: A buyer MAY request a stricter `level`, one further in `direction`.
+- ir: rule:5.7.1:5ea9f08c
+  digest: 482653530068f4dbc788f422c6e40e7aa208c1d23994a4f561841c3107ba44f3
+  quote: It means no remedy for any shortfall, and committed levels become targets, which an agent MUST NOT present as guaranteed.
+- ir: rule:5.7.1:2911055a
+  digest: 5eac361e4b8d9b5b8cbbb7dbd5d6d7aca3ddfa290a50c6096e1fc17ad0365317
+  quote: The buyer MAY refuse a `makegood`, and the seller then offers the next.
+- ir: rule:5.7.1:2d69f4d8
+  digest: 6652d2e2a7aa36f4536f1428a64333625c5b145000ba7ee205e5a1679d0d60af
+  quote: A makegood MUST NOT run past `commitment.flight.end` without the buyer's consent.
+- ir: rule:5.7.1:364afa20
+  digest: 5c2f846cfc155857aef1d34a530a03557d5c8b658d6b802f3e525ca1dd9bc455
+  quote: A seller MAY offer that consent upfront in `remedy_terms`.
+options:
+- id: by-what-decides-it
+  summary: Each statement takes the role of whatever can decide it, as D-082 through D-085 read the other
+    modules. Twenty-seven are read here and the nine a payload decides are named and left.
+- id: all-thirty-six-now
+  summary: Every statement is read in one record, with nine change pairs written in the same step.
+chosen: by-what-decides-it
+rationale: 'Twenty-two of the twenty-seven are duties, four carry nothing a check reads, and one is a
+  rule a payload decides. What the duties bind splits by section.
+
+
+  **Ten bind the seller or a consumer over inventory.** The seller serves the line item only into
+  impressions that match a key that is present, and only into impressions that match an option in effect,
+  for a placement as for a programme; it declares `slotinpod` 1, 2 or -1 only where it can guarantee that
+  slot; each `seller_accounts[]` entry is a record in the governing file, and no
+  relationship is stated that the file does not support; and over OpenRTB 2.6 the matched programme
+  option''s `content` values are sent under that standard''s key names. Where a property''s app store bars
+  behavioural advertising, the line item carries no `audiences` and both buyer-supplied flags are false
+  -- a duty and not a rule, because which store bars it is the store''s policy and not a value in the
+  document. A buyer names or excludes no individual screen under `seller_allocated`. And a consumer that
+  checks a seller account uses section 5.2.6''s table and confirms sellers.json at `asi` lists `sid`.
+
+
+  **Eight bind an implementation that inspects a creative, and they are the most emphatic in the
+  specification.** An inspection sends no production notification and requests no destination or redirect
+  that would; it may retrieve creative documents, follow wrappers and inspect referenced media; a preview
+  that executes creative or verification code prevents that code from notifying production; synthetic
+  events go to test endpoints or through a documented test mode; a preview served through server-side ad
+  insertion uses a session the insertion service sends no production notifications in, and where it
+  cannot provide one the creative is inspected outside the stitched stream; failures are reported through
+  diagnostics without firing a production error or verification URL; and no check that was skipped or
+  could not finish is reported as passed. Every one is about an act with an effect outside the document,
+  which is what makes them duties rather than rules.
+
+
+  **Re-read against the re-pinned lock, and the reading is unchanged.** § 5.4.1 gained one paragraph --
+  the server-side ad insertion one, whose two sentences this record now covers -- and that paragraph sits
+  above the two statements about reporting, so their host block moved from the sixth of the section to
+  the seventh and their digests moved with it. Their own bytes are identical to the byte: "Inspection
+  failures MUST be reported through diagnostics, without firing a production VAST `<Error>` or
+  `verificationNotExecuted` URL" and "An implementation MUST NOT report a check that was skipped or could
+  not finish as passed" are what they were. The two new sentences are the same kind as the seven already
+  read here: each binds the implementation doing the inspecting, and whether an insertion service sent a
+  notification is an act outside the document, so no payload decides it.
+
+
+  **Four more bind a party.** A seller''s `spec` equals the content of the version its `spec_ref` names,
+  which is a document elsewhere. A makegood does not run past `commitment.flight.end` without the buyer''s
+  consent, which the seller may offer upfront in `remedy_terms`; the buyer may refuse a makegood; and an
+  agent presents a target as a target where `none` is the remedy in effect.
+
+
+  **One is a rule a payload decides: section 5.2.1''s.** "Each `environments.available[]` value MUST
+  match at least one impression to which 5.1.1 gives the line item''s `channel`" has a value of the
+  document as its subject and constrains what the document may say, not what the seller may do. Both
+  operands are `LineItem` properties, `channel` and `environments.available[]`, and both tables that
+  decide the question are in the text: section 5.1.1 gives each channel its condition over an
+  impression''s distribution channel, media and device type, and reads an impression''s channel as the
+  first row it matches; section 5.2.1 gives each environment its (distribution channel, device type)
+  pairs. Crossing the two is arithmetic over the two tables, so one payload decides it. The
+  predecessor holds the working check, and that check is the port, keyed to this id, which the
+  statement text still matches byte for byte.
+
+
+  The duty that reads like it is a different sentence, in a different section: section 5.1.1''s "The
+  seller MUST serve a line item only on impressions of its `channel`", `rule:5.1.1:4c696214`, which is
+  mapped `role: obligation, party: seller`. One binds the act of serving and the other binds what the
+  document may claim, and reading the second as the first is what this record did before. The check
+  now runs on all ten shipped examples and finds no violation in any of them, which is the evidence
+  that the reading is decidable and that the examples agree with it.
+
+
+  What it costs until the reading is complete: `rules-emit` reports that the rule has no change pair.
+  A pair''s valid half is a shipped example''s own bytes, and every example line item carries
+  `environments`, a key the model publishes nowhere, so the schema refuses the payload for a reason no
+  record answers. That row is one of the example contradictions, and correcting the reading is
+  what answers it. The gate naming the missing pair is the gate doing its work, and it names the
+  one thing that blocks it.
+
+
+  **Four carry nothing a check reads.** Two are the `requestable` marker''s words -- a buyer may request
+  a later materials date, and a stricter committed level one further in `direction` -- which
+  `marker:3:requestable` grades with a change pair, the reading D-083 made of section 3''s four. The other
+  two name keys an open object may hold: a format `spec` MAY hold `asset`, and MAY hold `voice`. The object
+  is open and the specification defines no property for either, so the sentence says what a key means
+  rather than what a value must be.
+
+
+  **Nine are rules a payload decides, and they are not read here.** A line item whose
+  `environments.available[]` reaches an app or a CTV environment and whose `committed_metrics[]` includes
+  `viewable_rate` offers no seller-measured `measurement_source` option unless `api[]` includes OMID 1.0
+  (§ 5.2.2); a line item with a `directed` property carries no `audiences` and sets both buyer-supplied
+  flags false (§ 5.2.7); a tentative programme option is not in `included[]` and its delta is `delta_flat`
+  (§ 5.2.9); every id in `formats.available[]` has a `format_specs` entry once the proposal leaves `draft`
+  (§ 5.4); a request does not change a committed tuple''s `direction` and `included[]` names exactly one
+  option (§ 5.7); `counted_by` is the impression multiplier''s source on a `dooh` line item that counts
+  impressions, and the committed entry''s `cost_parameters.rating_source` under `CPP` (§ 5.7.1); and
+  `none`, where it is in effect, is the only remedy option (§ 5.7.1). Three of the nine are
+  SHOULD-level, which the rules output carries at a lower severity rather than as an error, and that is
+  the one thing the pair has to get right: a vector that fails a SHOULD is a warning and not a refusal.'

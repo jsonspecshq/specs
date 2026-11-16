@@ -1,0 +1,124 @@
+format: 2
+id: D-069
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: What does the section 2.1 Summary Representation hold?
+covers:
+- ir: key:2.1:ProposalSummary.line_items[]
+  digest: be252856b07cfe7830aa9bfc770b1630ec42de2814fe25a17a9e77b391670857
+  quote: '`line_items[]` | REQUIRED when the full form holds `line_items[]` | The full form''s line items,
+    each as a summary. In a manifest entry, only those § 2.3 lists'
+- ir: key:2.1:PackageSummary.package_id
+  digest: 058b1cd4911479235cae91532329437a7c0d71171c11d2ef4a2a4051d4796680
+  quote: '`package_id` | REQUIRED | The package''s `package_id` (§ 4.1.4)'
+
+- ir: code:2.1:1
+  digest: a60df1260430c44c11afd1ea911b6fa33403c406ca0dfa5034440a8af7871eea
+  quote: |-
+    line_item_id
+    channel
+    environments.available[]
+    episodes
+    programs.available[].id
+    programs.available[].content.series
+    programs.available[].content.title
+    placement.reward
+    placement.instl
+    placement.plcmt
+    placement.skip
+    placement.feed
+    break_position.available[].id
+    break_position.available[].delay
+    break_position.available[].slotinpod
+    properties.available[].id
+    properties.available[].name
+    properties.available[].domains[]
+    properties.available[].apps[].store
+    properties.available[].apps[].bundle
+    properties.available[].child_audience
+    properties.available[].seller_relationship
+    properties.available[].venue_type
+    audiences.available[].id
+    audiences.available[].name
+    formats.included[]
+    geo
+    markets
+    pricing[].pricing_id
+    pricing[].cost_method
+    pricing[].list_rate
+    pricing[].currency
+    pricing[].price_type
+    pricing[].unit_bounds
+    commitment_bounds
+    addressable_scale
+    committed_metrics[]
+    delivery_counting.impression_multiplier.impression_type
+    delivery_counting.impression_multiplier.source_type
+    delivery_counting.impression_multiplier.accreditation
+    required_credentials[]
+    buyer_requirements.allowed_dsps[]
+    transaction_mechanism.available[]
+- ir: code:2.1:2
+  digest: d70a5fe3c0c1773d24f7c2ff4297826e2678c0a3cb1876b8227bba04f8733c8e
+  quote: |-
+    proposal_id
+    version
+    seller.domain
+    seller.legal_name
+    description
+    offer_window
+- ir: key:2.1:ProposalSummary.packages[]
+  digest: 81ee1102e3e8b5968f1df00fa68ffd4a5eb2864e54e91b09f3bc93eba73b1307
+  quote: "`packages[]` | REQUIRED when the full form holds `packages[]` | The full form's packages, each as a summary. In a manifest entry, only those § 2.3 lists"
+options:
+- id: objects-of-their-own
+  summary: Each summary table describes an object named after the table, whose members are its own rows,
+    as any other key table does.
+- id: projection-plus-added-keys
+  summary: 'A summary of a document is the paths its fenced block lists, read at the types and the values
+    the full form gives them, together with the keys the summary''s own table adds beside those paths.
+    A summary that lists no paths is an object.'
+chosen: projection-plus-added-keys
+rationale: 'Section 2.1 states a summary twice over, and both halves are load-bearing. The lead-in says
+  "A summary is a strict path subset of the full object: a listed path has the type and value it has in
+  the Full Representation, it appears when the full form has it, and no other path appears", and then
+  "A summary''s own table adds keys beside these paths: the `line_items[]` and `packages[]` of `ProposalSummary`,
+  whose entries are summaries". So a summary is a projection of its document plus the members its own
+  table states, and reading it as either half alone loses the other.
+
+
+  `LineItemSummary` heads a lead-in reading "lists these paths of a line item (§ 5):" followed by a fenced
+  block of paths -- `line_item_id`, `channel`, `environments.available[]`, `programs.available[].content.title`
+  and the rest -- and no table, so it is the projection with nothing added. `ProposalSummary` heads a
+  fenced block of six paths of the proposal and a table of two keys, so it is the projection with two
+  members of its own. `PackageSummary` heads a table and no block, so it is an object: its four rows state
+  their own types and their own presence, and there is no document whose paths they project.
+
+
+  `objects-of-their-own` reads the two tables as whole objects and drops both blocks. It cannot be the
+  reading: `ProposalSummary`''s table states two keys, and a summary that held only `line_items[]` and
+  `packages[]` would carry none of `proposal_id`, `version`, `seller.domain`, `seller.legal_name`, `description`
+  or `offer_window`, which the block lists and which every manifest entry the specification ships writes.
+  The reason it was taken -- that a subset cannot state a member the document does not have, "`ProposalSummary`
+  holds `packages[]`, which no document of this specification holds" -- was wrong on the text: § 4.1''s
+  field table gives the proposal both `line_items[]` and `packages[]`.
+
+
+  THE TWO ADDED KEYS'' PRESENCE IS THE DOCUMENT''S AND NOT A RULE''S. `line_items[]` is "REQUIRED when
+  the full form holds `line_items[]`" and `packages[]` is "REQUIRED when the full form holds `packages[]`".
+  Each cell names a field of the full form rather than a sibling of the summary, so no condition on the
+  summary''s own value states it. The full form decides it: § 4.1 gives `line_items[]` "REQUIRED when
+  `packages[]` is absent" and `packages[]` "REQUIRED when `line_items[]` is absent", so a proposal holds
+  at least one of the two, and a summary that holds a path exactly when the full form holds it therefore
+  holds at least one of the two. That is a requirement over a set of the summary''s own members, which
+  the published schema states as one `anyOf` of a `required` per member (type rules § 8), so the two rows
+  carry it as that construct and the rules output holds no rule for them. It is the same requirement in
+  the same keyword the proposal''s own two rows already get, so the summary is neither narrower nor wider
+  than the document it projects: "not both", which § 4.1''s description adds in prose, is unstated on
+  both and is not this record''s to decide.
+
+
+  The paths of both blocks are a projection this record states and the mapping does not yet resolve, so
+  the rows that hold one report their value undecided until it does.'

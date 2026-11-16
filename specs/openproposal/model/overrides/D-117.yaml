@@ -1,0 +1,71 @@
+format: 2
+id: D-117
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: A Required cell states a condition on a value the member's own object does not hold. What decides
+  it, and what does a check answer where only that object is in hand?
+covers:
+- ir: rule:4.4:9754e43c
+  digest: 0d7152995f7b35be29f0c40654ff3d42d787cf1aa62453b9d62527cf0dfc3d6d
+  quote: REQUIRED when the line item has an `order` reference (§ 5.10)
+- ir: rule:5.2.4:45d0b1fa
+  digest: f6a772d5267d5c7610684eb86d845891ff8dc8e319afac9f68ced6f9887db120
+  quote: REQUIRED when `seller_relationship` is `reseller`, or the line item offers a deal mechanism (§
+    5.9)
+- ir: rule:5.6:62e21e38
+  digest: a5fc7801d7e0e75f77186ffcfb53329a8c87fb0c4580a2f7d3cfb3eac828a00a
+  quote: REQUIRED when this is the committed entry
+- ir: rule:5.6:8288302a
+  digest: 14845c24a6584a33e2511f328e76d63744a32697970793ff90942fffd2a9da7c
+  quote: REQUIRED when the entry prices a deal mechanism
+options:
+- id: context-and-undecided
+  summary: The vector gives the value as `context`, keyed by the property that holds it in the type that
+    does, and a check with no such context answers that it cannot decide.
+- id: read-the-holder
+  summary: The check reads the holder instead of the member's object, so a line item decides its pricing
+    entries' and its property options' rules.
+- id: absence-means-false
+  summary: A check with no context reads the condition as false, so a payload that holds only the member's
+    object keeps the rule.
+chosen: context-and-undecided
+rationale: 'Four of § 4''s and § 5''s Required cells condition a member on a value that sits outside the
+  object the member is on: a change request''s `orderid` on the line item''s `external_references[]`,
+  a property option''s `seller_accounts[]` on the line item''s offer, and a pricing entry''s `agreed_rate`
+  and `price_type` on the line item''s `commitment` and its offer. The rule is owned by the object the
+  row is on, because that is where the member is, so a check of it receives that object and not its holder.
+
+
+  Reading the holder instead would move the rule off the type that carries the member, and the rules output
+  states a rule once, on its owner (type rules § 5); a line item that decided its entries'' rules would
+  state them again for every entry it carries. Reading an absent context as a false condition would make
+  the check answer that the rule holds where it has not looked, which is the one answer a check must never
+  give: the examples would pass a rule nothing graded.
+
+
+  So the vector carries the value as `context`, which is what `context` is for -- facts the rule reads
+  that no payload of the vector''s type holds, keyed by the property that holds them -- and a check with
+  no such context returns that it cannot decide. The examples'' walk hands a check the sub-object alone,
+  so these four are undecided on the payloads that reach them, and each place is recorded under `undecided`
+  in `outputs/examples/findings.yaml`.
+
+
+  The record is narrow by construction. A rule that requires a member under a condition is read member
+  first: a payload that carries the member keeps the rule under every condition, so the check answers from
+  the member alone and reads the condition only where the member is absent. That leaves 17 places, not
+  60: the condition is reached only where the required member is missing. `PricingEntry.agreed_rate` holds
+  14 of them, because an entry carries `agreed_rate` only once a commitment is under it, and the row''s
+  other reading -- the only entry, where `commitment.pricing_id` names none -- turns on how many entries
+  the line item holds, which is not on an entry either.
+
+
+  The gate fails on a recorded undecided place that is decided now, so this record cannot outlive the gap:
+  a representation that carries the holder beside the member closes it.'
+feedback: 'State the condition of a conditional member on the member''s own object, or say which object
+  resolves it. Four cells condition a member on a value outside the object that carries it: `ChangeRequest.orderid`
+  on the line item''s `order` reference, `PropertyOption.seller_accounts[]` on the line item''s offered
+  mechanisms, and `pricing[].agreed_rate` and `pricing[].price_type` on the line item''s `commitment` and
+  its offered mechanisms. A party holding one of those objects on its own -- which § 4.3 and § 5.6.1 both
+  send one -- cannot tell whether the member is required.'

@@ -1,0 +1,72 @@
+format: 2
+id: D-119
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: A Required cell states a condition about the request a response answers, which no object of
+  this specification holds. Is it a rule, and if not, what maps it?
+covers:
+- ir: rule:2.4:3b0456cb
+  digest: a62c2e41efb1e1379726c47c217e9704b8d29d61c9a1bfac33f33a5c7b284a36
+  quote: REQUIRED when the request names a proposal the requester may read
+options:
+- id: obligation-on-a-party
+  summary: It is no rule. Type rules § 9 classes a requirement no payload can show as an obligation on
+    a party, with no schema keyword and no vector, so it maps to the party that must write the member.
+- id: receipt-vector
+  summary: 'It stays a rule and takes a payload with the response its receiver makes, which type rules
+    § 9 asks no check of.'
+- id: rule-with-context
+  summary: 'It stays a rule, and a vector supplies the condition''s subject as `context`.'
+chosen: obligation-on-a-party
+rationale: 'Type rules § 9 states the test: "A requirement that no payload can show is an obligation,
+  not a rule: what a party does... Each obligation names its party and goes to the obligations list, with
+  no schema keyword and no vector."
+
+
+  `ErrorObject.version` fails it twice over. The condition reads what the request named and whether its
+  sender may read it, which is § 5.8''s eligibility and not a value of the object. And no payload can carry
+  the request beside the error: `ErrorObject` is a published type that no member of any object in this
+  specification holds, measured over the whole mapping, so there is no object in which the request and
+  the error travel together. § 2.4''s code table is a near route -- `not_found` is returned when a named
+  proposal does not exist or the requester may not read it, and `stale_version`, `expired`, `record_mismatch`,
+  `idempotency_conflict` and `not_committable` are each decided about a proposal the requester is reading
+  -- but a `validation` error carries no such entailment either way, so `code` does not decide the condition,
+  only narrows it.
+
+
+  The party is the `seller`: § 2.4''s codes are what a seller returns to a request, and the party that
+  answers a request for a proposal the requester may read is the party that knows the `version` it was
+  answered at.
+
+
+  A receipt vector was the other way to keep it a rule, and type rules § 9 does ask no check of a rule
+  whose vectors carry a response. It is refused because the response would be the invention: the text states
+  what a party writes, and nowhere states what a receiver does with an error object that carries no version.
+
+
+  **`VersionRef.seller_domain` was covered by this record and is not an obligation.** Searching the whole
+  source for where a `VersionRef` travels settles it against this reading: § 3.3''s `AvailabilityRead.offer`
+  is a `VersionRef`, required, and an `AvailabilityRead` is the message a buyer sends to read a line item''s
+  figures and not a proposal, so every `VersionRef` there is outside its proposal and owes `seller_domain`.
+  § 1.1''s `ext.baseline` row says the same of a Deals API `Deal`: "The agreed baseline `VersionRef` (§
+  2.2), with `seller_domain`, so a DSP can join the deal to its record". So a payload can show the condition
+  -- a payload of the object that carries the reference -- and § 9''s test does not reach it. What the source
+  does not ship is a payload of that object. `D-121` reads it.
+
+
+  The mapping could not reach this reading when it was written, and now it can: `presence-statement` yields
+  a Required cell to a reading that maps it as an obligation, because no form of the cell says whether
+  its condition is one a payload can show, and `src/rules.ts` holds the obligation to being stated in the
+  condition''s own row, so a requirement the schema left cannot leave the published outputs by becoming
+  an obligation that names nothing. Landing only the first of those two was measured and refused: it took
+  `npm run ci` from 182 to 180 while replacing "has 0 valid and 0 invalid vectors" with "the schema leaves
+  the condition ... but no rule names its row", which publishes the requirement nowhere.'
+feedback: 'A conditional member is conditioned on something no payload holds. `ErrorObject.version` is
+  REQUIRED "when the request names a proposal the requester may read", which is a fact about the request
+  and about § 5.8 eligibility, and no object of this specification carries a request beside an `ErrorObject`.
+  A party that receives the value on its own cannot tell whether the member was required, and no conformance
+  vector can be derived for it. State it as what a party does -- a party answering a request for a proposal
+  the requester may read writes `version` -- or give the object a key that carries the fact its condition
+  reads, such as the request''s own identity.'

@@ -1,0 +1,132 @@
+format: 2
+id: D-162
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.2.4's `tv_channel` and `tv_network` are typed `Object` and each says it is an AdCOM 1.0
+  object -- `Channel` and `Network` -- "in AdCOM's keys and meanings". This specification
+  states none of their members. What does the model publish for each row?
+covers:
+- ir: key:5.2.4:PropertyOption.tv_channel
+  digest: 7b51885e02d8b5f63308b87a181fab2152a2b8252822181d5cfe4d9c1259f22d
+  quote: "`tv_channel` | OPTIONAL | The TV channel or station the property carries, as an AdCOM 1.0 `Channel` object in AdCOM's keys and meanings. It SHOULD carry `domain`. Properties whose `tv_channel.domain` is the same carry the same channel, so a buyer can tell when two sellers offer it. Each seller assigns its own `id`, so `id` matches only within one seller"
+- ir: key:5.2.4:PropertyOption.tv_network
+  digest: eaea36a37917cb4c1f35b1064f0a19c14d7261fa999a87079ec275bac86a4c1e
+  quote: "`tv_network` | OPTIONAL | The network that owns the property's channel, as an AdCOM 1.0 `Network` object in AdCOM's keys and meanings, matched by `domain` the same way"
+options:
+- id: the-cited-object-each-row-names
+  summary: >-
+    Each row holds an object of any members, under the name the text gives it -- `tv_channel`
+    is a `Channel` and `tv_network` a `Network` -- and the model names the definition that
+    states those members: AdCOM 1.0's object of that name, in AdCOM's keys and meanings. Each
+    is an open object, because this specification states no member of either, and `set_by`
+    carries the citation.
+- id: a-bare-object-per-row
+  summary: >-
+    Each row holds an anonymous object of any members, so the published type says a JSON
+    object and nothing about which one, and the citation lives only in the description.
+- id: adcoms-own-published-types
+  summary: >-
+    The rows reference the `Channel` and `Network` this repository publishes for AdCOM, so
+    one type serves both specifications.
+chosen: the-cited-object-each-row-names
+rationale: >-
+  THE ROW NAMES THE OBJECT AND SAYS WHOSE DEFINITION IT IS, WHICH IS WHAT `set_by` CARRIES.
+  "as an AdCOM 1.0 `Channel` object in AdCOM's keys and meanings" names the type and the
+  document that states its members in one clause. § 5.2.9's `content` is the same sentence
+  about `Content`, and `D-107` and `D-126` already read it that way: an open object whose
+  `set_by` names AdCOM's object, which type rules § 2.5 distinguishes from an object the
+  mapping has not finished -- that one states no members and names nothing.
+
+  OPEN, AND WITH NO MEMBERS OF ITS OWN. This specification writes none of AdCOM's keys for
+  either object, and § 2.1's summary projects no path through `tv_channel` or `tv_network`,
+  which is what gave `Content` its two members. So each is open with no members, and the
+  published type accepts the object AdCOM defines without restating a key of it.
+
+  `a-bare-object-per-row` publishes two types that say nothing about each other or
+  about AdCOM, so a consumer reading either learns only that it is an object; the citation
+  would be a description a generator may drop. `adcoms-own-published-types` reads a
+  cross-specification reference the text does not make: § 5.2.4 cites AdCOM's definition of
+  the keys, not a schema this repository publishes from AdCOM's own lock, and type rules § 3
+  gives a module the kernel and the modules it declares, not another specification's.
+
+  WHAT THIS LEAVES. "It SHOULD carry `domain`", in `tv_channel`'s own cell, is a statement
+  one payload decides -- a `Channel` either carries the key or it does not -- so it is a
+  rule and wants the valid and invalid vector the rules stage demands. It is not mapped
+  here, because mapping it without the pair moves a count from `mapping-bijection` to
+  `rules-emit` and settles nothing. The statements in that state are queued together, and
+  this one joins them.
+challenge:
+- type: Channel
+  value:
+    id: wabc-tv-1
+    name: WABC-TV
+    domain: abc7ny.com
+  verdict: accept
+  context: >-
+    A seller offering a local broadcast property, naming the channel with the
+    three keys AdCOM's own `Channel` writes about -- its `domain` description
+    gives `abc7ny.com` for the local channel WABC-TV and its `name` description
+    gives `WABC-TV`, which is the cited document's own example.
+  reason: >-
+    `the-cited-object-each-row-names` publishes an object of any members, so
+    every key AdCOM's `Channel` defines is taken without this specification
+    restating one. The row says it SHOULD carry `domain`, and this value does.
+- type: Channel
+  value:
+    domain: abc7ny.com
+    call_sign: WABC
+  verdict: accept
+  context: >-
+    A seller that adds the station's call sign as a key of its own, which AdCOM's
+    `Channel` does not define and which belongs in AdCOM's `ext` there.
+  reason: >-
+    This is the cost the reading accepts, stated as a value rather than left for
+    a reader to find. An open object with no members takes a key AdCOM refuses:
+    AdCOM's own published `Channel` is closed on `domain`, `ext`, `id` and
+    `name`, so it answers this payload "must NOT have additional properties",
+    and `adcoms-own-published-types` would therefore refuse it. That option is
+    the one the rationale declines, because § 5.2.4 cites AdCOM's definition of
+    the keys and not a schema this repository publishes from AdCOM's lock. So
+    this entry is where the two readings tell apart on a payload, and it is the
+    reason the citation is in `set_by` rather than in a `$ref`.
+- type: Channel
+  value: WABC-TV
+  verdict: reject
+  context: >-
+    A seller that writes the channel as the bare call letters, which is how a
+    linear-TV avail list names a station.
+  reason: >-
+    The row states an object -- "an AdCOM 1.0 `Channel` object in AdCOM's keys
+    and meanings" -- so the published type is an object and a string is refused.
+    Open says nothing about which members a value has; it does not stop saying
+    the value is an object, which is the half of the type the row does state.
+- type: Network
+  value:
+    id: abc-1
+    name: ABC
+    domain: abc.com
+  verdict: accept
+  context: >-
+    The network that owns the channel above, written with AdCOM's own example
+    values: its `Network.domain` description gives `abc.com` for the network
+    ABC, and its `name` description gives `ABC`.
+  reason: >-
+    `tv_network` reads the same sentence as `tv_channel` -- a `Network` object
+    "matched by `domain` the same way" -- so the reading publishes the same
+    construct for it, and both covered rows are challenged rather than one
+    standing for the other.
+- type: Network
+  value:
+  - abc.com
+  verdict: reject
+  context: >-
+    A seller that sends the networks it carries as a list of domains, the key
+    being matched by `domain`.
+  reason: >-
+    The row states one object per property, not a list of them: `tv_network` is
+    "the network that owns the property's channel", singular, and `domain` is
+    how two sellers' values are matched rather than a form the value may take.
+    An array is refused by the object the row states.

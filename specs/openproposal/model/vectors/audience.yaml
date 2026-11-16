@@ -1,0 +1,409 @@
+# Rule vectors for the statements of section 5.3 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: audience
+rules:
+  # § 5.3's `combine` row: REQUIRED when more than one seller audience
+  # can be in effect. § 3.1 states what can be in effect -- `selected[]`
+  # where the buyer writes one and `included[]` otherwise, bounded by
+  # `max_select` -- so more than one audience can be in effect when
+  # `available[]` offers more than one and `max_select` allows more than
+  # one. Without the operator the line item's first targeting condition
+  # has no reading: § 5.3 gives `any` and `all` opposite meanings over
+  # the set in effect.
+  #
+  # Derived from examples/line-item-display.yaml at `/audiences`: it
+  # offers three seller audiences and a `max_select` of 2, and carries
+  # `combine`. D-037's id form is applied to each option's id and to
+  # every reference to one, each the UUID version 5 of the document's own
+  # readable id in the DNS namespace. Every other value is that file's
+  # own bytes.
+  #
+  # The invalid half is that value with `combine` removed, and nothing
+  # else.
+  - rule: rule:5.3:153027ca
+    digest: a76948674f927c0bedf5eed46ac78e5c66f5f384d74e1d1206fa63f15bf3d21d
+    type: AudienceSelectable
+    valid:
+      - value:
+          available:
+            - id: 8962802c-16e3-5f1a-88b1-4b74a09b5626
+              name: SMB decision makers
+              taxonomy: 4
+              sensitive_categories: []
+              data_label:
+                provider_name: Business Daily Media
+                provider_domain: business-daily.example
+                provider_email: data@business-daily.example
+                audience_name: SMB decision makers
+                audience_id: 10451
+                taxonomy_id_list: "26"
+                audience_criteria: Registered readers who declared a managerial role at a small or mid-sized business at sign-up
+                audience_precision_levels:
+                  - Individual
+                audience_scope: Single domain / App
+                originating_domain: business-daily.example
+                audience_size: 2600000
+                id_types:
+                  - Platform ID
+                geocode_list: USA
+                privacy_compliance_mechanisms:
+                  - USPrivacy
+                  - GPC
+                privacy_policy_url: https://business-daily.example/privacy
+                iab_techlab_compliant: No
+                data_sources:
+                  - Web Usage
+                audience_inclusion_methodology:
+                  - Declared
+                audience_expansion: No
+                device_expansion: No
+                audience_refresh: Daily
+                lookback_window: Monthly
+                onboarder_match_keys:
+                  - N/A
+                onboarder_audience_expansion: N/A
+                onboarder_device_expansion: N/A
+                onboarder_audience_precision_level:
+                  - N/A
+            - id: 905cb6b5-90f4-5c4b-8cdb-b1ec425133ae
+              name: High-net-worth investors
+              taxonomy: 4
+              sensitive_categories: []
+              data_label:
+                provider_name: Business Daily Media
+                provider_domain: business-daily.example
+                provider_email: data@business-daily.example
+                audience_name: High-net-worth investors
+                audience_id: 10452
+                taxonomy_id_list: "190"
+                audience_criteria: Readers of markets coverage, modeled from subscribers who declared personal affluence over $1,000,000
+                audience_precision_levels:
+                  - Browser
+                audience_scope: Cross-domain within O&O
+                originating_domain: N/A (Cross-domain, Offline)
+                audience_size: 1100000
+                id_types:
+                  - Cookie ID
+                geocode_list: USA
+                privacy_compliance_mechanisms:
+                  - USPrivacy
+                  - GPC
+                privacy_policy_url: https://business-daily.example/privacy
+                iab_techlab_compliant: No
+                data_sources:
+                  - Web Usage
+                  - Online Survey
+                audience_inclusion_methodology:
+                  - Modeled
+                audience_expansion: Yes
+                device_expansion: No
+                audience_refresh: Weekly
+                lookback_window: Quarterly
+                onboarder_match_keys:
+                  - N/A
+                onboarder_audience_expansion: N/A
+                onboarder_device_expansion: N/A
+                onboarder_audience_precision_level:
+                  - N/A
+            - id: 09f34aef-285f-56d9-a42e-a2083993a512
+              name: CFOs and finance leaders
+              taxonomy: 4
+              excludable: true
+              sensitive_categories: []
+              data_label:
+                provider_name: Business Daily Media
+                provider_domain: business-daily.example
+                provider_email: data@business-daily.example
+                audience_name: CFOs and finance leaders
+                audience_id: 10453
+                taxonomy_id_list: 26,270
+                audience_criteria: Registered readers who declared a finance director or CFO role at sign-up
+                audience_precision_levels:
+                  - Individual
+                audience_scope: Single domain / App
+                originating_domain: business-daily.example
+                audience_size: 480000
+                id_types:
+                  - Platform ID
+                geocode_list: USA
+                privacy_compliance_mechanisms:
+                  - USPrivacy
+                  - GPC
+                privacy_policy_url: https://business-daily.example/privacy
+                iab_techlab_compliant: No
+                data_sources:
+                  - Web Usage
+                audience_inclusion_methodology:
+                  - Declared
+                audience_expansion: No
+                device_expansion: No
+                audience_refresh: Daily
+                lookback_window: Monthly
+                onboarder_match_keys:
+                  - N/A
+                onboarder_audience_expansion: N/A
+                onboarder_device_expansion: N/A
+                onboarder_audience_precision_level:
+                  - N/A
+          included:
+            - 8962802c-16e3-5f1a-88b1-4b74a09b5626
+          deltas:
+            905cb6b5-90f4-5c4b-8cdb-b1ec425133ae:
+              delta_cpm: 4
+            09f34aef-285f-56d9-a42e-a2083993a512:
+              delta_cpm: 6.5
+          max_select: 2
+          combine:
+            available:
+              - any
+              - all
+            included:
+              - any
+            max_select: 1
+    invalid:
+      - value:
+          available:
+            - id: 8962802c-16e3-5f1a-88b1-4b74a09b5626
+              name: SMB decision makers
+              taxonomy: 4
+              sensitive_categories: []
+              data_label:
+                provider_name: Business Daily Media
+                provider_domain: business-daily.example
+                provider_email: data@business-daily.example
+                audience_name: SMB decision makers
+                audience_id: 10451
+                taxonomy_id_list: "26"
+                audience_criteria: Registered readers who declared a managerial role at a small or mid-sized business at sign-up
+                audience_precision_levels:
+                  - Individual
+                audience_scope: Single domain / App
+                originating_domain: business-daily.example
+                audience_size: 2600000
+                id_types:
+                  - Platform ID
+                geocode_list: USA
+                privacy_compliance_mechanisms:
+                  - USPrivacy
+                  - GPC
+                privacy_policy_url: https://business-daily.example/privacy
+                iab_techlab_compliant: No
+                data_sources:
+                  - Web Usage
+                audience_inclusion_methodology:
+                  - Declared
+                audience_expansion: No
+                device_expansion: No
+                audience_refresh: Daily
+                lookback_window: Monthly
+                onboarder_match_keys:
+                  - N/A
+                onboarder_audience_expansion: N/A
+                onboarder_device_expansion: N/A
+                onboarder_audience_precision_level:
+                  - N/A
+            - id: 905cb6b5-90f4-5c4b-8cdb-b1ec425133ae
+              name: High-net-worth investors
+              taxonomy: 4
+              sensitive_categories: []
+              data_label:
+                provider_name: Business Daily Media
+                provider_domain: business-daily.example
+                provider_email: data@business-daily.example
+                audience_name: High-net-worth investors
+                audience_id: 10452
+                taxonomy_id_list: "190"
+                audience_criteria: Readers of markets coverage, modeled from subscribers who declared personal affluence over $1,000,000
+                audience_precision_levels:
+                  - Browser
+                audience_scope: Cross-domain within O&O
+                originating_domain: N/A (Cross-domain, Offline)
+                audience_size: 1100000
+                id_types:
+                  - Cookie ID
+                geocode_list: USA
+                privacy_compliance_mechanisms:
+                  - USPrivacy
+                  - GPC
+                privacy_policy_url: https://business-daily.example/privacy
+                iab_techlab_compliant: No
+                data_sources:
+                  - Web Usage
+                  - Online Survey
+                audience_inclusion_methodology:
+                  - Modeled
+                audience_expansion: Yes
+                device_expansion: No
+                audience_refresh: Weekly
+                lookback_window: Quarterly
+                onboarder_match_keys:
+                  - N/A
+                onboarder_audience_expansion: N/A
+                onboarder_device_expansion: N/A
+                onboarder_audience_precision_level:
+                  - N/A
+            - id: 09f34aef-285f-56d9-a42e-a2083993a512
+              name: CFOs and finance leaders
+              taxonomy: 4
+              excludable: true
+              sensitive_categories: []
+              data_label:
+                provider_name: Business Daily Media
+                provider_domain: business-daily.example
+                provider_email: data@business-daily.example
+                audience_name: CFOs and finance leaders
+                audience_id: 10453
+                taxonomy_id_list: 26,270
+                audience_criteria: Registered readers who declared a finance director or CFO role at sign-up
+                audience_precision_levels:
+                  - Individual
+                audience_scope: Single domain / App
+                originating_domain: business-daily.example
+                audience_size: 480000
+                id_types:
+                  - Platform ID
+                geocode_list: USA
+                privacy_compliance_mechanisms:
+                  - USPrivacy
+                  - GPC
+                privacy_policy_url: https://business-daily.example/privacy
+                iab_techlab_compliant: No
+                data_sources:
+                  - Web Usage
+                audience_inclusion_methodology:
+                  - Declared
+                audience_expansion: No
+                device_expansion: No
+                audience_refresh: Daily
+                lookback_window: Monthly
+                onboarder_match_keys:
+                  - N/A
+                onboarder_audience_expansion: N/A
+                onboarder_device_expansion: N/A
+                onboarder_audience_precision_level:
+                  - N/A
+          included:
+            - 8962802c-16e3-5f1a-88b1-4b74a09b5626
+          deltas:
+            905cb6b5-90f4-5c4b-8cdb-b1ec425133ae:
+              delta_cpm: 4
+            09f34aef-285f-56d9-a42e-a2083993a512:
+              delta_cpm: 6.5
+          max_select: 2
+  # § 5.3's `combine` row ends "`included[]` MUST name exactly one option",
+  # the same words § 5.7 writes of `controlling_measurement` and `D-142` reads
+  # there: `max_select: 1` lets the buyer choose one operator, so the seller's
+  # own choice is one too. The valid half is `line-item-display.yaml`'s own
+  # audience offer, carrying the one option its `included[]` names, with its
+  # `combine` as the file writes it. The invalid half adds `all` to
+  # `combine.included[]`, a value the field's own `available[]` offers, so the
+  # audiences combine both ways at once (D-154).
+  - rule: rule:5.3:7cdd61de
+    digest: b2ce5726603bdeaaf2541ff2261f895ec9d571a0d22b7b1ad609f9b80dc4e337
+    decision: D-154
+    type: AudienceSelectable
+    valid:
+      - value:
+          available:
+          - id: smb-decision-makers
+            name: SMB decision makers
+            taxonomy: 4
+            sensitive_categories: []
+            data_label:
+              provider_name: Business Daily Media
+              provider_domain: business-daily.example
+              provider_email: data@business-daily.example
+              audience_name: SMB decision makers
+              audience_id: 10451
+              taxonomy_id_list: '26'
+              audience_criteria: Registered readers who declared a managerial role at a small or mid-sized business at sign-up
+              audience_precision_levels:
+              - Individual
+              audience_scope: Single domain / App
+              originating_domain: business-daily.example
+              audience_size: 2600000
+              id_types:
+              - Platform ID
+              geocode_list: USA
+              privacy_compliance_mechanisms:
+              - USPrivacy
+              - GPC
+              privacy_policy_url: https://business-daily.example/privacy
+              iab_techlab_compliant: 'No'
+              data_sources:
+              - Web Usage
+              audience_inclusion_methodology:
+              - Declared
+              audience_expansion: 'No'
+              device_expansion: 'No'
+              audience_refresh: Daily
+              lookback_window: Monthly
+              onboarder_match_keys:
+              - N/A
+              onboarder_audience_expansion: N/A
+              onboarder_device_expansion: N/A
+              onboarder_audience_precision_level:
+              - N/A
+          included:
+          - smb-decision-makers
+          combine:
+            available:
+            - any
+            - all
+            included:
+            - any
+            max_select: 1
+    invalid:
+      - value:
+          available:
+          - id: smb-decision-makers
+            name: SMB decision makers
+            taxonomy: 4
+            sensitive_categories: []
+            data_label:
+              provider_name: Business Daily Media
+              provider_domain: business-daily.example
+              provider_email: data@business-daily.example
+              audience_name: SMB decision makers
+              audience_id: 10451
+              taxonomy_id_list: '26'
+              audience_criteria: Registered readers who declared a managerial role at a small or mid-sized business at sign-up
+              audience_precision_levels:
+              - Individual
+              audience_scope: Single domain / App
+              originating_domain: business-daily.example
+              audience_size: 2600000
+              id_types:
+              - Platform ID
+              geocode_list: USA
+              privacy_compliance_mechanisms:
+              - USPrivacy
+              - GPC
+              privacy_policy_url: https://business-daily.example/privacy
+              iab_techlab_compliant: 'No'
+              data_sources:
+              - Web Usage
+              audience_inclusion_methodology:
+              - Declared
+              audience_expansion: 'No'
+              device_expansion: 'No'
+              audience_refresh: Daily
+              lookback_window: Monthly
+              onboarder_match_keys:
+              - N/A
+              onboarder_audience_expansion: N/A
+              onboarder_device_expansion: N/A
+              onboarder_audience_precision_level:
+              - N/A
+          included:
+          - smb-decision-makers
+          combine:
+            available:
+            - any
+            - all
+            included:
+            - any
+            - all
+            max_select: 1

@@ -1,0 +1,62 @@
+format: 2
+id: D-095
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  What names an object option, and does a selectable or settable field admit a bare value in place of
+  the full form?
+covers:
+- ir: rule:3.1:bfffacdf
+  digest: 705cdabdb624bd15e1d51d39445a32e68b2d7c9c3364e2beedeca3da9ca4e77f
+  quote: An object option's id is its REQUIRED `id`, unique in the field.
+  locks:
+  - with-open-prs
+- ir: def:2.2:Range
+  digest: a5f2fef3bebd5d423fa2851e2932f39cd399076f17968466789fa94ff4895d96
+  quote: '`Range` | bounds a value of type `T`, written `Range[T]`. At least one bound is present, and
+    `min` is no greater than `max`.'
+  locks:
+  - with-open-prs
+options:
+- id: the-option-carries-its-id-and-no-bare-form
+  summary: >-
+    An object option carries `id`, required, and the type that names it is that `id`'s own; and neither
+    a `Selectable` nor a `Settable` admits a bare value in place of the full form, because this text
+    states none, so the kernel's fallback parameter goes.
+- id: keep-the-bare-form
+  summary: >-
+    The two constructors keep the fallback the kernel declared, and the binding names the statement and
+    the record that give it.
+chosen: the-option-carries-its-id-and-no-bare-form
+rationale: 'Section 3.1 states both halves in one paragraph. "**Option ids.** A string option''s id is
+  its value. An object option''s id is its REQUIRED `id`, unique in the field." So a string option needs
+  no member and an object option carries one, which is what the kernel''s `Selectable` says of the
+  parameter that names its options; and the type of that `id` is the `id` row''s own, which is how
+  section 5.9''s mechanism option comes to be named by a `TransactionMechanism` rather than by a minted
+  `MintedId`.
+
+
+  **And the text states no bare form.** The kernel declared a fallback on `Selectable` and on
+  `Settable` -- an optional parameter whose argument is "The bare value that may stand in for the full
+  form" -- and the binding named a statement for each. Both statements name an element this lock does
+  not hold: `rule:3.1:f8b0c287` and `rule:3.2:4f3b0a9c` are the predecessor''s sentences, and the
+  rewritten sections 3.1 and 3.2 say nothing of a bare value. What section 3.1 does say is the other
+  thing: "Every field marked `selectable` is a `Selectable[T]`, **or a named type that holds its
+  keys**" -- which is `AudienceSelectable`, a named object holding the envelope''s members, and not a
+  bare option standing in for the envelope.
+
+
+  `keep-the-bare-form` cannot be written: there is no element to name as the statement, and a binding''s
+  fallback rests on its specification''s text. No other specification in the tree states one either --
+  AdCOM and the Deals API each mark both constructors absent -- so the parameter was declared for a
+  reading one text made and no longer makes, and it goes with the reading. The `B` parameter goes with
+  it, because a constructor''s optional parameter is its fallback and nothing else
+  (`src/constructors.ts`: "parameter B is optional but isn''t the fallback").
+
+
+  **Two constructor rules get the row that states them.** `constructor:Range:ordered` is section 2.2''s
+  own sentence -- "At least one bound is present, and `min` is no greater than `max`" -- and
+  `constructor:Selectable:options-named` is the option-ids paragraph above, which says what an entry of
+  `included[]`, of `selected[]` and a key of `deltas` may name. Each cited a record the restart deleted.'

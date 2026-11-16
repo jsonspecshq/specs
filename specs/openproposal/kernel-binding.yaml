@@ -1,803 +1,1282 @@
-# The OpenProposal kernel binding (src/binding.ts): what OpenProposal adds to the
-# shared kernel's definitions in kernel/primitives.yaml, constructors.yaml, and
-# domains.yaml. Each item is named as the kernel names it. A spec source is
-# quoted and digested; regenerate a quote and a digest with
-# `npm run cite -- --lock specs/openproposal/input/spec-lock.yaml --all-locks <IR element ID>`.
 format: 1
 spec: openproposal
 primitives:
-  - name: Uuid
-    decision: D-037
-    sources:
+- name: DurationSeconds
+  sources:
+    spec: &id004
+    - ir: key:5.2.8:Loop.length_s
+      digest: 7797744630e9f12050c32c91311b81a6bcf49b639d0df73140c64024bfae5d21
+      quote: '`length_s` | REQUIRED | Loop length, in seconds, counting every item the loop
+        plays, paid or not'
+    - ir: key:5.2.8:Loop.slot_s
+      digest: 7f545a560618e7a8978658d20632e28d186b174586a8429f571536a57f3b10ff
+      quote: '`slot_s` | REQUIRED | Slot length, in seconds'
+    - ir: key:5.6.5:CostParameters.view_s
+      digest: 07c3ce92aff2f4d5079df371767846cbd707637eec0a113f9b1737580634ae30
+      quote: '`view_s` | REQUIRED when `cost_method` is `CPV` and `view_fraction` is absent | Seconds played that make a view. Absent when `view_fraction` is present'
+    - ir: key:5.2.2:Refresh.min_interval_s
+      digest: 858d83b183216c3319adeb6bb3882f4c9b9efc6d5f54ee31fc71a54ba64b3743
+      quote: '`min_interval_s` | REQUIRED | Minimum seconds a creative renders before the slot refreshes'
+    - ir: key:5.2.3:BreakPositionOption.poddur
+      digest: 37180c898a9cfe74fa941482b963b5a8517e7560080ad41c3fd03570807dc9cd
+      quote: '`poddur` | OPTIONAL | Ceiling: the most seconds of dynamic ad time a served pod holds | `poddur`, `poddur`'
+  decision: D-070
+- name: DurationMilliseconds
+  decision: D-115
+  sources:
+    spec:
+    - &playtolerance
+      ir: key:5.6.4:DeliveryCounting.play_tolerance_ms
+      digest: 9585d4f990efb99da04a661aa118cd4ce6adfea1a12c785b93cb0e3705dff933
+      quote: '`play_tolerance_ms` | REQUIRED | How far short of its full duration a play may end and still count'
+- name: IntegerId
+  absent: true
+- name: MintedId
+  decision: D-037
+  sources:
+    spec:
+    - ir: field:4.1:proposal_id
+      digest: 505aadeb488fdbaba09c40fc494d450478648a7d6b81f20440e67d378fd6f4b6
+      quote: '`proposal_id` | String | immutable | Identifies the proposal. Unique within `seller.domain`'
+    - ir: field:5.1:line_item_id
+      digest: 54da51504430aebaa335ae5a20fefa939f005cca07dcafe4cdd3bb747baf021d
+      quote: '`line_item_id` | String | immutable | Identity within the proposal'
+- name: ExternalId
+  sources:
+    spec:
+    - ir: field:4.1:proposal_template_id
+      digest: 3be054395ec9b9361e085c13831652204ded2153b3631ff710d4324eef1cd38f
+      quote: '`proposal_template_id` | String | immutable | Links a proposal to the seller''s template. Opaque to buyers; used for the seller''s reporting'
+  decision: D-067
+- name: Text
+  sources:
+    spec:
+    - ir: field:4.2:description
+      digest: f741f0311c23ba6cfb77a404187fdba7545d0a92b7ba38712760ecf4a86b832b
+      quote: '`description` | String | seller-set | Prose, not a name. Where the "why buy" case is made, including which channels a multi-channel proposal spans'
+    - ir: field:4.2:seasonality_notes
+      digest: ba887f0a6fc13cac29acad0ce87325b6d0f9f10574dc85a6609adb877f24b356
+      quote: '`seasonality_notes` | String | seller-set | When the proposal performs differently'
+- name: Url
+  sources:
+    spec:
+    - ir: def:2.2:Url
+      digest: ac1d3962a8fd84f62e1061d42d1e6d0741182bbc4679acf12ea6fa5e99c38ad3
+      quote: '`Url` | String: an absolute `http` or `https` URL (RFC 3986) | A location a client can fetch'
+  decision: D-079
+- name: Domain
+  decision: D-067
+  sources:
+    spec:
+    - ir: field:5.2:properties
+      digest: 51851b4eb428c45904ca874aaf132f101255a70f54933a8c86fb19deb3af33d1
+      quote: '`properties` | Selectable[PropertyOption] | selectable | What the line item runs on. See 5.2.4. Absent: the seller promises no property'
+      locks:
+      - with-open-prs
+    - ir: def:2.2:Domain
+      digest: d671964da3ca199ac23b95c300f4348400e9cb5e63f6fb483f6fac0c98679265
+      quote: '`Domain` | String: lowercase ASCII, internationalized labels in A-label form (RFC 5890), with no scheme, port, path, or trailing dot | Producers MUST write this form. Consumers MUST compare
+        byte for byte and MUST NOT normalize a value before comparing it. A value read from ads.txt or sellers.json is converted to this form before comparison'
+      locks:
+      - with-open-prs
+- name: FormatId
+  decision: D-019
+  sources:
+    spec:
+    - ir: field:5.4:formats
+      digest: 97f074e7283ce7c3cb2509b194a0989880e66ba5e32607c5c5e153d5a8e271b8
+      quote: '`formats` | Selectable[FormatId] | selectable | Format ids, such as `display/300x250` and `audio/host-read-30s`. Absent: this line item states no format'
+- name: CurrencyCode
+  sources:
+    spec:
+    - ir: field:5.6:pricing[].currency
+      digest: 41548bd198d7a364c84be1ab7c22d217009d7ecc5909827f10feb1c86e45a06a
+      quote: '`pricing[].currency` | CurrencyCode | seller-set | The currency of the entry''s rates (below)'
+- name: Amount
+  decision: D-067
+  sources:
+    spec:
+    - ir: key:5.6.1:CommitmentAmount.amount
+      digest: c86da179b6125a87987ded010bdcf718b33df838acd429a72dc4c892cf9fcbae
+      quote: '`amount` | REQUIRED | The figure committed: an `Amount` when `basis` is `spend`, otherwise a whole number of the entry''s units (§ 5.6.5)'
+    - ir: def:2.2:Amount
+      digest: 7e43f7cc99e45c463678c46bb4532a1133af9e9fdff68dc37f7ec017ab97f0bb
+      quote: '`Amount` | Number within the limits of § 4.1.1 | Money. It carries no currency: § 5.6 states which one it reads in'
+      locks:
+      - with-open-prs
+- name: PriceAdjustment
+  absent: true
+- name: PercentChange
+  absent: true
+- name: Fraction
+  decision: D-067
+  sources:
+    spec:
+    - ir: field:5.7:committed_metrics[]
+      digest: f780f0eb75a5d9c437e7bcbf98c882ea50a0854c0b25beab8f57a96fdecfce11
+      quote: '`committed_metrics[]` | Array[CommittedMetric] | requestable | `CommittedMetric` tuples (§ 5.7.1). Seller declares its offered `level`. A buyer MAY request a stricter `level`, one further in `direction`. A request MUST NOT change a tuple''s `direction`'
+    - ir: field:5.3:buyer_supplied
+      digest: 156e80a7f77bb45b68c65982db7885275ff1b89a00fc1c4127465ce94d6e9889
+      quote: '`buyer_supplied` | BuyerSupplied | mixed | See below'
+    - ir: def:2.2:Fraction
+      digest: 9024cdd485d132f1f11c353db7f2e211da12588fb6a049f230207d08d2e8fe1c
+      quote: '`Fraction` | Number from 0 to 1 | A proportion'
+      locks:
+      - with-open-prs
+- name: Count
+  sources:
+    spec:
+    - ir: field:5.3:addressable_scale
+      digest: 646b6c2843fd5b8eddfcd9f52b9f12c2321e34e9c789dff0def1eed33c060a49
+      quote: '`addressable_scale` | AddressableScale | asserted | What the line item can reach, recomputed against the buyer''s selection. Not segment size. See below'
+- name: Measure
+  decision: D-005
+  sources:
+    spec:
+    - ir: field:5.7:committed_metrics[]
+      digest: f780f0eb75a5d9c437e7bcbf98c882ea50a0854c0b25beab8f57a96fdecfce11
+      quote: '`committed_metrics[]` | Array[CommittedMetric] | requestable | `CommittedMetric` tuples (§ 5.7.1). Seller declares its offered `level`. A buyer MAY request a stricter `level`, one further in `direction`. A request MUST NOT change a tuple''s `direction`'
+- name: Timestamp
+  absent: true
+- name: UtcTimestamp
+  absent: true
+- name: EpochMilliseconds
+  absent: true
+- name: Duration
+  decision: D-067
+  sources:
+    spec:
+    - ir: def:2.2:Duration
+      digest: b8964f62205468b2e358f311497bf7bac3b639dddf0eeead1ce15f5526490b06
+      quote: '`Duration` | String: the ISO 8601 grammar of RFC 3339 Appendix A without its week form (`P14D`, not `P2W`) | A length of time. A comparison names its anchor. A length within the playback of
+        an ad or a placement, such as a play, view, read, loop, slot, or refresh, is instead an Integer whose key ends `_s` or `_ms`, except a key imported from another standard, which keeps its spelling
+        (§ 2.6)'
+      locks:
+      - with-open-prs
+- name: TimeOfDay
+  sources:
+    spec:
+    - ir: def:5.5:ClockTime
+      digest: 54ae9661ffb2a541fe08c1e20918fcdb690d40f440b2140ac214dc00d7f2df0a
+      quote: '`ClockTime` | is a String: `HH:MM` on a 24-hour clock, two digits each, from `00:00` to `23:59`, or `24:00`, the end of the day.'
+  decision: D-075
+- name: DayName
+  sources:
+    spec:
+    - ir: def:5.5:DayOfWeek
+      digest: c33f22bda0cc4398646c8abc6c445f6300bc714605afb6d1295292a41a2a5c72
+      quote: '`DayOfWeek` | is `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`.'
+  decision: D-075
+- name: IntegerFlag
+  locks:
+  - with-open-prs
+  sources:
+    spec:
+    - ir: def:2.2:IntegerFlag
+      digest: 8ccd938cec80d303890604d05b8fb931e7aa132dfca500cd59b2d3b9db29c5a4
+      quote: '`IntegerFlag` | Integer: `0` (no) | `1` (yes) | A yes or no that another standard writes as an integer. Each field says what `1` affirms'
+      locks:
+      - with-open-prs
+- name: RegistrableDomain
+  locks:
+  - with-open-prs
+  decision: D-067
+  sources:
+    spec:
+    - ir: key:2.2:Party.domain
+      digest: 4f993cad977cd8f3893ae6f792ea716454b17eebcd62dd765320bf7056eca545
+      quote: '`domain` | REQUIRED | The party''s domain'
+      locks:
+      - with-open-prs
+    - ir: key:2.2:SeatRef.dsp
+      digest: a7e019396f0b10d9ccd414c756e345fae410c3538d9504d4219d3b1e4b1c72ba
+      quote: '`dsp` | REQUIRED | The DSP''s primary domain'
+      locks:
+      - with-open-prs
+    - ir: def:2.2:RegistrableDomain
+      digest: 996140da167fae546cefbbdb984df61f7cf0780a2eca6d4d5aa48a5bed5e2666
+      quote: '`RegistrableDomain` | A `Domain` that is the Public Suffix List registrable domain, taken over the whole list, PRIVATE section included | It names a business'
+      locks:
+      - with-open-prs
+  rules:
+  - id: kernel:RegistrableDomain:registrable
+    source:
       spec:
-        - ir: field:4.1:proposal_id
-          digest: fb8604e60eabfa2db105b17ca562af8ba2f20784907dcce349772ce83054088d
-          quote: "`proposal_id` | String | immutable | Unique identity for the proposal object"
-        - ir: field:5.1:line_item_id
-          digest: 60cd2aeea40121597f5e2b0725417665bc560c9b677000d3dfbc432d1c88c969
-          quote: "`line_item_id` | String | immutable | Identity within the proposal"
-  - name: ExternalId
-    sources:
+      - ir: def:2.2:RegistrableDomain
+        digest: 996140da167fae546cefbbdb984df61f7cf0780a2eca6d4d5aa48a5bed5e2666
+        quote: '`RegistrableDomain` | A `Domain` that is the Public Suffix List registrable domain, taken over the whole list, PRIVATE section included | It names a business'
+        locks:
+        - with-open-prs
+- name: FieldPointer
+  locks:
+  - with-open-prs
+  decision: D-067
+  sources:
+    spec:
+    - ir: key:2.4:ErrorObject.pointer
+      digest: deeb4f4b44dbfec8db701e927b4ac9770cdecf2577992a578c53d6ab7ff0b4be
+      quote: '`pointer` | OPTIONAL | Into the object this specification defines that the request carries, to the value that caused the error'
+      locks:
+      - with-open-prs
+    - ir: key:4.1:HistoryPath.pointer
+      digest: abd363f19dbe5d883fcc02f8441d2c815971f2638bfe37d0b583057b5340809f
+      quote: '`pointer` | REQUIRED | Into that line item or the proposal'
+      locks:
+      - with-open-prs
+    - ir: def:2.2:FieldPointer
+      digest: 81c9fe24955719224a5619829da66cd27e74ea53e642be90bb605fb6fcf9f39a
+      quote: '`FieldPointer` | String: a JSON Pointer (RFC 6901) | A location in the object this specification defines'
+      locks:
+      - with-open-prs
+- name: FractionDelta
+  locks:
+  - with-open-prs
+  decision: D-067
+  sources:
+    spec:
+    - ir: key:3.1:Delta.delta_fraction
+      digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+      quote: '`delta_fraction` | OPTIONAL | Multiplies the rate of any entry by 1 plus this value. `0.20` is 20 percent more'
+      locks:
+      - with-open-prs
+    - ir: def:2.2:FractionDelta
+      digest: d1df316a19e8a8701b794b94dd6737989aab1ed8e0fadfb55b30d418c261123d
+      quote: '`FractionDelta` | Number greater than -1 | Used only by `delta_fraction` (§ 3.1)'
+      locks:
+      - with-open-prs
+- name: Instant
+  locks:
+  - with-open-prs
+  decision: D-067
+  sources:
+    spec:
+    - ir: key:2.2:Interval.start
+      digest: eef6d2a736303d5d5081c1f1eb92b6d60df3fdb9d545f6071aea012805ee4d16
+      quote: '`start` | REQUIRED | The first second'
+      locks:
+      - with-open-prs
+    - ir: key:4.1:HistoryEntry.at
+      digest: b68b117ee8bbf9f32b984acac735be1ba894a9cd73c74e6aaec95b80c7380e3e
+      quote: '`at` | REQUIRED | When the side acted'
+      locks:
+      - with-open-prs
+    - ir: def:2.2:Instant
+      digest: df8f4931a29cab49ac4f7be005c0e543329982c6dd42ad24f6ca266927fde0bc
+      quote: '`Instant` | String: an RFC 3339 `date-time` in whole seconds, ending in `Z` | A point in time. One written form, so one instant has one digest input'
+      locks:
+      - with-open-prs
+- name: IanaZone
+  locks:
+  - with-open-prs
+  sources:
+    spec:
+    - ir: key:5.2.8:Screen.time_zone
+      digest: 3ff6012607b766df2a717a341e284efd9aa32f1efd19e1832c38b5188b1df4b7
+      quote: '`time_zone` | OPTIONAL | The screen''s time zone'
+      locks:
+      - with-open-prs
+    - ir: key:5.10:Billing.time_zone
+      digest: 8a3ffc03e1d828afb577c46430d48722d6f7aea224ff6d2d2e58774d3991dba3
+      quote: '`time_zone` | OPTIONAL | The clock for a `month` invoice period. Absent: `UTC`'
+      locks:
+      - with-open-prs
+    - ir: def:2.2:IanaZone
+      digest: a155797aac910548f8d5856f94bb63c7d3737a3a343dfac0a13179481951f330
+      quote: '`IanaZone` | String: a name in the IANA time zone database, such as `America/New_York` or `UTC` | A time zone'
+      locks:
+      - with-open-prs
+  rules:
+  - id: kernel:IanaZone:listed
+    source:
       spec:
-        - ir: field:4.1:seller_id
-          digest: 98c167e650ac7cbe7a3fe910d218292ae19d16156e9a575875776ba335e4e833
-          quote: "`seller_id` | String | immutable | IAB Tech Lab registry reference"
-        - ir: field:5.8:eligible_bidders[]
-          digest: 377ad11d09a2b66329d8d7f32f46f187f2d0ba5d06ac90980630554720456d9a
-          quote: "`eligible_bidders[]` | Array[String] | seller-set | Permitted seat or buyer ids"
-  - name: Text
-    sources:
+      - ir: def:2.2:IanaZone
+        digest: a155797aac910548f8d5856f94bb63c7d3737a3a343dfac0a13179481951f330
+        quote: '`IanaZone` | String: a name in the IANA time zone database, such as `America/New_York` or `UTC` | A time zone'
+        locks:
+        - with-open-prs
+- name: TimeZone
+  locks:
+  - with-open-prs
+  sources:
+    spec:
+    - ir: def:2.2:ZoneName
+      digest: cec6f43072d265cffcfbc633af33a3754a3aca0edd981f46aba57fd9d17018b4
+      quote: '`ZoneName` | An `IanaZone`, or `viewer_local` | `viewer_local` is where the ad renders. On a `dooh` line item that is each screen''s own zone, which its `time_zone` names when present'
+      locks:
+      - with-open-prs
+    - ir: field:5.5:time_zone
+      digest: 958a94cb93aec0fc1e994aa1650a4973a0ecd1d859de960efcc516c8b0179a00
+      quote: '`time_zone` | ZoneName | seller-set | The clock for `daypart` and a calendar `frequency_cap.period`'
+      locks:
+      - with-open-prs
+  rules:
+  - id: kernel:TimeZone:listed
+    source:
       spec:
-        - ir: field:4.2:description
-          digest: d8f9bd51c2ecf2a1311600c2fad1dda1b1b8f74269700a3f3ae6018a8beba30d
-          quote: '`description` | String | seller-set | REQUIRED. Prose, not a name. Where the "why buy" case is made, including which channels a multi-channel proposal spans'
-        - ir: field:4.2:seasonality_notes
-          digest: 33869d96c87875efa58c05a56f748e10c70beaf72e89bec328f29de4c6c3ece6
-          quote: "`seasonality_notes` | String | seller-set | When the proposal performs differently"
-  - name: Url
-    decision: D-006
-    sources:
-      spec:
-        - ir: rule:2.3:99777739
-          digest: 406feb42eaa323b7ecfc76a14cc5018b0571b0ed8a54b9059f49d101885f4e65
-          quote: A seller MAY publish `https://<seller domain>/.well-known/openproposal.json`.
-          locks: [with-open-prs]
-        - ir: key:5.2:apps[].storeurl
-          digest: ff0b57e686b74d4d7954d4f807d16f837493476801ec8813d4b42463df5760d3
-          quote: "`storeurl` | OPTIONAL | Store listing URL. As `app.storeurl`"
-          locks: [with-open-prs]
-  - name: Domain
-    decision: D-002
-    sources:
-      spec:
-        - ir: field:5.2:properties
-          digest: 8167901b1024772db9ede8143ce1d5009d6effcfd66b290f82e427a00940b50c
-          quote: "`properties` | Object | selectable | `available[]` of `{ id, name, domains, supported_formats }`, `included[]`, `pricing`, `max_select`"
-          locks: [main]
-        - ir: field:5.2:properties
-          digest: 4115b24e46ceb6cf1b12d1730a313c02123ae5b3ed6739bb9fefdaadc10ea478
-          quote: "`properties` | Object | selectable | `available[]` of `{ id, name, domains, apps, supported_formats }`, `included[]`, `pricing`, `max_select`. Each property MUST carry `domains`, `apps` or both"
-          locks: [with-open-prs]
-        - ir: key:5.2:apps[].domain
-          digest: 225b562dcf1a6bb5794204f48f457410c578cee81a69e2906f3c994b3a747eb4
-          quote: "`domain` | RECOMMENDED | Developer domain, against which `app-ads.txt` is checked. As `app.domain`"
-          locks: [with-open-prs]
-  - name: FormatId
-    decision: D-019
-    sources:
-      spec:
-        - ir: field:5.4:formats
-          digest: 2a8a55ef5666b057f31306cadf667fc01dff13e5cc5e009f00d3f649de375016
-          quote: "`formats` | Object | selectable | `available[]` of registry format ids namespaced by channel (`display/300x250`, `audio/host-read-30s`), `included[]`, `pricing`, `max_select`"
-  - name: CurrencyCode
-    sources:
-      spec:
-        - ir: field:5.6:pricing[].currency
-          digest: c3fe3033ef8ca1012e67b36b728cc3383f4f4b4642ded0b50c4537216dcafde1
-          quote: "`pricing[].currency` | String | seller-set | ISO-4217"
-        - ir: key:5.6.1:commitment.currency
-          digest: 19e4d985eb2f3a597bafe8f3233448688dcfd827a2e41bc2b8fe1886c5e9ce33
-          quote: "`currency` | REQUIRED when `basis = spend` | ISO-4217"
-  - name: Amount
-    decision: D-036
-    sources:
-      spec:
-        - ir: field:5.6:min_spend
-          digest: 9950b94692a4b0250d54a54d47eca0f63c96a7b9d26607cded57896d46e5c8c4
-          quote: "`min_spend` | Number | seller-set | Minimum spend for this line item"
-        - ir: key:5.6.1:commitment.amount
-          digest: 9e4c291747cc047e67c9ef7b1b6f9776d02bb2e82de16dfe9b8079e42921e804
-          quote: "`amount` | REQUIRED | The figure committed"
-        - ir: field:5.6:pricing[].gross_rate
-          digest: f432867a10e6b5662c58996ee4f1c3ea14cddc65968fb1f879bbc703940b9621
-          quote: "`pricing[].gross_rate` | Number | seller-set | The list rate the buyer pays"
-  - name: PriceAdjustment
-    decision: D-036
-    sources:
-      spec:
-        - ir: key:3.1:pricing
-          digest: 539b0422b84a2eec4d1a6247ff1c0e887e86cb8cb997396fdca33c03477a03ce
-          quote: "`pricing` | OPTIONAL | Delta per option beyond those included, as `{ option_id: { delta_cpm | delta_flat | delta_pct } }`"
-  - name: PercentChange
-    decision: D-010
-    sources:
-      spec:
-        - ir: key:3.1:pricing
-          digest: 539b0422b84a2eec4d1a6247ff1c0e887e86cb8cb997396fdca33c03477a03ce
-          quote: "`pricing` | OPTIONAL | Delta per option beyond those included, as `{ option_id: { delta_cpm | delta_flat | delta_pct } }`"
-  - name: Fraction
-    decision: D-005
-    sources:
-      spec:
-        - ir: field:5.7:committed_metrics[]
-          digest: 2c123e829ef892456b09671dfd52243f1bef0db8b067aa9c5d184dc07411caf5
-          quote: "`committed_metrics[]` | Array[Object] | requestable | `{ metric, value, basis }` tuples — `viewable_rate` for display, `completion_rate` for video/audio/CTV, an audience-modelled metric for DOOH. Seller declares a ceiling; a buyer MAY request above it"
-        - ir: field:5.3:buyer_supplied
-          digest: 18d87a0de58116db76d7152a7f96bc722dc700b91f053406b32e4299e7910504
-          quote: "`buyer_supplied` | Object | supplied | `{ segments_allowed, suppression_allowed, match_rate_expected, segments[], suppression_list }`. `match_rate_expected` is the seller's stated expectation; `segments[]` and `suppression_list` are buyer-populated"
-  - name: Count
-    sources:
-      spec:
-        - ir: field:5.3:addressable_scale
-          digest: 1289f106e9861b03225c1fc7056b164eac34f82d73fc327c7009b0c8b9111e24
-          quote: "`addressable_scale` | Integer | derived | Reachable units in the flight, recomputed against the buyer's selection. Not segment size"
-        - ir: key:3.1:max_select
-          digest: 199cab600b78dcd9dc40358fa8a94ec4d323f2bcf2fd7922a62b008af465d820
-          quote: "`max_select` | OPTIONAL | Cap on how many options the buyer may choose"
-  - name: Measure
-    decision: D-005
-    sources:
-      spec:
-        - ir: field:5.7:committed_metrics[]
-          digest: 2c123e829ef892456b09671dfd52243f1bef0db8b067aa9c5d184dc07411caf5
-          quote: "`committed_metrics[]` | Array[Object] | requestable | `{ metric, value, basis }` tuples — `viewable_rate` for display, `completion_rate` for video/audio/CTV, an audience-modelled metric for DOOH. Seller declares a ceiling; a buyer MAY request above it"
-  - name: Timestamp
-    decision: D-001
-    sources:
-      spec:
-        - ir: field:4.1:valid_from,valid_until
-          digest: 9c5853eb24269fa128f158276e85a0e45be848cce58efe34fa1739a06514e9a0
-          quote: "`valid_from` · `valid_until` | Timestamp | seller-set | ISO-8601 window the offer holds. This is the offer window, not the campaign flight"
-        - ir: key:5.6.2:hold_status.hold_expires_at
-          digest: d298da40613999b40a53bab56e17f7c8af9488207a3755391ce3c368a2556cb8
-          quote: "`hold_expires_at` | Absolute timestamp, set when the hold is granted"
-  - { name: UtcTimestamp, absent: true }
-  # Every OpenProposal point in time is an ISO-8601 string, so no field writes one as milliseconds since the epoch (D-063 adds the type for AdCOM's four that do).
-  - { name: EpochMilliseconds, absent: true }
-  - name: Duration
-    decision: D-001
-    sources:
-      spec:
-        - ir: key:5.6.2:hold_status.hold_duration
-          digest: 926e46e5c6325e98292a30a6655d0991d1979a9e07c1c637c9d256aa82659493
-          quote: "`hold_duration` | ISO-8601 duration the hold runs for"
-  - name: TimeOfDay
-    decision: D-004
-    decision_locks: [main]
-    sources:
-      spec:
-        - ir: field:5.5:daypart
-          digest: 25c80cd35ce4831dfbd372627f2d794511fffe5f029243e586ee1e607be4fdc2
-          quote: "`daypart` | Object | settable | `allowed[]` of time windows"
-          locks: [main]
-        - ir: field:5.5:daypart
-          digest: b34d1818bf80b3e5947f9902057ac882707ef3a893fc370c97efc81487d64080
-          quote: "`daypart` | Object | settable | `allowed[]` of `{ days[], start, end }`: `days[]` from `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`, HH:MM civil time, `end` exclusive, up to `24:00`"
-          locks: [with-open-prs]
-        - ir: sentence:5.5:348ea676
-          digest: b653534aab2fd12f0dad1b1f4422634068e90af810a75414b00aa4d346e379fc
-          quote: A `daypart` window is `{ days[], start, end }`, with `days[]` from Monday to Sunday, `start` and `end` as HH:MM, and `end` exclusive, later than `start`, and allowed to be `24:00`.
-          locks: [with-open-prs]
-  - name: DayName
-    decision: D-004
-    decision_locks: [main]
-    sources:
-      spec:
-        - ir: field:5.5:daypart
-          digest: 25c80cd35ce4831dfbd372627f2d794511fffe5f029243e586ee1e607be4fdc2
-          quote: "`daypart` | Object | settable | `allowed[]` of time windows"
-          locks: [main]
-        - ir: field:5.5:daypart
-          digest: b34d1818bf80b3e5947f9902057ac882707ef3a893fc370c97efc81487d64080
-          quote: "`daypart` | Object | settable | `allowed[]` of `{ days[], start, end }`: `days[]` from `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`, HH:MM civil time, `end` exclusive, up to `24:00`"
-          locks: [with-open-prs]
-  - name: IntegerFlag
-    locks: [with-open-prs]
-    sources:
-      spec:
-        - ir: key:5.2.2:placement.reward#meaning/values:1
-          digest: a1ee2de06115664b61cd55dd1806c6f7bf19446b7c9a49840198ae8c461aeddd
-          quote: "`0` (no) | `1` (yes)"
-          locks: [with-open-prs]
-        - ir: rule:5.2.2:463dfafd
-          digest: eee71b1ff54c633f884713ce121e5b82ef4ecc041de54921c9ab66336402c469
-          quote: Each key takes an integer, except `playmethod[]` and `api[]`, which take arrays of integers, and `refresh`, an object whose `min_interval_s` is a REQUIRED integer.
-          locks: [with-open-prs]
-  - name: TimeZone
-    locks: [with-open-prs]
-    sources:
-      spec:
-        - ir: field:5.5:time_zone
-          digest: c3a3201d895ffca4363f6b17d138858db2a32c7ba2bb5352647cec4a596de13d
-          quote: "`time_zone` | String | seller-set | IANA time zone name, or `viewer_local` (where the ad renders). The clock for `daypart` and `frequency_cap.period`. REQUIRED with either"
-          locks: [with-open-prs]
-        - ir: sentence:5.5:3ec41b49
-          digest: d28f7a045f76828d2402a2595875e5dc09466aac3c71c79f5f20c833b51e312f
-          quote: "`time_zone` names a zone in the IANA time zone database, such as America/New_York or UTC."
-          locks: [with-open-prs]
-    rules:
-      - id: kernel:TimeZone:listed
-        source:
-          spec:
-            - ir: sentence:5.5:3ec41b49
-              digest: d28f7a045f76828d2402a2595875e5dc09466aac3c71c79f5f20c833b51e312f
-              quote: "`time_zone` names a zone in the IANA time zone database, such as America/New_York or UTC."
-              locks: [with-open-prs]
-  - name: NamespacedTerm
-    decision: D-002
-  - name: VendorCode
-    locks: [with-open-prs]
-  - name: CatalogRef
-    decision: D-009
-    sources:
-      spec:
-        - ir: code:2.2:1
-          digest: 5b0b87b43dbc9c1a24ed8f3e2bd71d22c5d790a6f786b980bd554f64a71436a0
-          quote: |-
-            catalog_ref: "<seller_namespace>/<collection>/<entry_id>@<version>"
-            example:     "examplepub/audiences/smb-decision-makers@3"
-        - ir: rule:2.2:3916a8f2
-          digest: 511cade5dc52dec990f091f7293a343392bae81a91404e3a81983b040edf9315
-          quote: References MUST be version-pinned.
-  - name: Digest
-    decision: D-003
-    locks: [with-open-prs]
-    sources:
-      spec:
-        - ir: field:5.8:terms_ref
-          digest: c65b1714f353bd191478e58c22e966ba7aea717efd79a61aa495c477fc4249b1
-          quote: "`terms_ref` | Object | seller-set | OPTIONAL; REQUIRED when `terms_acceptance_required` is `true`. `{ url, sha256, version }`: the legal terms or IO template the buyer accepts at assent. Hash-pinned, so assent (§ 4.1) binds to an exact document"
-          locks: [with-open-prs]
-  # AdCOM's start delays, which OpenProposal's text doesn't write.
-  - { name: MediaOffset, absent: true }
-  # The Deals API's country codes, which OpenProposal's text doesn't write.
-  - { name: CountryCode, absent: true }
-  # The three AdCOM minted for its Geo and its placements: a coordinate in
-  # signed degrees, a clock's offset from UTC in minutes, and a length of
-  # extended play that states "no limit". OpenProposal's text carries no
-  # location and no media timing at all, so none of them is reachable here.
-  - { name: Degrees, absent: true }
-  - { name: MinuteOffset, absent: true }
-  - { name: ExtendedDuration, absent: true }
+      - ir: def:2.2:IanaZone
+        digest: a155797aac910548f8d5856f94bb63c7d3737a3a343dfac0a13179481951f330
+        quote: "`IanaZone` | String: a name in the IANA time zone database, such as `America/New_York` or `UTC` | A time zone"
+- name: ShortCountryCode
+  decision: D-113
+  sources:
+    spec:
+    - &geocode
+      ir: def:5.5:GeoCode
+      digest: 00199fb1320521bce65188b2ddcc281db1bbac486f33976cdc44868bf4e25a79
+      quote: "`GeoCode` | is a String: an ISO 3166-1 alpha-2 country code, an ISO 3166-2 subdivision code,\
+        \ or an extension `VocabularyTerm` for any other area, such as a metro list. The country of an\
+        \ ISO 3166-2 code is the part before the hyphen, and a country covers every subdivision code it\
+        \ prefixes. An extension term covers only itself. § 1.1 states the conversion to OpenRTB 2.6 and\
+        \ the Deals API."
+- name: SubdivisionCode
+  decision: D-113
+  sources:
+    spec:
+    - *geocode
+- name: NamespacedTerm
+  decision: D-067
+  sources:
+    spec:
+    - ir: def:2.2:VocabularyTerm
+      digest: 230b1f4131ea57db381354fb49edff8e0692b28a6969ba4ddf93a1288ce198b9
+      quote: '`VocabularyTerm` | String: a bare core term, or `<domain>:<term>` with `<domain>` a `Domain` the definer controls. A term is ASCII letters, digits, `_`, and `-` | See below'
+- name: VendorCode
+  sources:
+    spec:
+    - &id007
+      ir: key:5.2.2:Placement.api[]
+      digest: c577b85ef9a5c7412b3bbe51de9e35879db3999ec4d7d744f7edb150bb78044b
+      quote: '`api[]` | OPTIONAL | Values from List: API Frameworks that every impression supports, such as MRAID 3.0 (6), OMID 1.0 (7) and SIMID 1.1 (9) | `DisplayPlacement.api`, `VideoPlacement.api`,
+        `AudioPlacement.api`, `banner.api`, `video.api`, `audio.api`'
+  decision: D-067
+- name: CatalogRef
+  sources:
+    spec:
+    - &id001
+      ir: def:2.2:EntryRef
+      digest: f44558203adf4d0fe42abce8cd25edef3fdd370ff34a525e10a270d438c8235a
+      quote: '`EntryRef` | String: `<domain>/<collection>/<entry_id>@<version>`, with no `/` or `@` inside a part | A named entry at one exact version, whose content does not change. `<domain>` is a `Domain`.
+        It carries no digest'
+  decision: D-077
+- name: Digest
+  absent: true
+- name: QualifiedDigest
+  decision: D-080
+  locks:
+  - with-open-prs
+  sources:
+    spec:
+    - ir: def:2.2:Digest
+      digest: 3d8eea53cc986aa9993abb94385caee4c6baba8fdf1ff4c7f9a027f7c2202e58
+      quote: '`Digest` | String of 71 characters: `sha256:` followed by the 64 lowercase hexadecimal characters of the SHA-256 of its input | The value carries the algorithm, and a field name never names
+        it. `sha256` is the only algorithm in this version. Each field that holds a `Digest` states its input'
+      locks:
+      - with-open-prs
+- name: MediaOffset
+  absent: true
+- name: CountryCode
+  absent: true
+- name: Degrees
+  sources:
+    spec:
+    - &id005
+      ir: key:5.2.8:Screen.lat
+      digest: 13949576fa5b4720e607e2c1b9fa780a8b5bc121e3df494d70c294f4cd174e13
+      quote: '`lat` | OPTIONAL | Latitude, as OpenRTB 2.6 `geo.lat`. Absent when `movable` is `true`'
+    - &id006
+      ir: key:5.2.8:Screen.lon
+      digest: ba80067422a87c354c5f2e4c99a426088fc922f3a04aa064dae01b76fa3fb7bc
+      quote: '`lon` | OPTIONAL | Longitude, as OpenRTB 2.6 `geo.lon`. Absent when `movable` is `true`'
+- name: MinuteOffset
+  absent: true
+- name: ExtendedDuration
+  absent: true
+- name: VocabularyTerm
+  sources:
+    spec:
+    - &id008
+      ir: def:2.2:VocabularyTerm
+      digest: 230b1f4131ea57db381354fb49edff8e0692b28a6969ba4ddf93a1288ce198b9
+      quote: '`VocabularyTerm` | String: a bare core term, or `<domain>:<term>` with `<domain>` a `Domain` the definer controls. A term is ASCII letters, digits, `_`, and `-` | See below'
+  decision: D-078
+- name: HttpsUrl
+  sources:
+    spec:
+    - &id002
+      ir: def:2.2:HttpsUrl
+      digest: c96e41b2cdd45c793be7b6e4b549806b234be39bba19fe5fd8ba60dabb141706
+      quote: '`HttpsUrl` | A `Url` whose scheme is `https` | A location fetched over TLS'
+  decision: D-079
 constructors:
-  - name: Selectable
-    sources:
+- name: Selectable
+  sources:
+    spec:
+    - ir: marker:3:selectable
+      digest: 8a003787c373122f307a428826b4ca094f064f90fc1877096d8f8232946e3a51
+      quote: '`selectable` | The buyer chooses from a seller-declared set. Each option MAY carry a price delta. Resolves without a round trip.'
+  parameters:
+  - name: K
+    carries:
+      member: id
+      decision: D-095
+  rules:
+  - id: constructor:Selectable:options-named
+    source:
       spec:
-        - ir: marker:3:selectable
-          digest: 9d4920aaf4e7581b9e328b70600205e70277c7ca1a1f6275a8736c157cd1999d
-          quote: "`selectable` | The buyer chooses from a seller-declared set. Each option MAY carry a price delta. Resolves without seller assent."
-        - ir: rule:3.1:f3c3cab7
-          digest: d228e1dfba5ae266474b8184f4d55612ea607481e33f1a1eeb8da4102ef906ae
-          quote: "Every field marked `selectable` MUST declare:"
-        - ir: key:3.1:available[]
-          digest: e56c463d4043e1f551eae09af84db75ecf3185079f60194536361b619af55af5
-          quote: "`available[]` | REQUIRED | The options the seller offers"
-        - ir: key:3.1:included[]
-          digest: 8ec666d51bf96c60f03793156f832384d83126b7e98f3112259b423bc624b78b
-          quote: "`included[]` | REQUIRED | Which options are in the base rate. MAY be empty"
-        - ir: rule:3.1:ff8838af
-          digest: 36e4b0c48894abc60ddd2f7ebc3e9bda8f6e95efc4b28e17162a36e093a3143a
-          quote: MAY be empty
-        - ir: key:3.1:pricing
-          digest: 539b0422b84a2eec4d1a6247ff1c0e887e86cb8cb997396fdca33c03477a03ce
-          quote: "`pricing` | OPTIONAL | Delta per option beyond those included, as `{ option_id: { delta_cpm | delta_flat | delta_pct } }`"
-        - ir: key:3.1:max_select
-          digest: 199cab600b78dcd9dc40358fa8a94ec4d323f2bcf2fd7922a62b008af465d820
-          quote: "`max_select` | OPTIONAL | Cap on how many options the buyer may choose"
-        - ir: rule:3.1:f8b0c287
-          digest: d60c77636afc33649141f8de560cbf2e0f599b124779ea89b069f9b08a9181cd
-          quote: A field marked `selectable` that carries a bare value and no `available[]` MUST be treated as `seller-set`.
-    fallback:
-      statement: rule:3.1:f8b0c287
-      decision: D-008
-    parameters:
-      - name: K
-        carries:
-          member: id
-          decision: D-046
-          departure: D-047
-    rules:
-      - id: constructor:Selectable:options-named
-        source:
-          decision: D-007
-      - id: constructor:Selectable:priced-beyond-included
-        source:
-          spec:
-            - ir: key:3.1:pricing
-              digest: 539b0422b84a2eec4d1a6247ff1c0e887e86cb8cb997396fdca33c03477a03ce
-              quote: "`pricing` | OPTIONAL | Delta per option beyond those included, as `{ option_id: { delta_cpm | delta_flat | delta_pct } }`"
-            - ir: key:3.1:included[]
-              digest: 8ec666d51bf96c60f03793156f832384d83126b7e98f3112259b423bc624b78b
-              quote: "`included[]` | REQUIRED | Which options are in the base rate. MAY be empty"
-  - name: Settable
-    sources:
+      - ir: rule:3.1:bfffacdf
+        digest: 705cdabdb624bd15e1d51d39445a32e68b2d7c9c3364e2beedeca3da9ca4e77f
+        quote: An object option's id is its REQUIRED `id`, unique in the field.
+        locks:
+        - with-open-prs
+      decision: D-095
+  - id: constructor:Selectable:priced-beyond-included
+    source:
       spec:
-        - ir: marker:3:settable
-          digest: 66671c35883697ab396f64f940b5566cca0b389bef1aa9fcaed09f2b8c20d961
-          quote: "`settable` | The buyer supplies a value within seller-declared bounds. Resolves without seller assent."
-        - ir: rule:3.2:ee009430
-          digest: b70f59e2c68b16af32a8ad7ee513de31c1f1bd7a3c1540f17ba556688780a7cf
-          quote: "Every field marked `settable` MUST declare its bounds: either `allowed[]` (an enumerated set) or `min` / `max` (a numeric or date range)."
-        - ir: rule:3.2:4f3b0a9c
-          digest: 07c583d4952414b695fe884dd3b8b2257e046904bec68931d240feef4ad28988
-          quote: A field marked `settable` that carries a bare value and no bounds MUST be treated as `seller-set`.
-    fallback:
-      statement: rule:3.2:4f3b0a9c
-      decision: D-008
-  - name: Range
-    sources:
+      - ir: key:3.1:Selectable.deltas
+        digest: 4700416237f4a50c06b55fc36d2f452b0e233bbc1df246421eb972e901716d8b
+        quote: '`deltas` | OPTIONAL | The price of an option outside `included[]`, keyed by option id. An option with no entry has no delta'
+      - ir: "key:3.1:Selectable.included[]"
+        digest: 659488665861929f507b596c583a50b4c0791fbad4a7507e4ba39c31d939e769
+        quote: '`included[]` | REQUIRED | The options in the base rate, by option id'
+- name: Settable
+  sources:
+    spec:
+    - ir: marker:3:settable
+      digest: aadea752f5c312037a97353c1e8c88c591c5b2db26ec4ae59963b9490f47507b
+      quote: '`settable` | The buyer supplies a value within seller-declared bounds. Resolves without a round trip.'
+- name: Narrowing
+  sources:
+    spec:
+    - ir: def:3.2:Narrowing
+      digest: 1086155ed777d8e06ae6457421070afb999d168277e4805f32c5ed71f1572d3f
+      quote: '`Narrowing` | keys. Exclusion wins.'
+      locks:
+      - with-open-prs
+    - ir: "key:3.2:Narrowing.include[]"
+      digest: bd426b77c0a4b508cd2dce247b84c7f79964c97482716ac06927372d5cedc327
+      quote: '`include[]` | REQUIRED | Each entry MUST be covered by an `allowed[]` entry'
+      locks:
+      - with-open-prs
+    - ir: "key:3.2:Narrowing.exclude[]"
+      digest: e92c11d0f82da1d2b48ba4da84d21be5d1ff567027eb2c2cc432c3cce03c5596
+      quote: '`exclude[]` | OPTIONAL | Each entry MUST be covered by an `include[]` entry'
+      locks:
+      - with-open-prs
+  rules:
+  - id: constructor:Narrowing:exclusion-wins
+    source:
       spec:
-        - ir: field:5.5:frequency_cap#description/object:1
-          digest: adbcfc3ac2b7bc7c0bda1069751986267cf304dbafb4ee388d9c2f62b43ba305
-          quote: "{ max: { min, max }, period, basis: device | household | listener }"
-        - ir: rule:3.2:ee009430
-          digest: b70f59e2c68b16af32a8ad7ee513de31c1f1bd7a3c1540f17ba556688780a7cf
-          quote: "Every field marked `settable` MUST declare its bounds: either `allowed[]` (an enumerated set) or `min` / `max` (a numeric or date range)."
-    rules:
-      - id: constructor:Range:ordered
-        source:
-          spec:
-            - ir: field:5.5:frequency_cap#description/object:1
-              digest: adbcfc3ac2b7bc7c0bda1069751986267cf304dbafb4ee388d9c2f62b43ba305
-              quote: "{ max: { min, max }, period, basis: device | household | listener }"
-          decision: D-011
-  - name: CatalogRefOr
-    sources:
+      - ir: def:3.2:Narrowing
+        digest: 1086155ed777d8e06ae6457421070afb999d168277e4805f32c5ed71f1572d3f
+        quote: '`Narrowing` | keys. Exclusion wins.'
+        locks:
+        - with-open-prs
+      decision: D-090
+- name: SettableRange
+  sources:
+    spec:
+    - ir: def:3.2:SettableRange
+      digest: e5891e9f7ef2ef88027a58ad024a2f22a2da4c930be00c28692311daa036dc52
+      quote: '`SettableRange` | holds the keys of `Range[T]` (§ 2.2) and these. It is the range form.'
+      locks:
+      - with-open-prs
+    - ir: key:3.2:SettableRange.default
+      digest: d97d76912df4bb5ee849fc1802f93de600b0a3abae90401672b3282d10fd998e
+      quote: '`default` | REQUIRED | In effect when `value` is absent, between the bounds'
+      locks:
+      - with-open-prs
+    - ir: key:3.2:SettableRange.value
+      digest: d9a93239a54374af6e956d40481ad28395f1c29c1cd2c4efe42eb6b85e2f53cb
+      quote: '`value` | OPTIONAL | The buyer''s value, between the bounds inclusive'
+      locks:
+      - with-open-prs
+  rules:
+  - id: constructor:SettableRange:within-the-bounds
+    source:
       spec:
-        - ir: rule:2.2:c610e803
-          digest: d92a309b641f5804a63417966289d0dd289ae5243884b49fab292652386ab7b0
-          quote: "Any field whose value is drawn from a seller-maintained catalog MAY carry a reference in place of an inline value:"
-        - ir: code:2.2:1
-          digest: 5b0b87b43dbc9c1a24ed8f3e2bd71d22c5d790a6f786b980bd554f64a71436a0
-          quote: |-
-            catalog_ref: "<seller_namespace>/<collection>/<entry_id>@<version>"
-            example:     "examplepub/audiences/smb-decision-makers@3"
-        - ir: rule:2.2:696ee27b
-          digest: 9b517ad2b69750533a5be0079e02aaf389a5e013eceb9c55d4f37b9bb2c67388
-          quote: A field MUST carry either an inline value or a `catalog_ref`, never both.
-  - name: List
-    sources:
+      - ir: key:3.2:SettableRange.value
+        digest: d9a93239a54374af6e956d40481ad28395f1c29c1cd2c4efe42eb6b85e2f53cb
+        quote: '`value` | OPTIONAL | The buyer''s value, between the bounds inclusive'
+        locks:
+        - with-open-prs
+      decision: D-091
+- name: Range
+  rules:
+  - id: constructor:Range:ordered
+    source:
       spec:
-        - ir: field:5.6:pricing[]
-          digest: 362371b22d681a7cf62432d36c01b9a96ee682c497028234b637b2a3f0df8b0b
-          quote: "`pricing[]` | Array[Object] | mixed | See below"
-        - ir: key:3.1:available[]
-          digest: e56c463d4043e1f551eae09af84db75ecf3185079f60194536361b619af55af5
-          quote: "`available[]` | REQUIRED | The options the seller offers"
-  - name: Map
-    sources:
-      spec:
-        - ir: key:3.1:pricing#meaning/object:1
-          digest: 1d2ea6996d7c3bbf4808776d7399e4719b79687764674d92f08a885763ad61fe
-          quote: "{ option_id: { delta_cpm | delta_flat | delta_pct } }"
+      - ir: def:2.2:Range
+        digest: a5f2fef3bebd5d423fa2851e2932f39cd399076f17968466789fa94ff4895d96
+        quote: '`Range` | bounds a value of type `T`, written `Range[T]`. At least one bound is present, and `min` is no greater than `max`.'
+        locks:
+        - with-open-prs
+      decision: D-095
+  sources:
+    spec:
+    - ir: key:2.2:Range.min
+      digest: 53f742f85601f1a10180c8f8eacaccd23af9e90035e2a652a90a102a59f51b34
+      quote: '`min` | OPTIONAL | The lower bound'
+- name: TaxonomyCodes
+  sources:
+    spec:
+    - ir: def:2.2:TaxonomyCodes
+      digest: 2ee8d6885b0983b6f0dc485033f2421fd544ee31e06f4680eb4ecec8a308db30
+      quote: '`TaxonomyCodes` | holds codes in one taxonomy. Each field that holds it names the list `taxonomy` comes from and whether an id covers its descendants.'
+    - ir: key:2.2:TaxonomyCodes.taxonomy
+      digest: 08b4c3a14093b12b45241e0006344bdb90dfa33f9555fe9d9f7fdcef7c070349
+      quote: '`taxonomy` | REQUIRED | A value from the list the field names'
+    - ir: "key:2.2:TaxonomyCodes.ids[]"
+      digest: 21bca4d5b1171d6fe0be84cc1f4fe0494d237447567fad1f68e7aa8bf0a9310d
+      quote: '`ids[]` | REQUIRED | Ids in that taxonomy'
+- name: CatalogRefOr
+  absent: true
+- name: List
+  sources:
+    spec:
+    - ir: field:5.6:pricing[]
+      digest: 4ae834bf37c20f63fdcf3f858823998c4992a74475a387248ed9ca18c82a945b
+      quote: '`pricing[]` | Array[PricingEntry] | mixed | See below'
+- name: Map
+  sources:
+    spec:
+    - ir: def:2.2:Ext
+      digest: dd56e75c1da896153df232a9ce59a6208c8d41fb3c7022fe5383b6c4122ab886
+      quote: '`Ext` | `Map[Domain, Object]` | The extension container. § 2.5 states its rules'
 parts:
-  - name: PriceDelta
-    sources:
+- name: PriceDelta
+  decisions:
+  - decision: D-068
+  sources:
+    spec: &id003
+    - ir: def:3.1:Delta
+      digest: dc2a753d308437731f469e171a0d7d0c41a0d9d632a7a81346f413920fcb2c2b
+      quote: '`Delta` | keys. At least one key is present. § 5.6 states how they enter `agreed_rate`.'
+    - ir: key:3.1:Delta.delta_cpm
+      digest: 60e3140cbf8caa8ce10c19f0a23b13a7f0d40dc4fc36b058d8981464e4d6a48c
+      quote: '`delta_cpm` | OPTIONAL | Added to the rate of a `CPM` or `CPMV` entry (§ 5.6.5), and to no other'
+    - ir: key:3.1:Delta.delta_flat
+      digest: 23ec4c9beccbcf91882b3a3777a542f6b92c6408c9f37fc9a6e3dc18d04dce51
+      quote: '`delta_flat` | OPTIONAL | A charge on any entry, outside the rate'
+    - ir: key:3.1:Delta.delta_fraction
+      digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+      quote: '`delta_fraction` | OPTIONAL | Multiplies the rate of any entry by 1 plus this value. `0.20` is 20 percent more'
+- name: CatalogReference
+  absent: true
+- name: DaypartWindow
+  decisions:
+  - decision: D-096
+  sources:
+    spec:
+    - ir: def:5.5:ClockWindow
+      digest: bfa31e5d0cb79e574db850c0b46711c30c904bb7d6d235473a4ab945e650a121
+      quote: '`ClockWindow` | is a repeating window of civil time, deliberately not an `Interval`. A window that crosses midnight is two windows.'
+      locks:
+      - with-open-prs
+    - ir: "key:5.5:ClockWindow.days[]"
+      digest: 75d34865bfd1e0a581d00620d7eb3ef980d021a345ef1c6da96c1a114b1c64c1
+      quote: '`days[]` | REQUIRED | The days the window repeats on'
+      locks:
+      - with-open-prs
+    - ir: key:5.5:ClockWindow.start
+      digest: 7fec487433d27928cea2eca9db2671bf7d7b346e02056282524924d04206a45d
+      quote: '`start` | REQUIRED | The first minute. Not `24:00`'
+      locks:
+      - with-open-prs
+    - ir: key:5.5:ClockWindow.before
+      digest: d70b10f2d89e83df52a13d2440603029487cf760dfc0ccc049b34bf2707019d9
+      quote: '`before` | REQUIRED | The first minute after the window, later than `start`'
+      locks:
+      - with-open-prs
+  rules:
+  - id: kernel:DaypartWindow:ordered
+    source:
       spec:
-        - ir: key:3.1:pricing#meaning/object:1
-          digest: 1d2ea6996d7c3bbf4808776d7399e4719b79687764674d92f08a885763ad61fe
-          quote: "{ option_id: { delta_cpm | delta_flat | delta_pct } }"
-  - name: CatalogReference
-    sources:
-      spec:
-        - ir: code:2.2:1
-          digest: 5b0b87b43dbc9c1a24ed8f3e2bd71d22c5d790a6f786b980bd554f64a71436a0
-          quote: |-
-            catalog_ref: "<seller_namespace>/<collection>/<entry_id>@<version>"
-            example:     "examplepub/audiences/smb-decision-makers@3"
-        - ir: rule:2.2:696ee27b
-          digest: 9b517ad2b69750533a5be0079e02aaf389a5e013eceb9c55d4f37b9bb2c67388
-          quote: A field MUST carry either an inline value or a `catalog_ref`, never both.
-  - name: DaypartWindow
-    decisions:
-      - { decision: D-004, locks: [main] }
-      - { decision: D-038, locks: [main] }
-      - { decision: D-045 }
-    sources:
-      spec:
-        - ir: field:5.5:daypart
-          digest: 25c80cd35ce4831dfbd372627f2d794511fffe5f029243e586ee1e607be4fdc2
-          quote: "`daypart` | Object | settable | `allowed[]` of time windows"
-          locks: [main]
-        - ir: field:5.5:daypart
-          digest: b34d1818bf80b3e5947f9902057ac882707ef3a893fc370c97efc81487d64080
-          quote: "`daypart` | Object | settable | `allowed[]` of `{ days[], start, end }`: `days[]` from `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`, HH:MM civil time, `end` exclusive, up to `24:00`"
-          locks: [with-open-prs]
-        - ir: sentence:5.5:348ea676
-          digest: b653534aab2fd12f0dad1b1f4422634068e90af810a75414b00aa4d346e379fc
-          quote: A `daypart` window is `{ days[], start, end }`, with `days[]` from Monday to Sunday, `start` and `end` as HH:MM, and `end` exclusive, later than `start`, and allowed to be `24:00`.
-          locks: [with-open-prs]
-    rules:
-      - id: kernel:DaypartWindow:ordered
-        source:
-          spec:
-            - ir: sentence:5.5:348ea676
-              digest: b653534aab2fd12f0dad1b1f4422634068e90af810a75414b00aa4d346e379fc
-              quote: A `daypart` window is `{ days[], start, end }`, with `days[]` from Monday to Sunday, `start` and `end` as HH:MM, and `end` exclusive, later than `start`, and allowed to be `24:00`.
-              locks: [with-open-prs]
-          decision: D-004
-          decision_locks: [main]
-  - { name: Ext, absent: true }
+      - ir: key:5.5:ClockWindow.before
+        digest: d70b10f2d89e83df52a13d2440603029487cf760dfc0ccc049b34bf2707019d9
+        quote: '`before` | REQUIRED | The first minute after the window, later than `start`'
+        locks:
+        - with-open-prs
+      decision: D-096
+- name: Ext
+  sources:
+    spec:
+    - ir: def:2.2:Ext
+      digest: dd56e75c1da896153df232a9ce59a6208c8d41fb3c7022fe5383b6c4122ab886
+      quote: '`Ext` | `Map[Domain, Object]` | The extension container. § 2.5 states its rules'
 domains:
-  - name: identity
-    concepts:
-      - name: minted-id
-        sources:
-          spec:
-            - ir: field:4.1:proposal_id
-              digest: fb8604e60eabfa2db105b17ca562af8ba2f20784907dcce349772ce83054088d
-              quote: "`proposal_id` | String | immutable | Unique identity for the proposal object"
-            - ir: field:5.1:line_item_id
-              digest: 60cd2aeea40121597f5e2b0725417665bc560c9b677000d3dfbc432d1c88c969
-              quote: "`line_item_id` | String | immutable | Identity within the proposal"
-            - ir: field:5.10:correlation_id
-              digest: e015a269b356797dbfe7737b7178f592b5fe280e8a95db0d446724b685cc80d9
-              quote: "`correlation_id` | String | derived | One identity for this line item's commitment, carried across every system it touches"
-            - ir: key:5.6.1:commitment.idempotency_key
-              digest: 47264d377373977897dc60c399d4e61a15e862743a2ff4e2fab92830ca3f3550
-              quote: "`idempotency_key` | REQUIRED | Buyer-generated, unique per commitment attempt"
-            - ir: key:5.6.1:commitment.proposal_id
-              digest: 5786eb882e01494be61d482b94b44011a8669f93a79419c1e74db23908e04453
-              quote: "`proposal_id` | REQUIRED | The proposal the commitment is made against"
-              locks:
-                - with-open-prs
-            - ir: key:5.6.3:requires.all_of[]
-              digest: ba606c815b2f294442e06b436f9b146cdad79fc400cfe5586a1906370ee74c7c
-              quote: "`all_of[]` | Line items that MUST all be in the same commitment"
-              locks:
-                - with-open-prs
-            - ir: key:5.6.3:requires.any_of[]
-              digest: a9c3ff73e8f7dbce358a1c75350766332e8f8db4cfca291bf7775f7f0ba38929
-              quote: "`any_of[]` | Line items of which at least one MUST be in the same commitment"
-              locks:
-                - with-open-prs
-      - name: external-id
-        sources:
-          spec:
-            - ir: field:4.1:proposal_template_id
-              digest: 5f43a39db8284176822173553f81108c25fea3e72083caeffb881d5050e8a39c
-              quote: "`proposal_template_id` | String | immutable | OPTIONAL. Links an issued proposal to the seller's template. Opaque to buyers; used for the seller's reporting"
-              locks:
-                - with-open-prs
-            - ir: field:4.1:brief_ref
-              digest: 482c83600e1a104be57aaa70c91f4df5bec6b6bdc7621b8c8cdb9283d768eeaa
-              quote: "`brief_ref` | String | supplied | Reference to the buyer's brief. REQUIRED when `type` is `custom`"
-            - ir: field:4.1:seller_id
-              digest: 98c167e650ac7cbe7a3fe910d218292ae19d16156e9a575875776ba335e4e833
-              quote: "`seller_id` | String | immutable | IAB Tech Lab registry reference"
-            - ir: field:5.8:eligible_bidders[]
-              digest: 377ad11d09a2b66329d8d7f32f46f187f2d0ba5d06ac90980630554720456d9a
-              quote: "`eligible_bidders[]` | Array[String] | seller-set | Permitted seat or buyer ids"
-            - ir: field:5.10:supported_order_systems[]
-              digest: 7aaf91ef69703a0a34d2843995fd0a71869f5ee333feecb94a1a897741380d07
-              quote: "`supported_order_systems[]` | Array[String] | seller-set | Declared up front so the agent knows it will reconcile"
-            - ir: key:5.2:apps[].bundle
-              digest: 59f9924d3d8ee09a637650c5ab939c28dcf07905af01337dac1bfa74a038d6d0
-              quote: "`bundle` | REQUIRED | Store ID. As OpenRTB 2.6 `app.bundle`"
-              locks:
-                - with-open-prs
-            - ir: field:5.5:device
-              digest: 265e83a84f1efb967c4a62daab8adb8b69139f794b7cc080b03c5c28cf4828d4
-              quote: "`device` | Object | settable | `allowed[]` of device categories"
-            - ir: sentence:5.5:8d595b9a
-              digest: 0dae3f9597019a6d868e3a14e0548e9b34e8e22a6080e5ceec67b758f279d029
-              quote: "`iab_content_category[]` entries are IAB Content Taxonomy ids."
-              locks:
-                - with-open-prs
-      - name: format-id
-        sources:
-          spec:
-            - ir: field:5.4:formats
-              digest: 2a8a55ef5666b057f31306cadf667fc01dff13e5cc5e009f00d3f649de375016
-              quote: "`formats` | Object | selectable | `available[]` of registry format ids namespaced by channel (`display/300x250`, `audio/host-read-30s`), `included[]`, `pricing`, `max_select`"
-  - name: reference
-    concepts:
-      - name: catalog-ref
-        sources:
-          spec:
-            - ir: code:2.2:1
-              digest: 5b0b87b43dbc9c1a24ed8f3e2bd71d22c5d790a6f786b980bd554f64a71436a0
-              quote: |-
-                catalog_ref: "<seller_namespace>/<collection>/<entry_id>@<version>"
-                example:     "examplepub/audiences/smb-decision-makers@3"
-            - ir: rule:2.2:3916a8f2
-              digest: 511cade5dc52dec990f091f7293a343392bae81a91404e3a81983b040edf9315
-              quote: References MUST be version-pinned.
-      - name: digest
-        sources:
-          spec:
-            - ir: field:5.8:terms_ref
-              digest: c65b1714f353bd191478e58c22e966ba7aea717efd79a61aa495c477fc4249b1
-              quote: "`terms_ref` | Object | seller-set | OPTIONAL; REQUIRED when `terms_acceptance_required` is `true`. `{ url, sha256, version }`: the legal terms or IO template the buyer accepts at assent. Hash-pinned, so assent (§ 4.1) binds to an exact document"
-              locks:
-                - with-open-prs
+- name: identity
+  concepts:
+  - name: minted-id
+    sources:
+      spec:
+      - ir: field:4.1:proposal_id
+        digest: 505aadeb488fdbaba09c40fc494d450478648a7d6b81f20440e67d378fd6f4b6
+        quote: '`proposal_id` | String | immutable | Identifies the proposal. Unique within `seller.domain`'
+      - ir: field:5.1:line_item_id
+        digest: 54da51504430aebaa335ae5a20fefa939f005cca07dcafe4cdd3bb747baf021d
+        quote: '`line_item_id` | String | immutable | Identity within the proposal'
+      - ir: key:2.1:PackageSummary.package_id
+        digest: 058b1cd4911479235cae91532329437a7c0d71171c11d2ef4a2a4051d4796680
+        quote: '`package_id` | REQUIRED | The package''s `package_id` (§ 4.1.4)'
+      - ir: key:2.2:VersionRef.proposal_id
+        digest: 2c604ed9eb08d9c9d3b54050195ec352e95173d1d6fe7e36c4be507b3e86651a
+        quote: '`proposal_id` | REQUIRED | The proposal'
+      - ir: key:2.2:VersionRef.line_item_id
+        digest: 8828a6d382ee339a95341e0ebed2a9a78c7a7ef1c5b0204bb770fe15dd20395c
+        quote: '`line_item_id` | OPTIONAL | A line item in that version'
+      - ir: key:3.3:AvailabilityRead.pricing_id
+        digest: 825c08e7352e1922586f6582bc57945701072b2bca5579470075b658aa715e56
+        quote: '`pricing_id` | OPTIONAL | The entry the buyer means to commit under, as `commitment.pricing_id`, so that the figure can count that entry''s `unit` (§ 5.6.5)'
+      - ir: key:4.1:HistoryPath.line_item_id
+        digest: 1f3fb157323c96fd5762aa060d9d4c19fdd02f4734214748e159c33877993814
+        quote: '`line_item_id` | REQUIRED when `requested_value` is present | The line item. When absent, `pointer` is into the proposal'
+      - ir: key:4.1.2:AssentEntry.line_item_ids[]
+        digest: 360354ae190cae29dd48ed3a481ad12091ce23a6869444bb816e93b97f692745
+        quote: '`line_item_ids[]` | REQUIRED | The line items the entry names. MUST be non-empty'
+      - ir: key:4.1.4:Package.package_id
+        digest: 3e8e6bae92063c2d440f585a826688f8035db163952cd56202bb796f328121a2
+        quote: '`package_id` | REQUIRED | Identity within the proposal'
+      - ir: key:4.1.4:MinCommitment.line_item_id
+        digest: 1068aa4245b47cd7c7d84bb06616e542364cb717f40888be5c091defaeb990cb
+        quote: '`line_item_id` | REQUIRED | A line item in the package''s `line_items[]`'
+      - ir: key:5.2.8:Screen.screen_id
+        digest: 213b19f61f8ffdcd47bb69236f7e5ee7eba0ae414718c7ea7c0df09b6518ffdd
+        quote: '`screen_id` | REQUIRED | The seller''s id for the screen, as its proof-of-play log carries it. When the bid request''s `device.ifa_type` is `ppid`, as the OpenRTB 2.6 implementation guide
+          (§ 7.9.2.5) uses it, `device.ifa` carries the same id'
+      - ir: key:5.2.8:SyncGroup.sync_group_id
+        digest: fc91fbc712fc9021d871c5eac45f7a0f627e31bf0799dae74446814523ccf1c5
+        quote: '`sync_group_id` | REQUIRED | The group''s id'
+      - ir: key:5.2.8:SyncGroup.screen_ids[]
+        digest: 4be3d781489961f86a32e32ec057394c0e5d39beae3588af8fbc2869c021fdb7
+        quote: '`screen_ids[]` | REQUIRED | The `screen_id` of each screen in the group'
+      - ir: key:5.3:BuyerList.list_id
+        digest: aec6162a5dd57d18a7afcc2631816acb9678ae845abd338acda0f7bed90afdcf
+        quote: '`list_id` | REQUIRED | Identity of the list within the line item. The buyer uses it wherever the list''s members travel'
+      - ir: key:5.4:Asset.asset_id
+        digest: 72b6febcdf7a17d7f0a15a9115d1696506f15cdf872aec8a02c72b1c496b1fc7
+        quote: '`asset_id` | REQUIRED | Identity of the asset within the line item'
+      - ir: key:5.6.1:Commitment.pricing_id
+        digest: 90f18952cbecfa5425a0aeb5d2fceb2e7178cb881c2530b604c42f971f43404f
+        quote: '`pricing_id` | REQUIRED when `pricing[]` has more than one entry | The entry the buyer commits under'
+      - ir: key:5.6.1:Commit.writes
+        digest: a59b7085bf6ef94f63770d8f3b69f439ccfb19f534e1d89517e65826050c5b98
+        quote: '`writes` | REQUIRED | The buyer''s writes (§ 3.4), keyed by each `line_item_id` that `entry.line_item_ids[]` names'
+      - ir: key:5.6.1:CommitResult.availability
+        digest: 4a080484e0290001c168dbd5c5391fcac0ec96f6f467f4584e8113f84a6af257
+        quote: '`availability` | REQUIRED when `entries[]` holds a `decline` for lack of availability | The figures that `decline` states, keyed by `line_item_id`. They are not part of the entry'
+      - ir: key:5.6.6:CancellationNotice.option_id
+        digest: 34b2ef7dd456940d1c836475d81bebf93fead6492a5950a25317f3a456a26a2d
+        quote: '`option_id` | REQUIRED | The `id` of the option in effect that the notice exercises'
+      - ir: key:5.10:Agreement.agreement_id
+        digest: b6c51fb3a41a3f7c9aedc46e1762b68fbdf3e97654a2347a8f2b392bcdabd4c9
+        quote: '`agreement_id` | REQUIRED | The agreement''s id'
+      - ir: key:4.4:ChangeRequest.id
+        digest: 9301c189b36eaf245b459d63597e92a4b77f447e62259f79c05447ec408e1582
+        quote: '`id` | REQUIRED | Opaque identifier of the change request'
+      - ir: key:5.2.3:BreakPositionOption.id
+        digest: f6c45e6c0994be0cf7bc9d207bd2514f0627136674ad6c29a1b8196cc8c38b59
+        quote: '`id` | REQUIRED | Option id (§ 3.1) | none'
+      - ir: key:5.2.4:PropertyOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.2.9:ProgramOption.id
+        digest: 1f08a6de6b8b0435920a5dc5f377a8bdac439e4521883f8efded38e2e7fcc839
+        quote: '`id` | REQUIRED | Option id (§ 3.1). It is not compared with delivered content'
+      - ir: key:5.3:AudienceOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.4:ProductionOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.6.6:CancellationOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.6.7:ExclusivityOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.7.1:MeasurementOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.7.1:ControllingMeasurementOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.7.1:ReportingOption.id
+        digest: 800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a
+        quote: '`id` | REQUIRED | Option id (§ 3.1)'
+      - ir: key:5.3:AudienceSelectable.excluded[]
+        digest: f227f89396c61a37d741c715b7d46708d23cd545455550c409299ef69224cbfb
+        quote: '`excluded[]` | OPTIONAL | The buyer''s write: option ids of options whose `excludable` is `true`, disjoint from the seller audiences in effect. `max_select` does not count them'
+  - name: external-id
+    sources:
+      spec:
+      - ir: field:4.1:proposal_template_id
+        digest: 3be054395ec9b9361e085c13831652204ded2153b3631ff710d4324eef1cd38f
+        quote: '`proposal_template_id` | String | immutable | Links a proposal to the seller''s template. Opaque to buyers; used for the seller''s reporting'
+        locks:
+        - with-open-prs
+      - ir: field:5.5:device
+        digest: fe1f4bd919cf85dd10844e816eb7915d4aac754524377e73eff9543bed5123a2
+        quote: '`device` | Settable[Integer] | settable | `allowed[]` of AdCOM 1.0 List: Device Types codes, the values of OpenRTB 2.6 `device.devicetype`. It narrows `environments` (§ 5.2.1). Mobile/Tablet - General (1) covers Phone (4) and Tablet (5)'
+      - ir: key:2.2:Party.registry_id
+        digest: d0622481dfb5f9c25674de9bc63384069e4b23fd6cf25732c7ca675956648e33
+        quote: '`registry_id` | OPTIONAL | An IAB Tech Lab Agent Registry reference for the entity controlling `domain`'
+      - ir: key:2.2:SeatRef.ids[]
+        digest: 97e772988addf758f659b2f63aa0ce4f884d4381d27cb00c50b3f12c75fcb202
+        quote: '`ids[]` | OPTIONAL | The ids the DSP issues, the same values OpenRTB 2.6 carries in `Deal.wseat`'
+      - ir: key:5.10:ExternalReference.id
+        digest: 829ae4641922373ba42a86d3ffa5aef491a64e7d05f1810bbc42c4570f92972b
+        quote: '`id` | REQUIRED | The id'
+      - ir: key:4.4:ChangeRequest.accountid
+        digest: fbdc1a836ad8a313623cae6e6ad5647f7a243fe4c5d6e409c65d6301b9df3915
+        quote: '`accountid` | OPTIONAL | The account of the advertiser and buyer that own the change, the same as the OpenDirect Order''s. An OpenDirect 2.1 ChangeRequest requires it'
+      - ir: key:4.4:ChangeRequest.orderid
+        digest: e2d547e91227664e9b2ca3b86ce36a433cde2f469db6d798621d1ee2d7ae84dd
+        quote: '`orderid` | REQUIRED when the line item has an `order` reference (§ 5.10) | The order the change is requested for: the id in the `order` entry'
+      - ir: key:4.4:ChangeRequest.lineid
+        digest: 6d4ef20151122c543da5c6e6ed60d2d595ff3940761e6862d5339260880ee465
+        quote: '`lineid` | OPTIONAL | The Line in that Order, for a change at line level'
+      - ir: key:4.4:ChangeRequest.requesterid
+        digest: a8a10060c8ab069adfb2a3335840d6cad47b9257ac92e827025e1b8d885b0d51
+        quote: '`requesterid` | OPTIONAL | The organization that requests the change: usually the agency, or the publisher. An OpenDirect 2.1 ChangeRequest requires it'
+      - ir: key:5.2.5:AppId.bundle
+        digest: fb0d71d462a630e2d8c9120710cc3f728328df240aace2449c0ddafd0a6dc6f2
+        quote: '`bundle` | REQUIRED | Store ID. As OpenRTB 2.6 `app.bundle`'
+      - ir: key:5.2.6:SellerAccount.sid
+        digest: b335ef6296e2bbb2ee52560b62cfee4749b4de01e872f80c0a1393df902b60ac
+        quote: '`sid` | REQUIRED | As ads.txt field 2, Publisher''s Account ID'
+  - name: format-id
+    sources:
+      spec:
+      - ir: field:5.4:formats
+        digest: 97f074e7283ce7c3cb2509b194a0989880e66ba5e32607c5c5e153d5a8e271b8
+        quote: '`formats` | Selectable[FormatId] | selectable | Format ids, such as `display/300x250` and `audio/host-read-30s`. Absent: this line item states no format'
+  - name: integer-id
+    absent: true
+- name: reference
+  concepts:
+  - name: catalog-ref
+    sources:
+      spec:
+      - *id001
+  - name: field-pointer
+    sources:
+      spec:
+      - ir: key:2.4:ErrorObject.pointer
+        digest: deeb4f4b44dbfec8db701e927b4ac9770cdecf2577992a578c53d6ab7ff0b4be
+        quote: '`pointer` | OPTIONAL | Into the object this specification defines that the request carries, to the value that caused the error'
+        locks:
+        - with-open-prs
+      - ir: key:4.1:HistoryPath.pointer
+        digest: abd363f19dbe5d883fcc02f8441d2c815971f2638bfe37d0b583057b5340809f
+        quote: '`pointer` | REQUIRED | Into that line item or the proposal'
+        locks:
+        - with-open-prs
+  - name: digest
+    absent: true
+  - name: qualified-digest
+    sources:
+      spec:
+      - ir: key:2.2:DocumentRef.digest
+        digest: 46a5bd414000136114ff38f74368009f644e074d5b755abf46d07191664d8266
+        quote: '`digest` | REQUIRED | Over the exact bytes served, with no content coding'
+- name: text
+  concepts:
   - name: text
-    concepts:
-      - name: text
-        sources:
-          spec:
-            - ir: field:4.2:description
-              digest: d8f9bd51c2ecf2a1311600c2fad1dda1b1b8f74269700a3f3ae6018a8beba30d
-              quote: '`description` | String | seller-set | REQUIRED. Prose, not a name. Where the "why buy" case is made, including which channels a multi-channel proposal spans'
-            - ir: field:4.2:seasonality_notes
-              digest: 33869d96c87875efa58c05a56f748e10c70beaf72e89bec328f29de4c6c3ece6
-              quote: "`seasonality_notes` | String | seller-set | When the proposal performs differently"
-            - ir: field:4.1:seller_name
-              digest: 270af1c40363b766b5013891995f439c36dbfe87392a61eec853cc14203bb712
-              quote: "`seller_name` | String | immutable | Canonical legal seller entity name, from the registry"
-            - ir: field:4.2:best_for[]
-              digest: 4a9b533b2efb864c58a34a23e06d7788501a0c07cba58bfa9ead7c89e9dcb4c2
-              quote: "`best_for[]` | Array[String] | seller-set | Advisory planning hints. Non-normative, and never the basis for a match"
-            - ir: field:4.2:not_suitable_for[]
-              digest: 90017ea8f4ac27e03fb7a3655c68ef299f3e0d2705575c428bff5865b1da9f2b
-              quote: "`not_suitable_for[]` | Array[String] | seller-set | Advisory exclusion guidance. Non-normative"
-            - ir: field:5.9:deal_id_issuance
-              digest: 064acb1a6dfcb9c0cd2788373080091ccd3a991f47a4b1d055046eb5f51272cb
-              quote: "`deal_id_issuance` | String | derived | When and how the deal id is minted. Issued at commitment time"
-            - ir: field:5.9:serving_platform
-              digest: 6755aeee541637916ff2959d75837395628b01f5deea9a200accf26eea573107
-              quote: "`serving_platform` | String | seller-set | Where the line item serves"
-  - name: network
-    concepts:
-      - name: url
-        sources:
-          spec:
-            - ir: key:5.2:apps[].storeurl
-              digest: ff0b57e686b74d4d7954d4f807d16f837493476801ec8813d4b42463df5760d3
-              quote: "`storeurl` | OPTIONAL | Store listing URL. As `app.storeurl`"
-              locks:
-                - with-open-prs
-      - name: domain-name
-        sources:
-          spec:
-            - ir: field:5.2:properties
-              digest: 8167901b1024772db9ede8143ce1d5009d6effcfd66b290f82e427a00940b50c
-              quote: "`properties` | Object | selectable | `available[]` of `{ id, name, domains, supported_formats }`, `included[]`, `pricing`, `max_select`"
-              locks:
-                - main
-            - ir: field:5.2:properties
-              digest: 4115b24e46ceb6cf1b12d1730a313c02123ae5b3ed6739bb9fefdaadc10ea478
-              quote: "`properties` | Object | selectable | `available[]` of `{ id, name, domains, apps, supported_formats }`, `included[]`, `pricing`, `max_select`. Each property MUST carry `domains`, `apps` or both"
-              locks:
-                - with-open-prs
-            - ir: key:5.2:apps[].domain
-              digest: 225b562dcf1a6bb5794204f48f457410c578cee81a69e2906f3c994b3a747eb4
-              quote: "`domain` | RECOMMENDED | Developer domain, against which `app-ads.txt` is checked. As `app.domain`"
-              locks:
-                - with-open-prs
-  - name: money
-    concepts:
-      - name: amount
-        sources:
-          spec:
-            - ir: field:5.6:min_spend
-              digest: 9950b94692a4b0250d54a54d47eca0f63c96a7b9d26607cded57896d46e5c8c4
-              quote: "`min_spend` | Number | seller-set | Minimum spend for this line item"
-            - ir: field:5.6:pricing[].gross_rate
-              digest: f432867a10e6b5662c58996ee4f1c3ea14cddc65968fb1f879bbc703940b9621
-              quote: "`pricing[].gross_rate` | Number | seller-set | The list rate the buyer pays"
-            - ir: field:5.6:pricing[].agreed_rate
-              digest: fddb11299e9061fe008737676d347a540cc4a21ffaadb153b5cf7765f312d3c6
-              quote: "`pricing[].agreed_rate` | Number | derived | The transacted rate after selections and any agreed request"
-            - ir: field:5.6:pricing[].seller_rate
-              digest: 314758d24a50efd1b2b8813f612feb3630d3635c709cd98d136a482f6ebbc049
-              quote: "`pricing[].seller_rate` | Number | seller-set | What the publisher receives"
-            - ir: field:5.6:pricing[].floor
-              digest: c635c8c9f7c2bc45268481c963866fc8a5bc289c2ed6c22c8ad5115b2529c1d7
-              quote: "`pricing[].floor` | Number | seller-set | OPTIONAL. The lowest rate the seller will consider. Enables a `requestable` counter to be evaluated without a round trip"
-              locks:
-                - main
-            - ir: field:5.6:pricing[].floor
-              digest: 2a2f1c3a1f72fae862344a6b30acedcb6510ab6cf43f9c7f13a837680ed1a3ca
-              quote: "`pricing[].floor` | Number | seller-set | OPTIONAL. The seller's offer floor: the lowest rate it will consider at proposal time, so a `requestable` counter can be evaluated without a round trip. Not the downstream auction floor, and not a guarantee that bids at or above it will clear"
-              locks:
-                - with-open-prs
-            - ir: key:5.6.1:commitment.amount
-              digest: 9e4c291747cc047e67c9ef7b1b6f9776d02bb2e82de16dfe9b8079e42921e804
-              quote: "`amount` | REQUIRED | The figure committed"
-        requires:
-          member: currency
-          decision: D-036
-          lacking:
-            - ir: field:5.4:production#description/object:1
-            - ir: field:5.6:min_spend
-            - ir: field:5.6:commitment_bounds#description/object:1
-      - name: price-adjustment
-        sources:
-          spec:
-            - ir: key:3.1:pricing#meaning/object:1
-              digest: 1d2ea6996d7c3bbf4808776d7399e4719b79687764674d92f08a885763ad61fe
-              quote: "{ option_id: { delta_cpm | delta_flat | delta_pct } }"
-        requires:
-          member: currency
-          decision: D-036
-          lacking:
-            - ir: key:3.1:pricing#meaning/object:1
-      - name: option-price-delta
-        sources:
-          spec:
-            - ir: key:3.1:pricing
-              digest: 539b0422b84a2eec4d1a6247ff1c0e887e86cb8cb997396fdca33c03477a03ce
-              quote: "`pricing` | OPTIONAL | Delta per option beyond those included, as `{ option_id: { delta_cpm | delta_flat | delta_pct } }`"
-        requires:
-          member: currency
-          decision: D-036
-          lacking:
-            - ir: key:3.1:pricing#meaning/object:1
-      - name: currency
-        sources:
-          spec:
-            - ir: field:5.6:pricing[].currency
-              digest: c3fe3033ef8ca1012e67b36b728cc3383f4f4b4642ded0b50c4537216dcafde1
-              quote: "`pricing[].currency` | String | seller-set | ISO-4217"
-            - ir: key:5.6.1:commitment.currency
-              digest: 19e4d985eb2f3a597bafe8f3233448688dcfd827a2e41bc2b8fe1886c5e9ce33
-              quote: "`currency` | REQUIRED when `basis = spend` | ISO-4217"
-  - name: ratio
-    concepts:
-      - name: fraction
-        sources:
-          spec:
-            - ir: field:5.7:committed_metrics[]
-              digest: 2c123e829ef892456b09671dfd52243f1bef0db8b067aa9c5d184dc07411caf5
-              quote: "`committed_metrics[]` | Array[Object] | requestable | `{ metric, value, basis }` tuples — `viewable_rate` for display, `completion_rate` for video/audio/CTV, an audience-modelled metric for DOOH. Seller declares a ceiling; a buyer MAY request above it"
-            - ir: field:5.3:buyer_supplied
-              digest: 18d87a0de58116db76d7152a7f96bc722dc700b91f053406b32e4299e7910504
-              quote: "`buyer_supplied` | Object | supplied | `{ segments_allowed, suppression_allowed, match_rate_expected, segments[], suppression_list }`. `match_rate_expected` is the seller's stated expectation; `segments[]` and `suppression_list` are buyer-populated"
-      - name: percent-change
-        sources:
-          spec:
-            - ir: key:3.1:pricing#meaning/object:1
-              digest: 1d2ea6996d7c3bbf4808776d7399e4719b79687764674d92f08a885763ad61fe
-              quote: "{ option_id: { delta_cpm | delta_flat | delta_pct } }"
-  - name: quantity
-    concepts:
-      - name: count
-        sources:
-          spec:
-            - ir: field:5.3:addressable_scale
-              digest: 1289f106e9861b03225c1fc7056b164eac34f82d73fc327c7009b0c8b9111e24
-              quote: "`addressable_scale` | Integer | derived | Reachable units in the flight, recomputed against the buyer's selection. Not segment size"
-            - ir: key:5.6.1:commitment.derived_units
-              digest: a9f6d92f09ae371454efb08c6b7e3ae3a5d7340cedd195cb446ce3da2db6735f
-              quote: "`derived_units` | derived | Computed from `amount`, `agreed_rate` and `cost_method`. Informative, not binding"
-            - ir: key:3.1:max_select
-              digest: 199cab600b78dcd9dc40358fa8a94ec4d323f2bcf2fd7922a62b008af465d820
-              quote: "`max_select` | OPTIONAL | Cap on how many options the buyer may choose"
-            - ir: field:4.1:version
-              digest: 0d60d71f86bb7ba75bce82f30d59f3a971355af3191a622f5ee2e856069fb67f
-              quote: "`version` | Integer | derived | Monotonically increasing revision number"
-              locks:
-                - main
-            - ir: field:4.1:version
-              digest: a09ae7827a52ff907bbe2cb190b88a430dd2a075fe1f098c2f024ff7ba097988
-              quote: "`version` | Integer | derived | Monotonically increasing revision number. Each revision while status is `published` increments it"
-              locks:
-                - with-open-prs
-            - ir: key:5.6.1:commitment.version
-              digest: 394505396cda2bb39d2e3e57aec4d9f3135b74d215b31c1483869965339ac648
-              quote: "`version` | REQUIRED | The proposal `version` the commitment was priced against"
-              locks:
-                - with-open-prs
-      - name: measure
-        sources:
-          spec:
-            - ir: field:5.7:committed_metrics[]
-              digest: 2c123e829ef892456b09671dfd52243f1bef0db8b067aa9c5d184dc07411caf5
-              quote: "`committed_metrics[]` | Array[Object] | requestable | `{ metric, value, basis }` tuples — `viewable_rate` for display, `completion_rate` for video/audio/CTV, an audience-modelled metric for DOOH. Seller declares a ceiling; a buyer MAY request above it"
-  - name: time
-    concepts:
-      - name: instant
-        sources:
-          spec:
-            - ir: field:4.1:valid_from,valid_until
-              digest: 9c5853eb24269fa128f158276e85a0e45be848cce58efe34fa1739a06514e9a0
-              quote: "`valid_from` · `valid_until` | Timestamp | seller-set | ISO-8601 window the offer holds. This is the offer window, not the campaign flight"
-            - ir: field:5.6:pricing[].price_valid_until
-              digest: d5f73077d16f2df27e85bbb8df330143da8f86fd4c531ecf4da35b9cac37f6f1
-              quote: "`pricing[].price_valid_until` | Timestamp | seller-set | How long the posted rate holds. Distinct from the proposal's `valid_until`"
-            - ir: key:5.6.2:hold_status.hold_expires_at
-              digest: d298da40613999b40a53bab56e17f7c8af9488207a3755391ce3c368a2556cb8
-              quote: "`hold_expires_at` | Absolute timestamp, set when the hold is granted"
-            - ir: key:5.6.1:commitment.flight_start
-              digest: f55507bcfbcdffa24a4949e12e1e59a92cef3e9b56f23e47b59e6b8c20f0d4fb
-              quote: "`flight_start` | REQUIRED | The buyer's campaign start. Distinct from `valid_from`"
-            - ir: key:5.6.1:commitment.flight_end
-              digest: d3bd830cbe989315172dc25dcb1f42bdb93752cfa4f6f0112d4fca784f286345
-              quote: "`flight_end` | REQUIRED | The buyer's campaign end. Distinct from `valid_until`"
-      - { name: utc-instant, absent: true }
-      # No field writes a point in time as milliseconds since the epoch; every one is an ISO-8601 string.
-      - { name: epoch-instant, absent: true }
-      # AdCOM's `Geo.utcoffset` and its `maxext`. OpenProposal states a clock
-      # by name (`time_zone`) and never as an offset, and its only length of
-      # time is the hold's, which states no sentinel.
-      - { name: utc-offset, absent: true }
-      - { name: extended-duration, absent: true }
-      - name: duration
-        sources:
-          spec:
-            - ir: key:5.6.2:hold_status.hold_duration
-              digest: 926e46e5c6325e98292a30a6655d0991d1979a9e07c1c637c9d256aa82659493
-              quote: "`hold_duration` | ISO-8601 duration the hold runs for"
-            - ir: key:5.2.2:placement.skipafter
-              digest: 7eb11e62931be7a67537c85a3e6e1609978155b48c0219644d3998f796a1c36d
-              quote: "`skipafter` | OPTIONAL | When `skip` is `1`: seconds the ad plays before the placement enables skipping | `VideoPlacement.skipafter`, `AudioPlacement.skipafter`, `video.skipafter`"
-              locks:
-                - with-open-prs
-      - name: daypart-window
-        sources:
-          spec:
-            - ir: field:5.5:daypart
-              digest: 25c80cd35ce4831dfbd372627f2d794511fffe5f029243e586ee1e607be4fdc2
-              quote: "`daypart` | Object | settable | `allowed[]` of time windows"
-              locks: [main]
-            - ir: field:5.5:daypart
-              digest: b34d1818bf80b3e5947f9902057ac882707ef3a893fc370c97efc81487d64080
-              quote: "`daypart` | Object | settable | `allowed[]` of `{ days[], start, end }`: `days[]` from `monday` | `tuesday` | `wednesday` | `thursday` | `friday` | `saturday` | `sunday`, HH:MM civil time, `end` exclusive, up to `24:00`"
-              locks: [with-open-prs]
-      - name: time-zone
-        sources:
-          spec:
-            - ir: field:5.5:time_zone
-              digest: c3a3201d895ffca4363f6b17d138858db2a32c7ba2bb5352647cec4a596de13d
-              quote: "`time_zone` | String | seller-set | IANA time zone name, or `viewer_local` (where the ad renders). The clock for `daypart` and `frequency_cap.period`. REQUIRED with either"
-              locks: [with-open-prs]
-            - ir: sentence:5.5:bcaa431b
-              digest: dd32a6368f87c6f3cc3b6ecb6ff87b8aa69d0332a9b99e1a2b7467f2c3ea5f00
-              quote: Like the calendar Day of OpenDirect 2.1 `Line.frequencyinterval`, `frequency_cap.period` is a calendar period in `time_zone`; weeks start on Monday.
-              locks: [with-open-prs]
+    sources:
+      spec:
+      - ir: field:4.2:description
+        digest: f741f0311c23ba6cfb77a404187fdba7545d0a92b7ba38712760ecf4a86b832b
+        quote: '`description` | String | seller-set | Prose, not a name. Where the "why buy" case is made, including which channels a multi-channel proposal spans'
+      - ir: field:4.2:seasonality_notes
+        digest: ba887f0a6fc13cac29acad0ce87325b6d0f9f10574dc85a6609adb877f24b356
+        quote: '`seasonality_notes` | String | seller-set | When the proposal performs differently'
+      - ir: field:4.2:best_for[]
+        digest: fa785a686b12c8287bea93b31973a72a44fc601f660d038cb4dcd64cfa91d1e3
+        quote: '`best_for[]` | Array[String] | seller-set | Advisory planning hints. Non-normative, and never the basis for a match'
+      - ir: field:4.2:not_suitable_for[]
+        digest: f730ad1f48b3b951211d96453e818575c2bde0b389346eb239a0958a29830e8d
+        quote: '`not_suitable_for[]` | Array[String] | seller-set | Advisory exclusion guidance. Non-normative'
+      - ir: field:5.9:serving_platform
+        digest: 95cb7fcc8b1bba7680a2be4208cb591f8e27a0b0bb5ac949a46c355919a032a8
+        quote: '`serving_platform` | Domain | seller-set | The ad platform that serves the line item, such as the seller''s ad server, by its domain. For a deal sold through a separate SSP it differs from `deal_origin`'
+      - ir: key:2.2:Party.legal_name
+        digest: 69c5ec396551158b05dad14d3d0109d896ffd12d53542bbe2926a82f4a070542
+        quote: '`legal_name` | OPTIONAL | The party''s legal name. A `registry_id` entry that applies can attest it; the value alone attests nothing'
+      - ir: key:5.2.4:PropertyOption.name
+        digest: aefb4736cbdcd31f60197621d4ec22376b9c2785f644b2b640625ae5a944f975
+        quote: '`name` | OPTIONAL | The property''s name, for people'
+      - ir: key:5.3:AudienceOption.name
+        digest: b66f074736cda06db588f104f15b79c549332a164e83be9388338734a8ea1add
+        quote: '`name` | OPTIONAL | The audience''s name, for people'
+      - ir: key:2.4:ErrorObject.detail
+        digest: 2fb7d1dbfc2e0007598c82b19a373b58461cb264f3b4b6bdd0ff4c75925edf55
+        quote: '`detail` | REQUIRED | Human-readable. A receiver SHOULD NOT parse it'
+      - ir: key:4.4:ChangeRequest.comments
+        digest: ffb9530ad5040636fb05ef2d8664953bd5938455d18973c9d346cbaeb97294fb
+        quote: '`comments` | OPTIONAL | Why the change is requested. Free text'
+      - ir: key:5.4:AssetProvenance.generator
+        digest: 48832d25124cadc30aa81075808fd52ef10a514432ede7f3aa1196059835dbfd
+        quote: '`generator` | OPTIONAL | The system that generated it'
+      - ir: key:5.4:AssetProvenance.model_version
+        digest: dd368f60bccb8763b3c62cdfde7b11b5107b51ba932b4a7f849704198b6b5d20
+        quote: '`model_version` | OPTIONAL | The version of the model that generated it'
+      - ir: key:5.4:ProductionOption.custom_unit
+        digest: 888bbc2e34ce21245d2c8777e6af2dff5fbb679bb037c65be6390e127fe75255
+        quote: '`custom_unit` | OPTIONAL | The custom unit built'
+      - ir: key:5.4:Asset.markup
+        digest: 1237f40e094ce62f23d5600b3d8d84150a17e30cab5fb5847da0fcc4bc8ddb45
+        quote: '`markup` | REQUIRED when `url` is absent | The tag or creative markup'
+      - ir: key:5.6.4:ImpressionMultiplier.dataset
+        digest: 20b1f4d87fcb6f3554302bd6d736333f855fd6acd5b1e355d89af281208312a7
+        quote: '`dataset` | REQUIRED | The source''s named data release the multipliers come from. A new release is a new `dataset`'
+      - ir: key:5.7.1:MeasurementOption.qualifier
+        digest: 92abe5f12865a556e2b4625291d737980892130cf84e4bab7b8564cf32a72a61
+        quote: '`qualifier` | OPTIONAL | A product or method of `measured_by`'
+      - ir: key:5.7.1:ControllingMeasurementOption.qualifier
+        digest: 2a4263ae98031d170ae661280b9c493961cca1ddde5cda5360b60aa11280159c
+        quote: '`qualifier` | OPTIONAL | A product or method of `counted_by`, such as a named ad server'
+      - ir: key:5.10:ExternalReference.system
+        digest: 6fc2e266b3afd9f76a35b47846f673d917b6ef72e5cf1b82a39c0ee69512ca02
+        quote: '`system` | REQUIRED | The system that holds the id'
+      - ir: key:5.10:ExternalReference.namespace
+        digest: 60145fded2a9fbe98116c6918a5b20863df316364792bdeacaf5a822a48927f9
+        quote: '`namespace` | OPTIONAL | The namespace of the id in that system'
+      - ir: key:5.10:Billing.payment_terms
+        digest: b280539a3f33a652566d1e1378f729706fe28227baff8d94e2f0864f3af6cf67
+        quote: '`payment_terms` | OPTIONAL | The payment terms, such as `net 30`'
+- name: network
+  concepts:
+  - name: url
+    sources:
+      spec:
+      - ir: key:5.2.5:App.store_url
+        digest: fbe210ddfe1e4c7dd33c4794fbeea524559e8531ce0be8693996eeb93e229182
+        quote: '`store_url` | OPTIONAL | Store listing URL. As OpenRTB 2.6 `app.storeurl`'
+      - ir: key:5.4:Asset.url
+        digest: 2c75977918fb7225eb4cd6708a04826cb23321db44d40f6014803232afffe67a
+        quote: '`url` | REQUIRED when `markup` is absent | Where the asset is, such as a tag URL with its macros unexpanded'
+  - name: registrable-domain
+    sources:
+      spec:
+      - ir: key:2.2:Party.domain
+        digest: 4f993cad977cd8f3893ae6f792ea716454b17eebcd62dd765320bf7056eca545
+        quote: '`domain` | REQUIRED | The party''s domain'
+        locks:
+        - with-open-prs
+      - ir: key:2.2:SeatRef.dsp
+        digest: a7e019396f0b10d9ccd414c756e345fae410c3538d9504d4219d3b1e4b1c72ba
+        quote: '`dsp` | REQUIRED | The DSP''s primary domain'
+        locks:
+        - with-open-prs
+  - name: domain-name
+    sources:
+      spec:
+      - ir: field:5.2:properties
+        digest: 51851b4eb428c45904ca874aaf132f101255a70f54933a8c86fb19deb3af33d1
+        quote: '`properties` | Selectable[PropertyOption] | selectable | What the line item runs on. See 5.2.4. Absent: the seller promises no property'
+        locks:
+        - with-open-prs
+  - name: tls-url
+    sources:
+      spec:
+      - *id002
+- name: money
+  concepts:
+  - name: amount
+    sources:
+      spec:
+      - ir: field:5.6:pricing[].agreed_rate
+        digest: 5ed66aa5f747b2c39b111708371543c09c29f59f000e958808f939b45aa40c45
+        quote: '`pricing[].agreed_rate` | Amount | derived | The transacted rate (below). Absent on every other entry'
+      - ir: key:5.6.1:CommitmentAmount.amount
+        digest: c86da179b6125a87987ded010bdcf718b33df838acd429a72dc4c892cf9fcbae
+        quote: '`amount` | REQUIRED | The figure committed: an `Amount` when `basis` is `spend`, otherwise a whole number of the entry''s units (§ 5.6.5)'
+    requires:
+      member: currency
+      decision: D-092
+      lacking:
+      - ir: key:3.1:Delta.delta_cpm
+      - ir: key:3.1:Delta.delta_flat
+      - ir: key:3.1:Delta.delta_fraction
+      - ir: key:4.1:RequestedValue.list_rate
+      - ir: key:5.6.1:CommitmentAmount.amount
+      - ir: key:5.6.6:Fee.amount
+  - name: price-adjustment
+    absent: true
+  - name: option-price-delta
+    sources:
+      spec: *id003
+    requires:
+      member: currency
+      decision: D-092
+      lacking:
+      - ir: key:3.1:Delta.delta_cpm
+      - ir: key:3.1:Delta.delta_flat
+      - ir: key:3.1:Delta.delta_fraction
+  - name: currency
+    sources:
+      spec:
+      - ir: field:5.6:pricing[].currency
+        digest: 41548bd198d7a364c84be1ab7c22d217009d7ecc5909827f10feb1c86e45a06a
+        quote: '`pricing[].currency` | CurrencyCode | seller-set | The currency of the entry''s rates (below)'
+- name: ratio
+  concepts:
+  - name: fraction
+    sources:
+      spec:
+      - ir: field:5.7:committed_metrics[]
+        digest: f780f0eb75a5d9c437e7bcbf98c882ea50a0854c0b25beab8f57a96fdecfce11
+        quote: '`committed_metrics[]` | Array[CommittedMetric] | requestable | `CommittedMetric` tuples (§ 5.7.1). Seller declares its offered `level`. A buyer MAY request a stricter `level`, one further in `direction`. A request MUST NOT change a tuple''s `direction`'
+      - ir: field:5.3:buyer_supplied
+        digest: 156e80a7f77bb45b68c65982db7885275ff1b89a00fc1c4127465ce94d6e9889
+        quote: '`buyer_supplied` | BuyerSupplied | mixed | See below'
+  - name: fraction-delta
+    sources:
+      spec:
+      - ir: key:3.1:Delta.delta_fraction
+        digest: 17f30605db1f38b66ff005598b7d60b6bdd839394eabac1b2343af4b612b8731
+        quote: '`delta_fraction` | OPTIONAL | Multiplies the rate of any entry by 1 plus this value. `0.20` is 20 percent more'
+        locks:
+        - with-open-prs
+  - name: percent-change
+    absent: true
+- name: quantity
+  concepts:
+  - name: count
+    sources:
+      spec:
+      - ir: field:5.3:addressable_scale
+        digest: 646b6c2843fd5b8eddfcd9f52b9f12c2321e34e9c789dff0def1eed33c060a49
+        quote: '`addressable_scale` | AddressableScale | asserted | What the line item can reach, recomputed against the buyer''s selection. Not segment size. See below'
+      - ir: key:5.6.1:Commitment.derived_units
+        digest: 2f071a5c115cbd4afc5600faf55a107b1dea05c5aa98f94841bba45962f1f7d2
+        quote: '`derived_units` | OPTIONAL | The committed units, as § 5.6.5 derives them, whether or not this key is written. A written value is a copy, outside the record (§ 4.1.1); where it differs, the § 5.6.5 result applies'
+      - ir: field:5.6:pricing[].unit_bounds
+        digest: d130098edd23aa022335b27cc098f0c3cb816bf3ba91ad4167c36fa349341741
+        quote: '`pricing[].unit_bounds` | Range[Integer] | requestable | Bounds on the units committed under this entry, counted in its unit (§ 5.6.5): `commitment.amount` when `basis` is `units`, otherwise `derived_units`. A buyer MAY request another. Absent on a `FLAT` entry'
+      - ir: field:4.1:version
+        digest: 95abf292cdcc32a9365e568b756c093f4d7e96c011d58783a43c90db738b0db5
+        quote: '`version` | Integer | derived | Monotonically increasing revision number, starting at 1, held by the seller. Each version is a snapshot of the proposal''s offered terms (§ 4.1.3). A version is frozen at the earliest of: the proposal''s `status` leaving `draft`; a `negotiation_history[]` or `assent[]` entry naming it; a counterparty receiving it in any representation (§ 2.1). The offered terms of a frozen version MUST NOT change; a change to them creates version `n+1`. The values § 4.1.3 lists as not offered terms change without a new version'
+        locks:
+        - with-open-prs
+      - ir: key:2.2:VersionRef.version
+        digest: ba0312da840ff7fdd6178f88b915801a6f77e3b101b2010668bd413544114b48
+        quote: '`version` | REQUIRED | The proposal''s `version`'
+      - ir: key:2.4:ErrorObject.version
+        digest: 407dee4d73ecc52331ba20ae22175edcb429a3a6b9d79a0856b5d828e48980b4
+        quote: '`version` | REQUIRED when the request names a proposal the requester may read | The proposal''s `version` when the error was decided'
+      - ir: key:4.1:HistoryEntry.version
+        digest: 2d917d282442becae950ee7a953543fc4d226962b82e46ae68cf4b72c93d9ccd
+        quote: '`version` | REQUIRED | The version the act created or refers to (§ 4.1.3)'
+      - ir: key:4.1.2:AssentEntry.version
+        digest: 3c6efa0c80c07aee50994da32d3a0f71d6a090fce9d2f24d2bf9d1524b268deb
+        quote: '`version` | REQUIRED | The `version` of the record the digest was computed over. `version` is outside the binding record, so the entry binds it'
+      - ir: key:5.6.2:Hold.version
+        digest: ca6cb0ebf234ad53b53011ecaa81eef0823cdfe75d77e7f246987efe5c2ce83f
+        quote: '`version` | REQUIRED | The `version` the hold is on (§ 4.1.3)'
+      - ir: key:2.3:HoldLimits.per_buyer
+        digest: 432befca88b55ac2351b25ab24ae2ddb53632a58893c39ec4b5d55e0f08ff923
+        quote: '`per_buyer` | OPTIONAL | Holds whose `status` is `held` on proposals issued to one `buyer.domain`'
+      - ir: key:2.3:HoldLimits.per_advertiser
+        digest: b07f2df0984b93ffbe9703c93a78894adc6f09d6e330091cd24f1824b608b75c
+        quote: '`per_advertiser` | OPTIONAL | Holds whose `status` is `held` for one advertiser, counted by the `commitment.advertisers[]` in each hold''s `requested_terms`. A hold that names several advertisers
+          counts once for each'
+      - ir: key:5.2.3:BreakPositionOption.maxseq
+        digest: 0621ab83e2302b50b004c6b0eb70a73924d8a6cd6c52f6fce386a43446f424c5
+        quote: '`maxseq` | OPTIONAL | Ceiling: the most ads a served pod holds | `maxseq`, `maxseq`'
+      - ir: key:5.2.4:PropertyOption.min_screens
+        digest: 93e3f3343327f296ec32c7983d4db27c4aa5f3b6484d318e07d79ab8bc400e68
+        quote: '`min_screens` | OPTIONAL | With `seller_allocated`, the fewest screens the seller allocates to the line item'
+      - ir: key:5.2.4:PropertyOption.slots_per_loop
+        digest: c1ef2cfcaa1c5e3e422ce9322a06b154608963070934b356b76b68501e461fd4
+        quote: '`slots_per_loop` | OPTIONAL | The slots per loop the line item buys on each screen of the property that has a `loop`'
+      - ir: key:5.3:BuyerList.size
+        digest: f0a72a68121097bc48004f061d2c3da1312a2156a657d9c3c85ae3e6911e2def
+        quote: '`size` | OPTIONAL | How many members it holds'
+      - ir: key:5.3:AddressableScale.quantity
+        digest: 97bf7301c757d616f4535d83357efab46ba49281508a20f633fe3b4ab8672552
+        quote: '`quantity` | REQUIRED | How many'
+      - ir: key:5.5:ExclusionTerms.max_entries
+        digest: 2d70f74f6199650feac5e1a8667c03121611c06a15e9ccd500c27581f1c7d069
+        quote: '`max_entries` | OPTIONAL | The most entries of this type the seller accepts'
+      - ir: key:5.5:FrequencyCap.count
+        digest: 8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923
+        quote: '`count` | REQUIRED | The cap. The buyer''s `value` is the count, and `period` and `per` stay the seller''s'
+      - ir: key:5.2.8:SyncGroup.min_screens_per_play
+        digest: 34b819fe3becdcaafce433f66f1e7b47dab3de59bc35683dff262a57d771831b
+        quote: '`min_screens_per_play` | REQUIRED | The fewest of the group''s screens that must show a display for it to count as one play (§ 5.6.4)'
+  - name: measure
+    sources:
+      spec:
+      - ir: field:5.7:committed_metrics[]
+        digest: f780f0eb75a5d9c437e7bcbf98c882ea50a0854c0b25beab8f57a96fdecfce11
+        quote: '`committed_metrics[]` | Array[CommittedMetric] | requestable | `CommittedMetric` tuples (§ 5.7.1). Seller declares its offered `level`. A buyer MAY request a stricter `level`, one further in `direction`. A request MUST NOT change a tuple''s `direction`'
+      - ir: key:5.6:Availability.quantity
+        digest: 5a1e531522540df9d1287ebd4d94a3c64b71c4bceea5674cf531ce171d98c1b6
+        quote: '`quantity` | REQUIRED | How many. It can be fractional where the unit is, such as `rating_points` per `day`'
+      - ir: key:5.7.1:CommittedMetric.level
+        digest: d55f880f7cfb47eeb4395791bcd3842d67f3b4471748a026efb5d8557b576788
+        quote: '`level` | REQUIRED | The offered level: a `Fraction` under a rate term, a count under a count term'
+- name: time
+  concepts:
+  - name: instant
+    absent: true
+  - name: canonical-utc-instant
+    sources:
+      spec:
+      - ir: key:2.2:Interval.start
+        digest: eef6d2a736303d5d5081c1f1eb92b6d60df3fdb9d545f6071aea012805ee4d16
+        quote: '`start` | REQUIRED | The first second'
+        locks:
+        - with-open-prs
+      - ir: key:4.1:HistoryEntry.at
+        digest: b68b117ee8bbf9f32b984acac735be1ba894a9cd73c74e6aaec95b80c7380e3e
+        quote: '`at` | REQUIRED | When the side acted'
+        locks:
+        - with-open-prs
+  - name: utc-instant
+    absent: true
+  - name: epoch-instant
+    absent: true
+  - name: utc-offset
+    absent: true
+  - name: extended-duration
+    absent: true
+  - name: duration
+    sources:
+      spec:
+      - ir: key:5.2.2:Placement.skipafter
+        digest: d52c7f497d5028b2767e0376aeaf1b4dd9f3f61a2be2f89ff6722573f0e546aa
+        quote: '`skipafter` | OPTIONAL | When `skip` is `1`: seconds the ad plays before the placement enables skipping | `VideoPlacement.skipafter`, `AudioPlacement.skipafter`, `video.skipafter`'
+        locks:
+        - with-open-prs
+  - name: daypart-window
+    sources:
+      spec:
+      - ir: def:5.5:ClockWindow
+        digest: bfa31e5d0cb79e574db850c0b46711c30c904bb7d6d235473a4ab945e650a121
+        quote: '`ClockWindow` | is a repeating window of civil time, deliberately not an `Interval`. A window that crosses midnight is two windows.'
+        locks:
+        - with-open-prs
+  - name: listed-time-zone
+    sources:
+      spec:
+      - ir: key:5.2.8:Screen.time_zone
+        digest: 3ff6012607b766df2a717a341e284efd9aa32f1efd19e1832c38b5188b1df4b7
+        quote: '`time_zone` | OPTIONAL | The screen''s time zone'
+        locks:
+        - with-open-prs
+      - ir: key:5.10:Billing.time_zone
+        digest: 8a3ffc03e1d828afb577c46430d48722d6f7aea224ff6d2d2e58774d3991dba3
+        quote: '`time_zone` | OPTIONAL | The clock for a `month` invoice period. Absent: `UTC`'
+        locks:
+        - with-open-prs
+  - name: time-zone
+    sources:
+      spec:
+      - ir: field:5.5:time_zone
+        digest: 958a94cb93aec0fc1e994aa1650a4973a0ecd1d859de960efcc516c8b0179a00
+        quote: '`time_zone` | ZoneName | seller-set | The clock for `daypart` and a calendar `frequency_cap.period`'
+        locks:
+        - with-open-prs
+  - name: second-duration
+    sources:
+      spec: *id004
+  - name: millisecond-duration
+    sources:
+      spec:
+      - *playtolerance
+- name: flag
+  concepts:
   - name: flag
-    concepts:
-      - name: flag
-        sources:
-          spec:
-            - ir: field:5.8:terms_acceptance_required
-              digest: 0243a3b7686e677b229229ed525e3ceb6ac606d6e71bac139abf02de3260ceef
-              quote: "`terms_acceptance_required` | Boolean | seller-set | Whether legal terms must be accepted before assent"
-            - ir: key:5.6.2:hold_status.hold_available
-              digest: 201a73f56ae7a6f7c81671b5a989999e5e68f5a5e75b72046ea852d93480867c
-              quote: "`hold_available` | Whether this line item may be held"
-      - name: integer-flag
-        sources:
-          spec:
-            - ir: key:5.2.2:placement.reward
-              digest: 81dad5cb11e58c90e15a2d623375ffdf8e31217948a200d10e6d5cbdac120042
-              quote: "`reward` | OPTIONAL | `0` (no) | `1` (yes). The user receives a reward for viewing the ad | `Placement.reward`, `imp.rwdd`"
-              locks: [with-open-prs]
-            - ir: key:5.2.2:placement.instl
-              digest: 2334f8c26628f80ae242e03e2b5556817cb4958765bb2036951355997119b8a7
-              quote: "`instl` | OPTIONAL | `0` (no) | `1` (yes). The ad is interstitial or full screen | `DisplayPlacement.instl`, `imp.instl`"
-              locks: [with-open-prs]
-            - ir: key:5.2.2:placement.skip
-              digest: 17938cd996b69f208a2d9cb397eb1cc84b4b21a0568d9f251d76c70a470ba483
-              quote: "`skip` | OPTIONAL | Video or audio. `0` (no) | `1` (yes). The placement lets the user skip the ad | `VideoPlacement.skip`, `AudioPlacement.skip`, `video.skip`"
-              locks: [with-open-prs]
-  - { name: media, absent: true }
-  - { name: place, absent: true }
-  - { name: extension, absent: true }
+    sources:
+      spec:
+      - ir: key:5.2.2:Placement.reward
+        digest: 6243552951780056e5e425e05fe6b9a4415b59a38daf4397feb58047498888ff
+        quote: '`reward` | OPTIONAL | The user receives a reward for viewing the ad | `Placement.reward`, `imp.rwdd`'
+      - ir: key:5.3:AudienceOption.excludable
+        digest: e25857225a1e17b773da6f7987dbc42e39381ee3e441366e510fc86451f12151
+        quote: '`excludable` | OPTIONAL | Whether the buyer may name this option in `excluded[]`. Absent means `false`'
+      - ir: key:5.3:BuyerSupplied.segments_allowed
+        digest: 089a3de87412c7dc2f4616ead51247449c2462169e84b30afa2e50f0736b1c20
+        quote: '`segments_allowed` | OPTIONAL | Whether the buyer may supply `segments[]`'
+      - ir: key:5.3:BuyerSupplied.suppression_allowed
+        digest: 2150ca7ac182f5cb004e18cb97a13789283eeece420765766f755875f38b02a6
+        quote: '`suppression_allowed` | OPTIONAL | Whether the buyer may supply `suppression_list`'
+      - ir: key:5.4:AssetProvenance.synthetic
+        digest: b7c77296d67b14f59d4763ec826ee55b876dc0ffeda0c4b420df7849ed98ba9a
+        quote: '`synthetic` | REQUIRED | True when the content is artificially generated or manipulated, in whole or in part'
+      - ir: key:5.4:CreativeDelivery.secure_required
+        digest: 9f274139a8c5ba8384e272aa1e31e1a25b3c85551da3e0ac8dcb66dc76c4e5e6
+        quote: '`secure_required` | OPTIONAL | Whether the creative must load over a secure connection. Absent: this line item states no such requirement'
+      - ir: key:5.2.8:Screen.movable
+        digest: 12741af3f07daff4a53814869ab65595b4fa731554b405889c586b6807ce9a45
+        quote: '`movable` | OPTIONAL | True when the screen has no fixed location, as AdCOM 1.0 `Dooh.fixed` value 2 (movable)'
+      - ir: key:5.6.2:HoldTerms.available
+        digest: 5c3c5a05196378e5359143820b6d258a0b0f8427b71e71442b99e692b663adf7
+        quote: '`available` | REQUIRED | Whether this line item may be held'
+      - ir: key:5.9:BuyerRequirements.seats_expected
+        digest: dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5
+        quote: '`seats_expected` | OPTIONAL | The seller asks the buyer to supply `seats`'
+  - name: integer-flag
+    sources:
+      spec:
+      - ir: key:5.2.2:Placement.reward
+        digest: 6243552951780056e5e425e05fe6b9a4415b59a38daf4397feb58047498888ff
+        quote: '`reward` | OPTIONAL | The user receives a reward for viewing the ad | `Placement.reward`, `imp.rwdd`'
+        locks:
+        - with-open-prs
+      - ir: key:5.2.2:Placement.instl
+        digest: ea0607b0c8eaddea6f7971105d106b56f0f97a8c93eb80aed7845c7579d35899
+        quote: '`instl` | OPTIONAL | The ad is interstitial or full screen | `DisplayPlacement.instl`, `imp.instl`'
+        locks:
+        - with-open-prs
+      - ir: key:5.2.2:Placement.skip
+        digest: c4688332e468110399eb6c929ae527892405380a68f6f75ac8daf60e954c303d
+        quote: '`skip` | OPTIONAL | Video or audio. The placement lets the user skip the ad | `VideoPlacement.skip`, `AudioPlacement.skip`, `video.skip`'
+        locks:
+        - with-open-prs
+- name: media
+  absent: true
+- name: place
+  concepts:
+  - name: geo-degrees
+    sources:
+      spec:
+      - *id005
+      - *id006
+  - name: country
+    absent: true
+  - name: short-country
+    sources:
+      spec:
+      - *geocode
+  - name: subdivision
+    sources:
+      spec:
+      - *geocode
+- name: extension
+  concepts:
+  - name: extension
+    sources:
+      spec:
+      - ir: key:4.4:ChangeRequest.ext
+        digest: b8ef98a6ba46e630fb9c58f17f3be1335586d44f2af163dd549bfe6e17b6f9b6
+        quote: '`ext` | OPTIONAL | See Extensions (§ 2.5)'
+- name: term
+  concepts:
+  - name: vendor-code
+    sources:
+      spec:
+      - *id007
+  - name: namespaced-term
+    sources:
+      spec:
+      - ir: key:2.4:ErrorObject.code
+        digest: f02f2830fe2f27d6494b17eae053f9e3a699aa51be2baf902c4d1373d5613c85
+        quote: '`code` | REQUIRED | A core code (below) or an extension code'
+  - name: vocabulary-term
+    sources:
+      spec:
+      - *id008
 homonyms:
-  - member: basis
-    decision: D-013
-    reason: Four lists go by `basis`, so each is the vocabulary of what it bases, named after it. A commitment's and a `min_commitment[]` threshold's `basis` say what the amount is (`CommitmentBasis`); an availability's, a committed metric's, and a frequency cap's each name a list of their own.
-  - member: id
-    decision: D-037
-    reason: An object option's `id`, which the selectable template gives every object option (D-046, D-047), is the identity the seller mints for the option, a minted ID that `included[]` and the `pricing` keys name it by; an external reference's `id` is the ID another system keeps.
-  - member: status
-    decision: D-013
-    reason: A proposal and a line item each have a status, with different states, so each is the vocabulary of its own object.
-  - member: type
-    decision: D-013
-    reason: Four objects name a type, and each means a different list, so each is the vocabulary of its own object, named after it.
-  - member: version
-    decision: D-027
-    reason: A proposal's `version` and every reference to it count the proposal's revisions, which the seller increments, a count; a terms reference's `version` is the terms document's version as its publisher writes it, an external ID.
+- member: id
+  decision: D-095
+  reason: An object option's `id` is "its REQUIRED `id`, unique in the field" (§ 3.1), which eleven options carry as the `MintedId` the seller mints; § 5.9's mechanism
+    option types it as a `TransactionMechanism`, "The mechanism, which is the option id", so the term is the id and no UUID is minted for it; and an external
+    reference's `id` is "The id" another system holds, which is neither.
+- member: status
+  decision: D-064
+  reason: Four objects carry a `status` and each states its own values. A proposal's is a `ProposalStatus` "computed by § 4.3.3"; a line item's is a `LineItemStatus`,
+    which is that plus `sold_out`, and "Independent of the proposal's status, so one line item may sell out while the rest of the shelf stays live"; a hold's
+    is a `HoldStatus`; and a change request's is an `ApprovalStatus`, "in the spelling of OpenDirect 2.1's ChangeRequest `status`". One concept over the four
+    would publish a line item's `sold_out` on a change request.
+- member: time_zone
+  decision: D-055
+  reason: A line item's `time_zone` is the clock its daypart and calendar frequency cap are read on, which § 2.2 states as a `ZoneName` and which may be `viewer_local`, where the ad renders; a screen's
+    and a billing period's `time_zone` is a zone the IANA database lists, which § 2.2 states as an `IanaZone` and which admits no stand-in, because a screen has a zone and an invoice period is cut on one.
+- member: quantity
+  decision: D-093
+  reason: An addressable scale's `quantity` is "How many", a count of reachable things; an availability's is "How many. It can be fractional where the unit is, such as `rating_points` per `day`", which
+    is a measure and not a count. One concept would let a scale be fractional, which no row of it admits.
+- member: url
+  decision: D-093
+  reason: A document reference's `url` is an `HttpsUrl`, because § 2.2 makes the scheme part of the requirement for a document a counterparty fetches and stores; an asset's is a `Url`, "Where the asset
+    is, such as a tag URL with its macros unexpanded", which admits `http` as D-079 read for the rows that state no scheme.
 bases:
-  - vocabulary: CommitmentBasis
-    member: amount
-    terms: { spend: amount, units: count }
-    decision: D-036
-  - vocabulary: Metric
-    member: value
-    terms: { viewable_rate: fraction, completion_rate: fraction }
-    others: measure
-    decision: D-005
+- vocabulary: CommitmentBasis
+  member: amount
+  terms:
+    spend: amount
+    units: count
+  decision: D-097
+- vocabulary: Metric
+  member: level
+  terms:
+    viewable_rate: fraction
+    completion_rate: fraction
+    ivt_rate: fraction
+    impressions: count
+  others: measure
+  decision: D-097
 shared_structures:
-  - concepts: [external-id, text]
-    decisions: [D-024, D-025, D-027]
-  - { concepts: [currency, country], absent: true }
-  # AdCOM's pair: a media offset is a whole number as a count is, and
-  # OpenProposal's kernel holds no media offset, so the pair has no second
-  # member here and nothing to set aside.
-  - { concepts: [count, media-offset], absent: true }
-  - concepts: [amount, measure]
-    decisions: [D-005, D-036]
+- concepts:
+  - external-id
+  - minted-id
+  decisions:
+  - D-037
+- concepts:
+  - minted-id
+  - text
+  decisions:
+  - D-037
+- concepts:
+  - domain-name
+  - registrable-domain
+  decisions:
+  - D-058
+- concepts:
+  - external-id
+  - text
+  decisions:
+  - D-024
+  - D-025
+  - D-027
+- concepts:
+  - currency
+  - country
+  absent: true
+- concepts:
+  - count
+  - media-offset
+  absent: true
+- concepts:
+  - count
+  - second-duration
+  decisions:
+  - D-070
+- concepts:
+  - count
+  - millisecond-duration
+  decisions:
+  - D-115
+- concepts:
+  - media-offset
+  - second-duration
+  absent: true
+- concepts:
+  - second-duration
+  - millisecond-duration
+  decisions:
+  - D-115
+
+- concepts:
+  - integer-id
+  - epoch-instant
+  absent: true
+- concepts:
+  - amount
+  - measure
+  decisions:
+  - D-005
+  - D-036

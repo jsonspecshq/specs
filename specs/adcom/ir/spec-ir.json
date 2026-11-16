@@ -2210,8 +2210,10 @@
       "html-object": 45,
       "markdown-object": 1
     },
-    "value_lists": 0,
-    "value_lists_by_origin": {}
+    "value_lists": 32,
+    "value_lists_by_origin": {
+      "table_cell": 32
+    }
   },
   "definitions": [
     {
@@ -9816,7 +9818,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_ad:Ad.secure#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -11432,7 +11436,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_asset:Asset.req#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -14269,7 +14275,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_placement:Placement.ssai#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -14416,7 +14424,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_placement:Placement.reward#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -14520,7 +14530,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_placement:Placement.secure#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -14568,7 +14580,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_placement:Placement.admx#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -14616,7 +14630,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_placement:Placement.curlx#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -14962,7 +14978,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_displayplacement:DisplayPlacement.instl#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -15010,7 +15028,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_displayplacement:DisplayPlacement.topframe#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -15173,7 +15193,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -15677,7 +15699,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_displayplacement:DisplayPlacement.priv#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -16442,7 +16466,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_assetformat:AssetFormat.req#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -17751,7 +17777,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_eventspec:EventSpec.wjs#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -17856,7 +17884,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_eventspec:EventSpec.wpx#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -18122,7 +18152,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_videoplacement:VideoPlacement.skip#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -19526,7 +19558,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_videoplacement:VideoPlacement.boxing#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -19930,7 +19964,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_audioplacement:AudioPlacement.skip#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -21459,7 +21495,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_companion:Companion.vcm#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -22091,7 +22129,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_site:Site.privpolicy#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -22387,7 +22427,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_site:Site.mobile#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -22435,7 +22477,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_site:Site.amp#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -22799,7 +22843,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_app:App.privpolicy#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -23148,7 +23194,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_app:App.paid#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -23302,7 +23350,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_dooh:Dooh.fixed#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -25126,7 +25176,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_content:Content.embed#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -27023,7 +27075,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_device:Device.dnt#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -27073,7 +27127,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_device:Device.lmt#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -27563,7 +27619,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_device:Device.js#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -27855,7 +27913,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_device:Device.iptr#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -28108,7 +28168,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_device:Device.geofetch#meaning/values:1"
+      ]
     },
     {
       "cites": [
@@ -30442,7 +30504,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_regs:Regs.coppa#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -30490,7 +30554,9 @@
         "qualifier": null,
         "target": null
       },
-      "value_lists": []
+      "value_lists": [
+        "key:object_regs:Regs.gdpr#meaning/values:1"
+      ]
     },
     {
       "cites": [],
@@ -38581,5 +38647,750 @@
       "section": "appendixb_changelog"
     }
   ],
-  "value_lists": []
+  "value_lists": [
+    {
+      "context_after": "There is no default and thus if omitted",
+      "host": "key:object_ad:Ad.secure#meaning",
+      "id": "key:object_ad:Ad.secure#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 276,
+        "row": 9,
+        "section": "object_ad",
+        "table": "table:object_ad:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_asset:Asset.req#meaning",
+      "id": "key:object_asset:Asset.req#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 487,
+        "row": 2,
+        "section": "object_asset",
+        "table": "table:object_asset:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_placement:Placement.ssai#meaning",
+      "id": "key:object_placement:Placement.ssai#meaning/values:1",
+      "items": [
+        {
+          "annotation": "status unknown",
+          "value": "0"
+        },
+        {
+          "annotation": "all client-side (i.e., not server-side)",
+          "value": "1"
+        },
+        {
+          "annotation": "assets stitched server-side but tracking pixels fired client-side",
+          "value": "2"
+        },
+        {
+          "annotation": "all server-side",
+          "value": "3"
+        }
+      ],
+      "loc": {
+        "line": 904,
+        "row": 2,
+        "section": "object_placement",
+        "table": "table:object_placement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "Typcially video ad implementations allow users to read an additional news article for free",
+      "host": "key:object_placement:Placement.reward#meaning",
+      "id": "key:object_placement:Placement.reward#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 919,
+        "row": 5,
+        "section": "object_placement",
+        "table": "table:object_placement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "There is no default and thus if omitted",
+      "host": "key:object_placement:Placement.secure#meaning",
+      "id": "key:object_placement:Placement.secure#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 929,
+        "row": 7,
+        "section": "object_placement",
+        "table": "table:object_placement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_placement:Placement.admx#meaning",
+      "id": "key:object_placement:Placement.admx#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 934,
+        "row": 8,
+        "section": "object_placement",
+        "table": "table:object_placement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_placement:Placement.curlx#meaning",
+      "id": "key:object_placement:Placement.curlx#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 939,
+        "row": 9,
+        "section": "object_placement",
+        "table": "table:object_placement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_displayplacement:DisplayPlacement.instl#meaning",
+      "id": "key:object_displayplacement:DisplayPlacement.instl#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 985,
+        "row": 2,
+        "section": "object_displayplacement",
+        "table": "table:object_displayplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "A value of \"1\" can be understood to mean that expandable ads are technically capable of being delivered",
+      "host": "key:object_displayplacement:DisplayPlacement.topframe#meaning",
+      "id": "key:object_displayplacement:DisplayPlacement.topframe#meaning/values:1",
+      "items": [
+        {
+          "annotation": "unfriendly iframe or unknown",
+          "value": "0"
+        },
+        {
+          "annotation": "top frame, friendly iframe, or SafeFrame",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 990,
+        "row": 3,
+        "section": "object_displayplacement",
+        "table": "table:object_displayplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_displayplacement:DisplayPlacement.ampren#meaning",
+      "id": "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1",
+      "items": [
+        {
+          "annotation": "early loading",
+          "value": "1"
+        },
+        {
+          "annotation": "standard loading",
+          "value": "2"
+        }
+      ],
+      "loc": {
+        "line": 1005,
+        "row": 6,
+        "section": "object_displayplacement",
+        "table": "table:object_displayplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_displayplacement:DisplayPlacement.priv#meaning",
+      "id": "key:object_displayplacement:DisplayPlacement.priv#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1050,
+        "row": 15,
+        "section": "object_displayplacement",
+        "table": "table:object_displayplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_assetformat:AssetFormat.req#meaning",
+      "id": "key:object_assetformat:AssetFormat.req#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1163,
+        "row": 2,
+        "section": "object_assetformat",
+        "table": "table:object_assetformat:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_eventspec:EventSpec.wjs#meaning",
+      "id": "key:object_eventspec:EventSpec.wjs#meaning/values:1",
+      "items": [
+        {
+          "annotation": "block list",
+          "value": "0"
+        },
+        {
+          "annotation": "allow list",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1343,
+        "row": 5,
+        "section": "object_eventspec",
+        "table": "table:object_eventspec:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_eventspec:EventSpec.wpx#meaning",
+      "id": "key:object_eventspec:EventSpec.wpx#meaning/values:1",
+      "items": [
+        {
+          "annotation": "block list",
+          "value": "0"
+        },
+        {
+          "annotation": "allow list",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1353,
+        "row": 7,
+        "section": "object_eventspec",
+        "table": "table:object_eventspec:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_videoplacement:VideoPlacement.skip#meaning",
+      "id": "key:object_videoplacement:VideoPlacement.skip#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1391,
+        "row": 4,
+        "section": "object_videoplacement",
+        "table": "table:object_videoplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_videoplacement:VideoPlacement.boxing#meaning",
+      "id": "key:object_videoplacement:VideoPlacement.boxing#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1521,
+        "row": 30,
+        "section": "object_videoplacement",
+        "table": "table:object_videoplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_audioplacement:AudioPlacement.skip#meaning",
+      "id": "key:object_audioplacement:AudioPlacement.skip#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1568,
+        "row": 2,
+        "section": "object_audioplacement",
+        "table": "table:object_audioplacement:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "For a given placement",
+      "host": "key:object_companion:Companion.vcm#meaning",
+      "id": "key:object_companion:Companion.vcm#meaning/values:1",
+      "items": [
+        {
+          "annotation": "concurrent",
+          "value": "0"
+        },
+        {
+          "annotation": "end-card",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1721,
+        "row": 2,
+        "section": "object_companion",
+        "table": "table:object_companion:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_site:Site.privpolicy#meaning",
+      "id": "key:object_site:Site.privpolicy#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1819,
+        "row": 6,
+        "section": "object_site",
+        "table": "table:object_site:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_site:Site.mobile#meaning",
+      "id": "key:object_site:Site.mobile#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1849,
+        "row": 12,
+        "section": "object_site",
+        "table": "table:object_site:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_site:Site.amp#meaning",
+      "id": "key:object_site:Site.amp#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1854,
+        "row": 13,
+        "section": "object_site",
+        "table": "table:object_site:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_app:App.privpolicy#meaning",
+      "id": "key:object_app:App.privpolicy#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1904,
+        "row": 6,
+        "section": "object_app",
+        "table": "table:object_app:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_app:App.paid#meaning",
+      "id": "key:object_app:App.paid#meaning/values:1",
+      "items": [
+        {
+          "annotation": "free",
+          "value": "0"
+        },
+        {
+          "annotation": "paid",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 1939,
+        "row": 13,
+        "section": "object_app",
+        "table": "table:object_app:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_dooh:Dooh.fixed#meaning",
+      "id": "key:object_dooh:Dooh.fixed#meaning/values:1",
+      "items": [
+        {
+          "annotation": "fixed",
+          "value": "1"
+        },
+        {
+          "annotation": "movable",
+          "value": "2"
+        }
+      ],
+      "loc": {
+        "line": 1969,
+        "row": 2,
+        "section": "object_dooh",
+        "table": "table:object_dooh:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_content:Content.embed#meaning",
+      "id": "key:object_content:Content.embed#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2064,
+        "row": 27,
+        "section": "object_content",
+        "table": "table:object_content:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_device:Device.dnt#meaning",
+      "id": "key:object_device:Device.dnt#meaning/values:1",
+      "items": [
+        {
+          "annotation": "tracking is unrestricted",
+          "value": "0"
+        },
+        {
+          "annotation": "do not track",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2287,
+        "row": 5,
+        "section": "object_device",
+        "table": "table:object_device:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_device:Device.lmt#meaning",
+      "id": "key:object_device:Device.lmt#meaning/values:1",
+      "items": [
+        {
+          "annotation": "tracking is unrestricted",
+          "value": "0"
+        },
+        {
+          "annotation": "tracking must be limited per commercial guidelines",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2292,
+        "row": 6,
+        "section": "object_device",
+        "table": "table:object_device:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_device:Device.js#meaning",
+      "id": "key:object_device:Device.js#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2342,
+        "row": 16,
+        "section": "object_device",
+        "table": "table:object_device:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "Refer to https://tools.ietf.org/html/rfc6235#section-4.1.1 for more information on IP truncation",
+      "host": "key:object_device:Device.iptr#meaning",
+      "id": "key:object_device:Device.iptr#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes (e.g., from 1.2.3.4 to 1.2.3.0)",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2372,
+        "row": 22,
+        "section": "object_device",
+        "table": "table:object_device:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": null,
+      "host": "key:object_device:Device.geofetch#meaning",
+      "id": "key:object_device:Device.geofetch#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2398,
+        "row": 27,
+        "section": "object_device",
+        "table": "table:object_device:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "The Children's Online Privacy Protection Act (COPPA) was established by the U.S",
+      "host": "key:object_regs:Regs.coppa#meaning",
+      "id": "key:object_regs:Regs.coppa#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2732,
+        "row": 1,
+        "section": "object_regs",
+        "table": "table:object_regs:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    },
+    {
+      "context_after": "The General Data Protection Regulation (GDPR) is a regulation of the European Union",
+      "host": "key:object_regs:Regs.gdpr#meaning",
+      "id": "key:object_regs:Regs.gdpr#meaning/values:1",
+      "items": [
+        {
+          "annotation": "no",
+          "value": "0"
+        },
+        {
+          "annotation": "yes",
+          "value": "1"
+        }
+      ],
+      "loc": {
+        "line": 2738,
+        "row": 2,
+        "section": "object_regs",
+        "table": "table:object_regs:1"
+      },
+      "origin": "table_cell",
+      "subject": null
+    }
+  ]
 }

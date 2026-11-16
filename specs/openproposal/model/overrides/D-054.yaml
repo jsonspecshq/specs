@@ -1,0 +1,53 @@
+format: 2
+id: D-054
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: '§ 2.2 states `Side`, whose terms are `buyer` and `seller`, and `D-013` reads a list of the
+  two parties as `Party`, which it gives to `actor`. With § 2.2''s vocabulary declared, three members
+  named `actor` resolve two ways: `NegotiationHistoryEntry.actor` to `Party` and `ChangeRequest.actor`
+  and `HistoryEntry.actor` to `Side`. Is that one concept or two?'
+covers:
+- ir: def:2.2:Side
+  digest: 35df06335d0d9fc85badd131e1875337d07d91b0f1bf8fb7fdb068349fefb7d2
+  quote: '`Side` | `buyer` | `seller` | It says which side, never who that side is. `Party` says who'
+options:
+- id: two-concepts
+  summary: Two. `Side` names which of the two sides of the transaction a value is about; `Party` names
+    who a party is. `actor` is a homonym, listed as one with this record as the explanation, and each
+    member keeps the vocabulary its own text gives it.
+- id: one-concept-side
+  summary: One, and it is `Side`. `Party` is withdrawn for `actor` and the three members all take `Side`,
+    so the member name resolves once.
+- id: one-concept-party
+  summary: One, and it is `Party`. § 2.2's `Side` is read as another spelling of the two-party list and
+    binds to `Party`, so § 2.2 adds no vocabulary.
+chosen: two-concepts
+rationale: 'The specification distinguishes them itself, in the `Side` row and in as many words: "It says
+  which side, never who that side is. `Party` says who." A record that collapsed the two would publish
+  one type against a sentence that exists to keep them apart.
+
+  `one-concept-party` is refused for the same sentence, and because `Party` is an object elsewhere in
+  this lock — § 2.2 declares a `Party` key table with `domain` among its keys, so a party is a thing with
+  members, while a side is one of two words. Binding `Side` to `Party` would type a two-term enumeration
+  as an object.
+
+  `one-concept-side` is refused because it would withdraw a landed reading over a member `D-013` read
+  correctly for the text it read: `NegotiationHistoryEntry.actor` descends from the inline `negotiation_history[]`
+  object, whose own row names the two parties, and `D-013` named that list `Party` so `actor` and `build_owner`
+  could share it. Nothing about that is wrong; the rewrite added a second, narrower vocabulary beside
+  it and gave the new objects'' `actor` that one instead.
+
+  So the member name carries two concepts on this lock and is listed under `homonyms` in the kernel binding,
+  which is the mechanism the domain model already uses for `basis`, `id`, `status`, `type` and `version`
+  — five member names that each mean different lists on different objects, every one of them explained
+  by the record that read them.'
+evidence:
+- 'docs/reports/reading-runs/openproposal-d050-binding-2026-11-08.md § 4: declaring § 2.2''s vocabularies
+  raises this collision, measured as the `domains-homonyms` line naming the three members.'
+- '`D-013`''s rationale: "A list of the two parties, `buyer` and `seller`, is `Party`, so `actor` and
+  `build_owner` share it".'
+feedback: § 2.2's `Side` row already says it is not `Party`. Say the same where `actor` is defined, because
+  a reader meeting `actor` on one object and `actor` on another has no way to tell which of the two the
+  row means.

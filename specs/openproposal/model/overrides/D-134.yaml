@@ -1,0 +1,187 @@
+format: 2
+id: D-134
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  The specification states a message's keys row by row and ships no payload of it. Is a payload
+  whose every value is a byte of a shipped payload, assembled into the envelope those rows state,
+  a derived fixture or an authored one?
+covers:
+  - ir: rule:2.2:e46f15c4
+    digest: 842f144cbb538352e229fb3aafe5bbb71a204f09e1aeb96e1c3d14aa72935dae
+    quote: REQUIRED when the `VersionRef` is outside its proposal
+  - ir: key:2.2:VersionRef.seller_domain
+    digest: ec8fb461339f3b87060c0c03b4969284400815d632384455d3a9aa69e78fe3c8
+    quote: "`seller_domain` | REQUIRED when the `VersionRef` is outside its proposal | The proposal's `seller.domain`"
+  - ir: sentence:2.2:d3643f2d
+    digest: 5e3219f08b4dd2fe221c62ac093d51269d6869f5506998d3ea9f6ac3017c5708
+    quote: "A `proposal_id` is unique only within a `seller.domain` (§ 4.1): a `VersionRef` inside a proposal resolves against that proposal's `seller`, and one outside a proposal carries `seller_domain`."
+  - ir: def:3.3:AvailabilityRead
+    digest: 93df95a7b46f5d35fb0ac88cbcdc18d57f37dc78eb66f0846d6f17051255e5b5
+    quote: "`AvailabilityRead` | holds the keys of `BuyerWrites` (§ 3.4) and these:"
+  - ir: key:3.3:AvailabilityRead.offer
+    digest: 78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268
+    quote: "`offer` | REQUIRED | The line item and the `version` whose options the figures are computed against. `line_item_id` is REQUIRED here"
+  - ir: key:3.3:AvailabilityRead.flight
+    digest: 774c5e1a9c547830d62d8878c1ddbd824b259eb51a73631b9f1e79e52f04c1e5
+    quote: "`flight` | REQUIRED | The flight, as `commitment.flight` (§ 5.6.1)"
+  - ir: key:3.3:AvailabilityRead.pricing_id
+    digest: 825c08e7352e1922586f6582bc57945701072b2bca5579470075b658aa715e56
+    quote: "`pricing_id` | OPTIONAL | The entry the buyer means to commit under, as `commitment.pricing_id`, so that the figure can count that entry's `unit` (§ 5.6.5)"
+  - ir: sentence:3.3:c10596ed
+    digest: 7f6c2ce16fcce5be29577740b6413b0557e1ce02bb13b52656809ae161f76783
+    quote: A buyer reads these figures by sending the seller an `AvailabilityRead`.
+options:
+  - id: assembly-from-shipped-bytes-is-derivation
+    summary: >-
+      A fixture is derived when every byte in it answers to a source the specification ships:
+      values to shipped payloads, keys and types to the key table that states them, and the one
+      difference between the halves to the rule's own statement of what it forbids. Assembling
+      shipped values into a stated envelope invents nothing, so it is derivation, and the pair
+      lands.
+  - id: only-mutation-of-one-shipped-payload-is-derivation
+    summary: >-
+      Derivation is the single operation the convention names: take one example the specification
+      ships and change what the rule forbids. A payload with no shipped payload as its input is
+      authored however its values were sourced, so the pair stays blocked and the gap goes to the
+      working group.
+  - id: author-it-and-say-so
+    summary: >-
+      It is authoring, and authoring is permitted here because the source ships no payload of the
+      type, with this record as the authority.
+chosen: assembly-from-shipped-bytes-is-derivation
+rationale: >-
+  `D-119`, `D-121`, `D-124` and `D-131` each read this row and each ended in the same place: the
+  rule is a rule, it is owned by `VersionRef`, its pair sits at the carrier, and the carrier §
+  3.3 names is a message the specification ships no payload of. None of the four asked whether a
+  payload of that message can be derived rather than authored, so none of them could land the
+  pair. That is the question this record answers, and it is a question about what derivation is,
+  not about what § 2.2 means.
+
+
+  **The convention states its own test, and it is about provenance of bytes.** "Fixtures are
+  derived. A test vector's valid half is the source's own bytes: take an example the
+  specification ships and mutate exactly what the rule forbids. Never author a payload where the
+  source has one." The second sentence gives the principle -- the source's own bytes -- and the
+  third gives the prohibition, conditioned on the source *having* a payload. Here it has none, so
+  the prohibition does not reach this payload, and what is left to satisfy is the principle.
+
+
+  **"Appears in no shipped file" cannot be the test, because the licensed step fails it.** Delete
+  `legal_name` from proposal-agreed.yaml's `buyer` and the result is a byte sequence that appears
+  in no example. The convention calls that derivation. So what makes the mutated half derived is
+  not that it was found somewhere; it is that every byte of it answers to a source: the unchanged
+  bytes to the example, the changed one to the rule's own statement of what it forbids. Derivation
+  is bytes answerable to the source. Authoring is a byte whose only authority is the writer's
+  judgement.
+
+
+  **Under that test the assembly is derivation, and more tightly sourced than the half the
+  convention already licenses.** The mutated invalid half has one byte whose authority is a
+  reading of the condition. The assembly has none: every value is the byte a row points at, and
+  every key and type is the row. Row by row, § 3.3 does not merely permit each value, it names
+  where the value comes from.
+
+
+  - `offer` is REQUIRED and its row makes `line_item_id` REQUIRED there, so only a shipped
+    `VersionRef` carrying one will serve. Three do.
+  - `flight` is REQUIRED and its row states the value: "The flight, as `commitment.flight` (§
+    5.6.1)". The row sends the reader to a `commitment.flight`.
+  - `pricing_id` is OPTIONAL and its row states the value: "as `commitment.pricing_id`".
+  - `seller_domain` inside the offer is what § 2.2's row calls "The proposal's `seller.domain`",
+    and the offer names a proposal whose `seller.domain` the same file ships.
+
+
+  **The provenance, path by path, all of it from examples/proposal-agreed.yaml.** Nothing was
+  invented and nothing was taken from a second file, so a reader can check the whole payload
+  against one document.
+
+
+  | Vector path | Shipped path | Value |
+  | --- | --- | --- |
+  | `/offer` `proposal_id`, `version`, `line_item_id` | `/change_requests/0/baseline` | `examplepub-agencya-custom-q4-2026`, `2`, `business-daily-display` |
+  | `/offer/seller_domain` | `/seller/domain` | `examplepub.example` |
+  | `/flight` | `/line_items/0/commitment/flight` | `2026-10-06T00:00:00Z` to `2026-12-21T23:59:59Z` |
+  | `/pricing_id` | `/line_items/0/pricing/0/pricing_id` | `bd-cpm-usd` |
+
+
+  The parts agree with each other as well as with their rows, because they are all parts of one
+  shipped document: `/proposal_id` is the proposal the offer names, `/seller/domain` is that
+  proposal's seller, and the flight and the pricing entry are the ones the named line item,
+  `business-daily-display`, ships. The message reads availability for that line item at that
+  version under that entry over that flight. The invalid half is the one mutation § 2.2's row
+  forbids: the same message with `seller_domain` absent from the `offer`.
+
+
+  **The objection weighed, and where it is sharp.** The strongest form of
+  `only-mutation-of-one-shipped-payload-is-derivation` is not that the bytes are unsourced but
+  that the envelope encodes readings: that in choosing which shipped reference, which flight and
+  whether to carry `pricing_id`, the record decides what a coherent availability read is, and
+  that is judgement. Two of its three parts do not survive. Choosing which of thirteen examples
+  to mutate is the same kind of choice and the convention licenses it; the concern is invented
+  values, not the absence of choice. And `pricing_id`'s presence is decided by its row, which
+  marks it OPTIONAL and states its value. The part that does survive is that no shipped payload
+  constrains which `commitment.flight` an availability read may carry, and the answer is that §
+  3.3's row constrains it instead -- it says the value is a `commitment.flight`, and the one taken
+  is the `commitment.flight` of the line item the offer names, which is the only one the rows
+  leave standing. Where a row names the value's source, taking the value from that source is
+  reading the row, not deciding past it.
+
+
+  `author-it-and-say-so` is refused because it would make this record the authority for bytes that
+  already have one. A record states a decision the text leaves open; it does not stand behind a
+  value the text supplies. Citing it for `examplepub.example` would record as a judgement what §
+  2.2's row and `/seller/domain` jointly state, and would put this payload in the same class as
+  the vectors of `D-066`, whose proposals carry `7c9e6679-7425-40de-944b-e07fc1f90ae7` and "A
+  display package for the spring campaign" -- values of no shipped payload and no row. Those
+  predate the convention and are what it was adopted to stop producing. Telling the two classes
+  apart is the whole use of the test.
+
+
+  **What the pair needs of the mechanism already exists and this is its first consumer.**
+  `src/rules.ts` reads a vectors entry's type as `v.type ?? r.owner`, so an entry names the type
+  its payloads are instances of and the rule's owner need not be it. Measured over the nine
+  vectors files before this entry: 44 entries, 0 naming a type other than the rule's owner. So
+  the owner stays `VersionRef`, which `presence-statement` derives and which `D-124` and `D-131`
+  settled, and the entry names `AvailabilityRead`.
+
+
+  **The check and what it leaves undecided.** The rule's check reads the carrier: given an
+  `AvailabilityRead` it requires `seller_domain` inside `offer`, and given a reference on its own
+  it returns no verdict, because a reference says nothing about what carries it. A reference that
+  states the member satisfies the row wherever it travels, since the row requires the member in
+  one case and forbids it in neither. The examples gate applies the check at the rule's owner, so
+  it meets the four shipped references and leaves each undecided, which is what § 11 asks of a
+  check whose verdict turns on what the payload does not hold, and `outputs/examples/findings.yaml`
+  records the four. The alternative was measured by `D-119` and refused: a check reading an absent
+  carrier as "outside" reports all four shipped references as breaking the rule and takes
+  `examples-validate` from 41 to 45.
+
+
+  **What this record does not decide.** It decides what makes a fixture derived. It does not
+  re-read any other row. `rule:5.6.1:94be9998` `CommitResult.availability` is the row the test
+  most plainly bears on -- `D-118` left it on the ground that the source ships no `CommitResult`
+  at all -- and whether its halves can be assembled turns on whether each of their values, among
+  them a `decline` the examples never write and the figures of an `availability` map, is a byte a
+  shipped payload or a row supplies. That is a different question about a different row, and one
+  cause is one record, so it stays with `D-118`, and with the finding that no shipped payload holds a
+  `CommitResult`, an `ErrorObject`, a decline entry or a `VersionRef` outside its proposal,
+  until someone measures it. This
+  record changes no mapping entry, no schema and no other rule's vectors.
+feedback: >-
+  § 3.3 states the keys of `AvailabilityRead` and the specification ships no payload of one, so
+  the only case in which `VersionRef.seller_domain` is required has no worked example:
+  `seller_domain` appears in no shipped payload, and the four references the examples carry are
+  one `Proposal.issued_from` and three `ChangeRequest.baseline`, every one inside a proposal. Ship
+  an `AvailabilityRead` whose `offer` names a line item and a `version` and carries the
+  `seller_domain` of the proposal's seller, beside its REQUIRED `flight`. Conformance vectors for
+  the row can be derived without it, from the rows and the examples' own values, but an
+  implementer reading the examples sees only the case in which the member is absent.
+
+
+  Separately, § 3.3's lead-in says an `AvailabilityRead` "holds the keys of `BuyerWrites` (§ 3.4)
+  and these", and a reader of the three rows alone cannot tell that the message also carries a
+  buyer's writes. Either list the inherited paths in § 3.3, or state in the lead-in that the
+  inherited keys are every path § 3.4 lists and all OPTIONAL.

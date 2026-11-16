@@ -1,0 +1,100 @@
+format: 2
+id: D-038
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "The published tag gives `sellerstatus` value `4` two meanings, `deal is complete` and `deal is archived`, and states no `3`. What does value `4` mean, and what does the schema publish for it?"
+covers:
+  - ir: field:object-deal:sellerstatus#description/values:1
+    digest: dd529e414958473bad788115a191289a0d211501f0494a03faccba4da5d71cf9
+    quote: "`0` (deal is active) | `1` (deal is paused) | `2` (deal is pending) | `3` (deal is complete (ie. selling scomplete (ie. selling system shows deal has completed)) | `4` (deal is archived (cannot be active again))"
+    locks: [main]
+  - ir: field:object-deal:sellerstatus#description/values:1
+    digest: 5ce582edd21c71a68d1eb059567e90aa167f7c8e007db7316a5ff8d2bfc494c8
+    quote: "`0` (deal is active) | `1` (deal is paused) | `2` (deal is pending) | `4` (deal is complete (ie. selling scomplete (ie. selling system shows deal has completed)) | `4` (deal is archived (cannot be active again))"
+    locks: [tag-1.0-202602]
+options:
+  - id: fold-with-both-labels
+    summary: >-
+      One branch for value `4`, whose label and code name carry both meanings
+      the text gives it. The published code list admits exactly the values the
+      text admits, and the label says plainly that the value is ambiguous.
+  - id: read-as-typo
+    summary: >-
+      Read `4` = complete as `3` = complete, on the evidence that the sequence
+      runs `0` to `4` with one gap and that the later text states `3` =
+      complete. The published list gains a value the tag never writes.
+  - id: refuse-the-list
+    summary: >-
+      Publish no code list for the tag's `sellerstatus`, leaving it a plain
+      integer, because a list one of whose values has two meanings enumerates
+      nothing.
+  - id: keep-the-later-label
+    summary: >-
+      One branch for `4`, labelled `deal is archived` alone, because the second
+      of two rows writing the same value is the one that stands.
+chosen: fold-with-both-labels
+rationale: >-
+  Only the chosen option publishes the set the text publishes. The tag admits
+  `0`, `1`, `2` and `4` and nothing else, and a consumer sending `4` has sent
+  a value the text allows; the schema's four branches accept exactly those and
+  refuse every other integer. Each of the other three departs from the text in
+  a direction the text does not license.
+
+  `read-as-typo` is the likeliest account of how the defect arose and still
+  the wrong thing to publish. The sequence runs `0` to `4` with `3` missing,
+  and `main` — the same document later — writes `3` = complete where the tag
+  writes `4`, so a human reader will conclude the digit was mistyped. But a
+  published code list claims to enumerate what the text states, and adding
+  `3` would have the tag's schema accept a value the tag never writes. The
+  directional floor admits a type wider than the document; it does not admit a
+  code list that claims the document says something it does not. The reading
+  belongs in the feedback, where a correction to the text can act on it, and
+  not in the bytes a consumer validates against.
+
+  `refuse-the-list` throws four unambiguous codes away to punish one ambiguous
+  one, and leaves every consumer of the tag with a bare integer where the text
+  names four states. `keep-the-later-label` picks one of two labels the text
+  gives equal standing and states the choice nowhere a reader can see it.
+
+  What the choice costs, and it is a real cost. The label reads `deal is
+  complete or deal is archived (cannot be active again)` and the generated
+  constant reads `DEAL_IS_COMPLETE_OR_DEAL_IS_ARCHIVED_CANNOT_BE`, truncated
+  by the code-name rule. A consumer of the tag cannot tell a completed deal
+  from an archived one, because the text it is generated from cannot either.
+  That cost is the specification's and this record does not hide it behind a
+  tidier name.
+
+  This record changes no published byte. The mapping rule already folds the two
+  rows into one branch with a concatenated label, so what was missing was not
+  the behaviour but the review: a value whose meaning the text leaves open was
+  settled by a rule, and the rule's answer is now a reading somebody chose.
+
+  Measured. `specs/dealsapi/schemas/tag-1.0-202602/modules/deal/1/deal.json`
+  publishes `SellerDealStatus` with four branches -- `0`, `1`, `2` and `4` --
+  against the five of `specs/dealsapi/schemas/modules/deal/1/deal.json`, where
+  `3` is stated and the labels do not combine. Extraction reports the
+  duplicate as a finding on the tag lock and not on `main`, so the two locks
+  disagreeing is what makes it visible, which is what the two-lock structure
+  is for.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L88"
+  - "https://github.com/IABTechLab/deal-api/blob/938a5d1fdb5705ae53b2584c90b9eb325b71a96b/deal1.0.md#L88"
+feedback: >-
+  Two defects in `Deal.sellerstatus`, both in the published 1.0 text.
+
+  Value `4` is given two meanings — `deal is complete` and `deal is archived
+  (cannot be active again)` — and no `3` is stated, while the states run `0`
+  through `4` otherwise. A later revision of the same table writes `3` = deal
+  is complete, so the intended list is almost certainly `3` = complete and `4`
+  = archived, and the published tag has `3` mistyped as `4`. Until that is
+  corrected, no implementation can distinguish a completed deal from an
+  archived one, and two implementations reading the same `4` may disagree about
+  what the seller meant.
+
+  Separately, and on both revisions, the label for the completed state reads
+  `deal is complete (ie. selling scomplete (ie. selling system shows deal has
+  completed)` — an unclosed parenthesis around a fragment that repeats itself
+  and truncates `system` to `scomplete`. The intended sentence appears to be
+  `deal is complete (ie. selling system shows deal has completed)`.

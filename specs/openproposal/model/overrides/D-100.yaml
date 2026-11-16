@@ -1,0 +1,56 @@
+format: 2
+id: D-100
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Section 5.6's `availability.unit` states its core terms as "the `unit` terms of § 5.6.5, and
+  `slots_per_loop` ... | `unit_periods`", and § 5.6.5's unit terms are the vocabulary `ChargeableUnit`.
+  What does the row hold?
+covers:
+
+- ir: key:5.6:Availability.unit
+  digest: 799e276073ecf9494833c499c7bf09978380730d8256bb742c2470492ffaba77
+  quote: "`unit` | REQUIRED | What `quantity` counts. Core terms: the `unit` terms of § 5.6.5, and `slots_per_loop`
+    (as the § 5.2.4 key) | `unit_periods` (one unit for one period, such as a board for a 4-week cycle).
+    A receiver that doesn't know a term can't compare the figure, and still reads the line item"
+- ir: key:5.6:Availability.unit#meaning/values:1
+  digest: 69104ba0c54549a40dbcb50082a096a9e06c54006ea02a54093dd88b372762f4
+  quote: "`slots_per_loop` (as the § 5.2.4 key) | `unit_periods` (one unit for one period, such as a board
+    for a 4-week cycle)"
+options:
+- id: a-union-of-two-vocabularies
+  summary: The row holds a union, `AvailabilityUnit`, of `ChargeableUnit` and the two terms the row
+    itself lists, which take a vocabulary of their own. Each list stays defined once, and the row's name
+    goes to what the row holds.
+- id: one-vocabulary-of-thirteen-terms
+  summary: '`AvailabilityUnit` lists all thirteen terms, so the row holds one vocabulary and the eleven
+    terms of § 5.6.5 are written twice.'
+chosen: a-union-of-two-vocabularies
+rationale: >-
+  What the row holds is what the sentence says: a chargeable unit, or one of two units of its own.
+  Reading it as one vocabulary of thirteen terms restates § 5.6.5's eleven, and each list is defined
+  once and referenced (type rules § 5) -- which is the clause the model enforces on a second list that
+  names a vocabulary's terms, and which forbids a second list from adding to them. So the vocabulary
+  that holds both is a union of the two, which is what the model's union kind is for and what § 2.2's
+  `Measurer` already is.
+
+
+  **The name goes to what the row holds.** Under the § 7 scheme the row's name is `AvailabilityUnit`,
+  and the row holds the union, so the union takes it. The two terms the row lists need a name the text
+  does not give, which is `concept-names`: they are what the quantity counts when it is not a billable
+  unit -- a slot in a DOOH loop, or one unit for one period, such as a board for a four-week cycle --
+  so the concept is a unit of capacity and the vocabulary is `CapacityUnit`.
+
+
+  **Openness stays on the terms the row lists.** `ChargeableUnit` is closed, because § 5.6.5's unit
+  column states every unit a cost method bills in. `CapacityUnit` is open, because the row says a
+  receiver that doesn't know a term still reads the line item, so the union admits a namespaced term
+  through that branch and through no other.
+
+
+  **What was published before.** `AvailabilityUnit` was a vocabulary of the two terms the row lists and
+  nothing else, so an `Availability` counting `impressions` was refused by a type narrower than the
+  document. `rule-vectors` is what found it, on all three payloads of the pair for section 5.6's
+  `availability.certainty` rule, and that pair is written with this record.

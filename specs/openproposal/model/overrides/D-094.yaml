@@ -1,0 +1,162 @@
+format: 2
+id: D-094
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Twelve rows state a bare `String` or `Integer`. Which domain concept is each one's?
+covers:
+
+- ir: field:4.2:media_kit_detail
+  digest: 98405c359500e6ccda919cc364a242423ca10808af742184faa6bff9adc3d5a0
+  quote: "`media_kit_detail` | String | seller-set | Detail at media-kit depth"
+- ir: field:5.4:approval
+  digest: 99af7aa57b5240f96c95824540ea05ab9a2af3ee90927e17debd90e2cc714244
+  quote: "`approval` | String | seller-set | Review SLA and revision policy, in prose"
+- ir: field:5.4:creative_policy
+  digest: fdeee2307d43e492a541ea41f73584ad82b2fb6445fbe983237205093b286996
+  quote: "`creative_policy` | String | seller-set | Content and category restrictions on creative, in prose"
+- ir: field:5.6:pricing[].unit_label
+  digest: e5f4eb08fce55537e174e857278fd675a79a1ba5b42e2467c5df819a1641a425
+  quote: "`pricing[].unit_label` | String | seller-set | A short label for one unit, such as `engagement`"
+- ir: field:4.1:brief_id
+  digest: e7bbfd797d37cc1822ac53a36835fc02fbb29387cddf12fd39783927a3126d8c
+  quote: "`brief_id` | String | immutable | The buyer's brief this proposal answers"
+- ir: field:4.1:spec_version
+  digest: 0e8346d62b7c56a63c39d2f66dcfac9fbf8bff3984485db6ea5c716221d8f281
+  quote: "`spec_version` | String | seller-set | The version of this specification the document follows, such as `3.0`"
+- ir: key:2.3:ProposalManifest.spec_version
+  digest: 646a83f545dd6a36e20c5d8f138509cf52c8f0f9ae57529a82ed7a13662c7e23
+  quote: "`spec_version` | REQUIRED | The version of this specification the file follows"
+- ir: key:4.1.2:AssentEntry.idempotency_key
+  digest: e507e674a3801585327a6dcc515e8b0d0d56fd69091e5cd0ab706fe1bb897cef
+  quote: "`idempotency_key` | REQUIRED when `role` is `commitment` | Buyer-generated, unique per `commit`, opaque, and scoped to one buyer and seller pair. The seller MUST NOT interpret it (§ 5.6.1)"
+- ir: key:5.6.2:Hold.reference
+  digest: fde272801a755858593b88859e48ea00c73442bfb05db146898efa220f439dba
+  quote: "`reference` | OPTIONAL | Seller-set. The seller's id for the reservation, so a buyer can reconcile a hold against the seller's systems"
+- ir: key:5.3:BuyerList.source
+  digest: fff3e26ee551c54a3aeba51dc8cb8992867b5b4eb49b0d22ef023ccd362bf98e
+  quote: "`source` | OPTIONAL | Where the list comes from, such as `advertiser_crm`"
+- ir: field:5.6:pricing[].pricing_id
+  digest: 20cd37022edf6b216eab7d933128110573ca6011c455b945d7bf3fd4b7c037a5
+  quote: "`pricing[].pricing_id` | String | immutable | Names the entry within the line item. A revision MUST NOT reuse it for a different `cost_method`, `cost_parameters`, `currency`, or `transaction_mechanisms[]`"
+- ir: key:5.6.2:Hold.position
+  digest: 22f86a1bf96d764540fc3c09bfa1b2d02eaa77e71e3e52d12bc4307b49d12bf3
+  quote: "`position` | OPTIONAL | Seller-set, 1 for first in line, in the order granted. A later hold moves up only when the one ahead expires, is released or converts. Holds on the same inventory reserve it in that order, so a later hold reserves only what the holds granted ahead of it leave (§ 5.6.1)"
+options:
+- id: by-what-the-row-says-the-value-is-for
+  summary: >-
+    Each row takes the concept its own meaning names: prose a reader reads is text, an id another
+    system or party writes is an external id, and a place in a queue is a count.
+- id: leave-them-bare
+  summary: >-
+    Each keeps the bare scalar its cell states, so a published type says only that the value is a
+    string or an integer and the domain model holds nothing about it.
+chosen: by-what-the-row-says-the-value-is-for
+rationale: 'A bare `String` in a cell says what the value is written as and nothing about what it is
+  for, and the domain model is the other half. Each of these twelve rows says the other half in its own
+  meaning, and the concept is whichever that names.
+
+
+  **Four are prose.** A proposal''s `media_kit_detail` is "Detail at media-kit depth"; a line item''s
+  `approval` is "Review SLA and revision policy, in prose" and its `creative_policy` is "Content and
+  category restrictions on creative, in prose"; a pricing entry''s `unit_label` is "A short label for
+  one unit, such as `engagement`". Each is written for a person or an agent to read and nothing compares
+  two of them, which is the `text` concept.
+
+
+  **Six are an identity another system or party writes, and one is a minted id.** A proposal''s `brief_id` is "The buyer''s
+  brief this proposal answers", which the buyer''s own system holds. A `spec_version` is "The version
+  of this specification the document follows, such as `3.0`", on a proposal and on a manifest, and the
+  `external-id` concept names a published document''s version among its cases. An assent entry''s
+  `idempotency_key` is "Buyer-generated, unique per `commit`, opaque". A hold''s `reference` is "The
+  seller''s id for the reservation, so a buyer can reconcile a hold against the seller''s system". A
+  buyer list''s `source` is "Where the list comes from, such as `advertiser_crm`", a label that system
+  keeps. And a pricing entry''s `pricing_id` "Names the entry within the line item", which the
+  seller mints for the buyer to name it by, so it is a minted id. Its cell reads `String`, as a
+  proposal''s `proposal_id` and a line item''s `line_item_id` do, and those are the `minted-id` concept''s
+  too: in this specification an id a party of the proposal mints is written as a string and typed as the
+  `Uuid` the concept carries. Reading the cell for the concept rather than the row would have made this
+  one an external id, which is an id another system holds -- and the two rows that reference it, an
+  availability read''s and a commitment''s, are minted ids already, so one member would have carried two
+  concepts.
+
+
+  **One is a count.** A hold''s `position` is "Seller-set, 1 for first in line, in the order granted",
+  a whole number of places and never negative.
+
+
+  `leave-them-bare` is what the model published, and what it costs is not a type but a check. A value
+  with no concept is read by no domain rule, so nothing holds a prose field to carrying no identity, and
+  nothing holds an id to being compared rather than parsed. The concept is where that is stated, which
+  is why the other two specifications give one to every row of this kind.
+
+
+  **Rows of the same shape that are not read here** wait on something other than a concept. A row that
+  states a value of another standard''s code list holds that list and not a scalar: a break position''s
+  `delay`, `podseq` and `slotinpod` are read by `D-105`, an audience option''s `taxonomy` by `D-104`,
+  and a pricing entry''s `price_type` and a placement''s `ssai` wait on the list each one names. The shared
+  `TaxonomyCodes.taxonomy` waits on something else again, and on no list: its cell is "A value from the
+  list **the field names**", and the lead-in says each field that holds the object names the list `taxonomy`
+  comes from. Three fields hold it and they name two lists -- § 5.2.4''s `venue_type` names AdCOM''s List:
+  DOOH Venue Taxonomies, § 5.5''s `exclusions.categories` and § 5.6.7''s `ExclusivityOption.categories`
+  name its List: Category Taxonomies -- and the source ships both: `venue_type: {taxonomy: 5}` in line-item-dooh.yaml,
+  which that list numbers OpenOOH Venue Taxonomy 1.1, and `categories: {taxonomy: 8}` in line-item-audio.yaml,
+  proposal-package.yaml and proposal.yaml, which the other numbers IAB Tech Lab Ad Product Taxonomy 2.0.
+  Both lists are published in AdCOM''s committed lists module and both reach this specification through
+  the registry import its profile already holds, so neither the list nor the import is what is missing.
+  What is missing is a type shape: one entry on one row cannot carry two lists. At List: DOOH Venue Taxonomies
+  the published type refuses three shipped `categories` payloads, because 8 is no code of that list; at
+  List: Category Taxonomies it accepts both numbers and publishes `taxonomy: 5` as IAB Tech Lab Content
+  Taxonomy 2.1, which is not what the dooh property states, and no gate sees a type that accepts a payload
+  under the wrong meaning. So the row waits on a reading of whether an object whose member''s list its
+  holder names becomes a constructor over that list, which is what the five object constructors of `kernel/constructors.yaml`
+  already are and what `Placement.api` already does with an AdCOM list under `D-071`. A delivery counting''s
+  `play_tolerance_ms` is a length of time in
+  milliseconds, and the kernel''s duration is in seconds, so it needs a type before a concept. A
+  committed metric''s `level` is "a `Fraction` under a rate term, a count under a count term", which is
+  two types under one member: `D-097` reads it as the basis its sibling''s term states, and the row is
+  cited for the concept that basis gives it where no term narrows it.'
+challenge:
+- type: ExternalId
+  value: brief-2026-Q1-0042
+  verdict: accept
+  context: >-
+    A buyer whose planning system numbers its briefs, writing the id of the
+    brief this proposal answers.
+  reason: >-
+    `by-what-the-row-says-the-value-is-for` types the row at the `external-id`
+    concept, whose value is the id as the system that keeps it writes it, and
+    a receiver compares it by exact equality rather than parsing it.
+- type: ExternalId
+  value: 42
+  verdict: reject
+  context: >-
+    A buyer whose system numbers its briefs and sends the number, because the
+    id is a number in the place it comes from.
+  reason: >-
+    An external id travels as the system writes it and is compared by exact
+    equality, so it is carried as a string whatever the other system stores:
+    `42` and `"42"` would otherwise be two ids for one brief. The concept's
+    type refuses the number.
+- type: Count
+  value: 1
+  verdict: accept
+  context: >-
+    A buyer first in line for a hold, which is the value the seller sets when
+    it grants the first one.
+  reason: >-
+    A hold's `position` is "Seller-set, 1 for first in line, in the order
+    granted", a whole number of places, which is the `count` concept.
+- type: Count
+  value: -1
+  verdict: reject
+  context: >-
+    A seller using a negative to mean the hold is in no queue, as a sentinel.
+  reason: >-
+    A count is never negative, so the sentinel is refused and a hold that is
+    in no queue carries no `position` at all. `leave-them-bare` is the option
+    this rejects: a bare `Integer` takes `-1` and tells the sender nothing,
+    which is the whole of what a concept adds to a cell that says only how
+    the value is written.

@@ -1,0 +1,110 @@
+format: 2
+id: D-036
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: "Five statements say what an attribute's value must be, and carry no actor. Are they obligations on a party or rules on an object?"
+covers:
+  - ir: rule:object-terms:5c3134f5
+    digest: 0c525e45c48b0b9a60f1058a01f98288229799f362e3c50da10f6bfcbbf6b82a
+    quote: Evergreen or always on deals should leave this field blank.
+  - ir: rule:object-inventory:81ab0b3a
+    digest: 839cf61993f70a2572439e02156571e5a5367f29cd6564d39e490d787dcd5c00
+    quote: If used, the values in this attribute must contain the same value used in transactions (i.e. OpenRTB bid requests) in the field specified by the SSP/exchange.
+  - ir: rule:auxiliary-data:3020f0de
+    digest: 176f1b12cff99beb65db510c35da6f2f592255ecd7a8753bf5ca4fcbf590c567
+    quote: "`auxdata` should be used whenever any non-publisher data is expected to be part of a given deal."
+  - ir: rule:auxiliary-data:bf4c5c99
+    digest: 96739fc3def87386bc52644a68bb6422e49a8f86757bf59af86d104a2e3dd308
+    quote: While the non-publisher data entities are not named, if any company is being paid for their data and/or optimization, this value should indicate the presence of non-publisher data.
+  - ir: rule:auxiliary-data:436042a5
+    digest: 0ea9b0f012e4a791c48322642f352450bc2234d390ab453227d5d7de9664282e
+    quote: For example, a deal starts with some additional data and expects the list of data and/or optimization services to be added or updated as the deal is in flight should use a value of 2.
+options:
+  - id: obligation-on-the-seller
+    summary: >-
+      The side that fills a deal in is the seller, so each is an obligation
+      on the seller: it says what the seller writes into the deal.
+  - id: rule-on-the-object
+    summary: >-
+      Each says what a payload must or must not contain — a field left
+      blank, an attribute's values matching the ones used in transactions,
+      an attribute set when a condition holds — so each is a rule on the
+      object whose attribute it constrains: `Terms`, `Inventory`, and
+      `Deal`.
+  - id: informative
+    summary: >-
+      Each is guidance on how to fill a field in, with no conformance
+      content.
+chosen: rule-on-the-object
+rationale: >-
+  Measured on both locks, `main` and `tag-1.0-202602`, by reading all 24
+  obligation claims' sentences for a grammatical subject: 19 have a subject
+  that names a person or a system, and these 5 have a subject that names
+  part of the document — "this field", "the values in this attribute",
+  "`auxdata`", "this value", and "a deal ... should use a value of 2". Each
+  states a condition under which a payload is or is not well formed, and
+  each is checkable on a deal payload alone, which is the whole distinction
+  between the two roles: an obligation is a requirement no payload can
+  show.
+
+  Two of the five have a witness in the same row that already went the
+  other way. `rule:object-inventory:81ab0b3a` and
+  `rule:object-inventory:2b2c54b3` are two sentences of one `sellerids`
+  cell: "If used, the values in this attribute must contain the same value
+  used in transactions" is carried as an obligation on the seller, and
+  "Should be limited to 64 characters in length" as a rule on `Inventory`.
+  Both constrain the same attribute's values and nothing distinguishes
+  them, so one of the two readings is wrong and the row says which: a
+  length bound and a value-equality bound are the same kind of statement.
+
+  `obligation-on-the-seller` is what the tree carries today, under D-032,
+  whose rationale reads these as "sellers set `auxdata` when non-publisher
+  data is paid for". That is true of the world and not of the sentences:
+  none of the five names a seller, and in this document "seller" is also
+  the name of a `Deal` attribute holding a domain, so the party name and
+  the attribute name collide at exactly the place a reader looks. The cost
+  of rejecting it is that the duty loses its holder, which is correct here —
+  the holder is whoever writes the payload, and a rule on an object binds
+  that party by constraining what it may write.
+
+  `informative` costs four SHOULDs and one MUST. `rule:object-inventory:81ab0b3a`
+  is a MUST, and reading a MUST as having no conformance content is the one
+  reading the text forbids outright.
+
+  What `rule-on-the-object` costs: a rule's job is to become a check, and
+  none of these five can be one today. "The same value used in transactions
+  in the field specified by the SSP/exchange" names a field this
+  specification does not carry, and "whenever any non-publisher data is
+  expected to be part of a given deal" names a condition no payload states.
+  So each becomes a rule that is registered and that no vector can exercise
+  — visibly unexercised rather than silently absent, which is the point of
+  moving them. The reading this record is least sure of is
+  `rule:auxiliary-data:436042a5`, whose sentence is introduced as an
+  example ("For example, a deal starts with ...") and whose subject is a
+  deal rather than an attribute, so `informative` has a real claim on it.
+
+  This record settles the reading and settles nothing about the value. A
+  statement's role and a rule's object are not derived by any mapping rule
+  and are not among the attributes a `name` record may set — `title`,
+  `description`, `defs-key`, `code-name`, `type`, `presence`, `open` — so
+  they live in the hand-written `as` of `specs/dealsapi/model/mapping/`,
+  which `npm run map` preserves for every entry that cites a decision.
+  Moving these five from `obligation` to `rule` also adds five rules the
+  rule checks must account for, which is a separate authority's call and
+  not this record's. Until it is made the five keep `role: obligation`.
+evidence:
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L109"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L128"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L213"
+  - "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#L215"
+feedback: >-
+  The `sellerids` row holds two requirements on the same attribute's
+  values, one a MUST and one a SHOULD, and they read as different kinds of
+  statement: "the values in this attribute must contain the same value used
+  in transactions" names a field in another specification that the reader
+  has to be told separately, where "Should be limited to 64 characters in
+  length" is a bound a reader can apply. Say which field in OpenRTB is
+  meant, or say that the SSP names it out of band and that no receiver can
+  check the attribute without that.

@@ -1,0 +1,110 @@
+format: 2
+id: D-165
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.1.1's fenced block lists the twenty paths a binding record removes. A block of paths is how this
+  document writes a profile's member list, and this one states what is taken out rather than what is
+  kept. What does the block state?
+covers:
+- ir: code:4.1.1:1
+  digest: 5f380bbe329be6760e05e67d76269b20e297fb3c34b9bf6502f106d8f5b794d7
+  quote: |-
+    $.version
+    $.status
+    $.assent
+    $.negotiation_history
+    $.change_requests
+    $.best_for
+    $.not_suitable_for
+    $.seasonality_notes
+    $.line_items[*].status
+    $.line_items[*].availability
+    $.line_items[*].addressable_scale
+    $.line_items[*].assets
+    $.line_items[*].buyer_supplied.expected_match_rate
+    $.line_items[*].buyer_supplied.segments
+    $.line_items[*].buyer_supplied.suppression_list
+    $.line_items[*].pricing[*].min_rate
+    $.line_items[*].hold
+    $.line_items[*].commitment.derived_units
+    $.line_items[*].external_references
+- ir: sentence:4.1.1:565dfc29
+  digest: 093fe8b60b7facbacd10eaa8f085f19b6c01c258f82ebf81f4917435c9c87db0
+  quote: "`record_digest` is the `Digest` (§ 2.2) of the digest input."
+- ir: sentence:4.1.1:87d9c76f
+  digest: 4bd6665899a952cdf85be68d945c240a6f23af2c244525e9ea8bbe229c11058c
+  quote: "Each removed path is one of three things: lifecycle state or sequence position (`version`, `status`, `assent[]`, `negotiation_history[]`, `change_requests[]`, `hold`); a seller assertion, advisory text, an informative figure, or an identifier minted downstream of agreement (`best_for[]`, `not_suitable_for[]`, `seasonality_notes`, `availability`, `addressable_scale`, `expected_match_rate`, `min_rate`, `derived_units`, `external_references[]`); or a delivery (`assets[]`, `segments[]`, `suppression_list`)."
+options:
+- id: the-operand-list-of-a-transformation
+  summary: >-
+    The block states no value of any published type: it is the operand list of the cut § 4.1.1 defines,
+    whose requirements and whose removal semantics are already claims of their own, and whose output is
+    hashed rather than validated. It is informative.
+- id: a-profile-by-subtraction
+  summary: >-
+    The binding record is a profile of the document, published as the document's paths less these
+    twenty, so a consumer has a type for the thing it is asked to hash.
+- id: leave-it-reported
+  summary: >-
+    The block stays unmapped and the bijection gate keeps reporting it, as a block whose question this
+    repository has not answered.
+chosen: the-operand-list-of-a-transformation
+rationale: 'A block of paths one per line is how this document writes a profile''s member list (type
+  rules § 3), and that form is why this block needs a reading rather than a rule: it has the shape of a
+  projection and the meaning of its complement.
+
+
+  **What the section does with the block.** "The binding record of a document for a set of line items S
+  is the JSON form of that document in its Full Representation (§ 2.1), restricted to the line items in
+  S, with the following paths removed and no others", and `record_digest` is the digest of that form.
+  So the block is the operand list of a transformation, and every other part of the transformation is
+  already a claim: the three MUSTs of § 4.1.1 — the serialization a producer may not write outside, the
+  recomputation a receiving party owes before relying on a digest, and the string forms nobody
+  normalises — and the sentences that state the removal semantics, among them the one exception, the
+  reach into `$.packages[*]`, what restricting to S leaves, and the classification of the twenty paths
+  into lifecycle state, a seller assertion and a delivery. **Twenty-eight of § 4.1.1''s twenty-nine
+  elements are claimed; the block is the one that was not.**
+
+
+  **Nothing validates a binding record**, which is what makes it informative rather than a type. It
+  exists to be hashed: the published schemas carry the documents a payload may be, and a digest input is
+  not one. A consumer computing `record_digest` follows the section''s prose and this block, and the
+  value it then compares is `record_digest` itself, which is published, typed and claimed.
+
+
+  **`a-profile-by-subtraction` is refused for three reasons, and the first is enough.** The profile
+  mechanism projects the paths a block lists (type rules § 3: "a document restricted to the paths the
+  specification lists for it"); reading this block the same way would publish a type holding exactly the
+  twenty paths the document removes, which is the opposite of what it says. Subtraction is not a
+  mechanism the model has, and building it for one use would be building it for later. And the cut is
+  not expressible as a path set at all: `buyer_supplied` is removed when the removals leave it empty,
+  each `$.line_items[*]` path also selects under `$.packages[*].line_items[*]` and
+  `$.packages[*].add_ons[*]`, and a path that selects nothing removes nothing — three rules the prose
+  states and no list of paths carries. A type published from the paths alone would be wrong in all three.
+
+
+  **`leave-it-reported` is refused because the document answers the question.** The block has been one of
+  the bijection gate''s unclaimed elements since the lock was pinned, and the reason was that no mapping
+  rule reads a text block: `yaml-example-block` declines it correctly, since it is not a payload. That is
+  a fact about the rules and not about the text.
+
+
+  **What this reading costs.** The twenty paths reach no published artifact, so a consumer that wants the
+  digest input''s shape has the specification''s own text and nothing generated. That is the same cost the
+  `informative` reading carries everywhere, and it is visible here because the value being hashed is one
+  the parties compare byte for byte. If a later slice publishes the cut — a validator for the digest
+  input, or the SDKs computing it — the three prose rules above are what it has to carry, and this record
+  is where its author should start.'
+evidence:
+- https://github.com/IABTechLab/OpenProposal/blob/a36266907148c7fe7f79fd3706d4bd2ff1e99b16/spec/openproposal-3.0.md
+feedback: >-
+  § 4.1.1 states the binding record as a cut: the Full Representation less twenty listed paths, with
+  three further rules in prose — `buyer_supplied` removed when the removals empty it, each
+  `$.line_items[*]` path also selecting under `$.packages[*]`, and a path that selects nothing removing
+  nothing. A reader implementing the digest has to compose the block and those three sentences correctly
+  to get the same bytes as a counterparty. Stating the cut as an algorithm — the paths, then the three
+  rules, in the order they apply — would make two independent implementations agree by construction
+  rather than by reading carefully.

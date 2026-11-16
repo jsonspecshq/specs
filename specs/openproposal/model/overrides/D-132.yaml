@@ -1,0 +1,102 @@
+format: 2
+id: D-132
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Four rows state that a member of the type they reference is required at that
+  row — "`line_item_id` is REQUIRED here", "`legal_name` is REQUIRED here".
+  Which construct carries such a statement: a keyword in the carrier's own
+  schema, or a rule in the rules output?
+covers:
+  - ir: rule:3.3:de17ca68
+    digest: 161bc9df600531d946b437d5e5d8ca90e525f3949c47136be2f730c37f6040a6
+    quote: "`line_item_id` is REQUIRED here"
+  - ir: rule:4.4:de17ca68
+    digest: 4a5a11808fec6593d07ce8ce79497090890238e94013a83502285c800c899c4d
+    quote: "`line_item_id` is REQUIRED here"
+  - ir: rule:4.1:b1f3c197
+    digest: 34aaac9abe19603f636fa41bf1b51998c2e9ca4745bc79df4b6ad517318dfeb4
+    quote: "`legal_name` is REQUIRED here"
+  - ir: key:3.3:AvailabilityRead.offer
+    digest: 78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268
+    quote: "`offer` | REQUIRED | The line item and the `version` whose options the figures are computed against. `line_item_id` is REQUIRED here"
+options:
+  - id: the-carriers-schema-requires-it
+    summary: >-
+      A keyword in the carrier's own schema: `required` naming the member,
+      nested under the property that holds the referenced type. Type rules
+      § 2a's clause 1 takes it, so the rules output does not hold it and no
+      vector is needed.
+  - id: a-rule-paired-at-the-carrier
+    summary: >-
+      A rule owned by the referenced type and paired at the carrier, which is
+      what `D-088` wrote for § 4.1's two statements.
+chosen: the-carriers-schema-requires-it
+rationale: >-
+  **The form is the carrier's own and the statement is not conditional.** Each of the four sits in
+  the `#meaning` or `#description` of one row, names one backticked member of the type that row
+  references, and says it is required *here* — at this row and not wherever the referenced type
+  travels. So the subject is the carrier's property, the member is named, and nothing has to be
+  read but the row the statement is hosted at and the entry that types it.
+
+
+  **Type rules § 2a applies its clauses in order, and clause 1 reaches this.** "Where a keyword
+  § 8 allows states the rule, the schema states it with that keyword." A `required` nested under a
+  holder's property is such a keyword, and the question is settled by what the published schemas
+  already carry rather than by reading the table: **18 locations under
+  `schemas/with-open-prs/` state `required` inside a property**, among them
+  `properties/placement: required: [feed]` and `required: [plcmt]` on the line-item document,
+  which `heldConditions` writes through `Reach`. The construct exists, the emitter writes it, and
+  the only thing absent is an input for an *unconditional* one: `Reach.require` is populated from
+  a `HeldCondition`, which is derived from a conditional property, so nothing today can say "this
+  holder requires that member at this location, always".
+
+
+  **`a-rule-paired-at-the-carrier` is what the tree does and it is clause 2's answer to a
+  question clause 1 already answers.** `D-088` maps § 4.1's two statements as
+  `{role: rule, object: Proposal}` with vectors at `type: Proposal`, `key:2.2:Party.legal_name`
+  stays `presence: optional` on the shared type, and **no published schema of this specification
+  states `required` naming `legal_name` or `line_item_id` at a reference's location** — measured
+  over every file under `schemas/with-open-prs/`. So a reader of `AvailabilityRead` gets a bare
+  `$ref` to `VersionRef` whose description says `line_item_id` is required and whose schema does
+  not require it, and the requirement is published only in a rules output that is not written.
+  Clause 1 is not optional where it applies, and the emitter's missing input is a gap to close
+  rather than a reason to take clause 2.
+
+
+  **This is the half of § 2.2's reference the schema can state, and the other half it cannot.**
+  `D-131` decides that `VersionRef.seller_domain` is not statable per carrier, because § 2.2
+  states that requirement of the reference wherever it travels and one carrier it names is a Deals
+  API key this specification publishes nothing for. These four are the opposite case in the same
+  place: the text states them *at* the carrier, in the carrier's own row, so each carrier's schema
+  states its own and no carrier the specification does not define is left anything. The two
+  readings together are why § 3.3's `offer` row says `line_item_id` is required here and says
+  nothing about `seller_domain`.
+
+
+  **What this record decides and what it does not.** It decides the construct, which is what
+  settles the form: one treatment for all four, and `D-088`'s two follow the other two rather
+  than the reverse. It does not decide the claim's spelling in the mapping or write the emitter's
+  input, because `keyword`'s four constructs are stated as the owner's own members —
+  `at-least-one-of`, `exactly-one-of`, `at-most-one-of`, `required-when` — and none of them names
+  a member of a type the owner references. A fifth construct, the format's schema for it, the
+  mapping rule that reads the form, and the retirement of `D-088`'s two rules and their vectors
+  are one piece of work, taken with this record behind it and not inside it.
+evidence:
+- 18 locations under specs/openproposal/schemas/with-open-prs/ state `required` inside a property,
+  so the construct the reading needs is one the emitter already writes
+- 0 published schemas state `required` naming `legal_name` or `line_item_id` at a reference's
+  location, measured over every file under schemas/with-open-prs/
+- '`rule:3.3:de17ca68` and `rule:4.4:de17ca68` are unmapped: neither id occurs in
+  specs/openproposal/model/mapping/ or model/vectors/'
+feedback: >-
+  § 3.3's `offer` row and § 4.4's `baseline` row each say "`line_item_id` is REQUIRED here", and
+  § 4.1's `seller` and `buyer` rows each say "`legal_name` is REQUIRED here", of a member their
+  referenced type states as OPTIONAL. That is the clearest form in the document for a requirement
+  that holds at one carrier, and it would be clearer still stated as the row's own presence —
+  either by giving the row a type of its own whose member is required, or by saying in § 2.2 that
+  a member a row requires here is required of that row's value and optional elsewhere. As written,
+  a reader of `VersionRef` or `Party` alone cannot tell that any carrier requires more than those
+  types state.

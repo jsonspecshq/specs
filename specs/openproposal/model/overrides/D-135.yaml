@@ -1,0 +1,103 @@
+format: 2
+id: D-135
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.5's four YAML blocks write a few of a line item's fields each. What does a rule's check
+  decide when it reads a field such a block does not write?
+covers:
+- ir: code:5.5:1
+  digest: 4ae1940d6b0d5e5e5f8542aeef47eda510e75d995f1a6d97d226e1645971409c
+  quote: |-
+    accepted_exclusions:
+      types:
+        domains:    { enforcement: pre_serve, max_entries: 5000 }
+        apps:       { enforcement: pre_serve }
+        categories: { enforcement: pre_serve }
+        keywords:   { enforcement: best_effort, max_entries: 500 }
+      verification: ["integralads.com", "doubleverify.com"]
+
+    exclusions:
+      domains:    ["example-gambling.example"]
+      apps:       [{ store: roku_channel_store, bundle: "123456" }]
+      categories: [{ taxonomy: 7, ids: ["181"] }]         # IAB Content Taxonomy 3.0: Casinos & Gambling
+      keywords:   { url: "https://agency-a.example/lists/keywords-2026-10.json",   # a long list, by reference
+                    digest: "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06" }
+- ir: code:5.5:2
+  digest: fc4f88183448190871232404a95f4fcdeee050aa36bbe78fc23fcfe915f70b1d
+  quote: |-
+    geo:
+      allowed: ["US"]
+      default: { include: ["US"] }
+      value:   { include: ["US"], exclude: ["US-TX"] }   # the buyer's write
+- ir: code:5.5:3
+  digest: 18292d652dadcb8ef88fa92c5cfc7734db7390a86870ee7a622bf08ebfb2852d
+  quote: |-
+    markets:
+      available:  ["SG", "TH", "ID", "MY"]
+      included:   ["SG", "TH"]
+      deltas:     { "ID": { delta_cpm: 18.00 }, "MY": { delta_cpm: 21.00 } }
+      max_select: 4
+      selected:   ["SG", "ID"]   # the buyer's write: runs in these two, and pays the ID delta
+- ir: code:5.5:4
+  digest: acaa5cdfd95ac89fc5020e24d1769c70cd2ba1e5cd869ca713c1089f147a5fc2
+  quote: |-
+    # Late fringe, 23:00 to 01:00, Monday night into Tuesday
+    daypart:
+      allowed:
+        - { days: [monday],  start: "23:00", before: "24:00" }
+        - { days: [tuesday], start: "00:00", before: "01:00" }
+      default:
+        include:
+          - { days: [monday],  start: "23:00", before: "24:00" }
+          - { days: [tuesday], start: "00:00", before: "01:00" }
+    time_zone: "America/New_York"
+options:
+- id: a-part-decides-only-what-it-writes
+  summary: >-
+    A rule whose verdict turns on a field the block does not write is undecided on that block,
+    and the finding is recorded as one, with this record as the reason. The block is part of a
+    line item and says nothing of the fields it leaves out.
+- id: a-part-passes-what-it-does-not-write
+  summary: >-
+    A rule that reads a field the block does not write passes, because nothing in the block
+    breaks it.
+- id: the-blocks-are-not-examples
+  summary: >-
+    A block that writes a few fields is not an example of a document at all, so no rule check
+    runs on it and the elements stay unmapped.
+chosen: a-part-decides-only-what-it-writes
+rationale: >-
+  Each of the four blocks is a payload of a line item's own fields: § 5.5 writes `geo` as the
+  field's structure with the buyer's write in it, `markets` as a market-priced line item's, the
+  `daypart` pair with the `time_zone` its clock is read on, and `accepted_exclusions` beside the
+  `exclusions` a buyer supplies under it. Every top-level key of each is a field row of § 5, and
+  of § 5 alone, so what they show is a `LineItem` -- which is what `yaml-example-block` reads and
+  what the examples gate then validates, field by field. All four validate: the gate reports no
+  refusal of any value any of them writes.
+
+
+  What the gate cannot do is decide a rule that reads a field the block leaves out. Ten rules of
+  §§ 5.6 and 5.9 read a commitment, a pricing entry or a serving mode, and none of the four
+  blocks writes one. `a-part-passes-what-it-does-not-write` would report those forty checks as
+  passes, which is a verdict the block does not support: a payload that omits the field the rule
+  turns on is not a payload the rule holds, and counting it as one would make forty green checks
+  that check nothing. The findings format states this case in its own words -- the undecided list
+  is for "the rules' checks that an example's values can't decide, because the verdict turns on
+  what the example leaves out: the proposal's seller for a line item alone, a member a code block
+  leaves out, or a fact the text gives no field for" -- so the mechanism is the one the format was
+  written for, and the forty entries it asks for are this record's cost.
+
+
+  `the-blocks-are-not-examples` leaves four elements of the lock unmapped and says the document
+  does not answer what they are. It plainly does: a fenced YAML block of a line item's fields,
+  under a section that introduces each one, is an example of part of a line item. An element the
+  document answers is not one to report as undecided.
+
+
+  WHAT THIS COSTS, counted rather than described: forty undecided entries, four blocks by the ten
+  rules each cannot decide, every one of them this record's and none a reading of its own. They
+  are derived from what the stage reports and not authored, and the gate fails a recorded
+  undecided that no longer occurs, so the list cannot outlive the blocks it answers.

@@ -1,0 +1,92 @@
+format: 2
+id: D-111
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: Does a row that cites an attribute of another specification on this site reuse the vocabulary
+  that specification publishes, or state a vocabulary of its own?
+covers:
+- ir: field:5.6:pricing[].price_type
+  digest: 4ef76dd54651ea69ff33e03b64b711f7432f602686abc603ae4fba14befd6e7f
+  quote: "`pricing[].price_type` | Integer | seller-set | How `agreed_rate` clears, as Deals API 1.0 `terms.pricetype`:
+    Dynamic (0), the auction type of each bid request; First Price (1); Second Price Plus (2); Fixed Price
+    (3); or an exchange-specific value, 500 and up"
+options:
+- id: reuse-the-published-vocabulary
+  summary: The row reuses the vocabulary the Deals API publishes for `terms.pricetype`, under the name
+    that specification gives it, with the codes it holds and the range it reserves.
+- id: restate-the-codes
+  summary: The row states a vocabulary of its own, named after the row, whose terms are the four codes
+    the cell writes out and whose vendor range is the one it names.
+chosen: reuse-the-published-vocabulary
+rationale: 'The cell says which vocabulary it means: "as Deals API 1.0 `terms.pricetype`". The row does
+  not define a vocabulary, it names one, and the Deals API 1.0 in this repository publishes exactly that
+  one -- `PriceType`, at `field:object-terms:pricetype`, open, holding Dynamic (0), First Price (1), Second
+  Price Plus (2) and Fixed Price (3), with the exchange-specific range from 500. The four codes, their
+  names and the range are the cell''s, term for term.
+
+
+  Type rules section 6 states the reuse: a vocabulary may take its terms from a code list another standard
+  keeps, and where that standard is a specification on this site the taking is an import from its committed
+  outputs, so the published type is a reference to the other specification''s vocabulary and holds no
+  code of its own.
+
+
+  `restate-the-codes` would publish a second vocabulary of one subject. `D-071` refused that for the
+  six rows that cite AdCOM''s lists and the reasons hold here unchanged: a copy drifts the moment the
+  Deals API''s text changes, a payload the Deals API''s own schema accepts would be refused by a copy
+  that had not been regenerated, and a reader is left two names for one thing.
+
+
+  This is not the import those six rows take. The Deals API keeps no registry of code lists -- it cites
+  AdCOM''s rather than keeping any of its own, and its profile says so -- so `terms.pricetype` is no list
+  of a registry. It is a vocabulary of that specification''s own model, which a citing row names by the
+  attribute whose codes it is, and `src/imports.ts` reads it from the Deals API''s committed outputs at
+  the `main` lock this specification pins. The list it is imported as carries the name the published vocabulary
+  gives it, `Terms.pricetype`, which is the form `kernel/lists.yaml` already writes an attribute''s codes
+  in for OpenDirect 2.1''s `Line.frequencyinterval`.
+
+
+  The vocabulary is open. "Or an exchange-specific value, 500 and up" is the range the Deals API reserves
+  from 500, so the published type takes a vendor code above its four codes, and the bound is read from
+  the published kernel rather than restated here.
+
+
+  The name this specification publishes it under is `PriceType`, the name the Deals API gives it, so one
+  vocabulary has one name wherever it is cited, as a registry''s code keeps the name its registry gives
+  it.
+
+
+  The row is REQUIRED when the entry prices a deal mechanism, which is a condition on a sibling''s value,
+  so the property is conditional.'
+evidence:
+- "https://github.com/IABTechLab/deal-api/blob/3028ddcb8d5faea44bdab272aeaa9be6b5980f81/deal1.0.md#object-terms"
+- examples/line-item-display.yaml (pricing[].price_type 3, Fixed Price)
+- examples/line-item-ctv.yaml (pricing[].price_type 1, First Price)
+challenge:
+- type: PriceType
+  value: 500
+  verdict: accept
+  context: >-
+    A seller whose exchange numbers an auction type of its own and clears
+    `agreed_rate` by it, which the row's "an exchange-specific value, 500 and
+    up" states.
+  reason: >-
+    `reuse-the-published-vocabulary` publishes the row at the Deals API's own
+    vocabulary, which is open to the range it reserves from 500, so a code in
+    that range is a value of the row.
+- type: PriceType
+  value: 4
+  verdict: reject
+  context: >-
+    A seller that numbers a fifth way of clearing a rate, past Fixed Price
+    (3), and writes it where the Deals API reserves nothing between its codes
+    and 500.
+  reason: >-
+    The vocabulary holds the four codes the Deals API publishes and the range
+    it reserves, and nothing between them, so a fifth code is refused.
+    `restate-the-codes`, the option not taken, refuses the same value today
+    and would stop refusing it the moment the Deals API added a code without
+    the copy being regenerated; the reading rests on the one definition and
+    not on this value.

@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "ErrorCode": {
+      "anyOf": [
+        {
+          "enum": [
+            "validation",
+            "not_found",
+            "not_offered",
+            "unresolved_reference",
+            "not_committable",
+            "stale_version",
+            "expired",
+            "idempotency_conflict",
+            "not_eligible",
+            "record_mismatch"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ]
+    },
+    "ErrorObject": {
+      "additionalProperties": true,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/ErrorCode",
+          "description": "A core code (below) or an extension code"
+        },
+        "detail": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Text",
+          "description": "Human-readable. A receiver SHOULD NOT parse it"
+        },
+        "pointer": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/FieldPointer",
+          "description": "Into the object this specification defines that the request carries, to the value that caused the error"
+        },
+        "retry": {
+          "$ref": "#/$defs/Retry",
+          "description": "`same` | `refetch` | `none`. `same`: the same request can succeed later. `refetch`: a new attempt, composed on the current `version`, can succeed. `none`: only a changed request can succeed. On a `commit`, `same` keeps the `idempotency_key` and such an error is not a stored result (§ 5.6.1), and `refetch` and `none` take a new `idempotency_key`"
+        },
+        "version": {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
+          "description": "The proposal's `version` when the error was decided"
+        }
+      },
+      "required": [
+        "code",
+        "detail",
+        "retry"
+      ],
+      "type": "object"
+    },
+    "Retry": {
+      "enum": [
+        "same",
+        "refetch",
+        "none"
+      ],
+      "type": "string"
+    }
+  },
+  "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/overview/1/overview.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The OpenProposal `overview` module: the vocabularies, objects, unions, and constructor copies of § 1, § 1.1, § 1.2, § 2, § 2.4, § 2.5, § 2.6, § 2.7, § 2.8, § 2.8.1, § 2.8.2, § 2.8.3, § 2.8.4, § 2.8.5, § 2.8.6, § 2.8.7, § 6, § 6.1, § 6.2, § 6.3, § 6.4, § 6.5, § 6.6, § 6.7, § 6.8, § 6.9, § 6.10, § 6.11, § 6.12, § 7, and § 8.",
+  "title": "overview"
+}

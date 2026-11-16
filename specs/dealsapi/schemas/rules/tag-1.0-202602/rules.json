@@ -1,10 +1,255 @@
 {
-  "format": 1,
+  "expressed": [
+    "Terms.dealfloor"
+  ],
+  "format": 2,
   "input": {
     "blob": "f675232c0e0d57b77ce1fc34b74baa2e42bc700a",
     "commit": "938a5d1fdb5705ae53b2584c90b9eb325b71a96b",
     "lock": "tag-1.0-202602"
   },
+  "obligations": [
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:authorization:6c7eb7db",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "authorization",
+      "text": "Supply Chain validation should always be done using Object: Supply Chain from OpenRTB."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:authorization:bb5fb360",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "authorization",
+      "text": "If this information is unavailable, implementers should proceed with extreme caution with the understanding that there is no mechanism to know if a given path is authorized to sell the inventory."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:auxiliary-data:3020f0de",
+      "level": "SHOULD",
+      "party": "seller",
+      "section": "auxiliary-data",
+      "text": "`auxdata` should be used whenever any non-publisher data is expected to be part of a given deal."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:auxiliary-data:436042a5",
+      "level": "SHOULD",
+      "party": "seller",
+      "section": "auxiliary-data",
+      "text": "For example, a deal starts with some additional data and expects the list of data and/or optimization services to be added or updated as the deal is in flight should use a value of 2."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:auxiliary-data:bf4c5c99",
+      "level": "SHOULD",
+      "party": "seller",
+      "section": "auxiliary-data",
+      "text": "While the non-publisher data entities are not named, if any company is being paid for their data and/or optimization, this value should indicate the presence of non-publisher data."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:considerations:0177440b",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "considerations",
+      "text": "The information contained in this API should be used as a guide of what the terms that were agreed to, but they should never be used to bid without validating that information coming from the OpenRTB Bid Request is in line with the terms laid out in this API."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:considerations:0e9898a0",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "considerations",
+      "text": "For example, if a deal is struck for US only inventory, buyers should include that targeting in their DSP when trafficking the campaign."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:considerations:4fbe8443",
+      "level": "SHOULD",
+      "party": "implementation",
+      "section": "considerations",
+      "text": "If bid requests continually do not match the expectations laid out in the API, a conversation should be had between the buyer and seller to continue negotiations offline."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:considerations:5f88e3d1",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "considerations",
+      "text": "Deal IDs receiving requests without that information should be used rarely and closely monitored."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:considerations:e67e066e",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "considerations",
+      "text": "In other words, buyers should ALWAYS apply targeting matching the terms outlined in any deal on their side."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:dynamic-inventory:0af8b640",
+      "level": "RECOMMENDED",
+      "party": "implementation",
+      "section": "dynamic-inventory",
+      "text": "Implementers are strongly encouraged to communicate and discuss the specifics of any and all inventory updates to ensure expectations are met."
+    },
+    {
+      "decisions": [
+        "D-026"
+      ],
+      "id": "rule:matching-bid-requests-to-deals:13ab19fc",
+      "level": "SHOULD",
+      "party": "implementation",
+      "section": "matching-bid-requests-to-deals",
+      "text": "The `deal.id` from both the sender and receiver should match the `deal.id` in the OpenRTB request when bidding."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:matching-bid-requests-to-deals:30bd062c",
+      "level": "SHOULD",
+      "party": "implementation",
+      "section": "matching-bid-requests-to-deals",
+      "text": "In instances where additional targeting will be applied in the receiving system, implementers should discuss potential implicaitons to delivery if sources of targeting may differ."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:matching-bid-requests-to-deals:8cd01d0a",
+      "level": "RECOMMENDED",
+      "party": "implementation",
+      "section": "matching-bid-requests-to-deals",
+      "text": "Implementers are strongly encouraged to discuss where targeting criteria will be set."
+    },
+    {
+      "decisions": [
+        "D-026"
+      ],
+      "id": "rule:matching-bid-requests-to-deals:a48a0c62",
+      "level": "SHOULD",
+      "party": "implementation",
+      "section": "matching-bid-requests-to-deals",
+      "text": "Implementers should use the Deal ID from the Origin system that did the PUSH."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:matching-bid-requests-to-deals:c25bb816",
+      "level": "SHOULD",
+      "party": "implementation",
+      "section": "matching-bid-requests-to-deals",
+      "text": "Conversations between implementers should be had around what attributes, if any, may be subject to change after the deal has gone live."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:object-deal:8540a232",
+      "level": "MUST",
+      "party": "implementation",
+      "section": "object-deal",
+      "text": "IDs of seats and knowledge of the buyer's customers to which they refer must be coordinated between bidders and the exchange a priori."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:object-deal:8540a232-2",
+      "level": "MUST",
+      "party": "implementation",
+      "section": "object-deal",
+      "text": "IDs of seats and knowledge of the buyer's customers to which they refer must be coordinated between bidders and the exchange a priori."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:object-deal:9aa65446",
+      "level": "SHOULD",
+      "party": "seller",
+      "section": "object-deal",
+      "text": "The person inputting the deal into the `origin` system should consider that when setting up the deal."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:object-inventory:81ab0b3a",
+      "level": "MUST",
+      "party": "seller",
+      "section": "object-inventory",
+      "text": "If used, the values in this attribute must contain the same value used in transactions (i.e. OpenRTB bid requests) in the field specified by the SSP/exchange."
+    },
+    {
+      "decisions": [
+        "D-018"
+      ],
+      "id": "rule:object-terms:10cce23d",
+      "level": "MUST",
+      "party": "buyer",
+      "section": "object-terms",
+      "text": "Indicates that the deal is of type guaranteed and the bidder must bid on the deal, where 0 = not a guaranteed deal, 1 = guaranteed deal."
+    },
+    {
+      "decisions": [
+        "D-003"
+      ],
+      "id": "rule:object-terms:5c3134f5",
+      "level": "SHOULD",
+      "party": "seller",
+      "section": "object-terms",
+      "text": "Evergreen or always on deals should leave this field blank."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:publisher-count:734470bd",
+      "level": "SHOULD",
+      "party": "buyer",
+      "section": "publisher-count",
+      "text": "Intermediaries should be identified using Supply Chain Validation from OpenRTB requests."
+    },
+    {
+      "decisions": [
+        "D-032"
+      ],
+      "id": "rule:what-it-isnt:6dd81df9",
+      "level": "RECOMMENDED",
+      "party": "buyer",
+      "section": "what-it-isnt",
+      "text": "Implementers are strongly encouraged to validate the conditions laid out in this deal with OpenRTB requests to ensure their expectations are being met."
+    }
+  ],
   "rules": [
     {
       "applies_to": [
@@ -500,57 +745,6 @@
           {
             "value": {
               "guar": 0
-            }
-          },
-          {
-            "value": {}
-          }
-        ]
-      }
-    },
-    {
-      "applies_to": [
-        "Terms"
-      ],
-      "decisions": [
-        "D-007"
-      ],
-      "id": "rule:terms-object-1:647b6593",
-      "level": "MUST",
-      "owner": "Terms",
-      "severity": "error",
-      "sources": [
-        "rule:terms-object-1:647b6593"
-      ],
-      "statement": "Price attribute must be provided if the deal is a fixed price deal, especially if it's a programmatic guaranteed deal, but otherwise can be used as pricing guidance or not provided at all if there is no pricing guidance (for example, for a Run-of-Exchange deal where there is no pricing guidance)",
-      "vectors": {
-        "invalid": [
-          {
-            "value": {
-              "pricetype": 3
-            }
-          },
-          {
-            "value": {
-              "guar": 1,
-              "pricetype": 3,
-              "totalcost": 5000,
-              "units": 1000000
-            }
-          }
-        ],
-        "schema": "https://jsonspecs.com/dealsapi/schemas/tag-1.0-202602/modules/deal/1/deal.json#/$defs/Terms",
-        "type": "Terms",
-        "valid": [
-          {
-            "value": {
-              "dealfloor": 2.5,
-              "pricetype": 3
-            }
-          },
-          {
-            "value": {
-              "pricetype": 1
             }
           },
           {

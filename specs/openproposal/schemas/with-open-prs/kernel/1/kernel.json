@@ -1,0 +1,421 @@
+{
+  "$defs": {
+    "Amount": {
+      "description": "A sum of money or a price per unit of a cost method, never negative, such as a budget, a minimum spend, or a CPM. It is in the currency of the `currency` member of the object that carries it, and the cost method says what a rate is per.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "ApprovalStatus": {
+      "enum": [
+        "PENDING",
+        "APPROVED",
+        "REJECTED"
+      ],
+      "type": "string"
+    },
+    "CalendarUnit": {
+      "enum": [
+        "hour",
+        "day",
+        "week",
+        "month"
+      ],
+      "type": "string"
+    },
+    "CatalogRef": {
+      "description": "A version-pinned reference to an entry in a seller-maintained catalog, written `<seller_namespace>/<collection>/<entry_id>@<version>`, such as `examplepub/audiences/smb-decision-makers@3`. No part is empty or holds a `/`, an `@`, a space, or a control character.",
+      "pattern": "^[^\\x00-\\x20\\x7f/@]+/[^\\x00-\\x20\\x7f/@]+/[^\\x00-\\x20\\x7f/@]+@[^\\x00-\\x20\\x7f/@]+$",
+      "type": "string"
+    },
+    "Count": {
+      "description": "A whole number of things, never negative and at most 2^53 − 1, such as impressions, options, or a proposal's revisions, which its `version` counts.",
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "CurrencyCode": {
+      "description": "An ISO 4217 alphabetic currency code, such as `USD`.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "DayName": {
+      "description": "A day of the week, named in lowercase English, from `monday` to `sunday`.",
+      "enum": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday"
+      ],
+      "type": "string"
+    },
+    "DaypartWindow": {
+      "additionalProperties": false,
+      "description": "A window of the week in which a line item's ads may serve, read on the line item's clock, as Google Ad Manager writes a day part. On each day `days[]` names, the window runs from `start` up to `before`, which is the first minute after the window and later than `start`. `start` is never `24:00`, the end of the day.",
+      "if": {
+        "properties": {
+          "start": {
+            "const": "24:00"
+          }
+        },
+        "required": [
+          "start"
+        ],
+        "type": "object"
+      },
+      "properties": {
+        "before": {
+          "$ref": "#/$defs/TimeOfDay"
+        },
+        "days": {
+          "items": {
+            "$ref": "#/$defs/DayName"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "start": {
+          "$ref": "#/$defs/TimeOfDay"
+        }
+      },
+      "required": [
+        "before",
+        "days",
+        "start"
+      ],
+      "then": false,
+      "type": "object"
+    },
+    "Degrees": {
+      "description": "A geographic coordinate in signed decimal degrees, a latitude or a longitude, where the sign gives the hemisphere, as AdCOM 1.0 writes a `Geo`'s `lat` from −90.0 to +90.0 and its `lon` from −180.0 to +180.0. A receiver reads it as a number and never rounds it to a whole degree. The type states no bound, because the two bounds are the coordinate's and not the kind's, and one type carrying both would accept a latitude of 150.",
+      "type": "number"
+    },
+    "DocumentRef": {
+      "additionalProperties": true,
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/QualifiedDigest",
+          "description": "Over the exact bytes served, with no content coding"
+        },
+        "url": {
+          "$ref": "#/$defs/HttpsUrl",
+          "description": "The document. It MAY need authentication"
+        }
+      },
+      "required": [
+        "digest",
+        "url"
+      ],
+      "type": "object"
+    },
+    "Domain": {
+      "description": "A domain name, written as lowercase A-labels with at least two labels, a top-level label that starts with a letter, and no trailing dot, such as `examplepub.example`.",
+      "maxLength": 253,
+      "pattern": "^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]([a-z0-9-]{0,61}[a-z0-9])?$",
+      "type": "string"
+    },
+    "Duration": {
+      "description": "A length of time, written as an ISO 8601 duration in the grammar of RFC 3339 Appendix A, such as `PT48H`.",
+      "format": "duration",
+      "type": "string"
+    },
+    "DurationMilliseconds": {
+      "description": "A length of time in whole milliseconds, never negative, as OpenProposal writes a `DeliveryCounting`'s `play_tolerance_ms`, \"How far short of its full duration a play may end and still count\". The unit is milliseconds and never seconds, so `500` is half a second; the field's name carries the unit and the value does not, which is why this is not a `DurationSeconds`. It is a length and not a point, so a receiver adds two of them and never compares one with an instant, and it is not a number of things, so nothing counts it.",
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "DurationSeconds": {
+      "description": "A length of time in whole seconds, never negative, as AdCOM 1.0 writes a `Video`'s `dur`, \"Duration of the video creative in seconds\", and a `Content`'s `len`, \"Length of content in seconds\". The unit is seconds and never milliseconds, so `30` is half a minute. It is a length and not a point, so a receiver adds two of them and never compares one with an instant, and it is not a number of things, so nothing counts it. It carries no sentinel, because a field that states \"no limit\" in the same value is `ExtendedDuration`.",
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "Ext": {
+      "additionalProperties": true,
+      "description": "An object for members the specification leaves to the parties to define, such as the Deals API's `ext` on each of its objects. It takes any members, and a receiver keeps the ones it doesn't know.",
+      "type": "object"
+    },
+    "ExternalId": {
+      "description": "The identity of a record, a code, or a version that another system or list defines, such as a registry entry, a DSP seat, a geo code, a content category, a published document's version, or a field of the specification, named by its path as the specification's tables write it, carried as that system writes it. The field's description names the system or list it comes from.",
+      "type": "string"
+    },
+    "FieldPointer": {
+      "description": "A location inside a payload this specification defines, written as a JSON Pointer. It names where something is rather than what it is, so a receiver resolves it against a document and never compares two of them as values.",
+      "pattern": "^(/([^/~\\x00-\\x1f]|~[01])*)*$",
+      "type": "string"
+    },
+    "FormatId": {
+      "description": "The ID of a creative format in the format registry, namespaced by channel and written `<channel>/<format>`, such as `display/300x250` or `audio/host-read-30s`. Neither part is empty or holds a `/`, a space, or a control character. A receiver compares it by exact string equality.",
+      "pattern": "^[^\\x00-\\x20\\x7f/]+/[^\\x00-\\x20\\x7f/]+$",
+      "type": "string"
+    },
+    "Fraction": {
+      "description": "A proportion from 0 to 1, such as 0.7 for 70 %.",
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "FractionDelta": {
+      "description": "A relative change written as a fraction, which multiplies the value it applies to by 1 plus itself, such as `0.20` for twenty percent more. It is greater than -1 because at -1 the value it applies to is nothing and below -1 it is negative.",
+      "exclusiveMinimum": -1,
+      "type": "number"
+    },
+    "HttpsUrl": {
+      "description": "An absolute `https` URL that a receiver may fetch, which is a `Url` whose scheme is `https`. A location fetched over TLS.",
+      "format": "uri",
+      "pattern": "^https://.+$",
+      "type": "string"
+    },
+    "IanaZone": {
+      "description": "A zone of the IANA time zone database, such as `America/New_York` or `UTC`, naming a real clock with its daylight saving rules. It is the zone itself, never the stand-in `viewer_local`, so a value of it resolves to one offset at any instant without knowing where an ad rendered.",
+      "pattern": "^[A-Z][A-Za-z0-9_+-]*(/[A-Za-z0-9_+-]+)*$",
+      "type": "string"
+    },
+    "Instant": {
+      "description": "A point in time in one written form, an RFC 3339 `date-time` in whole seconds ending in `Z`. It narrows the UTC instant to a single spelling so that one instant has one digest input, which is what lets a record be digested and compared.",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "type": "string"
+    },
+    "IntegerFlag": {
+      "description": "A yes or no written as an integer, `0` for no and `1` for yes, as AdCOM 1.0 and OpenRTB 2.6 write their flags, such as a placement's `instl`. A receiver reads it as a flag, never as a count, and a field that takes it keeps the integer its text writes.",
+      "oneOf": [
+        {
+          "const": 0,
+          "title": "No"
+        },
+        {
+          "const": 1,
+          "title": "Yes"
+        }
+      ],
+      "type": "integer"
+    },
+    "Interval": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "$ref": "#/$defs/Instant",
+          "description": "The last second, inclusive"
+        },
+        "start": {
+          "$ref": "#/$defs/Instant",
+          "description": "The first second"
+        }
+      },
+      "required": [
+        "end",
+        "start"
+      ],
+      "type": "object"
+    },
+    "LineItemStatus": {
+      "enum": [
+        "draft",
+        "published",
+        "under_review",
+        "agreed",
+        "withdrawn",
+        "expired",
+        "sold_out"
+      ],
+      "type": "string"
+    },
+    "Measure": {
+      "description": "What a metric that isn't a rate measures, a number never negative and not always whole, such as 1,200,000 audience impacts for DOOH or a modelled audience of 14.2 impacts per play.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "Measurer": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Side"
+        },
+        {
+          "$ref": "#/$defs/RegistrableDomain"
+        }
+      ]
+    },
+    "MintedId": {
+      "description": "The identity of a record a party mints for the other parties to carry. The specification types it as a string and states no further form, such as `business-daily-display`. Two parties compare it for equality and read nothing from it, and a party that wants an identity no coordination can collide mints a UUID, which is one such string.",
+      "type": "string"
+    },
+    "NamespacedTerm": {
+      "description": "A term outside a vocabulary's core list, written `<domain>:<term>`, where the domain is the definer's identity domain, such as `examplepub.example:podcast_host_read`.",
+      "pattern": "^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]([a-z0-9-]{0,61}[a-z0-9])?:[A-Za-z0-9]+(_[A-Za-z0-9]+)*$",
+      "type": "string"
+    },
+    "Party": {
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "$ref": "#/$defs/RegistrableDomain",
+          "description": "The party's domain"
+        },
+        "legal_name": {
+          "$ref": "#/$defs/Text",
+          "description": "The party's legal name. A `registry_id` entry that applies can attest it; the value alone attests nothing"
+        },
+        "registry_id": {
+          "$ref": "#/$defs/ExternalId",
+          "description": "An IAB Tech Lab Agent Registry reference for the entity controlling `domain`"
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "PriceDelta": {
+      "additionalProperties": false,
+      "description": "The change in price when the buyer selects an option outside `included[]`, given as exactly one of a change to the rate of a CPM entry, a charge outside the rate, or a factor on the rate.",
+      "maxProperties": 1,
+      "minProperties": 1,
+      "properties": {
+        "delta_cpm": {
+          "$ref": "#/$defs/Amount"
+        },
+        "delta_flat": {
+          "$ref": "#/$defs/Amount"
+        },
+        "delta_fraction": {
+          "$ref": "#/$defs/FractionDelta"
+        }
+      },
+      "type": "object"
+    },
+    "ProposalStatus": {
+      "enum": [
+        "draft",
+        "published",
+        "under_review",
+        "agreed",
+        "withdrawn",
+        "expired"
+      ],
+      "type": "string"
+    },
+    "QualifiedDigest": {
+      "description": "A hash of the exact bytes it pins, written with the algorithm that produced it: `sha256:` followed by the 64 lowercase hexadecimal characters of the SHA-256. The value names its algorithm, so no field name has to.",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "RegistrableDomain": {
+      "description": "The domain that names a business, taken as the Public Suffix List registrable domain over the whole list with the PRIVATE section included, so that two values name one party when they are equal byte for byte. It has a `Domain`'s syntax and a narrower meaning, because a host name below the registrable boundary is a `Domain` and is not one of these.",
+      "maxLength": 253,
+      "pattern": "^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]([a-z0-9-]{0,61}[a-z0-9])?$",
+      "type": "string"
+    },
+    "SeatRef": {
+      "additionalProperties": false,
+      "properties": {
+        "dsp": {
+          "$ref": "#/$defs/RegistrableDomain",
+          "description": "The DSP's primary domain"
+        },
+        "ids": {
+          "description": "The ids the DSP issues, the same values OpenRTB 2.6 carries in `Deal.wseat`",
+          "items": {
+            "$ref": "#/$defs/ExternalId"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "dsp"
+      ],
+      "type": "object"
+    },
+    "ShortCountryCode": {
+      "description": "An ISO 3166-1 alpha-2 country code, such as `US`. It is the two-letter code ISO 3166-1 assigns the country, which is also the part of an ISO 3166-2 subdivision code before the hyphen.",
+      "pattern": "^[A-Z]{2}$",
+      "type": "string"
+    },
+    "Side": {
+      "enum": [
+        "buyer",
+        "seller"
+      ],
+      "type": "string"
+    },
+    "SubdivisionCode": {
+      "description": "An ISO 3166-2 country subdivision code, such as `US-NY`: the country's ISO 3166-1 alpha-2 code, a hyphen, and the subdivision's code of one to three letters or digits.",
+      "pattern": "^[A-Z]{2}-[A-Z0-9]{1,3}$",
+      "type": "string"
+    },
+    "Text": {
+      "description": "Prose for people and agents to read, on which the specification states no lexical constraint.",
+      "type": "string"
+    },
+    "TimeOfDay": {
+      "description": "A civil time of day, written `HH:MM` from `00:00` to `24:00`, read on the line item's clock. `24:00` is the end of the day, so it ends a window and never starts one.",
+      "pattern": "^(([01][0-9]|2[0-3]):[0-5][0-9]|24:00)$",
+      "type": "string"
+    },
+    "TimeUnit": {
+      "enum": [
+        "hour",
+        "day",
+        "week",
+        "month",
+        "flight"
+      ],
+      "type": "string"
+    },
+    "TimeZone": {
+      "description": "The clock a line item's daypart and frequency cap period are read on, a zone name of the IANA time zone database, such as `America/New_York` or `UTC`, or `viewer_local`, the clock where the ad renders. A zone name follows the zone's daylight saving rules, which a fixed offset doesn't.",
+      "pattern": "^(viewer_local|[A-Z][A-Za-z0-9_+-]*(/[A-Za-z0-9_+-]+)*)$",
+      "type": "string"
+    },
+    "Url": {
+      "description": "An absolute `http` or `https` URL that a receiver may fetch.",
+      "format": "uri",
+      "pattern": "^https?://.+$",
+      "type": "string"
+    },
+    "VendorCode": {
+      "description": "A code that an AdCOM 1.0 list reserves for vendors, 500 or more, as List API Frameworks reserves \"500+ Vendor-specific codes\". It extends a vocabulary of the list's codes.",
+      "minimum": 500,
+      "type": "integer"
+    },
+    "VersionRef": {
+      "additionalProperties": false,
+      "properties": {
+        "line_item_id": {
+          "$ref": "#/$defs/MintedId",
+          "description": "A line item in that version"
+        },
+        "proposal_id": {
+          "$ref": "#/$defs/MintedId",
+          "description": "The proposal"
+        },
+        "seller_domain": {
+          "$ref": "#/$defs/RegistrableDomain",
+          "description": "The proposal's `seller.domain`"
+        },
+        "version": {
+          "$ref": "#/$defs/Count",
+          "description": "The proposal's `version`"
+        }
+      },
+      "required": [
+        "proposal_id",
+        "version"
+      ],
+      "type": "object"
+    },
+    "VocabularyTerm": {
+      "description": "A term of a vocabulary, written either as a bare core term the vocabulary lists or as `<domain>:<term>` for one outside that list, where the domain is the definer's identity domain. A term is ASCII letters, digits, `_` and `-`. It is the whole value of an open vocabulary, of which `NamespacedTerm` is the extension half.",
+      "pattern": "^([A-Za-z0-9]+([_-][A-Za-z0-9]+)*|([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]([a-z0-9-]{0,61}[a-z0-9])?:[A-Za-z0-9]+([_-][A-Za-z0-9]+)*)$",
+      "type": "string"
+    }
+  },
+  "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/kernel/1/kernel.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The OpenProposal kernel: the primitives, the value objects and the parts that constructor copies share, and the kernel vocabularies, from § 2.2, § 3, § 3.1, and § 3.2.",
+  "title": "kernel"
+}

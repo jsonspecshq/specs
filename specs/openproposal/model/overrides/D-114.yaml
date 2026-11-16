@@ -1,0 +1,94 @@
+format: 2
+id: D-114
+status: superseded
+superseded_by: D-123
+kind: reading
+basis: gap
+author: agent
+question: >-
+  A `retention` is a `Range[Duration]`, and `Range`'s parameter takes an
+  ordered type. Does a length of time written as an ISO 8601 duration order,
+  and what is the row's type?
+covers:
+- ir: field:5.9:retention
+  digest: 3e9712ff57aa7e91db5c73fb72e61fc7410635c243b103bf5d83e779eb5d66de
+  quote: "`retention` | Range[Duration] | requestable | From release or air. The ad stays in every copy of the content the seller distributes for at least `min` and is removed by `max`. No `max`: indefinitely. When `placement.feed` is present, only copies in that feed count toward delivery"
+- ir: def:2.2:Range
+  digest: a5f2fef3bebd5d423fa2851e2932f39cd399076f17968466789fa94ff4895d96
+  quote: "`Range` | bounds a value of type `T`, written `Range[T]`. At least one bound is present, and\
+    \ `min` is no greater than `max`."
+options:
+- id: the-range-the-cell-states
+  summary: >-
+    The row is a `Range[Duration]`, the two bounds the cell states, and
+    whether a given pair of them is in order is left undecided where ISO 8601
+    does not say.
+- id: a-range-of-seconds
+  summary: >-
+    The bounds are lengths of time, so the row is a `Range[DurationSeconds]`,
+    the kernel's integer seconds, which orders as a number.
+- id: an-object-of-two-durations
+  summary: >-
+    The row is an object of its own with a `min` and a `max` `Duration`, and
+    no constructor is applied, so no ordering rule reaches it.
+chosen: the-range-the-cell-states
+rationale: 'The row''s own words order the bounds: the ad "stays in every copy of the content the seller
+  distributes for at least `min` and is removed by `max`", so `min` comes before `max` and a pair that
+  did not would state nothing a seller could honour. That is why the parameter''s "ordered" is satisfied
+  here.
+
+
+  What ISO 8601 does not give is a total order, and the specification''s own example is the case: `retention`
+  is `{ min: "P90D", max: "P1Y" }`, ninety days against one year. A year is not a fixed number of days,
+  so no comparison of the two strings decides them without a calendar convention the specification states
+  nowhere. So the published type is the two bounds -- which is all the text states, and which the example
+  validates against -- and the kernel''s `constructor:Range:ordered` leaves such a pair **undecided**
+  rather than deciding it from a convention nobody chose. A check that reports it cannot decide is the
+  honest end state for a rule the text states and the value domain does not settle, and this record is
+  what that finding rests on.
+
+
+  `a-range-of-seconds` publishes a type that refuses every value the specification writes. The cell says
+  `Duration`, the example writes `P90D`, and the kernel''s `DurationSeconds` is an integer; a reading that
+  took the bounds'' meaning over their cell would have published a number where the text ships a string.
+
+
+  `an-object-of-two-durations` buys the absence of an undecided finding by giving one shape two names.
+  A `Range` is `{ min, max }` with at least one bound, which is exactly this row, and declaring an object
+  beside it would be a second definition of the constructor''s structure -- what type rules section 5 refuses
+  -- and would also drop the ordering the row states rather than record that it cannot always be checked.
+
+
+  `src/mapping-rules.ts` declines the row for the reason this record decides: its `applicationOf` fills
+  a parameter that accepts an ordered type only from a type that orders by itself, a number or an instant,
+  and says in its own words that whether a written duration orders is a reading and not the rule''s to
+  make. So the entry rests on this record and the rule is unchanged.'
+evidence:
+- examples/line-item-podcast-embedded.yaml (retention { min "P90D", max "P1Y" })
+- '`constructor:Range:ordered` states "`min` is at most `max`: numbers compare as numbers, and timestamps
+  as instants", and names no third kind.'
+challenge:
+- type: RetentionRange
+  value:
+    min: P90D
+    max: P1Y
+  verdict: accept
+  context: >-
+    An embedded podcast read the seller keeps in every copy for ninety days
+    and removes within a year, which is what the shipped example writes.
+  reason: >-
+    `the-range-the-cell-states` publishes the two bounds at the `Duration`
+    the cell names, so the example's own value is a value of the row.
+- type: RetentionRange
+  value:
+    min: 7776000
+    max: 31536000
+  verdict: reject
+  context: >-
+    A sender that reads "a length of time" as a count of seconds and writes
+    the two bounds as numbers.
+  reason: >-
+    The bounds are `Duration`, a string in one written form, so a number is
+    refused however plainly it states the same length. `a-range-of-seconds`,
+    the option not taken, accepts exactly this pair and refuses the example's,
+    which is how the two readings tell apart on a payload.

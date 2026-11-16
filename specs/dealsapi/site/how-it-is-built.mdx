@@ -47,7 +47,7 @@ description: How Postindustria generates the Deals API 1.0 schemas from the spec
 <p>Every element has exactly one entry in the mapping, on each input. Of the <Stat of="mappingEntries" /> entries across both inputs, <Stat of="mappingByRule" /> come from mapping rules and <Stat of="mappingByDecision" /> cite a decision record.</p>
 <ul>
 <li><strong>An object no attribute holds is a document.</strong> <code>Object: Deal</code> and <code>Object: BuyerSeat</code> are the two payloads; <code>terms</code> holds <code>Object: Terms</code>, so <TypeLink of="Terms" /> is an object, named by its heading.</li>
-<li><strong>A row's concept types it.</strong> The kernel binding cites each row for a concept of the domain model, and the concept's type is the row's: an identifier is <TypeLink of="ExternalId" />, a domain <TypeLink of="Domain" />, a UTC timestamp <TypeLink of="UtcTimestamp" /> (<Decision of="D-002" />).</li>
+<li><strong>A row's concept types it.</strong> The kernel binding cites each row for a concept of the domain model, and the concept's type is the row's: an identifier is <TypeLink of="ExternalId" />, a domain <TypeLink of="Domain" />, a UTC timestamp <TypeLink of="Instant" /> (<Decision of="D-002" />).</li>
 <li><strong>A code list is a vocabulary.</strong> Each own list becomes one, named for what its codes are (<Decision of="D-031" />), each code labeled with its row's text.</li>
 <li><strong>Decisions fill the gaps.</strong> <Stat of="gaps" unit="decision record" /> settle what the text leaves open, from how an evergreen deal leaves <code>enddate</code> blank (<Decision of="D-003" />) to which field "Price attribute" names (<Decision of="D-007" />). Read them in the <a href="decisions/index.html">decision records</a>.</li>
 </ul>

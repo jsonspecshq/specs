@@ -4,15 +4,543 @@
       "list_without_codes": 2,
       "must_without_field": 4,
       "section_anchor_irregular": 6,
-      "unresolved_identifier": 3
+      "unresolved_identifier": 3,
+      "value_set_duplicate": 2,
+      "value_set_subset": 2
     },
     "by_verdict": {
-      "open": 15
+      "open": 19
     },
-    "open": 15,
-    "total": 15
+    "open": 19,
+    "total": 19
   },
   "findings": [
+    {
+      "details": {
+        "values": [
+          "0",
+          "1"
+        ]
+      },
+      "disposition": null,
+      "id": "value_set_duplicate:0 | 1",
+      "kind": "value_set_duplicate",
+      "locs": [
+        {
+          "line": 276,
+          "row": 9,
+          "section": "object_ad",
+          "table": "table:object_ad:1"
+        },
+        {
+          "line": 487,
+          "row": 2,
+          "section": "object_asset",
+          "table": "table:object_asset:1"
+        },
+        {
+          "line": 919,
+          "row": 5,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 929,
+          "row": 7,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 934,
+          "row": 8,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 939,
+          "row": 9,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 985,
+          "row": 2,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 990,
+          "row": 3,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 1050,
+          "row": 15,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 1163,
+          "row": 2,
+          "section": "object_assetformat",
+          "table": "table:object_assetformat:1"
+        },
+        {
+          "line": 1343,
+          "row": 5,
+          "section": "object_eventspec",
+          "table": "table:object_eventspec:1"
+        },
+        {
+          "line": 1353,
+          "row": 7,
+          "section": "object_eventspec",
+          "table": "table:object_eventspec:1"
+        },
+        {
+          "line": 1391,
+          "row": 4,
+          "section": "object_videoplacement",
+          "table": "table:object_videoplacement:1"
+        },
+        {
+          "line": 1521,
+          "row": 30,
+          "section": "object_videoplacement",
+          "table": "table:object_videoplacement:1"
+        },
+        {
+          "line": 1568,
+          "row": 2,
+          "section": "object_audioplacement",
+          "table": "table:object_audioplacement:1"
+        },
+        {
+          "line": 1721,
+          "row": 2,
+          "section": "object_companion",
+          "table": "table:object_companion:1"
+        },
+        {
+          "line": 1819,
+          "row": 6,
+          "section": "object_site",
+          "table": "table:object_site:1"
+        },
+        {
+          "line": 1849,
+          "row": 12,
+          "section": "object_site",
+          "table": "table:object_site:1"
+        },
+        {
+          "line": 1854,
+          "row": 13,
+          "section": "object_site",
+          "table": "table:object_site:1"
+        },
+        {
+          "line": 1904,
+          "row": 6,
+          "section": "object_app",
+          "table": "table:object_app:1"
+        },
+        {
+          "line": 1939,
+          "row": 13,
+          "section": "object_app",
+          "table": "table:object_app:1"
+        },
+        {
+          "line": 2064,
+          "row": 27,
+          "section": "object_content",
+          "table": "table:object_content:1"
+        },
+        {
+          "line": 2287,
+          "row": 5,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2292,
+          "row": 6,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2342,
+          "row": 16,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2372,
+          "row": 22,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2398,
+          "row": 27,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2732,
+          "row": 1,
+          "section": "object_regs",
+          "table": "table:object_regs:1"
+        },
+        {
+          "line": 2738,
+          "row": 2,
+          "section": "object_regs",
+          "table": "table:object_regs:1"
+        }
+      ],
+      "message": "The value set 0 | 1 is declared 29 times.",
+      "subjects": [
+        "key:object_ad:Ad.secure#meaning/values:1",
+        "key:object_asset:Asset.req#meaning/values:1",
+        "key:object_placement:Placement.reward#meaning/values:1",
+        "key:object_placement:Placement.secure#meaning/values:1",
+        "key:object_placement:Placement.admx#meaning/values:1",
+        "key:object_placement:Placement.curlx#meaning/values:1",
+        "key:object_displayplacement:DisplayPlacement.instl#meaning/values:1",
+        "key:object_displayplacement:DisplayPlacement.topframe#meaning/values:1",
+        "key:object_displayplacement:DisplayPlacement.priv#meaning/values:1",
+        "key:object_assetformat:AssetFormat.req#meaning/values:1",
+        "key:object_eventspec:EventSpec.wjs#meaning/values:1",
+        "key:object_eventspec:EventSpec.wpx#meaning/values:1",
+        "key:object_videoplacement:VideoPlacement.skip#meaning/values:1",
+        "key:object_videoplacement:VideoPlacement.boxing#meaning/values:1",
+        "key:object_audioplacement:AudioPlacement.skip#meaning/values:1",
+        "key:object_companion:Companion.vcm#meaning/values:1",
+        "key:object_site:Site.privpolicy#meaning/values:1",
+        "key:object_site:Site.mobile#meaning/values:1",
+        "key:object_site:Site.amp#meaning/values:1",
+        "key:object_app:App.privpolicy#meaning/values:1",
+        "key:object_app:App.paid#meaning/values:1",
+        "key:object_content:Content.embed#meaning/values:1",
+        "key:object_device:Device.dnt#meaning/values:1",
+        "key:object_device:Device.lmt#meaning/values:1",
+        "key:object_device:Device.js#meaning/values:1",
+        "key:object_device:Device.iptr#meaning/values:1",
+        "key:object_device:Device.geofetch#meaning/values:1",
+        "key:object_regs:Regs.coppa#meaning/values:1",
+        "key:object_regs:Regs.gdpr#meaning/values:1"
+      ]
+    },
+    {
+      "details": {
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "disposition": null,
+      "id": "value_set_duplicate:1 | 2",
+      "kind": "value_set_duplicate",
+      "locs": [
+        {
+          "line": 1005,
+          "row": 6,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 1969,
+          "row": 2,
+          "section": "object_dooh",
+          "table": "table:object_dooh:1"
+        }
+      ],
+      "message": "The value set 1 | 2 is declared 2 times.",
+      "subjects": [
+        "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1",
+        "key:object_dooh:Dooh.fixed#meaning/values:1"
+      ]
+    },
+    {
+      "details": {
+        "subset": [
+          "0",
+          "1"
+        ],
+        "supersets": [
+          {
+            "lists": [
+              "key:object_placement:Placement.ssai#meaning/values:1"
+            ],
+            "values": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
+          }
+        ]
+      },
+      "disposition": null,
+      "id": "value_set_subset:0 | 1",
+      "kind": "value_set_subset",
+      "locs": [
+        {
+          "line": 276,
+          "row": 9,
+          "section": "object_ad",
+          "table": "table:object_ad:1"
+        },
+        {
+          "line": 487,
+          "row": 2,
+          "section": "object_asset",
+          "table": "table:object_asset:1"
+        },
+        {
+          "line": 919,
+          "row": 5,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 929,
+          "row": 7,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 934,
+          "row": 8,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 939,
+          "row": 9,
+          "section": "object_placement",
+          "table": "table:object_placement:1"
+        },
+        {
+          "line": 985,
+          "row": 2,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 990,
+          "row": 3,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 1050,
+          "row": 15,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 1163,
+          "row": 2,
+          "section": "object_assetformat",
+          "table": "table:object_assetformat:1"
+        },
+        {
+          "line": 1343,
+          "row": 5,
+          "section": "object_eventspec",
+          "table": "table:object_eventspec:1"
+        },
+        {
+          "line": 1353,
+          "row": 7,
+          "section": "object_eventspec",
+          "table": "table:object_eventspec:1"
+        },
+        {
+          "line": 1391,
+          "row": 4,
+          "section": "object_videoplacement",
+          "table": "table:object_videoplacement:1"
+        },
+        {
+          "line": 1521,
+          "row": 30,
+          "section": "object_videoplacement",
+          "table": "table:object_videoplacement:1"
+        },
+        {
+          "line": 1568,
+          "row": 2,
+          "section": "object_audioplacement",
+          "table": "table:object_audioplacement:1"
+        },
+        {
+          "line": 1721,
+          "row": 2,
+          "section": "object_companion",
+          "table": "table:object_companion:1"
+        },
+        {
+          "line": 1819,
+          "row": 6,
+          "section": "object_site",
+          "table": "table:object_site:1"
+        },
+        {
+          "line": 1849,
+          "row": 12,
+          "section": "object_site",
+          "table": "table:object_site:1"
+        },
+        {
+          "line": 1854,
+          "row": 13,
+          "section": "object_site",
+          "table": "table:object_site:1"
+        },
+        {
+          "line": 1904,
+          "row": 6,
+          "section": "object_app",
+          "table": "table:object_app:1"
+        },
+        {
+          "line": 1939,
+          "row": 13,
+          "section": "object_app",
+          "table": "table:object_app:1"
+        },
+        {
+          "line": 2064,
+          "row": 27,
+          "section": "object_content",
+          "table": "table:object_content:1"
+        },
+        {
+          "line": 2287,
+          "row": 5,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2292,
+          "row": 6,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2342,
+          "row": 16,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2372,
+          "row": 22,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2398,
+          "row": 27,
+          "section": "object_device",
+          "table": "table:object_device:1"
+        },
+        {
+          "line": 2732,
+          "row": 1,
+          "section": "object_regs",
+          "table": "table:object_regs:1"
+        },
+        {
+          "line": 2738,
+          "row": 2,
+          "section": "object_regs",
+          "table": "table:object_regs:1"
+        }
+      ],
+      "message": "The value set 0 | 1 is a strict subset of 0 | 1 | 2 | 3.",
+      "subjects": [
+        "key:object_ad:Ad.secure#meaning/values:1",
+        "key:object_asset:Asset.req#meaning/values:1",
+        "key:object_placement:Placement.reward#meaning/values:1",
+        "key:object_placement:Placement.secure#meaning/values:1",
+        "key:object_placement:Placement.admx#meaning/values:1",
+        "key:object_placement:Placement.curlx#meaning/values:1",
+        "key:object_displayplacement:DisplayPlacement.instl#meaning/values:1",
+        "key:object_displayplacement:DisplayPlacement.topframe#meaning/values:1",
+        "key:object_displayplacement:DisplayPlacement.priv#meaning/values:1",
+        "key:object_assetformat:AssetFormat.req#meaning/values:1",
+        "key:object_eventspec:EventSpec.wjs#meaning/values:1",
+        "key:object_eventspec:EventSpec.wpx#meaning/values:1",
+        "key:object_videoplacement:VideoPlacement.skip#meaning/values:1",
+        "key:object_videoplacement:VideoPlacement.boxing#meaning/values:1",
+        "key:object_audioplacement:AudioPlacement.skip#meaning/values:1",
+        "key:object_companion:Companion.vcm#meaning/values:1",
+        "key:object_site:Site.privpolicy#meaning/values:1",
+        "key:object_site:Site.mobile#meaning/values:1",
+        "key:object_site:Site.amp#meaning/values:1",
+        "key:object_app:App.privpolicy#meaning/values:1",
+        "key:object_app:App.paid#meaning/values:1",
+        "key:object_content:Content.embed#meaning/values:1",
+        "key:object_device:Device.dnt#meaning/values:1",
+        "key:object_device:Device.lmt#meaning/values:1",
+        "key:object_device:Device.js#meaning/values:1",
+        "key:object_device:Device.iptr#meaning/values:1",
+        "key:object_device:Device.geofetch#meaning/values:1",
+        "key:object_regs:Regs.coppa#meaning/values:1",
+        "key:object_regs:Regs.gdpr#meaning/values:1",
+        "key:object_placement:Placement.ssai#meaning/values:1"
+      ]
+    },
+    {
+      "details": {
+        "subset": [
+          "1",
+          "2"
+        ],
+        "supersets": [
+          {
+            "lists": [
+              "key:object_placement:Placement.ssai#meaning/values:1"
+            ],
+            "values": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
+          }
+        ]
+      },
+      "disposition": null,
+      "id": "value_set_subset:1 | 2",
+      "kind": "value_set_subset",
+      "locs": [
+        {
+          "line": 1005,
+          "row": 6,
+          "section": "object_displayplacement",
+          "table": "table:object_displayplacement:1"
+        },
+        {
+          "line": 1969,
+          "row": 2,
+          "section": "object_dooh",
+          "table": "table:object_dooh:1"
+        }
+      ],
+      "message": "The value set 1 | 2 is a strict subset of 0 | 1 | 2 | 3.",
+      "subjects": [
+        "key:object_displayplacement:DisplayPlacement.ampren#meaning/values:1",
+        "key:object_dooh:Dooh.fixed#meaning/values:1",
+        "key:object_placement:Placement.ssai#meaning/values:1"
+      ]
+    },
     {
       "details": {
         "defined_in_prose": [],

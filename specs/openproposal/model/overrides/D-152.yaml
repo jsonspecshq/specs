@@ -1,0 +1,49 @@
+format: 2
+id: D-152
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.6.4's `source_type` is "A value from AdCOM 1.0 List: DOOH Multiplier Measurement
+  Source Types other than Unknown (`0`)". The list has four codes and the row admits three.
+  Does the published vocabulary hold the fourth?
+covers:
+- ir: key:5.6.4:ImpressionMultiplier.source_type
+  digest: 9e9656697e8c68a4311e3227a7fd8afa89006e88f658c6e4d89b1284e0e6f011
+  quote: "`source_type` | REQUIRED | Who supplies the multiplier. A value from AdCOM 1.0 List: DOOH Multiplier Measurement Source Types other than Unknown (`0`), such as Publisher Provided (`2`). The value OpenRTB 2.6 `imp.qty.sourcetype` carries"
+options:
+- id: the-list-less-the-code-the-row-names
+  summary: >-
+    The vocabulary holds the three codes the row admits -- `1` Measurement Vendor Provided,
+    `2` Publisher Provided, `3` Exchange Provided -- and the record lists `0` as the code
+    the row excludes, so the check that holds a cited list to all its codes reads the
+    exclusion rather than reporting it.
+- id: the-whole-list
+  summary: >-
+    The vocabulary holds all four codes, and the exclusion of Unknown is a rule a payload
+    decides rather than a narrowing of the type.
+chosen: the-list-less-the-code-the-row-names
+rationale: >-
+  THE ROW NAMES THE CODE IT EXCLUDES, WHICH IS WHY THIS IS A LISTING AND NOT A RULE. "other
+  than Unknown (`0`)" is the row stating which value of the cited list it does not admit,
+  by both the label AdCOM gives the code and the code itself. A `source_type` of `0` is a
+  value the specification forbids at this row, and a type that accepted it would publish a
+  payload § 5.6.4 refuses.
+
+  `the-whole-list` would publish the fourth code and then forbid it again in a rule, which
+  states one requirement twice: type rules § 2a carries a requirement once, and the place
+  it is carried here is the type, because the row's own cell is where the exclusion is
+  written. It would also need a vector for a value the schema already rejects.
+
+  WHAT THE LISTING COSTS, AND WHY IT CANNOT GO STALE. `mapping-sources` holds a cited list
+  to all its codes, which is the clause that found this; it now reads the record's
+  `excludes` and holds that in both directions. A code the list does not hold fails, so the
+  listing cannot name a code AdCOM drops; and a code the vocabulary does hold a term for
+  fails, so the listing cannot survive the row admitting it. Nothing else of the clause
+  moves: the other three codes are still held to standing for one code each, and the list
+  is still held to being named by an element the vocabulary rests on.
+
+  AdCOM's own `DoohMultiplierMeasurementSourceType` is untouched and still holds all four
+  codes, because AdCOM's list is AdCOM's. This record reads one row of OpenProposal, which
+  cites that list and admits three of it.

@@ -1,0 +1,94 @@
+format: 2
+id: D-142
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.5's `geo` row ends "A line item MUST NOT declare both `geo` and `markets`" and § 5.7's
+  `controlling_measurement` row ends "`included[]` MUST name exactly one option". Each sits in a
+  line-item field row and constrains that line item's own fields. Are they rules of `LineItem`
+  that one payload decides, and can each pair be derived from a payload the specification ships?
+covers:
+- ir: rule:5.5:9d06dca4
+  digest: 9d1fe98242211acd358c2d75d9dbc045903e7e4db63bbfac172cf49dc914f5cd
+  quote: A line item MUST NOT declare both `geo` and `markets`
+- ir: field:5.5:geo
+  digest: f492a26496f05549bd2f597bfb46224f68b3eb347aee1c5e0e5974d88dabe693
+  quote: "`geo` | Settable[GeoCode] | settable | Where the line item runs. `allowed[]` of `GeoCode` (below). A line item MUST NOT declare both `geo` and `markets`"
+- ir: rule:5.7:dfffe633
+  digest: 884efa85c4476ee29c35e44f1a224350101c375f12366ebf4e1905ae80d6fcf4
+  quote: "`included[]` MUST name exactly one option"
+- ir: field:5.7:controlling_measurement
+  digest: 49502fe7e2df06af62949e7e1d39c6f61ab2d20743bb6e5a6af1f422c93cf593
+  quote: "`controlling_measurement` | Selectable[ControllingMeasurementOption] | selectable | Whose count of billable units is invoiced. See § 5.7.1. `max_select: 1`. `included[]` MUST name exactly one option"
+options:
+- id: rules-of-the-line-item-paired-from-its-example
+  summary: >-
+    Each is a rule of `LineItem`, the object whose field row states it, and one line item decides
+    each. The pair for both is `line-item-display.yaml`'s own line item, trimmed to the keys
+    `LineItem` requires plus the two fields the rules read, with one mutation per rule: the
+    `markets` `line-item-audio.yaml` ships added beside `geo`, and a second option named in
+    `controlling_measurement.included`.
+- id: obligations-of-the-seller
+  summary: >-
+    The seller writes both fields, so each is an obligation of the seller and no payload decides
+    it.
+- id: keywords-the-schema-states
+  summary: >-
+    `not` of a `required` of both members states the first and `maxItems: 1` with `minItems: 1`
+    the second, so the schema carries both and the rules output carries neither.
+chosen: rules-of-the-line-item-paired-from-its-example
+rationale: >-
+  Both sentences name no party and ask nothing of anyone's behaviour: each says what a line item's
+  value may be. "A line item MUST NOT declare both `geo` and `markets`" names its subject
+  outright, and "`included[]` MUST name exactly one option" follows "`max_select: 1`" in the same
+  cell, so its subject is the `included[]` of the field that row types. Each row sits in § 5's
+  field table, whose owner is the line item, so the object is `LineItem` and one line item shows
+  whether either holds -- which is what a rule is (type rules § 9).
+
+
+  `obligations-of-the-seller` is how neither can be read. An obligation is a statement no single
+  payload decides, and a validator counting the members of one line item decides both. `D-088`
+  already reads a sentence of this shape as a rule rather than an obligation where the sentence
+  constrains a value, and `D-139` reads § 5.6.6's "MUST be non-empty" the same way.
+
+
+  `keywords-the-schema-states` is what type rules § 2a's clause 1 would do if the emitter read
+  these cells. It does not: `src/emit.ts` builds a condition from a Required cell and from a
+  sentence that names a sibling and a value, and neither of these is in a Required cell. § 8's
+  table does list `not` of a `required` of both members for "at most one of two members may be
+  present", so the first is a construct the schema could carry once something reads the cell;
+  until then clause 2 puts it in the rules output, and the feedback below is what asks for the
+  keyword. The second has no § 8 keyword at all while `included[]` is a member of a constructor's
+  shell rather than of the owner.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES, AND ONE PAYLOAD SERVES BOTH. `line-item-display.yaml`
+  declares `geo` and no `markets`, and its `controlling_measurement.included` names one of the two
+  options its `available[]` offers, so the shipped line item satisfies both rules. The valid half
+  is that line item trimmed to the six keys `LineItem` requires -- `channel`, `line_item_id`,
+  `pricing`, `status`, `transaction_mechanism`, `visibility` -- plus `geo` and
+  `controlling_measurement`, every value the file's own. Trimming keeps the schema's verdict,
+  which `rule-vectors` requires of both halves, and changes no value.
+
+
+  Each invalid half is that payload with one mutation. For the first, the `markets` of
+  `line-item-audio.yaml`, whole, added beside `geo`: both fields then declared, which is what the
+  sentence forbids, and every value still a shipped one. For the second, `buyer-3pas` added to
+  `controlling_measurement.included`, which is already an option of that field's `available[]`, so
+  the only thing the mutation changes is how many options are named.
+
+
+  WHAT THIS LEAVES. `max_select: 1` sits in the same cell and says the same thing a second way for
+  the buyer's `selected[]`; no rule of this record reads it, and whether the two sentences are one
+  requirement or two is § 3.1's question and not § 5.7's. The nine other row-hosted statements
+  § 5 and § 4 leave unmapped are each a reading of their own: two are about two versions of a
+  document, which no single payload decides, and the rest read a sibling object's value.
+feedback: >-
+  § 5.5 states "A line item MUST NOT declare both `geo` and `markets`" in the Description of one
+  of the two fields, and § 5.7 states "`included[]` MUST name exactly one option" beside
+  "`max_select: 1`", which says it again for a different member. A published schema can state the
+  first -- `not` of a `required` of both -- and a consumer reading the document gets a rule to
+  implement instead. Putting the first in a Required cell, and saying once whether `max_select`
+  bounds `included[]` as well as `selected[]`, would move both out of the rules output.

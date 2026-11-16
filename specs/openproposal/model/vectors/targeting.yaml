@@ -1,0 +1,201 @@
+# Rule vectors for the statements of section 5.5 that a payload decides.
+# Regenerate a digest with `npm run cite -- --lock
+# specs/openproposal/input/with-open-prs.lock.yaml <rule ID>`.
+format: 1
+module: targeting
+rules:
+  # § 5.5's `geo` row ends "A line item MUST NOT declare both `geo` and
+  # `markets`": the two state where a line item runs in two ways, one as
+  # bounds a buyer writes within and one as options a buyer selects, and a
+  # line item declaring both says where it runs twice (D-142).
+  #
+  # Derived from examples/line-item-display.yaml, trimmed to the six keys
+  # `LineItem` requires plus the two fields this record's rules read. Every
+  # value is that file's own.
+  #
+  # The invalid half is that line item with the `markets` of
+  # examples/line-item-audio.yaml, whole, added beside `geo`, and nothing
+  # else.
+  - rule: rule:5.5:9d06dca4
+    digest: 9d1fe98242211acd358c2d75d9dbc045903e7e4db63bbfac172cf49dc914f5cd
+    decision: D-142
+    type: LineItem
+    valid:
+      - value:
+          channel: display
+          controlling_measurement:
+            available:
+            - counted_by: seller
+              discrepancy_threshold: 0.1
+              final_after: P10D
+              id: seller-count
+            - counted_by: buyer
+              discrepancy_threshold: 0.1
+              final_after: P15D
+              id: buyer-3pas
+              qualifier: Buyer ad server A
+            included:
+            - seller-count
+            max_select: 1
+          geo:
+            allowed:
+            - US-NY
+            - US-CA
+            - US-IL
+            - US-TX
+            default:
+              include:
+              - US-NY
+              - US-CA
+              - US-IL
+              - US-TX
+          line_item_id: business-daily-display
+          pricing:
+          - cost_method: CPM
+            currency: USD
+            list_rate: 24.0
+            min_rate: 21.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-usd
+          - cost_method: CPM
+            currency: EUR
+            list_rate: 22.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-eur
+          status: published
+          transaction_mechanism:
+            available:
+            - delivery_type: guaranteed
+              id: programmatic_guaranteed
+            - delivery_type: non_guaranteed
+              id: preferred_deal
+            included:
+            - programmatic_guaranteed
+            max_select: 1
+          visibility: registry_gated
+    invalid:
+      - value:
+          channel: display
+          controlling_measurement:
+            available:
+            - counted_by: seller
+              discrepancy_threshold: 0.1
+              final_after: P10D
+              id: seller-count
+            - counted_by: buyer
+              discrepancy_threshold: 0.1
+              final_after: P15D
+              id: buyer-3pas
+              qualifier: Buyer ad server A
+            included:
+            - seller-count
+            max_select: 1
+          geo:
+            allowed:
+            - US-NY
+            - US-CA
+            - US-IL
+            - US-TX
+            default:
+              include:
+              - US-NY
+              - US-CA
+              - US-IL
+              - US-TX
+          line_item_id: business-daily-display
+          markets:
+            available:
+            - US
+            - CA
+            - GB
+            deltas:
+              CA:
+                delta_cpm: 1.5
+              GB:
+                delta_cpm: 3.0
+            included:
+            - US
+            max_select: 3
+          pricing:
+          - cost_method: CPM
+            currency: USD
+            list_rate: 24.0
+            min_rate: 21.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-usd
+          - cost_method: CPM
+            currency: EUR
+            list_rate: 22.0
+            price_type: 3
+            price_valid_until: '2026-11-15T23:59:59Z'
+            pricing_id: bd-cpm-eur
+          status: published
+          transaction_mechanism:
+            available:
+            - delivery_type: guaranteed
+              id: programmatic_guaranteed
+            - delivery_type: non_guaranteed
+              id: preferred_deal
+            included:
+            - programmatic_guaranteed
+            max_select: 1
+          visibility: registry_gated
+  # § 5.5: a buyer supplies no exclusion type absent from
+  # `accepted_exclusions.types`. The valid half is `proposal-issued.yaml`'s
+  # first line item, which accepts `domains` and `keywords` and supplies those
+  # two, trimmed to the keys a `LineItem` requires plus the two fields the rule
+  # reads. The invalid half is that payload with the `categories` list of
+  # § 5.5's own exclusions block added to `exclusions`, a type the seller does
+  # not accept (D-144).
+  - rule: rule:5.5:2e4a1b0c
+    digest: 05c0089b5af2fffecbe6aaa93d430268d2c73912cb971e3bde7e8a4543c75d73
+    decision: D-144
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: business-daily-display
+          status: agreed
+          channel: display
+          visibility: named
+          accepted_exclusions:
+            types:
+              domains:  { enforcement: pre_serve, max_entries: 5000 }
+              keywords: { enforcement: best_effort, max_entries: 500 }
+          exclusions:
+            domains: [ example-gambling.example ]
+            keywords:
+              url: https://agency-a.example/lists/keywords-2026-10.json
+              digest: sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06
+          pricing:
+            - { pricing_id: bd-cpm-usd, cost_method: CPM, list_rate: 24.00, agreed_rate: 27.54,
+                price_valid_until: "2026-11-15T23:59:59Z", currency: USD, price_type: 3 }
+          transaction_mechanism:
+            available: [ { id: programmatic_guaranteed, delivery_type: guaranteed } ]
+            included: [ programmatic_guaranteed ]
+            max_select: 1
+    invalid:
+      - value:
+          line_item_id: business-daily-display
+          status: agreed
+          channel: display
+          visibility: named
+          accepted_exclusions:
+            types:
+              domains:  { enforcement: pre_serve, max_entries: 5000 }
+              keywords: { enforcement: best_effort, max_entries: 500 }
+          exclusions:
+            domains: [ example-gambling.example ]
+            categories: [ { taxonomy: 7, ids: [ "181" ] } ]
+            keywords:
+              url: https://agency-a.example/lists/keywords-2026-10.json
+              digest: sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06
+          pricing:
+            - { pricing_id: bd-cpm-usd, cost_method: CPM, list_rate: 24.00, agreed_rate: 27.54,
+                price_valid_until: "2026-11-15T23:59:59Z", currency: USD, price_type: 3 }
+          transaction_mechanism:
+            available: [ { id: programmatic_guaranteed, delivery_type: guaranteed } ]
+            included: [ programmatic_guaranteed ]
+            max_select: 1

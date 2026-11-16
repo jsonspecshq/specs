@@ -1,0 +1,112 @@
+format: 2
+id: D-144
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Three more statements of § 5 constrain a line item's own fields: what an `embedded` line item
+  must leave absent, what every offered format id must have once the proposal leaves `draft`, and
+  what exclusion types a buyer may supply. Is each a rule the line item's payload decides, and can
+  each pair be derived from a payload the specification ships?
+covers:
+- ir: rule:5.9:f8f81606
+  digest: 15c83c8342c93c68532808ba61c9faef711ed13b643e96aca5a432ee80bf62c0
+  quote: "`geo`, `markets`, `device`, and `frequency_cap` MUST be absent."
+- ir: rule:5.4:c07c0dd1
+  digest: c0931f38e0359ee1670e6d952b88e4f3e1361d9b44425e8d5250115357f37fab
+  quote: Once the proposal leaves `draft`, every id in `formats.available[]` MUST have a `format_specs` entry.
+- ir: rule:5.5:2e4a1b0c
+  digest: 05c0089b5af2fffecbe6aaa93d430268d2c73912cb971e3bde7e8a4543c75d73
+  quote: A buyer MUST NOT supply an exclusion type absent from `accepted_exclusions.types`.
+- ir: field:5.9:serving_mode
+  digest: c9994f9a14689c371bdf435ba3928d0fcb38fc125d310c8e47d602ba1b6c68fa
+  quote: "`serving_mode` | VocabularyTerm | seller-set | How the ad reaches the content or the player. Core terms: `dai` | `scheduled` | `embedded`, defined below. `placement.ssai` states server-side insertion"
+- ir: field:5.4:format_specs
+  digest: e1002f5a6ce64e7aab22acd2215df84e47e0bf49e0fc914d9765c2396556242d
+  quote: "`format_specs` | Map[FormatId, FormatSpec] | seller-set | Map from format id to `FormatSpec`"
+- ir: field:5.5:exclusions
+  digest: bbeb46f5697324ba7ae0176140d23968269018116a18a3536e34f970a758e882
+  quote: "`exclusions` | Map[ExclusionType, ExclusionList] | supplied | The buyer's block lists, keyed by exclusion type. See below"
+- ir: field:5.5:accepted_exclusions
+  digest: b6ad6e1cb8262c95058ce8e5d43ecef42e309580eb5eae35e7ba80c1ebb7d991
+  quote: "`accepted_exclusions` | AcceptedExclusions | seller-set | What the seller can enforce. See below"
+options:
+- id: three-rules-of-the-line-item
+  summary: >-
+    Each is a rule of `LineItem`, the object that holds every field it reads, and each pair is a
+    shipped line item with one mutation: a `geo` added to the embedded one, a `format_specs` entry
+    removed, and an exclusion type added to what the buyer supplies.
+- id: the-buyer-s-is-an-obligation
+  summary: >-
+    § 5.5's names the buyer, so it is an obligation of the buyer and no payload decides it.
+- id: the-format-rule-waits-on-the-proposal
+  summary: >-
+    § 5.4's reads the proposal's `status`, so it is a rule of `Proposal` and a line item cannot
+    decide it.
+chosen: three-rules-of-the-line-item
+rationale: >-
+  A rule is owned by the type whose payload decides it (type rules § 9), and all three read fields
+  of one line item.
+
+
+  § 5.9's IS DECIDED WHERE `serving_mode` IS. The bullet sits under "On an `embedded` line item",
+  so the condition is the line item's own `serving_mode`, and the requirement is the absence of
+  four of its fields. That is the reading `D-088` already gives the three sibling bullets of the
+  same block -- `episodes`, `time_zone` and `retention` -- so this one is read the same way and
+  decided by the same member.
+
+
+  § 5.4's IS DECIDED BY THE LINE ITEM, NOT BY THE PROPOSAL. The requirement is over
+  `formats.available[]` and `format_specs`, which are the line item's two fields; only the
+  condition reads the proposal's `status`. `rule:5.4:3a677601` already reads that condition from a
+  line item: the vector gives the proposal's `status` as context, and failing that § 4.3.3's first
+  clause makes a proposal `draft` only while every line item is, so a line item that has left
+  `draft` is in a proposal that has. A line item still `draft` says nothing, because a sibling may
+  have left it. `the-format-rule-waits-on-the-proposal` would move the rule to the object that
+  holds the condition rather than the requirement, and a shared line item (§ 4.3) travels without
+  its proposal, so the rule would go unchecked exactly where it is read.
+
+
+  § 5.5's IS A RULE AND NOT AN OBLIGATION, BECAUSE THE BUYER'S WRITE IS IN THE PAYLOAD. The
+  `exclusions` row is marked `supplied`: the field is what the buyer supplies, and
+  `accepted_exclusions` beside it is what the seller accepts. So a line item carrying both shows
+  whether the buyer supplied a type the seller did not accept, which is what a rule is.
+  `the-buyer-s-is-an-obligation` reads the named party and not the sentence: `D-087`'s consumer
+  obligations ask something of a consumer's behaviour, which no payload records, while this asks
+  what a field holds.
+
+
+  THE PAIRS ARE THE SOURCE'S OWN BYTES. `line-item-podcast-embedded.yaml` is the embedded line
+  item this specification ships, and it writes none of the four fields -- its own comment says "no
+  geo, device, or frequency_cap: everyone who downloads gets the read". The valid half is that line
+  item trimmed to the keys a `LineItem` requires plus the `placement`, `episodes`, `serving_mode`
+  and `retention` the published schema requires of it. The invalid half is that payload with the
+  `geo` of `proposal-issued.yaml`, whole, added beside them: one addition, and a shipped value.
+
+
+  `proposal-issued.yaml`'s first line item is `agreed`, so it has left `draft`, and it offers two
+  format ids with a `format_specs` entry for each. The valid half is that line item trimmed to the
+  keys it requires plus its `formats` and `format_specs`. The invalid half is that payload with
+  the `display/970x250` entry removed from `format_specs`, which leaves an offered id with no
+  entry: one removal, no value invented.
+
+
+  That same line item carries `accepted_exclusions.types` for `domains` and `keywords` and
+  supplies exactly those two. The valid half is it trimmed to the keys it requires plus those two
+  fields. The invalid half is that payload with the `categories` list of § 5.5's own exclusions
+  block added to `exclusions`, a type the seller's `accepted_exclusions.types` does not name: one
+  addition, and the value the document writes.
+
+
+  WHAT THIS COSTS, counted rather than described: a rule conditioned on `serving_mode` is one the
+  four part-payloads of § 5.5 cannot decide, because none of them writes that member, so each
+  leaves it undecided under `D-135`, as it does for the three sibling bullets already. The other
+  two rules read fields those blocks either write or leave out entirely, so they add nothing.
+feedback: >-
+  § 5.4's condition is the proposal's `status` and its requirement is the line item's two fields,
+  so a shared line item (§ 4.3) carries the requirement and not what triggers it. Saying the
+  requirement on the line item alone -- that an offered format id has a `format_specs` entry once
+  the line item itself has left `draft` -- would let a receiver check what it holds. § 5.5's
+  states the rule of the buyer's write in the seller's voice; saying it of the field, as the
+  `exclusions` row's own type already does, would put it where a validator reads it.

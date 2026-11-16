@@ -1,0 +1,172 @@
+format: 2
+id: D-128
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 3.4 states `BuyerWrites` as a strict path subset of the line item and lists its paths in a
+  block whose first two lines are `<selectable>.selected[]` and `<settable>.value`. What type does
+  the model publish, under what name, and what are those two lines?
+covers:
+- ir: def:3.4:BuyerWrites
+  digest: 485fa6481f1a341bb7a30dd35aba5ff7036f89d9a9ded6c8faa49a93cb2a92f9
+  quote: "`BuyerWrites` | holds what a buyer writes on one line item. It is a strict path subset of the line item: a listed path has the type it has there, and no other path appears. Every path is OPTIONAL. A buyer delivery (§ 4.1.1) is not a write."
+- ir: code:3.4:1
+  digest: dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc
+  quote: |-
+    <selectable>.selected[]
+    <settable>.value
+    audiences.excluded[]
+    audiences.combine.selected[]
+    frequency_cap.count.value
+    exclusions
+    buyer_requirements.seats
+    buyer_requirements.seat_owner
+- ir: key:3.4:LineItemWrites.commitment
+  digest: 094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd
+  quote: "`commitment` | REQUIRED | The line item's `commitment` (§ 5.6.1)"
+- ir: def:3.4:LineItemWrites
+  digest: 7a8768a3e6522913daacc2708c400388dd8942d4d978d723bf1aeb12cb8a950b
+  quote: "`LineItemWrites` | holds the keys of `BuyerWrites` and this one. It is the buyer's writes on one line item, which a `Commit` (§ 5.6.1) and a hold's `requested_terms` (§ 5.6.2) carry."
+options:
+- id: a-writes-profile-of-the-line-item
+  summary: >-
+    `BuyerWrites` is a profile of `LineItem`, the `Writes` one, published under the name § 3.4
+    gives it. Its paths are the block's six literal lines plus the expansion of its two
+    placeholders: each field marked `selectable` at its `selected[]`, and each field marked
+    `settable` at its `value`.
+- id: one-type-with-the-commitment-added
+  summary: >-
+    There is one profile, `LineItemWrites`, which is the block's paths plus the `commitment` its
+    own key table adds, and `BuyerWrites` is a name the model publishes nowhere.
+- id: an-object-of-its-own-members
+  summary: >-
+    `BuyerWrites` is an object whose members the mapping types from the line item's rows, read off
+    § 5 by hand rather than projected.
+chosen: a-writes-profile-of-the-line-item
+rationale: >-
+  The lead-in is § 2.1's sentence over again: "It is a strict path subset of the line item: a
+  listed path has the type it has there, and no other path appears." That is a projection of a
+  document's paths, which `D-069` reads for the summaries and which the model resolves from the
+  block that lists them. "Every path is OPTIONAL" is what a projection gives anyway, since a
+  condition binds the document and the profile cannot check it alone (`D-028`).
+
+
+  THE NAME IS THE TEXT'S AND NOT THE CONVENTION'S. A profile is published as
+  `<Document><Profile>`, which would be `LineItemWrites` -- and § 3.4 gives that name to a
+  different type, the object that "holds the keys of `BuyerWrites` and this one", `commitment`. So
+  the profile is published as `BuyerWrites`, the name the text uses, and the mapping states it;
+  type rules § 7 already requires a decision record for a name the mapping overrides, and this is
+  that record. `LineItemWrites` stays the object it is and carries the profile's keys the way type
+  rules § 3 states, by naming it: `includes: BuyerWrites`, with `commitment` its own.
+
+
+  THE TWO PLACEHOLDERS ARE THE MARKERS THEY SPELL. The lead-in says so -- "where `<selectable>` is
+  a field marked `selectable`, and `<settable>` is a field marked `settable` other than
+  `frequency_cap`" -- and the marker is the word in the brackets, which the IR puts on every field
+  row. So `<selectable>.selected[]` is each of the 16 fields § 5 marks `selectable` at its
+  `selected[]`, and `<settable>.value` each of the 4 it marks `settable` at its `value`. With the
+  six literal lines that is 25 paths.
+
+
+  THE EXCEPTION IS THE BLOCK'S OWN AND NOT A SENTENCE THE MODEL PARSES. `frequency_cap` is marked
+  `settable`, and § 5.5 types it `FrequencyCap`, an object with no `value`: its settable value is
+  `count`, a `SettableRange[Integer]`, and `frequency_cap.count.value` is a line of the block. So
+  a marked field whose type has no member for the rest of the placeholder is a field whose write
+  the list names itself, and the model holds that both ways -- it expands where the member is
+  there, and it reports a marked field that has neither the member nor a path of its own under it.
+  Reading the prose exception instead would have the model parse "other than `frequency_cap`" out
+  of a sentence, which is a reading of meaning where the block and the shapes already agree. The
+  lead-in is corroboration, and the corroboration is exact: `frequency_cap` is the only one of the
+  four settable fields whose type is not a `Settable`.
+
+
+  `one-type-with-the-commitment-added` publishes no `BuyerWrites`, and two sections need it to be
+  a type. § 3.4 says `LineItemWrites` "holds the keys of `BuyerWrites` and this one" and § 3.3 says
+  `AvailabilityRead` "holds the keys of `BuyerWrites` and these"; an `AvailabilityRead` that
+  included `LineItemWrites` would carry a REQUIRED `commitment`, which § 3.3 states nowhere, so
+  the two cannot be one type.
+
+
+  `an-object-of-its-own-members` defines 25 members a second time, which is the thing a projection
+  exists to stop: "The model projects it from the document, so its fields are defined once". It
+  also goes stale the moment § 5 marks another field `selectable`, with nothing to say so.
+
+
+  WHAT THIS LEAVES. `AvailabilityRead` still states its three own keys and not `BuyerWrites`'s:
+  `def:3.3:AvailabilityRead` already has an entry, so `mapping-bijection` does not report it, and
+  giving that object the keys of `BuyerWrites` is a separate piece of work. Nothing here reads § 4.1.1's deliveries, which the lead-in's last
+  sentence excludes from writes and which travel outside this object.
+twins:
+- types: [ BuyerWritesBreakPositionSelection, BuyerWritesCancellationPolicySelection, BuyerWritesControllingMeasurementSelection,
+    BuyerWritesExclusivitySelection, BuyerWritesMeasurementSourceSelection, BuyerWritesProductionSelection, BuyerWritesProgramsSelection,
+    BuyerWritesPropertiesSelection, BuyerWritesReportingSelection ]
+  reason: >-
+    Nine fields of § 5 are marked `selectable` over object options, so § 3.1 keys each one's
+    `selected[]` by the `Uuid` the seller mints for an option of that field, and the projection of
+    each to `selected[]` alone is the same structure. They are nine write targets and not one: a
+    receiver validates each against its own field's `available[]`, which is § 3.1's membership
+    rule, so an id of a cancellation option in `programs.selected[]` names no option. The nine
+    fields are nine field rows of six sections, not one row named nine times.
+challenge:
+- type: BuyerWrites
+  value:
+    properties:
+      selected:
+      - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+  verdict: accept
+  context: >-
+    The buyer's write in `proposal-issued.yaml`'s hold, choosing one property of the line item's
+    shelf, which is the payload `requested_terms` carries, with the option id as `D-037` types it.
+  reason: >-
+    `properties` is marked `selectable`, so `<selectable>.selected[]` projects its `selected[]`,
+    a list of the `Uuid` § 3.1 keys an object option by, and every path of this profile is
+    optional. The shipped payload writes `weather-app` there, which `D-037`'s departure refuses
+    and which the examples findings record.
+- type: BuyerWrites
+  value:
+    geo:
+      value:
+        include:
+        - US
+  verdict: accept
+  context: >-
+    A buyer narrowing delivery to the United States, which § 5.5's `geo` block writes as the
+    buyer's write.
+  reason: >-
+    `geo` is marked `settable`, so `<settable>.value` projects its `value`, at the type
+    `Settable[GeoCode]` gives it.
+- type: BuyerWrites
+  value:
+    properties:
+      available:
+      - id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        name: Weather App
+  verdict: reject
+  context: >-
+    A buyer answering with the whole selectable structure, including the shelf the seller
+    declared, because that is the shape the line item carries.
+  reason: >-
+    § 3.4 says no path appears but the ones the block lists, and the block lists `selected[]`
+    alone, so the projection of `properties` is closed on it: `available[]` is the seller's and
+    the buyer writes nothing there.
+- type: BuyerWrites
+  value:
+    frequency_cap:
+      value: 3
+  verdict: reject
+  context: >-
+    A buyer capping frequency the way it sets every other settable bound, by writing `value` at
+    the field.
+  reason: >-
+    `frequency_cap` is marked `settable` and § 5.5 types it `FrequencyCap`, which has no `value`;
+    the block lists `frequency_cap.count.value`, so the cap is written one level down and the
+    projection of `frequency_cap` is closed on `count`.
+feedback: >-
+  § 3.4 writes two of `BuyerWrites`'s eight lines as placeholders over a class of fields and
+  states the class in the lead-in, with an exception for `frequency_cap` in the same sentence. A
+  reader has to scan every field table of § 5 for markers to know what the type holds, and a
+  generator has to parse the exception. Listing the paths, or stating the exception as the rule it
+  is -- a settable field whose own `value` the field does not carry writes it where its type puts
+  it -- would make the block readable on its own.

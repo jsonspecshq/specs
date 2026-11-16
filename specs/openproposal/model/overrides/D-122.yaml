@@ -1,0 +1,128 @@
+format: 2
+id: D-122
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `TaxonomyCodes` names no list of its own, and § 2.2 says each field that holds it names the one
+  `taxonomy` comes from. What type does the shared object publish?
+covers:
+- ir: def:2.2:TaxonomyCodes
+  digest: 2ee8d6885b0983b6f0dc485033f2421fd544ee31e06f4680eb4ecec8a308db30
+  quote: '`TaxonomyCodes` | holds codes in one taxonomy. Each field that holds it names the list `taxonomy` comes from and whether an id covers its descendants.'
+- ir: key:2.2:TaxonomyCodes.taxonomy
+  digest: 08b4c3a14093b12b45241e0006344bdb90dfa33f9555fe9d9f7fdcef7c070349
+  quote: '`taxonomy` | REQUIRED | A value from the list the field names'
+- ir: key:2.2:TaxonomyCodes.ids[]
+  digest: 21bca4d5b1171d6fe0be84cc1f4fe0494d237447567fad1f68e7aa8bf0a9310d
+  quote: '`ids[]` | REQUIRED | Ids in that taxonomy'
+- ir: key:5.2.4:PropertyOption.venue_type
+  digest: 78f8494879de6e326402cd24af001372bbb228338900d5faec7042b25c257aad
+  quote: '`venue_type` | REQUIRED when `channel` is `dooh` | `taxonomy` is a value of AdCOM 1.0 List: DOOH Venue Taxonomies. `ids[]` holds exactly one id. It covers only itself, not its descendants. The values OpenRTB 2.6 `dooh.venuetypetax` and `dooh.venuetype` carry'
+- ir: key:5.6.7:ExclusivityOption.categories
+  digest: 61d187729255992144975ff76b2a3d8e878b6802d6b66bf077a1c929c4bafa34
+  quote: '`categories` | REQUIRED when `scope` is `category` | `taxonomy` per AdCOM 1.0 List: Category Taxonomies. An id covers its descendants'
+- ir: def:5.5:exclusions.categories
+  digest: c1247ebdca722641ead3b70561ef223b13375432d36b92740aa686da257dd381
+  quote: '`categories` | `TaxonomyCodes` | `taxonomy` per AdCOM 1.0 List: Category Taxonomies. An id covers only itself, not its descendants'
+options:
+- id: constructor-over-the-list-the-holder-names
+  summary: >-
+    `TaxonomyCodes` is a constructor over the taxonomy list, with one published copy per list a
+    holder names. The holder's row supplies the argument, and `taxonomy` is a code of that list.
+- id: one-object-at-one-list
+  summary: >-
+    `TaxonomyCodes` stays one object and `taxonomy` is typed at one of the two lists the holders
+    name, for every holder.
+- id: one-object-at-the-bare-integer
+  summary: >-
+    `TaxonomyCodes` stays one object and `taxonomy` keeps the bare `Integer` its cell states, so
+    the published type says which lists are in play nowhere.
+chosen: constructor-over-the-list-the-holder-names
+rationale: >-
+  The row says "A value from the list the field names" and the lead-in says which field names it:
+  "Each field that holds it names the list `taxonomy` comes from". So the list is a parameter of
+  the object and the holder supplies the argument, which is what a constructor is. Five of the
+  kernel's eight constructors already have this shape -- an object template with a parameterised
+  member -- and `naming.from: argument` names each copy after the argument, so the two copies are
+  `DoohVenueTaxonomyCodes` and `CategoryTaxonomyCodes`.
+
+
+  Three fields hold the object and they name two lists. § 5.2.4's `venue_type` is "a value of AdCOM
+  1.0 List: DOOH Venue Taxonomies"; § 5.5's `exclusions.categories` and § 5.6.7's
+  `ExclusivityOption.categories` are each "`taxonomy` per AdCOM 1.0 List: Category Taxonomies".
+  Both lists reach this specification through the registry import the profile holds, so each copy's
+  `taxonomy` references the list AdCOM publishes rather than a vocabulary of this specification's
+  own: `D-071`'s reuse-the-registry reading governs both, and neither list is copied. List:
+  Category Taxonomies is already the model's `CategoryTaxonomy`, declared by `D-104` at § 5.3's
+  `AudienceOption.taxonomy`, so the `categories` copies take that type and `commercial` depends on
+  `audience` for it; List: DOOH Venue Taxonomies is reached by `venue_type` alone and is declared
+  there.
+
+
+  `one-object-at-one-list` is wrong at either list, and the two failures are not alike. At List:
+  DOOH Venue Taxonomies the codes are 0 to 5, so the published type refuses the three shipped
+  `categories` payloads that write `taxonomy: 8` -- line-item-audio.yaml, proposal-package.yaml and
+  proposal.yaml. At List: Category Taxonomies the codes are 1 to 9, so the type accepts both shipped
+  numbers and publishes line-item-dooh.yaml's `taxonomy: 5` as "IAB Tech Lab Content Taxonomy 2.1"
+  where that property means OpenOOH Venue Taxonomy 1.1, which is code 5 of the other list. A
+  refusal is reported by `examples-validate`; a code published under the wrong title is reported by
+  nothing, so the option that looks cheaper is the one that puts a wrong value in the schemas, the
+  SDKs and the site.
+
+
+  `one-object-at-the-bare-integer` is what the model published before this record, and it costs the
+  key its type: `taxonomy` had no mapping entry at all, so the published `TaxonomyCodes` stated no
+  `taxonomy` key and refused every shipped value of it. A bare `Integer` would also refuse nothing,
+  and the two lists it would admit together have ten codes in common with different meanings.
+
+
+  `ids[]` is a list of `ExternalId` in both copies, which is what it was as a property of the
+  object: an id another standard's taxonomy keeps, compared by exact equality. § 5.2.4 narrows it
+  to exactly one id and § 5.5 and § 5.6.7 differ on whether an id covers its descendants; neither
+  is a member of the shell, so each stays with the holder's own row.
+challenge:
+- type: DoohVenueTaxonomyCodes
+  value:
+    taxonomy: 5
+    ids:
+    - '10502'
+  verdict: accept
+  context: >-
+    A seller offering subway platform screens, naming the venue as OpenOOH Venue Taxonomy 1.1 code
+    10502, which is `transit.subway.platform`.
+  reason: >-
+    `venue_type` names List: DOOH Venue Taxonomies, whose code 5 is OpenOOH Venue Taxonomy 1.1, so
+    the copy's `taxonomy` takes 5 and `ids[]` takes the taxonomy's own id as a string.
+- type: DoohVenueTaxonomyCodes
+  value:
+    taxonomy: 8
+    ids:
+    - '1551'
+  verdict: reject
+  context: >-
+    A seller writing an ad product taxonomy code in a DOOH property's `venue_type`, because the
+    same object carries both kinds of code elsewhere in the specification.
+  reason: >-
+    List: DOOH Venue Taxonomies holds the codes 0 to 5, so 8 is no code of it and the copy's
+    `taxonomy` refuses it. `one-object-at-one-list` at List: Category Taxonomies is what this
+    rejects: that type would accept 8 here and publish 5 as a content taxonomy.
+- type: CategoryTaxonomyCodes
+  value:
+    taxonomy: 8
+    ids:
+    - '1551'
+  verdict: accept
+  context: >-
+    A buyer excluding a competitor's category, naming IAB Tech Lab Ad Product Taxonomy 2.0 code
+    1551, which is Vehicles.
+  reason: >-
+    `categories` names List: Category Taxonomies, whose code 8 is IAB Tech Lab Ad Product Taxonomy
+    2.0, so the copy's `taxonomy` takes 8 under the title the registry gives it.
+feedback: >-
+  § 2.2 states `TaxonomyCodes` as a shared object whose `taxonomy` is "a value from the list the
+  field names", which makes the type incomplete without its holder. Write it as a parameterised
+  type, as § 2.2 already writes `Range[T]`: `TaxonomyCodes[DoohVenueTaxonomies]` at § 5.2.4's
+  `venue_type` and `TaxonomyCodes[CategoryTaxonomies]` at § 5.5's and § 5.6.7's `categories` says
+  in the cell what the lead-in now says in prose.
