@@ -1,0 +1,126 @@
+format: 2
+id: D-230
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 3.2's `Narrowing` states two MUST-level requirements in its Meaning cells --
+  every `include[]` entry covered by an `allowed[]` entry, every `exclude[]`
+  entry covered by an `include[]` entry -- and no rule claims either. Can a
+  payload decide them, and if so what does "covered by" compare?
+covers:
+  - ir: rule:3.2:9277e83b
+    digest: b1ab848b6c192faf9512d7b88287356b19240fb2e8cd07b08018c3ed9fa6803e
+    quote: Each entry MUST be covered by an `allowed[]` entry
+  - ir: rule:3.2:4659b1d4
+    digest: 778a9db0e5ccb7906aa5a5906bae3d8994a11c41a8afe60fbf794ee27371114e
+    quote: Each entry MUST be covered by an `include[]` entry
+  - ir: field:5.5:geo
+    digest: f492a26496f05549bd2f597bfb46224f68b3eb347aee1c5e0e5974d88dabe693
+    quote: "`geo` | Settable[GeoCode] | settable | Where the line item runs. `allowed[]` of `GeoCode` (below). A line item MUST NOT declare both `geo` and `markets`"
+  - ir: field:5.5:device
+    digest: fe1f4bd919cf85dd10844e816eb7915d4aac754524377e73eff9543bed5123a2
+    quote: "`device` | Settable[Integer] | settable | `allowed[]` of AdCOM 1.0 List: Device Types codes, the values of OpenRTB 2.6 `device.devicetype`. It narrows `environments` (§ 5.2.1). Mobile/Tablet - General (1) covers Phone (4) and Tablet (5)"
+  - ir: field:5.5:daypart
+    digest: 1793e5ab24f0ca81b4c9e404a35bface2fbc59ee815591375834b2fb1d7adbb4
+    quote: "`daypart` | Settable[ClockWindow] | settable | `allowed[]` of `ClockWindow` (below). A window covers any window inside it"
+  - ir: def:5.5:GeoCode
+    digest: 00199fb1320521bce65188b2ddcc281db1bbac486f33976cdc44868bf4e25a79
+    quote: "`GeoCode` | is a String: an ISO 3166-1 alpha-2 country code, an ISO 3166-2 subdivision code, or an extension `VocabularyTerm` for any other area, such as a metro list. The country of an ISO 3166-2 code is the part before the hyphen, and a country covers every subdivision code it prefixes. An extension term covers only itself. § 1.1 states the conversion to OpenRTB 2.6 and the Deals API."
+options:
+  - id: rules-of-the-line-item-reading-each-field-s-own-coverage
+    summary: >-
+      Both are rules a line item's payload decides, owned by `LineItem`,
+      because the comparison needs the `allowed[]` of the same settable field
+      and the coverage relation the field states -- in its own row, or in the
+      type its row points at. The check reads equality always, and beyond
+      equality only what the text states: a device code `1` covering `4` and
+      `5`, a daypart window covering any window inside it, and a country code
+      covering every subdivision code it prefixes.
+  - id: a-constructor-rule-on-narrowing
+    summary: >-
+      Both belong to the `Narrowing` constructor, so every copy carries them
+      and the check sees one `Narrowing` value.
+  - id: rules-checked-by-equality-alone
+    summary: >-
+      Coverage is membership: an `include[]` entry is covered when `allowed[]`
+      holds that same entry. One relation, no per-field reading.
+chosen: rules-of-the-line-item-reading-each-field-s-own-coverage
+rationale: >-
+  **§ 3.2 says what coverage is and defers the rest to the field.** Between the
+  `Narrowing` table and `SettableRange` the section states: "An entry covers
+  itself and what the field says it contains. Nothing else is assumed." So
+  coverage is reflexive everywhere, and anything wider is the field's to state.
+  That sentence is quoted here from the pinned text and is covered by no IR
+  element, because the extraction does not hold it, which is carried apart from
+  this record, and it is the reason this record names the three field rows and
+  the `GeoCode`
+  definition instead: they are where each widening is written and they are
+  extracted.
+
+
+  **Three fields use the form and each states its own widening, which is what
+  settles the reading.** § 5.5's `device` row states one outright --
+  "Mobile/Tablet - General (1) covers Phone (4) and Tablet (5)". Its `daypart`
+  row states another -- "A window covers any window inside it". Its `geo` row
+  states none in the row itself and points at a type -- "`allowed[]` of
+  `GeoCode` (below)" -- whose definition states it: "The country of an ISO
+  3166-2 code is the part before the hyphen, and a country covers every
+  subdivision code it prefixes. An extension term covers only itself." So the
+  field says what it contains either in its row or in the type that row names,
+  and one relation cannot serve all three.
+
+
+  **Where the shipped payloads settled it.** Reading `geo` as equality alone
+  was the first form of this record, and `examples-validate` refused it on two
+  payloads the specification itself ships: § 5.5's own fenced block and
+  `examples/proposal-issued.yaml`, both of which write `geo.allowed: ["US"]`
+  with `value.include: ["US"]` and `value.exclude: ["US-TX"]`. That exclusion
+  is covered only if `US` covers `US-TX`, which the `GeoCode` definition says it
+  does. So the search for the widening has to follow the row's pointer into the
+  type, and a reading that stops at the row is incomplete -- which is what those
+  two payloads are for.
+
+
+  **`rules-checked-by-equality-alone` refuses payloads the specification
+  allows, and this is measured rather than argued.** On `geo` it refuses the
+  two shipped payloads above. On `device` it would reject `allowed: [1]` with
+  `include: [4]`, which the `device` row says is covered; on `daypart` it would
+  reject an included window inside an allowed one, which the `daypart` row says
+  is covered. A check that reports a violation the text permits is worse than no
+  check, because the finding is then the check's and a reader has to discover
+  that.
+
+
+  **`a-constructor-rule-on-narrowing` cannot see what it has to compare.** A
+  `Narrowing` value holds `include[]` and `exclude[]` and no `allowed[]`:
+  `allowed[]` is the `Settable` envelope's key, one level up. And neither a
+  `Narrowing` nor a `Settable` value carries the name of the field it is on, so
+  a check at either level cannot reach the coverage relation the field's row
+  states. The object that holds the settable fields does, as keys, which is how
+  `rule:3.1:bfffacdf` already reads every field whose value states
+  `available[]`. So the owner is `LineItem` and the field name is read from the
+  key.
+
+
+  **The second requirement has the same shape as the first and not a narrower
+  one.** `exclude[]` against `include[]` is within one `Narrowing` value, so it
+  needs no envelope -- but it needs the same coverage relation, because an
+  excluded daypart window inside an included one is covered. So both are the
+  line item's and both read the field.
+
+
+  **What the check does not decide.** Where a field's row states a widening the
+  check does not implement, coverage falls back to equality and the check can
+  only report what no entry covers at all; it never reports a pair the text
+  permits. The three relations above are every one § 5.5 states for a settable
+  field, in a row or in a type a row points at. A fourth settable field, or a
+  widening added to one of these, needs this record re-read, which a cover on
+  that sentence would have caught and today nothing does.
+evidence:
+  - 'The shipped line-item-display.yaml carries all three settable fields with their
+    `allowed[]` and `default.include[]`, and its `device` line annotates the widening
+    in a comment of its own: "AdCOM 1.0 Device Types; 1 covers 4 and 5"'
+  - 'A `Narrowing` value holds no `allowed[]` and no field name, so neither it nor the
+    `Settable` envelope can reach the relation the field''s row states'

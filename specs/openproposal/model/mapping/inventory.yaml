@@ -501,6 +501,10 @@ entries:
     digest: 7b51885e02d8b5f63308b87a181fab2152a2b8252822181d5cfe4d9c1259f22d
     source: { decision: D-162 }
     as: { role: property, object: PropertyOption, type: { kind: named, name: Channel }, presence: optional }
+  - ir: rule:5.2.4:c122ccdd
+    digest: bb4c8a176a20b7ccb46fbb8d5199bce8886b697591b5e91b0aa3158b1bbf20ef
+    source: { decision: D-170 }
+    as: { role: rule, object: PropertyOption }
   - ir: key:5.2.4:PropertyOption.tv_network
     digest: eaea36a37917cb4c1f35b1064f0a19c14d7261fa999a87079ec275bac86a4c1e
     source: { decision: D-162 }

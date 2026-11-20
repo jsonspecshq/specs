@@ -1,0 +1,136 @@
+format: 2
+id: D-324
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.6's fenced block is the `agreed_rate` formula, and `D-167` read the other three unclaimed
+  blocks and left this one: "what role the document settles for the formula block is its own
+  question, carried apart from this record". So what does the block carry, and which object
+  decides it?
+covers:
+- ir: code:5.6:1
+  digest: b6719071729d88ce1385f42bb24611bb3fa30ba1d809aa9722dc696fe478de90
+  quote: agreed_rate = (list_rate + sum of delta_cpm) × product of (1 + delta_fraction)
+- ir: sentence:5.6:bc1e0afe
+  digest: b52ed2d1b809e4ef6d2476a0fe871ef02d37b6de6da8d26247e0ffb47fcf06f3
+  quote: "`agreed_rate` is computed on the committed entry from the options in effect (§ 3.1), in exact decimal, and rounded once, half up, to 6 decimal places:"
+- ir: sentence:5.6:388fd9ea
+  digest: 2c61b9f32749c2ee8c74066ac4635e1085969cb0f24b996dd7206900d8b5a6ad
+  quote: A delta counts when its option is in effect and not in `included[]`, on any field of the line item marked `selectable`; § 5.3 adds excluded audience options.
+- ir: sentence:5.6:1a265711
+  digest: a82c6f1f9731cb121c60c5eaf1346abdb2a4d6c8fc46443576688256d0b01e6a
+  quote: A `delta_cpm` enters only a `CPM` or `CPMV` entry (§ 3.1), and the option's other deltas still count.
+- ir: sentence:5.6:cf14058d
+  digest: 43b5f3f61bb33f9cfa3293a4a4f403f8b826204487eba6ece94cd38eb876cae1
+  quote: So `list_rate` 24.00 with one `delta_cpm` of 3.00 and one `delta_fraction` of 0.02 is 27.54.
+- ir: sentence:5.3:147681be
+  digest: fcde80beb7f60dd236045385221ad0cc1dbca3c7a8c594ddea384683041e1340
+  quote: An option in `excluded[]` adds its delta to `agreed_rate` (§ 5.6), under either operator.
+- ir: field:5.6:pricing[].agreed_rate
+  digest: 5ed66aa5f747b2c39b111708371543c09c29f59f000e958808f939b45aa40c45
+  quote: "`pricing[].agreed_rate` | Amount | derived | The transacted rate (below). Absent on every other entry"
+- ir: field:5.6:pricing[].list_rate
+  digest: a322d5f698774305710257376f60fd8b5972bf481ea92cff2b9cf22e8fa5486b
+  quote: "`pricing[].list_rate` | Amount | requestable | The rate before options. A buyer MAY request another value, and a granted value is the `list_rate` of the next `version`"
+options:
+- id: a-rule-of-the-line-item-the-formula-reads
+  summary: >-
+    `role: rule, object: LineItem`. The block states the computation the sentence above it
+    introduces with a colon, and the figures it reads are a committed entry's `list_rate` and
+    the deltas in effect across the line item's selectable fields, so a line item is the
+    smallest payload that decides it. The check computes in exact decimal and rounds once, half
+    up, to six places, as the sentence states.
+- id: a-rule-of-the-pricing-entry
+  summary: >-
+    `role: rule, object: PricingEntry`, the reading `D-167` named in passing, since the entry
+    holds `list_rate` and `agreed_rate` and the figure is computed on it.
+- id: an-illustration-of-the-sentence-above-it
+  summary: >-
+    `role: informative`, as three of `D-167`'s four blocks are: the sentence says `agreed_rate`
+    is computed from the options in effect and the block draws the arithmetic of it.
+chosen: a-rule-of-the-line-item-the-formula-reads
+rationale: >-
+  THE BLOCK STATES A REQUIREMENT THE PROSE DOES NOT, WHICH IS `D-167`'s TEST. Its chosen option
+  is to read each block against the prose it sits in: "Where the block states a requirement the
+  prose does not, it carries that requirement and takes the destination type rules section 9
+  gives it. Where the prose states the requirement and the block shows it, the block is
+  informative." The sentence above this block says `agreed_rate` "is computed on the committed
+  entry from the options in effect (§ 3.1), in exact decimal, and rounded once, half up, to 6
+  decimal places:" and ends in a colon. It says that the figure is computed, how exactly, and
+  to how many places; it does not say what the computation is. The block is the only place the
+  document states it, so `an-illustration-of-the-sentence-above-it` would leave the arithmetic
+  carried nowhere.
+
+
+  MEASURED, AND THE MEASUREMENT IS THE REASON THE ROLE IS NOT `informative`: 78 rules and 114
+  obligations in the rules output, and the two that name `agreed_rate` state when the figure
+  must be present and that it must exceed zero. None states how it is computed.
+
+
+  `a-rule-of-the-pricing-entry` IS THE READING `D-167` GUESSED, AND THE INPUTS REFUTE IT. The
+  published `PricingEntry` has fourteen members -- `agreed_rate`, `cost_definition`,
+  `cost_method`, `cost_parameters`, `currency`, `list_rate`, `min_rate`, `price_type`,
+  `price_valid_until`, `pricing_id`, `rate_per`, `transaction_mechanisms`, `unit_bounds`,
+  `unit_label` -- and not one of them is a delta. The deltas live on the line item's selectable
+  fields, which § 5.6 says in its own words: a delta counts "on any field of the line item
+  marked `selectable`". An entry alone also cannot say whether it is the committed one, which
+  the sentence makes the figure's subject. So the smallest payload that decides the formula is
+  the line item, and `LineItem` is the owner (type rules § 9).
+
+
+  WHAT THE FORMULA READS, each clause from a sentence of the document. The base is the committed
+  entry's `list_rate`. The `delta_cpm` terms are summed, and only where the entry bills `CPM` or
+  `CPMV`, because "A `delta_cpm` enters only a `CPM` or `CPMV` entry (§ 3.1), and the option's
+  other deltas still count" -- so a non-`CPM` entry drops those terms and keeps the fractions.
+  Each `delta_fraction` multiplies by one plus itself. `delta_flat` is outside the figure, which
+  § 5.6 states. A delta counts where its option is in effect and not in `included[]`, which is
+  the walk `D-323` already put in one helper, and § 5.3 adds one more source: "An option in
+  `excluded[]` adds its delta to `agreed_rate` (§ 5.6), under either operator." An excluded
+  option is by its own row "disjoint from the seller audiences in effect", so the in-effect walk
+  cannot reach it and this rule adds it. The `delta_flat` reading keeps the narrower walk,
+  because § 5.6 puts that charge outside `agreed_rate` and § 5.3 speaks only of this figure.
+
+
+  THE ARITHMETIC IS EXACT DECIMAL BECAUSE THE SENTENCE SAYS SO, AND A FLOAT IS NOT THAT. The
+  check reads each value's own shortest decimal spelling into an integer numerator with a
+  tracked scale, sums and multiplies at full scale, and rounds once, half up, to six places at
+  the end. Carrying the same expression in binary floating point rounds at every step instead of
+  once, and the figure the document rounds to six places is where that shows. A value no decimal
+  spelling fits is read as nothing, so the rule reports on no payload whose numbers it cannot
+  order.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES, AND THE SOURCE DOES THE ARITHMETIC ITSELF.
+  `proposal-issued.yaml`'s `business-daily-display` selects `display/970x250` at `delta_cpm`
+  3.00 and `notice-7d` at `delta_fraction` 0.02, commits under `bd-cpm-usd` at `list_rate` 24.00,
+  and states `agreed_rate` 27.54 beside the comment "(24.00 + 3.00) x (1 + 0.02) = 27.54" --
+  which is § 5.6's own worked example, "So `list_rate` 24.00 with one `delta_cpm` of 3.00 and
+  one `delta_fraction` of 0.02 is 27.54." The valid half is that line item trimmed to the keys a
+  `LineItem` requires plus the two fields whose deltas are in effect, the `pricing` and the
+  `commitment`. The invalid half states `agreed_rate` as 27.00, the figure that drops the
+  fraction, and changes nothing else.
+
+
+  THE CHECK REPRODUCES EVERY `agreed_rate` THE SPECIFICATION SHIPS. Five payloads state one --
+  `line-item-dooh.yaml`, `line-item-podcast-embedded.yaml`, `proposal-agreed.yaml`'s two line
+  items and `proposal-issued.yaml`'s first -- and the computed figure equals the stated one in
+  all five. That is the measurement that would catch a formula read to fit one example.
+
+
+  WHAT THIS COSTS, counted rather than described. A line item that does not say which entry the
+  buyer commits under is left undecided, as `D-323`'s rule is and for the same reason, and so is
+  one whose committed entry states no `agreed_rate` -- the field is `derived` and absent on every
+  entry but the committed one, so a payload without it has nothing to check rather than a
+  failure. The four part-payloads of § 5.5 write no `pricing[]` and are undecided under `D-135`.
+feedback: >-
+  The formula is the only normative arithmetic in the document and it is written as a displayed
+  block with no RFC 2119 keyword, under a sentence that ends in a colon. A reader that records
+  only keyworded sentences records the computation nowhere, which is what happened here: eight
+  rules of § 5.6 reached the rules output and the formula reached none of them. Giving the
+  sentence a keyword -- that `agreed_rate` MUST equal the block's value -- would settle it, and
+  the same shape is worth checking wherever a colon introduces a block. The order of operations
+  is also left to the reader: the block's parentheses fix it, but "rounded once" is what says
+  the product is not rounded term by term, and that sentence is separable from the block it
+  introduces.

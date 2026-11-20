@@ -1,0 +1,95 @@
+format: 2
+id: D-231
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.4's `ChangeRequest.providerdata` is typed `Object` and its cell names no
+  object and cites none, so `named-object-row` derives nothing. What does the
+  model publish for the row?
+covers:
+  - ir: key:4.4:ChangeRequest.providerdata
+    digest: 577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385
+    quote: "`providerdata` | OPTIONAL | Structured references a buyer uses to identify its order in the seller's system"
+  - ir: "field:4.4:change_requests[]"
+    digest: 37848c071eae8107ce3bb5fda622133aae3661efcab5aa4b527dd5583bf9fb93
+    quote: "`change_requests[]` | Array[ChangeRequest] | recorded | Ordered post-`agreed` history. Each entry carries the fields of the OpenDirect 2.1 ChangeRequest, except its `webhook`, plus `baseline`, `actor`, `at`, and `cancellation`. Outside the binding record (§ 4.1.1) and the offered terms (§ 4.1.3), like `negotiation_history[]`, so an entry changes neither `record_digest` nor `version`"
+options:
+  - id: the-opendirect-object-the-field-row-cites
+    summary: >-
+      The row holds an object of any members under the name its key gives it,
+      `ProviderData`, and `set_by` names the definition that states those
+      members: OpenDirect 2.1's `ChangeRequest.providerdata`, which the
+      `change_requests[]` row cites for every key of this table. Open, because
+      this specification states no member of it.
+  - id: a-bare-object-with-no-name
+    summary: >-
+      The row holds an anonymous object, so the published type says a JSON
+      object and nothing about whose it is, and the citation lives nowhere.
+chosen: the-opendirect-object-the-field-row-cites
+rationale: >-
+  **The citation is in the field row, for every key of this table at once.**
+  `change_requests[]` reads "Each entry carries the fields of the OpenDirect
+  2.1 ChangeRequest, except its `webhook`, plus `baseline`, `actor`, `at`, and
+  `cancellation`". `providerdata` is none of the four this specification adds,
+  so it is one of the fields it carries, and what states its members is
+  OpenDirect's definition. The key row then says what the value is *for* --
+  "Structured references a buyer uses to identify its order in the seller's
+  system" -- and states no member of it.
+
+
+  **Its sibling in the same table is already read this way.** `contacts[]` is
+  `Array[Object]` whose cell says "As OpenDirect 2.1 Contact", and `D-137`
+  publishes `Contact` as an open object with `set_by` naming OpenDirect's
+  object. `providerdata` differs only in where the citation sits: in the field
+  row that governs the whole table rather than in the key's own cell. That is a
+  difference in where the text writes the reference, not in what it references,
+  and `D-162` reads § 5.2.4's `tv_channel` and `tv_network` the same way
+  against AdCOM.
+
+
+  **Open, and with no members of its own.** This specification writes none of
+  OpenDirect's keys for it, and § 2.1's summary projects no path through
+  `providerdata`. So the published type accepts the object OpenDirect defines
+  without restating a key of it, which type rules § 2.5 distinguishes from an
+  object the mapping has not finished -- that one states no members and names
+  nothing.
+
+
+  **`a-bare-object-with-no-name` publishes a type that says only "object".** A
+  consumer reading it learns nothing about whose definition fills it, and the
+  citation would survive only in a description a generator may drop. The name
+  is the one type rules § 7 gives an object field's value, its key in
+  PascalCase.
+evidence:
+  - 'The published key is a `$ref` to `ProviderData`, an open object whose `set_by`
+    names OpenDirect 2.1''s `ChangeRequest.providerdata`, so the citation is in the
+    model and not only in a description'
+  - '`contacts[]` of the same table is published the same way under `D-137`, which is
+    the precedent this follows rather than a new construct'
+challenge:
+  - type: ProviderData
+    value:
+      order_ref: ORD-2026-44817
+      advertiser_code: AGENCY-A-7731
+    verdict: accept
+    context: >-
+      A buyer identifying its order in the seller's system by the two
+      references its own trafficking tool issues, which is what the row says
+      the value is for.
+    reason: >-
+      `the-opendirect-object-the-field-row-cites` publishes an object of any
+      members, so every key OpenDirect's `providerdata` carries is taken without
+      this specification restating one, and the row names no member to require.
+  - type: ProviderData
+    value: ORD-2026-44817
+    verdict: reject
+    context: >-
+      A buyer that sends the single order reference as a bare string, which is
+      how a query parameter would carry it.
+    reason: >-
+      The row states an `Object` and the word is the type cell's, so the
+      published type is an object and a string is refused. Open says nothing
+      about which members a value has; it does not stop saying the value is an
+      object, which is the half of the type this row does state.

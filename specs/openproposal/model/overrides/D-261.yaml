@@ -1,0 +1,76 @@
+format: 2
+id: D-261
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `ErrorObject.version` is "REQUIRED when the request names a proposal the requester may read", which
+  is a condition on the request and on what the requester is allowed to see. What presence does the
+  type state for it?
+covers:
+- ir: key:2.4:ErrorObject.version
+  digest: 407dee4d73ecc52331ba20ae22175edcb429a3a6b9d79a0856b5d828e48980b4
+  quote: "`version` | REQUIRED when the request names a proposal the requester may read | The proposal's `version` when the error was decided"
+options:
+- id: a-duty-on-the-responder-with-the-cell-s-presence-kept
+  summary: >-
+    The row keeps the presence its cell states, and what the condition names is read as a duty on the
+    party that composes the error: it states the version where the requester may read the proposal and
+    omits it where they may not. Nothing a receiver validates carries it.
+- id: optional-on-the-type
+  summary: >-
+    The mapping states the type's presence as OPTIONAL, because an error object carries no value a
+    consumer can read the condition from.
+- id: required-on-the-type
+  summary: >-
+    The type requires it, so every error carries the proposal's version.
+chosen: a-duty-on-the-responder-with-the-cell-s-presence-kept
+rationale: 'The condition reads two things an `ErrorObject` does not carry: **the request** it answers,
+  and **whether the requester may read** the proposal that request names. Neither is a member of the
+  object, a sibling of the row, or a value of either, so no keyword of this type can state it — which
+  is what `schemas-emit` reports when it says the condition names no sibling and value.
+
+
+  **The two directions it carries, and the second is why it cannot be required.** Where the requester
+  may read the proposal, the responder states the version the error was decided at, and the member is
+  there for a reason the row gives: a client that is told its `commit` failed needs to know which
+  version decided it. Where the requester may **not** read the proposal, stating the version would
+  disclose that the proposal exists and how many times it has moved — so the member''s absence is
+  itself the specification''s answer, and § 5.8''s visibility rules are the same shape: what a party
+  may not read, a response does not carry.
+
+
+  **So what the condition names is a duty on the composer, not a property of the payload.** A consumer
+  validating an error object cannot evaluate it, and a responder does not need a schema to tell it what
+  it already decided. An error with the version and an error without it are both correct answers to
+  different requests, so nothing a receiver checks can hold the requirement.
+
+
+  **MEASURED, AND IT REFUSED THE OTHER OPTION.** `optional-on-the-type` was written and run on
+  2026-11-17, and the pipeline refused it twice: `mapping-location` reported "presence is
+  ''optional'', but the specification states ''conditional''", and `mapping-rules` reported that
+  `domain-row` decides the entry, "so the entry cites it, not a decision record". Both refusals are
+  right — the cell''s spelling is the form a rule reads, and a decision covers only what no rule decides
+  — so the row keeps the presence its cell states and this record states what the condition is about.
+
+
+  **What this reading costs, stated.** Nothing in the published artifacts then says that a responder
+  owes the version where the requester may read the proposal. That duty is real and this record does
+  not publish it: it is a sentence of the Required cell, and the obligation it states is one no
+  schema keyword carries. `reaches-outputs` is the check that will report it as soon as the mapping
+  claims it as an obligation rather than a presence, which is work this record leaves ready and does
+  not do — the row carries one claim, and this record makes that claim the presence.
+
+
+  **`required-on-the-type` is refused** because it would refuse the error the specification''s own
+  condition describes: the one answering a request for a proposal the requester may not read.'
+evidence:
+- https://github.com/IABTechLab/OpenProposal/blob/a36266907148c7fe7f79fd3706d4bd2ff1e99b16/spec/openproposal-3.0.md
+feedback: >-
+  § 2.4 conditions `ErrorObject.version` on "the request names a proposal the requester may read",
+  which is a rule for the party composing the error rather than a shape a receiver can check. Saying
+  it as a duty — "a responder states `version` where the requester may read the proposal, and omits it
+  otherwise" — in the prose above the table, with the Required cell reading OPTIONAL, would let an
+  implementer of the receiving side validate the object and an implementer of the sending side read
+  its obligation, which the one cell cannot do for both today.

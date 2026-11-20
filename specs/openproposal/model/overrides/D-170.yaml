@@ -1,0 +1,71 @@
+format: 2
+id: D-170
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 5.2.4's `tv_channel` row states "It SHOULD carry `domain`" of an object this specification
+  states no member of, and no shipped payload carries a `tv_channel` at all. Which object owns the
+  rule, and what does its pair carry?
+covers:
+- ir: rule:5.2.4:c122ccdd
+  digest: bb4c8a176a20b7ccb46fbb8d5199bce8886b697591b5e91b0aa3158b1bbf20ef
+  quote: It SHOULD carry `domain`.
+- ir: key:5.2.4:PropertyOption.tv_channel
+  digest: 7b51885e02d8b5f63308b87a181fab2152a2b8252822181d5cfe4d9c1259f22d
+  quote: "`tv_channel` | OPTIONAL | The TV channel or station the property carries, as an AdCOM 1.0 `Channel` object in AdCOM's keys and meanings. It SHOULD carry `domain`. Properties whose `tv_channel.domain` is the same carry the same channel, so a buyer can tell when two sellers offer it. Each seller assigns its own `id`, so `id` matches only within one seller"
+options:
+- id: a-rule-of-the-property-option-at-warning-severity
+  summary: >-
+    It is a rule of `PropertyOption`, the object whose row states it, and its severity is
+    `warning`, since the level is SHOULD. The pair is a shipped property option carrying a
+    `tv_channel` with `domain`, against the same option whose `tv_channel` has none.
+- id: informative-because-the-object-is-another-standards
+  summary: >-
+    `tv_channel` holds an AdCOM object this specification states no member of, so what it carries
+    is AdCOM's business and the sentence is a note to a reader.
+- id: a-rule-of-the-channel-object
+  summary: >-
+    It is a rule of the `Channel` object itself, which is what must carry `domain`.
+chosen: a-rule-of-the-property-option-at-warning-severity
+rationale: >-
+  THE SENTENCE IS ABOUT A MEMBER, AND ONE PROPERTY OPTION SHOWS IT. "It SHOULD carry `domain`"
+  reads the `tv_channel` of the row's own object, so a `PropertyOption` carrying one decides the
+  rule, and the level is SHOULD, which `severityOf` reads as a warning -- the reading `D-153`
+  states for § 5.2.2's and § 5.2.7's SHOULD NOT and the same machinery carries.
+
+
+  `a-rule-of-the-channel-object` is refused because the object the rule would sit on is open and
+  this specification states no member of it: `D-162` reads `tv_channel` as AdCOM's `Channel`,
+  taking any member, which is exactly a type that cannot carry a requirement about one of its
+  members. The requirement is this specification's, about the member its own row names, so it sits
+  on the object whose row names it.
+
+
+  `informative-because-the-object-is-another-standards` would publish nothing for a sentence that
+  tells a seller what to write and tells a buyer what it can rely on. The row's next sentence says
+  why the member matters -- "Properties whose `tv_channel.domain` is the same carry the same
+  channel, so a buyer can tell when two sellers offer it" -- so the recommendation has a consumer
+  and an effect, and a warning is what the pipeline has for a recommendation.
+
+
+  THE PAIR, AND WHERE EVERY BYTE OF IT COMES FROM. No shipped payload carries a `tv_channel`,
+  which `D-169` measures of four other conditions of § 5 and is true of this one too, so the
+  object is built from the bytes of the file the property comes from.
+  `line-item-ctv-live-series.yaml` is the Connected TV line item this specification ships: its one
+  property option is `sports-app`, and the same file names a television network in its programs,
+  `{ id: example-network, name: Example Network }`, and the property's own app names
+  `sports-app.example`. The valid half is that property option with a `tv_channel` carrying those
+  three values under AdCOM's keys; the invalid half is the same option with `domain` removed, which
+  is the one thing the sentence asks for. One removal, and every other byte the file's own.
+
+
+  WHAT THIS COSTS: a reader checking the vectors against `examples/` finds no `tv_channel` there,
+  because the specification illustrates none. The feedback asks for one.
+feedback: >-
+  § 5.2.4 says a property's `tv_channel` SHOULD carry `domain`, and explains that two sellers
+  offering the same channel are recognisable by it. No example in § 6 carries a `tv_channel`, so a
+  seller writing one has the prose and no worked value, and the key whose whole purpose is to be
+  compared across sellers is the one with no illustration. One Connected TV example carrying a
+  `tv_channel` with its `domain` would show what a buyer compares.

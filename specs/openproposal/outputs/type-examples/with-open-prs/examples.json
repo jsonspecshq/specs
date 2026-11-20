@@ -20,7 +20,23 @@
           "integralads.com",
           "doubleverify.com"
         ]
-      }
+      },
+      "undecided": [
+        {
+          "path": "/verification/0",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/verification/1",
+          "rule": "kernel:RegistrableDomain:registrable"
+        }
+      ]
+    },
+    "Accreditation": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/Accreditation",
+      "minimal": "industry_currency",
+      "full": "industry_currency"
     },
     "ActionType": {
       "kind": "vocabulary",
@@ -161,7 +177,7 @@
     },
     "AssentEntry": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/proposal/1/proposal.json#/$defs/AssentEntry",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/AssentEntry",
       "minimal": {
         "at": "2026-09-22T10:14:03Z",
         "idempotency_key": "agency-a-camp1-q4-2026-5d10e2c7",
@@ -186,13 +202,13 @@
     },
     "AssentEntryGround": {
       "kind": "vocabulary",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/proposal/1/proposal.json#/$defs/AssentEntryGround",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/AssentEntryGround",
       "minimal": "availability",
       "full": "availability"
     },
     "AssentEntryRole": {
       "kind": "vocabulary",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/proposal/1/proposal.json#/$defs/AssentEntryRole",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/AssentEntryRole",
       "minimal": "commitment",
       "full": "commitment"
     },
@@ -1172,7 +1188,7 @@
     },
     "BuyerWritesActivationRouteSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesActivationRouteSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesActivationRouteSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1182,7 +1198,7 @@
     },
     "BuyerWritesAudienceSelectable": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesAudienceSelectable",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesAudienceSelectable",
       "minimal": {},
       "full": {
         "combine": {
@@ -1200,7 +1216,7 @@
     },
     "BuyerWritesBreakPositionSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesBreakPositionSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesBreakPositionSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1210,7 +1226,7 @@
     },
     "BuyerWritesBuyerRequirements": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesBuyerRequirements",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesBuyerRequirements",
       "minimal": {},
       "full": {
         "seat_owner": {
@@ -1229,7 +1245,7 @@
     },
     "BuyerWritesCancellationPolicySelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesCancellationPolicySelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesCancellationPolicySelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1239,7 +1255,7 @@
     },
     "BuyerWritesCombineSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesCombineSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesCombineSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1249,7 +1265,7 @@
     },
     "BuyerWritesControllingMeasurementSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesControllingMeasurementSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesControllingMeasurementSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1259,7 +1275,7 @@
     },
     "BuyerWritesCountSettableRange": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesCountSettableRange",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesCountSettableRange",
       "minimal": {},
       "full": {
         "value": 250000
@@ -1267,7 +1283,7 @@
     },
     "BuyerWritesDaypartBounds": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesDaypartBounds",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesDaypartBounds",
       "minimal": {},
       "full": {
         "value": {
@@ -1296,7 +1312,7 @@
     },
     "BuyerWritesDeviceBounds": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesDeviceBounds",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesDeviceBounds",
       "minimal": {},
       "full": {
         "value": {
@@ -1311,7 +1327,7 @@
     },
     "BuyerWritesEnvironmentsSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesEnvironmentsSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesEnvironmentsSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1321,7 +1337,7 @@
     },
     "BuyerWritesExclusivitySelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesExclusivitySelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesExclusivitySelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1331,7 +1347,7 @@
     },
     "BuyerWritesFormatsSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesFormatsSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesFormatsSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1341,7 +1357,7 @@
     },
     "BuyerWritesFrequencyCap": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesFrequencyCap",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesFrequencyCap",
       "minimal": {},
       "full": {
         "count": {
@@ -1351,7 +1367,7 @@
     },
     "BuyerWritesGeoBounds": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesGeoBounds",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesGeoBounds",
       "minimal": {},
       "full": {
         "value": {
@@ -1366,7 +1382,7 @@
     },
     "BuyerWritesMarketsSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesMarketsSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesMarketsSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1376,7 +1392,7 @@
     },
     "BuyerWritesMeasurementSourceSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesMeasurementSourceSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesMeasurementSourceSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1386,7 +1402,7 @@
     },
     "BuyerWritesProductionSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesProductionSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesProductionSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1396,7 +1412,7 @@
     },
     "BuyerWritesProgramsSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesProgramsSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesProgramsSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1406,7 +1422,7 @@
     },
     "BuyerWritesPropertiesSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesPropertiesSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesPropertiesSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1416,7 +1432,7 @@
     },
     "BuyerWritesReportingSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesReportingSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesReportingSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1426,7 +1442,7 @@
     },
     "BuyerWritesShortfallRemedy": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesShortfallRemedy",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesShortfallRemedy",
       "minimal": {},
       "full": {
         "selected": [
@@ -1436,7 +1452,7 @@
     },
     "BuyerWritesTransactionMechanismSelection": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/BuyerWritesTransactionMechanismSelection",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/BuyerWritesTransactionMechanismSelection",
       "minimal": {},
       "full": {
         "selected": [
@@ -1676,6 +1692,7 @@
         "id": "9a3d8dda-e91c-5bf2-ab8c-595d18487470",
         "lineid": "778120",
         "orderid": "345233",
+        "providerdata": {},
         "requesterid": "7987654",
         "status": "PENDING"
       },
@@ -1685,6 +1702,12 @@
           "rule": "rule:2.2:e46f15c4"
         }
       ]
+    },
+    "Channel": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/inventory/1/inventory.json#/$defs/Channel",
+      "minimal": {},
+      "full": {}
     },
     "ChargeableUnit": {
       "kind": "vocabulary",
@@ -2052,8 +2075,8 @@
       },
       "full": {
         "direction": "at_least",
-        "level": 0.92,
-        "metric": "completion_rate"
+        "level": 0.9,
+        "metric": "viewable_rate"
       }
     },
     "CommittedMetricDirection": {
@@ -2969,8 +2992,8 @@
               "committed_metrics": [
                 {
                   "direction": "at_least",
-                  "level": 0.92,
-                  "metric": "completion_rate"
+                  "level": 0.9,
+                  "metric": "viewable_rate"
                 }
               ],
               "list_rate": 18.5,
@@ -2981,6 +3004,10 @@
               "retention": {
                 "min": "P90D",
                 "max": "P1Y"
+              },
+              "unit_bounds": {
+                "min": 100000,
+                "max": 250000
               }
             }
           }
@@ -3009,8 +3036,8 @@
           "committed_metrics": [
             {
               "direction": "at_least",
-              "level": 0.92,
-              "metric": "completion_rate"
+              "level": 0.9,
+              "metric": "viewable_rate"
             }
           ],
           "list_rate": 18.5,
@@ -3021,6 +3048,10 @@
           "retention": {
             "min": "P90D",
             "max": "P1Y"
+          },
+          "unit_bounds": {
+            "min": 100000,
+            "max": 250000
           }
         }
       }
@@ -3277,7 +3308,7 @@
       "full": {
         "accreditation": "industry_currency",
         "dataset": "2026-R2",
-        "demographic": "CPM",
+        "demographic": "examplepub.example:custom_term",
         "impression_type": "viewable",
         "settles_on": "declared",
         "source_type": 1,
@@ -3324,47 +3355,127 @@
       "kind": "document",
       "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/documents/1/line-item.json",
       "minimal": {
-        "break_position": {
+        "cancellation_policy": {
           "available": [
             {
-              "id": "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40",
-              "maxseq": 3
+              "id": "notice-14d",
+              "notice_duration": "P14D",
+              "max_share": 1,
+              "fees": [
+                {
+                  "calculation": "none"
+                }
+              ]
             },
             {
-              "id": "7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74",
-              "maxseq": 6
+              "id": "notice-7d",
+              "notice_duration": "P7D",
+              "max_share": 1,
+              "fees": [
+                {
+                  "calculation": "none"
+                }
+              ]
             }
           ],
           "included": [
-            "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40"
+            "notice-14d"
+          ],
+          "deltas": {
+            "notice-7d": {
+              "delta_fraction": 0.02
+            }
+          },
+          "max_select": 1,
+          "selected": [
+            "notice-7d"
           ]
         },
-        "channel": "video",
-        "line_item_id": "5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71",
-        "placement": {
-          "plcmt": 1
+        "channel": "display",
+        "commitment": {
+          "pricing_id": "bd-cpm-usd",
+          "basis": "spend",
+          "amount": 80000,
+          "flight": {
+            "start": "2026-10-12T00:00:00Z",
+            "end": "2026-12-21T23:59:59Z"
+          },
+          "advertisers": [
+            {
+              "domain": "brand-a.example"
+            }
+          ],
+          "derived_units": 2904865
         },
+        "deal_origin": "adserver.example",
+        "format_specs": {
+          "display/300x250": {
+            "spec_ref": "registry.example/display/300x250@1",
+            "spec": {
+              "w": 300,
+              "h": 250
+            }
+          },
+          "display/970x250": {
+            "spec_ref": "registry.example/display/970x250@1",
+            "spec": {
+              "w": 970,
+              "h": 250
+            }
+          }
+        },
+        "formats": {
+          "available": [
+            "display/300x250",
+            "display/970x250"
+          ],
+          "included": [
+            "display/300x250"
+          ],
+          "deltas": {
+            "display/970x250": {
+              "delta_cpm": 3
+            }
+          },
+          "selected": [
+            "display/300x250",
+            "display/970x250"
+          ]
+        },
+        "line_item_id": "business-daily-display",
         "pricing": [
           {
-            "pricing_id": "9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15",
+            "pricing_id": "bd-cpm-usd",
             "cost_method": "CPM",
+            "list_rate": 24,
+            "agreed_rate": 27.54,
+            "price_valid_until": "2026-11-15T23:59:59Z",
             "currency": "USD",
-            "list_rate": 12000
+            "price_type": 3
+          },
+          {
+            "pricing_id": "bd-cpm-eur",
+            "cost_method": "CPM",
+            "list_rate": 22,
+            "price_valid_until": "2026-11-15T23:59:59Z",
+            "currency": "EUR",
+            "price_type": 3
           }
         ],
-        "status": "published",
+        "status": "agreed",
         "transaction_mechanism": {
           "available": [
             {
-              "id": "direct_io",
+              "id": "programmatic_guaranteed",
               "delivery_type": "guaranteed"
             }
           ],
           "included": [
-            "direct_io"
-          ]
+            "programmatic_guaranteed"
+          ],
+          "max_select": 1
         },
-        "visibility": "public"
+        "visibility": "named"
       },
       "full": {
         "accepted_exclusions": {
@@ -3656,17 +3767,20 @@
         "break_position": {
           "available": [
             {
-              "id": "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40",
-              "maxseq": 3
-            },
-            {
-              "id": "7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74",
-              "maxseq": 6
+              "delay": -1,
+              "id": "midroll-any",
+              "maxseq": 4,
+              "poddur": 15,
+              "podseq": -1,
+              "slotinpod": 0
             }
           ],
           "included": [
-            "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40"
-          ]
+            "midroll-any"
+          ],
+          "selected": [],
+          "deltas": {},
+          "max_select": 1
         },
         "buyer_requirements": {
           "allowed_dsps": [
@@ -3708,64 +3822,54 @@
         "cancellation_policy": {
           "available": [
             {
-              "dated_shares": [
-                {
-                  "max_share": 0.7,
-                  "window": {
-                    "end": "2026-12-31T23:59:59Z",
-                    "start": "2026-10-01T00:00:00Z"
-                  }
-                }
-              ],
+              "id": "notice-14d",
+              "notice_duration": "P14D",
+              "max_share": 1,
               "fees": [
                 {
-                  "before_reference": "P60D",
                   "calculation": "none"
-                },
-                {
-                  "before_reference": "P30D",
-                  "calculation": "cancelled",
-                  "share": 0.25
-                },
-                {
-                  "before_reference": "P7D",
-                  "calculation": "cancelled",
-                  "share": 0.5
-                },
-                {
-                  "before_reference": "P0D",
-                  "calculation": "cancelled",
-                  "share": 1
                 }
-              ],
-              "id": "stepped-fee",
+              ]
+            },
+            {
+              "id": "notice-7d",
+              "notice_duration": "P7D",
               "max_share": 1,
-              "notice_duration": "P0D",
-              "notice_reference": "flight"
+              "fees": [
+                {
+                  "calculation": "none"
+                }
+              ]
             }
           ],
-          "included": [],
-          "selected": [],
-          "deltas": {},
-          "max_select": 1
+          "included": [
+            "notice-14d"
+          ],
+          "deltas": {
+            "notice-7d": {
+              "delta_fraction": 0.02
+            }
+          },
+          "max_select": 1,
+          "selected": [
+            "notice-7d"
+          ]
         },
-        "channel": "video",
+        "channel": "display",
         "commitment": {
+          "pricing_id": "bd-cpm-usd",
+          "basis": "spend",
+          "amount": 80000,
+          "flight": {
+            "start": "2026-10-12T00:00:00Z",
+            "end": "2026-12-21T23:59:59Z"
+          },
           "advertisers": [
             {
-              "domain": "examplepub.example",
-              "legal_name": "Example Publisher US",
-              "registry_id": "reg:examplepub-digital"
+              "domain": "brand-a.example"
             }
           ],
-          "amount": 80000,
-          "basis": "spend",
-          "derived_units": 3333333,
-          "flight": {
-            "end": "2026-12-31T23:59:59Z",
-            "start": "2026-10-01T00:00:00Z"
-          },
-          "pricing_id": "bd-cpm-usd"
+          "derived_units": 2904865
         },
         "commitment_bounds": {},
         "creative_delivery": {
@@ -3836,7 +3940,7 @@
             ]
           }
         },
-        "deal_origin": "ssp-a.example",
+        "deal_origin": "adserver.example",
         "delivery_counting": {
           "impression_multiplier": {
             "impression_type": "viewable",
@@ -3949,13 +4053,37 @@
         ],
         "format_specs": {
           "display/300x250": {
-            "spec": {},
-            "spec_ref": "registry.example/ctv/instream-30s@1"
+            "spec_ref": "registry.example/display/300x250@1",
+            "spec": {
+              "w": 300,
+              "h": 250
+            }
+          },
+          "display/970x250": {
+            "spec_ref": "registry.example/display/970x250@1",
+            "spec": {
+              "w": 970,
+              "h": 250
+            }
           }
         },
         "formats": {
-          "available": [],
-          "included": []
+          "available": [
+            "display/300x250",
+            "display/970x250"
+          ],
+          "included": [
+            "display/300x250"
+          ],
+          "deltas": {
+            "display/970x250": {
+              "delta_cpm": 3
+            }
+          },
+          "selected": [
+            "display/300x250",
+            "display/970x250"
+          ]
         },
         "frequency_cap": {
           "count": {
@@ -4187,7 +4315,7 @@
           "available": false,
           "duration": "P7D"
         },
-        "line_item_id": "5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71",
+        "line_item_id": "business-daily-display",
         "materials_due": {
           "at": "2026-10-01T23:59:59Z",
           "before_start": "P1D"
@@ -4207,7 +4335,23 @@
           "max_select": 1
         },
         "placement": {
-          "plcmt": 1
+          "api": [
+            6,
+            7
+          ],
+          "feed": 1,
+          "instl": 1,
+          "playmethod": [
+            3
+          ],
+          "plcmt": 1,
+          "refresh": {
+            "min_interval_s": 15
+          },
+          "reward": 1,
+          "skip": 0,
+          "skipafter": "P7D",
+          "ssai": 3
         },
         "preemption": {
           "notice_duration": "P7D",
@@ -4216,10 +4360,21 @@
         },
         "pricing": [
           {
-            "pricing_id": "9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15",
+            "pricing_id": "bd-cpm-usd",
             "cost_method": "CPM",
+            "list_rate": 24,
+            "agreed_rate": 27.54,
+            "price_valid_until": "2026-11-15T23:59:59Z",
             "currency": "USD",
-            "list_rate": 12000
+            "price_type": 3
+          },
+          {
+            "pricing_id": "bd-cpm-eur",
+            "cost_method": "CPM",
+            "list_rate": 22,
+            "price_valid_until": "2026-11-15T23:59:59Z",
+            "currency": "EUR",
+            "price_type": 3
           }
         ],
         "production": {
@@ -4318,6 +4473,7 @@
                   "sync_group_id": "business-daily-display"
                 }
               ],
+              "tv_network": {},
               "venue_type": {
                 "taxonomy": 5,
                 "ids": [
@@ -4340,7 +4496,7 @@
               "id": "daily-aggregate",
               "latency": "P7D",
               "provided_metrics": [
-                "CPM"
+                "impressions"
               ],
               "report_type": "aggregate"
             }
@@ -4388,7 +4544,7 @@
         },
         "sov_basis": "impressions",
         "sov_share": 0.7,
-        "status": "published",
+        "status": "agreed",
         "terms_refs": [
           {
             "digest": "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06",
@@ -4399,15 +4555,16 @@
         "transaction_mechanism": {
           "available": [
             {
-              "id": "direct_io",
+              "id": "programmatic_guaranteed",
               "delivery_type": "guaranteed"
             }
           ],
           "included": [
-            "direct_io"
-          ]
+            "programmatic_guaranteed"
+          ],
+          "max_select": 1
         },
-        "visibility": "public"
+        "visibility": "named"
       },
       "notes": [
         {
@@ -4426,11 +4583,6 @@
           "reason": "rule:5.7:dfffe633: /controlling_measurement/included: names 0 options and not one, so whose count is invoiced is unstated"
         },
         {
-          "path": "/formats",
-          "holds": "minimal",
-          "reason": "rule:5.4:c07c0dd1: /format_specs: the proposal has left `draft` and it offers \"audio/host-read-30s\", which `format_specs` has no entry for"
-        },
-        {
           "path": "/markets",
           "holds": "omitted",
           "reason": "rule:5.5:9d06dca4: /: declares both `geo` and `markets`, so where it runs is stated twice"
@@ -4438,12 +4590,16 @@
       ],
       "undecided": [
         {
-          "path": "/pricing/0",
-          "rule": "rule:5.6:62e21e38"
+          "path": "/accepted_exclusions/verification/0",
+          "rule": "kernel:RegistrableDomain:registrable"
         },
         {
-          "path": "/pricing/0",
-          "rule": "rule:5.6:8288302a"
+          "path": "/accepted_exclusions/verification/1",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/pricing/1",
+          "rule": "rule:5.6:62e21e38"
         }
       ]
     },
@@ -4507,8 +4663,8 @@
         "committed_metrics": [
           {
             "direction": "at_least",
-            "level": 0.92,
-            "metric": "completion_rate"
+            "level": 0.9,
+            "metric": "viewable_rate"
           }
         ],
         "delivery_counting": {
@@ -4908,7 +5064,7 @@
     },
     "LineItemWrites": {
       "kind": "object",
-      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json#/$defs/LineItemWrites",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/LineItemWrites",
       "minimal": {
         "commitment": {
           "advertisers": [],
@@ -5174,8 +5330,8 @@
             "committed_metrics": [
               {
                 "direction": "at_least",
-                "level": 0.92,
-                "metric": "completion_rate"
+                "level": 0.9,
+                "metric": "viewable_rate"
               }
             ],
             "delivery_counting": {
@@ -5357,8 +5513,8 @@
                 "committed_metrics": [
                   {
                     "direction": "at_least",
-                    "level": 0.92,
-                    "metric": "completion_rate"
+                    "level": 0.9,
+                    "metric": "viewable_rate"
                   }
                 ],
                 "delivery_counting": {
@@ -5534,8 +5690,8 @@
                 "committed_metrics": [
                   {
                     "direction": "at_least",
-                    "level": 0.92,
-                    "metric": "completion_rate"
+                    "level": 0.9,
+                    "metric": "viewable_rate"
                   }
                 ],
                 "delivery_counting": {
@@ -5856,6 +6012,12 @@
       "minimal": "published",
       "full": "published"
     },
+    "Network": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/inventory/1/inventory.json#/$defs/Network",
+      "minimal": {},
+      "full": {}
+    },
     "NoticeReference": {
       "kind": "vocabulary",
       "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/commercial/1/commercial.json#/$defs/NoticeReference",
@@ -6161,17 +6323,20 @@
             "break_position": {
               "available": [
                 {
-                  "id": "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40",
-                  "maxseq": 3
-                },
-                {
-                  "id": "7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74",
-                  "maxseq": 6
+                  "delay": -1,
+                  "id": "midroll-any",
+                  "maxseq": 4,
+                  "poddur": 15,
+                  "podseq": -1,
+                  "slotinpod": 0
                 }
               ],
               "included": [
-                "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40"
-              ]
+                "midroll-any"
+              ],
+              "selected": [],
+              "deltas": {},
+              "max_select": 1
             },
             "buyer_requirements": {
               "allowed_dsps": [
@@ -6213,64 +6378,54 @@
             "cancellation_policy": {
               "available": [
                 {
-                  "dated_shares": [
-                    {
-                      "max_share": 0.7,
-                      "window": {
-                        "end": "2026-12-31T23:59:59Z",
-                        "start": "2026-10-01T00:00:00Z"
-                      }
-                    }
-                  ],
+                  "id": "notice-14d",
+                  "notice_duration": "P14D",
+                  "max_share": 1,
                   "fees": [
                     {
-                      "before_reference": "P60D",
                       "calculation": "none"
-                    },
-                    {
-                      "before_reference": "P30D",
-                      "calculation": "cancelled",
-                      "share": 0.25
-                    },
-                    {
-                      "before_reference": "P7D",
-                      "calculation": "cancelled",
-                      "share": 0.5
-                    },
-                    {
-                      "before_reference": "P0D",
-                      "calculation": "cancelled",
-                      "share": 1
                     }
-                  ],
-                  "id": "stepped-fee",
+                  ]
+                },
+                {
+                  "id": "notice-7d",
+                  "notice_duration": "P7D",
                   "max_share": 1,
-                  "notice_duration": "P0D",
-                  "notice_reference": "flight"
+                  "fees": [
+                    {
+                      "calculation": "none"
+                    }
+                  ]
                 }
               ],
-              "included": [],
-              "selected": [],
-              "deltas": {},
-              "max_select": 1
+              "included": [
+                "notice-14d"
+              ],
+              "deltas": {
+                "notice-7d": {
+                  "delta_fraction": 0.02
+                }
+              },
+              "max_select": 1,
+              "selected": [
+                "notice-7d"
+              ]
             },
-            "channel": "video",
+            "channel": "display",
             "commitment": {
+              "pricing_id": "bd-cpm-usd",
+              "basis": "spend",
+              "amount": 80000,
+              "flight": {
+                "start": "2026-10-12T00:00:00Z",
+                "end": "2026-12-21T23:59:59Z"
+              },
               "advertisers": [
                 {
-                  "domain": "examplepub.example",
-                  "legal_name": "Example Publisher US",
-                  "registry_id": "reg:examplepub-digital"
+                  "domain": "brand-a.example"
                 }
               ],
-              "amount": 80000,
-              "basis": "spend",
-              "derived_units": 3333333,
-              "flight": {
-                "end": "2026-12-31T23:59:59Z",
-                "start": "2026-10-01T00:00:00Z"
-              },
-              "pricing_id": "bd-cpm-usd"
+              "derived_units": 2904865
             },
             "commitment_bounds": {},
             "creative_delivery": {
@@ -6341,7 +6496,7 @@
                 ]
               }
             },
-            "deal_origin": "ssp-a.example",
+            "deal_origin": "adserver.example",
             "delivery_counting": {
               "impression_multiplier": {
                 "impression_type": "viewable",
@@ -6454,13 +6609,37 @@
             ],
             "format_specs": {
               "display/300x250": {
-                "spec": {},
-                "spec_ref": "registry.example/ctv/instream-30s@1"
+                "spec_ref": "registry.example/display/300x250@1",
+                "spec": {
+                  "w": 300,
+                  "h": 250
+                }
+              },
+              "display/970x250": {
+                "spec_ref": "registry.example/display/970x250@1",
+                "spec": {
+                  "w": 970,
+                  "h": 250
+                }
               }
             },
             "formats": {
-              "available": [],
-              "included": []
+              "available": [
+                "display/300x250",
+                "display/970x250"
+              ],
+              "included": [
+                "display/300x250"
+              ],
+              "deltas": {
+                "display/970x250": {
+                  "delta_cpm": 3
+                }
+              },
+              "selected": [
+                "display/300x250",
+                "display/970x250"
+              ]
             },
             "frequency_cap": {
               "count": {
@@ -6692,7 +6871,7 @@
               "available": false,
               "duration": "P7D"
             },
-            "line_item_id": "5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71",
+            "line_item_id": "business-daily-display",
             "materials_due": {
               "at": "2026-10-01T23:59:59Z",
               "before_start": "P1D"
@@ -6712,7 +6891,23 @@
               "max_select": 1
             },
             "placement": {
-              "plcmt": 1
+              "api": [
+                6,
+                7
+              ],
+              "feed": 1,
+              "instl": 1,
+              "playmethod": [
+                3
+              ],
+              "plcmt": 1,
+              "refresh": {
+                "min_interval_s": 15
+              },
+              "reward": 1,
+              "skip": 0,
+              "skipafter": "P7D",
+              "ssai": 3
             },
             "preemption": {
               "notice_duration": "P7D",
@@ -6721,10 +6916,21 @@
             },
             "pricing": [
               {
-                "pricing_id": "9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15",
+                "pricing_id": "bd-cpm-usd",
                 "cost_method": "CPM",
+                "list_rate": 24,
+                "agreed_rate": 27.54,
+                "price_valid_until": "2026-11-15T23:59:59Z",
                 "currency": "USD",
-                "list_rate": 12000
+                "price_type": 3
+              },
+              {
+                "pricing_id": "bd-cpm-eur",
+                "cost_method": "CPM",
+                "list_rate": 22,
+                "price_valid_until": "2026-11-15T23:59:59Z",
+                "currency": "EUR",
+                "price_type": 3
               }
             ],
             "production": {
@@ -6823,6 +7029,7 @@
                       "sync_group_id": "business-daily-display"
                     }
                   ],
+                  "tv_network": {},
                   "venue_type": {
                     "taxonomy": 5,
                     "ids": [
@@ -6845,7 +7052,7 @@
                   "id": "daily-aggregate",
                   "latency": "P7D",
                   "provided_metrics": [
-                    "CPM"
+                    "impressions"
                   ],
                   "report_type": "aggregate"
                 }
@@ -6893,7 +7100,7 @@
             },
             "sov_basis": "impressions",
             "sov_share": 0.7,
-            "status": "published",
+            "status": "agreed",
             "terms_refs": [
               {
                 "digest": "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06",
@@ -6904,15 +7111,16 @@
             "transaction_mechanism": {
               "available": [
                 {
-                  "id": "direct_io",
+                  "id": "programmatic_guaranteed",
                   "delivery_type": "guaranteed"
                 }
               ],
               "included": [
-                "direct_io"
-              ]
+                "programmatic_guaranteed"
+              ],
+              "max_select": 1
             },
-            "visibility": "public"
+            "visibility": "named"
           }
         ],
         "line_items": [
@@ -7206,17 +7414,20 @@
             "break_position": {
               "available": [
                 {
-                  "id": "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40",
-                  "maxseq": 3
-                },
-                {
-                  "id": "7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74",
-                  "maxseq": 6
+                  "delay": -1,
+                  "id": "midroll-any",
+                  "maxseq": 4,
+                  "poddur": 15,
+                  "podseq": -1,
+                  "slotinpod": 0
                 }
               ],
               "included": [
-                "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40"
-              ]
+                "midroll-any"
+              ],
+              "selected": [],
+              "deltas": {},
+              "max_select": 1
             },
             "buyer_requirements": {
               "allowed_dsps": [
@@ -7258,64 +7469,54 @@
             "cancellation_policy": {
               "available": [
                 {
-                  "dated_shares": [
-                    {
-                      "max_share": 0.7,
-                      "window": {
-                        "end": "2026-12-31T23:59:59Z",
-                        "start": "2026-10-01T00:00:00Z"
-                      }
-                    }
-                  ],
+                  "id": "notice-14d",
+                  "notice_duration": "P14D",
+                  "max_share": 1,
                   "fees": [
                     {
-                      "before_reference": "P60D",
                       "calculation": "none"
-                    },
-                    {
-                      "before_reference": "P30D",
-                      "calculation": "cancelled",
-                      "share": 0.25
-                    },
-                    {
-                      "before_reference": "P7D",
-                      "calculation": "cancelled",
-                      "share": 0.5
-                    },
-                    {
-                      "before_reference": "P0D",
-                      "calculation": "cancelled",
-                      "share": 1
                     }
-                  ],
-                  "id": "stepped-fee",
+                  ]
+                },
+                {
+                  "id": "notice-7d",
+                  "notice_duration": "P7D",
                   "max_share": 1,
-                  "notice_duration": "P0D",
-                  "notice_reference": "flight"
+                  "fees": [
+                    {
+                      "calculation": "none"
+                    }
+                  ]
                 }
               ],
-              "included": [],
-              "selected": [],
-              "deltas": {},
-              "max_select": 1
+              "included": [
+                "notice-14d"
+              ],
+              "deltas": {
+                "notice-7d": {
+                  "delta_fraction": 0.02
+                }
+              },
+              "max_select": 1,
+              "selected": [
+                "notice-7d"
+              ]
             },
-            "channel": "video",
+            "channel": "display",
             "commitment": {
+              "pricing_id": "bd-cpm-usd",
+              "basis": "spend",
+              "amount": 80000,
+              "flight": {
+                "start": "2026-10-12T00:00:00Z",
+                "end": "2026-12-21T23:59:59Z"
+              },
               "advertisers": [
                 {
-                  "domain": "examplepub.example",
-                  "legal_name": "Example Publisher US",
-                  "registry_id": "reg:examplepub-digital"
+                  "domain": "brand-a.example"
                 }
               ],
-              "amount": 80000,
-              "basis": "spend",
-              "derived_units": 3333333,
-              "flight": {
-                "end": "2026-12-31T23:59:59Z",
-                "start": "2026-10-01T00:00:00Z"
-              },
-              "pricing_id": "bd-cpm-usd"
+              "derived_units": 2904865
             },
             "commitment_bounds": {},
             "creative_delivery": {
@@ -7386,7 +7587,7 @@
                 ]
               }
             },
-            "deal_origin": "ssp-a.example",
+            "deal_origin": "adserver.example",
             "delivery_counting": {
               "impression_multiplier": {
                 "impression_type": "viewable",
@@ -7499,13 +7700,37 @@
             ],
             "format_specs": {
               "display/300x250": {
-                "spec": {},
-                "spec_ref": "registry.example/ctv/instream-30s@1"
+                "spec_ref": "registry.example/display/300x250@1",
+                "spec": {
+                  "w": 300,
+                  "h": 250
+                }
+              },
+              "display/970x250": {
+                "spec_ref": "registry.example/display/970x250@1",
+                "spec": {
+                  "w": 970,
+                  "h": 250
+                }
               }
             },
             "formats": {
-              "available": [],
-              "included": []
+              "available": [
+                "display/300x250",
+                "display/970x250"
+              ],
+              "included": [
+                "display/300x250"
+              ],
+              "deltas": {
+                "display/970x250": {
+                  "delta_cpm": 3
+                }
+              },
+              "selected": [
+                "display/300x250",
+                "display/970x250"
+              ]
             },
             "frequency_cap": {
               "count": {
@@ -7737,7 +7962,7 @@
               "available": false,
               "duration": "P7D"
             },
-            "line_item_id": "5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71",
+            "line_item_id": "business-daily-display",
             "materials_due": {
               "at": "2026-10-01T23:59:59Z",
               "before_start": "P1D"
@@ -7757,7 +7982,23 @@
               "max_select": 1
             },
             "placement": {
-              "plcmt": 1
+              "api": [
+                6,
+                7
+              ],
+              "feed": 1,
+              "instl": 1,
+              "playmethod": [
+                3
+              ],
+              "plcmt": 1,
+              "refresh": {
+                "min_interval_s": 15
+              },
+              "reward": 1,
+              "skip": 0,
+              "skipafter": "P7D",
+              "ssai": 3
             },
             "preemption": {
               "notice_duration": "P7D",
@@ -7766,10 +8007,21 @@
             },
             "pricing": [
               {
-                "pricing_id": "9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15",
+                "pricing_id": "bd-cpm-usd",
                 "cost_method": "CPM",
+                "list_rate": 24,
+                "agreed_rate": 27.54,
+                "price_valid_until": "2026-11-15T23:59:59Z",
                 "currency": "USD",
-                "list_rate": 12000
+                "price_type": 3
+              },
+              {
+                "pricing_id": "bd-cpm-eur",
+                "cost_method": "CPM",
+                "list_rate": 22,
+                "price_valid_until": "2026-11-15T23:59:59Z",
+                "currency": "EUR",
+                "price_type": 3
               }
             ],
             "production": {
@@ -7868,6 +8120,7 @@
                       "sync_group_id": "business-daily-display"
                     }
                   ],
+                  "tv_network": {},
                   "venue_type": {
                     "taxonomy": 5,
                     "ids": [
@@ -7890,7 +8143,7 @@
                   "id": "daily-aggregate",
                   "latency": "P7D",
                   "provided_metrics": [
-                    "CPM"
+                    "impressions"
                   ],
                   "report_type": "aggregate"
                 }
@@ -7938,7 +8191,7 @@
             },
             "sov_basis": "impressions",
             "sov_share": 0.7,
-            "status": "published",
+            "status": "agreed",
             "terms_refs": [
               {
                 "digest": "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06",
@@ -7949,15 +8202,16 @@
             "transaction_mechanism": {
               "available": [
                 {
-                  "id": "direct_io",
+                  "id": "programmatic_guaranteed",
                   "delivery_type": "guaranteed"
                 }
               ],
               "included": [
-                "direct_io"
-              ]
+                "programmatic_guaranteed"
+              ],
+              "max_select": 1
             },
-            "visibility": "public"
+            "visibility": "named"
           }
         ],
         "min_commitments": [
@@ -7971,20 +8225,28 @@
       },
       "undecided": [
         {
-          "path": "/add_ons/0/pricing/0",
+          "path": "/add_ons/0/accepted_exclusions/verification/0",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/add_ons/0/accepted_exclusions/verification/1",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/add_ons/0/pricing/1",
           "rule": "rule:5.6:62e21e38"
         },
         {
-          "path": "/add_ons/0/pricing/0",
-          "rule": "rule:5.6:8288302a"
+          "path": "/line_items/0/accepted_exclusions/verification/0",
+          "rule": "kernel:RegistrableDomain:registrable"
         },
         {
-          "path": "/line_items/0/pricing/0",
+          "path": "/line_items/0/accepted_exclusions/verification/1",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/line_items/0/pricing/1",
           "rule": "rule:5.6:62e21e38"
-        },
-        {
-          "path": "/line_items/0/pricing/0",
-          "rule": "rule:5.6:8288302a"
         }
       ]
     },
@@ -8040,8 +8302,8 @@
             "committed_metrics": [
               {
                 "direction": "at_least",
-                "level": 0.92,
-                "metric": "completion_rate"
+                "level": 0.9,
+                "metric": "viewable_rate"
               }
             ],
             "delivery_counting": {
@@ -8217,8 +8479,8 @@
             "committed_metrics": [
               {
                 "direction": "at_least",
-                "level": 0.92,
-                "metric": "completion_rate"
+                "level": 0.9,
+                "metric": "viewable_rate"
               }
             ],
             "delivery_counting": {
@@ -8734,6 +8996,7 @@
                 "sync_group_id": "business-daily-display"
               }
             ],
+            "tv_network": {},
             "venue_type": {
               "taxonomy": 5,
               "ids": [
@@ -8842,13 +9105,21 @@
             "sync_group_id": "business-daily-display"
           }
         ],
+        "tv_network": {},
         "venue_type": {
           "taxonomy": 5,
           "ids": [
             "10502"
           ]
         }
-      }
+      },
+      "notes": [
+        {
+          "path": "/tv_channel",
+          "holds": "omitted",
+          "reason": "rule:5.2.4:c122ccdd: /tv_channel: it carries a `tv_channel` with no `domain`, so no buyer can tell it from another seller's channel"
+        }
+      ]
     },
     "Proposal": {
       "kind": "document",
@@ -8856,25 +9127,25 @@
       "minimal": {
         "assent": [
           {
-            "at": "2026-09-22T10:14:03Z",
-            "idempotency_key": "agency-a-camp1-q4-2026-5d10e2c7",
-            "line_item_ids": [
-              "83b9253d-2076-59d8-8672-341b973eac5b",
-              "f8f2ba30-0b43-5d9b-bd89-e88a84800b08"
-            ],
-            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
             "role": "commitment",
-            "version": 2
+            "version": 2,
+            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
+            "line_item_ids": [
+              "business-daily-display",
+              "weather-app-ctv"
+            ],
+            "at": "2026-09-22T10:14:03Z",
+            "idempotency_key": "agency-a-camp1-q4-2026-5d10e2c7"
           },
           {
-            "at": "2026-09-22T10:31:47Z",
-            "line_item_ids": [
-              "83b9253d-2076-59d8-8672-341b973eac5b",
-              "f8f2ba30-0b43-5d9b-bd89-e88a84800b08"
-            ],
-            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
             "role": "acceptance",
-            "version": 2
+            "version": 2,
+            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
+            "line_item_ids": [
+              "business-daily-display",
+              "weather-app-ctv"
+            ],
+            "at": "2026-09-22T10:31:47Z"
           }
         ],
         "brief_id": "agency-a-brief-q4-2026",
@@ -8884,81 +9155,76 @@
         },
         "change_requests": [
           {
-            "accountid": "23873345",
+            "id": "67853",
+            "baseline": {
+              "proposal_id": "examplepub-agencya-custom-q4-2026",
+              "version": 2,
+              "line_item_id": "business-daily-display"
+            },
             "actor": "buyer",
             "at": "2026-11-02T15:20:00Z",
-            "baseline": {
-              "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
-              "proposal_id": "2867eb46-e66a-58a7-acd0-e295ab465182",
-              "version": 2
-            },
-            "comments": "Shorten the flight to end on 2026-12-07.",
-            "id": "9a3d8dda-e91c-5bf2-ab8c-595d18487470",
-            "lineid": "778120",
+            "accountid": "23873345",
             "orderid": "345233",
+            "lineid": "778120",
             "requesterid": "7987654",
-            "status": "PENDING"
+            "status": "PENDING",
+            "comments": "Shorten the flight to end on 2026-12-07."
           },
           {
+            "id": "agency-a-change-0002",
+            "baseline": {
+              "proposal_id": "examplepub-agencya-custom-q4-2026",
+              "version": 2,
+              "line_item_id": "weather-app-ctv"
+            },
             "actor": "buyer",
             "at": "2026-11-03T09:05:00Z",
-            "baseline": {
-              "line_item_id": "f8f2ba30-0b43-5d9b-bd89-e88a84800b08",
-              "proposal_id": "2867eb46-e66a-58a7-acd0-e295ab465182",
-              "version": 2
-            },
-            "comments": "Shorten the flight to end on 2026-12-14.",
-            "id": "05aebc23-fa41-5244-836e-a7a21ee53508"
+            "comments": "Shorten the flight to end on 2026-12-14."
           }
         ],
         "description": "Display and CTV package for Agency A, built from its brief.\n",
         "line_items": [
           {
-            "buyer_requirements": {
-              "seats": {
-                "dsp": "dsp-a.example",
-                "ids": [
-                  "seat-99812",
-                  "seat-99813"
-                ]
-              }
-            },
+            "line_item_id": "business-daily-display",
+            "status": "agreed",
             "channel": "display",
-            "commitment": {
-              "advertisers": [
-                {
-                  "domain": "brand-a.example"
-                }
-              ],
-              "amount": 80000,
-              "basis": "spend",
-              "derived_units": 3333333,
-              "flight": {
-                "end": "2026-12-21T23:59:59Z",
-                "start": "2026-10-06T00:00:00Z"
-              }
-            },
-            "commitment_bounds": {
-              "earliest_start": "2026-10-05T00:00:00Z",
-              "latest_end": "2026-12-31T23:59:59Z",
-              "spend": {
-                "max": 500000,
-                "min": 10000
-              }
-            },
-            "controlling_measurement": {
+            "properties": {
               "available": [
                 {
-                  "counted_by": "seller",
-                  "discrepancy_threshold": 0.1,
-                  "final_after": "P10D",
-                  "id": "3ff26d37-03d0-54d5-a154-62235a9a75f8"
+                  "id": "business-daily",
+                  "domains": [
+                    "business-daily.example"
+                  ],
+                  "child_audience": "general",
+                  "seller_relationship": "owner",
+                  "seller_accounts": [
+                    {
+                      "asi": "ssp-a.example",
+                      "sid": "pub-1001"
+                    }
+                  ]
                 }
               ],
               "included": [
-                "3ff26d37-03d0-54d5-a154-62235a9a75f8"
+                "business-daily"
+              ]
+            },
+            "formats": {
+              "available": [
+                "display/300x250"
               ],
-              "max_select": 1
+              "included": [
+                "display/300x250"
+              ]
+            },
+            "format_specs": {
+              "display/300x250": {
+                "spec_ref": "registry.example/display/300x250@1",
+                "spec": {
+                  "w": 300,
+                  "h": 250
+                }
+              }
             },
             "creative_delivery": {
               "method": "buyer_hosted",
@@ -8967,102 +9233,66 @@
               ],
               "secure_required": true
             },
-            "deal_origin": "adserver.example",
-            "eligible_buyers": [
-              "agency-a.example"
-            ],
-            "external_references": [
-              {
-                "id": "345233",
-                "reference_type": "order",
-                "system": "orders.examplepub.example"
-              },
-              {
-                "id": "778120",
-                "reference_type": "line",
-                "system": "orders.examplepub.example"
-              },
-              {
-                "id": "ep-agency-a-display-q4",
-                "reference_type": "deal",
-                "system": "adserver.example"
-              }
-            ],
-            "format_specs": {
-              "display/300x250": {
-                "spec": {
-                  "h": 250,
-                  "w": 300
-                },
-                "spec_ref": "registry.example/display/300x250@1"
-              }
-            },
-            "formats": {
-              "available": [
-                "display/300x250"
-              ],
-              "included": [
-                "display/300x250"
-              ]
-            },
-            "hold_terms": {
-              "available": true,
-              "duration": "P7D"
-            },
-            "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
             "materials_due": {
               "at": "2026-09-28T23:59:59Z"
             },
             "pricing": [
               {
-                "agreed_rate": 24,
+                "pricing_id": "bd-cpm-usd",
                 "cost_method": "CPM",
-                "currency": "USD",
                 "list_rate": 24,
+                "agreed_rate": 24,
                 "min_rate": 21,
-                "price_type": 3,
                 "price_valid_until": "2026-11-15T23:59:59Z",
-                "pricing_id": "781b2e4a-fa07-5ca2-be24-61bdf2d595d2"
+                "currency": "USD",
+                "price_type": 3
               }
             ],
-            "properties": {
+            "commitment_bounds": {
+              "spend": {
+                "min": 10000,
+                "max": 500000
+              },
+              "earliest_start": "2026-10-05T00:00:00Z",
+              "latest_end": "2026-12-31T23:59:59Z"
+            },
+            "controlling_measurement": {
               "available": [
                 {
-                  "child_audience": "general",
-                  "domains": [
-                    "business-daily.example"
-                  ],
-                  "id": "20d41300-2fbb-579b-bc61-5b334a26a30a",
-                  "seller_accounts": [
-                    {
-                      "asi": "ssp-a.example",
-                      "sid": "pub-1001"
-                    }
-                  ],
-                  "seller_relationship": "owner"
+                  "id": "seller-count",
+                  "counted_by": "seller",
+                  "discrepancy_threshold": 0.1,
+                  "final_after": "P10D"
                 }
               ],
               "included": [
-                "20d41300-2fbb-579b-bc61-5b334a26a30a"
-              ]
+                "seller-count"
+              ],
+              "max_select": 1
             },
-            "status": "agreed",
-            "terms_refs": [
-              {
-                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
-                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
-                "version": "2026.1"
+            "commitment": {
+              "basis": "spend",
+              "amount": 80000,
+              "flight": {
+                "start": "2026-10-06T00:00:00Z",
+                "end": "2026-12-21T23:59:59Z"
               },
-              {
-                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca",
-                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf"
-              }
-            ],
+              "advertisers": [
+                {
+                  "domain": "brand-a.example"
+                }
+              ],
+              "derived_units": 3333333
+            },
+            "hold_terms": {
+              "available": true,
+              "duration": "P7D"
+            },
             "transaction_mechanism": {
               "available": [
                 {
-                  "delivery_type": "guaranteed",
-                  "id": "programmatic_guaranteed"
+                  "id": "programmatic_guaranteed",
+                  "delivery_type": "guaranteed"
                 }
               ],
               "included": [
@@ -9070,9 +9300,7 @@
               ],
               "max_select": 1
             },
-            "visibility": "named"
-          },
-          {
+            "deal_origin": "adserver.example",
             "buyer_requirements": {
               "seats": {
                 "dsp": "dsp-a.example",
@@ -9082,82 +9310,70 @@
                 ]
               }
             },
-            "channel": "ctv",
-            "commitment": {
-              "advertisers": [
-                {
-                  "domain": "brand-a.example"
-                }
-              ],
-              "amount": 160000,
-              "basis": "spend",
-              "flight": {
-                "end": "2026-12-21T23:59:59Z",
-                "start": "2026-10-06T00:00:00Z"
-              }
-            },
-            "commitment_bounds": {
-              "spend": {
-                "min": 25000
-              }
-            },
-            "controlling_measurement": {
-              "available": [
-                {
-                  "counted_by": "seller",
-                  "discrepancy_threshold": 0.1,
-                  "final_after": "P10D",
-                  "id": "3ff26d37-03d0-54d5-a154-62235a9a75f8"
-                }
-              ],
-              "included": [
-                "3ff26d37-03d0-54d5-a154-62235a9a75f8"
-              ],
-              "max_select": 1
-            },
-            "creative_delivery": {
-              "method": "seller_hosted",
-              "protocols": [
-                13
-              ],
-              "secure_required": true
-            },
-            "deal_origin": "ssp-a.example",
+            "visibility": "named",
             "eligible_buyers": [
               "agency-a.example"
             ],
-            "external_references": [
+            "terms_refs": [
               {
-                "id": "ep-agency-a-ctv-q4",
-                "reference_type": "deal",
-                "system": "ssp-a.example"
+                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
+                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
+                "version": "2026.1"
+              },
+              {
+                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf",
+                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca"
               }
             ],
-            "format_specs": {
-              "ctv/instream-15s": {
-                "spec": {
-                  "creative_id": {
-                    "universal_ad_id": "required"
-                  },
-                  "duration": {
-                    "nominal_s": 15,
-                    "tolerance_ms": 500
-                  },
-                  "loudness": {
-                    "standard": "atsc_a85",
-                    "target": -24,
-                    "tolerance_db": 2
-                  },
-                  "mezzanine": {
-                    "min_resolution": "1920x1080",
-                    "required_for": [
-                      "ssai"
-                    ]
-                  },
-                  "source": "vast_mezzanine"
-                },
-                "spec_ref": "registry.example/ctv/instream-15s@1"
+            "external_references": [
+              {
+                "system": "orders.examplepub.example",
+                "id": "345233",
+                "reference_type": "order"
+              },
+              {
+                "system": "orders.examplepub.example",
+                "id": "778120",
+                "reference_type": "line"
+              },
+              {
+                "system": "adserver.example",
+                "id": "ep-agency-a-display-q4",
+                "reference_type": "deal"
               }
+            ]
+          },
+          {
+            "line_item_id": "weather-app-ctv",
+            "status": "agreed",
+            "channel": "ctv",
+            "properties": {
+              "available": [
+                {
+                  "id": "weather-app",
+                  "apps": [
+                    {
+                      "store": "roku_channel_store",
+                      "bundle": "000000",
+                      "developer_domain": "weather-app.example"
+                    }
+                  ],
+                  "child_audience": "general",
+                  "seller_relationship": "owner",
+                  "seller_accounts": [
+                    {
+                      "asi": "ssp-a.example",
+                      "sid": "pub-1001"
+                    }
+                  ]
+                }
+              ],
+              "included": [
+                "weather-app"
+              ]
+            },
+            "placement": {
+              "plcmt": 1
             },
             "formats": {
               "available": [
@@ -9167,67 +9383,91 @@
                 "ctv/instream-15s"
               ]
             },
-            "hold_terms": {
-              "available": false
+            "format_specs": {
+              "ctv/instream-15s": {
+                "spec_ref": "registry.example/ctv/instream-15s@1",
+                "spec": {
+                  "duration": {
+                    "nominal_s": 15,
+                    "tolerance_ms": 500
+                  },
+                  "source": "vast_mezzanine",
+                  "mezzanine": {
+                    "required_for": [
+                      "ssai"
+                    ],
+                    "min_resolution": "1920x1080"
+                  },
+                  "loudness": {
+                    "standard": "atsc_a85",
+                    "target": -24,
+                    "tolerance_db": 2
+                  },
+                  "creative_id": {
+                    "universal_ad_id": "required"
+                  }
+                }
+              }
             },
-            "line_item_id": "f8f2ba30-0b43-5d9b-bd89-e88a84800b08",
-            "placement": {
-              "plcmt": 1
+            "creative_delivery": {
+              "method": "seller_hosted",
+              "protocols": [
+                13
+              ],
+              "secure_required": true
             },
             "pricing": [
               {
-                "agreed_rate": 45,
+                "pricing_id": "ctv-pa-cpm-usd",
                 "cost_method": "CPM",
-                "currency": "USD",
                 "list_rate": 45,
+                "agreed_rate": 45,
                 "min_rate": 39.6,
-                "price_type": 1,
                 "price_valid_until": "2026-12-01T23:59:59Z",
-                "pricing_id": "3117acff-53ee-5120-9fbe-7e3e04d437bb"
+                "currency": "USD",
+                "price_type": 1
               }
             ],
-            "properties": {
+            "commitment_bounds": {
+              "spend": {
+                "min": 25000
+              }
+            },
+            "controlling_measurement": {
               "available": [
                 {
-                  "apps": [
-                    {
-                      "bundle": "000000",
-                      "developer_domain": "weather-app.example",
-                      "store": "roku_channel_store"
-                    }
-                  ],
-                  "child_audience": "general",
-                  "id": "97220a37-f11f-5846-9728-b3301b01bfb3",
-                  "seller_accounts": [
-                    {
-                      "asi": "ssp-a.example",
-                      "sid": "pub-1001"
-                    }
-                  ],
-                  "seller_relationship": "owner"
+                  "id": "seller-count",
+                  "counted_by": "seller",
+                  "discrepancy_threshold": 0.1,
+                  "final_after": "P10D"
                 }
               ],
               "included": [
-                "97220a37-f11f-5846-9728-b3301b01bfb3"
+                "seller-count"
+              ],
+              "max_select": 1
+            },
+            "commitment": {
+              "basis": "spend",
+              "amount": 160000,
+              "flight": {
+                "start": "2026-10-06T00:00:00Z",
+                "end": "2026-12-21T23:59:59Z"
+              },
+              "advertisers": [
+                {
+                  "domain": "brand-a.example"
+                }
               ]
             },
-            "status": "agreed",
-            "terms_refs": [
-              {
-                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
-                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
-                "version": "2026.1"
-              },
-              {
-                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca",
-                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf"
-              }
-            ],
+            "hold_terms": {
+              "available": false
+            },
             "transaction_mechanism": {
               "available": [
                 {
-                  "delivery_type": "non_guaranteed",
-                  "id": "private_auction"
+                  "id": "private_auction",
+                  "delivery_type": "non_guaranteed"
                 }
               ],
               "included": [
@@ -9235,24 +9475,55 @@
               ],
               "max_select": 1
             },
-            "visibility": "named"
+            "deal_origin": "ssp-a.example",
+            "buyer_requirements": {
+              "seats": {
+                "dsp": "dsp-a.example",
+                "ids": [
+                  "seat-99812",
+                  "seat-99813"
+                ]
+              }
+            },
+            "visibility": "named",
+            "eligible_buyers": [
+              "agency-a.example"
+            ],
+            "terms_refs": [
+              {
+                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
+                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
+                "version": "2026.1"
+              },
+              {
+                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf",
+                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca"
+              }
+            ],
+            "external_references": [
+              {
+                "system": "ssp-a.example",
+                "id": "ep-agency-a-ctv-q4",
+                "reference_type": "deal"
+              }
+            ]
           }
         ],
         "negotiation_history": [
           {
-            "action": "published",
+            "version": 1,
             "actor": "seller",
-            "at": "2026-09-14T09:00:00Z",
+            "action": "published",
             "paths": [],
-            "version": 1
+            "at": "2026-09-14T09:00:00Z"
           },
           {
-            "action": "requested",
+            "version": 1,
             "actor": "buyer",
-            "at": "2026-09-14T09:02:11Z",
+            "action": "requested",
             "paths": [
               {
-                "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
+                "line_item_id": "business-daily-display",
                 "pointer": "/materials_due",
                 "requested_value": {
                   "materials_due": {
@@ -9261,26 +9532,26 @@
                 }
               }
             ],
-            "version": 1
+            "at": "2026-09-14T09:02:11Z"
           },
           {
-            "action": "countered",
+            "version": 2,
             "actor": "seller",
-            "at": "2026-09-14T09:40:05Z",
+            "action": "countered",
             "paths": [
               {
-                "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
+                "line_item_id": "business-daily-display",
                 "pointer": "/materials_due"
               }
             ],
-            "version": 2
+            "at": "2026-09-14T09:40:05Z"
           }
         ],
         "offer_window": {
-          "end": "2026-12-31T23:59:59Z",
-          "start": "2026-09-14T00:00:00Z"
+          "start": "2026-09-14T00:00:00Z",
+          "end": "2026-12-31T23:59:59Z"
         },
-        "proposal_id": "2867eb46-e66a-58a7-acd0-e295ab465182",
+        "proposal_id": "examplepub-agencya-custom-q4-2026",
         "seller": {
           "domain": "examplepub.example",
           "legal_name": "Example Publisher US",
@@ -9294,25 +9565,25 @@
       "full": {
         "assent": [
           {
-            "at": "2026-09-22T10:14:03Z",
-            "idempotency_key": "agency-a-camp1-q4-2026-5d10e2c7",
-            "line_item_ids": [
-              "83b9253d-2076-59d8-8672-341b973eac5b",
-              "f8f2ba30-0b43-5d9b-bd89-e88a84800b08"
-            ],
-            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
             "role": "commitment",
-            "version": 2
+            "version": 2,
+            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
+            "line_item_ids": [
+              "business-daily-display",
+              "weather-app-ctv"
+            ],
+            "at": "2026-09-22T10:14:03Z",
+            "idempotency_key": "agency-a-camp1-q4-2026-5d10e2c7"
           },
           {
-            "at": "2026-09-22T10:31:47Z",
-            "line_item_ids": [
-              "83b9253d-2076-59d8-8672-341b973eac5b",
-              "f8f2ba30-0b43-5d9b-bd89-e88a84800b08"
-            ],
-            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
             "role": "acceptance",
-            "version": 2
+            "version": 2,
+            "record_digest": "sha256:a9290958d7f148d212b552b51b6cc3ccca86edbc817f2058252b3ee9d7d3a10a",
+            "line_item_ids": [
+              "business-daily-display",
+              "weather-app-ctv"
+            ],
+            "at": "2026-09-22T10:31:47Z"
           }
         ],
         "best_for": [
@@ -9326,31 +9597,31 @@
         },
         "change_requests": [
           {
-            "accountid": "23873345",
+            "id": "67853",
+            "baseline": {
+              "proposal_id": "examplepub-agencya-custom-q4-2026",
+              "version": 2,
+              "line_item_id": "business-daily-display"
+            },
             "actor": "buyer",
             "at": "2026-11-02T15:20:00Z",
-            "baseline": {
-              "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
-              "proposal_id": "2867eb46-e66a-58a7-acd0-e295ab465182",
-              "version": 2
-            },
-            "comments": "Shorten the flight to end on 2026-12-07.",
-            "id": "9a3d8dda-e91c-5bf2-ab8c-595d18487470",
-            "lineid": "778120",
+            "accountid": "23873345",
             "orderid": "345233",
+            "lineid": "778120",
             "requesterid": "7987654",
-            "status": "PENDING"
+            "status": "PENDING",
+            "comments": "Shorten the flight to end on 2026-12-07."
           },
           {
+            "id": "agency-a-change-0002",
+            "baseline": {
+              "proposal_id": "examplepub-agencya-custom-q4-2026",
+              "version": 2,
+              "line_item_id": "weather-app-ctv"
+            },
             "actor": "buyer",
             "at": "2026-11-03T09:05:00Z",
-            "baseline": {
-              "line_item_id": "f8f2ba30-0b43-5d9b-bd89-e88a84800b08",
-              "proposal_id": "2867eb46-e66a-58a7-acd0-e295ab465182",
-              "version": 2
-            },
-            "comments": "Shorten the flight to end on 2026-12-14.",
-            "id": "05aebc23-fa41-5244-836e-a7a21ee53508"
+            "comments": "Shorten the flight to end on 2026-12-14."
           }
         ],
         "description": "Display and CTV package for Agency A, built from its brief.\n",
@@ -9363,51 +9634,46 @@
         },
         "line_items": [
           {
-            "buyer_requirements": {
-              "seats": {
-                "dsp": "dsp-a.example",
-                "ids": [
-                  "seat-99812",
-                  "seat-99813"
-                ]
-              }
-            },
+            "line_item_id": "business-daily-display",
+            "status": "agreed",
             "channel": "display",
-            "commitment": {
-              "advertisers": [
-                {
-                  "domain": "brand-a.example"
-                }
-              ],
-              "amount": 80000,
-              "basis": "spend",
-              "derived_units": 3333333,
-              "flight": {
-                "end": "2026-12-21T23:59:59Z",
-                "start": "2026-10-06T00:00:00Z"
-              }
-            },
-            "commitment_bounds": {
-              "earliest_start": "2026-10-05T00:00:00Z",
-              "latest_end": "2026-12-31T23:59:59Z",
-              "spend": {
-                "max": 500000,
-                "min": 10000
-              }
-            },
-            "controlling_measurement": {
+            "properties": {
               "available": [
                 {
-                  "counted_by": "seller",
-                  "discrepancy_threshold": 0.1,
-                  "final_after": "P10D",
-                  "id": "3ff26d37-03d0-54d5-a154-62235a9a75f8"
+                  "id": "business-daily",
+                  "domains": [
+                    "business-daily.example"
+                  ],
+                  "child_audience": "general",
+                  "seller_relationship": "owner",
+                  "seller_accounts": [
+                    {
+                      "asi": "ssp-a.example",
+                      "sid": "pub-1001"
+                    }
+                  ]
                 }
               ],
               "included": [
-                "3ff26d37-03d0-54d5-a154-62235a9a75f8"
+                "business-daily"
+              ]
+            },
+            "formats": {
+              "available": [
+                "display/300x250"
               ],
-              "max_select": 1
+              "included": [
+                "display/300x250"
+              ]
+            },
+            "format_specs": {
+              "display/300x250": {
+                "spec_ref": "registry.example/display/300x250@1",
+                "spec": {
+                  "w": 300,
+                  "h": 250
+                }
+              }
             },
             "creative_delivery": {
               "method": "buyer_hosted",
@@ -9416,102 +9682,66 @@
               ],
               "secure_required": true
             },
-            "deal_origin": "adserver.example",
-            "eligible_buyers": [
-              "agency-a.example"
-            ],
-            "external_references": [
-              {
-                "id": "345233",
-                "reference_type": "order",
-                "system": "orders.examplepub.example"
-              },
-              {
-                "id": "778120",
-                "reference_type": "line",
-                "system": "orders.examplepub.example"
-              },
-              {
-                "id": "ep-agency-a-display-q4",
-                "reference_type": "deal",
-                "system": "adserver.example"
-              }
-            ],
-            "format_specs": {
-              "display/300x250": {
-                "spec": {
-                  "h": 250,
-                  "w": 300
-                },
-                "spec_ref": "registry.example/display/300x250@1"
-              }
-            },
-            "formats": {
-              "available": [
-                "display/300x250"
-              ],
-              "included": [
-                "display/300x250"
-              ]
-            },
-            "hold_terms": {
-              "available": true,
-              "duration": "P7D"
-            },
-            "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
             "materials_due": {
               "at": "2026-09-28T23:59:59Z"
             },
             "pricing": [
               {
-                "agreed_rate": 24,
+                "pricing_id": "bd-cpm-usd",
                 "cost_method": "CPM",
-                "currency": "USD",
                 "list_rate": 24,
+                "agreed_rate": 24,
                 "min_rate": 21,
-                "price_type": 3,
                 "price_valid_until": "2026-11-15T23:59:59Z",
-                "pricing_id": "781b2e4a-fa07-5ca2-be24-61bdf2d595d2"
+                "currency": "USD",
+                "price_type": 3
               }
             ],
-            "properties": {
+            "commitment_bounds": {
+              "spend": {
+                "min": 10000,
+                "max": 500000
+              },
+              "earliest_start": "2026-10-05T00:00:00Z",
+              "latest_end": "2026-12-31T23:59:59Z"
+            },
+            "controlling_measurement": {
               "available": [
                 {
-                  "child_audience": "general",
-                  "domains": [
-                    "business-daily.example"
-                  ],
-                  "id": "20d41300-2fbb-579b-bc61-5b334a26a30a",
-                  "seller_accounts": [
-                    {
-                      "asi": "ssp-a.example",
-                      "sid": "pub-1001"
-                    }
-                  ],
-                  "seller_relationship": "owner"
+                  "id": "seller-count",
+                  "counted_by": "seller",
+                  "discrepancy_threshold": 0.1,
+                  "final_after": "P10D"
                 }
               ],
               "included": [
-                "20d41300-2fbb-579b-bc61-5b334a26a30a"
-              ]
+                "seller-count"
+              ],
+              "max_select": 1
             },
-            "status": "agreed",
-            "terms_refs": [
-              {
-                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
-                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
-                "version": "2026.1"
+            "commitment": {
+              "basis": "spend",
+              "amount": 80000,
+              "flight": {
+                "start": "2026-10-06T00:00:00Z",
+                "end": "2026-12-21T23:59:59Z"
               },
-              {
-                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca",
-                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf"
-              }
-            ],
+              "advertisers": [
+                {
+                  "domain": "brand-a.example"
+                }
+              ],
+              "derived_units": 3333333
+            },
+            "hold_terms": {
+              "available": true,
+              "duration": "P7D"
+            },
             "transaction_mechanism": {
               "available": [
                 {
-                  "delivery_type": "guaranteed",
-                  "id": "programmatic_guaranteed"
+                  "id": "programmatic_guaranteed",
+                  "delivery_type": "guaranteed"
                 }
               ],
               "included": [
@@ -9519,9 +9749,7 @@
               ],
               "max_select": 1
             },
-            "visibility": "named"
-          },
-          {
+            "deal_origin": "adserver.example",
             "buyer_requirements": {
               "seats": {
                 "dsp": "dsp-a.example",
@@ -9531,82 +9759,70 @@
                 ]
               }
             },
-            "channel": "ctv",
-            "commitment": {
-              "advertisers": [
-                {
-                  "domain": "brand-a.example"
-                }
-              ],
-              "amount": 160000,
-              "basis": "spend",
-              "flight": {
-                "end": "2026-12-21T23:59:59Z",
-                "start": "2026-10-06T00:00:00Z"
-              }
-            },
-            "commitment_bounds": {
-              "spend": {
-                "min": 25000
-              }
-            },
-            "controlling_measurement": {
-              "available": [
-                {
-                  "counted_by": "seller",
-                  "discrepancy_threshold": 0.1,
-                  "final_after": "P10D",
-                  "id": "3ff26d37-03d0-54d5-a154-62235a9a75f8"
-                }
-              ],
-              "included": [
-                "3ff26d37-03d0-54d5-a154-62235a9a75f8"
-              ],
-              "max_select": 1
-            },
-            "creative_delivery": {
-              "method": "seller_hosted",
-              "protocols": [
-                13
-              ],
-              "secure_required": true
-            },
-            "deal_origin": "ssp-a.example",
+            "visibility": "named",
             "eligible_buyers": [
               "agency-a.example"
             ],
-            "external_references": [
+            "terms_refs": [
               {
-                "id": "ep-agency-a-ctv-q4",
-                "reference_type": "deal",
-                "system": "ssp-a.example"
+                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
+                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
+                "version": "2026.1"
+              },
+              {
+                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf",
+                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca"
               }
             ],
-            "format_specs": {
-              "ctv/instream-15s": {
-                "spec": {
-                  "creative_id": {
-                    "universal_ad_id": "required"
-                  },
-                  "duration": {
-                    "nominal_s": 15,
-                    "tolerance_ms": 500
-                  },
-                  "loudness": {
-                    "standard": "atsc_a85",
-                    "target": -24,
-                    "tolerance_db": 2
-                  },
-                  "mezzanine": {
-                    "min_resolution": "1920x1080",
-                    "required_for": [
-                      "ssai"
-                    ]
-                  },
-                  "source": "vast_mezzanine"
-                },
-                "spec_ref": "registry.example/ctv/instream-15s@1"
+            "external_references": [
+              {
+                "system": "orders.examplepub.example",
+                "id": "345233",
+                "reference_type": "order"
+              },
+              {
+                "system": "orders.examplepub.example",
+                "id": "778120",
+                "reference_type": "line"
+              },
+              {
+                "system": "adserver.example",
+                "id": "ep-agency-a-display-q4",
+                "reference_type": "deal"
               }
+            ]
+          },
+          {
+            "line_item_id": "weather-app-ctv",
+            "status": "agreed",
+            "channel": "ctv",
+            "properties": {
+              "available": [
+                {
+                  "id": "weather-app",
+                  "apps": [
+                    {
+                      "store": "roku_channel_store",
+                      "bundle": "000000",
+                      "developer_domain": "weather-app.example"
+                    }
+                  ],
+                  "child_audience": "general",
+                  "seller_relationship": "owner",
+                  "seller_accounts": [
+                    {
+                      "asi": "ssp-a.example",
+                      "sid": "pub-1001"
+                    }
+                  ]
+                }
+              ],
+              "included": [
+                "weather-app"
+              ]
+            },
+            "placement": {
+              "plcmt": 1
             },
             "formats": {
               "available": [
@@ -9616,67 +9832,91 @@
                 "ctv/instream-15s"
               ]
             },
-            "hold_terms": {
-              "available": false
+            "format_specs": {
+              "ctv/instream-15s": {
+                "spec_ref": "registry.example/ctv/instream-15s@1",
+                "spec": {
+                  "duration": {
+                    "nominal_s": 15,
+                    "tolerance_ms": 500
+                  },
+                  "source": "vast_mezzanine",
+                  "mezzanine": {
+                    "required_for": [
+                      "ssai"
+                    ],
+                    "min_resolution": "1920x1080"
+                  },
+                  "loudness": {
+                    "standard": "atsc_a85",
+                    "target": -24,
+                    "tolerance_db": 2
+                  },
+                  "creative_id": {
+                    "universal_ad_id": "required"
+                  }
+                }
+              }
             },
-            "line_item_id": "f8f2ba30-0b43-5d9b-bd89-e88a84800b08",
-            "placement": {
-              "plcmt": 1
+            "creative_delivery": {
+              "method": "seller_hosted",
+              "protocols": [
+                13
+              ],
+              "secure_required": true
             },
             "pricing": [
               {
-                "agreed_rate": 45,
+                "pricing_id": "ctv-pa-cpm-usd",
                 "cost_method": "CPM",
-                "currency": "USD",
                 "list_rate": 45,
+                "agreed_rate": 45,
                 "min_rate": 39.6,
-                "price_type": 1,
                 "price_valid_until": "2026-12-01T23:59:59Z",
-                "pricing_id": "3117acff-53ee-5120-9fbe-7e3e04d437bb"
+                "currency": "USD",
+                "price_type": 1
               }
             ],
-            "properties": {
+            "commitment_bounds": {
+              "spend": {
+                "min": 25000
+              }
+            },
+            "controlling_measurement": {
               "available": [
                 {
-                  "apps": [
-                    {
-                      "bundle": "000000",
-                      "developer_domain": "weather-app.example",
-                      "store": "roku_channel_store"
-                    }
-                  ],
-                  "child_audience": "general",
-                  "id": "97220a37-f11f-5846-9728-b3301b01bfb3",
-                  "seller_accounts": [
-                    {
-                      "asi": "ssp-a.example",
-                      "sid": "pub-1001"
-                    }
-                  ],
-                  "seller_relationship": "owner"
+                  "id": "seller-count",
+                  "counted_by": "seller",
+                  "discrepancy_threshold": 0.1,
+                  "final_after": "P10D"
                 }
               ],
               "included": [
-                "97220a37-f11f-5846-9728-b3301b01bfb3"
+                "seller-count"
+              ],
+              "max_select": 1
+            },
+            "commitment": {
+              "basis": "spend",
+              "amount": 160000,
+              "flight": {
+                "start": "2026-10-06T00:00:00Z",
+                "end": "2026-12-21T23:59:59Z"
+              },
+              "advertisers": [
+                {
+                  "domain": "brand-a.example"
+                }
               ]
             },
-            "status": "agreed",
-            "terms_refs": [
-              {
-                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
-                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
-                "version": "2026.1"
-              },
-              {
-                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca",
-                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf"
-              }
-            ],
+            "hold_terms": {
+              "available": false
+            },
             "transaction_mechanism": {
               "available": [
                 {
-                  "delivery_type": "non_guaranteed",
-                  "id": "private_auction"
+                  "id": "private_auction",
+                  "delivery_type": "non_guaranteed"
                 }
               ],
               "included": [
@@ -9684,25 +9924,56 @@
               ],
               "max_select": 1
             },
-            "visibility": "named"
+            "deal_origin": "ssp-a.example",
+            "buyer_requirements": {
+              "seats": {
+                "dsp": "dsp-a.example",
+                "ids": [
+                  "seat-99812",
+                  "seat-99813"
+                ]
+              }
+            },
+            "visibility": "named",
+            "eligible_buyers": [
+              "agency-a.example"
+            ],
+            "terms_refs": [
+              {
+                "url": "https://examplepub.example/legal/io-terms-2026.pdf",
+                "digest": "sha256:83e44f6fa723c35fef1b3528b16cc13a8a19ee34a32b658f6d3cc243ce12592e",
+                "version": "2026.1"
+              },
+              {
+                "url": "https://examplepub.example/legal/agency-a-q4-addendum.pdf",
+                "digest": "sha256:ab4cac3cb240b5c6eec3d0bf40e8c0b0f21c2026837865d88a5c941702f2eeca"
+              }
+            ],
+            "external_references": [
+              {
+                "system": "ssp-a.example",
+                "id": "ep-agency-a-ctv-q4",
+                "reference_type": "deal"
+              }
+            ]
           }
         ],
         "media_kit_detail": "Display across two business-news sites; rewarded video in a pack of puzzle games; audio on a music stream; CTV via weather and sports app inventory. First-party B2B and investor audiences available with clean-room activation.\n",
         "negotiation_history": [
           {
-            "action": "published",
+            "version": 1,
             "actor": "seller",
-            "at": "2026-09-14T09:00:00Z",
+            "action": "published",
             "paths": [],
-            "version": 1
+            "at": "2026-09-14T09:00:00Z"
           },
           {
-            "action": "requested",
+            "version": 1,
             "actor": "buyer",
-            "at": "2026-09-14T09:02:11Z",
+            "action": "requested",
             "paths": [
               {
-                "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
+                "line_item_id": "business-daily-display",
                 "pointer": "/materials_due",
                 "requested_value": {
                   "materials_due": {
@@ -9711,19 +9982,19 @@
                 }
               }
             ],
-            "version": 1
+            "at": "2026-09-14T09:02:11Z"
           },
           {
-            "action": "countered",
+            "version": 2,
             "actor": "seller",
-            "at": "2026-09-14T09:40:05Z",
+            "action": "countered",
             "paths": [
               {
-                "line_item_id": "83b9253d-2076-59d8-8672-341b973eac5b",
+                "line_item_id": "business-daily-display",
                 "pointer": "/materials_due"
               }
             ],
-            "version": 2
+            "at": "2026-09-14T09:40:05Z"
           }
         ],
         "not_suitable_for": [
@@ -9731,8 +10002,8 @@
           "endemic gaming"
         ],
         "offer_window": {
-          "end": "2026-12-31T23:59:59Z",
-          "start": "2026-09-14T00:00:00Z"
+          "start": "2026-09-14T00:00:00Z",
+          "end": "2026-12-31T23:59:59Z"
         },
         "packages": [
           {
@@ -10027,17 +10298,20 @@
                 "break_position": {
                   "available": [
                     {
-                      "id": "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40",
-                      "maxseq": 3
-                    },
-                    {
-                      "id": "7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74",
-                      "maxseq": 6
+                      "delay": -1,
+                      "id": "midroll-any",
+                      "maxseq": 4,
+                      "poddur": 15,
+                      "podseq": -1,
+                      "slotinpod": 0
                     }
                   ],
                   "included": [
-                    "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40"
-                  ]
+                    "midroll-any"
+                  ],
+                  "selected": [],
+                  "deltas": {},
+                  "max_select": 1
                 },
                 "buyer_requirements": {
                   "allowed_dsps": [
@@ -10079,64 +10353,54 @@
                 "cancellation_policy": {
                   "available": [
                     {
-                      "dated_shares": [
-                        {
-                          "max_share": 0.7,
-                          "window": {
-                            "end": "2026-12-31T23:59:59Z",
-                            "start": "2026-10-01T00:00:00Z"
-                          }
-                        }
-                      ],
+                      "id": "notice-14d",
+                      "notice_duration": "P14D",
+                      "max_share": 1,
                       "fees": [
                         {
-                          "before_reference": "P60D",
                           "calculation": "none"
-                        },
-                        {
-                          "before_reference": "P30D",
-                          "calculation": "cancelled",
-                          "share": 0.25
-                        },
-                        {
-                          "before_reference": "P7D",
-                          "calculation": "cancelled",
-                          "share": 0.5
-                        },
-                        {
-                          "before_reference": "P0D",
-                          "calculation": "cancelled",
-                          "share": 1
                         }
-                      ],
-                      "id": "stepped-fee",
+                      ]
+                    },
+                    {
+                      "id": "notice-7d",
+                      "notice_duration": "P7D",
                       "max_share": 1,
-                      "notice_duration": "P0D",
-                      "notice_reference": "flight"
+                      "fees": [
+                        {
+                          "calculation": "none"
+                        }
+                      ]
                     }
                   ],
-                  "included": [],
-                  "selected": [],
-                  "deltas": {},
-                  "max_select": 1
+                  "included": [
+                    "notice-14d"
+                  ],
+                  "deltas": {
+                    "notice-7d": {
+                      "delta_fraction": 0.02
+                    }
+                  },
+                  "max_select": 1,
+                  "selected": [
+                    "notice-7d"
+                  ]
                 },
-                "channel": "video",
+                "channel": "display",
                 "commitment": {
+                  "pricing_id": "bd-cpm-usd",
+                  "basis": "spend",
+                  "amount": 80000,
+                  "flight": {
+                    "start": "2026-10-12T00:00:00Z",
+                    "end": "2026-12-21T23:59:59Z"
+                  },
                   "advertisers": [
                     {
-                      "domain": "examplepub.example",
-                      "legal_name": "Example Publisher US",
-                      "registry_id": "reg:examplepub-digital"
+                      "domain": "brand-a.example"
                     }
                   ],
-                  "amount": 80000,
-                  "basis": "spend",
-                  "derived_units": 3333333,
-                  "flight": {
-                    "end": "2026-12-31T23:59:59Z",
-                    "start": "2026-10-01T00:00:00Z"
-                  },
-                  "pricing_id": "bd-cpm-usd"
+                  "derived_units": 2904865
                 },
                 "commitment_bounds": {},
                 "creative_delivery": {
@@ -10207,7 +10471,7 @@
                     ]
                   }
                 },
-                "deal_origin": "ssp-a.example",
+                "deal_origin": "adserver.example",
                 "delivery_counting": {
                   "impression_multiplier": {
                     "impression_type": "viewable",
@@ -10320,13 +10584,37 @@
                 ],
                 "format_specs": {
                   "display/300x250": {
-                    "spec": {},
-                    "spec_ref": "registry.example/ctv/instream-30s@1"
+                    "spec_ref": "registry.example/display/300x250@1",
+                    "spec": {
+                      "w": 300,
+                      "h": 250
+                    }
+                  },
+                  "display/970x250": {
+                    "spec_ref": "registry.example/display/970x250@1",
+                    "spec": {
+                      "w": 970,
+                      "h": 250
+                    }
                   }
                 },
                 "formats": {
-                  "available": [],
-                  "included": []
+                  "available": [
+                    "display/300x250",
+                    "display/970x250"
+                  ],
+                  "included": [
+                    "display/300x250"
+                  ],
+                  "deltas": {
+                    "display/970x250": {
+                      "delta_cpm": 3
+                    }
+                  },
+                  "selected": [
+                    "display/300x250",
+                    "display/970x250"
+                  ]
                 },
                 "frequency_cap": {
                   "count": {
@@ -10558,7 +10846,7 @@
                   "available": false,
                   "duration": "P7D"
                 },
-                "line_item_id": "5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71",
+                "line_item_id": "business-daily-display",
                 "materials_due": {
                   "at": "2026-10-01T23:59:59Z",
                   "before_start": "P1D"
@@ -10578,7 +10866,23 @@
                   "max_select": 1
                 },
                 "placement": {
-                  "plcmt": 1
+                  "api": [
+                    6,
+                    7
+                  ],
+                  "feed": 1,
+                  "instl": 1,
+                  "playmethod": [
+                    3
+                  ],
+                  "plcmt": 1,
+                  "refresh": {
+                    "min_interval_s": 15
+                  },
+                  "reward": 1,
+                  "skip": 0,
+                  "skipafter": "P7D",
+                  "ssai": 3
                 },
                 "preemption": {
                   "notice_duration": "P7D",
@@ -10587,10 +10891,21 @@
                 },
                 "pricing": [
                   {
-                    "pricing_id": "9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15",
+                    "pricing_id": "bd-cpm-usd",
                     "cost_method": "CPM",
+                    "list_rate": 24,
+                    "agreed_rate": 27.54,
+                    "price_valid_until": "2026-11-15T23:59:59Z",
                     "currency": "USD",
-                    "list_rate": 12000
+                    "price_type": 3
+                  },
+                  {
+                    "pricing_id": "bd-cpm-eur",
+                    "cost_method": "CPM",
+                    "list_rate": 22,
+                    "price_valid_until": "2026-11-15T23:59:59Z",
+                    "currency": "EUR",
+                    "price_type": 3
                   }
                 ],
                 "production": {
@@ -10689,6 +11004,7 @@
                           "sync_group_id": "business-daily-display"
                         }
                       ],
+                      "tv_network": {},
                       "venue_type": {
                         "taxonomy": 5,
                         "ids": [
@@ -10711,7 +11027,7 @@
                       "id": "daily-aggregate",
                       "latency": "P7D",
                       "provided_metrics": [
-                        "CPM"
+                        "impressions"
                       ],
                       "report_type": "aggregate"
                     }
@@ -10759,7 +11075,7 @@
                 },
                 "sov_basis": "impressions",
                 "sov_share": 0.7,
-                "status": "published",
+                "status": "agreed",
                 "terms_refs": [
                   {
                     "digest": "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06",
@@ -10770,15 +11086,16 @@
                 "transaction_mechanism": {
                   "available": [
                     {
-                      "id": "direct_io",
+                      "id": "programmatic_guaranteed",
                       "delivery_type": "guaranteed"
                     }
                   ],
                   "included": [
-                    "direct_io"
-                  ]
+                    "programmatic_guaranteed"
+                  ],
+                  "max_select": 1
                 },
-                "visibility": "public"
+                "visibility": "named"
               }
             ],
             "line_items": [
@@ -11072,17 +11389,20 @@
                 "break_position": {
                   "available": [
                     {
-                      "id": "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40",
-                      "maxseq": 3
-                    },
-                    {
-                      "id": "7d1e4b58-9c20-4af6-8e35-1b6f0a2d9c74",
-                      "maxseq": 6
+                      "delay": -1,
+                      "id": "midroll-any",
+                      "maxseq": 4,
+                      "poddur": 15,
+                      "podseq": -1,
+                      "slotinpod": 0
                     }
                   ],
                   "included": [
-                    "2f0a9c31-6b4d-4e82-9f17-5c3a8d1b7e40"
-                  ]
+                    "midroll-any"
+                  ],
+                  "selected": [],
+                  "deltas": {},
+                  "max_select": 1
                 },
                 "buyer_requirements": {
                   "allowed_dsps": [
@@ -11124,64 +11444,54 @@
                 "cancellation_policy": {
                   "available": [
                     {
-                      "dated_shares": [
-                        {
-                          "max_share": 0.7,
-                          "window": {
-                            "end": "2026-12-31T23:59:59Z",
-                            "start": "2026-10-01T00:00:00Z"
-                          }
-                        }
-                      ],
+                      "id": "notice-14d",
+                      "notice_duration": "P14D",
+                      "max_share": 1,
                       "fees": [
                         {
-                          "before_reference": "P60D",
                           "calculation": "none"
-                        },
-                        {
-                          "before_reference": "P30D",
-                          "calculation": "cancelled",
-                          "share": 0.25
-                        },
-                        {
-                          "before_reference": "P7D",
-                          "calculation": "cancelled",
-                          "share": 0.5
-                        },
-                        {
-                          "before_reference": "P0D",
-                          "calculation": "cancelled",
-                          "share": 1
                         }
-                      ],
-                      "id": "stepped-fee",
+                      ]
+                    },
+                    {
+                      "id": "notice-7d",
+                      "notice_duration": "P7D",
                       "max_share": 1,
-                      "notice_duration": "P0D",
-                      "notice_reference": "flight"
+                      "fees": [
+                        {
+                          "calculation": "none"
+                        }
+                      ]
                     }
                   ],
-                  "included": [],
-                  "selected": [],
-                  "deltas": {},
-                  "max_select": 1
+                  "included": [
+                    "notice-14d"
+                  ],
+                  "deltas": {
+                    "notice-7d": {
+                      "delta_fraction": 0.02
+                    }
+                  },
+                  "max_select": 1,
+                  "selected": [
+                    "notice-7d"
+                  ]
                 },
-                "channel": "video",
+                "channel": "display",
                 "commitment": {
+                  "pricing_id": "bd-cpm-usd",
+                  "basis": "spend",
+                  "amount": 80000,
+                  "flight": {
+                    "start": "2026-10-12T00:00:00Z",
+                    "end": "2026-12-21T23:59:59Z"
+                  },
                   "advertisers": [
                     {
-                      "domain": "examplepub.example",
-                      "legal_name": "Example Publisher US",
-                      "registry_id": "reg:examplepub-digital"
+                      "domain": "brand-a.example"
                     }
                   ],
-                  "amount": 80000,
-                  "basis": "spend",
-                  "derived_units": 3333333,
-                  "flight": {
-                    "end": "2026-12-31T23:59:59Z",
-                    "start": "2026-10-01T00:00:00Z"
-                  },
-                  "pricing_id": "bd-cpm-usd"
+                  "derived_units": 2904865
                 },
                 "commitment_bounds": {},
                 "creative_delivery": {
@@ -11252,7 +11562,7 @@
                     ]
                   }
                 },
-                "deal_origin": "ssp-a.example",
+                "deal_origin": "adserver.example",
                 "delivery_counting": {
                   "impression_multiplier": {
                     "impression_type": "viewable",
@@ -11365,13 +11675,37 @@
                 ],
                 "format_specs": {
                   "display/300x250": {
-                    "spec": {},
-                    "spec_ref": "registry.example/ctv/instream-30s@1"
+                    "spec_ref": "registry.example/display/300x250@1",
+                    "spec": {
+                      "w": 300,
+                      "h": 250
+                    }
+                  },
+                  "display/970x250": {
+                    "spec_ref": "registry.example/display/970x250@1",
+                    "spec": {
+                      "w": 970,
+                      "h": 250
+                    }
                   }
                 },
                 "formats": {
-                  "available": [],
-                  "included": []
+                  "available": [
+                    "display/300x250",
+                    "display/970x250"
+                  ],
+                  "included": [
+                    "display/300x250"
+                  ],
+                  "deltas": {
+                    "display/970x250": {
+                      "delta_cpm": 3
+                    }
+                  },
+                  "selected": [
+                    "display/300x250",
+                    "display/970x250"
+                  ]
                 },
                 "frequency_cap": {
                   "count": {
@@ -11603,7 +11937,7 @@
                   "available": false,
                   "duration": "P7D"
                 },
-                "line_item_id": "5b2f1c84-91ae-4d33-8c7e-6a0b2d9e4f71",
+                "line_item_id": "business-daily-display",
                 "materials_due": {
                   "at": "2026-10-01T23:59:59Z",
                   "before_start": "P1D"
@@ -11623,7 +11957,23 @@
                   "max_select": 1
                 },
                 "placement": {
-                  "plcmt": 1
+                  "api": [
+                    6,
+                    7
+                  ],
+                  "feed": 1,
+                  "instl": 1,
+                  "playmethod": [
+                    3
+                  ],
+                  "plcmt": 1,
+                  "refresh": {
+                    "min_interval_s": 15
+                  },
+                  "reward": 1,
+                  "skip": 0,
+                  "skipafter": "P7D",
+                  "ssai": 3
                 },
                 "preemption": {
                   "notice_duration": "P7D",
@@ -11632,10 +11982,21 @@
                 },
                 "pricing": [
                   {
-                    "pricing_id": "9c2f5b70-1d4a-4e3c-8f21-6b0d7a9e4c15",
+                    "pricing_id": "bd-cpm-usd",
                     "cost_method": "CPM",
+                    "list_rate": 24,
+                    "agreed_rate": 27.54,
+                    "price_valid_until": "2026-11-15T23:59:59Z",
                     "currency": "USD",
-                    "list_rate": 12000
+                    "price_type": 3
+                  },
+                  {
+                    "pricing_id": "bd-cpm-eur",
+                    "cost_method": "CPM",
+                    "list_rate": 22,
+                    "price_valid_until": "2026-11-15T23:59:59Z",
+                    "currency": "EUR",
+                    "price_type": 3
                   }
                 ],
                 "production": {
@@ -11734,6 +12095,7 @@
                           "sync_group_id": "business-daily-display"
                         }
                       ],
+                      "tv_network": {},
                       "venue_type": {
                         "taxonomy": 5,
                         "ids": [
@@ -11756,7 +12118,7 @@
                       "id": "daily-aggregate",
                       "latency": "P7D",
                       "provided_metrics": [
-                        "CPM"
+                        "impressions"
                       ],
                       "report_type": "aggregate"
                     }
@@ -11804,7 +12166,7 @@
                 },
                 "sov_basis": "impressions",
                 "sov_share": 0.7,
-                "status": "published",
+                "status": "agreed",
                 "terms_refs": [
                   {
                     "digest": "sha256:ca833e169e39bcaae9fc5b74f8dd3cfddf5b1c4158b6bc19bb3ae9112a347b06",
@@ -11815,15 +12177,16 @@
                 "transaction_mechanism": {
                   "available": [
                     {
-                      "id": "direct_io",
+                      "id": "programmatic_guaranteed",
                       "delivery_type": "guaranteed"
                     }
                   ],
                   "included": [
-                    "direct_io"
-                  ]
+                    "programmatic_guaranteed"
+                  ],
+                  "max_select": 1
                 },
-                "visibility": "public"
+                "visibility": "named"
               }
             ],
             "min_commitments": [
@@ -11836,7 +12199,7 @@
             "package_id": "weather-audio"
           }
         ],
-        "proposal_id": "2867eb46-e66a-58a7-acd0-e295ab465182",
+        "proposal_id": "examplepub-agencya-custom-q4-2026",
         "proposal_template_id": "examplepub-q4-omni-template",
         "seasonality_notes": "Earnings weeks carry materially higher engagement.",
         "seller": {
@@ -11863,20 +12226,28 @@
           "rule": "rule:2.2:e46f15c4"
         },
         {
-          "path": "/packages/0/add_ons/0/pricing/0",
+          "path": "/packages/0/add_ons/0/accepted_exclusions/verification/0",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/packages/0/add_ons/0/accepted_exclusions/verification/1",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/packages/0/add_ons/0/pricing/1",
           "rule": "rule:5.6:62e21e38"
         },
         {
-          "path": "/packages/0/add_ons/0/pricing/0",
-          "rule": "rule:5.6:8288302a"
+          "path": "/packages/0/line_items/0/accepted_exclusions/verification/0",
+          "rule": "kernel:RegistrableDomain:registrable"
         },
         {
-          "path": "/packages/0/line_items/0/pricing/0",
+          "path": "/packages/0/line_items/0/accepted_exclusions/verification/1",
+          "rule": "kernel:RegistrableDomain:registrable"
+        },
+        {
+          "path": "/packages/0/line_items/0/pricing/1",
           "rule": "rule:5.6:62e21e38"
-        },
-        {
-          "path": "/packages/0/line_items/0/pricing/0",
-          "rule": "rule:5.6:8288302a"
         }
       ]
     },
@@ -11942,8 +12313,8 @@
                 "committed_metrics": [
                   {
                     "direction": "at_least",
-                    "level": 0.92,
-                    "metric": "completion_rate"
+                    "level": 0.9,
+                    "metric": "viewable_rate"
                   }
                 ],
                 "delivery_counting": {
@@ -12125,8 +12496,8 @@
                     "committed_metrics": [
                       {
                         "direction": "at_least",
-                        "level": 0.92,
-                        "metric": "completion_rate"
+                        "level": 0.9,
+                        "metric": "viewable_rate"
                       }
                     ],
                     "delivery_counting": {
@@ -12302,8 +12673,8 @@
                     "committed_metrics": [
                       {
                         "direction": "at_least",
-                        "level": 0.92,
-                        "metric": "completion_rate"
+                        "level": 0.9,
+                        "metric": "viewable_rate"
                       }
                     ],
                     "delivery_counting": {
@@ -12520,8 +12891,8 @@
             "committed_metrics": [
               {
                 "direction": "at_least",
-                "level": 0.92,
-                "metric": "completion_rate"
+                "level": 0.9,
+                "metric": "viewable_rate"
               }
             ],
             "delivery_counting": {
@@ -12703,8 +13074,8 @@
                 "committed_metrics": [
                   {
                     "direction": "at_least",
-                    "level": 0.92,
-                    "metric": "completion_rate"
+                    "level": 0.9,
+                    "metric": "viewable_rate"
                   }
                 ],
                 "delivery_counting": {
@@ -12880,8 +13251,8 @@
                 "committed_metrics": [
                   {
                     "direction": "at_least",
-                    "level": 0.92,
-                    "metric": "completion_rate"
+                    "level": 0.9,
+                    "metric": "viewable_rate"
                   }
                 ],
                 "delivery_counting": {
@@ -13048,6 +13419,12 @@
       "minimal": "standard",
       "full": "standard"
     },
+    "ProviderData": {
+      "kind": "object",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/proposal/1/proposal.json#/$defs/ProviderData",
+      "minimal": {},
+      "full": {}
+    },
     "QualifiedDigest": {
       "kind": "primitive",
       "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/kernel/1/kernel.json#/$defs/QualifiedDigest",
@@ -13115,6 +13492,12 @@
       "minimal": "aggregate",
       "full": "aggregate"
     },
+    "ReportedMetric": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/guarantees/1/guarantees.json#/$defs/ReportedMetric",
+      "minimal": "impressions",
+      "full": "impressions"
+    },
     "ReportingOption": {
       "kind": "object",
       "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/guarantees/1/guarantees.json#/$defs/ReportingOption",
@@ -13128,7 +13511,7 @@
         "id": "daily-aggregate",
         "latency": "P7D",
         "provided_metrics": [
-          "CPM"
+          "impressions"
         ],
         "report_type": "aggregate"
       }
@@ -13148,7 +13531,7 @@
             "id": "daily-aggregate",
             "latency": "P7D",
             "provided_metrics": [
-              "CPM"
+              "impressions"
             ],
             "report_type": "aggregate"
           }
@@ -13189,8 +13572,8 @@
         "committed_metrics": [
           {
             "direction": "at_least",
-            "level": 0.92,
-            "metric": "completion_rate"
+            "level": 0.9,
+            "metric": "viewable_rate"
           }
         ],
         "list_rate": 18.5,
@@ -13201,6 +13584,10 @@
         "retention": {
           "min": "P90D",
           "max": "P1Y"
+        },
+        "unit_bounds": {
+          "min": 100000,
+          "max": 250000
         }
       }
     },
@@ -13232,6 +13619,12 @@
       "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/overview/1/overview.json#/$defs/Retry",
       "minimal": "same",
       "full": "same"
+    },
+    "ScaleUnit": {
+      "kind": "vocabulary",
+      "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/audience/1/audience.json#/$defs/ScaleUnit",
+      "minimal": "device",
+      "full": "device"
     },
     "Screen": {
       "kind": "object",
@@ -13327,8 +13720,13 @@
       "kind": "object",
       "schema": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/guarantees/1/guarantees.json#/$defs/ShortfallRemedy",
       "minimal": {
-        "available": [],
-        "included": []
+        "available": [
+          "makegood",
+          "makegood"
+        ],
+        "included": [
+          "makegood"
+        ]
       },
       "full": {
         "available": [

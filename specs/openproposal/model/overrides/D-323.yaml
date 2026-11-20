@@ -1,0 +1,110 @@
+format: 2
+id: D-323
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 3.1 ends its `Delta` table with a sentence nothing reached: an option priced only by
+  `delta_cpm` MUST NOT resolve against any other entry. Which object decides it, what is "any
+  other entry", and what makes an option resolve at all?
+covers:
+- ir: rule:3.1:99ddc11e
+  digest: 12b91f33953a643a5ea560c72f0b6025855b7adb72aea37ba0eb1b97b8975e21
+  quote: An option priced only by `delta_cpm` MUST NOT resolve against any other entry.
+- ir: key:3.1:Delta.delta_cpm
+  digest: 60e3140cbf8caa8ce10c19f0a23b13a7f0d40dc4fc36b058d8981464e4d6a48c
+  quote: "`delta_cpm` | OPTIONAL | Added to the rate of a `CPM` or `CPMV` entry (§ 5.6.5), and to no other"
+- ir: key:3.1:Selectable.deltas
+  digest: 4700416237f4a50c06b55fc36d2f452b0e233bbc1df246421eb972e901716d8b
+  quote: "`deltas` | OPTIONAL | The price of an option outside `included[]`, keyed by option id. An option with no entry has no delta"
+- ir: "key:3.1:Selectable.selected[]"
+  digest: c3543a69287e07596310a03ae02b51233274d1ee59a37d760eed584222c61b8b
+  quote: "`selected[]` | OPTIONAL | The buyer's choice, by option id"
+- ir: "key:3.1:Selectable.included[]"
+  digest: 659488665861929f507b596c583a50b4c0791fbad4a7507e4ba39c31d939e769
+  quote: "`included[]` | REQUIRED | The options in the base rate, by option id"
+- ir: sentence:3.1:90082c7b
+  digest: 161403bb46925eb4e041434df413505993c8c5e260906a4978cb562453fb61e0
+  quote: "`selected[]` is the complete set in effect and replaces `included[]`."
+- ir: sentence:3.1:4235f893
+  digest: 81fdfc9e5c660a26f6c4cd11e617556ae9ff271ee4c9178a27ab27971839aea2
+  quote: With no `selected[]`, `included[]` is in effect.
+options:
+- id: a-rule-of-the-line-item-on-the-entry-the-commitment-names
+  summary: >-
+    `role: rule, object: LineItem`. "Any other entry" is the `pricing[]` entry the commitment
+    names, since that is the entry a resolution prices against, and an option resolves where a
+    delta is in effect and outside `included[]`. A line item holds the fields, the entries and
+    the commitment, so one decides it.
+- id: a-rule-of-every-entry-the-line-item-offers
+  summary: >-
+    The same owner, reading "any other entry" as every entry of `pricing[]`: a seller that
+    prices an option by `delta_cpm` alone offers it on a line item whose entries are all `CPM`
+    or `CPMV`, or the option can never resolve.
+- id: a-statement-the-delta-row-already-carries
+  summary: >-
+    `role: schema, in: PriceDelta`, since `delta_cpm`'s own row says it is added "to the rate of
+    a `CPM` or `CPMV` entry (§ 5.6.5), and to no other", and the sentence restates that.
+chosen: a-rule-of-the-line-item-on-the-entry-the-commitment-names
+rationale: >-
+  THE SENTENCE FORBIDS A RESOLUTION, NOT AN OFFER, AND § 3 SAYS WHAT A RESOLUTION IS:
+  "Resolution is validation and pricing, not acceptance." So what the rule reaches is the
+  pricing a payload actually states, and § 5.6 puts that against one entry -- the one
+  `commitment.pricing_id` names, or the only entry where it names none. A line item holds the
+  selectable fields, their `deltas`, the `pricing[]` and the `commitment` at once, so one line
+  item decides the rule and `LineItem` is the owner (type rules § 9), as it is for § 3.1's other
+  rule under `D-103`.
+
+
+  WHAT PUTS AN OPTION IN EFFECT IS THE DOCUMENT'S OWN ANSWER, in two sentences of § 3.1:
+  "`selected[]` is the complete set in effect and replaces `included[]`", and "With no
+  `selected[]`, `included[]` is in effect." A delta prices "an option outside `included[]`", so
+  the option that resolves against the entry is one the set in effect holds and `included[]`
+  does not. That is the same reading `rule:5.6.5`'s `delta_flat` check already rests on, and the
+  walk is now one helper both use rather than two.
+
+
+  `a-rule-of-every-entry-the-line-item-offers` reads a prohibition on resolving as a prohibition
+  on offering, and the row it would rest on says the opposite: `delta_cpm` is added to a `CPM`
+  or `CPMV` entry "and to no other", which tells a seller what the key does against each entry
+  rather than which entries it may sit beside. A line item may price one entry `CPM` and
+  another `CPC` -- `proposal-issued.yaml` prices two currencies and § 5.6 allows a mechanism per
+  entry -- and under that reading the seller could offer no `delta_cpm` option at all, which no
+  sentence of the text says.
+
+
+  `a-statement-the-delta-row-already-carries` is refused by what the published type can express.
+  `PriceDelta` is three optional amounts, and no keyword of it can see a `pricing[]` entry's
+  `cost_method`: the entry is not a member of the delta, nor of the field that holds it, nor of
+  any object `PriceDelta` reaches. The row and the sentence are also not the same statement --
+  the row says where the amount is added, and the sentence says the option must not resolve
+  where it is not -- so roling this one `schema` would leave the second uncarried while claiming
+  it was carried.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES. `proposal-issued.yaml`'s `business-daily-display` is the
+  one shipped payload where a delta is in effect: the buyer's `formats.selected` holds
+  `display/970x250`, which `included[]` does not, and `deltas` prices it at `delta_cpm: 3.00`
+  and nothing else, while `commitment.pricing_id` names `bd-cpm-usd`, a `CPM` entry -- the file
+  even writes the arithmetic, "(24.00 + 3.00) x (1 + 0.02) = 27.54". The valid half is that line
+  item trimmed to the six keys a `LineItem` requires plus the `formats`, the `pricing` and the
+  `commitment` the rule reads. The invalid half reads the committed entry's `cost_method` as
+  `CPC`, a core term of § 5.6.5's own table that requires no `cost_parameters`, and changes
+  nothing else: one value, and one the vocabulary states.
+
+
+  WHAT THIS COSTS, counted rather than described. A line item that does not say which entry the
+  buyer commits under -- several entries and no `pricing_id` -- is left undecided, which is the
+  same discipline `rule:5.7.1`'s checks keep under `D-151`, and the four part-payloads of § 5.5
+  decide it for neither reason: none writes a `pricing[]`. No shipped payload puts a
+  `delta_fraction`-only or `delta_flat`-only option in effect against a non-`CPM` entry either,
+  so the rule's quiet cases rest on the one payload that has a delta in effect at all.
+feedback: >-
+  § 3.1 states the prohibition after the `Delta` table while the thing that makes it decidable
+  -- which entry a resolution prices against -- is in § 5.6, and what puts an option in effect
+  is three paragraphs above. A reader has to hold three places at once to know whether a line
+  item breaks it. Saying in the `delta_cpm` row that the entry meant is the committed one, or
+  giving the sentence the words "the entry the commitment names", would make the rule readable
+  where it is written. "Any other entry" is also the only place in § 3 that calls a `pricing[]`
+  entry simply an entry, while § 2.2 has an `EntryRef` for something else.

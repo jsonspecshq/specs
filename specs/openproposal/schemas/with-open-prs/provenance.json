@@ -3617,6 +3617,26 @@
         ],
         "rule": "type-rules § 6 vocabulary names"
       },
+      "/$defs/ScaleUnit": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db",
+            "ir": "key:5.3:AddressableScale.unit"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/ScaleUnit/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db",
+            "ir": "key:5.3:AddressableScale.unit"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
       "/$defs/SensitiveCategory": {
         "by": "rule",
         "from": [
@@ -3659,6 +3679,10 @@
           {
             "digest": "97bf7301c757d616f4535d83357efab46ba49281508a20f633fe3b4ab8672552",
             "ir": "key:5.3:AddressableScale.quantity"
+          },
+          {
+            "digest": "fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db",
+            "ir": "key:5.3:AddressableScale.unit"
           },
           {
             "digest": "74daab120c18c4ad88c9f38c309986a79442cf7d53b8db3eb3fa869e20b8abe5",
@@ -3721,6 +3745,10 @@
           {
             "digest": "97bf7301c757d616f4535d83357efab46ba49281508a20f633fe3b4ab8672552",
             "ir": "key:5.3:AddressableScale.quantity"
+          },
+          {
+            "digest": "fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db",
+            "ir": "key:5.3:AddressableScale.unit"
           },
           {
             "digest": "74daab120c18c4ad88c9f38c309986a79442cf7d53b8db3eb3fa869e20b8abe5",
@@ -3802,6 +3830,106 @@
           }
         ],
         "rule": "type-rules § 6 vocabulary descriptions"
+      },
+      "/$defs/AssentEntry": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
+            "ir": "key:4.1.2:AssentEntry.role"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/AssentEntry/properties/at/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "bee56029814bdcd3f391a86070685aa850463faeb315d00d96745a480f60a3ae",
+            "ir": "key:4.1.2:AssentEntry.at"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntry/properties/ground/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "d3b2799dd41fb5a23e26ae4f75dfa767a74f23d436190c180c738b88cbea01db",
+            "ir": "key:4.1.2:AssentEntry.ground"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntry/properties/idempotency_key/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e507e674a3801585327a6dcc515e8b0d0d56fd69091e5cd0ab706fe1bb897cef",
+            "ir": "key:4.1.2:AssentEntry.idempotency_key"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntry/properties/line_item_ids/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "360354ae190cae29dd48ed3a481ad12091ce23a6869444bb816e93b97f692745",
+            "ir": "key:4.1.2:AssentEntry.line_item_ids[]"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntry/properties/record_digest/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "41af590a865a2ee85a73d37dfe50ca46d1c7cd2cea7b2976c178780e26d62ad8",
+            "ir": "key:4.1.2:AssentEntry.record_digest"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntry/properties/role/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
+            "ir": "key:4.1.2:AssentEntry.role"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntry/properties/version/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "3c6efa0c80c07aee50994da32d3a0f71d6a090fce9d2f24d2bf9d1524b268deb",
+            "ir": "key:4.1.2:AssentEntry.version"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/AssentEntryGround": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb",
+            "ir": "key:4.1.2:AssentEntry.ground#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/AssentEntryRole": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a",
+            "ir": "key:4.1.2:AssentEntry.role#meaning/values:1"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
       },
       "/$defs/Availability": {
         "by": "rule",
@@ -3889,6 +4017,422 @@
           {
             "digest": "799e276073ecf9494833c499c7bf09978380730d8256bb742c2470492ffaba77",
             "ir": "key:5.6:Availability.unit"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesActivationRouteSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesAudienceSelectable": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
+            "ir": "key:5.3:AudienceSelectable.combine"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesAudienceSelectable/properties/combine/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
+            "ir": "key:5.3:AudienceSelectable.combine"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerWritesAudienceSelectable/properties/excluded/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "f227f89396c61a37d741c715b7d46708d23cd545455550c409299ef69224cbfb",
+            "ir": "key:5.3:AudienceSelectable.excluded[]"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerWritesBreakPositionSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesBuyerRequirements": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5",
+            "ir": "key:5.9:BuyerRequirements.seats_expected"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesBuyerRequirements/properties/seat_owner/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "df11abedb41e2c23ce30ca449643400dd89818d6b945ae3606663ef9aaf8b15b",
+            "ir": "key:5.9:BuyerRequirements.seat_owner"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerWritesBuyerRequirements/properties/seats/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "41ec107f02292d82f99a2fa5e116fc4b90f3e25b97f41a5be2371f5456f0a69e",
+            "ir": "key:5.9:BuyerRequirements.seats"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerWritesCancellationPolicySelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesCombineSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
+            "ir": "key:5.3:AudienceSelectable.combine"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesControllingMeasurementSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesCountSettableRange": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
+            "ir": "key:5.5:FrequencyCap.count"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesDaypartBounds": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesDeviceBounds": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesEnvironmentsSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesExclusivitySelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesFormatsSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesFrequencyCap": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
+            "ir": "key:5.5:FrequencyCap.count"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesFrequencyCap/properties/count/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
+            "ir": "key:5.5:FrequencyCap.count"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/BuyerWritesGeoBounds": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesMarketsSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesMeasurementSourceSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesProductionSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesProgramsSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesPropertiesSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesReportingSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesShortfallRemedy": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "2303da89b08f8375a118e981c62453307da1ce9cd7c3f91e3a2e7e05840e5293",
+            "ir": "key:5.7.1:ShortfallRemedy.remedy_terms"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/BuyerWritesTransactionMechanismSelection": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
           }
         ],
         "rule": "type-rules § 3 named types"
@@ -4923,6 +5467,246 @@
         ],
         "rule": "type-rules § 6 vocabulary names"
       },
+      "/$defs/LineItemWrites": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/LineItemWrites/properties/activation_route/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/audiences/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/break_position/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/buyer_requirements/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/cancellation_policy/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/commitment/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/controlling_measurement/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/daypart/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/device/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/environments/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/exclusions/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/exclusivity/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/formats/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/frequency_cap/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/geo/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/markets/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/measurement_source/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/production/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/programs/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/properties/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/reporting/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/shortfall_remedy/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/LineItemWrites/properties/transaction_mechanism/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
       "/$defs/NoticeReference": {
         "by": "rule",
         "from": [
@@ -5359,6 +6143,10 @@
           {
             "digest": "4ae834bf37c20f63fdcf3f858823998c4992a74475a387248ed9ca18c82a945b",
             "ir": "field:5.6:pricing[]"
+          },
+          {
+            "digest": "5eca1c21decabc08ea2e9e9ec3e3cc55a90f2c71c4b3671d3f07de2580a813ca",
+            "ir": "key:4.1:RequestedValue.list_rate"
           }
         ],
         "rule": "type-rules § 3 named types"
@@ -5369,6 +6157,10 @@
           {
             "digest": "4ae834bf37c20f63fdcf3f858823998c4992a74475a387248ed9ca18c82a945b",
             "ir": "field:5.6:pricing[]"
+          },
+          {
+            "digest": "5eca1c21decabc08ea2e9e9ec3e3cc55a90f2c71c4b3671d3f07de2580a813ca",
+            "ir": "key:4.1:RequestedValue.list_rate"
           }
         ],
         "rule": "type-rules § 3a value domains"
@@ -5399,6 +6191,10 @@
             "ir": "block:5.6.5:2/values:1"
           },
           {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
             "digest": "f15f32c47bd59a324c9a71d0c013c5059f64bb924c8499381831d6e9de1a19fa",
             "ir": "def:5.6.5:cost_method.TIME#unit/values:1"
           },
@@ -5421,6 +6217,38 @@
           {
             "digest": "48cf3d5378abf2c639e318431e2e929dc54b0cf7110d14a958166cf6bb6eff52",
             "ir": "field:5.6:renewal_right"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          },
+          {
+            "digest": "fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb",
+            "ir": "key:4.1.2:AssentEntry.ground#meaning/values:1"
+          },
+          {
+            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
+            "ir": "key:4.1.2:AssentEntry.role"
+          },
+          {
+            "digest": "3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a",
+            "ir": "key:4.1.2:AssentEntry.role#meaning/values:1"
+          },
+          {
+            "digest": "5eca1c21decabc08ea2e9e9ec3e3cc55a90f2c71c4b3671d3f07de2580a813ca",
+            "ir": "key:4.1:RequestedValue.list_rate"
+          },
+          {
+            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
+            "ir": "key:5.3:AudienceSelectable.combine"
+          },
+          {
+            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
+            "ir": "key:5.5:FrequencyCap.count"
           },
           {
             "digest": "92a352eaec62a167f80c95f37b34afa6921a7b1990711ca77ecb481528b09fab",
@@ -5561,6 +6389,14 @@
           {
             "digest": "69104ba0c54549a40dbcb50082a096a9e06c54006ea02a54093dd88b372762f4",
             "ir": "key:5.6:Availability.unit#meaning/values:1"
+          },
+          {
+            "digest": "2303da89b08f8375a118e981c62453307da1ce9cd7c3f91e3a2e7e05840e5293",
+            "ir": "key:5.7.1:ShortfallRemedy.remedy_terms"
+          },
+          {
+            "digest": "dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5",
+            "ir": "key:5.9:BuyerRequirements.seats_expected"
           }
         ],
         "rule": "type-rules § 3 schema files"
@@ -5581,6 +6417,10 @@
             "ir": "block:5.6.5:2/values:1"
           },
           {
+            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
+            "ir": "code:3.4:1"
+          },
+          {
             "digest": "f15f32c47bd59a324c9a71d0c013c5059f64bb924c8499381831d6e9de1a19fa",
             "ir": "def:5.6.5:cost_method.TIME#unit/values:1"
           },
@@ -5603,6 +6443,38 @@
           {
             "digest": "48cf3d5378abf2c639e318431e2e929dc54b0cf7110d14a958166cf6bb6eff52",
             "ir": "field:5.6:renewal_right"
+          },
+          {
+            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
+            "ir": "key:3.3:AvailabilityRead.offer"
+          },
+          {
+            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
+            "ir": "key:3.4:LineItemWrites.commitment"
+          },
+          {
+            "digest": "fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb",
+            "ir": "key:4.1.2:AssentEntry.ground#meaning/values:1"
+          },
+          {
+            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
+            "ir": "key:4.1.2:AssentEntry.role"
+          },
+          {
+            "digest": "3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a",
+            "ir": "key:4.1.2:AssentEntry.role#meaning/values:1"
+          },
+          {
+            "digest": "5eca1c21decabc08ea2e9e9ec3e3cc55a90f2c71c4b3671d3f07de2580a813ca",
+            "ir": "key:4.1:RequestedValue.list_rate"
+          },
+          {
+            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
+            "ir": "key:5.3:AudienceSelectable.combine"
+          },
+          {
+            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
+            "ir": "key:5.5:FrequencyCap.count"
           },
           {
             "digest": "92a352eaec62a167f80c95f37b34afa6921a7b1990711ca77ecb481528b09fab",
@@ -5743,6 +6615,14 @@
           {
             "digest": "69104ba0c54549a40dbcb50082a096a9e06c54006ea02a54093dd88b372762f4",
             "ir": "key:5.6:Availability.unit#meaning/values:1"
+          },
+          {
+            "digest": "2303da89b08f8375a118e981c62453307da1ce9cd7c3f91e3a2e7e05840e5293",
+            "ir": "key:5.7.1:ShortfallRemedy.remedy_terms"
+          },
+          {
+            "digest": "dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5",
+            "ir": "key:5.9:BuyerRequirements.seats_expected"
           }
         ],
         "rule": "type-rules § 3 schema files"
@@ -6961,6 +7841,26 @@
         ],
         "rule": "type-rules § 6 vocabulary descriptions"
       },
+      "/$defs/ReportedMetric": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "88047001dce48e5657919eaef3bf8a878e81b6793adb1ab1b6217f761dd1f0d9",
+            "ir": "key:5.7.1:ReportingOption.provided_metrics[]"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary names"
+      },
+      "/$defs/ReportedMetric/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "88047001dce48e5657919eaef3bf8a878e81b6793adb1ab1b6217f761dd1f0d9",
+            "ir": "key:5.7.1:ReportingOption.provided_metrics[]"
+          }
+        ],
+        "rule": "type-rules § 6 vocabulary descriptions"
+      },
       "/$defs/ReportingOption": {
         "by": "rule",
         "from": [
@@ -7119,6 +8019,10 @@
             "ir": "key:5.7.1:ReportingOption.id"
           },
           {
+            "digest": "88047001dce48e5657919eaef3bf8a878e81b6793adb1ab1b6217f761dd1f0d9",
+            "ir": "key:5.7.1:ReportingOption.provided_metrics[]"
+          },
+          {
             "digest": "d5cd23c623a5fda79a3ba43ea96b7f45f4695bb042f527a7d703d3c754faa155",
             "ir": "key:5.7.1:ReportingOption.report_type#meaning/values:1"
           },
@@ -7175,6 +8079,10 @@
           {
             "digest": "800219b4fb0ba124e44fdb19bf21d17cd73df66d9366503f851f0a540be0ab8a",
             "ir": "key:5.7.1:ReportingOption.id"
+          },
+          {
+            "digest": "88047001dce48e5657919eaef3bf8a878e81b6793adb1ab1b6217f761dd1f0d9",
+            "ir": "key:5.7.1:ReportingOption.provided_metrics[]"
           },
           {
             "digest": "d5cd23c623a5fda79a3ba43ea96b7f45f4695bb042f527a7d703d3c754faa155",
@@ -8967,662 +9875,6 @@
         ],
         "rule": "type-rules § 5 property descriptions"
       },
-      "/$defs/BuyerWritesActivationRouteSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesAudienceSelectable": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
-            "ir": "key:5.3:AudienceSelectable.combine"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesAudienceSelectable/properties/combine/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
-            "ir": "key:5.3:AudienceSelectable.combine"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/BuyerWritesAudienceSelectable/properties/excluded/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "f227f89396c61a37d741c715b7d46708d23cd545455550c409299ef69224cbfb",
-            "ir": "key:5.3:AudienceSelectable.excluded[]"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/BuyerWritesBreakPositionSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesBuyerRequirements": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5",
-            "ir": "key:5.9:BuyerRequirements.seats_expected"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesBuyerRequirements/properties/seat_owner/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "df11abedb41e2c23ce30ca449643400dd89818d6b945ae3606663ef9aaf8b15b",
-            "ir": "key:5.9:BuyerRequirements.seat_owner"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/BuyerWritesBuyerRequirements/properties/seats/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "41ec107f02292d82f99a2fa5e116fc4b90f3e25b97f41a5be2371f5456f0a69e",
-            "ir": "key:5.9:BuyerRequirements.seats"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/BuyerWritesCancellationPolicySelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesCombineSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
-            "ir": "key:5.3:AudienceSelectable.combine"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesControllingMeasurementSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesCountSettableRange": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
-            "ir": "key:5.5:FrequencyCap.count"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesDaypartBounds": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesDeviceBounds": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesEnvironmentsSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesExclusivitySelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesFormatsSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesFrequencyCap": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
-            "ir": "key:5.5:FrequencyCap.count"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesFrequencyCap/properties/count/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
-            "ir": "key:5.5:FrequencyCap.count"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/BuyerWritesGeoBounds": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesMarketsSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesMeasurementSourceSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesProductionSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesProgramsSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesPropertiesSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesReportingSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesShortfallRemedy": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "2303da89b08f8375a118e981c62453307da1ce9cd7c3f91e3a2e7e05840e5293",
-            "ir": "key:5.7.1:ShortfallRemedy.remedy_terms"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/BuyerWritesTransactionMechanismSelection": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
-            "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
-            "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/LineItemWrites": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/LineItemWrites/properties/activation_route/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/audiences/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/break_position/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/buyer_requirements/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/cancellation_policy/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/commitment/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/controlling_measurement/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/daypart/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/device/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/environments/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/exclusions/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/exclusivity/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/formats/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/frequency_cap/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/geo/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/markets/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/measurement_source/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/production/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/programs/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/properties/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/reporting/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/shortfall_remedy/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/LineItemWrites/properties/transaction_mechanism/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
       "/$defs/MediaChannel": {
         "by": "rule",
         "from": [
@@ -9637,36 +9889,12 @@
         "by": "rule",
         "from": [
           {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
             "digest": "f68a85afce8842b9809b82419452751408f6907c1ca8e650919a88a84325ec74",
             "ir": "def:5.1.1:MediaChannel"
           },
           {
             "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
             "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          },
-          {
-            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
-            "ir": "key:5.3:AudienceSelectable.combine"
-          },
-          {
-            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
-            "ir": "key:5.5:FrequencyCap.count"
-          },
-          {
-            "digest": "2303da89b08f8375a118e981c62453307da1ce9cd7c3f91e3a2e7e05840e5293",
-            "ir": "key:5.7.1:ShortfallRemedy.remedy_terms"
-          },
-          {
-            "digest": "dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5",
-            "ir": "key:5.9:BuyerRequirements.seats_expected"
           }
         ],
         "rule": "type-rules § 3 schema files"
@@ -9675,36 +9903,12 @@
         "by": "rule",
         "from": [
           {
-            "digest": "dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc",
-            "ir": "code:3.4:1"
-          },
-          {
             "digest": "f68a85afce8842b9809b82419452751408f6907c1ca8e650919a88a84325ec74",
             "ir": "def:5.1.1:MediaChannel"
           },
           {
             "digest": "78aef7276a2e4d5048f8abc76c37b349776a6d0cc36bf7bd9f0f8385d5daf268",
             "ir": "key:3.3:AvailabilityRead.offer"
-          },
-          {
-            "digest": "094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd",
-            "ir": "key:3.4:LineItemWrites.commitment"
-          },
-          {
-            "digest": "e60aad2648e01532ad874d5c1862db3fac8c9ae1e9016d3ba358c43c80a66e31",
-            "ir": "key:5.3:AudienceSelectable.combine"
-          },
-          {
-            "digest": "8f082418fb1ba3ea28cafb780f12c92663010a1626f9dedc17f9710b24c5c923",
-            "ir": "key:5.5:FrequencyCap.count"
-          },
-          {
-            "digest": "2303da89b08f8375a118e981c62453307da1ce9cd7c3f91e3a2e7e05840e5293",
-            "ir": "key:5.7.1:ShortfallRemedy.remedy_terms"
-          },
-          {
-            "digest": "dc0a0ec8dd0a8f3b8f99cda3f5c6be3cdce372064c6903e866e7235ebd1b53b5",
-            "ir": "key:5.9:BuyerRequirements.seats_expected"
           }
         ],
         "rule": "type-rules § 3 schema files"
@@ -9829,106 +10033,6 @@
       }
     },
     "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/proposal/1/proposal.json": {
-      "/$defs/AssentEntry": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
-            "ir": "key:4.1.2:AssentEntry.role"
-          }
-        ],
-        "rule": "type-rules § 3 named types"
-      },
-      "/$defs/AssentEntry/properties/at/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "bee56029814bdcd3f391a86070685aa850463faeb315d00d96745a480f60a3ae",
-            "ir": "key:4.1.2:AssentEntry.at"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntry/properties/ground/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "d3b2799dd41fb5a23e26ae4f75dfa767a74f23d436190c180c738b88cbea01db",
-            "ir": "key:4.1.2:AssentEntry.ground"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntry/properties/idempotency_key/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "e507e674a3801585327a6dcc515e8b0d0d56fd69091e5cd0ab706fe1bb897cef",
-            "ir": "key:4.1.2:AssentEntry.idempotency_key"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntry/properties/line_item_ids/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "360354ae190cae29dd48ed3a481ad12091ce23a6869444bb816e93b97f692745",
-            "ir": "key:4.1.2:AssentEntry.line_item_ids[]"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntry/properties/record_digest/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "41af590a865a2ee85a73d37dfe50ca46d1c7cd2cea7b2976c178780e26d62ad8",
-            "ir": "key:4.1.2:AssentEntry.record_digest"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntry/properties/role/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
-            "ir": "key:4.1.2:AssentEntry.role"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntry/properties/version/description": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "3c6efa0c80c07aee50994da32d3a0f71d6a090fce9d2f24d2bf9d1524b268deb",
-            "ir": "key:4.1.2:AssentEntry.version"
-          }
-        ],
-        "rule": "type-rules § 5 property descriptions"
-      },
-      "/$defs/AssentEntryGround": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb",
-            "ir": "key:4.1.2:AssentEntry.ground#meaning/values:1"
-          }
-        ],
-        "rule": "type-rules § 6 vocabulary names"
-      },
-      "/$defs/AssentEntryRole": {
-        "by": "rule",
-        "from": [
-          {
-            "digest": "3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a",
-            "ir": "key:4.1.2:AssentEntry.role#meaning/values:1"
-          }
-        ],
-        "rule": "type-rules § 6 vocabulary names"
-      },
       "/$defs/ChangeRequest": {
         "by": "rule",
         "from": [
@@ -10045,6 +10149,16 @@
           {
             "digest": "e2d547e91227664e9b2ca3b86ce36a433cde2f469db6d798621d1ee2d7ae84dd",
             "ir": "key:4.4:ChangeRequest.orderid"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
+      "/$defs/ChangeRequest/properties/providerdata/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385",
+            "ir": "key:4.4:ChangeRequest.providerdata"
           }
         ],
         "rule": "type-rules § 5 property descriptions"
@@ -10299,6 +10413,26 @@
         ],
         "rule": "type-rules § 6 vocabulary names"
       },
+      "/$defs/ProviderData": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385",
+            "ir": "key:4.4:ChangeRequest.providerdata"
+          }
+        ],
+        "rule": "type-rules § 3 named types"
+      },
+      "/$defs/ProviderData/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385",
+            "ir": "key:4.4:ChangeRequest.providerdata"
+          }
+        ],
+        "rule": "type-rules § 3a value domains"
+      },
       "/$defs/RequestedValue": {
         "by": "rule",
         "from": [
@@ -10359,24 +10493,22 @@
         ],
         "rule": "type-rules § 5 property descriptions"
       },
+      "/$defs/RequestedValue/properties/unit_bounds/description": {
+        "by": "rule",
+        "from": [
+          {
+            "digest": "e650773e444b150799cb1892373b724aeba75f9354454c2f995a8605bd5b770a",
+            "ir": "key:4.1:RequestedValue.unit_bounds"
+          }
+        ],
+        "rule": "type-rules § 5 property descriptions"
+      },
       "/description": {
         "by": "rule",
         "from": [
           {
             "digest": "ca19474b34999ea939d03107e0a9dceaf7abe2d56b469ae64f29c8a2c13257b4",
             "ir": "field:4.1:type#description/values:1"
-          },
-          {
-            "digest": "fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb",
-            "ir": "key:4.1.2:AssentEntry.ground#meaning/values:1"
-          },
-          {
-            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
-            "ir": "key:4.1.2:AssentEntry.role"
-          },
-          {
-            "digest": "3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a",
-            "ir": "key:4.1.2:AssentEntry.role#meaning/values:1"
           },
           {
             "digest": "1068aa4245b47cd7c7d84bb06616e542364cb717f40888be5c091defaeb990cb",
@@ -10409,6 +10541,10 @@
           {
             "digest": "9301c189b36eaf245b459d63597e92a4b77f447e62259f79c05447ec408e1582",
             "ir": "key:4.4:ChangeRequest.id"
+          },
+          {
+            "digest": "577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385",
+            "ir": "key:4.4:ChangeRequest.providerdata"
           }
         ],
         "rule": "type-rules § 3 schema files"
@@ -10421,18 +10557,6 @@
             "ir": "field:4.1:type#description/values:1"
           },
           {
-            "digest": "fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb",
-            "ir": "key:4.1.2:AssentEntry.ground#meaning/values:1"
-          },
-          {
-            "digest": "91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180",
-            "ir": "key:4.1.2:AssentEntry.role"
-          },
-          {
-            "digest": "3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a",
-            "ir": "key:4.1.2:AssentEntry.role#meaning/values:1"
-          },
-          {
             "digest": "1068aa4245b47cd7c7d84bb06616e542364cb717f40888be5c091defaeb990cb",
             "ir": "key:4.1.4:MinCommitment.line_item_id"
           },
@@ -10463,6 +10587,10 @@
           {
             "digest": "9301c189b36eaf245b459d63597e92a4b77f447e62259f79c05447ec408e1582",
             "ir": "key:4.4:ChangeRequest.id"
+          },
+          {
+            "digest": "577d6443c9f823525ea30ce80f1aff5417f5d973217b0dbf0718be879cb3e385",
+            "ir": "key:4.4:ChangeRequest.providerdata"
           }
         ],
         "rule": "type-rules § 3 schema files"

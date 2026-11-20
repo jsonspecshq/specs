@@ -1,111 +1,5 @@
 {
   "$defs": {
-    "AssentEntry": {
-      "additionalProperties": false,
-      "else": {
-        "if": {
-          "properties": {
-            "role": {
-              "const": "decline"
-            }
-          },
-          "required": [
-            "role"
-          ]
-        },
-        "then": {
-          "properties": {
-            "ground": true
-          },
-          "required": [
-            "ground"
-          ]
-        }
-      },
-      "if": {
-        "properties": {
-          "role": {
-            "const": "commitment"
-          }
-        },
-        "required": [
-          "role"
-        ]
-      },
-      "properties": {
-        "at": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Instant",
-          "description": "When the party wrote the entry, by its own statement. No rule reads order from it"
-        },
-        "ground": {
-          "$ref": "#/$defs/AssentEntryGround",
-          "description": "Why the seller declined. Core terms: `availability` | `exclusivity` | `terms`, the grounds of § 4.3.2. Absent on any other entry. A receiver that doesn't know a term still reads the entry as a `decline`"
-        },
-        "idempotency_key": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId",
-          "description": "Buyer-generated, unique per `commit`, opaque, and scoped to one buyer and seller pair. The seller MUST NOT interpret it (§ 5.6.1)"
-        },
-        "line_item_ids": {
-          "description": "The line items the entry names. MUST be non-empty",
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        },
-        "record_digest": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/QualifiedDigest",
-          "description": "Of the binding record for the line items in `line_item_ids[]` (§ 4.1.1)"
-        },
-        "role": {
-          "$ref": "#/$defs/AssentEntryRole",
-          "description": "`commitment` | `acceptance` | `withdrawal` | `decline`. It says what the entry does, and it implies the party"
-        },
-        "version": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count",
-          "description": "The `version` of the record the digest was computed over. `version` is outside the binding record, so the entry binds it"
-        }
-      },
-      "required": [
-        "at",
-        "line_item_ids",
-        "record_digest",
-        "role",
-        "version"
-      ],
-      "then": {
-        "properties": {
-          "idempotency_key": true
-        },
-        "required": [
-          "idempotency_key"
-        ]
-      },
-      "type": "object"
-    },
-    "AssentEntryGround": {
-      "anyOf": [
-        {
-          "enum": [
-            "availability",
-            "exclusivity",
-            "terms"
-          ],
-          "type": "string"
-        },
-        {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
-        }
-      ]
-    },
-    "AssentEntryRole": {
-      "enum": [
-        "commitment",
-        "acceptance",
-        "withdrawal",
-        "decline"
-      ],
-      "type": "string"
-    },
     "ChangeRequest": {
       "additionalProperties": false,
       "dependentSchemas": {
@@ -170,6 +64,10 @@
         "orderid": {
           "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId",
           "description": "The order the change is requested for: the id in the `order` entry"
+        },
+        "providerdata": {
+          "$ref": "#/$defs/ProviderData",
+          "description": "Structured references a buyer uses to identify its order in the seller's system"
         },
         "requesterid": {
           "$ref": "../../../kernel/1/kernel.json#/$defs/ExternalId",
@@ -374,6 +272,11 @@
       ],
       "type": "string"
     },
+    "ProviderData": {
+      "additionalProperties": true,
+      "description": "Its content is set by OpenDirect 2.1's `ChangeRequest.providerdata`, which § 4.4's `change_requests[]` row cites for every key of the table",
+      "type": "object"
+    },
     "RequestedValue": {
       "additionalProperties": false,
       "properties": {
@@ -399,6 +302,10 @@
         "retention": {
           "$ref": "../../execution/1/execution.json#/$defs/RetentionRange",
           "description": "The line item's `retention`"
+        },
+        "unit_bounds": {
+          "$ref": "../../commercial/1/commercial.json#/$defs/UnitBoundsRange",
+          "description": "A `pricing[].unit_bounds`"
         }
       },
       "type": "object"
@@ -406,6 +313,6 @@
   },
   "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/proposal/1/proposal.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "The OpenProposal `proposal` module: the vocabularies, objects, unions, and constructor copies of § 4, § 4.1, § 4.1.1, § 4.1.2, § 4.1.3, § 4.1.4, § 4.2, § 4.3, § 4.3.1, § 4.3.2, § 4.3.3, § 4.3.4, and § 4.4.",
+  "description": "The OpenProposal `proposal` module: the vocabularies, objects, unions, and constructor copies of § 4, § 4.1, § 4.1.1, § 4.1.3, § 4.1.4, § 4.2, § 4.3, § 4.3.1, § 4.3.2, § 4.3.3, § 4.3.4, and § 4.4.",
   "title": "proposal"
 }

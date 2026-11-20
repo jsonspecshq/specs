@@ -1,0 +1,83 @@
+format: 2
+id: D-232
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `kernel:RegistrableDomain:registrable` is a rule one payload decides, so it
+  owes a check. Deciding it means knowing where the registrable boundary falls,
+  which is the Public Suffix List's answer and no payload's. What does the
+  check decide, and what does it cost?
+covers:
+  - ir: def:2.2:RegistrableDomain
+    digest: 996140da167fae546cefbbdb984df61f7cf0780a2eca6d4d5aa48a5bed5e2666
+    quote: "`RegistrableDomain` | A `Domain` that is the Public Suffix List registrable domain, taken over the whole list, PRIVATE section included | It names a business"
+options:
+  - id: decide-under-a-reserved-tld-and-decline-the-rest
+    summary: >-
+      The check decides a name whose suffix an RFC fixes -- `example`,
+      `invalid`, `localhost` and `test`, which RFC 6761 and RFC 2606 reserve as
+      single labels that are never delegated -- where the registrable domain is
+      the last two labels. Every other name declines, because only the Public
+      Suffix List says where its boundary is and the repository pins no such
+      list.
+  - id: count-labels-for-every-name
+    summary: >-
+      Two labels is registrable and three or more is not, whatever the suffix.
+  - id: pin-the-public-suffix-list
+    summary: >-
+      Add the list to `kernel/lists.yaml` by version, URL and SHA-256 with a
+      committed copy under `kernel/sources/`, as ISO 4217 and the IANA time
+      zone database are pinned, and read it in the check.
+chosen: decide-under-a-reserved-tld-and-decline-the-rest
+rationale: >-
+  **A check decides from the payload alone, and the boundary is not in the
+  payload.** § 2.2's row says what settles it: a `RegistrableDomain` is "the
+  Public Suffix List registrable domain, taken over the whole list, PRIVATE
+  section included". So the fact the rule rests on is the list's, and a value
+  carries no trace of it.
+
+
+  **`count-labels-for-every-name` is wrong, not merely incomplete.** It calls
+  `example.co.uk` a violation, where `co.uk` is a suffix and three labels is
+  the registrable domain; and it calls `github.io` registrable, where the
+  PRIVATE section makes it a suffix and `user.github.io` the registrable
+  domain. A check that reports a violation the specification permits is the
+  failure mode this repository keeps finding, and the row's own "whole list,
+  PRIVATE section included" is the clause that names both cases.
+
+
+  **So the check decides where an RFC settles the suffix.** RFC 6761 reserves
+  `example`, `invalid`, `localhost` and `test`, and RFC 2606 reserves
+  `example` for documentation; each is one label and none is delegated below,
+  so under them the registrable domain is the last two labels and nothing can
+  make it otherwise. That is not a list that drifts, which is why it can be a
+  constant in the check rather than a pin. The rule's own four vectors are all
+  under `.example` and all decide.
+
+
+  **What it costs.** Ten checks over the
+  shipped payloads decline: two `accepted_exclusions.verification[]` entries of
+  § 5.5's fenced block and eight `measurement_source.available[].measured_by`
+  values across three example files, which name real measurement vendors under
+  `.com`. Each is recorded under `undecided` in
+  `outputs/examples/findings.yaml` against this record. The specification's own
+  values are therefore unchecked for the one thing this rule states, and that
+  is the cost: a payload writing `ads.doubleverify.com` where the row wants
+  `doubleverify.com` passes.
+
+
+  **`pin-the-public-suffix-list` is the fix and is not taken here.** It is the
+  mechanism this repository already uses for a register another body keeps, and
+  it would decide all ten. It is a different change -- a new pin, a committed
+  source, a drift gate -- and it belongs with the other pins rather than inside
+  a check. When that pin lands, this record is withdrawn and the ten undecided
+  entries go with it.
+evidence:
+  - 'The four vectors of `kernel:RegistrableDomain:registrable` are `examplepub.example`
+    and `agency-a.example` valid, `ads.examplepub.example` and
+    `deep.ads.examplepub.example` invalid, and the check gives each its verdict'
+  - 'Measured: the check declines `doubleverify.com`, `example.co.uk` and
+    `user.github.io`, and decides `a.test`, so it answers only where an RFC fixes the
+    suffix'

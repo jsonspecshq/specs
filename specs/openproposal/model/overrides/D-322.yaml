@@ -1,0 +1,97 @@
+format: 2
+id: D-322
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.3.2's second rule ends with a sentence nothing reached: a `commit` MUST NOT carry a
+  `requestable` ask. A `commit` carries a `Commit`, and an ask is a `HistoryPath` with a
+  `requested_value`. Which output carries the requirement -- is it a rule a payload decides, an
+  obligation on the buyer, or something the published schema already refuses?
+covers:
+- ir: rule:4.3.2:84b5ebab
+  digest: 52279a09a58e49b6d84610422a63b069554beccb6c2dd5c40c9e473fb347e765
+  quote: "A `commit` MUST NOT carry a `requestable` ask: `accept` makes no new `version`, so another value takes a separate `request`."
+- ir: key:5.6.1:Commit.entry
+  digest: 92a352eaec62a167f80c95f37b34afa6921a7b1990711ca77ecb481528b09fab
+  quote: "`entry` | REQUIRED | The buyer's entry (§ 4.1.2), with `role: commitment`"
+- ir: key:5.6.1:Commit.writes
+  digest: a59b7085bf6ef94f63770d8f3b69f439ccfb19f534e1d89517e65826050c5b98
+  quote: "`writes` | REQUIRED | The buyer's writes (§ 3.4), keyed by each `line_item_id` that `entry.line_item_ids[]` names"
+- ir: def:3.4:BuyerWrites
+  digest: 485fa6481f1a341bb7a30dd35aba5ff7036f89d9a9ded6c8faa49a93cb2a92f9
+  quote: "`BuyerWrites` | holds what a buyer writes on one line item. It is a strict path subset of the line item: a listed path has the type it has there, and no other path appears. Every path is OPTIONAL. A buyer delivery (§ 4.1.1) is not a write."
+- ir: def:3.4:LineItemWrites
+  digest: 7a8768a3e6522913daacc2708c400388dd8942d4d978d723bf1aeb12cb8a950b
+  quote: "`LineItemWrites` | holds the keys of `BuyerWrites` and this one. It is the buyer's writes on one line item, which a `Commit` (§ 5.6.1) and a hold's `requested_terms` (§ 5.6.2) carry."
+- ir: def:4.1:RequestedValue
+  digest: 8ccf1166df7363586fe86fb42012fe9de789758af6f358808149867d2251fba0
+  quote: "`RequestedValue` | holds exactly one key: the `requestable` field `pointer` names, in the form its row states. `pointer` says which `pricing[]` entry."
+- ir: marker:3:requestable
+  digest: 6848566b78555a6b35a505cd2a1f627422f6519b85d870dd3a1163f3a9756102
+  quote: "`requestable` | The buyer MAY ask for a value outside the declared space. An ask changes the value only through a seller `grant` or `counter` (§ 4.3.1). A change on the seller's own initiative follows § 4.1.3."
+options:
+- id: a-statement-the-commit-schema-already-refuses
+  summary: >-
+    `role: schema, in: Commit`. The published `Commit` is closed over `entry` and `writes`, and
+    no object below either admits a `requested_value`, a `pointer` or any key `RequestedValue`
+    holds, so a payload carrying an ask is already refused by a keyword and the requirement is
+    carried once.
+- id: a-rule-of-the-commit-with-its-own-check
+  summary: >-
+    `role: rule, object: Commit`, with a check that walks a commit for a requestable path and a
+    vector pair derived from a shipped commit.
+- id: an-obligation-on-the-buyer
+  summary: >-
+    An obligation on the buyer, since the sentence tells the buyer to send a separate `request`
+    instead, and no artifact need carry the prohibition.
+chosen: a-statement-the-commit-schema-already-refuses
+rationale: >-
+  ONE REQUIREMENT IS CARRIED ONCE (type rules § 2a), AND THE KEYWORD ALREADY CARRIES THIS ONE.
+  § 3.4 makes `BuyerWrites` "a strict path subset of the line item: a listed path has the type it
+  has there, and no other path appears", and the eight paths it lists are the `selected[]` of a
+  `selectable` field, the `value` of a `settable` field other than `frequency_cap`, two
+  `audiences` paths, `frequency_cap.count.value`, `exclusions`, and two
+  `buyer_requirements` members. A `requestable` field is none of those, and `LineItemWrites`
+  adds only `commitment`. So the type is closed against the ask before any check runs.
+
+
+  MEASURED RATHER THAN ASSERTED, at every depth a commit has. `Commit` publishes
+  `additionalProperties: false` over `entry` and `writes`. `AssentEntry` publishes it over seven
+  keys -- `at`, `ground`, `idempotency_key`, `line_item_ids`, `record_digest`, `role`, `version`
+  -- and `LineItemWrites` over twenty-three, of which the deepest commercial one is `commitment`,
+  itself closed over `advertisers`, `amount`, `basis`, `derived_units`, `flight` and
+  `pricing_id`. `RequestedValue` holds the six keys that are the six `requestable` fields of this
+  text -- `commitment_bounds`, `committed_metrics`, `list_rate`, `materials_due`, `retention`,
+  `unit_bounds` -- and not one of the six is a property of any object a `Commit` reaches, nor is
+  `pointer` or `requested_value`. A payload that states an ask inside a commit is refused by the
+  published schema wherever it puts it.
+
+
+  `a-rule-of-the-commit-with-its-own-check` would put the same requirement in the rules output
+  beside the keyword that already states it, which is what `reaches-outputs` reports as two
+  artifacts that can disagree. It would also need a vector pair whose invalid half is a payload
+  the published schema refuses, and the rule-vectors gate requires the schema of each vector's
+  type to accept every payload, so the pair could not be written without loosening the type that
+  makes the rule true.
+
+
+  `an-obligation-on-the-buyer` is refused by the sentence's own grammar. An obligation is the
+  role for a statement no payload settles, and one `Commit` settles this: the ask is in the bytes
+  or it is not. The clause after the colon -- "`accept` makes no new `version`, so another value
+  takes a separate `request`" -- is the reason for the prohibition and not a second requirement;
+  § 4.3.1's `request` row already carries the route it points at.
+
+
+  WHAT THIS COSTS, counted rather than described. No pair is derived for this statement, so no
+  payload of the source grades it directly; what grades it is the schema's own keyword, and
+  `schemas-ajv` holds that the keyword is published. A reader who wants the prohibition stated as
+  a sentence finds it in the document and in this record, and not in the rules output.
+feedback: >-
+  § 4.3.2 states the prohibition in prose, in a numbered rule about seller revisions, while the
+  thing that makes it true is § 3.4's "no other path appears". A reader of § 5.6.1's `Commit`
+  table learns neither. Saying in § 3.4 that the listed paths exclude every `requestable` field,
+  or in § 5.6.1 that a `Commit` carries writes and no asks, would put the rule where the object
+  is defined. The sentence also uses "ask" for two different things across § 4.3: a `request` and
+  a hold are both asks in § 4.3.1's lead-in, and here only the first is meant.

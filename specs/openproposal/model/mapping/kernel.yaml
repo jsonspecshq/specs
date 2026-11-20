@@ -548,6 +548,10 @@ entries:
     digest: 23ec4c9beccbcf91882b3a3777a542f6b92c6408c9f37fc9a6e3dc18d04dce51
     source: { rule: constructor-shell-row }
     as: { role: schema, in: PriceDelta }
+  - ir: rule:3.1:99ddc11e
+    digest: 12b91f33953a643a5ea560c72f0b6025855b7adb72aea37ba0eb1b97b8975e21
+    source: { decision: D-323 }
+    as: { role: rule, object: LineItem }
   - ir: sentence:3.2:f5da1fc4
     digest: d7261d9e23038123e25f0b19bd4997d3c117b174efd03c3dfa67d79f39863ecd
     source: { rule: prose-sentence }
@@ -596,10 +600,18 @@ entries:
     digest: bd426b77c0a4b508cd2dce247b84c7f79964c97482716ac06927372d5cedc327
     source: { rule: constructor-shell-row }
     as: { role: schema, in: Narrowing }
+  - ir: rule:3.2:9277e83b
+    digest: b1ab848b6c192faf9512d7b88287356b19240fb2e8cd07b08018c3ed9fa6803e
+    source: { decision: D-230 }
+    as: { role: rule, object: LineItem }
   - ir: "key:3.2:Narrowing.exclude[]"
     digest: e92c11d0f82da1d2b48ba4da84d21be5d1ff567027eb2c2cc432c3cce03c5596
     source: { rule: constructor-shell-row }
     as: { role: schema, in: Narrowing }
+  - ir: rule:3.2:4659b1d4
+    digest: 778a9db0e5ccb7906aa5a5906bae3d8994a11c41a8afe60fbf794ee27371114e
+    source: { decision: D-230 }
+    as: { role: rule, object: LineItem }
   - ir: def:3.2:SettableRange
     digest: e5891e9f7ef2ef88027a58ad024a2f22a2da4c930be00c28692311daa036dc52
     source: { rule: lead-in-restates }

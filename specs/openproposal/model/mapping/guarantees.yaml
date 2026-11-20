@@ -24,6 +24,27 @@ types:
     ir: key:5.7.1:ReportingOption.id
     source: { rule: key-table-object }
     open: false
+  - name: ReportedMetric
+    kind: vocabulary
+    ir: "key:5.7.1:ReportingOption.provided_metrics[]"
+    source: { decision: D-290 }
+    open: true
+    terms:
+      - impressions
+      - viewable_impressions
+      - clicks
+      - completed_views
+      - views
+      - rating_points
+      - actions
+      - plays
+      - hours
+      - days
+      - weeks
+      - viewable_rate
+      - completion_rate
+      - ivt_rate
+    description: "The metrics a report holds. § 5.7.1 states its core terms as § 5.6.5's `unit` terms and the Rate terms of its own `metric` table, so the set is composed rather than listed in the row."
   - name: ShortfallRemedy
     kind: object
     ir: key:5.7.1:ShortfallRemedy.remedy_terms
@@ -231,6 +252,14 @@ entries:
       object: ControllingMeasurementOption
       type: { kind: named, name: Measurer }
       presence: required
+  - ir: rule:5.7.1:0894f8c4
+    digest: 77b420d234cc4556addacdc7162942bb937828309358bc9e268fd3c77d6ab3b1
+    source: { decision: D-169 }
+    as: { role: rule, object: LineItem }
+  - ir: rule:5.7.1:99d3e14a
+    digest: 4460442144f60a3d5277b0e38a1837d68e511ec5436e3eea46636f2f104314f3
+    source: { decision: D-169 }
+    as: { role: rule, object: LineItem }
   - ir: rule:5.7.1:d9939d8b
     digest: 43183329b1994ca4030c14cff27b1b5ca451dc81b3cecf4d804bfa35cf2f60a3
     source: { decision: D-151 }
@@ -295,7 +324,7 @@ entries:
     as:
       role: property
       object: ReportingOption
-      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: VocabularyTerm } } }
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: ReportedMetric } } }
       presence: optional
   - ir: key:5.7.1:ReportingOption.latency
     digest: 47b9949def1fd4567d35f98d44bc1dddc98f500da7b7a077bc886ee5cd6194fb
@@ -358,6 +387,10 @@ entries:
     digest: 2cbe7cafd39a0cd738523e1c2f41110fb0a23f8663956e733d6ea22200f99f9d
     source: { rule: prose-sentence }
     as: { role: informative }
+  - ir: rule:5.7.1:0a8e3bf2
+    digest: dfe7473da76bce6f000f82bd876248f1986fd1440f276a7bf17d68acfc3f512b
+    source: { decision: D-169 }
+    as: { role: rule, object: ShortfallRemedy }
   - ir: sentence:5.7.1:aadd7eb9
     digest: d4f8838a49f2eac49048d99b1e40a40d47cb1fa2d9e6ed5e2f330178ec758a18
     source: { rule: prose-sentence }

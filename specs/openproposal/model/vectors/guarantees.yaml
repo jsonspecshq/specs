@@ -389,3 +389,296 @@ rules:
       - party: buyer
         before: { metric: viewable_rate, level: 0.90, direction: at_least }
         after: { metric: viewable_rate, level: 0.90, direction: at_most }
+  # § 5.7.1's `counted_by` cell states three conditions; this is the first.
+  # No example prices a line item at `CPP`, so the condition is built from the
+  # rows that state it: `CPP` is one of § 5.6.5's ten core terms, `demographic`
+  # takes the value its own row writes as its example, and `rating_source`
+  # takes `seller`, which § 2.2 states is what a seller writes as a `Measurer`.
+  # Everything else is `line-item-dooh.yaml`'s own line item, trimmed to the
+  # keys a `LineItem` requires of it plus the two fields the rule reads. The
+  # halves differ only in `counted_by`: `seller`, which equals the entry's
+  # `rating_source` byte for byte, against `audience-vendor.example`, the value
+  # that file writes for that member (D-169).
+  - rule: rule:5.7.1:0894f8c4
+    digest: 77b420d234cc4556addacdc7162942bb937828309358bc9e268fd3c77d6ab3b1
+    decision: D-169
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: metro-platforms-dooh
+          status: published
+          channel: dooh
+          visibility: named
+          delivery_counting:
+            play_tolerance_ms: 500
+            proof_of_performance:
+              logged_by: seller
+              evidence:
+              - play_log
+              - photo
+            impression_multiplier:
+              impression_type: viewable
+              source_type: 1
+              vendor: audience-vendor.example
+              accreditation: industry_currency
+              dataset: 2026-R2
+              settles_on: declared
+          pricing:
+          - pricing_id: metro-cpm-usd
+            cost_method: CPP
+            list_rate: 8.0
+            agreed_rate: 8.0
+            currency: USD
+            price_type: 3
+            price_valid_until: '2026-12-15T23:59:59Z'
+            cost_parameters:
+              demographic: ratings.example:adults_25_54
+              rating_source: seller
+          commitment:
+            basis: spend
+            amount: 70156.8
+            flight:
+              start: '2026-11-02T00:00:00Z'
+              end: '2026-11-15T23:59:59Z'
+            derived_units: 8769600
+            advertisers:
+            - domain: brand-a.example
+          controlling_measurement:
+            available:
+            - id: vendor-count
+              counted_by: seller
+              discrepancy_threshold: 0.1
+              final_after: P30D
+            included:
+            - vendor-count
+            max_select: 1
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            - id: programmatic_guaranteed
+              delivery_type: guaranteed
+            included:
+            - direct_io
+            max_select: 1
+    invalid:
+      - value:
+          line_item_id: metro-platforms-dooh
+          status: published
+          channel: dooh
+          visibility: named
+          delivery_counting:
+            play_tolerance_ms: 500
+            proof_of_performance:
+              logged_by: seller
+              evidence:
+              - play_log
+              - photo
+            impression_multiplier:
+              impression_type: viewable
+              source_type: 1
+              vendor: audience-vendor.example
+              accreditation: industry_currency
+              dataset: 2026-R2
+              settles_on: declared
+          pricing:
+          - pricing_id: metro-cpm-usd
+            cost_method: CPP
+            list_rate: 8.0
+            agreed_rate: 8.0
+            currency: USD
+            price_type: 3
+            price_valid_until: '2026-12-15T23:59:59Z'
+            cost_parameters:
+              demographic: ratings.example:adults_25_54
+              rating_source: seller
+          commitment:
+            basis: spend
+            amount: 70156.8
+            flight:
+              start: '2026-11-02T00:00:00Z'
+              end: '2026-11-15T23:59:59Z'
+            derived_units: 8769600
+            advertisers:
+            - domain: brand-a.example
+          controlling_measurement:
+            available:
+            - id: vendor-count
+              counted_by: audience-vendor.example
+              discrepancy_threshold: 0.1
+              final_after: P30D
+            included:
+            - vendor-count
+            max_select: 1
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            - id: programmatic_guaranteed
+              delivery_type: guaranteed
+            included:
+            - direct_io
+            max_select: 1
+  # The second condition, read the same way of an action-priced entry.
+  # `attribution_window` takes `P30D`, the duration § 5.7.1's `final_after` row
+  # writes as its own example, and `action_type` takes the extension term its
+  # own row writes, because the published `ActionType` carries none of the
+  # ECAPI core terms the row names -- this repository pins no such list, which
+  # `D-140`'s declaration states. The halves differ only in `counted_by`
+  # (D-169).
+  - rule: rule:5.7.1:99d3e14a
+    digest: 4460442144f60a3d5277b0e38a1837d68e511ec5436e3eea46636f2f104314f3
+    decision: D-169
+    type: LineItem
+    valid:
+      - value:
+          line_item_id: metro-platforms-dooh
+          status: published
+          channel: dooh
+          visibility: named
+          delivery_counting:
+            play_tolerance_ms: 500
+            proof_of_performance:
+              logged_by: seller
+              evidence:
+              - play_log
+              - photo
+            impression_multiplier:
+              impression_type: viewable
+              source_type: 1
+              vendor: audience-vendor.example
+              accreditation: industry_currency
+              dataset: 2026-R2
+              settles_on: declared
+          pricing:
+          - pricing_id: metro-cpm-usd
+            cost_method: CPA
+            list_rate: 8.0
+            agreed_rate: 8.0
+            currency: USD
+            price_type: 3
+            price_valid_until: '2026-12-15T23:59:59Z'
+            cost_parameters:
+              action_type: shop.example:store_visit
+              attribution_window: P30D
+              action_source: seller
+          commitment:
+            basis: spend
+            amount: 70156.8
+            flight:
+              start: '2026-11-02T00:00:00Z'
+              end: '2026-11-15T23:59:59Z'
+            derived_units: 8769600
+            advertisers:
+            - domain: brand-a.example
+          controlling_measurement:
+            available:
+            - id: vendor-count
+              counted_by: seller
+              discrepancy_threshold: 0.1
+              final_after: P30D
+            included:
+            - vendor-count
+            max_select: 1
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            - id: programmatic_guaranteed
+              delivery_type: guaranteed
+            included:
+            - direct_io
+            max_select: 1
+    invalid:
+      - value:
+          line_item_id: metro-platforms-dooh
+          status: published
+          channel: dooh
+          visibility: named
+          delivery_counting:
+            play_tolerance_ms: 500
+            proof_of_performance:
+              logged_by: seller
+              evidence:
+              - play_log
+              - photo
+            impression_multiplier:
+              impression_type: viewable
+              source_type: 1
+              vendor: audience-vendor.example
+              accreditation: industry_currency
+              dataset: 2026-R2
+              settles_on: declared
+          pricing:
+          - pricing_id: metro-cpm-usd
+            cost_method: CPA
+            list_rate: 8.0
+            agreed_rate: 8.0
+            currency: USD
+            price_type: 3
+            price_valid_until: '2026-12-15T23:59:59Z'
+            cost_parameters:
+              action_type: shop.example:store_visit
+              attribution_window: P30D
+              action_source: seller
+          commitment:
+            basis: spend
+            amount: 70156.8
+            flight:
+              start: '2026-11-02T00:00:00Z'
+              end: '2026-11-15T23:59:59Z'
+            derived_units: 8769600
+            advertisers:
+            - domain: brand-a.example
+          controlling_measurement:
+            available:
+            - id: vendor-count
+              counted_by: audience-vendor.example
+              discrepancy_threshold: 0.1
+              final_after: P30D
+            included:
+            - vendor-count
+            max_select: 1
+          transaction_mechanism:
+            available:
+            - id: direct_io
+              delivery_type: guaranteed
+            - id: programmatic_guaranteed
+              delivery_type: guaranteed
+            included:
+            - direct_io
+            max_select: 1
+  # § 5.7.1: `none` means no remedy for any shortfall, so it is the only
+  # option where it is in effect. No example offers it, so the pair is
+  # `line-item-display.yaml`'s own `shortfall_remedy` with the third core term
+  # its row lists added to `available[]`. The first valid half is that file's
+  # value whole, where `none` is not in effect at all; the second puts `none`
+  # in effect alone; and the invalid half puts it in effect beside the
+  # `makegood` the file includes (D-169).
+  - rule: rule:5.7.1:0a8e3bf2
+    digest: dfe7473da76bce6f000f82bd876248f1986fd1440f276a7bf17d68acfc3f512b
+    decision: D-169
+    type: ShortfallRemedy
+    valid:
+      - value:
+          available:
+          - makegood
+          - credit
+          included:
+          - makegood
+      - value:
+          available:
+          - makegood
+          - credit
+          - none
+          included:
+          - none
+    invalid:
+      - value:
+          available:
+          - makegood
+          - credit
+          - none
+          included:
+          - makegood
+          - none

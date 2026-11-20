@@ -332,6 +332,33 @@
       ],
       "description": "`log_level`: one record per event; `aggregate`: totals over a period or a dimension"
     },
+    "ReportedMetric": {
+      "anyOf": [
+        {
+          "enum": [
+            "impressions",
+            "viewable_impressions",
+            "clicks",
+            "completed_views",
+            "views",
+            "rating_points",
+            "actions",
+            "plays",
+            "hours",
+            "days",
+            "weeks",
+            "viewable_rate",
+            "completion_rate",
+            "ivt_rate"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ],
+      "description": "The metrics a report holds. § 5.7.1 states its core terms as § 5.6.5's `unit` terms and the Rate terms of its own `metric` table, so the set is composed rather than listed in the row"
+    },
     "ReportingOption": {
       "additionalProperties": false,
       "properties": {
@@ -354,7 +381,7 @@
         "provided_metrics": {
           "description": "The metrics a report holds. Core terms: the `unit` terms of § 5.6.5, and the Rate terms of the `metric` table (§ 5.7.1)",
           "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/VocabularyTerm"
+            "$ref": "#/$defs/ReportedMetric"
           },
           "type": "array"
         },

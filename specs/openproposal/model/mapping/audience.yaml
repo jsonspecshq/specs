@@ -49,6 +49,13 @@ types:
     ir: key:5.3:AddressableScale.quantity
     source: { rule: key-table-object }
     open: false
+  - name: ScaleUnit
+    kind: vocabulary
+    ir: key:5.3:AddressableScale.unit
+    source: { decision: D-290 }
+    open: true
+    terms: [ device, household, listener, screen, person ]
+    description: "What an addressable scale's `quantity` counts. § 5.3 states its core terms as § 5.5's `frequency_cap.per` terms and `person`, so the set is composed rather than listed in the row."
 entries:
   - ir: field:5.3:audiences
     digest: a0b120d54324830aacfcbf094c51a542138af32594d125cd7ac5cb2f199a0a9a
@@ -274,7 +281,7 @@ entries:
   - ir: key:5.3:AddressableScale.unit
     digest: fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db
     source: { rule: named-type-row }
-    as: { role: property, object: AddressableScale, type: { kind: named, name: VocabularyTerm }, presence: required }
+    as: { role: property, object: AddressableScale, type: { kind: named, name: ScaleUnit }, presence: required }
   - ir: key:5.3:AddressableScale.window
     digest: 861130084de21301d1711711714a78c7b499b4afb18400f7bb6b4cfac2cf4264
     source: { rule: named-object-row }

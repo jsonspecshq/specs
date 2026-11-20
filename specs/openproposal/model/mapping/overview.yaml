@@ -290,6 +290,10 @@ entries:
     digest: 40fe67bacf96db0b51d0151a8c4f9669ec4c60b6d4d8a1f6c76373e0dd7f98a2
     source: { rule: prose-sentence }
     as: { role: informative }
+  - ir: code:2:1
+    digest: 165b0a3062398807b674d42cbe1aefa247e87670d42382cdebe7a615cdb95ca2
+    source: { decision: D-167 }
+    as: { role: informative }
   - ir: rule:2:4ae8f775
     digest: 7b7a4e9aec10b20c71883badcb8f72e9f7fc0febc0c9bf6588ad4b590843342f
     source: { decision: D-082 }
@@ -427,6 +431,10 @@ entries:
     digest: 616b1e284dd760594568cadbfecb852bd2bc4f9e1cfb71d40413b621bc170ddc
     source: { decision: D-082 }
     as: { role: obligation, party: seller }
+  - ir: code:2.5:1
+    digest: 3d896e1951745285ef66a642e6d4755642584cc20a3ded40efcda3f42d82aca8
+    source: { decision: D-167 }
+    as: { role: informative }
   - ir: rule:2.5:f02c39d6
     digest: 25bf8839068c755195be54131b58fd02003e3f3115613e24aeb21eb350e7341e
     source: { decision: D-082 }
@@ -674,6 +682,10 @@ entries:
   - ir: sentence:2.8.1:180d2b81
     digest: 556c570c1a400c19d8d8662692c89c8b90d66ee4398c14a3ef1597716604e316
     source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: code:2.8.1:1
+    digest: 54811d0ad1eb14e49caedfae055a3750a867891c2ca3b89744de51480d922f61
+    source: { decision: D-167 }
     as: { role: informative }
   - ir: sentence:2.8.1:65217794
     digest: 5256aa3470f935c2b9147a4a1a3edb46e064260617716364e7a83e80eef8376a

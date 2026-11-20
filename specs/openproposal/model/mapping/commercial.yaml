@@ -2,9 +2,20 @@
 # are kept as they are; every other entry and type is derived by a mapping rule (src/mapping-rules.ts).
 format: 1
 module: commercial
-sections: [ "5.6", 5.6.1, 5.6.2, 5.6.3, 5.6.4, 5.6.5, 5.6.6, 5.6.7 ]
-depends: [ audience, execution, line-item, proposal ]
+sections: [ "3.4", 4.1.2, "5.6", 5.6.1, 5.6.2, 5.6.3, 5.6.4, 5.6.5, 5.6.6, 5.6.7 ]
+depends: [ audience, execution, guarantees, inventory, targeting ]
 types:
+  - name: LineItemWrites
+    kind: object
+    ir: key:3.4:LineItemWrites.commitment
+    source: { decision: D-128 }
+    open: false
+    includes: BuyerWrites
+  - name: AssentEntry
+    kind: object
+    ir: key:4.1.2:AssentEntry.role
+    source: { rule: key-table-object }
+    open: false
   - name: PricingEntry
     kind: object
     ir: "field:5.6:pricing[]"
@@ -151,6 +162,220 @@ types:
     open: true
     terms: [ exclusivity ]
 entries:
+  - ir: def:3.4:BuyerWrites
+    digest: 485fa6481f1a341bb7a30dd35aba5ff7036f89d9a9ded6c8faa49a93cb2a92f9
+    source: { rule: lead-in-restates }
+    as: { role: informative }
+  - ir: sentence:3.4:39df5553
+    digest: 88c396bed6a19628f4c3b9f57f93bb42822c39ca3c9b37592577089d03fd1e15
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:3.4:8a37931e
+    digest: 137180560e78c77933e2313616c5d475a7b87798cbd80b7bfd9b07992a640c1c
+    source: { decision: D-083 }
+    as: { role: informative }
+  - ir: sentence:3.4:5167ab36
+    digest: 9ded72c71e618e294c18b0bdd7f02db27e63f5dd3da6987f62609a06c4aefdef
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: code:3.4:1
+    digest: dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc
+    source: { decision: D-128 }
+    as: { role: profile, profile: Writes, document: LineItem, name: BuyerWrites, optional: true }
+  - ir: def:3.4:LineItemWrites
+    digest: 7a8768a3e6522913daacc2708c400388dd8942d4d978d723bf1aeb12cb8a950b
+    source: { rule: lead-in-restates }
+    as: { role: same, name: LineItemWrites }
+  - ir: sentence:3.4:808be197
+    digest: b957dea769ae4844b258bc36d167fd40e22c119370db1170b6cb36dac4ebb2b4
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:3.4:e06f9ab3
+    digest: 4f6c6c32b0840450575afa7170fc04c9cb03c7d92ba50854973136480f730528
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:3.4:LineItemWrites.commitment
+    digest: 094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd
+    source: { rule: named-object-row }
+    as: { role: property, object: LineItemWrites, type: { kind: named, name: Commitment }, presence: required }
+  - ir: sentence:4.1.2:4185f60b
+    digest: bcaad46a95bc181682485e778b4db0c4c6abf64cca4eb9ff04958d300cd6ccd1
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: def:4.1.2:AssentEntry
+    digest: 29a67ff9074d4a2c168a5fba7517087f96a64860871f7df9c3786536c1b9deda
+    source: { rule: lead-in-restates }
+    as: { role: same, name: AssentEntry }
+  - ir: sentence:4.1.2:7838c492
+    digest: 888de5a548196b93d67405a228a49926dd06215408d27cbb929c2a3d0cb944b7
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: key:4.1.2:AssentEntry.role
+    digest: 91231edb7cb2285c8501dbf72e43534dd6421d64aa73f3c1baaef2dee2bf2180
+    source: { rule: enum-row }
+    as: { role: property, object: AssentEntry, type: { kind: named, name: AssentEntryRole }, presence: required }
+  - ir: key:4.1.2:AssentEntry.role#meaning/values:1
+    digest: 3506e2eddcc1da90b7cd1e7aba7073b7f2a098fe4f86bae71a069aecce31172a
+    locks: [ with-open-prs ]
+    source: { decision: D-065 }
+    as: { role: type, name: AssentEntryRole, layer: vocabulary, open: false }
+  - ir: key:4.1.2:AssentEntry.version
+    digest: 3c6efa0c80c07aee50994da32d3a0f71d6a090fce9d2f24d2bf9d1524b268deb
+    source: { rule: domain-row }
+    as: { role: property, object: AssentEntry, type: { kind: named, name: Count }, presence: required }
+  - ir: key:4.1.2:AssentEntry.record_digest
+    digest: 41af590a865a2ee85a73d37dfe50ca46d1c7cd2cea7b2976c178780e26d62ad8
+    source: { rule: named-type-row }
+    as: { role: property, object: AssentEntry, type: { kind: named, name: QualifiedDigest }, presence: required }
+  - ir: "key:4.1.2:AssentEntry.line_item_ids[]"
+    digest: 360354ae190cae29dd48ed3a481ad12091ce23a6869444bb816e93b97f692745
+    source: { rule: domain-row }
+    as:
+      role: property
+      object: AssentEntry
+      type: { kind: apply, constructor: List, arguments: { T: { kind: named, name: MintedId } } }
+      presence: required
+  - ir: rule:4.1.2:527c9881
+    digest: 451abbcc3afc2a441dce3577af85a734a2f688a513087ccca80fec5d0d07afaf
+    source: { decision: D-088 }
+    as: { role: rule, object: AssentEntry }
+  - ir: key:4.1.2:AssentEntry.at
+    digest: bee56029814bdcd3f391a86070685aa850463faeb315d00d96745a480f60a3ae
+    source: { rule: named-type-row }
+    as: { role: property, object: AssentEntry, type: { kind: named, name: Instant }, presence: required }
+  - ir: key:4.1.2:AssentEntry.idempotency_key
+    digest: e507e674a3801585327a6dcc515e8b0d0d56fd69091e5cd0ab706fe1bb897cef
+    source: { decision: D-094 }
+    as: { role: property, object: AssentEntry, type: { kind: named, name: ExternalId }, presence: conditional }
+  - ir: rule:4.1.2:1cbff705
+    digest: ee8c26acbc19e0954df055f11170b5af3809d2351922ad787656a89b75559fc2
+    source: { rule: presence-statement }
+    as: { role: rule, object: AssentEntry }
+  - ir: rule:4.1.2:d5a6e326
+    digest: 8d84d6e26e3c4f1ed6fd50871d124dccef18acd62bfaa7af19033a2831ad585e
+    source: { decision: D-084 }
+    as: { role: obligation, party: seller }
+  - ir: key:4.1.2:AssentEntry.ground
+    digest: d3b2799dd41fb5a23e26ae4f75dfa767a74f23d436190c180c738b88cbea01db
+    source: { rule: named-type-row }
+    as: { role: property, object: AssentEntry, type: { kind: named, name: AssentEntryGround }, presence: conditional }
+  - ir: key:4.1.2:AssentEntry.ground#meaning/values:1
+    digest: fb508f8879fe71d98779b4c30b2e5207af4f4810ddedd4b2b688c1832fca83bb
+    locks: [ with-open-prs ]
+    source: { decisions: [ D-065, D-089 ] }
+    as: { role: type, name: AssentEntryGround, layer: vocabulary, open: true }
+  - ir: rule:4.1.2:a9695c33
+    digest: b6aecc4de9228e62a91e0178dab91230a7d4427e7b7bbbfe3bdc4288f4efe3d4
+    source: { rule: presence-statement }
+    as: { role: rule, object: AssentEntry }
+  - ir: sentence:4.1.2:7c0975a4
+    digest: 9e2f9842020b245a12cff130530deb623d34f97aaca1441c16b3fb09de80bdb9
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:c6e43dca
+    digest: af1c826419cd42bb6a441293b2bd05e5903fde4d613d6665532dbd87ec9892cb
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:4.1.2:0006fe1d
+    digest: 7793fc15e0fefb0ec9b39dbf9f8ce7f705c8da81769688db5a06f7ec7acdcf48
+    source: { decision: D-171 }
+    as: { role: rule, object: Proposal }
+  - ir: sentence:4.1.2:e95695a5
+    digest: 7f23e019e05044759ee3e8ec2ce8a770895014dcdf179107c971ff3d29e5df3a
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:18100fa4
+    digest: 172fdf75513777d09bfc5f5de98e0a5543d33b2c15c20d038907a6de19c855d0
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:74cbe1c9
+    digest: 7cb4bad30f10c49496fb683c2c2f73423bf54d106e25d3c75401ccc44cd9797a
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:b1e180e2
+    digest: 80f776a479962a5158d883114cdb6d9fd641c4cf0ea5a7fee5faed58187d0214
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:3720a27b
+    digest: f59f3d1d51a06ef96c3d5ddbcdebfbc1c3232b9f7dc3bc2acbeb831f62b9723d
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:3d67e37e
+    digest: a437a6db1c6ae71cac55194618b06117c9154fc099e76a0b75754449b6142940
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:c5c4e5ee
+    digest: 7d6c275df287aa92a452062962d6c83aa43565ba62ea02046ce880f7118365fd
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:4.1.2:c9ce18dd
+    digest: 8c00feda546efd02d92d57b6068d426acdda5961383e42d074c5a58488aafc5d
+    source: { decision: D-084 }
+    as: { role: obligation, party: implementation }
+  - ir: sentence:4.1.2:57dfdeca
+    digest: 04ce99c285dfcac28159b6c680cf148dfb574cace8ab233f5bdf0fcc089abd48
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:4.1.2:dc1eb3b2
+    digest: 83bc4a9d3c0d7a0c0397dbae7f428b3b50972494286b155c637ab835d5695f67
+    source: { decision: D-171 }
+    as: { role: rule, object: Proposal }
+  - ir: sentence:4.1.2:46048f7e
+    digest: ad4f0daffcda9b1702d1f26e0df9a6c335b47374e379afc6e4f016894bded2c3
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:110168c4
+    digest: 05d0bd1079410b6afa5f9c053a498392d74ca32c543c93595ddabe90ae128aa5
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:42dbc7e5
+    digest: c0c247458eb6257b6b86e2529311ab14ca71859879263dc720cdfcc52db220e5
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:4.1.2:a855dcd7
+    digest: a3ce6e90057cbfbbf92b9791066100075feed6a32cb62ee997cfcff3388b6cab
+    source: { decision: D-171 }
+    as: { role: obligation, party: seller }
+  - ir: sentence:4.1.2:430978d8
+    digest: 258bffeea418b4e735acf0a10de58033c1b3ba8b8fb25c39b848a03a22b922fb
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:248a753f
+    digest: b96fc7662011c5539682a5c1b4bc5859e343dc765d75c172b07b7f0df09923aa
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:067e10f7
+    digest: c8cd94d7d8e5cb36acd00d6b8e4a6e46644c2ffd690050ca8c41614720ccb034
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:addc1297
+    digest: cc4b255c63c5138ed305621a7685de1649a1b34dcf561ff293d760393536a008
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:ec934f27
+    digest: 53456fe8266cda861fc5de123c3885069da9db6d45e57899282346aa47fed64a
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: sentence:4.1.2:aafdf092
+    digest: a5a047d68448f30d70ca3333100146db7ca2566f1d9e9cfc4c416698e0f2569d
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:4.1.2:b3c1ac3b
+    digest: f393f55a23f7c5d66538a25a2a908b2af4aa0bd7d35fb57260139a2d98a05dc1
+    source: { decision: D-084 }
+    as: { role: informative }
+  - ir: sentence:4.1.2:8e5481e7
+    digest: 9638357ce1033d0d4fcc10d6ef33ae32df31c63a7913c482c8e08b4c7cc16a31
+    source: { rule: prose-sentence }
+    as: { role: informative }
+  - ir: rule:4.1.2:9a7a80e3
+    digest: 2c7fc4e8ca9617f8cc592c95816a8b00d437ec47f46fb1f020d7d9aa1eadc71d
+    source: { decision: D-084 }
+    as: { role: obligation, party: implementation }
+  - ir: sentence:4.1.2:5ca39dff
+    digest: 1f35670a2d8d1a12ec5c94ea00fb49dab14886b8d2730b4b85d888195432fb99
+    source: { rule: prose-sentence }
+    as: { role: informative }
   - ir: "field:5.6:pricing[]"
     digest: 4ae834bf37c20f63fdcf3f858823998c4992a74475a387248ed9ca18c82a945b
     source: { rule: named-object-row }
@@ -370,6 +595,10 @@ entries:
     digest: b52ed2d1b809e4ef6d2476a0fe871ef02d37b6de6da8d26247e0ffb47fcf06f3
     source: { rule: prose-sentence }
     as: { role: informative }
+  - ir: code:5.6:1
+    digest: b6719071729d88ce1385f42bb24611bb3fa30ba1d809aa9722dc696fe478de90
+    source: { decision: D-324 }
+    as: { role: rule, object: LineItem }
   - ir: sentence:5.6:388fd9ea
     digest: 2c61b9f32749c2ee8c74066ac4635e1085969cb0f24b996dd7206900d8b5a6ad
     source: { rule: prose-sentence }
@@ -1269,6 +1498,10 @@ entries:
     digest: b02d7dac467cd6f757df4c8c5b6c2fc5c65d4b738cd0cce2bb3fb8f7a370901b
     source: { decision: D-085 }
     as: { role: schema, in: Amount }
+  - ir: rule:5.6.5:1f53e407
+    digest: e8d43ee1e9ad08afe7a0e3d60c7451c9003becb1d82b20340358a305efdbeb72
+    source: { decision: D-169 }
+    as: { role: rule, object: LineItem }
   - ir: sentence:5.6.5:4804c1fd
     digest: a0ba537677fddc88f352a2c9bf71f7079328e194b12747ff60e468aec0eb675e
     source: { rule: prose-sentence }

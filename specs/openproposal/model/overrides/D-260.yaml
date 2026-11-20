@@ -1,0 +1,88 @@
+format: 2
+id: D-260
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  `VersionRef.seller_domain` is "REQUIRED when the `VersionRef` is outside its proposal", which is a
+  condition on where the value sits rather than on anything the value carries. What presence does the
+  type state for it?
+covers:
+- ir: key:2.2:VersionRef.seller_domain
+  digest: ec8fb461339f3b87060c0c03b4969284400815d632384455d3a9aa69e78fe3c8
+  quote: "`seller_domain` | REQUIRED when the `VersionRef` is outside its proposal | The proposal's `seller.domain`"
+- ir: sentence:2.2:d3643f2d
+  digest: 5e3219f08b4dd2fe221c62ac093d51269d6869f5506998d3ea9f6ac3017c5708
+  quote: "A `proposal_id` is unique only within a `seller.domain` (§ 4.1): a `VersionRef` inside a proposal resolves against that proposal's `seller`, and one outside a proposal carries `seller_domain`."
+options:
+- id: a-duty-at-each-carrier-with-the-cell-s-presence-kept
+  summary: >-
+    The row keeps the presence its cell states, because the cell states it and a mapping entry may not
+    say otherwise; the requirement the condition names is the carrier's, and the construct for it is
+    the one this document already uses twice — a `required-here` keyword on the object that holds a
+    `VersionRef`.
+- id: optional-on-the-type-narrowed-by-each-carrier
+  summary: >-
+    The mapping states the type's presence as OPTIONAL, because a `VersionRef` cannot see where it
+    sits, and leaves the requirement to each carrier's own row.
+- id: required-on-the-type
+  summary: >-
+    The type requires it, so every `VersionRef` carries the seller's domain whether or not it sits
+    inside the proposal it names.
+chosen: a-duty-at-each-carrier-with-the-cell-s-presence-kept
+rationale: 'The condition names no sibling and no value of this object. It names **where the object
+  sits**, and the same `VersionRef` is required to carry `seller_domain` at one position and not at
+  another, so no schema of `VersionRef` can state it: the type would be wrong in one direction or the
+  other at every use.
+
+
+  **The document states the rule on the type and the presence at the carrier.** § 2.2''s lead-in reads
+  "a `VersionRef` inside a proposal resolves against that proposal''s `seller`, and one outside a
+  proposal carries `seller_domain`" — which says what a carrier must do, not what the object''s own
+  schema can check. And the carriers say it themselves, in their own rows: § 1.1''s `ext.baseline` is
+  "The agreed baseline `VersionRef` (§ 2.2), **with `seller_domain`**, so a DSP can join the deal to
+  its record", while § 4.1''s `issued_from` is a `VersionRef` inside the proposal that carries it and
+  says nothing about the member.
+
+
+  **The construct for the carrier''s requirement already exists and this document already uses it
+  twice.** § 5.6''s `offer` row and § 4.4''s `baseline` row both read "`line_item_id` is REQUIRED
+  here", and § 2.2''s own rule licenses it: a row "MAY narrow the type for that field, by requiring a
+  key the type leaves OPTIONAL or by limiting the values or count the type allows, and says so". Both
+  are claimed as a `required-here` keyword on the carrier and both are published: `AvailabilityRead`
+  and `ChangeRequest` each carry a `dependentSchemas` that requires `line_item_id` inside the member
+  that holds the `VersionRef`. So the requirement the `seller_domain` condition names has a home, and
+  it is not the type''s own presence.
+
+
+  **The one carrier the document names for `seller_domain` is a key this specification does not type.**
+  § 1.1''s `ext.baseline` is "The agreed baseline `VersionRef` (§ 2.2), with `seller_domain`, so a DSP
+  can join the deal to its record" — an entry of an `ext` map, which § 2.5 leaves to the parties. So
+  there is no object of this specification whose row carries the narrowing, which is why the
+  requirement reaches no published byte: not because the construct is missing, but because the carrier
+  is outside the model.
+
+
+  **MEASURED, AND IT REFUSED THE OTHER OPTION.** `optional-on-the-type-narrowed-by-each-carrier` was
+  written and run on 2026-11-17, and the pipeline refused it twice: `mapping-location` reported
+  "presence is \"optional\", but the specification states \"conditional\"", because the Required
+  cell states a condition and a mapping entry may not say otherwise; and `mapping-rules` reported that
+  `named-type-row` decides the entry, "so the entry cites it, not a decision record". Both refusals
+  are right — the cell''s spelling is the form, and a decision covers only what no rule decides — so
+  the row keeps the presence its cell states and this record states what the condition is about rather
+  than restating the row. The count of conditions left to the rules stays 14, and buying 12 with two
+  refused entries would have been a count moved and nothing learned.
+
+
+  **`required-on-the-type` is refused** because § 4.1''s `issued_from` is a `VersionRef` inside its own
+  proposal, so requiring the member would refuse a value the specification''s own row describes.'
+evidence:
+- https://github.com/IABTechLab/OpenProposal/blob/a36266907148c7fe7f79fd3706d4bd2ff1e99b16/spec/openproposal-3.0.md
+feedback: >-
+  § 2.2 states that a `VersionRef` outside its proposal carries `seller_domain`, and § 1.1's
+  `ext.baseline` row repeats it for that one carrier. The rule is about the carrier and the Required
+  cell is on the type, so a reader implementing `VersionRef` cannot tell from the type's own table
+  which of its uses require the member. Stating the requirement in each carrier's row — as § 5.6's
+  `offer` and § 4.4's `baseline` already do for `line_item_id` — would put it where an implementer
+  reads it.

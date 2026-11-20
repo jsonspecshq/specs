@@ -1,0 +1,106 @@
+format: 2
+id: D-290
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Two rows state their core terms by naming another row's and adding to it: § 5.3's
+  `AddressableScale.unit` is "the `frequency_cap.per` terms (§ 5.5), and `person`", and § 5.7.1's
+  `ReportingOption.provided_metrics[]` is "the `unit` terms of § 5.6.5, and the Rate terms of the
+  `metric` table (§ 5.7.1)". Neither carries a value list of its own, so each is published as the
+  term grammar. Which vocabulary does each name?
+covers:
+- ir: key:5.3:AddressableScale.unit
+  digest: fa2c97686db26ca4215f46dd239b3916e9945e30c608f68389aaab939ecae0db
+  quote: "`unit` | REQUIRED | What `quantity` counts. Core terms: the `frequency_cap.per` terms (§ 5.5), and `person`. A receiver that doesn't know a term reads the figure as unstated"
+- ir: key:5.7.1:ReportingOption.provided_metrics[]
+  digest: 88047001dce48e5657919eaef3bf8a878e81b6793adb1ab1b6217f761dd1f0d9
+  quote: "`provided_metrics[]` | OPTIONAL | The metrics a report holds. Core terms: the `unit` terms of § 5.6.5, and the Rate terms of the `metric` table (§ 5.7.1)"
+- ir: key:5.5:FrequencyCap.per#meaning/values:1
+  digest: 4c39cab778f304adb684e295d0f75ece60710030810062e2278a29efad90c61a
+  quote: "`device` | `household` | `listener` | `screen`"
+- ir: block:5.6.5:2/values:1
+  digest: e00660fef89061aedaae96b661bd32026d740b008fb6f90f56639e1e774132d2
+  quote: "`impressions` | `viewable_impressions` | `clicks` | `completed_views` | `views` | `rating_points` | `actions` | `plays` | `hours` | `days` | `weeks`"
+- ir: block:5.7.1:3/values:1
+  digest: 61f2bec7b245ca2c4dd09f004fb8c233da2b6cc9a906a85d9c553961f13cd590
+  quote: "`viewable_rate` | `completion_rate` | `ivt_rate` | `impressions`"
+- ir: key:5.5:FrequencyCap.per
+  digest: c02efa7f19c141e0fa82d1eb9630fb1dcfc6e7c98aab6c38621f0a21e99e6706
+  quote: "`per` | REQUIRED | Who is capped. It matters: CTV typically caps at household, audio at listener. Core terms: `device` | `household` | `listener` | `screen`"
+options:
+- id: a-vocabulary-of-its-own-holding-the-union
+  summary: >-
+    Each row names a vocabulary of its own, open as every `VocabularyTerm` is, whose core terms
+    are the union the row states: `ScaleUnit` over `FrequencyCapBasis`'s four terms and `person`,
+    and `ReportedMetric` over § 5.6.5's eleven `unit` terms and the three Rate terms of § 5.7.1's
+    `metric` table. Each is declared with its terms, because the row it rests on carries no value
+    list to read them from.
+- id: the-vocabulary-each-row-points-at
+  summary: >-
+    `unit` takes `FrequencyCapBasis` and `provided_metrics[]` takes `Metric`, the vocabularies the
+    rows point at, and the added terms are extension terms a party may write.
+- id: the-term-grammar-as-published-today
+  summary: >-
+    Each stays a `VocabularyTerm`: the row lists no terms of its own, so the published type admits
+    any term and the core list is prose a reader applies.
+chosen: a-vocabulary-of-its-own-holding-the-union
+rationale: >-
+  A UNION OF A TERM LIST AND MORE TERMS IS A LONGER TERM LIST, which is the reading `D-064` took
+  of § 2.2's `LineItemStatus` -- "A `ProposalStatus`, or `sold_out`" -- and of its `TimeUnit`.
+  These two rows are that shape written the other way round: instead of naming a type and adding a
+  term, they name a row's terms and add to them. Nothing a payload can carry distinguishes
+  `unit` as "the `per` terms and `person`" from `unit` as the five terms, and the second is one
+  type where the first is two.
+
+
+  THE SETS, read off the elements the rows point at and not from memory. § 5.5's `per` row lists
+  `device`, `household`, `listener` and `screen`, so `ScaleUnit`'s core terms are those four and
+  `person`: five. § 5.6.5's sentence lists eleven `unit` terms, and § 5.7.1's `metric` table lists
+  four terms of which its Kind column marks three Rate -- `viewable_rate`, `completion_rate` and
+  `ivt_rate` -- and one Count, `impressions`. So `ReportedMetric`'s core terms are those eleven and
+  those three: fourteen, with no term twice, because `impressions` is a `unit` term and is not one
+  of the three the Kind column marks Rate.
+
+
+  BOTH ARE OPEN, and each row says so in its own way. § 2.2 gives a `VocabularyTerm` the form "a
+  bare core term, or `<domain>:<term>`", so a term outside the core list is admitted wherever the
+  type is one; `unit`'s row states the receiver clause that goes with that -- "A receiver that
+  doesn't know a term reads the figure as unstated" -- and both rows say "Core terms", which names
+  a core half and leaves the other open. So neither declaration closes its list.
+
+
+  `the-vocabulary-each-row-points-at` is refused by what it would publish. Reading `unit` as
+  `FrequencyCapBasis` would make `person` an extension term, and § 2.2 requires an extension term
+  to be `<domain>:<term>` under a domain its definer controls -- so a seller writing the bare
+  `person` the row states would be refused, and a seller writing `example.com:person` would state
+  a term the specification already names. The same holds of every `unit` term for
+  `provided_metrics[]`: `Metric` holds four terms and the row names fourteen, so ten of them would
+  be refused as bare terms the vocabulary does not list.
+
+
+  `the-term-grammar-as-published-today` is what the tree publishes and what `domains-properties`
+  reports: a property whose values are terms references a named vocabulary (type rules § 6). The
+  cost of leaving it is that the published type accepts any term at all, so a consumer gets no
+  check on either member and the core list lives only in the description; the gate's own message is
+  the measurement that says so.
+
+
+  WHY A DECLARATION WITH EXPLICIT TERMS, which is the mechanism and not the reading. A vocabulary's
+  terms are read from the element its entry sits on, and neither row carries a value list: each
+  names other rows' lists instead. `D-064` met this on its three § 2.2 spellings and declared each
+  in `types:` with its terms; these two follow it, each resting on its own row, so a reader of the
+  declaration sees the set the prose composes.
+
+
+  WHAT THIS COSTS: the two declarations restate terms the document states elsewhere, so a term
+  added to § 5.5's `per` row or to § 5.6.5's `unit` sentence does not reach these two lists on its
+  own. The digests of the three value lists this record covers are what catch that: a change to any
+  of them makes this record stale and the re-read is where the term is added.
+feedback: >-
+  § 5.3's `unit` and § 5.7.1's `provided_metrics[]` state their core terms by pointing at other
+  rows -- one at § 5.5's `per`, the other at § 5.6.5's unit sentence and § 5.7.1's own metric
+  table, by the Kind column -- so a reader assembles each list from two or three places and a
+  generator cannot read either from the row. Listing the terms in the row, or naming the set once
+  and pointing both rows at that name, would make each row say what its values are.

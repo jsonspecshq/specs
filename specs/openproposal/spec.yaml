@@ -21,7 +21,7 @@ plugin: openproposal
 # mapping and its JSON Schemas, so its folder holds `input/`, `ir/`,
 # `kernel-binding.yaml`, `model/` and `schemas/`, and no later stage's jobs
 # are built for it. The outputs follow, advancing this line.
-through: schemas
+through: targets
 # `type-rules § 6 code descriptions` keeps a code's branch text where the row
 # says more than the code's name. No code of this text has such a row: § 5.6.5's
 # `rate_per` lists `1` | `1000` with no label at all, and § 5.2.9's

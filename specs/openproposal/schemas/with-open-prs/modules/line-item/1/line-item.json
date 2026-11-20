@@ -19,39 +19,39 @@
       },
       "properties": {
         "activation_route": {
-          "$ref": "#/$defs/BuyerWritesActivationRouteSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesActivationRouteSelection",
           "description": "The line item's `activation_route`, projected to `selected[]`."
         },
         "audiences": {
-          "$ref": "#/$defs/BuyerWritesAudienceSelectable",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesAudienceSelectable",
           "description": "The line item's `audiences`, projected to `excluded[]`, `combine.selected[]`, and `selected[]`."
         },
         "break_position": {
-          "$ref": "#/$defs/BuyerWritesBreakPositionSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesBreakPositionSelection",
           "description": "The line item's `break_position`, projected to `selected[]`."
         },
         "buyer_requirements": {
-          "$ref": "#/$defs/BuyerWritesBuyerRequirements",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesBuyerRequirements",
           "description": "The line item's `buyer_requirements`, projected to `seats` and `seat_owner`."
         },
         "cancellation_policy": {
-          "$ref": "#/$defs/BuyerWritesCancellationPolicySelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesCancellationPolicySelection",
           "description": "The line item's `cancellation_policy`, projected to `selected[]`."
         },
         "controlling_measurement": {
-          "$ref": "#/$defs/BuyerWritesControllingMeasurementSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesControllingMeasurementSelection",
           "description": "The line item's `controlling_measurement`, projected to `selected[]`."
         },
         "daypart": {
-          "$ref": "#/$defs/BuyerWritesDaypartBounds",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesDaypartBounds",
           "description": "The line item's `daypart`, projected to `value`."
         },
         "device": {
-          "$ref": "#/$defs/BuyerWritesDeviceBounds",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesDeviceBounds",
           "description": "The line item's `device`, projected to `value`."
         },
         "environments": {
-          "$ref": "#/$defs/BuyerWritesEnvironmentsSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesEnvironmentsSelection",
           "description": "The line item's `environments`, projected to `selected[]`."
         },
         "exclusions": {
@@ -65,7 +65,7 @@
           "type": "object"
         },
         "exclusivity": {
-          "$ref": "#/$defs/BuyerWritesExclusivitySelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesExclusivitySelection",
           "description": "The line item's `exclusivity`, projected to `selected[]`."
         },
         "flight": {
@@ -73,23 +73,23 @@
           "description": "The flight, as `commitment.flight` (§ 5.6.1)"
         },
         "formats": {
-          "$ref": "#/$defs/BuyerWritesFormatsSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesFormatsSelection",
           "description": "The line item's `formats`, projected to `selected[]`."
         },
         "frequency_cap": {
-          "$ref": "#/$defs/BuyerWritesFrequencyCap",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesFrequencyCap",
           "description": "The line item's `frequency_cap`, projected to `count.value`."
         },
         "geo": {
-          "$ref": "#/$defs/BuyerWritesGeoBounds",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesGeoBounds",
           "description": "The line item's `geo`, projected to `value`."
         },
         "markets": {
-          "$ref": "#/$defs/BuyerWritesMarketsSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesMarketsSelection",
           "description": "The line item's `markets`, projected to `selected[]`."
         },
         "measurement_source": {
-          "$ref": "#/$defs/BuyerWritesMeasurementSourceSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesMeasurementSourceSelection",
           "description": "The line item's `measurement_source`, projected to `selected[]`."
         },
         "offer": {
@@ -101,469 +101,33 @@
           "description": "The entry the buyer means to commit under, as `commitment.pricing_id`, so that the figure can count that entry's `unit` (§ 5.6.5)"
         },
         "production": {
-          "$ref": "#/$defs/BuyerWritesProductionSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesProductionSelection",
           "description": "The line item's `production`, projected to `selected[]`."
         },
         "programs": {
-          "$ref": "#/$defs/BuyerWritesProgramsSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesProgramsSelection",
           "description": "The line item's `programs`, projected to `selected[]`."
         },
         "properties": {
-          "$ref": "#/$defs/BuyerWritesPropertiesSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesPropertiesSelection",
           "description": "The line item's `properties`, projected to `selected[]`."
         },
         "reporting": {
-          "$ref": "#/$defs/BuyerWritesReportingSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesReportingSelection",
           "description": "The line item's `reporting`, projected to `selected[]`."
         },
         "shortfall_remedy": {
-          "$ref": "#/$defs/BuyerWritesShortfallRemedy",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesShortfallRemedy",
           "description": "The line item's `shortfall_remedy`, projected to `selected[]`."
         },
         "transaction_mechanism": {
-          "$ref": "#/$defs/BuyerWritesTransactionMechanismSelection",
+          "$ref": "../../commercial/1/commercial.json#/$defs/BuyerWritesTransactionMechanismSelection",
           "description": "The line item's `transaction_mechanism`, projected to `selected[]`."
         }
       },
       "required": [
         "flight",
         "offer"
-      ],
-      "type": "object"
-    },
-    "BuyerWritesActivationRouteSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../audience/1/audience.json#/$defs/ActivationRoute"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesAudienceSelectable": {
-      "additionalProperties": false,
-      "properties": {
-        "combine": {
-          "$ref": "#/$defs/BuyerWritesCombineSelection",
-          "description": "The line item's `audiences.combine`, projected to `selected[]`."
-        },
-        "excluded": {
-          "description": "The buyer's write: option ids of options whose `excludable` is `true`, disjoint from the seller audiences in effect. `max_select` does not count them",
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        },
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesBreakPositionSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesBuyerRequirements": {
-      "additionalProperties": false,
-      "properties": {
-        "seat_owner": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Party",
-          "description": "The legal entity that owns the seats. Absent: the `buyer`"
-        },
-        "seats": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/SeatRef",
-          "description": "The buyer's seats on the deal, as the Deals API 1.0 `wseat`"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesCancellationPolicySelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesCombineSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../audience/1/audience.json#/$defs/CombineOperator"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesControllingMeasurementSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesCountSettableRange": {
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/Count"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesDaypartBounds": {
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "additionalProperties": false,
-          "properties": {
-            "exclude": {
-              "items": {
-                "$ref": "../../../kernel/1/kernel.json#/$defs/DaypartWindow"
-              },
-              "type": "array"
-            },
-            "include": {
-              "items": {
-                "$ref": "../../../kernel/1/kernel.json#/$defs/DaypartWindow"
-              },
-              "type": "array"
-            }
-          },
-          "required": [
-            "include"
-          ],
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesDeviceBounds": {
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "additionalProperties": false,
-          "properties": {
-            "exclude": {
-              "items": {
-                "$ref": "../../targeting/1/targeting.json#/$defs/DeviceType"
-              },
-              "type": "array"
-            },
-            "include": {
-              "items": {
-                "$ref": "../../targeting/1/targeting.json#/$defs/DeviceType"
-              },
-              "type": "array"
-            }
-          },
-          "required": [
-            "include"
-          ],
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesEnvironmentsSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../inventory/1/inventory.json#/$defs/Environment"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesExclusivitySelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesFormatsSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/FormatId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesFrequencyCap": {
-      "additionalProperties": false,
-      "properties": {
-        "count": {
-          "$ref": "#/$defs/BuyerWritesCountSettableRange",
-          "description": "The line item's `frequency_cap.count`, projected to `value`."
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesGeoBounds": {
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "additionalProperties": false,
-          "properties": {
-            "exclude": {
-              "items": {
-                "$ref": "../../targeting/1/targeting.json#/$defs/GeoCode"
-              },
-              "type": "array"
-            },
-            "include": {
-              "items": {
-                "$ref": "../../targeting/1/targeting.json#/$defs/GeoCode"
-              },
-              "type": "array"
-            }
-          },
-          "required": [
-            "include"
-          ],
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesMarketsSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../targeting/1/targeting.json#/$defs/GeoCode"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesMeasurementSourceSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesProductionSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesProgramsSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesPropertiesSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesReportingSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../../kernel/1/kernel.json#/$defs/MintedId"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesShortfallRemedy": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../guarantees/1/guarantees.json#/$defs/RemedyKind"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "BuyerWritesTransactionMechanismSelection": {
-      "additionalProperties": false,
-      "properties": {
-        "selected": {
-          "items": {
-            "$ref": "../../execution/1/execution.json#/$defs/TransactionMechanism"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "LineItemWrites": {
-      "additionalProperties": false,
-      "properties": {
-        "activation_route": {
-          "$ref": "#/$defs/BuyerWritesActivationRouteSelection",
-          "description": "The line item's `activation_route`, projected to `selected[]`."
-        },
-        "audiences": {
-          "$ref": "#/$defs/BuyerWritesAudienceSelectable",
-          "description": "The line item's `audiences`, projected to `excluded[]`, `combine.selected[]`, and `selected[]`."
-        },
-        "break_position": {
-          "$ref": "#/$defs/BuyerWritesBreakPositionSelection",
-          "description": "The line item's `break_position`, projected to `selected[]`."
-        },
-        "buyer_requirements": {
-          "$ref": "#/$defs/BuyerWritesBuyerRequirements",
-          "description": "The line item's `buyer_requirements`, projected to `seats` and `seat_owner`."
-        },
-        "cancellation_policy": {
-          "$ref": "#/$defs/BuyerWritesCancellationPolicySelection",
-          "description": "The line item's `cancellation_policy`, projected to `selected[]`."
-        },
-        "commitment": {
-          "$ref": "../../commercial/1/commercial.json#/$defs/Commitment",
-          "description": "The line item's `commitment` (§ 5.6.1)"
-        },
-        "controlling_measurement": {
-          "$ref": "#/$defs/BuyerWritesControllingMeasurementSelection",
-          "description": "The line item's `controlling_measurement`, projected to `selected[]`."
-        },
-        "daypart": {
-          "$ref": "#/$defs/BuyerWritesDaypartBounds",
-          "description": "The line item's `daypart`, projected to `value`."
-        },
-        "device": {
-          "$ref": "#/$defs/BuyerWritesDeviceBounds",
-          "description": "The line item's `device`, projected to `value`."
-        },
-        "environments": {
-          "$ref": "#/$defs/BuyerWritesEnvironmentsSelection",
-          "description": "The line item's `environments`, projected to `selected[]`."
-        },
-        "exclusions": {
-          "additionalProperties": {
-            "$ref": "../../targeting/1/targeting.json#/$defs/ExclusionList"
-          },
-          "description": "The buyer's block lists, keyed by exclusion type. See below",
-          "propertyNames": {
-            "$ref": "../../targeting/1/targeting.json#/$defs/ExclusionType"
-          },
-          "type": "object"
-        },
-        "exclusivity": {
-          "$ref": "#/$defs/BuyerWritesExclusivitySelection",
-          "description": "The line item's `exclusivity`, projected to `selected[]`."
-        },
-        "formats": {
-          "$ref": "#/$defs/BuyerWritesFormatsSelection",
-          "description": "The line item's `formats`, projected to `selected[]`."
-        },
-        "frequency_cap": {
-          "$ref": "#/$defs/BuyerWritesFrequencyCap",
-          "description": "The line item's `frequency_cap`, projected to `count.value`."
-        },
-        "geo": {
-          "$ref": "#/$defs/BuyerWritesGeoBounds",
-          "description": "The line item's `geo`, projected to `value`."
-        },
-        "markets": {
-          "$ref": "#/$defs/BuyerWritesMarketsSelection",
-          "description": "The line item's `markets`, projected to `selected[]`."
-        },
-        "measurement_source": {
-          "$ref": "#/$defs/BuyerWritesMeasurementSourceSelection",
-          "description": "The line item's `measurement_source`, projected to `selected[]`."
-        },
-        "production": {
-          "$ref": "#/$defs/BuyerWritesProductionSelection",
-          "description": "The line item's `production`, projected to `selected[]`."
-        },
-        "programs": {
-          "$ref": "#/$defs/BuyerWritesProgramsSelection",
-          "description": "The line item's `programs`, projected to `selected[]`."
-        },
-        "properties": {
-          "$ref": "#/$defs/BuyerWritesPropertiesSelection",
-          "description": "The line item's `properties`, projected to `selected[]`."
-        },
-        "reporting": {
-          "$ref": "#/$defs/BuyerWritesReportingSelection",
-          "description": "The line item's `reporting`, projected to `selected[]`."
-        },
-        "shortfall_remedy": {
-          "$ref": "#/$defs/BuyerWritesShortfallRemedy",
-          "description": "The line item's `shortfall_remedy`, projected to `selected[]`."
-        },
-        "transaction_mechanism": {
-          "$ref": "#/$defs/BuyerWritesTransactionMechanismSelection",
-          "description": "The line item's `transaction_mechanism`, projected to `selected[]`."
-        }
-      },
-      "required": [
-        "commitment"
       ],
       "type": "object"
     },
@@ -588,6 +152,6 @@
   },
   "$id": "https://jsonspecs.com/openproposal/schemas/with-open-prs/modules/line-item/1/line-item.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "The OpenProposal `line-item` module: the vocabularies, objects, unions, and constructor copies of § 3.3, § 3.4, § 5, § 5.1, and § 5.1.1.",
+  "description": "The OpenProposal `line-item` module: the vocabularies, objects, unions, and constructor copies of § 3.3, § 5, § 5.1, and § 5.1.1.",
   "title": "line-item"
 }

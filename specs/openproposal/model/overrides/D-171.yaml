@@ -1,0 +1,136 @@
+format: 2
+id: D-171
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  §§ 4.1 to 4.1.4 state seven MUST-level requirements in prose that no rule
+  claims. Type rules § 2a gives three carriers -- a keyword of the schema, an
+  entry of the rules output, an obligation on a party -- and the form of a
+  prose statement says which for none of them. Which carries each?
+covers:
+  - ir: rule:4.1:ce1d9648
+    digest: 78b338bdf7b4bee50907bdfe614694ced549764abc13dc72cead247ddc252886
+    quote: The offered terms of a frozen version MUST NOT change; a change to them creates version `n+1`.
+  - ir: rule:4.1.2:a855dcd7
+    digest: a3ce6e90057cbfbbf92b9791066100075feed6a32cb62ee997cfcff3388b6cab
+    quote: Every `seller-set`, `selectable`, `settable`, and `requestable` value of it and its `pricing[].agreed_rate` MUST remain as in the version `assent[]` names.
+  - ir: rule:4.1.3:e06c57e1
+    digest: 43392f1f110005df6198890fcbf269c68790233cb10cf726a8fa9b9a22e8500b
+    quote: A line item that appears in a frozen version MUST NOT be removed from the proposal or moved to another package; it leaves the shelf by its `status` (§ 5.1), which is a lifecycle change.
+  - ir: rule:4.1.2:0006fe1d
+    digest: 7793fc15e0fefb0ec9b39dbf9f8ce7f705c8da81769688db5a06f7ec7acdcf48
+    quote: Its `line_item_ids[]` MUST name line items whose `commitment` object (§ 5.6.1) is populated in the record, and on their own MUST meet the package rules (§ 4.1.4).
+  - ir: rule:4.1.2:dc1eb3b2
+    digest: 83bc4a9d3c0d7a0c0397dbae7f428b3b50972494286b155c637ab835d5695f67
+    quote: A line item MUST NOT be named by more than one live `commitment` entry, nor by more than one `acceptance` entry.
+  - ir: rule:4.1.4:d0dd8213
+    digest: e9e7b958ad6cff756d28ad747ed60d26a1559c8547d1dc53403346aa3df18d50
+    quote: A `commit` that names a line item in a package's `line_items[]` MUST name all of them.
+  - ir: rule:4.1.4:24987106
+    digest: 1e4a93b54defdd90df838969830a6024324a44963a339750993823a3562f50c5
+    quote: A `commit` that names an add-on MUST name every line item in its package's `line_items[]` and meet each of the package's `min_commitments[]`.
+options:
+  - id: one-payload-decides-it-or-no-payload-does
+    summary: >-
+      Each statement is sorted by what a receiver holds when it reads one
+      document: a requirement a single `Proposal` payload settles is a rule of
+      `Proposal` with a check and a vector pair, and one that compares the
+      payload with a version or a representation the payload does not carry is
+      an obligation on the party that writes it.
+  - id: all-seven-are-rules
+    summary: >-
+      Every MUST is a rule of the rules output, and the four that compare two
+      versions get checks that read what they can and pass where the payload is
+      silent.
+  - id: all-seven-are-obligations
+    summary: >-
+      Prose outside a Required cell states conduct, so all seven are
+      obligations on the seller and the buyer and none is checked.
+chosen: one-payload-decides-it-or-no-payload-does
+rationale: >-
+  **Type rules § 9 draws the line and the document puts each statement on one
+  side of it.** An obligation is a requirement no payload can show, "with no
+  schema keyword and no vector"; a rule is one a payload decides, and it owes
+  the valid and invalid pair. The question for each statement is therefore a
+  question about what a `Proposal` carries, and § 4.1's own table answers it:
+  a proposal holds `assent[]`, `line_items[]`, `packages[]` and a single
+  `version` number. It does not hold any other version's bytes.
+
+
+  **Three compare the payload with a version it does not carry, so no payload
+  shows them.**
+
+
+  `rule:4.1:ce1d9648` -- "The offered terms of a frozen version MUST NOT
+  change" -- is a statement about two representations of one
+  `(proposal_id, version)` at two times. § 4.1.3 says so outright where it
+  defines freezing: "Two representations of the same `(proposal_id, version)`
+  whose offered terms differ, compared on the fields and line items both carry,
+  are non-conformant." A receiver holding one of them holds no second to
+  compare, and the party that could is the seller, which § 4.1.3 also names:
+  "A seller MAY edit a proposal in place only while its current version is not
+  yet frozen."
+
+
+  `rule:4.1.2:a855dcd7` -- every `seller-set`, `selectable`, `settable` and
+  `requestable` value "MUST remain as in the version `assent[]` names" -- needs
+  that version's values. The entry carries `version` and `record_digest` and
+  not the record, which is the point of a digest: § 4.1.2's row says
+  `record_digest` is "Of the binding record for the line items in
+  `line_item_ids[]`". A payload holding the digest cannot reconstruct what it
+  digests.
+
+
+  `rule:4.1.3:e06c57e1` -- a line item in a frozen version "MUST NOT be removed
+  from the proposal or moved to another package" -- is removal, which is the
+  absence of something in a later payload measured against an earlier one. The
+  same sentence says what a reader of one payload does see: it "leaves the
+  shelf by its `status` (§ 5.1)", and `status` is a field a check already
+  reads.
+
+
+  All three are the seller's: the seller writes offered terms, freezes a
+  version, and holds the proposal.
+
+
+  **Four are settled by the payload in hand, so each is a rule of `Proposal`
+  with a check and a pair.** `rule:4.1.2:0006fe1d` compares a commitment
+  entry's `line_item_ids[]` with the `commitment` objects of the line items
+  the same proposal carries. `rule:4.1.2:dc1eb3b2` counts entries of one
+  `assent[]` by `role`. `rule:4.1.4:d0dd8213` and `rule:4.1.4:24987106`
+  compare a commitment entry's named line items with a package's
+  `line_items[]`, `add_ons[]` and `min_commitments[]`, all of which
+  `packages[]` carries. Each check reads one document and nothing outside it.
+
+
+  **`all-seven-are-rules` publishes four checks that cannot fail.** A check for
+  "the offered terms of a frozen version MUST NOT change" over a single payload
+  has no second version to read, so it would report nothing on every input --
+  a rule whose vector pair cannot have an invalid half, which is the shape type
+  rules § 9 reserves for an obligation. A rule that passes everything is worse
+  than an obligation, because the rules output then claims a receiver can check
+  what it cannot.
+
+
+  **`all-seven-are-obligations` loses four requirements a receiver can enforce
+  today.** The two § 4.1.2 statements are violated by payloads this
+  specification ships the shape of: `proposal-agreed.yaml` carries a commitment
+  and an acceptance over two line items that each hold a populated
+  `commitment`, and the mutations that break each rule are a deletion and a
+  duplication within that file. A requirement a payload shows belongs where a
+  payload can show it.
+
+
+  **The grain is the statement and not the section.** § 4.1.2 contributes to
+  both halves -- `a855dcd7` is an obligation and `0006fe1d` and `dc1eb3b2` are
+  rules -- because what a payload holds differs between them, which is the only
+  question this record asks.
+evidence:
+  - 'A `Proposal` payload carries `assent`, `line_items`, `packages`, `version` and
+    `status`, and no other version''s bytes, so the split is a property of the
+    published document and not of the prose'
+  - '§ 4.1.3 states the frozen-version requirement as a comparison of "two
+    representations of the same `(proposal_id, version)`", which names the second
+    representation a single payload lacks'

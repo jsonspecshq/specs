@@ -63,7 +63,7 @@
     "assent": {
       "description": "The parties' acts (§ 4.1.2). Each entry is written whole by the party its `role` implies. Entries MUST NOT be edited or removed",
       "items": {
-        "$ref": "../../modules/proposal/1/proposal.json#/$defs/AssentEntry"
+        "$ref": "../../modules/commercial/1/commercial.json#/$defs/AssentEntry"
       },
       "type": "array"
     },

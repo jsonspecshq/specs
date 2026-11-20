@@ -815,3 +815,48 @@ rules:
             included:
             - programmatic_guaranteed
             max_select: 1
+  # § 5.2.4: a property's `tv_channel` SHOULD carry `domain`, because two
+  # sellers offering one channel are told apart by it and by nothing else --
+  # each seller assigns its own `id`. No example carries a `tv_channel`, so the
+  # object is built from the bytes of the file the property comes from:
+  # `line-item-ctv-live-series.yaml`'s own property option, the television
+  # network its programs name, and the domain its app names. The halves differ
+  # by the one removal the rule forbids. SHOULD, so a finding is a warning
+  # (D-170).
+  - rule: rule:5.2.4:c122ccdd
+    digest: bb4c8a176a20b7ccb46fbb8d5199bce8886b697591b5e91b0aa3158b1bbf20ef
+    decision: D-170
+    type: PropertyOption
+    valid:
+      - value:
+          id: sports-app
+          apps:
+          - store: roku_channel_store
+            bundle: '000001'
+            store_url: https://channelstore.roku.com/details/000001/sports-app
+            developer_domain: sports-app.example
+          child_audience: general
+          seller_relationship: owner
+          seller_accounts:
+          - asi: ssp-a.example
+            sid: pub-2001
+          tv_channel:
+            id: example-network
+            name: Example Network
+            domain: sports-app.example
+    invalid:
+      - value:
+          id: sports-app
+          apps:
+          - store: roku_channel_store
+            bundle: '000001'
+            store_url: https://channelstore.roku.com/details/000001/sports-app
+            developer_domain: sports-app.example
+          child_audience: general
+          seller_relationship: owner
+          seller_accounts:
+          - asi: ssp-a.example
+            sid: pub-2001
+          tv_channel:
+            id: example-network
+            name: Example Network

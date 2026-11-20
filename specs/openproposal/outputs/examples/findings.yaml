@@ -17,6 +17,135 @@ format: 1
 findings: []
 undecided:
   - example: code:5.5:1
+    path: '/accepted_exclusions/verification/0'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: code:5.5:1
+    path: '/accepted_exclusions/verification/1'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/line-item-display.yaml
+    path: '/measurement_source/available/0/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/line-item-display.yaml
+    path: '/measurement_source/available/1/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/line-item-rewarded-video.yaml
+    path: '/measurement_source/available/0/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/line-item-rewarded-video.yaml
+    path: '/measurement_source/available/1/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/proposal.yaml
+    path: '/line_items/3/measurement_source/available/0/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/proposal.yaml
+    path: '/line_items/3/measurement_source/available/1/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/proposal.yaml
+    path: '/line_items/4/measurement_source/available/0/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: examples/proposal.yaml
+    path: '/line_items/4/measurement_source/available/1/measured_by'
+    rule: kernel:RegistrableDomain:registrable
+    decisions:
+    - D-232
+    reason: >-
+      The value's suffix is not one an RFC reserves, so where its registrable
+      boundary falls is the Public Suffix List's answer and the repository pins
+      no such list. The check declines rather than counting labels, which would
+      refuse `example.co.uk` and accept `github.io`. `D-232` states the cost, and
+      pinning such a list by its release is what would remove it.
+  - example: code:5.5:1
+    path: ''
+    rule: code:5.6:1
+    decisions:
+    - D-324
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so it holds neither the
+      committed entry's `list_rate` nor the `agreed_rate` the formula computes (D-324, D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:3.1:99ddc11e
+    decisions:
+    - D-323
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so nothing says which
+      entry the buyer commits under, and that entry's `cost_method` is what this rule's verdict
+      turns on (D-323, D-135).
+  - example: code:5.5:1
     path: ''
     rule: rule:5.6.2:3c2ac6dd
     decisions:
@@ -75,13 +204,6 @@ undecided:
   - example: code:5.5:1
     path: ''
     rule: rule:5.9:5b2d3b90
-    decisions:
-    - D-135
-    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
-      so the values it holds decide the check neither way (D-135).
-  - example: code:5.5:1
-    path: ''
-    rule: rule:5.9:d8611936
     decisions:
     - D-135
     reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
@@ -102,6 +224,25 @@ undecided:
       so the values it holds decide the check neither way (D-135).
   - example: code:5.5:2
     path: ''
+    rule: code:5.6:1
+    decisions:
+    - D-324
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so it holds neither the
+      committed entry's `list_rate` nor the `agreed_rate` the formula computes (D-324, D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:3.1:99ddc11e
+    decisions:
+    - D-323
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so nothing says which
+      entry the buyer commits under, and that entry's `cost_method` is what this rule's verdict
+      turns on (D-323, D-135).
+  - example: code:5.5:2
+    path: ''
     rule: rule:5.6.2:3c2ac6dd
     decisions:
     - D-135
@@ -159,13 +300,6 @@ undecided:
   - example: code:5.5:2
     path: ''
     rule: rule:5.9:5b2d3b90
-    decisions:
-    - D-135
-    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
-      so the values it holds decide the check neither way (D-135).
-  - example: code:5.5:2
-    path: ''
-    rule: rule:5.9:d8611936
     decisions:
     - D-135
     reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
@@ -186,6 +320,25 @@ undecided:
       so the values it holds decide the check neither way (D-135).
   - example: code:5.5:3
     path: ''
+    rule: code:5.6:1
+    decisions:
+    - D-324
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so it holds neither the
+      committed entry's `list_rate` nor the `agreed_rate` the formula computes (D-324, D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:3.1:99ddc11e
+    decisions:
+    - D-323
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so nothing says which
+      entry the buyer commits under, and that entry's `cost_method` is what this rule's verdict
+      turns on (D-323, D-135).
+  - example: code:5.5:3
+    path: ''
     rule: rule:5.6.2:3c2ac6dd
     decisions:
     - D-135
@@ -243,13 +396,6 @@ undecided:
   - example: code:5.5:3
     path: ''
     rule: rule:5.9:5b2d3b90
-    decisions:
-    - D-135
-    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
-      so the values it holds decide the check neither way (D-135).
-  - example: code:5.5:3
-    path: ''
-    rule: rule:5.9:d8611936
     decisions:
     - D-135
     reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
@@ -270,6 +416,25 @@ undecided:
       so the values it holds decide the check neither way (D-135).
   - example: code:5.5:4
     path: ''
+    rule: code:5.6:1
+    decisions:
+    - D-324
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so it holds neither the
+      committed entry's `list_rate` nor the `agreed_rate` the formula computes (D-324, D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:3.1:99ddc11e
+    decisions:
+    - D-323
+    - D-135
+    reason: >-
+      The block writes a few of a line item's fields and no `pricing[]`, so nothing says which
+      entry the buyer commits under, and that entry's `cost_method` is what this rule's verdict
+      turns on (D-323, D-135).
+  - example: code:5.5:4
+    path: ''
     rule: rule:5.6.2:3c2ac6dd
     decisions:
     - D-135
@@ -327,13 +492,6 @@ undecided:
   - example: code:5.5:4
     path: ''
     rule: rule:5.9:5b2d3b90
-    decisions:
-    - D-135
-    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
-      so the values it holds decide the check neither way (D-135).
-  - example: code:5.5:4
-    path: ''
-    rule: rule:5.9:d8611936
     decisions:
     - D-135
     reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
@@ -561,3 +719,153 @@ undecided:
     reason: >-
       The entry carries no `agreed_rate`, so the verdict turns on whether the commitment is
       under it, and a pricing entry does not hold the line item's `commitment`.
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.6.5:1f53e407
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.7.1:0894f8c4
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:1
+    path: ''
+    rule: rule:5.7.1:99d3e14a
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.6.5:1f53e407
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.7.1:0894f8c4
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:2
+    path: ''
+    rule: rule:5.7.1:99d3e14a
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.6.5:1f53e407
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.7.1:0894f8c4
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:3
+    path: ''
+    rule: rule:5.7.1:99d3e14a
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.6.5:1f53e407
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.7.1:0894f8c4
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: code:5.5:4
+    path: ''
+    rule: rule:5.7.1:99d3e14a
+    decisions:
+    - D-135
+    reason: The block writes a few of a line item's fields and not the one this rule's verdict turns on,
+      so the values it holds decide the check neither way (D-135).
+  - example: examples/line-item-display.yaml
+    path: ''
+    rule: code:5.6:1
+    decisions:
+    - D-324
+    reason: >-
+      The line item prices in two entries and states no commitment, so nothing says which entry
+      the figure is computed on, and neither entry states an `agreed_rate` (D-324).
+  - example: examples/line-item-display.yaml
+    path: ''
+    rule: rule:3.1:99ddc11e
+    decisions:
+    - D-323
+    reason: >-
+      The line item prices in two entries and states no commitment, so nothing says which entry
+      the buyer commits under, and that entry's `cost_method` is what this rule's verdict turns
+      on (D-323).
+  - example: examples/line-item-display.yaml
+    path: ''
+    rule: rule:5.7.1:0894f8c4
+    decisions:
+    - D-169
+    reason: The line item prices in two entries and states no commitment, so nothing says which entry
+      the buyer commits under, and the condition this rule reads is that entry's `cost_method`
+      (D-169).
+  - example: examples/line-item-display.yaml
+    path: ''
+    rule: rule:5.7.1:99d3e14a
+    decisions:
+    - D-169
+    reason: The line item prices in two entries and states no commitment, so nothing says which entry
+      the buyer commits under, and the condition this rule reads is that entry's `cost_method`
+      (D-169).
+  - example: examples/proposal.yaml
+    path: /line_items/3
+    rule: code:5.6:1
+    decisions:
+    - D-324
+    reason: >-
+      The line item prices in two entries and states no commitment, so nothing says which entry
+      the figure is computed on, and neither entry states an `agreed_rate` (D-324).
+  - example: examples/proposal.yaml
+    path: /line_items/3
+    rule: rule:3.1:99ddc11e
+    decisions:
+    - D-323
+    reason: >-
+      The line item prices in two entries and states no commitment, so nothing says which entry
+      the buyer commits under, and that entry's `cost_method` is what this rule's verdict turns
+      on (D-323).
+  - example: examples/proposal.yaml
+    path: /line_items/3
+    rule: rule:5.7.1:0894f8c4
+    decisions:
+    - D-169
+    reason: The line item prices in two entries and states no commitment, so nothing says which entry
+      the buyer commits under, and the condition this rule reads is that entry's `cost_method`
+      (D-169).
+  - example: examples/proposal.yaml
+    path: /line_items/3
+    rule: rule:5.7.1:99d3e14a
+    decisions:
+    - D-169
+    reason: The line item prices in two entries and states no commitment, so nothing says which entry
+      the buyer commits under, and the condition this rule reads is that entry's `cost_method`
+      (D-169).

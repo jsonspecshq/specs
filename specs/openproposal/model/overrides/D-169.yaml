@@ -1,0 +1,131 @@
+format: 2
+id: D-169
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Four statements of §§ 5.6.5 and 5.7.1 are rules one payload decides, and no payload this
+  specification ships makes any of their conditions true: a `CPP` entry, a `CPA` entry, a
+  `delta_flat` charge in effect under a spend commitment, and a `shortfall_remedy` offering
+  `none`. Where do a pair's values come from when the examples have none?
+covers:
+- ir: rule:5.7.1:0894f8c4
+  digest: 77b420d234cc4556addacdc7162942bb937828309358bc9e268fd3c77d6ab3b1
+  quote: When the `pricing[]` entry the buyer commits under has `cost_method` `CPP`, `counted_by` MUST be its `cost_parameters.rating_source`.
+- ir: rule:5.7.1:99d3e14a
+  digest: 4460442144f60a3d5277b0e38a1837d68e511ec5436e3eea46636f2f104314f3
+  quote: When it has `cost_method` `CPA`, `counted_by` MUST be its `cost_parameters.action_source`.
+- ir: rule:5.7.1:0a8e3bf2
+  digest: dfe7473da76bce6f000f82bd876248f1986fd1440f276a7bf17d68acfc3f512b
+  quote: When `none` is in effect, it MUST be the only option.
+- ir: rule:5.6.5:1f53e407
+  digest: e8d43ee1e9ad08afe7a0e3d60c7451c9003becb1d82b20340358a305efdbeb72
+  quote: When `commitment.basis` is `spend`, `amount` is the seller total, on the same terms as `agreed_rate`, including `delta_flat` charges in effect (§ 3.1), which MUST NOT exceed it.
+- ir: key:5.6.5:CostParameters.rating_source
+  digest: b65d516902c5a98bb0242c8ee45d639487f6970e0e38bfa7d8fe2a2e9fccb6d4
+  quote: "`rating_source` | REQUIRED when `cost_method` is `CPP` | Who supplies the ratings"
+- ir: key:5.6.5:CostParameters.demographic
+  digest: 28f394d87003c6ac615d1126a28769db077572b544dfde8a08a57ec31a6a4f7b
+  quote: "`demographic` | REQUIRED when `cost_method` is `CPP` | The rated demographic, such as `ratings.example:adults_25_54`. Its definition states whether co-viewers and impressions of unknown age count, or says `unknown`. This version lists no core terms"
+- ir: key:5.6.5:CostParameters.action_source
+  digest: 8f01f9eb8f0c09a191dd0763d5ea61b2e7f0073b97c34f55b884abe1ebc1e751
+  quote: "`action_source` | REQUIRED when `cost_method` is `CPA` | Who reports the action"
+- ir: key:5.6.5:CostParameters.action_type
+  digest: 7f7212da7d23f9e925f14e45f9def1eb5a9856b694929e806ab5b722f8171672
+  quote: "`action_type` | REQUIRED when `cost_method` is `CPA` | The kind of action counted. Core terms in IAB Tech Lab ECAPI 1.0: its `event_type` values, from the Standard Events and Additional Events tables both, other than `custom`, such as `purchase` or `install`. Any other action is an extension term, such as `shop.example:store_visit`"
+- ir: key:5.6.5:CostParameters.attribution_window
+  digest: cb7249308e30fff79b598498150bd1391340a20c003fed80551ac4c7bffdf3f7
+  quote: "`attribution_window` | REQUIRED when `cost_method` is `CPA` | How long after exposure an action counts"
+- ir: field:5.7:shortfall_remedy
+  digest: 699392b987c0cdab0b10b6c5ded1d0ae07e23407c6923c6e9cee166d3c7a8a88
+  quote: "`shortfall_remedy` | ShortfallRemedy | selectable | Core terms: `makegood` | `credit` | `none`. See `remedy_terms` in § 5.7.1. Nothing in effect: this line item states no remedy. Its committed levels stay guaranteed, because only `none` makes them targets"
+- ir: def:2.2:Measurer
+  digest: 8803264dc804871c16d2837330a0f52398e88a9494eca43226ae1e19bd5b445a
+  quote: "`Measurer` | A `Side`, or a `RegistrableDomain` | Who counts or measures. A seller writes `seller`, never its own domain. Two values name one party only when they are equal byte for byte. A `qualifier` beside a value names a product or method of that party and is not compared"
+options:
+- id: the-condition-is-built-from-the-rows-that-state-it
+  summary: >-
+    Each is a rule of the object whose payload decides it, and its pair is a shipped payload in
+    which the condition is made true using the values the rows that state the condition write:
+    a term from a table, an example a row gives, a value another row of the same file states. The
+    halves then differ by the one value the rule forbids, and every byte of both is one the
+    document or an example writes.
+- id: left-unclaimed-until-an-example-ships-the-condition
+  summary: >-
+    A pair's valid half is an example the specification ships, so a rule whose condition no
+    example makes true has no pair and stays unclaimed until the working group ships one.
+- id: an-obligation-of-the-party-that-writes-the-member
+  summary: >-
+    Each names a value a seller or a buyer writes, so each is an obligation and needs no pair.
+chosen: the-condition-is-built-from-the-rows-that-state-it
+rationale: >-
+  WHAT THE DERIVED-FIXTURE RULE FORBIDS, AND WHAT IT DOES NOT. It forbids authoring a payload
+  "where the source has one": a rule whose condition a shipped example makes true takes its pair
+  from that example, and writing a fresh payload beside it would be inventing a second source of
+  truth for bytes the specification already states. These four conditions are the other case. No
+  example prices a line item at `CPP` or at `CPA`, none puts a `delta_flat` charge in effect, and
+  none offers `none` as a remedy -- measured over all 19 line items of the 17 shipped examples, by
+  reading every `pricing[].cost_method`, every `deltas` entry against the `included[]` and
+  `selected[]` of the field that holds it, and every `shortfall_remedy`. So there is no payload to
+  take and no payload to displace, and the question is only where each value comes from.
+
+
+  EVERY VALUE COMES FROM A ROW THAT STATES IT, WHICH IS WHAT MAKES THE PAIR DERIVED. `CPP` and
+  `CPA` are two of the ten core terms § 5.6.5's table lists. The members each requires are the ones
+  its own rows require, filled from those rows' own words: `demographic` takes
+  `ratings.example:adults_25_54`, which its row writes as its example; `action_type` takes
+  `purchase`, which its row names from IAB Tech Lab ECAPI 1.0's event types; `attribution_window`
+  takes `P30D`, the duration § 5.7.1's `final_after` row writes as its own example; and
+  `rating_source` and `action_source` take `seller`, which § 2.2 states is what a seller writes as
+  a `Measurer`. `none` is one of the three core terms the `shortfall_remedy` row lists. The
+  `delta_flat` charge is `line-item-audio.yaml`'s own `production` field, grafted whole into
+  `line-item-dooh.yaml`'s line item, which is the one shipped line item that commits spend; the
+  amount the charge exceeds is `10000.00`, which `line-item-rewarded-video.yaml` writes as its
+  `commitment_bounds.spend.min`.
+
+
+  SO EACH PAIR TURNS ON ONE VALUE, AND THAT VALUE IS SHIPPED. For the two `counted_by` rules the
+  halves differ only in `counted_by`: `seller`, which equals the entry's `rating_source` or
+  `action_source` byte for byte as § 2.2 requires, against `audience-vendor.example`, which the
+  same file writes for that very member. For `none` the halves differ by which terms `included[]`
+  names, out of an `available[]` the shipped field states plus the row's own third term. For the
+  `delta_flat` bound the halves differ only in `commitment.amount`, and both numbers are shipped.
+
+
+  `left-unclaimed-until-an-example-ships-the-condition` is the reading this record replaces, and it
+  was this branch's own: it treats "no example makes the condition true" as the end of the matter,
+  which leaves four requirements of the specification carried by nothing while the document states
+  them plainly. An element nothing reaches is the absence of a reading, and the absence is what a
+  consumer inherits: a validator built from these artifacts would accept a `CPP` line item counted
+  by anyone.
+
+
+  `an-obligation-of-the-party-that-writes-the-member` is refused by what each sentence reads. An
+  obligation asks something of a party's behaviour that no payload records (`D-087`). These four
+  compare two values of one payload: a `counted_by` against a `cost_parameters` member of the
+  committed entry, a sum of charges against an amount, and the terms of one selectable field's
+  `included[]`. Each is decided by reading the payload and nothing else.
+
+
+  THE OWNERS, each the smallest object the model names that holds what its sentence reads.
+  `LineItem` for the two `counted_by` rules, which read the committed `pricing[]` entry and an
+  option of `controlling_measurement`; `LineItem` for the `delta_flat` bound, which reads the
+  commitment and the `deltas` of every selectable field; and `ShortfallRemedy` for the `none` rule,
+  whose `available[]`, `included[]` and `selected[]` are its own.
+
+
+  WHAT THIS COSTS, stated rather than hidden. The valid half of each of the first three is not a
+  payload a reader will find in `examples/`, so a reader checking the vectors against the shipped
+  files finds the condition nowhere and the record is the only account of where the bytes came
+  from. That is the cost of carrying a requirement whose case the specification states and does not
+  illustrate, and the feedback below asks for the examples that would remove it.
+feedback: >-
+  § 5.6.5 defines `CPP` and `CPA` with the `cost_parameters` each requires, § 5.6.5 bounds the
+  `delta_flat` charges a spend commitment carries, and § 5.7.1 defines a `none` remedy that makes
+  committed levels targets -- and § 6's examples illustrate none of the four. A reader who wants to
+  see what a rating-point line item looks like, or what a seller writes when it offers no remedy,
+  has only the prose. One example priced at `CPP` with its `rating_source`, one at `CPA`, one with
+  a `delta_flat` charge in effect under a spend commitment, and one offering `none` would make four
+  requirements checkable against the specification's own bytes rather than against a reading of its
+  rows.

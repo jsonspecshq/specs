@@ -1,0 +1,91 @@
+format: 2
+id: D-167
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  Four fenced blocks of this specification carry no claim. `yaml-example-block`
+  derives an example from a YAML block whose top-level keys all belong to one
+  document, and `prose-sentence` and the profile rules reach the rest; these
+  four fall outside every one of them. What does a fenced block carry where no
+  rule derives it -- a requirement, a profile's paths, an example payload, or an
+  illustration of what the prose around it already states?
+options:
+  - id: by-what-the-block-adds
+    summary: >-
+      Read each block against the prose it sits in. Where the block states a
+      requirement the prose does not, it carries that requirement and takes the
+      destination type rules section 9 gives it. Where the prose states the
+      requirement and the block shows it, the block is informative.
+  - id: every-block-is-an-example
+    summary: >-
+      Treat every unclaimed block as an example payload, since each shows a
+      shape, and let the examples gate validate what it can.
+  - id: leave-them-unclaimed
+    summary: >-
+      Leave them. A block is illustration and the surrounding prose carries the
+      reading, so nothing is lost by claiming none of them.
+chosen: by-what-the-block-adds
+rationale: >-
+  **Three of the four add nothing the prose around them does not state, and are
+  informative.** `code:4.1.1:1` is the precedent, read the same way by `D-165`.
+
+  Section 2's block names `Proposal`, `packages[]` and `line_items[]` with a
+  gloss each. Every one of the three is a field row of the document it names,
+  and the two sentences under it -- the no-inheritance rule and the
+  subsettable-proposals rule -- are what state the requirements; the block
+  draws the shape they talk about. It declares no key, no type and no list.
+
+  Section 2.5's block shows one `ext` entry. It is YAML and it is a payload
+  fragment, so `yaml-example-block` is the rule that would reach it, and that
+  rule declines for a reason worth keeping: its own words are that a block is
+  an example "of one document's value" and that "the examples gate validates
+  each field it holds against that document's own schema". `ext` is a field of
+  the proposal, of a line item and of a `change_requests[]` entry, so the block
+  belongs to three documents and to no one schema. Claiming it as an example of
+  no object would name a check that cannot run. The sentence above it states
+  the requirement -- each key a `Domain` its owner controls, each value an
+  object the owner defines -- and the block shows one.
+
+  Section 2.8.1's block is the chain from a `Signature-Agent` member to a host
+  to the directory URL. `D-161` read that section's requirements and found that
+  the profile "adds no header, tag, key field, or error code"; this block adds
+  no requirement either, and the three sentences around it state the derivation
+  it draws.
+
+  **The fourth is not informative and is not settled here.** Section 5.6's
+  block is the `agreed_rate` formula, and the sentence that introduces it ends
+  in a colon: "`agreed_rate` is computed on the committed entry from the
+  options in effect (section 3.1), in exact decimal, and rounded once, half up,
+  to 6 decimal places:". The block is that sentence's content, and type rules
+  section 9 names arithmetic among the rules no keyword can state. Measured: no
+  rule and no obligation of `rules.json` carries the computation -- the eight
+  rules of section 5.6 state the presence of `agreed_rate`, which entry is
+  committed, and what a revision may not reuse, and none of them states how the
+  figure is computed -- and the sentence itself is claimed informative by
+  `prose-sentence`. So the formula reaches no output a consumer reads. That is
+  a rule of `PricingEntry` wanting a derived pair, not a role this record can
+  assign: what role the document settles for the formula block is its own
+  question, carried apart from this record.
+feedback: >-
+  Ask the working group whether the `agreed_rate` formula is intended as
+  normative. It is written as a displayed formula rather than as a sentence
+  with an RFC 2119 keyword, and a reader that takes only keyworded sentences
+  records the requirement nowhere -- the same shape section 2.8's declarative
+  present raises.
+covers:
+  - ir: code:2:1
+    digest: 165b0a3062398807b674d42cbe1aefa247e87670d42382cdebe7a615cdb95ca2
+    quote: |-
+      Proposal          → the merchandising pitch, identity, lifecycle state and assent
+      packages[]        → optional: sets of line items sold only together
+      line_items[]      → buyable units, each in exactly one channel
+  - ir: code:2.5:1
+    digest: 3d896e1951745285ef66a642e6d4755642584cc20a3ded40efcda3f42d82aca8
+    quote: |-
+      ext:
+        examplepub.example: { placement_code: "BD-ROS-300x250-Q4" }
+  - ir: code:2.8.1:1
+    digest: 54811d0ad1eb14e49caedfae055a3750a867891c2ca3b89744de51480d922f61
+    quote: Signature-Agent member  ->  host  ->  https://<host>/.well-known/http-message-signatures-directory

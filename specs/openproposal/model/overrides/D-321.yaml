@@ -1,0 +1,111 @@
+format: 2
+id: D-321
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.3.4 closes its expiry table with a sentence capping a hold: `hold.valid_until` MUST NOT
+  exceed `offer_window.end` or the earliest `pricing[].price_valid_until`. The window is the
+  proposal's and the hold and the entries are a line item's, so which object owns the rule, and
+  can one payload the specification ships decide it?
+covers:
+- ir: rule:4.3.4:e97d564c
+  digest: 932a8c574fccbf94d2563201e0cde29a38efd3311b1bd49946b177ec15e27afc
+  quote: "`hold.valid_until` MUST NOT exceed `offer_window.end` or the earliest `pricing[].price_valid_until`."
+- ir: key:5.6.2:Hold.valid_until
+  digest: 50a5f4d29172211bc605eb96da9b51e2f465ea8edf3df3b370155bc3911f623c
+  quote: "`valid_until` | REQUIRED when `status` is `held` | The grant time plus `hold_terms.duration`, or the § 4.3.4 cap if that comes first. With no `duration`, the seller sets it within the cap. It MAY remain on `expired` and `released`"
+- ir: field:4.1:offer_window
+  digest: 1b00881e7b8293241b9a46f9bb2a071af4d2a2f6aa142517828c871859794c58
+  quote: "`offer_window` | Interval | seller-set | The window the offer holds: it does not hold before `start` or after `end`. This is the offer window, not the campaign flight"
+- ir: field:5.6:pricing[].price_valid_until
+  digest: 2aaac447ecae43dd1eca6d0423b8a57811939bdaae939f71ed5a39a8fca7ce3b
+  quote: "`pricing[].price_valid_until` | Instant | seller-set | How long the entry holds (§ 4.3.2). Distinct from the proposal's `offer_window.end`"
+- ir: field:5.6:hold
+  digest: 7b1427edf4c564e978a83f8daba3ff8b3d9379298630e3f37d1b67398008700b
+  quote: "`hold` | Hold | lifecycle | The buyer's hold. Absent until the buyer first asks. See 5.6.2"
+options:
+- id: a-rule-of-the-proposal-that-holds-all-three
+  summary: >-
+    A rule of `Proposal`, the smallest object that holds the window, the holds and the entries at
+    once. The check walks `line_items[]`, reads each hold's `valid_until` against the proposal's
+    `offer_window.end` and against the earliest `price_valid_until` of that line item's own
+    entries, and reports each half on its own.
+- id: a-rule-of-the-line-item-with-the-window-as-context
+  summary: >-
+    A rule of `LineItem`, since the hold and the entries are the line item's, with the
+    proposal's `offer_window` given as context the way § 5.2.4's `seller_accounts[]` rule is
+    given the line item's offer.
+- id: an-obligation-on-the-seller
+  summary: >-
+    An obligation on the seller, since `valid_until` is seller-set and the sentence tells the
+    seller how far it may set it, and no artifact carries the cap as a check.
+chosen: a-rule-of-the-proposal-that-holds-all-three
+rationale: >-
+  A rule is owned by the type whose payload decides it (type rules § 9), and the sentence names
+  three values: `offer_window.end`, which § 4.1 gives the proposal, and `hold.valid_until` and
+  `pricing[].price_valid_until`, which § 5.6 gives the line item. The proposal is the smallest
+  object that holds all three, and this is the reading `D-151` already took of § 5.8's first
+  bullet, which compares the proposal's `buyer` with a line item's restriction: the owner is what
+  a payload has to be to decide the rule, not the section the sentence sits in.
+
+
+  THE ROW ASKS FOR THE CHECK IN THE SENTENCE'S OWN WORDS. `Hold.valid_until`'s Meaning is "The
+  grant time plus `hold_terms.duration`, or the § 4.3.4 cap if that comes first. With no
+  `duration`, the seller sets it within the cap." So the member's row names § 4.3.4 as the cap and
+  states nothing about what the cap is; this sentence is where the figure lives, and leaving it
+  uncarried leaves the row pointing at nothing an artifact holds.
+
+
+  `a-rule-of-the-line-item-with-the-window-as-context` costs the stronger half of the grading for
+  nothing gained. A line item holds the hold and the entries, so the `price_valid_until` clause
+  would be decided as it is here; the `offer_window.end` clause would be decided only where a
+  vector supplies the window, and an example's walk gives no context, so every shipped proposal
+  would go ungraded on that clause while holding the value it needs one level up. Context is for a
+  value no payload in the tree holds beside the object, and this one is held by the object that
+  contains it.
+
+
+  `an-obligation-on-the-seller` is refused by the payload. An obligation is the role for a
+  statement a payload cannot settle -- `D-168` sorts § 4's statements by exactly that test, and
+  the ones that compare a proposal with a version whose bytes it does not carry are the
+  obligations. This sentence compares three values one proposal holds at once, so a payload
+  settles it and the role that carries a settled comparison is `rule`.
+
+
+  THE COMPARISON IS A STRING COMPARISON, AND THE DOCUMENT IS WHY. § 2.2 gives `Instant` one
+  written form, "an RFC 3339 `date-time` in whole seconds, ending in `Z`", and says why: "One
+  written form, so one instant has one digest input". Every value the published type accepts is
+  therefore the same width with the same separators, so a later instant sorts after an earlier one
+  under a plain comparison and the check needs no clock. A value outside that form is ordered
+  against nothing and left to the type's own keyword, so the rule reports on no payload whose
+  instants the schema already refuses.
+
+
+  THE PAIR IS THE SOURCE'S OWN BYTES. `proposal-issued.yaml` is the one shipped payload with a
+  hold on it: its `weather-app-ctv` line item holds to 2026-10-20 under an entry firm to
+  2026-12-01, inside a window ending 2026-12-31, so the file is the valid half. It is trimmed to
+  the seven keys the published `Proposal` requires plus `offer_window` and that one line item,
+  itself trimmed to the six keys a `LineItem` requires plus the `hold`, the `pricing` and the
+  `properties` its hold's `requested_terms` selects from. Every value is the file's. The invalid
+  halves move `hold.valid_until` and nothing else: to 2026-12-10, past the entry and not the
+  window, and to 2027-01-15, past both.
+
+
+  WHAT THIS COSTS, counted rather than described. The `offer_window.end` clause has no invalid
+  half of its own. On the shipped proposal the firm entry expires a month before the window
+  closes, so every instant that exceeds the window exceeds the entry as well, and isolating that
+  clause would take an edit to `offer_window` or to `price_valid_until`, both of which the source
+  states. The second invalid half grades the clause by reporting it, alongside the other, rather
+  than alone. A proposal that states no `offer_window` is graded on the entry clause only, which
+  is what the field's OPTIONAL presence means, and a hold whose `valid_until` is absent -- which
+  the row allows on `expired` and `released` -- is reported on neither.
+feedback: >-
+  § 4.3.4's cap is stated once, in a sentence under the table, while
+  `Hold.valid_until`'s own row names "the § 4.3.4 cap" and leaves the figure there. A reader of
+  § 5.6.2 has to leave the section to learn what bounds the member the section defines. Stating
+  the cap in the row, or giving the sentence the member's name, would put the bound where the
+  value is set. The sentence also reads one value from the proposal and two from the line item
+  without saying which object a validator should be handed, and the same is true of § 5.8's first
+  bullet; saying so once, in § 2.6 or § 3, would settle it for both.

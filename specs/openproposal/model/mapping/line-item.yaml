@@ -2,19 +2,13 @@
 # are kept as they are; every other entry and type is derived by a mapping rule (src/mapping-rules.ts).
 format: 1
 module: line-item
-sections: [ "3.3", "3.4", "5", "5.1", 5.1.1 ]
+sections: [ "3.3", "5", "5.1", 5.1.1 ]
 depends: [ audience, commercial, creative, eligibility, execution, guarantees, inventory, settlement, targeting ]
 types:
   - name: AvailabilityRead
     kind: object
     ir: key:3.3:AvailabilityRead.offer
     source: { rule: key-table-object }
-    open: false
-    includes: BuyerWrites
-  - name: LineItemWrites
-    kind: object
-    ir: key:3.4:LineItemWrites.commitment
-    source: { decision: D-128 }
     open: false
     includes: BuyerWrites
   - name: LineItem
@@ -69,42 +63,6 @@ entries:
     digest: 825c08e7352e1922586f6582bc57945701072b2bca5579470075b658aa715e56
     source: { rule: domain-row }
     as: { role: property, object: AvailabilityRead, type: { kind: named, name: MintedId }, presence: optional }
-  - ir: def:3.4:BuyerWrites
-    digest: 485fa6481f1a341bb7a30dd35aba5ff7036f89d9a9ded6c8faa49a93cb2a92f9
-    source: { rule: lead-in-restates }
-    as: { role: informative }
-  - ir: sentence:3.4:39df5553
-    digest: 88c396bed6a19628f4c3b9f57f93bb42822c39ca3c9b37592577089d03fd1e15
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: rule:3.4:8a37931e
-    digest: 137180560e78c77933e2313616c5d475a7b87798cbd80b7bfd9b07992a640c1c
-    source: { decision: D-083 }
-    as: { role: informative }
-  - ir: sentence:3.4:5167ab36
-    digest: 9ded72c71e618e294c18b0bdd7f02db27e63f5dd3da6987f62609a06c4aefdef
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: code:3.4:1
-    digest: dd4f5150930acb93b48eca8b807b7d685d9fbf891094a8b3422696097a675efc
-    source: { decision: D-128 }
-    as: { role: profile, profile: Writes, document: LineItem, name: BuyerWrites, optional: true }
-  - ir: def:3.4:LineItemWrites
-    digest: 7a8768a3e6522913daacc2708c400388dd8942d4d978d723bf1aeb12cb8a950b
-    source: { rule: lead-in-restates }
-    as: { role: same, name: LineItemWrites }
-  - ir: sentence:3.4:808be197
-    digest: b957dea769ae4844b258bc36d167fd40e22c119370db1170b6cb36dac4ebb2b4
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: sentence:3.4:e06f9ab3
-    digest: 4f6c6c32b0840450575afa7170fc04c9cb03c7d92ba50854973136480f730528
-    source: { rule: prose-sentence }
-    as: { role: informative }
-  - ir: key:3.4:LineItemWrites.commitment
-    digest: 094009065a6e6280c2869d13d4b28fa82c952560352048d2bd8f1a700fdcf3cd
-    source: { rule: named-object-row }
-    as: { role: property, object: LineItemWrites, type: { kind: named, name: Commitment }, presence: required }
   - ir: field:5.1:line_item_id
     digest: 54da51504430aebaa335ae5a20fefa939f005cca07dcafe4cdd3bb747baf021d
     source: { rule: domain-row }

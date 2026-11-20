@@ -65,7 +65,7 @@
           "description": "How many"
         },
         "unit": {
-          "$ref": "../../../kernel/1/kernel.json#/$defs/VocabularyTerm",
+          "$ref": "#/$defs/ScaleUnit",
           "description": "What `quantity` counts. Core terms: the `frequency_cap.per` terms (§ 5.5), and `person`. A receiver that doesn't know a term reads the figure as unstated"
         },
         "window": {
@@ -314,6 +314,24 @@
           "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
         }
       ]
+    },
+    "ScaleUnit": {
+      "anyOf": [
+        {
+          "enum": [
+            "device",
+            "household",
+            "listener",
+            "screen",
+            "person"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "../../../kernel/1/kernel.json#/$defs/NamespacedTerm"
+        }
+      ],
+      "description": "What an addressable scale's `quantity` counts. § 5.3 states its core terms as § 5.5's `frequency_cap.per` terms and `person`, so the set is composed rather than listed in the row"
     },
     "SensitiveCategory": {
       "anyOf": [

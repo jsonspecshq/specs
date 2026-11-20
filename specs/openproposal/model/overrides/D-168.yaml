@@ -1,0 +1,113 @@
+format: 2
+id: D-168
+status: proposed
+kind: reading
+basis: gap
+author: agent
+question: >-
+  § 4.1's `RequestedValue` holds a `unit_bounds` key whose Type cell states
+  `Range[Integer]` and whose Meaning cell reads "A `pricing[].unit_bounds`".
+  No rule derives it. What types the key?
+covers:
+  - ir: key:4.1:RequestedValue.unit_bounds
+    digest: e650773e444b150799cb1892373b724aeba75f9354454c2f995a8605bd5b770a
+    quote: "`unit_bounds` | OPTIONAL | A `pricing[].unit_bounds`"
+  - ir: def:4.1:RequestedValue
+    digest: 8ccf1166df7363586fe86fb42012fe9de789758af6f358808149867d2251fba0
+    quote: "`RequestedValue` | holds exactly one key: the `requestable` field `pointer` names, in the form its row states. `pointer` says which `pricing[]` entry."
+  - ir: "field:5.6:pricing[].unit_bounds"
+    digest: d130098edd23aa022335b27cc098f0c3cb816bf3ba91ad4167c36fa349341741
+    quote: "`pricing[].unit_bounds` | Range[Integer] | requestable | Bounds on the units committed under this entry, counted in its unit (§ 5.6.5): `commitment.amount` when `basis` is `units`, otherwise `derived_units`. A buyer MAY request another. Absent on a `FLAT` entry"
+options:
+  - id: the-type-the-field-s-row-maps-to
+    summary: >-
+      The key is the field § 5.6's row states, in that row's form, so it is
+      typed at the type that row maps to, named: the copy `UnitBoundsRange`.
+      One copy, referenced by both rows.
+  - id: an-application-of-its-own
+    summary: >-
+      The key's Type cell is read on its own and states `Range[Integer]`, so
+      the key applies `Range` to the `Integer` the cell writes, and § 4.1
+      publishes a second range beside § 5.6's.
+chosen: the-type-the-field-s-row-maps-to
+rationale: >-
+  **The lead-in says where the form comes from.** `RequestedValue` "holds
+  exactly one key: the `requestable` field `pointer` names, **in the form its
+  row states**". So the key is not a second field that happens to share a name
+  and a shape: it is the field that row names, carried in that row's form. The
+  Meaning cell says the same in its own words -- "A `pricing[].unit_bounds`" --
+  and names no meaning of its own.
+
+
+  **§ 5.6's row is why the key exists, and it says so in the row.** Its
+  mutability column reads `requestable` and its description ends "A buyer MAY
+  request another". A buyer may ask for other unit bounds, so § 4.1's
+  `RequestedValue` carries a `unit_bounds` key, and what it carries is the value
+  of that row at that row's type.
+
+
+  **That type is `UnitBoundsRange`, and it is not what this key's own cell
+  spells.** § 5.6's row maps `Range[Integer]` to `Range<Count>`, because the
+  bounds count units; the copy `Range` names after the field is
+  `UnitBoundsRange`, in the `commercial` module. `an-application-of-its-own`
+  reads `Integer` off this cell instead and publishes a second range whose
+  bounds are a bare integer. The two would then disagree about what a unit
+  bound is while both claiming to be the same field, and nothing in § 4.1 would
+  catch it -- which is the drift this table's shape invites and the reason the
+  lead-in fixes the form elsewhere.
+
+
+  **This is `D-159`'s reading on the second of the two keys it named.** That
+  record settled `retention` the same way and said `unit_bounds` would reach it
+  next. It has, unchanged: the same lead-in, the same Meaning-cell form, the
+  same mutability sentence in the mirrored row.
+
+
+  **A record carries it because no rule does.** `applied-constructor-row`
+  declines a key of a table whose lead-in states the form elsewhere, and
+  `domain-row` derives nothing from a `Range[Integer]` cell that names no code
+  list. The rule that would read the lead-in's form and derive all six keys is
+  its own piece of work; until it exists each key is a record's.
+evidence:
+  - 'The published key is a `$ref` to `commercial.json#/$defs/UnitBoundsRange`, the
+    copy § 5.6''s own row states, so one copy serves both rows'
+  - '§ 5.6''s row reads `requestable` and "A buyer MAY request another", which is why
+    § 4.1 carries the key at all'
+challenge:
+  - type: RequestedValue
+    value:
+      unit_bounds:
+        min: 100000
+    verdict: accept
+    context: >-
+      A buyer asking for the unit bounds the shipped
+      `line-item-podcast-embedded.yaml` already states on its pricing entry,
+      which is the value § 5.6's row carries.
+    reason: >-
+      The key is that row's field in that row's form, so a value of the row is a
+      value of the key: the same lower bound, at the same `Count`, and `max`
+      absent because the range needs only one bound.
+  - type: RequestedValue
+    value:
+      unit_bounds:
+        min: -5000
+    verdict: reject
+    context: >-
+      A buyer that writes a negative lower bound, which a bare integer range
+      would take.
+    reason: >-
+      Typing the key at § 5.6's own type is what refuses this: that row maps to
+      `Range<Count>` and a `Count` is not negative, so § 4.1 refuses what § 5.6
+      refuses. `an-application-of-its-own` reads `Integer` off this key's cell
+      and accepts it, which is where the two readings tell apart on a payload.
+  - type: RequestedValue
+    value:
+      unit_bounds: {}
+    verdict: reject
+    context: >-
+      A buyer that sends the key to say the bounds are negotiable and names
+      neither bound.
+    reason: >-
+      `UnitBoundsRange` carries `minProperties: 1` from § 5.6's row, which
+      states a range with at least one bound, so an empty range is refused in
+      § 4.1 because it is refused in § 5.6.
